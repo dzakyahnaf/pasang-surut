@@ -1,0 +1,237 @@
+{
+  "_status": "TERISI SEBAGIAN — 20 entri. Liputan 2015 sampai 2019 masih tipis. Baca _keterbatasan.",
+
+  "_untuk_apa_ini": "Daftar kejadian rob Semarang beserta tautan sumber. Kegunaannya ada tiga: bahan narasi konteks di proposal, bahan uji model terhadap kejadian yang benar-benar terjadi, dan pengisi Daftar Pustaka.",
+
+  "_bukan_untuk_apa": "JANGAN memakai daftar ini untuk memilih citra Sentinel-1. PLAN.md bagian 8 menyebut itu secara eksplisit sebagai insting yang salah: Sentinel-1 lewat pada jam tetap sementara puncak rob hanya beberapa jam, sehingga menyaring citra berdasarkan tanggal rob hanya menyisakan segelintir sampel. Dataset latih dibangun dari SELURUH citra sejak 2015, lalu tinggi pasut pada detik akuisisi dicatat untuk tiap citra.",
+
+  "_peringatan_satuan": "Bedakan dua besaran yang sering tertukar di berita. TINGGI PASANG adalah muka air laut terhadap datum stasiun, biasanya dilaporkan BMKG dalam meter. KEDALAMAN GENANGAN adalah tinggi air di atas permukaan jalan, biasanya dalam sentimeter. Angka 210 cm pada 23 Mei 2022 adalah tinggi muka air, bukan kedalaman air di jalan. Jangan disatukan dalam satu kolom saat masuk proposal.",
+
+  "_tingkat_verifikasi": {
+    "primer": "Artikel sumbernya dibaca langsung dan angkanya disalin dari isi artikel",
+    "perlu_verifikasi": "Baru berasal dari ringkasan mesin pencari. Tautannya ada, tetapi isinya BELUM dibuka. Wajib dibuka sebelum masuk proposal."
+  },
+
+  "_keterbatasan": [
+    "Periode 2015 sampai 2019 hampir kosong. Arsip berita daring dari rentang itu sulit muncul di mesin pencari. Untuk melengkapinya perlu penelusuran manual di arsip Suara Merdeka, Tribun Jateng, dan Radar Semarang, atau permintaan data kejadian ke BPBD Kota Semarang.",
+    "Sebagian besar entri masih berstatus perlu_verifikasi. Angka yang belum dibuka sumbernya TIDAK BOLEH masuk proposal apa adanya. Pengalaman hari ini: satu ringkasan mesin pencari menyajikan amplitudo pasut Semarang yang terbukti salah baca saat sumber primernya dibuka.",
+    "Beberapa entri adalah PERINGATAN DINI, bukan kejadian terkonfirmasi. Peringatan BMKG menyatakan potensi, dan tidak selalu berujung genangan. Kolom jenis membedakan keduanya.",
+    "Daftar ini condong ke kejadian besar yang layak berita. Rob kecil yang rutin merendam Tambak Lorok tiap pasang purnama nyaris tidak pernah diberitakan, padahal justru itu yang paling mengganggu mobilitas harian."
+  ],
+
+  "kejadian": [
+    {
+      "tanggal": "2016-07",
+      "presisi_tanggal": "bulan",
+      "jenis": "kejadian",
+      "lokasi": ["Jalan Kaligawe", "kolong jembatan tol Kaligawe", "simpang Terminal Terboyo", "depan Polsek Genuk"],
+      "catatan": "Sisa genangan dangkal di beberapa titik jalur Pantura",
+      "sumber": { "penerbit": "Direktorat Jenderal SDA, Kementerian PUPR", "tautan": "https://sda.pu.go.id/balai/bbwspemalijuana/pages/posts/banjir-rob-berangsur-berkurang-jalan-raya-kaligawe-semarang-sudah-bisa-dilewati-1612866176" },
+      "verifikasi": "perlu_verifikasi"
+    },
+    {
+      "tanggal": "2020-12-10",
+      "presisi_tanggal": "hari",
+      "jenis": "kejadian",
+      "lokasi": ["Kecamatan Genuk", "pesisir Kota Semarang"],
+      "luas_genangan_ha": 4032.898,
+      "catatan": "Genuk tercatat sebagai kecamatan dengan luas genangan rob terbesar, 1.057,274 ha",
+      "sumber": { "penerbit": "Prosiding ITENAS", "tautan": "https://eproceeding.itenas.ac.id/index.php/ftsp/article/download/3912/3236" },
+      "verifikasi": "perlu_verifikasi"
+    },
+    {
+      "tanggal": "2021-12-30/2022-01-05",
+      "presisi_tanggal": "rentang",
+      "jenis": "peringatan_dini",
+      "lokasi": ["pesisir Jawa Tengah"],
+      "catatan": "Peringatan dini potensi banjir pesisir BMKG",
+      "sumber": { "penerbit": "Ayo Semarang", "tautan": "https://www.ayosemarang.com/umum/pr-772285970/bmkg-peringatan-dini-potensi-banjir-pesisir-atau-rob-periode-30-desember-2021-hingga-5-januari-2022" },
+      "verifikasi": "perlu_verifikasi"
+    },
+    {
+      "tanggal": "2022-05-23",
+      "presisi_tanggal": "hari",
+      "jenis": "kejadian",
+      "peristiwa_besar": true,
+      "lokasi": ["Pelabuhan Tanjung Emas", "kawasan berikat PT Lamicitra", "jalur Pantura", "Demak", "Pekalongan"],
+      "tinggi_muka_air_cm": { "pukul_11_00": 155, "pukul_16_00_puncak": 210, "pukul_19_45": 190, "pukul_21_00": 180 },
+      "jam_mulai": "14.10 WIB",
+      "penyebab": "Tanggul pembatas jebol sehingga air laut masuk ke kawasan pelabuhan, bersamaan dengan rob",
+      "terdampak": { "karyawan_dievakuasi": 600, "keluarga_terdampak": 8000 },
+      "catatan": "Kejadian rujukan paling terdokumentasi. Angka tinggi muka air per jam di atas berguna untuk menguji rekonstruksi pasut.",
+      "sumber": { "penerbit": "CNN Indonesia", "tautan": "https://www.cnnindonesia.com/nasional/20220523204510-20-800284/kronologi-tanggul-jebol-dan-banjir-rob-hebat-terjang-semarang" },
+      "sumber_tambahan": [
+        { "penerbit": "BNPB", "tautan": "https://www.bnpb.go.id/berita/penahan-air-laut-jebol-kawasan-tanjung-emas-semarang-banjir-rob-sedalam-1-5-meter", "catatan": "Tidak bisa dibuka otomatis, HTTP 403. Buka manual." }
+      ],
+      "verifikasi": "primer"
+    },
+    {
+      "tanggal": "2022-12-01/2022-12-04",
+      "presisi_tanggal": "rentang",
+      "jenis": "kejadian",
+      "lokasi": ["pesisir Semarang Utara", "Pelabuhan Tanjung Emas", "Tambak Lorok", "Genuk"],
+      "tinggi_pasang_maks_m": 1.9,
+      "catatan": "Pasang tinggi diperkirakan terjadi sore sekitar pukul 17.00 sampai dini hari pukul 03.00 hingga 04.00",
+      "sumber": { "penerbit": "Radar Semarang, Jawa Pos", "tautan": "https://radarsemarang.jawapos.com/berita/jateng/semarang/2022/12/02/banjir-rob-ancam-pesisir-kota-semarang-selama-bulan-desember-2022-begini-penjelasan-bmkg/" },
+      "verifikasi": "perlu_verifikasi"
+    },
+    {
+      "tanggal": "2022",
+      "presisi_tanggal": "tahun",
+      "jenis": "rekapitulasi",
+      "jumlah_kejadian": 13,
+      "catatan": "Tercatat 13 kali rob sepanjang 2022 pada lokasi pemantauan yang sama",
+      "sumber": { "penerbit": "LK2 FHUI", "tautan": "https://lk2fhui.law.ui.ac.id/portfolio/banjir-rob-kabupaten-demak-dan-kota-semarang-sudahkah-efektif-mitigasinya/" },
+      "verifikasi": "perlu_verifikasi"
+    },
+    {
+      "tanggal": "2022-12-19",
+      "presisi_tanggal": "hari",
+      "jenis": "artikel_rangkuman",
+      "lokasi": ["Kota Semarang"],
+      "catatan": "Kaleidoskop 2022. Berguna untuk memanen tanggal-tanggal kejadian sepanjang 2022 sekaligus.",
+      "sumber": { "penerbit": "Kompas Regional", "tautan": "https://regional.kompas.com/read/2022/12/19/124555578/kaleidoskop-2022-banjir-rob-yang-tak-kunjung-usai-di-kota-semarang?page=all" },
+      "verifikasi": "perlu_verifikasi"
+    },
+    {
+      "tanggal": "2023-06-12",
+      "presisi_tanggal": "hari",
+      "jenis": "kejadian",
+      "lokasi": ["Tambak Lorok"],
+      "catatan": "Warga dan pelajar menerjang genangan rob",
+      "sumber": { "penerbit": "belum dipastikan", "tautan": null },
+      "verifikasi": "perlu_verifikasi"
+    },
+    {
+      "tanggal": "2023",
+      "presisi_tanggal": "tahun",
+      "jenis": "rekapitulasi",
+      "jumlah_kejadian": 7,
+      "catatan": "Turun dari 13 kejadian pada 2022 menjadi 7 pada 2023 di lokasi pemantauan yang sama",
+      "sumber": { "penerbit": "LK2 FHUI", "tautan": "https://lk2fhui.law.ui.ac.id/portfolio/banjir-rob-kabupaten-demak-dan-kota-semarang-sudahkah-efektif-mitigasinya/" },
+      "verifikasi": "perlu_verifikasi"
+    },
+    {
+      "tanggal": "2024-04-07",
+      "presisi_tanggal": "hari",
+      "jenis": "peringatan_dini",
+      "jam": "16.00 sampai 20.00 WIB",
+      "lokasi": ["pesisir Kota Semarang"],
+      "sumber": { "penerbit": "PPID Kota Semarang", "tautan": "https://ppid.semarangkota.go.id/peringatan-dini-banjir-pesisir-rob-7-april-2024/" },
+      "verifikasi": "perlu_verifikasi"
+    },
+    {
+      "tanggal": "2024-11-01/2024-11-13",
+      "presisi_tanggal": "rentang",
+      "jenis": "peringatan_dini",
+      "lokasi": ["pesisir Indonesia termasuk Semarang"],
+      "sumber": { "penerbit": "PPID Kota Semarang", "tautan": "https://ppid.semarangkota.go.id/informasi-potensi-banjir-pesisir-rob-di-wilayah-pesisir-indonesia-periode-1-13-november-2024/" },
+      "verifikasi": "perlu_verifikasi"
+    },
+    {
+      "tanggal": "2024-11-18",
+      "presisi_tanggal": "hari",
+      "jenis": "artikel_dampak",
+      "lokasi": ["pesisir Semarang"],
+      "catatan": "Warga mengeluarkan sekitar Rp100 juta tiap dua tahun untuk meninggikan rumah. Angka biaya adaptasi ini berguna untuk bagian Impact Projection.",
+      "sumber": { "penerbit": "Kompas Regional", "tautan": "https://regional.kompas.com/read/2024/11/18/120439278/banjir-rob-di-pesisir-semarang-warga-terpaksa-rogoh-rp-100-juta-setiap-2" },
+      "verifikasi": "perlu_verifikasi"
+    },
+    {
+      "tanggal": "2025-05-23",
+      "presisi_tanggal": "hari",
+      "jenis": "kejadian",
+      "lokasi": ["Pelabuhan Tanjung Emas"],
+      "sumber": { "penerbit": "Ayo Semarang", "tautan": "https://www.ayosemarang.com/semarang-raya/pr-773449779/semarang-banjir-rob-hari-ini-pelabuhan-tanjung-emas-tenggelam" },
+      "verifikasi": "perlu_verifikasi"
+    },
+    {
+      "tanggal": "2025-05/2025-07",
+      "presisi_tanggal": "rentang_bulan",
+      "jenis": "kejadian",
+      "lokasi": ["pesisir Kota Semarang"],
+      "catatan": "Rob berulang sepanjang Mei sampai Juli 2025",
+      "sumber": { "penerbit": "belum dipastikan", "tautan": null },
+      "verifikasi": "perlu_verifikasi"
+    },
+    {
+      "tanggal": "2025-10-17",
+      "presisi_tanggal": "hari",
+      "jenis": "kejadian",
+      "lokasi": ["pesisir Kota Semarang"],
+      "kedalaman_genangan_maks_m": 1.0,
+      "catatan": "Genangan terus meninggi sejak tanggal ini, mencapai sekitar 1 meter di beberapa lokasi",
+      "sumber": { "penerbit": "PPID Kota Semarang", "tautan": "https://ppid.semarangkota.go.id/informasi-banjir-kota-semarang-oktober-2025/" },
+      "verifikasi": "perlu_verifikasi"
+    },
+    {
+      "tanggal": "2025-11-27",
+      "presisi_tanggal": "hari",
+      "jenis": "peringatan_dini",
+      "jam": "dini hari",
+      "lokasi": ["Kota Semarang", "Kabupaten Demak"],
+      "catatan": "Disebut sebagai kali keempat rob merendam Semarang dan Demak sepanjang 2025",
+      "sumber": { "penerbit": "Kompas Regional", "tautan": "https://regional.kompas.com/read/2025/11/26/102647678/bmkg-peringatkan-banjir-rob-di-semarang-demak-pada-kamis-dini-hari" },
+      "verifikasi": "perlu_verifikasi"
+    },
+    {
+      "tanggal": "2026-01-09",
+      "presisi_tanggal": "hari",
+      "jenis": "kejadian",
+      "lokasi": ["pesisir Kota Semarang"],
+      "sumber": { "penerbit": "belum dipastikan", "tautan": null },
+      "verifikasi": "perlu_verifikasi"
+    },
+    {
+      "tanggal": "2026-05-04",
+      "presisi_tanggal": "hari",
+      "jenis": "peringatan_dini",
+      "lokasi": ["pesisir Kota Semarang"],
+      "sumber": { "penerbit": "IDN Times Jateng", "tautan": "https://jateng.idntimes.com/news/jawa-tengah/prakiraan-cuaca-semarang-raya-4-mei-2026-potensi-hujan-dan-banjir-rob-00-2m8jx-r64711" },
+      "verifikasi": "perlu_verifikasi"
+    },
+    {
+      "tanggal": "2026-05-10",
+      "presisi_tanggal": "hari",
+      "jenis": "peringatan_dini",
+      "jam": "11.00 sampai 14.00 WIB",
+      "lokasi": ["Tambak Lorok", "Bandarharjo", "Jalan Kaligawe"],
+      "catatan": "Potensi genangan di titik rendah akibat pasang harian",
+      "sumber": { "penerbit": "IDN Times Jateng", "tautan": "https://jateng.idntimes.com/news/jawa-tengah/prakiraan-cuaca-semarang-10-mei-2026-cerah-dan-waspada-rob-00-2m8jx-2gf3y6" },
+      "verifikasi": "perlu_verifikasi"
+    },
+    {
+      "tanggal": "2026-05-18",
+      "presisi_tanggal": "hari",
+      "jenis": "peringatan_dini",
+      "status": "Siaga Banjir Rob",
+      "jam_puncak": "12.10 WIB",
+      "tinggi_pasang_maks_m": 0.95,
+      "lokasi": [
+        "Semarang Utara: Tambak Lorok, Bandarharjo, Pelabuhan Tanjung Emas",
+        "Genuk: Kaligawe, Terboyo, DAS Sayung",
+        "Tugu: Mangkang Kulon, Mangkang Wetan, Mangunharjo"
+      ],
+      "sumber_data": "BMKG, Stasiun Meteorologi Maritim Tanjung Emas",
+      "catatan": "Angka 0,95 m adalah tinggi pasang, bukan kedalaman genangan di jalan. Berguna sebagai pembanding untuk mengkalibrasi rekonstruksi pasut.",
+      "sumber": { "penerbit": "IDN Times Jateng", "tautan": "https://jateng.idntimes.com/news/jawa-tengah/cuaca-semarang-18-mei-2026-siaga-puncak-rob-ancaman-hujanpetir-malam-00-2m8jx-0tlgcm" },
+      "verifikasi": "primer"
+    },
+    {
+      "tanggal": null,
+      "presisi_tanggal": "tidak_ada",
+      "jenis": "sumber_pemantauan",
+      "lokasi": ["Kota Semarang"],
+      "catatan": "Dasbor pemantauan banjir milik Pemerintah Kota Semarang. Bukan satu kejadian, melainkan sumber berjalan yang bisa dipanen untuk melengkapi daftar ini.",
+      "sumber": { "penerbit": "Pemerintah Kota Semarang", "tautan": "https://pantaubanjir.semarangkota.go.id/" },
+      "verifikasi": "perlu_verifikasi"
+    }
+  ],
+
+  "_langkah_berikutnya": [
+    "Buka satu per satu entri berstatus perlu_verifikasi, salin angka dari isi artikel, lalu ubah statusnya menjadi primer.",
+    "Untuk 2015 sampai 2019, minta rekap kejadian ke BPBD Kota Semarang. Itu jalur tercepat dan sumbernya resmi, jauh lebih kuat daripada arsip berita untuk keperluan proposal.",
+    "Panen tanggal tambahan dari artikel Kaleidoskop 2022 Kompas dan dari dasbor pantaubanjir.semarangkota.go.id.",
+    "Cocokkan tiap tanggal dengan tinggi pasut hasil rekonstruksi harmonik. Kejadian yang JATUH DI LUAR pasut tinggi adalah yang paling menarik, karena berarti pemicunya hujan atau angin, bukan pasut semata. Itu bahan bagus untuk bagian metodologi."
+  ]
+}

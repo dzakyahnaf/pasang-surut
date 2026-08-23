@@ -182,3 +182,116 @@ default export, jadi menaikkan versi berarti mengubah impor di `Peta.jsx`.
 - Kecepatan ruas berasal dari imputasi OSMnx untuk ruas tanpa tag `maxspeed`.
   Ini asumsi dan wajib ditulis di `docs/batasan.md`.
 - Repo belum dipublikasikan.
+
+---
+
+## Riset pendukung — 24 Agustus 2026
+
+Bukan milestone kode. Tiga butir CHECKLIST_MALAM_INI.md dikerjakan supaya
+tidak jadi penghalang di M3 ke atas.
+
+### Nomor 12 — konstanta harmonik pasut Semarang
+
+`data/referensi/konstanta_pasut_semarang.json` **terisi**, sebelumnya seluruh
+nilainya `null`.
+
+Sumber: Rachman, Ismunarti, Handoyo, "Pengaruh Pasang Surut Terhadap Sebaran
+Genangan Banjir Rob di Kecamatan Semarang Utara", Jurnal Oseanografi Undip
+Vol 4 No 1, 2015. Tabelnya dibaca langsung dari PDF aslinya, bukan dari
+ringkasan mesin pencari. Sepuluh komponen lengkap dengan amplitudo dan fase,
+ditambah MSL, HHWL, LLWL, dan Formzahl.
+
+Stasiunnya di 6°56'55,78" LS / 110°25'7,00" BT, yaitu **di dalam AOI**, dan
+hanya berjarak sekitar 120 meter dari stasiun pasut IOC berkode `sema` yang
+dikelola BIG. Untuk proyek ini keduanya boleh dianggap titik yang sama.
+
+Tiga temuan yang mengubah cara angka ini harus dipakai:
+
+1. **P1 dan K2 bukan hasil pengukuran.** Rekamannya hanya 15 hari, terlalu
+   pendek untuk memisahkan komponen berfrekuensi dekat. Keduanya diturunkan
+   dari K1 dan S2 memakai rasio tetap Admiralty. Buktinya aritmetis:
+   P1/K1 = 0,3305 dan K2/S2 = 0,2697, keduanya persis rasio baku, dan
+   fasenya disamakan dengan komponen induk. Dua dari tujuh komponen yang
+   diminta PLAN.md 10.2 karena itu tidak berdiri sendiri.
+2. **Zona waktu acuan fase tidak disebut sumber.** Disimpan sebagai `null`,
+   bukan ditebak. Salah menebak menggeser kurva sampai 7 jam, dan untuk M2
+   yang periodenya 12,4 jam itu bisa membalik pasang jadi surut. Cara
+   menyelesaikannya ditulis di berkas: rekonstruksi dua kali, sekali dengan
+   acuan UTC dan sekali WIB, lalu bandingkan dengan data terukur stasiun
+   `sema`.
+3. **Sumber lain tidak sepakat soal tipe pasut.** Az Zahro dkk (Prosiding SNF
+   UNJ) memakai data Pushidrosal 29 piantan Januari–Februari 2018 dan
+   memperoleh Formzahl 3,94, yaitu harian tunggal. Sumber kita memperoleh
+   1,121, campuran condong ke harian ganda. Rekaman mereka lebih panjang.
+   Tabel komponennya berupa gambar sehingga angkanya tidak bisa disalin.
+   Perbedaan ini belum terselesaikan dan sudah masuk `batasan.md`.
+
+Formzahl dihitung ulang dari angka yang tersimpan: 1,1235 versus 1,121 yang
+ditulis makalah. Cocok dalam batas pembulatan, jadi transkripsinya benar.
+
+**Jalan keluar yang direkomendasikan:** stasiun IOC `sema` punya empat sensor
+aktif dan dikelola BIG bersama GFZ. Menghitung konstanta sendiri dari rekaman
+satu tahun akan memisahkan P1 dari K1 dan K2 dari S2 dengan benar, sekaligus
+menghapus keraguan zona waktu karena kita sendiri yang menetapkannya.
+
+### Nomor 10 — tanggal kejadian rob
+
+`data/referensi/kejadian_rob_semarang.json` **dibuat**, 21 entri.
+
+Yang jujur harus disebut: **hanya 2 entri yang sudah dibaca sampai sumber
+primernya**, sisanya masih berstatus `perlu_verifikasi` karena baru berasal
+dari ringkasan mesin pencari. Tiga entri bahkan belum punya tautan. Periode
+**2015, 2017, 2018, dan 2019 kosong sama sekali** — arsip berita daring dari
+rentang itu tidak muncul di pencarian.
+
+Jadi target 20 sampai 30 tanggal tercapai secara jumlah, TIDAK tercapai
+secara mutu. Jangan masukkan angka berstatus `perlu_verifikasi` ke proposal
+sebelum artikelnya dibuka.
+
+Entri paling berguna, 23 Mei 2022, terverifikasi penuh dari CNN Indonesia
+lengkap dengan tinggi muka air per jam: 155 cm pukul 11.00, puncak 210 cm
+pukul 16.00, 190 cm pukul 19.45, 180 cm pukul 21.00. Deret ini bisa dipakai
+menguji rekonstruksi pasut nanti.
+
+Peringatan yang ditulis di berkas: **jangan pakai daftar ini untuk memilih
+citra Sentinel-1.** PLAN.md bagian 8 menyebutnya sebagai insting yang salah.
+
+Jalur tercepat melengkapi 2015–2019 adalah meminta rekap kejadian ke BPBD
+Kota Semarang. Sumbernya resmi dan jauh lebih kuat daripada arsip berita.
+
+### Nomor 8 — AOI dibekukan
+
+`data/aoi/aoi_semarang_pilot.geojson`: `dibekukan_pada` diisi `2026-08-24`.
+**Geometri tidak disentuh sama sekali** dan itu diverifikasi dengan
+membandingkan geometri sebelum dan sesudah penyuntingan. Graf, tabel
+ruas_jalan, dan prediksi tetap sah.
+
+Batas administratif keenam kelurahan sasaran diambil dari OpenStreetMap lewat
+Nominatim, lalu diuji satu per satu. Hasilnya: **keenamnya seluruhnya berada
+di dalam AOI.** Margin AOI di luar gabungan kelurahan: barat 2,47 km, timur
+3,24 km, utara 0,89 km, selatan 2,90 km.
+
+Temuan yang perlu diketahui tim: **AOI sekitar 3,6 kali lebih luas daripada
+gabungan enam kelurahan sasaran** — 98,4 km persegi berbanding 27,6 km
+persegi. Rekomendasi saya **jangan dipangkas**: routing membutuhkan jaringan
+jalan di luar wilayah tergenang untuk menghitung rute memutar, dan AOI yang
+dipotong persis di batas kelurahan akan membuat rute alternatif terputus di
+tepi peta. Tetapi konsekuensinya harus diingat — statistik apa pun yang
+dihitung atas seluruh AOI akan terlihat jauh lebih optimistis daripada
+kenyataan di enam kelurahan pesisir. Ini juga yang menjelaskan kenapa sebaran
+kerentanan condong ke selatan saat mengkalibrasi data contoh.
+
+### docs/batasan.md akhirnya terisi
+
+Sebelumnya hanya heading kosong, padahal PLAN.md menandainya bahan bagian 5
+proposal dan berlabel PENTING. Sekarang berisi 5 bagian dan 17 batasan yang
+benar-benar diketahui, termasuk seluruh temuan riset di atas ditambah imputasi
+kecepatan OSMnx dan konsekuensi penyimpanan hanya-ruas-tergenang.
+
+### Yang tetap tidak bisa saya kerjakan
+
+Seluruh BLOK 1 checklist — Earth Engine, Copernicus, DEMNAS, AVISO, Supabase,
+Vercel, Railway, GitHub, Figma — dan nomor 9 menjalankan `schema.sql` di
+Supabase. Semuanya menuntut pembuatan akun, pemasukan kata sandi, atau
+persetujuan syarat layanan atas nama tim. Ini batas aturan, bukan batas alat,
+dan tidak berubah oleh tersedianya browser otomatis.
