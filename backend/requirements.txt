@@ -1,0 +1,30 @@
+# PASANG SURUT — dependency backend, versi dikunci.
+#
+# Python 3.11 (lihat .python-version). Versi di bawah adalah hasil resolusi
+# nyata pada 23 Agustus 2026 dan sudah diuji terpasang bersama tanpa konflik.
+# Aturan repo: tidak ada dependency baru tanpa alasan tertulis. Setiap baris
+# di sini punya alasannya.
+
+# ── API ────────────────────────────────────────────────────────────────
+fastapi==0.141.1          # framework API, dokumentasi OpenAPI otomatis
+uvicorn==0.52.4           # server ASGI yang menjalankan FastAPI
+
+# ── Geospasial ─────────────────────────────────────────────────────────
+osmnx==2.1.1              # unduh jaringan jalan OpenStreetMap jadi graf
+networkx==3.6.1           # struktur graf + algoritma lintasan terpendek
+geopandas==1.1.4          # DataFrame yang punya kolom geometri
+rasterio==1.4.4           # baca raster DEMNAS
+shapely==2.1.2            # operasi geometri (potong, jarak, dalam-poligon)
+pyproj==3.7.2             # alih proyeksi antar CRS, mis. 4326 ke 32749
+
+# ── Model & data ───────────────────────────────────────────────────────
+scikit-learn==1.9.0       # gradient boosting untuk model genangan
+pandas==3.0.5             # tabel fitur latih
+numpy==2.4.6              # aritmetika larik, pondasi paket-paket di atas
+
+# ── Database & konfigurasi ─────────────────────────────────────────────
+psycopg2-binary==2.9.12   # driver PostgreSQL untuk Supabase
+python-dotenv==1.2.3      # baca .env tanpa menaruh secret di kode
+
+# ── Uji ────────────────────────────────────────────────────────────────
+pytest==9.1.1             # test runner

@@ -1,0 +1,63 @@
+# ===================================================================
+# PLAN.md BAGIAN 3 — SUDAH TERISI
+# Tempel blok ini menggantikan blok "???" di bagian 3 PLAN.md
+# ===================================================================
+
+# WAJIB — memblokir deliverable
+nama_tim:            "trio la albiceleste"
+nama_karya:          "PASANG SURUT"
+
+# Format nama file & judul video (rulebook 8.1 & 8.2) — TANPA SPASI:
+#   Anforcom2026_DSDC_TrioLaAlbiceleste_PasangSurut.pdf
+#   Anforcom2026_DSDC_TrioLaAlbiceleste_PasangSurut
+nama_file_slug:      "TrioLaAlbiceleste_PasangSurut"
+
+institusi:           "Institut Teknologi Sepuluh Nopember (ITS), Surabaya"
+
+anggota:
+  - nama: "Muhammad Dzaky Ahnaf"
+    nrp:  "5027231039"
+  - nama: "Daffa Rajendra Priyatama"
+    nrp:  "5027231009"
+  - nama: "Naufal Syafi' Hakim"
+    nrp:  "5027231022"
+
+# WAJIB — memblokir arsitektur
+jumlah_citra_s1:     "BELUM ADA"   # script v1 error di Map.centerObject.
+                                   # Jalankan ulang gee_cek_cakupan_s1.js v2.
+                                   # >150  = lanjut rencana ini
+                                   # 80-150 = pangkas fitur model, maksimal 5
+                                   # <80   = STOP, rombak pendekatan
+
+skill_tim:
+  python:            "pernah"       # mahasiswa Teknologi Informasi ITS
+  react:             "pernah"
+  sql:               "pernah"
+  geospasial:        "belum pernah" # DIHARAPKAN. Bukan masalah.
+
+# INSTRUKSI TAMBAHAN UNTUK CLAUDE CODE:
+# Karena geospasial "belum pernah", setiap kali menulis kode yang menyentuh
+# CRS, proyeksi, raster, atau graf jaringan, sertakan komentar Bahasa Indonesia
+# yang menjelaskan APA yang terjadi dan KENAPA, bukan sekadar apa yang dilakukan
+# baris itu. Contoh yang diharapkan:
+#
+#   # EPSG:4326 pakai satuan derajat, jadi jarak tidak bisa dihitung langsung.
+#   # Diproyeksikan dulu ke EPSG:32749 (UTM 49S, zona Jawa Tengah) supaya
+#   # satuannya meter dan panjang ruas jalan akurat.
+#
+# Tim ini akan ditanya juri soal metodologi (bobot 10% penyisihan, 20% tanya
+# jawab di final). Mereka harus paham kodenya sendiri, bukan sekadar menjalankannya.
+
+# ASUMSI — sudah dikonfirmasi user
+bentuk_produk:       "PWA"
+bahasa_ui:           "Indonesia"
+budget:              "Rp0"
+punya_domain:        false
+repo_sudah_ada:      false
+
+# KONTEKS TAMBAHAN — tim dari Surabaya, karya untuk Semarang
+# Ini SAH menurut rulebook: solusi boleh untuk "Semarang atau kota serupa
+# di Indonesia". Seluruh pendekatan berbasis data publik dan penginderaan
+# jauh, jadi jarak fisik tidak membatasi apa pun secara teknis.
+# Jawaban untuk juri bila ditanya "kenapa Semarang, bukan Surabaya?"
+# sudah disiapkan di docs/faq_juri.md.

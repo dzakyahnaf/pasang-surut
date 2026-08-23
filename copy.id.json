@@ -1,0 +1,287 @@
+{
+  "_petunjuk": {
+    "tujuan": "Sumber tunggal seluruh teks antarmuka PASANG SURUT. Tidak ada satu pun string yang boleh ditulis langsung di komponen.",
+    "caraPakai": "Impor sebagai modul, akses lewat helper t('hasilRute.judul'). Buat helper yang melempar error saat kunci tidak ditemukan, sehingga string yang terlewat ketahuan saat pengembangan, bukan saat demo di depan juri.",
+    "interpolasi": "Placeholder ditulis {namaVariabel} dalam kurung kurawal tunggal. Helper wajib mengganti seluruhnya. Placeholder yang tidak terganti harus memicu error, bukan tampil apa adanya.",
+    "menambahString": "Kalau butuh teks yang belum ada di sini, TAMBAHKAN KE FILE INI lebih dulu, baru dipakai. Jangan pernah mengarang kalimat di dalam komponen.",
+    "suara": "Kalimat biasa, bukan huruf besar semua kecuali label bagian. Kata kerja aktif. Tanpa basa-basi. Galat menjelaskan apa yang terjadi dan apa yang bisa dilakukan, tidak meminta maaf dan tidak kabur. Layar kosong adalah ajakan bertindak, bukan pengumuman kekosongan.",
+    "acuan": "DESIGN.md Bagian 10"
+  },
+
+  "_glosarium": {
+    "_catatan": "Istilah baku. Dilarang memakai sinonim di luar daftar ini, karena kosakata antarmuka adalah papan penunjuk arah bagi pengguna.",
+    "rob": "Selalu 'rob', jangan 'banjir rob' berulang-ulang, jangan 'air pasang'.",
+    "genangan": "Air yang menutupi jalan. Jangan 'banjir' untuk kondisi di ruas jalan.",
+    "ruas": "Potongan jalan. Jangan 'segmen', jangan 'jalur'.",
+    "pasut": "Pasang surut. Dipakai pada nama Pita Pasut.",
+    "moda": "Jenis kendaraan. Jangan 'transportasi', jangan 'vehicle'.",
+    "berangkat": "Jangan 'keberangkatan' pada tombol dan label pendek.",
+    "ruteDisarankan": "Rute yang menghindari genangan. Jangan sebut 'rute optimal' atau 'rute terbaik'.",
+    "ruteBiasa": "Rute pembanding yang mengabaikan genangan. Jangan sebut 'rute normal'."
+  },
+
+  "aplikasi": {
+    "nama": "Pasang Surut",
+    "tagline": "Tahu jalan mana yang terendam, sebelum berangkat",
+    "deskripsiSingkat": "Perutean sadar rob untuk Semarang pesisir",
+    "wilayah": "Semarang Utara dan Timur"
+  },
+
+  "navigasi": {
+    "peta": "Peta",
+    "validasi": "Validasi",
+    "tentang": "Tentang",
+    "bukaMenu": "Buka menu",
+    "tutupMenu": "Tutup menu",
+    "kembali": "Kembali"
+  },
+
+  "peta": {
+    "judulLegenda": "KEDALAMAN GENANGAN",
+    "tampilkanLegenda": "Tampilkan legenda",
+    "sembunyikanLegenda": "Sembunyikan legenda",
+    "posisiSaya": "Posisi saya",
+    "posisiTidakDiizinkan": "Akses lokasi ditolak. Ketuk peta untuk memilih titik berangkat.",
+    "perbesar": "Perbesar peta",
+    "perkecil": "Perkecil peta",
+    "ketukUntukAsal": "Ketuk peta untuk memilih titik berangkat",
+    "ketukUntukTujuan": "Ketuk peta untuk memilih tujuan",
+    "atribusi": "Data jalan dari OpenStreetMap"
+  },
+
+  "pitaPasut": {
+    "judul": "PITA PASUT · 72 JAM",
+    "petunjuk": "Geser untuk melihat kondisi jalan pada jam lain",
+    "sekarang": "Sekarang",
+    "jamBahaya": "Jam berisiko genangan",
+    "jamAman": "Jam aman",
+    "tinggiAir": "Tinggi air",
+    "berangkatPada": "Berangkat {hari}, pukul {jam}",
+    "labelSumbu": "Jam",
+    "tidakAdaData": "Data pasut untuk rentang ini belum dihitung."
+  },
+
+  "moda": {
+    "judul": "MODA",
+    "motor": "Motor",
+    "mobil": "Mobil",
+    "pilihModa": "Pilih moda kendaraan",
+    "keteranganMotor": "Batas aman lebih rendah, lebih cepat terhenti genangan",
+    "keteranganMobil": "Batas aman lebih tinggi, tetapi memutar lebih jauh"
+  },
+
+  "kedalaman": {
+    "kering": "Kering",
+    "tipis": "Tipis",
+    "sedang": "Sedang",
+    "dalam": "Dalam",
+    "sangatDalam": "Sangat dalam",
+    "rentangTipis": "1–10 cm",
+    "rentangSedang": "10–25 cm",
+    "rentangDalam": "25–50 cm",
+    "rentangSangatDalam": "di atas 50 cm",
+    "tidakBisaDilewati": "Tidak bisa dilewati {moda}",
+    "estimasi": "Kedalaman adalah estimasi, bukan hasil pengukuran langsung"
+  },
+
+  "pencarianRute": {
+    "judul": "CARI RUTE",
+    "asal": "Berangkat dari",
+    "tujuan": "Menuju",
+    "asalKosong": "Ketuk peta atau pilih tujuan cepat",
+    "tujuanKosong": "Ketuk peta atau pilih tujuan cepat",
+    "tukar": "Tukar titik berangkat dan tujuan",
+    "hapusAsal": "Hapus titik berangkat",
+    "hapusTujuan": "Hapus tujuan",
+    "cariRute": "Cari rute",
+    "cariUlang": "Cari ulang",
+    "sedangMencari": "Mencari rute"
+  },
+
+  "hasilRute": {
+    "judul": "RUTE",
+    "ruteDisarankan": "Rute disarankan",
+    "ruteBiasa": "Rute biasa",
+    "keteranganRuteBiasa": "Rute tercepat bila genangan diabaikan",
+    "waktuTempuh": "Waktu tempuh",
+    "jarak": "Jarak",
+    "tibaSekitar": "Tiba sekitar pukul {jam}",
+    "melewatiRuas": "Melewati {jumlah} ruas",
+    "ruasTergenang": "{jumlah} ruas tergenang di jalur ini",
+    "tidakAdaGenangan": "Tidak ada genangan di jalur ini pada jam tersebut",
+    "samaDenganRuteBiasa": "Pada jam ini rute disarankan sama dengan rute biasa. Tidak perlu memutar.",
+    "sembunyikanRuteBiasa": "Sembunyikan rute biasa",
+    "tampilkanRuteBiasa": "Tampilkan rute biasa"
+  },
+
+  "dampak": {
+    "judul": "BIAYA MENGHINDAR",
+    "keterangan": "Selisih terhadap rute biasa",
+    "selisihWaktu": "Waktu",
+    "selisihJarak": "Jarak",
+    "bahanBakar": "Bahan bakar",
+    "emisi": "Emisi",
+    "rentang": "{bawah}–{atas}",
+    "tidakAdaSelisih": "Tidak ada selisih",
+    "catatanFaktor": "Bahan bakar dan emisi dihitung dari faktor rata-rata per moda, bukan dari kendaraan Anda.",
+    "hemat": "Menghindari genangan menghemat {nilai} {satuan} dibanding menerjangnya"
+  },
+
+  "peringatan": {
+    "judulMenembus": "Rute ini menembus genangan",
+    "isiMenembus": "Genangan setinggi {kedalaman} cm di {namaJalan} pada pukul {jam}.",
+    "risikoKesehatan": "Air rob dapat membawa bakteri penyebab leptospirosis. Bila terpaksa lewat, hindari kontak kulit dengan air dan segera cuci dengan sabun setelahnya.",
+    "saranJamLain": "Berangkat pukul {jam} — genangan turun ke {kedalaman} cm.",
+    "tidakAdaJamAman": "Tidak ada jam dengan genangan lebih rendah dalam 72 jam ke depan.",
+    "judulSemuaTertutup": "Semua jalur tergenang",
+    "isiSemuaTertutup": "Tidak ada rute yang bisa dilewati {moda} menuju tujuan pada jam itu.",
+    "saranGantiModa": "Mobil punya batas aman lebih tinggi. Coba ganti moda.",
+    "lihatJamAman": "Lihat jam aman terdekat"
+  },
+
+  "tujuanCepat": {
+    "judul": "TUJUAN CEPAT",
+    "petunjuk": "Pilih tujuan yang sering dituju",
+    "muat": "Memuat daftar tujuan",
+    "kosong": "Daftar tujuan belum tersedia."
+  },
+
+  "sumberData": {
+    "lencanaContoh": "DATA CONTOH",
+    "penjelasanContoh": "Angka di layar ini belum berasal dari model. Dipakai sementara selama pengembangan.",
+    "lencanaModel": "Prediksi model",
+    "diperbaruiPada": "Diperbarui {waktu}",
+    "hinggaJam": "Prediksi tersedia sampai {waktu}"
+  },
+
+  "validasi": {
+    "judul": "Validasi model",
+    "pengantar": "Halaman ini menampilkan akurasi model apa adanya, termasuk bila hasilnya kurang baik. Klaim tanpa angka tidak layak dipercaya.",
+    "belumDilatih": "Model belum dilatih",
+    "belumDilatihIsi": "Angka akurasi akan muncul di sini setelah pelatihan selesai. Sebelum ada hasilnya, tidak ada angka yang ditampilkan.",
+    "periodeLatih": "Periode data latih",
+    "periodeUji": "Periode data uji",
+    "jumlahSampelLatih": "Sampel latih",
+    "jumlahSampelUji": "Sampel uji",
+    "rocAuc": "ROC-AUC",
+    "prAuc": "PR-AUC",
+    "f1": "Skor F1",
+    "ambang": "Ambang keputusan",
+    "matriksKebingungan": "Matriks kebingungan",
+    "benarPositif": "Benar tergenang",
+    "benarNegatif": "Benar kering",
+    "salahPositif": "Diprediksi tergenang, ternyata kering",
+    "salahNegatif": "Diprediksi kering, ternyata tergenang",
+    "kepentinganFitur": "Fitur paling berpengaruh",
+    "judulPembanding": "Prediksi dibanding citra satelit",
+    "keteranganPembanding": "Kejadian rob {tanggal}. Kiri: prediksi model. Kanan: genangan teramati Sentinel-1.",
+    "catatanPembagian": "Data dibagi berdasarkan waktu, bukan acak, agar akurasi tidak melambung palsu.",
+    "sumberLabel": "Label genangan berasal dari {jumlah} citra radar Sentinel-1, 2015 sampai 2026."
+  },
+
+  "tentang": {
+    "judul": "Tentang Pasang Surut",
+    "apaIni": "Pasang Surut memperkirakan ruas jalan mana yang tergenang rob pada jam tertentu, lalu menyusun rute yang menghindarinya.",
+    "kenapaAda": "Rob menutup sekitar sepersepuluh jaringan jalan Semarang. Tanggul dan proyek pesisir tetap dibutuhkan, tetapi berjalan dalam hitungan tahun, sementara orang tetap harus berangkat kerja besok pagi.",
+    "judulCaraKerja": "Cara kerjanya",
+    "caraKerja": "Model dilatih dari genangan yang benar-benar teramati citra radar satelit, bukan dari perkiraan ketinggian tanah. Tinggi pasang surut dan curah hujan dipakai sebagai pemicu untuk memperkirakan 72 jam ke depan.",
+    "judulBatasan": "Yang belum bisa dilakukan",
+    "batasanKedalaman": "Kedalaman genangan adalah estimasi turunan. Satelit hanya membedakan permukaan basah dan kering.",
+    "batasanCakupan": "Cakupan baru wilayah Semarang Utara dan Timur.",
+    "batasanModa": "Baru mendukung motor dan mobil.",
+    "batasanWaktuNyata": "Belum menerima laporan genangan dari warga secara langsung.",
+    "batasanBukanPeringatanResmi": "Ini bukan peringatan dini resmi. Untuk peringatan resmi, ikuti kanal BMKG dan BPBD.",
+    "judulTim": "Tim",
+    "tim": "Trio La Albiceleste — Institut Teknologi Sepuluh Nopember",
+    "judulSumber": "Sumber data",
+    "lihatKode": "Lihat kode sumber"
+  },
+
+  "kosong": {
+    "belumAdaRuteJudul": "Pilih titik berangkat dan tujuan",
+    "belumAdaRuteIsi": "Ketuk dua titik di peta, atau pilih dari daftar tujuan cepat.",
+    "belumAdaTujuanJudul": "Tinggal satu titik lagi",
+    "belumAdaTujuanIsi": "Ketuk peta untuk memilih tujuan.",
+    "tidakAdaGenanganJudul": "Tidak ada genangan pada jam ini",
+    "tidakAdaGenanganIsi": "Geser Pita Pasut untuk melihat jam lain."
+  },
+
+  "galat": {
+    "prediksiTidakAda": "Prediksi untuk jam itu belum tersedia. Pilih jam lain.",
+    "ruteGagal": "Rute tidak dapat dihitung. Coba pilih titik yang lebih dekat ke jalan.",
+    "titikDiLuarWilayah": "Titik itu berada di luar wilayah yang dicakup. Pilih titik di Semarang Utara atau Timur.",
+    "titikTerlaluJauhDariJalan": "Tidak ada jalan di dekat titik itu. Ketuk lebih dekat ke ruas jalan.",
+    "jaringanPutus": "Sambungan terputus. Data yang sudah dimuat tetap bisa dipakai.",
+    "serverTidakMerespons": "Server tidak merespons. Coba lagi sebentar lagi.",
+    "dataRusak": "Data yang diterima tidak lengkap. Muat ulang halaman.",
+    "cobaLagi": "Coba lagi",
+    "muatUlang": "Muat ulang",
+    "halamanTidakAda": "Halaman tidak ditemukan",
+    "halamanTidakAdaIsi": "Alamat yang Anda buka tidak ada. Kembali ke peta.",
+    "kembaliKePeta": "Kembali ke peta"
+  },
+
+  "memuat": {
+    "peta": "Memuat peta",
+    "jaringanJalan": "Memuat jaringan jalan",
+    "genangan": "Memuat prediksi genangan",
+    "rute": "Menghitung rute",
+    "pasut": "Memuat data pasut",
+    "validasi": "Memuat hasil validasi"
+  },
+
+  "satuan": {
+    "menit": "mnt",
+    "jam": "jam",
+    "kilometer": "km",
+    "meter": "m",
+    "sentimeter": "cm",
+    "liter": "L",
+    "kilogramCo2e": "kg CO₂e",
+    "persen": "%",
+    "_catatan": "Satuan selalu ditulis lebih kecil dan lebih redup daripada angkanya, sesuai DESIGN.md Bagian 4."
+  },
+
+  "waktu": {
+    "hariIni": "Hari ini",
+    "besok": "Besok",
+    "lusa": "Lusa",
+    "senin": "Sen",
+    "selasa": "Sel",
+    "rabu": "Rab",
+    "kamis": "Kam",
+    "jumat": "Jum",
+    "sabtu": "Sab",
+    "minggu": "Min",
+    "pukul": "pukul",
+    "zona": "WIB",
+    "formatJam": "{jam}.{menit}",
+    "_catatan": "Tampilkan selalu dalam WIB. Simpan selalu dalam UTC."
+  },
+
+  "aksesibilitas": {
+    "pitaPasutLabel": "Penggeser waktu berangkat. Gunakan panah kiri dan kanan untuk berpindah satu jam, Page Up dan Page Down untuk enam jam.",
+    "pitaPasutNilai": "{hari} {tanggal}, pukul {jam} WIB",
+    "petaLabel": "Peta jaringan jalan dengan prediksi genangan",
+    "ruasLabel": "{namaJalan}, genangan {kedalaman} sentimeter",
+    "ruasKeringLabel": "{namaJalan}, kering",
+    "ruteDisarankanLabel": "Rute disarankan, {waktu} menit, {jarak} kilometer",
+    "ruteBiasaLabel": "Rute biasa, {waktu} menit, {jarak} kilometer",
+    "legendaLabel": "Legenda kedalaman genangan",
+    "lencanaContohLabel": "Peringatan: data yang ditampilkan adalah data contoh, bukan prediksi model",
+    "lewatiKeKonten": "Lewati ke konten utama"
+  },
+
+  "tombol": {
+    "tutup": "Tutup",
+    "batal": "Batal",
+    "lanjut": "Lanjut",
+    "salin": "Salin",
+    "tersalin": "Tersalin",
+    "bagikan": "Bagikan",
+    "lihatDetail": "Lihat detail",
+    "sembunyikanDetail": "Sembunyikan detail",
+    "pasangAplikasi": "Pasang aplikasi",
+    "pasangAplikasiKeterangan": "Tambahkan ke layar utama agar bisa dibuka tanpa peramban"
+  }
+}

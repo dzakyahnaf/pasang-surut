@@ -1,0 +1,4 @@
+# Berkas asli ada di backend/requirements.txt sesuai struktur repo PLAN.md
+# bagian 5. Baris ini membuat `pip install -r requirements.txt` dari akar
+# repo tetap bekerja, sehingga kriteria terima M1 terpenuhi apa adanya.
+-r backend/requirements.txt

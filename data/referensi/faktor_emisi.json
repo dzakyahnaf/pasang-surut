@@ -1,0 +1,16 @@
+{
+  "_catatan": "TODO(sumber). PLAN.md bagian 8 mewajibkan faktor emisi dinyatakan sebagai RENTANG, bukan angka tunggal, dan panel dampak wajib menampilkan ketidakpastian itu. Biarkan null sampai nilainya diambil dari IPCC atau pedoman nasional.",
+  "sumber": null,
+  "tautan_sumber": null,
+  "satuan": "gram CO2e per kilometer",
+  "moda": {
+    "motor": { "minimum": null, "maksimum": null },
+    "mobil": { "minimum": null, "maksimum": null }
+  },
+  "konsumsi_bbm": {
+    "_catatan": "TODO(sumber). Satuan liter per 100 km.",
+    "satuan": "liter/100 km",
+    "motor": { "minimum": null, "maksimum": null },
+    "mobil": { "minimum": null, "maksimum": null }
+  }
+}

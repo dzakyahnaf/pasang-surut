@@ -1,0 +1,20 @@
+{
+  "_catatan": "TODO(sumber). Nilai masih null dan WAJIB tetap null sampai konstanta harmonik diambil dari sumber terpublikasi yang bisa disitasi. Jangan diisi angka perkiraan — rekonstruksi pasut memakai angka ini dan seluruh prediksi genangan berdiri di atasnya.",
+  "stasiun": null,
+  "sumber": null,
+  "tautan_sumber": null,
+  "datum_referensi": null,
+  "satuan_amplitudo": "cm",
+  "satuan_fase": "derajat",
+  "zona_waktu_fase": "UTC",
+  "konstituen": {
+    "M2": { "amplitudo": null, "fase": null },
+    "S2": { "amplitudo": null, "fase": null },
+    "N2": { "amplitudo": null, "fase": null },
+    "K2": { "amplitudo": null, "fase": null },
+    "K1": { "amplitudo": null, "fase": null },
+    "O1": { "amplitudo": null, "fase": null },
+    "P1": { "amplitudo": null, "fase": null },
+    "Q1": { "amplitudo": null, "fase": null }
+  }
+}

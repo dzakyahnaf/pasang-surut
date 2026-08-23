@@ -1,0 +1,30 @@
+{
+  "type": "FeatureCollection",
+  "name": "aoi_pasang_surut_semarang_pilot",
+  "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "nama": "AOI Pilot Pasang Surut",
+        "wilayah": "Semarang Utara dan Semarang Timur",
+        "kelurahan_target": "Tanjungmas, Bandarharjo, Kemijen, Kaligawe, Terboyo Kulon, Terboyo Wetan",
+        "catatan": "Kotak ini adalah titik awal, bukan angka final. Buka di geojson.io atau QGIS, cocokkan dengan batas kelurahan resmi, lalu kunci. Setelah dikunci, JANGAN diubah tanpa memberi tahu seluruh tim.",
+        "perkiraan_dimensi": "sekitar 12,7 km barat-timur, 7,7 km utara-selatan",
+        "dibekukan_pada": "ISI TANGGAL SAAT TIM SEPAKAT"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [110.385, -6.995],
+            [110.500, -6.995],
+            [110.500, -6.925],
+            [110.385, -6.925],
+            [110.385, -6.995]
+          ]
+        ]
+      }
+    }
+  ]
+}

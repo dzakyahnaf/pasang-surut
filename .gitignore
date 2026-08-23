@@ -1,0 +1,49 @@
+# ── Rahasia ────────────────────────────────────────────────────────────
+# Aturan repo: tidak ada secret yang masuk git. Yang di-commit hanya
+# .env.example yang berisi nama variabel tanpa nilainya.
+.env
+.env.local
+.env.*.local
+
+# ── Data mentah ────────────────────────────────────────────────────────
+# data/raw/ menampung DEMNAS, ekstrak OSM, dan citra unduhan. Ukurannya
+# ratusan MB sampai beberapa GB, jadi tidak pernah masuk repo.
+# Foldernya sendiri tetap ada di git lewat .gitkeep supaya struktur utuh
+# saat orang lain melakukan git clone.
+data/raw/*
+!data/raw/.gitkeep
+
+# Raster dan ekstrak peta, di mana pun letaknya
+*.tif
+*.tiff
+*.tfw
+*.osm.pbf
+*.osm.bz2
+
+# Graf jalan hasil unduhan OSMnx — dibangun ulang oleh skrip, bukan aset repo
+*.graphml
+
+# ── Python ─────────────────────────────────────────────────────────────
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ipynb_checkpoints/
+.coverage
+htmlcov/
+
+# ── Node / frontend ────────────────────────────────────────────────────
+node_modules/
+dist/
+.vite/
+*.local
+
+# ── Sistem operasi & editor ────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/

@@ -1,0 +1,16 @@
+{
+  "_catatan": "TODO(sumber). PLAN.md bagian 6 menyebut kisaran 9 sampai 13 cm per tahun untuk wilayah pilot, tetapi angka itu belum punya sitasi di repo ini. Biarkan null sampai sumbernya ditemukan. Aturan repo: jangan pernah mengarang angka.",
+  "sumber": null,
+  "tautan_sumber": null,
+  "metode": null,
+  "periode_pengamatan": null,
+  "satuan": "cm/tahun",
+  "kelurahan": {
+    "Tanjungmas": { "laju": null },
+    "Bandarharjo": { "laju": null },
+    "Kemijen": { "laju": null },
+    "Kaligawe": { "laju": null },
+    "Terboyo Kulon": { "laju": null },
+    "Terboyo Wetan": { "laju": null }
+  }
+}
