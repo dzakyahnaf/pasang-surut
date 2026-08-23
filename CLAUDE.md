@@ -13,12 +13,28 @@ antarmuka.** DESIGN.md mengunci tampilan, copy.id.json mengunci kalimat.
 
 ## Perintah
 
+Struktur folder mengikuti `PLAN.md` bagian 5: backend di `backend/`,
+frontend di `frontend/`. Seluruh perintah di bawah dijalankan dari akar repo
+kecuali disebutkan lain.
+
 ```bash
-source .venv/bin/activate
-uvicorn api.main:app --reload          # API di :8000
-cd web && npm run dev                  # frontend di :5173
-pytest -q                              # test
-python -m scripts.<nama>               # skrip pipeline
+source .venv/Scripts/activate           # Windows Git Bash
+source .venv/bin/activate               # Linux dan macOS
+
+pytest -q                               # test, dari akar repo
+
+cd backend && uvicorn app.main:app --reload   # API di :8000
+cd frontend && npm run dev                    # frontend di :5173
+
+cd backend && python -m scripts.<nama>  # skrip pipeline
+```
+
+Urutan pipeline data, dijalankan dari `backend/`:
+
+```bash
+python -m scripts.01_bangun_graf        # SEKALI saja, menyentuh Overpass
+python -m scripts.02_isi_ruas_jalan     # graf -> tabel ruas_jalan
+python -m scripts.03_isi_dummy          # data contoh 72 jam, sumber='dummy'
 ```
 
 ## Konvensi

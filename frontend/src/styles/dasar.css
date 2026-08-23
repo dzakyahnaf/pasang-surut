@@ -1,0 +1,140 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   dasar.css — setelan dasar dan kelas bersama.
+
+   Tidak ada satu pun nilai heks di berkas ini. Semua lewat var(--nama)
+   dari token.css.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ── Huruf, dimuat sendiri dari node_modules ──────────────────────────
+   Bukan dari Google Fonts. Aturan repo: tidak ada panggilan ke layanan
+   luar saat runtime, termasuk untuk mengunduh huruf. Kalau huruf datang
+   dari CDN, demo di depan juri bergantung pada sambungan internet ruangan
+   lomba. */
+@import "@fontsource/barlow-semi-condensed/400.css";
+@import "@fontsource/barlow-semi-condensed/500.css";
+@import "@fontsource/barlow-semi-condensed/600.css";
+@import "@fontsource/barlow-semi-condensed/700.css";
+@import "@fontsource/ibm-plex-mono/400.css";
+@import "@fontsource/ibm-plex-mono/600.css";
+
+@import "./token.css";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#akar {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  /* Badan instrumen gelap. Jendela peta yang menyala di atasnya. */
+  background: var(--lambung-1);
+  color: var(--tinta-balik);
+  font-family: var(--font-ui);
+  font-size: var(--t-isi-ukuran);
+  font-weight: var(--t-isi-tebal);
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+}
+
+/* ── Fokus papan ketik, DESIGN.md Bagian 11 ─────────────────────────── */
+:focus-visible {
+  outline: var(--fokus-tebal) solid var(--rute);
+  outline-offset: var(--fokus-jarak);
+}
+
+/* ── Tangga ukuran huruf ────────────────────────────────────────────── */
+.t-angka {
+  font-family: var(--font-data);
+  font-size: var(--t-angka-ukuran);
+  font-weight: var(--t-angka-tebal);
+  letter-spacing: var(--t-angka-spasi);
+  font-variant-numeric: tabular-nums;
+}
+
+.t-judul {
+  font-size: var(--t-judul-ukuran);
+  font-weight: var(--t-judul-tebal);
+  letter-spacing: var(--t-judul-spasi);
+}
+
+.t-bagian {
+  font-size: var(--t-bagian-ukuran);
+  font-weight: var(--t-bagian-tebal);
+  letter-spacing: var(--t-bagian-spasi);
+  text-transform: uppercase;
+}
+
+.t-label {
+  font-size: var(--t-label-ukuran);
+  font-weight: var(--t-label-tebal);
+  letter-spacing: var(--t-label-spasi);
+}
+
+.t-data {
+  font-family: var(--font-data);
+  font-size: var(--t-data-ukuran);
+  font-weight: var(--t-data-tebal);
+  letter-spacing: var(--t-data-spasi);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Satuan selalu lebih kecil dan lebih redup daripada angkanya.
+   Mata membaca besarannya lebih dulu. */
+.t-satuan {
+  font-size: var(--t-satuan-ukuran);
+  font-weight: var(--t-satuan-tebal);
+  letter-spacing: var(--t-satuan-spasi);
+  color: var(--tinta-3);
+}
+
+/* ── Hanya untuk pembaca layar ──────────────────────────────────────── */
+.khusus-pembaca-layar {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Tautan lewati, muncul hanya saat difokus lewat papan ketik. */
+.lewati {
+  position: absolute;
+  top: var(--s-2);
+  left: var(--s-2);
+  z-index: 40;
+  transform: translateY(-200%);
+  padding: var(--s-2) var(--s-3);
+  background: var(--lambung-2);
+  color: var(--tinta-balik);
+  border: var(--garis-rambut) solid var(--lambung-3);
+  border-radius: var(--r-1);
+  text-decoration: none;
+}
+
+.lewati:focus-visible {
+  transform: translateY(0);
+}
+
+/* ── Gerak ──────────────────────────────────────────────────────────── */
+/* Satu momen terkoreografi saja. Selain itu hanya transisi warna 120ms. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: var(--gerak-pudar) !important;
+    transition-duration: var(--gerak-pudar) !important;
+  }
+}

@@ -20,8 +20,14 @@ data/raw/*
 *.osm.pbf
 *.osm.bz2
 
-# Graf jalan hasil unduhan OSMnx — dibangun ulang oleh skrip, bukan aset repo
+# Graf jalan hasil unduhan OSMnx. Tidak di-commit karena besarnya 18 MB dan
+# skrip 01 membangunnya ulang dalam belasan detik. Yang DI-COMMIT adalah
+# data/processed/ruas_jalan.geojson, supaya peta tetap bisa dibuka pada
+# hasil git clone tanpa database dan tanpa menyentuh Overpass.
 *.graphml
+
+# Cache permintaan OSMnx, hanya berguna di mesin tempat skrip dijalankan
+cache/
 
 # ── Python ─────────────────────────────────────────────────────────────
 .venv/

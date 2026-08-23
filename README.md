@@ -59,7 +59,9 @@ pernah sebagai ambang.
 
 ## 3. Tangkapan layar
 
-Belum tersedia. Antarmuka belum dibangun.
+Belum dilampirkan ke README. Peta sudah berjalan: jaringan jalan wilayah
+pilot tampil penuh layar dengan lapisan genangan data contoh, lencana DATA
+CONTOH, dan legenda tangga kedalaman.
 
 ---
 
@@ -91,6 +93,10 @@ diunduh sekali lalu disimpan ke file, pasut dihitung sekali lalu disimpan.
 Juri babak final memakai aplikasi ini langsung sebagai pengguna, jadi tidak
 boleh ada dependensi jaringan yang bisa gagal di tengah demo.
 
+Konsekuensinya sampai ke peta: **tidak ada penyedia ubin peta dari luar.**
+Latar peta satu warna dek dan seluruh yang tergambar di atasnya adalah data
+sendiri. Huruf pun dimuat dari paket lokal, bukan dari Google Fonts.
+
 ### Tech stack
 
 | Lapisan | Pilihan |
@@ -100,7 +106,7 @@ boleh ada dependensi jaringan yang bisa gagal di tengah demo.
 | Model | scikit-learn — gradient boosting |
 | Citra satelit | Sentinel-1 GRD IW VV via Google Earth Engine |
 | Database | PostgreSQL + PostGIS (Supabase) |
-| Frontend | React, Vite, MapLibre GL JS, Tailwind CSS |
+| Frontend | React, Vite, MapLibre GL JS, CSS custom property |
 
 ---
 
@@ -153,7 +159,7 @@ menyebutkannya sebagai estimasi.
 
 ## 7. Menjalankan secara lokal
 
-**Prasyarat:** Python 3.11, Git. Node.js menyusul saat frontend dibangun.
+**Prasyarat:** Python 3.11, Node.js 20 atau lebih baru, Git.
 
 ```bash
 git clone <url-repo>
@@ -188,14 +194,40 @@ Jalankan `db/schema.sql` di Supabase SQL Editor.
 pytest -q
 ```
 
-**5. API**
+**5. Pipeline data**
 
-Belum tersedia. `backend/app/main.py` dibangun di milestone berikutnya.
-Setelah ada, dijalankan dari `backend/` dengan `uvicorn app.main:app --reload`.
+Dijalankan dari `backend/`, berurutan. Langkah pertama menyentuh Overpass dan
+cukup dijalankan SEKALI; hasilnya disimpan ke berkas dan dipakai selamanya.
 
-**6. Frontend**
+```bash
+cd backend
+python -m scripts.01_bangun_graf        # unduh jaringan jalan OSM -> GraphML
+python -m scripts.02_isi_ruas_jalan     # graf -> tabel ruas_jalan + GeoJSON
+python -m scripts.03_isi_dummy          # data contoh 72 jam, sumber='dummy'
+```
 
-Belum tersedia.
+**6. API**
+
+```bash
+cd backend && uvicorn app.main:app --reload
+```
+
+| Endpoint | Isi |
+|---|---|
+| `GET /api/kesehatan` | keadaan sistem, jumlah ruas, sumber data, rentang prediksi |
+| `GET /api/ruas?waktu=` | jaringan jalan GeoJSON dengan kedalaman pada satu jam |
+
+**7. Frontend**
+
+```bash
+cd frontend && npm install && npm run dev
+```
+
+Peta terbuka di <http://localhost:5173>.
+
+**Tanpa database.** Kalau `DATABASE_URL` belum diisi, API otomatis membaca
+`data/processed/ruas_jalan.geojson` yang ikut di-commit, sehingga peta tetap
+terbuka. Yang hilang hanya lapisan genangan.
 
 ---
 
@@ -233,7 +265,7 @@ dan riwayat perjalanan.
 | Milestone | Isi | Status |
 |---|---|---|
 | M1 | Fondasi repo, environment, AOI, cek arsip Sentinel-1 | Selesai |
-| M2 | Graf jalan dan data dummy | Belum |
+| M2 | Graf jalan, database terisi, peta jalan tampil | Selesai |
 | M3 | Routing jalan | Belum |
 | M4 | Model genangan asli | Belum |
 | M5 | Panel dampak dan integrasi | Belum |

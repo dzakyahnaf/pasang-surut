@@ -1,0 +1,238 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   tata-letak.css — DESIGN.md Bagian 7.
+
+   Peta memenuhi layar. Tidak ada kisi kartu. Elemen di sudut adalah pelat
+   instrumen: badan gelap, garis rambut 1px, TANPA bayangan. Bayangan hanya
+   diizinkan pada satu tempat, yaitu lembar bawah, dan lembar bawah belum
+   ada di milestone ini.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.layar {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* ── Peta ────────────────────────────────────────────────────────────── */
+/* Memenuhi seluruh layar, di lapisan paling bawah. Peta adalah konten,
+   bukan latar di belakang lapisan kartu. */
+.peta {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--dek-1);
+}
+
+/* Kontrol bawaan MapLibre disesuaikan agar tidak membawa tampilan asing
+   masuk. Radius 3px, badan gelap, tanpa bayangan. */
+.maplibregl-ctrl-group {
+  background: var(--lambung-1);
+  border: var(--garis-rambut) solid var(--lambung-3);
+  border-radius: var(--r-1);
+  box-shadow: none;
+}
+
+.maplibregl-ctrl-group button {
+  width: var(--sentuh-min);
+  height: var(--sentuh-min);
+  background: transparent;
+}
+
+.maplibregl-ctrl-group button + button {
+  border-top: var(--garis-rambut) solid var(--lambung-3);
+}
+
+.maplibregl-ctrl-group button .maplibregl-ctrl-icon {
+  filter: invert(1);
+}
+
+.maplibregl-ctrl-bottom-right {
+  margin-bottom: var(--s-8);
+}
+
+/* ── Pelat instrumen ─────────────────────────────────────────────────── */
+.plat {
+  position: absolute;
+  z-index: 10;
+  background: var(--lambung-1);
+  border: var(--garis-rambut) solid var(--lambung-3);
+  border-radius: var(--r-2);
+  color: var(--tinta-balik);
+}
+
+.plat--kiri-atas {
+  top: var(--s-3);
+  left: var(--s-3);
+  padding: var(--s-3) var(--s-4);
+  max-width: calc(100% - var(--s-12) * 2);
+}
+
+.plat__judul {
+  color: var(--tinta-balik);
+}
+
+.plat__anak {
+  color: var(--tinta-3);
+  margin-top: var(--s-1);
+}
+
+.plat__jam {
+  color: var(--rute);
+  margin-top: var(--s-2);
+}
+
+.plat--kiri-bawah {
+  left: var(--s-3);
+  bottom: var(--s-3);
+  padding: 0;
+  max-width: calc(100% - var(--s-6));
+}
+
+/* ── Lencana DATA CONTOH, DESIGN.md Bagian 8 ─────────────────────────── */
+.lencana-contoh {
+  position: absolute;
+  z-index: 20;
+  top: var(--s-3);
+  right: var(--s-3);
+  display: flex;
+  align-items: center;
+  min-height: var(--sentuh-min);
+}
+
+.lencana-contoh__teks {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--s-2) var(--s-3);
+  background: var(--bahaya);
+  color: var(--tinta-balik);
+  border-radius: var(--r-1);
+}
+
+/* ── Legenda ─────────────────────────────────────────────────────────── */
+.legenda {
+  min-width: 200px;
+}
+
+.legenda__saklar {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: var(--sentuh-min);
+  padding: var(--s-2) var(--s-4);
+  background: transparent;
+  border: 0;
+  border-radius: var(--r-2) var(--r-2) 0 0;
+  color: var(--tinta-balik);
+  font-family: var(--font-ui);
+  text-align: left;
+  cursor: pointer;
+  transition: background var(--gerak-warna) linear;
+}
+
+.legenda__saklar:hover {
+  background: var(--lambung-2);
+}
+
+.legenda__isi {
+  padding: 0 var(--s-4) var(--s-3);
+  border-top: var(--garis-rambut) solid var(--lambung-3);
+  padding-top: var(--s-3);
+}
+
+.legenda__daftar {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.legenda__baris {
+  display: grid;
+  grid-template-columns: 32px 1fr auto;
+  align-items: center;
+  gap: var(--s-3);
+  padding: var(--s-1) 0;
+}
+
+.legenda__contoh {
+  border-radius: var(--r-1);
+  overflow: hidden;
+}
+
+.legenda__nama {
+  color: var(--tinta-balik);
+}
+
+.legenda__rentang {
+  color: var(--tinta-3);
+}
+
+.legenda__catatan {
+  margin: var(--s-3) 0 0;
+  padding-top: var(--s-2);
+  border-top: var(--garis-rambut) solid var(--lambung-3);
+  color: var(--tinta-3);
+  max-width: 28ch;
+}
+
+/* ── Atribusi ────────────────────────────────────────────────────────── */
+.atribusi {
+  position: absolute;
+  z-index: 10;
+  right: var(--s-3);
+  bottom: var(--s-2);
+  color: var(--tinta-2);
+}
+
+/* ── Pesan memuat dan galat ──────────────────────────────────────────── */
+.pesan {
+  position: absolute;
+  z-index: 30;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  padding: var(--s-4) var(--s-6);
+  background: var(--lambung-1);
+  border: var(--garis-rambut) solid var(--lambung-3);
+  border-radius: var(--r-2);
+  color: var(--tinta-balik);
+  text-align: center;
+}
+
+.pesan--galat {
+  border-color: var(--bahaya);
+}
+
+.pesan__rincian {
+  color: var(--tinta-3);
+  max-width: 40ch;
+}
+
+/* ── Responsif sampai 360px, DESIGN.md Bagian 11 ─────────────────────── */
+@media (max-width: 420px) {
+  .plat--kiri-atas {
+    padding: var(--s-2) var(--s-3);
+  }
+
+  .legenda {
+    min-width: 0;
+  }
+
+  .legenda__baris {
+    grid-template-columns: 32px 1fr;
+  }
+
+  /* Rentang angka disembunyikan di layar sempit supaya nama kelas tidak
+     terpotong. Urutan warna dan pola titik tetap membawa informasinya. */
+  .legenda__rentang {
+    display: none;
+  }
+
+  .atribusi {
+    display: none;
+  }
+}
