@@ -117,7 +117,7 @@ sendiri. Huruf pun dimuat dari paket lokal, bukan dari Google Fonts.
 |---|---|---|---|
 | Jaringan jalan | OpenStreetMap via OSMnx | <https://www.openstreetmap.org> | Diunduh sekali, disimpan GraphML. Overpass tidak dipanggil saat runtime |
 | Label genangan | Sentinel-1 GRD IW VV, Google Earth Engine | <https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S1_GRD> | Jantung proyek. Hanya memberi label basah atau kering |
-| Elevasi | DEMNAS, Badan Informasi Geospasial | TODO(verifikasi tautan) | 0,27 arc-second sekitar 8 m, datum EGM2008. RMSE vertikal 2,79 m. Dipakai sebagai fitur, bukan ambang |
+| Elevasi | DEMNAS, Badan Informasi Geospasial | <https://tanahair.indonesia.go.id/demnas/> | 0,27 arc-second sekitar 8 m, datum EGM2008. RMSE vertikal 2,79 m. Dipakai sebagai fitur, bukan ambang |
 | Curah hujan | Open-Meteo | <https://open-meteo.com> | Gratis tanpa kunci API |
 | Curah hujan sekunder | BMKG | <https://www.bmkg.go.id> | Pembanding |
 | Pasang surut | Rekonstruksi harmonik dari konstanta terpublikasi | TODO(sumber) | Offline penuh. Konstanta belum diisi, lihat `data/referensi/konstanta_pasut_semarang.json` |

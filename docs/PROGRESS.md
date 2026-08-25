@@ -8,7 +8,7 @@ ini, baca bagian itu.
 
 ---
 
-## PAPAN BLOKADE — keadaan per 25 Agustus 2026
+## PAPAN BLOKADE — keadaan per 25 Agustus 2026 (diperbarui sore)
 
 > Bagian ini DIPERBARUI SETIAP SESI dan selalu menggambarkan keadaan
 > sekarang, bukan riwayat. Riwayat ada di entri per milestone di bawahnya.
@@ -20,8 +20,8 @@ ini, baca bagian itu.
 |---|---|---|---|
 | A1 | **Supabase belum ada.** Database yang dipakai masih PostGIS lokal di Docker. `db/schema.sql` belum pernah dijalankan di Supabase. | Deploy M6, dan kerja paralel antar anggota tim | Manual |
 | A2 | **Zona waktu acuan fase konstanta pasut belum dipastikan.** Sumbernya tidak menyebutkan. Salah menebak menggeser kurva sampai 7 jam. | Pasut asli menggantikan sinusoid contoh | Bisa saya kerjakan setelah A3 |
-| A3 | **Google Earth Engine belum didaftarkan.** Kuota dihitung per proyek, jadi tiap anggota perlu proyek sendiri. | Ekstraksi label Sentinel-1, dan karena itu seluruh model M4 | Manual |
-| A4 | **DEMNAS belum diunduh.** Butuh registrasi. | Fitur elevasi pada model M4 | Manual |
+| A3 | **Dua dari tiga proyek Earth Engine belum ada.** Minimal satu akun SUDAH ada — cek Sentinel-1 yang menghasilkan 723 citra mustahil berjalan tanpanya. Kuota 150 EECU-hours dihitung per proyek dan reset 1 September, yaitu SETELAH tenggat, jadi kuota Agustus adalah seluruh yang akan pernah ada. | Ekstraksi label Sentinel-1, dan karena itu seluruh model M4 | Manual — panduan di `docs/panduan_akun_dan_data.md` |
+| A4 | **DEMNAS belum diunduh.** Butuh registrasi. Tile yang dibutuhkan sudah dipastikan: **`1409-22`** saja, dikueri dari layanan indeks resmi BIG. Ada jalan cadangan tanpa registrasi, yaitu Copernicus DEM GLO-30 di dalam Earth Engine. | Fitur elevasi pada model M4 | Manual — panduan di `docs/panduan_akun_dan_data.md` |
 | A5 | **Repo belum dipublikasikan.** M1 mensyaratkan repo publik, dan juri menilai Code Project 10 persen dari sana. | Penilaian | Manual |
 
 ### B. PERLU PERHATIAN — tidak menghentikan, tetapi akan menggigit
@@ -29,7 +29,7 @@ ini, baca bagian itu.
 | # | Hal | Kenapa penting |
 |---|---|---|
 | B1 | `BAGIAN_3_TERISI.yaml` masih menulis `jumlah_citra_s1: "BELUM ADA"`, padahal angkanya 723. Blok `???` di PLAN.md bagian 3 juga masih kosong. | Sesi berikutnya bisa berhenti karena membaca angka yang salah |
-| B2 | Tautan DEMNAS dan riset WRI April 2026 di README masih `TODO(verifikasi tautan)`. | Tautan mati di gerbang juri lebih buruk daripada tidak ada tautan |
+| B2 | Tautan **riset WRI April 2026** di README masih `TODO(verifikasi tautan)`. Tautan DEMNAS sudah diverifikasi hidup pada 25 Agustus dan sudah dimasukkan. | Tautan mati di gerbang juri lebih buruk daripada tidak ada tautan |
 | B3 | Commit membawa trailer `Co-Authored-By: Claude Opus 5`. | Kalau rulebook DSDC mempersoalkan, putuskan sekarang selagi baru empat commit |
 | B4 | Koneksi database dibuka DUA KALI per permintaan, tanpa pooling. `database_tersedia()` membuka satu, endpoint membuka lagi. | Supabase paket gratis membatasi koneksi. Akan menggigit saat juri memakai aplikasi bersamaan di babak final |
 | B5 | `copy.id.json` ada di dua tempat, akar dan `frontend/src/`, tanpa apa pun yang menjaganya sinkron. | Begitu satu disunting, keduanya menyimpang diam-diam |
@@ -40,6 +40,7 @@ ini, baca bagian itu.
 | B10 | Kontras kelas genangan paling dangkal `--air-1` terhadap latar dek hanya 1,39:1. | DESIGN.md Bagian 11 mensyaratkan terbaca di bawah matahari langsung dan saat dicetak hitam putih. Belum diuji di luar ruangan |
 | B11 | Kecepatan ruas untuk jalan tanpa tag `maxspeed` berasal dari imputasi OSMnx. | Asumsi, bukan pengukuran. Sudah tercatat di `docs/batasan.md` bagian 2.4 |
 | B12 | Penalti genangan (1,0 → 2,5 → 8,0) adalah angka rancangan, bukan hasil pengukuran lapangan. | Juri berhak menanyakan dasarnya. Sudah tercatat di `docs/batasan.md` |
+| B13 | **`geemap` versi terbaru menuntut Python 3.12**, sementara proyek dikunci 3.11. PLAN.md bagian 4 menyebutnya sebagai bagian tech stack. | Rekomendasi: JANGAN pakai geemap. `earthengine-api` saja sudah cukup untuk pipeline yang mengekspor tabel, dan geemap 0.37.2 yang masih cocok menarik lebih dari 70 paket tambahan |
 
 ### C. HANYA BISA DIKERJAKAN MANUAL — di luar jangkauan Claude Code
 
@@ -49,9 +50,9 @@ berubah oleh tersedianya browser otomatis.
 
 | # | Tugas | Rujukan |
 |---|---|---|
-| C1 | Daftar Google Earth Engine, **tiap anggota proyek sendiri** karena kuota per proyek | CHECKLIST nomor 1 |
+| C1 | Daftar Google Earth Engine, **tiap anggota proyek sendiri** karena kuota per proyek. Pilih Community Tier, jangan Contributor karena menuntut akun billing | CHECKLIST nomor 1, panduan lengkap di `docs/panduan_akun_dan_data.md` |
 | C2 | Daftar Copernicus Data Space sebagai cadangan bila kuota GEE habis | CHECKLIST nomor 2 |
-| C3 | Daftar DEMNAS, unduh tile Semarang, lalu clip ke AOI sebelum diolah | CHECKLIST nomor 3 |
+| C3 | Daftar DEMNAS, unduh **tile `1409-22`**, simpan ke `data/raw/`, lalu clip ke AOI sebelum diolah | CHECKLIST nomor 3, panduan lengkap di `docs/panduan_akun_dan_data.md` |
 | C4 | Daftar AVISO — persetujuannya berhari-hari, daftar sekarang lalu lupakan | CHECKLIST nomor 4 |
 | C5 | Buat proyek Supabase, lalu jalankan `db/schema.sql` di SQL Editor | CHECKLIST nomor 5 dan 9 |
 | C6 | Buat akun Vercel dan Railway | CHECKLIST nomor 5 |
