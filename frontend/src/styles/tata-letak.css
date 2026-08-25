@@ -182,7 +182,16 @@
   z-index: 10;
   right: var(--s-3);
   bottom: var(--s-2);
+  display: flex;
+  gap: var(--s-3);
+  align-items: baseline;
   color: var(--tinta-2);
+}
+
+/* Petunjuk ketuk berdampingan dengan atribusi, tidak menggantikannya.
+   Atribusi OpenStreetMap adalah kewajiban lisensi ODbL, bukan hiasan. */
+.atribusi__petunjuk {
+  color: var(--tinta-1);
 }
 
 /* ── Pesan memuat dan galat ──────────────────────────────────────────── */
@@ -233,6 +242,362 @@
   }
 
   .atribusi {
+    display: none;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   M3 — rail kiri, jendela peta, dan Pita Pasut
+   DESIGN.md Bagian 7: rail kiri 360px berbadan gelap berisi kontrol dan
+   hasil, peta mengisi sisanya, Pita Pasut melintang penuh di bawah.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.layar__isi {
+  position: absolute;
+  inset: 0 0 var(--pita-tinggi) 0;
+  display: flex;
+}
+
+.jendela-peta {
+  position: relative;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.jendela-peta .peta {
+  position: absolute;
+  inset: 0;
+}
+
+/* ── Rail kiri ───────────────────────────────────────────────────────── */
+.rail {
+  flex: 0 0 360px;
+  width: 360px;
+  overflow-y: auto;
+  padding: var(--s-4);
+  background: var(--lambung-1);
+  border-right: var(--garis-rambut) solid var(--lambung-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+}
+
+.rail__blok {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+}
+
+.rail__judul {
+  margin: 0;
+  color: var(--tinta-3);
+}
+
+/* ── Titik berangkat dan tujuan ──────────────────────────────────────── */
+.titik {
+  display: flex;
+  align-items: stretch;
+  gap: var(--s-1);
+  border: var(--garis-rambut) solid var(--lambung-3);
+  border-radius: var(--r-1);
+  background: var(--lambung-2);
+  transition: border-color var(--gerak-warna) linear;
+}
+
+.titik--aktif {
+  border-color: var(--rute);
+}
+
+.titik__utama {
+  flex: 1 1 auto;
+  min-height: var(--sentuh-min);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+  padding: var(--s-2) var(--s-3);
+  background: transparent;
+  border: 0;
+  border-radius: var(--r-1);
+  color: var(--tinta-balik);
+  font-family: var(--font-ui);
+  text-align: left;
+  cursor: pointer;
+}
+
+.titik__label {
+  color: var(--tinta-3);
+}
+
+.titik__kosong {
+  color: var(--tinta-2);
+}
+
+.titik__koordinat {
+  color: var(--rute);
+}
+
+.titik__hapus {
+  flex: 0 0 auto;
+  width: var(--sentuh-min);
+  background: transparent;
+  border: 0;
+  color: var(--tinta-3);
+  cursor: pointer;
+  transition: color var(--gerak-warna) linear;
+}
+
+.titik__hapus:hover {
+  color: var(--tinta-balik);
+}
+
+/* ── Moda ────────────────────────────────────────────────────────────── */
+.moda {
+  display: flex;
+  gap: var(--s-2);
+}
+
+.moda__tombol {
+  flex: 1 1 0;
+  min-height: var(--sentuh-min);
+  background: var(--lambung-2);
+  border: var(--garis-rambut) solid var(--lambung-3);
+  border-radius: var(--r-1);
+  color: var(--tinta-3);
+  font-family: var(--font-ui);
+  cursor: pointer;
+  transition: background var(--gerak-warna) linear,
+              color var(--gerak-warna) linear,
+              border-color var(--gerak-warna) linear;
+}
+
+.moda__tombol--aktif {
+  background: var(--lambung-3);
+  border-color: var(--rute);
+  color: var(--tinta-balik);
+}
+
+.moda__keterangan {
+  margin: 0;
+  color: var(--tinta-3);
+}
+
+/* ── Tombol ──────────────────────────────────────────────────────────── */
+.tombol-utama {
+  min-height: var(--sentuh-min);
+  padding: 0 var(--s-4);
+  background: var(--lambung-2);
+  border: var(--garis-rambut) solid var(--rute);
+  border-radius: var(--r-1);
+  color: var(--tinta-balik);
+  font-family: var(--font-ui);
+  cursor: pointer;
+  transition: background var(--gerak-warna) linear;
+}
+
+.tombol-utama:hover:not(:disabled) {
+  background: var(--lambung-3);
+}
+
+.tombol-utama:disabled {
+  border-color: var(--lambung-3);
+  color: var(--tinta-2);
+  cursor: default;
+}
+
+.tombol-kecil {
+  min-height: var(--sentuh-min);
+  margin-top: var(--s-2);
+  padding: 0 var(--s-3);
+  background: transparent;
+  border: var(--garis-rambut) solid var(--lambung-3);
+  border-radius: var(--r-1);
+  color: var(--tinta-3);
+  font-family: var(--font-ui);
+  cursor: pointer;
+}
+
+/* ── Keadaan kosong dan galat ────────────────────────────────────────── */
+.kosong__judul {
+  margin: 0;
+  color: var(--tinta-balik);
+}
+
+.kosong__isi {
+  margin: 0;
+  color: var(--tinta-3);
+}
+
+.galat {
+  padding: var(--s-3);
+  border: var(--garis-rambut) solid var(--bahaya);
+  border-radius: var(--r-1);
+  color: var(--tinta-balik);
+}
+
+.galat p {
+  margin: 0;
+}
+
+/* ── Hasil rute ──────────────────────────────────────────────────────── */
+.hasil__angka {
+  display: flex;
+  gap: var(--s-6);
+  padding: var(--s-2) 0;
+}
+
+.dampak {
+  display: flex;
+  flex-direction: column;
+}
+
+.dampak__angka {
+  color: var(--tinta-balik);
+  line-height: 1;
+}
+
+.dampak__satuan {
+  margin-top: 2px;
+}
+
+.dampak__label {
+  margin-top: var(--s-1);
+  color: var(--tinta-3);
+}
+
+.hasil__baris {
+  margin: 0;
+  color: var(--tinta-3);
+}
+
+.peringatan {
+  margin-top: var(--s-3);
+  padding: var(--s-3);
+  background: var(--bahaya);
+  border-radius: var(--r-1);
+  color: var(--tinta-balik);
+}
+
+.peringatan__judul,
+.peringatan__isi {
+  margin: 0 0 var(--s-2);
+}
+
+.peringatan__isi:last-child {
+  margin-bottom: 0;
+}
+
+.pembanding {
+  margin-top: var(--s-4);
+  padding-top: var(--s-3);
+  border-top: var(--garis-rambut) solid var(--lambung-3);
+}
+
+.pembanding__judul,
+.pembanding__sama {
+  margin: 0;
+  color: var(--tinta-3);
+}
+
+/* ── Pita Pasut ──────────────────────────────────────────────────────── */
+.pita {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: var(--pita-tinggi);
+  display: flex;
+  flex-direction: column;
+  background: var(--lambung-1);
+  border-top: var(--garis-rambut) solid var(--lambung-3);
+  /* Satu-satunya bayangan yang diizinkan, DESIGN.md Bagian 5. */
+  box-shadow: var(--bayangan-lembar);
+  z-index: 15;
+}
+
+.pita--kosong {
+  align-items: center;
+  justify-content: center;
+  color: var(--tinta-3);
+}
+
+.pita__kepala {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--s-2) var(--s-4) 0;
+}
+
+.pita__judul {
+  color: var(--tinta-3);
+}
+
+.pita__terpilih {
+  color: var(--rute);
+}
+
+.pita__kanvas {
+  position: relative;
+  /* Basis 0 dan min-height 0, BUKAN flex: 1 1 auto. Dengan basis auto,
+     tinggi SVG dipakai sebagai dasar perhitungan flex, sehingga kepala,
+     kanvas, dan kaki bersama-sama melebihi tinggi pita dan kakinya
+     terpotong keluar layar. */
+  flex: 1 1 0;
+  min-height: 0;
+  overflow: hidden;
+  margin: 0 var(--s-4);
+  cursor: ew-resize;
+  touch-action: none;
+}
+
+.pita__svg {
+  display: block;
+}
+
+/* Sasaran sentuh 44px untuk pegangan geser, tidak terlihat tetapi bisa
+   diraih jempol. DESIGN.md Bagian 6. */
+.pita__pegangan {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: var(--sentuh-min);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.pita__kaki {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--s-4) var(--s-2);
+}
+
+.pita__petunjuk {
+  color: var(--tinta-2);
+}
+
+.pita__bacaan {
+  color: var(--tinta-balik);
+}
+
+/* ── Responsif ───────────────────────────────────────────────────────── */
+@media (max-width: 860px) {
+  .layar__isi {
+    flex-direction: column-reverse;
+  }
+
+  /* Di layar sempit rail menjadi lembar bawah yang menumpang di atas peta,
+     sesuai tata letak ponsel DESIGN.md Bagian 7. */
+  .rail {
+    flex: 0 0 auto;
+    width: 100%;
+    max-height: 45%;
+    border-right: 0;
+    border-top: var(--garis-rambut) solid var(--lambung-3);
+    border-radius: var(--r-2) var(--r-2) 0 0;
+  }
+
+  .plat--kiri-bawah {
     display: none;
   }
 }

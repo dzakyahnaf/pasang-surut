@@ -202,6 +202,80 @@ class RepositoriRuas:
                 })
         return {"type": "FeatureCollection", "features": fitur}
 
+    def semua_untuk_routing(self) -> list[dict]:
+        """Seluruh ruas dalam bentuk yang siap dijadikan graf routing.
+
+        KENAPA GRAF DIBANGUN DARI TABEL, BUKAN DARI GraphML. Tabel ruas_jalan
+        sudah memuat seluruh yang dibutuhkan: simpul ujung, panjang dalam
+        meter, kecepatan, arah, dan geometri. Jumlah simpul uniknya juga
+        persis sama dengan graf OSMnx aslinya, jadi tidak ada konektivitas
+        yang hilang.
+
+        Keuntungannya dua. Pertama, edge_id yang dipakai tabel prediksi
+        genangan menempel langsung pada sisi graf, sehingga tidak perlu
+        mencocokkan pasangan simpul dan tidak ada kemungkinan salah pasang
+        pada ruas paralel. Kedua, API tidak lagi memerlukan berkas GraphML
+        saat berjalan, sehingga server yang di-deploy cukup membawa database.
+
+        Titik ujung diambil dari geometri: koordinat pertama adalah posisi
+        osm_u, koordinat terakhir adalah posisi osm_v. Ini dipakai untuk
+        mencari simpul terdekat dari titik yang diketuk pengguna di peta.
+        """
+        import json
+
+        with self._kon.cursor() as kur:
+            kur.execute(
+                """
+                SELECT edge_id, osm_u, osm_v, nama, jenis, panjang_m,
+                       kecepatan_kmh, satu_arah, ST_AsGeoJSON(geom, 5)
+                FROM ruas_jalan
+                ORDER BY edge_id
+                """
+            )
+            hasil = []
+            for (edge_id, u, v, nama, jenis, panjang, kecepatan,
+                 satu_arah, geom) in kur.fetchall():
+                koordinat = json.loads(geom)["coordinates"]
+                hasil.append({
+                    "edge_id": int(edge_id),
+                    "osm_u": int(u),
+                    "osm_v": int(v),
+                    "nama": nama,
+                    "jenis": jenis,
+                    "panjang_m": float(panjang),
+                    "kecepatan_kmh": float(kecepatan) if kecepatan else 30.0,
+                    "satu_arah": bool(satu_arah),
+                    "koordinat": koordinat,
+                })
+            return hasil
+
+    def ambang_moda(self) -> dict[str, dict]:
+        """Baca tabel ambang_moda apa adanya.
+
+        Aturan sesi ini: ambang TIDAK BOLEH ditulis tetap di dalam kode.
+        Angka di tabel itu sendiri masih berstatus asumsi menurut komentar
+        di schema.sql, jadi ia harus bisa dikoreksi tanpa menyentuh kode.
+        """
+        with self._kon.cursor() as kur:
+            kur.execute(
+                """
+                SELECT moda, lambat_cm, berisiko_cm, tidak_bisa_lewat_cm,
+                       konsumsi_l_per_km, faktor_emisi_kg_per_l
+                FROM ambang_moda
+                ORDER BY moda
+                """
+            )
+            return {
+                baris[0]: {
+                    "lambat_cm": float(baris[1]),
+                    "berisiko_cm": float(baris[2]),
+                    "tidak_bisa_lewat_cm": float(baris[3]),
+                    "konsumsi_l_per_km": float(baris[4]),
+                    "faktor_emisi_kg_per_l": float(baris[5]),
+                }
+                for baris in kur.fetchall()
+            }
+
 
 class RepositoriGenangan:
     """Akses tabel `prediksi_genangan` — kontrak antara model dan routing."""
@@ -267,3 +341,48 @@ class RepositoriGenangan:
             kur.execute("SELECT MIN(waktu), MAX(waktu) FROM prediksi_genangan")
             awal, akhir = kur.fetchone()
             return awal, akhir
+
+    def peta_kedalaman(self, mulai, selesai) -> dict:
+        """Seluruh prediksi pada rentang waktu, disusun per jam.
+
+        Bentuk hasilnya: { waktu: { edge_id: (kedalaman_cm, probabilitas) } }
+
+        Dimuat sekaligus, bukan satu kueri per jam, karena mesin routing
+        yang sadar waktu berpindah jam sepanjang penelusuran. Menanyakan
+        database di tengah Dijkstra akan membuat satu permintaan rute
+        memicu ribuan kueri.
+
+        Ingat: ruas kering TIDAK punya baris. Ruas yang tidak muncul di sini
+        berarti kering, bukan berarti datanya hilang.
+        """
+        with self._kon.cursor() as kur:
+            kur.execute(
+                """
+                SELECT waktu, edge_id, kedalaman_cm, probabilitas
+                FROM prediksi_genangan
+                WHERE waktu BETWEEN %s AND %s
+                """,
+                (mulai, selesai),
+            )
+            hasil: dict = {}
+            for waktu, edge_id, kedalaman, probabilitas in kur.fetchall():
+                hasil.setdefault(waktu, {})[int(edge_id)] = (
+                    float(kedalaman), float(probabilitas)
+                )
+            return hasil
+
+    def ringkasan_per_jam(self) -> list[tuple]:
+        """(waktu, jumlah ruas tergenang, kedalaman maksimum) untuk tiap jam.
+
+        Dipakai Pita Pasut di frontend untuk mengarsir jam berisiko.
+        """
+        with self._kon.cursor() as kur:
+            kur.execute(
+                """
+                SELECT waktu, COUNT(*), COALESCE(MAX(kedalaman_cm), 0)
+                FROM prediksi_genangan
+                GROUP BY waktu
+                ORDER BY waktu
+                """
+            )
+            return [(w, int(n), float(m)) for w, n, m in kur.fetchall()]

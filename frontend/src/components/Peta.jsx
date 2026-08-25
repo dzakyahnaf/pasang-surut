@@ -98,7 +98,7 @@ function ekspresiLebarKedalaman() {
   ];
 }
 
-export default function Peta({ geojson, onSiap }) {
+export default function Peta({ geojson, rute, asal, tujuan, onKlikPeta, onSiap }) {
   const wadahRef = useRef(null);
   const petaRef = useRef(null);
 
@@ -108,6 +108,12 @@ export default function Peta({ geojson, onSiap }) {
   // Tanpa ini, GeoJSON yang datang duluan akan hilang begitu saja dan peta
   // tetap kosong meski tidak ada satu pun galat di console.
   const [siap, setSiap] = useState(false);
+
+  // Handler klik disimpan di ref, bukan ditutup langsung di dalam efek
+  // pembuatan peta. Kalau ditutup langsung, ia akan memegang nilai state
+  // dari render pertama selamanya.
+  const klikRef = useRef(null);
+  klikRef.current = onKlikPeta;
 
   // ── Pembuatan peta, sekali saja ────────────────────────────────────
   useEffect(() => {
@@ -174,7 +180,19 @@ export default function Peta({ geojson, onSiap }) {
         source: "ruas",
         layout: { "line-cap": "round", "line-join": "round" },
         paint: {
-          "line-color": token("--tinta-3"),
+          // --tinta-2, BUKAN --tinta-3, karena dua alasan yang keduanya
+          // terukur.
+          //
+          // Pertama, kontras. --tinta-3 di atas --dek-1 hanya 2,80:1,
+          // di bawah ambang 3:1 yang dituntut untuk objek grafis, dan
+          // DESIGN.md Bagian 11 mensyaratkan peta ini terbaca di bawah
+          // matahari langsung. --tinta-2 memberi 5,86:1.
+          //
+          // Kedua, --rute-abai dan --tinta-3 adalah nilai heks yang SAMA
+          // PERSIS. Menggambar jalan dengan --tinta-3 membuat rute
+          // pembanding yang putus-putus lenyap di atas jalan, padahal
+          // selisih antara kedua rute justru argumen produk ini.
+          "line-color": token("--tinta-2"),
           // Jalan utama digambar sedikit lebih tebal supaya rangka kota
           // terbaca sekilas dari jarak dua meter, sesuai kebutuhan pameran.
           "line-width": [
@@ -242,10 +260,105 @@ export default function Peta({ geojson, onSiap }) {
         },
       });
 
+      // ── Lapisan 5 sampai 8: rute ──────────────────────────────────
+      // DESIGN.md Bagian 8. Keduanya tampil BERSAMAAN dengan sengaja:
+      // selisih antara rute yang menembus genangan dan rute yang
+      // menghindarinya adalah argumen produk ini. Menyembunyikan
+      // pembandingnya berarti mengklaim penghematan tanpa dasar.
+      peta.addSource("rute", {
+        type: "geojson",
+        data: { type: "FeatureCollection", features: [] },
+      });
+
+      // Rute pembanding: putus-putus, tipis, warna mati.
+      peta.addLayer({
+        id: "rute-abai",
+        type: "line",
+        source: "rute",
+        filter: ["==", ["get", "jenis"], "rute_abai_rob"],
+        layout: { "line-cap": "butt", "line-join": "round" },
+        paint: {
+          "line-color": token("--rute-abai"),
+          "line-width": tokenPx("--rute-abai-lebar"),
+          "line-dasharray": [2, 2],
+        },
+      });
+
+      // Garis luar gelap 1px di tiap sisi, supaya rute ambar tetap terbaca
+      // saat melintas di atas air biru tua.
+      peta.addLayer({
+        id: "rute-sadar-luar",
+        type: "line",
+        source: "rute",
+        filter: ["==", ["get", "jenis"], "rute_sadar_rob"],
+        layout: { "line-cap": "round", "line-join": "round" },
+        paint: {
+          "line-color": token("--lambung-1"),
+          "line-width": tokenPx("--rute-lebar") + 2,
+        },
+      });
+
+      peta.addLayer({
+        id: "rute-sadar",
+        type: "line",
+        source: "rute",
+        filter: ["==", ["get", "jenis"], "rute_sadar_rob"],
+        layout: { "line-cap": "round", "line-join": "round" },
+        paint: {
+          "line-color": token("--rute"),
+          "line-width": tokenPx("--rute-lebar"),
+        },
+      });
+
+      // Titik berangkat dan tujuan.
+      peta.addSource("titik", {
+        type: "geojson",
+        data: { type: "FeatureCollection", features: [] },
+      });
+      peta.addLayer({
+        id: "titik-cincin",
+        type: "circle",
+        source: "titik",
+        paint: {
+          "circle-radius": 9,
+          "circle-color": token("--lambung-1"),
+          "circle-stroke-color": token("--rute"),
+          "circle-stroke-width": 2,
+        },
+      });
+      peta.addLayer({
+        id: "titik-inti",
+        type: "circle",
+        source: "titik",
+        paint: {
+          "circle-radius": 3.5,
+          "circle-color": [
+            "match", ["get", "peran"],
+            "asal", token("--rute"),
+            token("--aman"),
+          ],
+        },
+      });
+
       petaRef.current = peta;
       setSiap(true);
+
+      // Kait pengembangan. Verifikasi otomatis perlu memproyeksikan
+      // bujur-lintang ke piksel layar untuk mengetuk titik yang tepat, dan
+      // itu hanya bisa dilakukan lewat instance peta. Tidak ikut ke hasil
+      // build produksi karena import.meta.env.DEV bernilai salah di sana.
+      if (import.meta.env.DEV) window.__peta = peta;
+
       if (onSiap) onSiap(peta);
     });
+
+    // Ketuk peta untuk memilih titik. Handler disimpan di ref supaya
+    // pendengar tidak perlu dipasang ulang tiap kali fungsi berubah.
+    peta.on("click", (e) => {
+      const fn = klikRef.current;
+      if (fn) fn([e.lngLat.lng, e.lngLat.lat]);
+    });
+    peta.getCanvas().style.cursor = "crosshair";
 
     return () => {
       peta.remove();
@@ -279,6 +392,44 @@ export default function Peta({ geojson, onSiap }) {
       peta._sudahDipaskan = true;
     }
   }, [geojson, siap]);
+
+  // ── Pembaruan rute ─────────────────────────────────────────────────
+  useEffect(() => {
+    const peta = petaRef.current;
+    if (!siap || !peta) return;
+    const sumber = peta.getSource("rute");
+    if (!sumber) return;
+
+    // Fitur tanpa geometri, misalnya rute yang tidak ditemukan, dibuang
+    // supaya MapLibre tidak menerima geometri null.
+    const fitur = (rute?.features ?? []).filter((f) => f.geometry);
+    sumber.setData({ type: "FeatureCollection", features: fitur });
+  }, [rute, siap]);
+
+  // ── Pembaruan titik berangkat dan tujuan ───────────────────────────
+  useEffect(() => {
+    const peta = petaRef.current;
+    if (!siap || !peta) return;
+    const sumber = peta.getSource("titik");
+    if (!sumber) return;
+
+    const fitur = [];
+    if (asal) {
+      fitur.push({
+        type: "Feature",
+        properties: { peran: "asal" },
+        geometry: { type: "Point", coordinates: asal },
+      });
+    }
+    if (tujuan) {
+      fitur.push({
+        type: "Feature",
+        properties: { peran: "tujuan" },
+        geometry: { type: "Point", coordinates: tujuan },
+      });
+    }
+    sumber.setData({ type: "FeatureCollection", features: fitur });
+  }, [asal, tujuan, siap]);
 
   return (
     <div

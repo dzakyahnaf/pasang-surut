@@ -123,7 +123,17 @@
   --gerak-warna: 120ms;       /* hover dan fokus */
   --gerak-pudar: 80ms;        /* pengganti saat prefers-reduced-motion */
 
+  /* Pita Pasut, DESIGN.md Bagian 6: tinggi 96px di ponsel, 120px di
+     desktop. Nilainya ditimpa oleh media query di dasar berkas ini. */
+  --pita-tinggi: 120px;
+
   /* Fokus papan ketik, DESIGN.md Bagian 11 */
   --fokus-tebal: 2px;
   --fokus-jarak: 2px;
+}
+
+@media (max-width: 860px) {
+  :root {
+    --pita-tinggi: 96px;
+  }
 }

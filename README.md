@@ -59,9 +59,10 @@ pernah sebagai ambang.
 
 ## 3. Tangkapan layar
 
-Belum dilampirkan ke README. Peta sudah berjalan: jaringan jalan wilayah
-pilot tampil penuh layar dengan lapisan genangan data contoh, lencana DATA
-CONTOH, dan legenda tangga kedalaman.
+Belum dilampirkan ke README. Yang sudah berjalan: peta penuh layar dengan
+jaringan jalan wilayah pilot, lapisan genangan data contoh, Pita Pasut 72
+jam sebagai penggeser waktu, dan perutean sadar genangan yang menampilkan
+rute sadar rob bersama rute pembandingnya sekaligus.
 
 ---
 
@@ -77,9 +78,9 @@ curah hujan    ──┘                                            v
                                                      kedalaman_cm,
                                                      probabilitas, sumber)
                                                               │
-OpenStreetMap ──> OSMnx ──> graf jalan (GraphML) ──┐          │
-                                                    v          v
-                                          routing sadar waktu (NetworkX)
+OpenStreetMap ──> OSMnx ──> GraphML ──> tabel ruas_jalan ──┐  │
+                            (sekali, saat siapkan data)      v  v
+                                          routing sadar waktu (Dijkstra)
                                                               │
                                                               v
                                        FastAPI ──> React + MapLibre GL JS
@@ -216,6 +217,9 @@ cd backend && uvicorn app.main:app --reload
 |---|---|
 | `GET /api/kesehatan` | keadaan sistem, jumlah ruas, sumber data, rentang prediksi |
 | `GET /api/ruas?waktu=` | jaringan jalan GeoJSON dengan kedalaman pada satu jam |
+| `GET /api/genangan?waktu=` | ruas yang tergenang saja, jauh lebih ringan |
+| `GET /api/jam` | sumbu 72 jam Pita Pasut: tinggi pasut dan jam berisiko |
+| `POST /api/rute` | DUA rute sekaligus: pembanding dan sadar rob |
 
 **7. Frontend**
 
@@ -266,7 +270,7 @@ dan riwayat perjalanan.
 |---|---|---|
 | M1 | Fondasi repo, environment, AOI, cek arsip Sentinel-1 | Selesai |
 | M2 | Graf jalan, database terisi, peta jalan tampil | Selesai |
-| M3 | Routing jalan | Belum |
+| M3 | Perutean sadar genangan dan Pita Pasut | Selesai |
 | M4 | Model genangan asli | Belum |
 | M5 | Panel dampak dan integrasi | Belum |
 | M6 | Deploy | Belum |

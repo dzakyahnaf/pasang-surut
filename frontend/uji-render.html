@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Harness verifikasi render</title>
+  </head>
+  <body>
+    <div id="akar"></div>
+    <script type="module">
+      // ── HARNESS VERIFIKASI, BUKAN BAGIAN APLIKASI ────────────────────
+      //
+      // Buka http://localhost:5173/uji-render.html HANYA saat peta perlu
+      // diperiksa lewat otomasi. Pengguna sungguhan membuka index.html
+      // biasa dan tidak memerlukan berkas ini.
+      //
+      // Kenapa ada: tab peramban yang dikendalikan otomasi berstatus
+      // hidden. Pada tab tersembunyi, peramban tidak pernah menjalankan
+      // requestAnimationFrame, dan MapLibre menunda pemuatan gaya ke frame
+      // berikutnya — selamanya, tanpa satu pun pesan galat. Akibatnya peta
+      // tampak kosong padahal aplikasinya sehat. Ini pernah memakan waktu
+      // satu sesi penuh untuk ditelusuri; jangan diulang.
+      //
+      // Berkas ini tidak ikut ke hasil build. Vite hanya membangun
+      // index.html kecuali diberi masukan tambahan secara eksplisit.
+      //
+      // Laju sengaja dilambatkan dan dibatasi. Pada 16 ms, MapLibre
+      // menggambar 19 ribu ruas tanpa henti sampai renderer jenuh dan
+      // tangkapan layar lewat CDP kehabisan waktu.
+      window.__jumlahFrame = 0;
+      const BATAS_FRAME = 240;
+      window.requestAnimationFrame = (cb) => {
+        if (window.__jumlahFrame >= BATAS_FRAME) return 0;
+        return setTimeout(() => {
+          window.__jumlahFrame += 1;
+          cb(performance.now());
+        }, 120);
+      };
+
+      await import("/src/main.jsx");
+    </script>
+  </body>
+</html>

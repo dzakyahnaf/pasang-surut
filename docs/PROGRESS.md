@@ -2,6 +2,77 @@
 
 Satu entri per sesi kerja. Ditulis apa adanya, termasuk yang gagal.
 
+Bagian **Papan Blokade** di bawah ini adalah ringkasan keadaan sekarang dan
+diperbarui setiap sesi. Kalau hanya sempat membaca satu bagian dari berkas
+ini, baca bagian itu.
+
+---
+
+## PAPAN BLOKADE — keadaan per 25 Agustus 2026
+
+> Bagian ini DIPERBARUI SETIAP SESI dan selalu menggambarkan keadaan
+> sekarang, bukan riwayat. Riwayat ada di entri per milestone di bawahnya.
+> Sisa waktu ke tenggat: **6 hari** (31 Agustus 2026, 23.59 WIB).
+
+### A. BLOKADE — menghentikan pekerjaan berikutnya
+
+| # | Blokade | Menghambat | Siapa |
+|---|---|---|---|
+| A1 | **Supabase belum ada.** Database yang dipakai masih PostGIS lokal di Docker. `db/schema.sql` belum pernah dijalankan di Supabase. | Deploy M6, dan kerja paralel antar anggota tim | Manual |
+| A2 | **Zona waktu acuan fase konstanta pasut belum dipastikan.** Sumbernya tidak menyebutkan. Salah menebak menggeser kurva sampai 7 jam. | Pasut asli menggantikan sinusoid contoh | Bisa saya kerjakan setelah A3 |
+| A3 | **Google Earth Engine belum didaftarkan.** Kuota dihitung per proyek, jadi tiap anggota perlu proyek sendiri. | Ekstraksi label Sentinel-1, dan karena itu seluruh model M4 | Manual |
+| A4 | **DEMNAS belum diunduh.** Butuh registrasi. | Fitur elevasi pada model M4 | Manual |
+| A5 | **Repo belum dipublikasikan.** M1 mensyaratkan repo publik, dan juri menilai Code Project 10 persen dari sana. | Penilaian | Manual |
+
+### B. PERLU PERHATIAN — tidak menghentikan, tetapi akan menggigit
+
+| # | Hal | Kenapa penting |
+|---|---|---|
+| B1 | `BAGIAN_3_TERISI.yaml` masih menulis `jumlah_citra_s1: "BELUM ADA"`, padahal angkanya 723. Blok `???` di PLAN.md bagian 3 juga masih kosong. | Sesi berikutnya bisa berhenti karena membaca angka yang salah |
+| B2 | Tautan DEMNAS dan riset WRI April 2026 di README masih `TODO(verifikasi tautan)`. | Tautan mati di gerbang juri lebih buruk daripada tidak ada tautan |
+| B3 | Commit membawa trailer `Co-Authored-By: Claude Opus 5`. | Kalau rulebook DSDC mempersoalkan, putuskan sekarang selagi baru empat commit |
+| B4 | Koneksi database dibuka DUA KALI per permintaan, tanpa pooling. `database_tersedia()` membuka satu, endpoint membuka lagi. | Supabase paket gratis membatasi koneksi. Akan menggigit saat juri memakai aplikasi bersamaan di babak final |
+| B5 | `copy.id.json` ada di dua tempat, akar dan `frontend/src/`, tanpa apa pun yang menjaganya sinkron. | Begitu satu disunting, keduanya menyimpang diam-diam |
+| B6 | Belum ada `manifest.json`. Bentuk produk yang dikunci PLAN.md bagian 3 adalah PWA. | PWA itu yang membuat rulebook "website ATAU mobile" terpenuhi keduanya |
+| B7 | Test hanya menutupi `config.py` dan `routing.py`. `db.py`, `main.py`, ketiga skrip, dan `teks.js` tanpa test. | `t()` adalah mekanisme pengaman yang melempar galat, dan tidak ada test yang membuktikan ia melempar |
+| B8 | Data contoh kedaluwarsa setelah 72 jam sejak dibuat. | Kalau Pita Pasut tampak kering seluruhnya, jalankan ulang `python -m scripts.03_isi_dummy` dari `backend/` |
+| B9 | Ada PostgreSQL lain di mesin ini yang memakai port 5433, jadi kontainer pengembangan dipindah ke 55433. | Jangan bingung kalau `docker run` di 5433 gagal |
+| B10 | Kontras kelas genangan paling dangkal `--air-1` terhadap latar dek hanya 1,39:1. | DESIGN.md Bagian 11 mensyaratkan terbaca di bawah matahari langsung dan saat dicetak hitam putih. Belum diuji di luar ruangan |
+| B11 | Kecepatan ruas untuk jalan tanpa tag `maxspeed` berasal dari imputasi OSMnx. | Asumsi, bukan pengukuran. Sudah tercatat di `docs/batasan.md` bagian 2.4 |
+| B12 | Penalti genangan (1,0 → 2,5 → 8,0) adalah angka rancangan, bukan hasil pengukuran lapangan. | Juri berhak menanyakan dasarnya. Sudah tercatat di `docs/batasan.md` |
+
+### C. HANYA BISA DIKERJAKAN MANUAL — di luar jangkauan Claude Code
+
+Saya tidak membuat akun, tidak memasukkan kata sandi, dan tidak menyetujui
+syarat layanan atas nama tim. Ini batas aturan, bukan batas alat, dan tidak
+berubah oleh tersedianya browser otomatis.
+
+| # | Tugas | Rujukan |
+|---|---|---|
+| C1 | Daftar Google Earth Engine, **tiap anggota proyek sendiri** karena kuota per proyek | CHECKLIST nomor 1 |
+| C2 | Daftar Copernicus Data Space sebagai cadangan bila kuota GEE habis | CHECKLIST nomor 2 |
+| C3 | Daftar DEMNAS, unduh tile Semarang, lalu clip ke AOI sebelum diolah | CHECKLIST nomor 3 |
+| C4 | Daftar AVISO — persetujuannya berhari-hari, daftar sekarang lalu lupakan | CHECKLIST nomor 4 |
+| C5 | Buat proyek Supabase, lalu jalankan `db/schema.sql` di SQL Editor | CHECKLIST nomor 5 dan 9 |
+| C6 | Buat akun Vercel dan Railway | CHECKLIST nomor 5 |
+| C7 | Buat repo GitHub **PUBLIK** dan dorong seluruh commit ke sana | CHECKLIST nomor 5 |
+| C8 | Daftar Figma dan buat prototype — rulebook poin 7.9 mewajibkan, dan tautannya masuk Lampiran proposal | CHECKLIST nomor 6 |
+| C9 | Uji `pip install -r requirements.txt` dan `pytest -q` di laptop Daffa dan Naufal | Kriteria terima M1 |
+| C10 | Minta rekap kejadian rob 2015 sampai 2019 ke BPBD Kota Semarang | Melengkapi `kejadian_rob_semarang.json` |
+| C11 | Verifikasi tautan DEMNAS dan riset WRI April 2026 | B2 |
+| C12 | Rekam video 3 sampai 7 menit, wajah peserta wajib tampil sepanjang video | Rulebook, bobot 10 persen |
+| C13 | Buka satu per satu 19 entri `perlu_verifikasi` di `kejadian_rob_semarang.json` dan salin angkanya dari isi artikel | Angka belum terverifikasi tidak boleh masuk proposal |
+
+### D. SUDAH TERPECAHKAN — jangan dikerjakan lagi
+
+| Hal | Terpecahkan di |
+|---|---|
+| Apakah `graph.graphml` perlu ikut di-commit untuk deploy | M3. Mesin routing membangun grafnya dari tabel `ruas_jalan`, jadi server yang di-deploy cukup membawa database. GraphML hanya dibutuhkan skrip 02, bukan runtime |
+| Arah jalan satu arah salah pada 1.025 ruas | M3. Arah kini diperiksa ulang terhadap graf berarah asli, bukan diambil dari atribut hasil penggabungan |
+| Kontras garis jalan 2,80:1 di bawah ambang grafis | M3. Diganti `--tinta-2`, kini 5,92:1 |
+| `docs/batasan.md` kosong | Riset pendukung 24 Agustus. Kini 5 bagian, 17 batasan |
+| Konstanta pasut seluruhnya `null` | Riset pendukung 24 Agustus. Terisi dari Rachman dkk 2015, dengan seluruh keterbatasannya tercatat |
+
 ---
 
 ## M1 — 23 Agustus 2026: fondasi repo
@@ -295,3 +366,123 @@ Vercel, Railway, GitHub, Figma — dan nomor 9 menjalankan `schema.sql` di
 Supabase. Semuanya menuntut pembuatan akun, pemasukan kata sandi, atau
 persetujuan syarat layanan atas nama tim. Ini batas aturan, bukan batas alat,
 dan tidak berubah oleh tersedianya browser otomatis.
+
+---
+
+## M3 — 25 Agustus 2026: perutean sadar genangan
+
+**Status: selesai.** Kriteria terima terpenuhi — Pita Pasut digeser ke jam
+pasut tinggi, rutenya berubah.
+
+### Bukti kriteria terima
+
+Asal `[110,49290, -6,96452]` menuju `[110,43853, -6,97545]`, moda motor.
+
+| Jam WIB | Rute pembanding | Rute sadar rob | Putusan |
+|---|---|---|---|
+| Sel 25 · 16.00 (surut) | 10,3 mnt · 9,34 km · 0 ruas tergenang | sama persis | Tidak perlu memutar |
+| Jum 28 · 06.00 (pasut puncak) | 10,3 mnt · 9,34 km · **35 ruas tergenang** | 13,3 mnt · 11,33 km · **1 ruas tergenang** | Memutar, +3,0 mnt +2,0 km |
+
+Bayar tiga menit dan dua kilometer untuk menghindari 34 ruas tergenang.
+Itulah seluruh argumen produk ini dalam satu baris.
+
+### Yang dibuat
+
+- `backend/app/domain/routing.py` — Dijkstra sadar waktu. Bobot ruas
+  dihitung pada perkiraan waktu TIBA di ruas itu, bukan waktu berangkat.
+- `backend/app/domain/pasut.py` — rumah baru untuk pasut. Isinya masih
+  sinusoid contoh; M4 mengganti isinya tanpa mengubah pemanggilnya.
+- `POST /api/rute`, `GET /api/genangan`, `GET /api/jam`.
+- `frontend/src/components/PitaPasut.jsx` — elemen tanda tangan.
+- `frontend/src/components/PanelRute.jsx` — rail kiri.
+- `frontend/src/lib/waktu.js` — satu-satunya tempat UTC menjadi WIB.
+- `backend/tests/test_routing.py` — 13 uji.
+
+### Dua cacat data yang ditemukan dan diperbaiki
+
+**1. Arah jalan satu arah salah pada 1.025 dari 2.059 ruas.**
+
+Asumsi M2 bahwa `osm_u -> osm_v` adalah arah jalan ternyata SALAH.
+`ox.convert.to_undirected()` tidak menjamin sisi hasil penggabungan
+mempertahankan orientasi aslinya, jadi arahnya praktis seperti lemparan
+koin — dan memang tepat separuh yang terbalik.
+
+Akibatnya terukur: ketika mesin routing menghormati kolom `satu_arah` apa
+adanya, hanya **13,6 persen** simpul terjangkau dari Pelabuhan Tanjung Emas.
+Jalan satu arah yang arahnya terbalik bekerja seperti tembok.
+
+Perbaikannya di sumber, bukan di routing: skrip 02 kini memeriksa ulang
+setiap ruas terhadap graf BERARAH aslinya. Kalau hanya `(v, u)` yang ada,
+pasangan simpul ditukar dan geometrinya dibalik, sehingga `osm_u -> osm_v`
+selalu berarti arah yang boleh dilalui. Jangkauan naik ke **99,7 persen**.
+
+Menambal ini di routing dengan mengabaikan arah akan menyuruh orang melawan
+arus di jalan protokol. Itu sebabnya diperbaiki di data.
+
+**2. Rute pembanding tidak terlihat di peta.**
+
+`--rute-abai` dan `--tinta-3` adalah nilai heks yang SAMA PERSIS, `#7E97A3`.
+Karena jalan digambar dengan `--tinta-3` sejak M2, rute pembanding yang
+putus-putus lenyap di atas jalan — padahal selisih antara kedua rute justru
+argumen produk ini.
+
+Jalan diganti ke `--tinta-2`. Sekaligus menaikkan kontras jalan terhadap
+latar dek dari 2,80:1 menjadi **5,92:1**, melewati ambang 3:1 untuk objek
+grafis yang sebelumnya tercatat sebagai temuan audit.
+
+### Keputusan yang perlu diketahui tim
+
+**Graf routing dibangun dari tabel `ruas_jalan`, bukan dari GraphML.**
+Jumlah simpul uniknya persis sama dengan graf OSMnx aslinya, 14.139, jadi
+tidak ada konektivitas yang hilang. Keuntungannya dua: `edge_id` menempel
+langsung pada sisi graf sehingga tidak ada kemungkinan salah pasang pada 87
+ruas paralel, dan **server yang di-deploy cukup membawa database tanpa
+berkas GraphML 18 MB**. Ini menutup pertanyaan terbuka M6.
+
+**Bobot dihitung pada waktu TIBA, bukan waktu berangkat.** Ini bukan detail.
+Ruas yang kering saat pengguna berangkat bisa sudah terendam ketika ia
+benar-benar sampai di sana. Ada satu uji khusus yang mengunci perilaku ini
+dan akan gagal kalau seseorang menyederhanakannya.
+
+**Ambang moda dibaca dari tabel `ambang_moda`, tidak ditulis di kode.**
+Angka di tabel itu masih berstatus asumsi menurut komentar `schema.sql`,
+jadi tim harus bisa mengoreksinya tanpa menyentuh kode.
+
+**Rute dihitung ulang otomatis saat Pita Pasut digeser.** Tidak perlu
+menekan Cari rute lagi. Ini yang membuat menggeser pita benar-benar
+mengubah rute, bukan sekadar mengubah warna genangan.
+
+### Jebakan yang terpecahkan, catat supaya tidak terulang
+
+- **Sepuluh kali Page Up hanya bergerak enam jam.** Handler papan ketik
+  menghitung dari prop `indeks` yang masih basi ketika beberapa penekanan
+  tiba dalam satu batch React. Diperbaiki dengan pembaruan fungsional.
+- **Kaki Pita Pasut terpotong keluar layar.** `flex: 1 1 auto` memakai
+  tinggi SVG sebagai dasar perhitungan, sehingga total isi melebihi tinggi
+  pita. Diperbaiki dengan `flex: 1 1 0` dan `min-height: 0`.
+- **SVG Pita Pasut tetap berukuran 720x120 di dalam wadah 1408x64.**
+  `useLayoutEffect` dengan senarai kosong berjalan saat data jam belum
+  datang, sehingga elemennya belum ada, dan tidak pernah dijalankan lagi.
+  Diperbaiki dengan menjadikan `n` sebagai kebergantungan.
+- **Atribusi OpenStreetMap sempat tertimpa petunjuk ketuk.** Atribusi ODbL
+  adalah kewajiban lisensi, bukan hiasan. Kini keduanya berdampingan.
+- **Klik sintetis tidak sampai ke MapLibre di tab tersembunyi.** Keluarga
+  masalah yang sama dengan `requestAnimationFrame`. Verifikasi otomatis
+  memakai `peta.fire('click', ...)` yang tetap melewati jalur kode
+  aplikasi yang sebenarnya.
+
+### Alat verifikasi yang kini disimpan di repo
+
+`frontend/uji-render.html` — halaman harness yang mengganti
+`requestAnimationFrame` dengan `setTimeout`. Tanpa ini, peta selalu tampak
+kosong pada tab yang dikendalikan otomasi, dan pernah memakan satu sesi
+penuh untuk ditelusuri. Tidak ikut ke hasil build.
+
+`window.__peta` diekspos di `Peta.jsx`, hanya saat `import.meta.env.DEV`,
+supaya verifikasi otomatis bisa memproyeksikan bujur-lintang ke piksel layar.
+
+### Yang TIDAK dikerjakan, sesuai batas sesi
+
+Model asli, panel dampak empat angka, halaman validasi, dan tombol tujuan
+cepat. Selisih waktu dan jarak antara kedua rute sudah dikembalikan API di
+field `selisih` sebagai bahan mentah panel dampak M5.

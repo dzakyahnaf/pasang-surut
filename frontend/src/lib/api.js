@@ -7,17 +7,26 @@
 
 const ALAMAT = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
 
-async function ambil(jalur) {
-  const jawaban = await fetch(`${ALAMAT}${jalur}`);
+async function ambil(jalur, opsi) {
+  const jawaban = await fetch(`${ALAMAT}${jalur}`, opsi);
   if (!jawaban.ok) {
     let rincian = `HTTP ${jawaban.status}`;
+    let kode = null;
     try {
       const isi = await jawaban.json();
-      if (isi.detail) rincian = isi.detail;
+      if (isi.detail && typeof isi.detail === "object") {
+        kode = isi.detail.kode ?? null;
+        rincian = JSON.stringify(isi.detail);
+      } else if (isi.detail) {
+        rincian = isi.detail;
+      }
     } catch {
       /* jawaban bukan JSON, pakai kode status apa adanya */
     }
-    throw new Error(rincian);
+    const galat = new Error(rincian);
+    galat.status = jawaban.status;
+    galat.kode = kode;
+    throw galat;
   }
   return jawaban.json();
 }
@@ -34,4 +43,27 @@ export function ambilKesehatan() {
 export function ambilRuas(waktuIso = null) {
   const kueri = waktuIso ? `?waktu=${encodeURIComponent(waktuIso)}` : "";
   return ambil(`/api/ruas${kueri}`);
+}
+
+/** Ruas yang tergenang saja pada satu jam. Jauh lebih ringan dari ambilRuas. */
+export function ambilGenangan(waktuIso = null) {
+  const kueri = waktuIso ? `?waktu=${encodeURIComponent(waktuIso)}` : "";
+  return ambil(`/api/genangan${kueri}`);
+}
+
+/** Sumbu waktu Pita Pasut: 72 jam ke depan beserta tinggi pasut per jam. */
+export function ambilJam() {
+  return ambil("/api/jam");
+}
+
+/**
+ * Dua rute sekaligus: pembanding yang mengabaikan rob, dan yang sadar rob.
+ * @param {{asal:number[], tujuan:number[], waktu:string, moda:string}} isi
+ */
+export function hitungRute(isi) {
+  return ambil("/api/rute", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(isi),
+  });
 }

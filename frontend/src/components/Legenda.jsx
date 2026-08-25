@@ -40,7 +40,7 @@ function titikPola(jarak) {
 function ContohWarna({ kelas }) {
   // Kelas kering memakai --air-0 yang bernilai transparent, jadi yang
   // ditampilkan adalah warna garis jalan itu sendiri, bukan kotak kosong.
-  const isi = kelas.warna ? `var(${kelas.warna})` : "var(--tinta-3)";
+  const isi = kelas.warna ? `var(${kelas.warna})` : "var(--tinta-2)";
   const tinggi = kelas.warna ? TINGGI_CONTOH : 3;
 
   return (

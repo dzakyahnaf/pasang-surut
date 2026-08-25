@@ -2,107 +2,146 @@
  * App.jsx — susunan layar.
  *
  * Tata letak DESIGN.md Bagian 7: peta memenuhi layar, tidak ada kisi kartu.
- * Yang menumpang di atasnya hanya pelat instrumen kecil di sudut.
+ * Rail kiri berbadan gelap berisi kontrol dan hasil, Pita Pasut melintang
+ * penuh di bawah.
  *
- * Yang BELUM ada di milestone ini dan menyusul berikutnya: Pita Pasut,
- * formulir rute, panel dampak, peringatan paparan.
+ * Yang BELUM ada dan menyusul di milestone berikutnya: panel dampak dengan
+ * empat angka, tombol tujuan cepat, dan halaman validasi.
  */
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import Peta from "./components/Peta.jsx";
+import PitaPasut from "./components/PitaPasut.jsx";
+import PanelRute from "./components/PanelRute.jsx";
 import LencanaContoh from "./components/LencanaContoh.jsx";
 import Legenda from "./components/Legenda.jsx";
-import { ambilKesehatan, ambilRuas } from "./lib/api.js";
+import { ambilJam, ambilRuas, hitungRute } from "./lib/api.js";
 import { t } from "./lib/teks.js";
+import { labelHariJam } from "./lib/waktu.js";
 
-/* Nama hari pendek, diambil dari copy.id.json. Urutannya mengikuti
-   Date.getDay(): 0 adalah Minggu. */
-const KUNCI_HARI = [
-  "waktu.minggu", "waktu.senin", "waktu.selasa", "waktu.rabu",
-  "waktu.kamis", "waktu.jumat", "waktu.sabtu",
-];
-
-/**
- * Susun label jam dalam WIB dari potongan yang sudah ada di copy.id.json.
- *
- * Waktu datang dari server dalam UTC. Aturan repo: simpan UTC, tampilkan
- * WIB. Konversinya terjadi di sini, di lapisan tampilan, dan tidak di
- * tempat lain.
- */
-function labelJamWib(isoUtc) {
-  if (!isoUtc) return "";
-  const tanggal = new Date(isoUtc);
-
-  // Intl dipakai untuk memaksa zona Asia/Jakarta, bukan zona laptop yang
-  // sedang membuka aplikasi. Anggota tim di Surabaya dan juri di Semarang
-  // sama-sama harus melihat WIB.
-  const bagian = new Intl.DateTimeFormat("id-ID", {
-    timeZone: "Asia/Jakarta",
-    weekday: "short", day: "numeric", hour: "2-digit", minute: "2-digit",
-    hour12: false,
-  }).formatToParts(tanggal);
-
-  const ambil = (jenis) => bagian.find((b) => b.type === jenis)?.value ?? "";
-
-  // Nama hari diambil dari copy.id.json, bukan dari keluaran Intl, supaya
-  // singkatannya seragam dengan sisa antarmuka. Untuk memetakannya, hari
-  // dibaca sekali dalam bahasa Inggris di zona Asia/Jakarta lalu dicari
-  // indeksnya. Tidak bisa memakai getDay() begitu saja, karena itu
-  // mengembalikan hari menurut zona waktu laptop yang membuka aplikasi.
-  const HARI_INGGRIS = [
-    "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday",
-  ];
-  const hariInggris = new Intl.DateTimeFormat("en-US", {
-    timeZone: "Asia/Jakarta",
-    weekday: "long",
-  }).format(tanggal);
-  const indeksHari = Math.max(0, HARI_INGGRIS.indexOf(hariInggris));
-
-  const hari = t(KUNCI_HARI[indeksHari]);
-  const jam = t("waktu.formatJam", { jam: ambil("hour"), menit: ambil("minute") });
-
-  return `${hari} ${ambil("day")} · ${t("waktu.pukul")} ${jam} ${t("waktu.zona")}`;
+/** Ubah galat dari API menjadi kalimat yang ada di copy.id.json. */
+function pesanGalat(e) {
+  if (e?.kode === "asal_jauh_dari_jalan" || e?.kode === "tujuan_jauh_dari_jalan") {
+    return t("galat.titikTerlaluJauhDariJalan");
+  }
+  if (e?.status === 503) return t("galat.serverTidakMerespons");
+  if (e?.status === 422 || e?.status === 400) return t("galat.ruteGagal");
+  return t("galat.serverTidakMerespons");
 }
 
 export default function App() {
-  const [kesehatan, setKesehatan] = useState(null);
+  const [jam, setJam] = useState([]);
+  const [indeksJam, setIndeksJam] = useState(0);
   const [geojson, setGeojson] = useState(null);
-  const [galat, setGalat] = useState(null);
   const [memuat, setMemuat] = useState(true);
+  const [galatMuat, setGalatMuat] = useState(null);
+
+  const [asal, setAsal] = useState(null);
+  const [tujuan, setTujuan] = useState(null);
+  const [modePilih, setModePilih] = useState("asal");
+  const [moda, setModa] = useState("motor");
+
+  const [hasil, setHasil] = useState(null);
+  const [sedangMencari, setSedangMencari] = useState(false);
+  const [galatRute, setGalatRute] = useState(null);
+  const [tampilkanRuteBiasa, setTampilkanRuteBiasa] = useState(true);
 
   useEffect(() => {
     document.title = t("aplikasi.nama");
   }, []);
 
+  // ── Muat sumbu waktu dan jaringan jalan ───────────────────────────
   useEffect(() => {
     let dibatalkan = false;
-
-    async function muat() {
+    (async () => {
       setMemuat(true);
-      setGalat(null);
+      setGalatMuat(null);
       try {
-        const [k, r] = await Promise.all([ambilKesehatan(), ambilRuas()]);
+        const [dataJam, dataRuas] = await Promise.all([ambilJam(), ambilRuas()]);
         if (dibatalkan) return;
-        setKesehatan(k);
-        setGeojson(r);
+        setJam(dataJam.jam ?? []);
+        setGeojson(dataRuas);
       } catch (e) {
-        if (dibatalkan) return;
-        // Galat menjelaskan apa yang terjadi dan apa yang bisa dilakukan.
-        // Tidak meminta maaf, tidak kabur, tidak memakai tanda seru.
-        setGalat(e.message || t("galat.serverTidakMerespons"));
+        if (!dibatalkan) setGalatMuat(pesanGalat(e));
       } finally {
         if (!dibatalkan) setMemuat(false);
       }
-    }
-
-    muat();
-    return () => {
-      dibatalkan = true;
-    };
+    })();
+    return () => { dibatalkan = true; };
   }, []);
 
-  const sumberData = geojson?.sumber_data ?? kesehatan?.sumber_data ?? [];
+  // ── Jam berganti: muat ulang lapisan genangan ─────────────────────
+  const waktuAktif = jam[indeksJam]?.waktu_utc ?? null;
+
+  useEffect(() => {
+    if (!waktuAktif) return;
+    let dibatalkan = false;
+    (async () => {
+      try {
+        const data = await ambilRuas(waktuAktif);
+        if (!dibatalkan) setGeojson(data);
+      } catch (e) {
+        if (!dibatalkan) setGalatMuat(pesanGalat(e));
+      }
+    })();
+    return () => { dibatalkan = true; };
+  }, [waktuAktif]);
+
+  // Rute ikut dihitung ulang saat jam berganti, selama kedua titik sudah
+  // dipilih. Inilah yang membuat menggeser Pita Pasut benar-benar mengubah
+  // rute di layar, bukan hanya mengubah warna genangan.
+  useEffect(() => {
+    if (!waktuAktif || !asal || !tujuan) return;
+    let dibatalkan = false;
+    (async () => {
+      setSedangMencari(true);
+      setGalatRute(null);
+      try {
+        const data = await hitungRute({
+          asal, tujuan, waktu: waktuAktif, moda,
+        });
+        if (!dibatalkan) setHasil(data);
+      } catch (e) {
+        if (!dibatalkan) { setHasil(null); setGalatRute(pesanGalat(e)); }
+      } finally {
+        if (!dibatalkan) setSedangMencari(false);
+      }
+    })();
+    return () => { dibatalkan = true; };
+  }, [waktuAktif, asal, tujuan, moda]);
+
+  // ── Ketuk peta memilih titik ──────────────────────────────────────
+  const klikPeta = useCallback((koordinat) => {
+    if (modePilih === "asal") {
+      setAsal(koordinat);
+      setModePilih("tujuan");
+    } else {
+      setTujuan(koordinat);
+      setModePilih("asal");
+    }
+  }, [modePilih]);
+
+  const hapusTitik = useCallback((peran) => {
+    if (peran === "asal") setAsal(null);
+    else setTujuan(null);
+    setHasil(null);
+    setGalatRute(null);
+    setModePilih(peran);
+  }, []);
+
+  const sumberData = hasil?.sumber_data ?? geojson?.sumber_data ?? [];
+
+  // Rute yang dikirim ke peta. Rute pembanding bisa disembunyikan pengguna,
+  // tetapi rute sadar rob tidak pernah.
+  const ruteTampil = hasil?.rute
+    ? {
+        ...hasil.rute,
+        features: hasil.rute.features.filter(
+          (f) => tampilkanRuteBiasa || f.properties.jenis !== "rute_abai_rob"
+        ),
+      }
+    : null;
 
   return (
     <div className="layar">
@@ -110,39 +149,72 @@ export default function App() {
         {t("aksesibilitas.lewatiKeKonten")}
       </a>
 
-      {/* Peta adalah konten dan mengisi seluruh layar. Elemen di bawah ini
-          menumpang di atasnya sebagai pelat instrumen, bukan sebagai kartu
-          yang menjadikan peta sekadar latar. */}
-      <Peta geojson={geojson} />
+      <div className="layar__isi">
+        <PanelRute
+          asal={asal}
+          tujuan={tujuan}
+          modePilih={modePilih}
+          moda={moda}
+          hasil={hasil}
+          sedangMencari={sedangMencari}
+          galat={galatRute}
+          tampilkanRuteBiasa={tampilkanRuteBiasa}
+          onPilihMode={setModePilih}
+          onHapusTitik={hapusTitik}
+          onGantiModa={setModa}
+          onCari={() => setIndeksJam((i) => i)}
+          onTampilkanRuteBiasa={() => setTampilkanRuteBiasa((v) => !v)}
+        />
 
-      <div className="plat plat--kiri-atas">
-        <div className="plat__judul t-judul">{t("aplikasi.nama")}</div>
-        <div className="plat__anak t-label">{t("aplikasi.wilayah")}</div>
-        {geojson?.waktu_utc ? (
-          <div className="plat__jam t-data">{labelJamWib(geojson.waktu_utc)}</div>
-        ) : null}
+        <div className="jendela-peta">
+          <Peta
+            geojson={geojson}
+            rute={ruteTampil}
+            asal={asal}
+            tujuan={tujuan}
+            onKlikPeta={klikPeta}
+          />
+
+          <div className="plat plat--kiri-atas">
+            <div className="plat__judul t-judul">{t("aplikasi.nama")}</div>
+            <div className="plat__anak t-label">{t("aplikasi.wilayah")}</div>
+            {waktuAktif ? (
+              <div className="plat__jam t-data">{labelHariJam(waktuAktif)}</div>
+            ) : null}
+          </div>
+
+          <LencanaContoh sumberData={sumberData} />
+
+          <div className="plat plat--kiri-bawah">
+            <Legenda />
+          </div>
+
+          <div className="atribusi t-label">
+            <span className="atribusi__petunjuk">
+              {modePilih === "asal"
+                ? t("peta.ketukUntukAsal")
+                : t("peta.ketukUntukTujuan")}
+            </span>
+            {/* Atribusi OpenStreetMap wajib tampil. Lisensi ODbL menuntutnya,
+                dan ia tidak boleh digeser oleh petunjuk sesaat. */}
+            <span>{t("peta.atribusi")}</span>
+          </div>
+
+          {memuat ? (
+            <div className="pesan" role="status">
+              <span className="t-bagian">{t("memuat.jaringanJalan")}</span>
+            </div>
+          ) : null}
+
+          {galatMuat ? (
+            <div className="pesan pesan--galat" role="alert">
+              <span className="t-bagian">{galatMuat}</span>
+            </div>
+          ) : null}
+        </div>
       </div>
 
-      <LencanaContoh sumberData={sumberData} />
-
-      <div className="plat plat--kiri-bawah">
-        <Legenda />
-      </div>
-
-      <div className="atribusi t-label">{t("peta.atribusi")}</div>
-
-      {memuat ? (
-        <div className="pesan" role="status">
-          <span className="t-bagian">{t("memuat.jaringanJalan")}</span>
-        </div>
-      ) : null}
-
-      {galat ? (
-        <div className="pesan pesan--galat" role="alert">
-          <span className="t-bagian">{t("galat.serverTidakMerespons")}</span>
-          <span className="pesan__rincian t-data">{galat}</span>
-        </div>
-      ) : null}
+      <PitaPasut jam={jam} indeks={indeksJam} onPilih={setIndeksJam} />
     </div>
   );
 }

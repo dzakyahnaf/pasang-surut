@@ -28,6 +28,7 @@ from datetime import datetime, timedelta, timezone
 import numpy as np
 
 from app import config, db
+from app.domain import pasut
 
 SUMBER = "dummy"
 JUMLAH_JAM = 72
@@ -41,12 +42,13 @@ JUMLAH_JAM = 72
 # terpublikasi. Itu pekerjaan modul domain/pasut.py, bukan di sini. Satu
 # sinusoid ini hanya memberi bentuk naik-turun supaya Pita Pasut di frontend
 # punya sesuatu untuk digambar.
-PERIODE_PASUT_JAM = 24.8
-AMPLITUDO_PASUT_M = 0.5
-
-# Titik acuan fase. Dipatok pada waktu tetap, bukan waktu jalan, supaya
-# skrip ini menghasilkan kurva yang sama setiap kali dijalankan.
-EPOCH_PASUT = datetime(2026, 1, 1, 0, 0, tzinfo=timezone.utc)
+# Rumusnya kini tinggal di app/domain/pasut.py supaya Pita Pasut di frontend
+# menggambar kurva yang SAMA PERSIS dengan yang dipakai membuat data contoh
+# ini. Kalau keduanya berbeda, kurva di layar tidak akan cocok dengan
+# genangan yang tergambar di peta.
+PERIODE_PASUT_JAM = pasut.PERIODE_PASUT_JAM
+AMPLITUDO_PASUT_M = pasut.AMPLITUDO_PASUT_M
+EPOCH_PASUT = pasut.EPOCH_PASUT
 
 # ── Parameter kedalaman contoh ────────────────────────────────────────────
 # AMBANG_MAKS_CM sengaja jauh lebih besar daripada puncak muka air (50 cm).
@@ -70,16 +72,7 @@ KEDALAMAN_MAKS_CM = 80.0
 SEBARAN_JITTER = 0.12   # keragaman antar ruas, lihat kerentanan()
 
 
-def tinggi_pasut_m(waktu: np.ndarray | datetime) -> np.ndarray | float:
-    """Tinggi muka air contoh dalam meter, relatif terhadap rata-rata.
-
-    Satu kosinus tunggal. Sekali lagi: ini bukan rekonstruksi harmonik.
-    """
-    if isinstance(waktu, datetime):
-        jam = (waktu - EPOCH_PASUT).total_seconds() / 3600.0
-    else:
-        jam = waktu
-    return AMPLITUDO_PASUT_M * np.sin(2 * np.pi * jam / PERIODE_PASUT_JAM)
+tinggi_pasut_m = pasut.tinggi_pasut_m
 
 
 def kerentanan(lintang: np.ndarray) -> np.ndarray:

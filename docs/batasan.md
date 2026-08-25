@@ -120,7 +120,24 @@ lahir dari fungsi monotonik yang dikalibrasi terhadap tinggi pasut. Fungsi itu
 adalah asumsi, bukan hasil pengukuran, dan harus diakui sendiri sebelum juri
 menemukannya.
 
-### 2.4 Kecepatan ruas sebagian hasil imputasi
+### 2.4 Penalti genangan pada routing adalah angka rancangan
+
+Mesin perutean mengalikan waktu tempuh dengan penalti yang tumbuh seiring
+kedalaman: 1,0 di bawah ambang lambat, 2,5 di ambang berisiko, dan 8,0
+menjelang ambang tidak bisa lewat. **Ketiga angka itu dipilih agar
+bentuknya monoton dan bisa dijelaskan, bukan diukur di lapangan.**
+
+Ambang kedalamannya sendiri dibaca dari tabel `ambang_moda` dan bukan
+ditulis di kode, sehingga bisa dikoreksi tanpa menyentuh mesin routing.
+Tetapi komentar di `db/schema.sql` sendiri menyatakan angka di tabel itu
+masih asumsi dan rujukannya perlu dicari.
+
+Akibatnya: selisih waktu antara rute pembanding dan rute sadar rob
+bergantung pada angka yang belum bersumber. Selisih jarak tidak, karena itu
+geometri murni. Saat menyajikan dampak, jarak lebih kuat dipertahankan
+daripada waktu.
+
+### 2.5 Kecepatan ruas sebagian hasil imputasi
 
 Ruas jalan yang tidak punya tag `maxspeed` di OpenStreetMap diisi kecepatan
 rata-rata jenis jalan yang sama di dalam AOI, memakai OSMnx. Dari 19.394 ruas,
@@ -176,6 +193,10 @@ Jaringan jalan diunduh sekali dari OpenStreetMap pada 24 Agustus 2026 lalu
 disimpan. Jalan baru, penutupan, dan perubahan arah setelah tanggal itu tidak
 terlihat sampai skrip dijalankan ulang. Ini konsekuensi yang disengaja dari
 aturan jalur demo offline.
+
+Sejak M3, mesin perutean membangun grafnya dari tabel `ruas_jalan` dan bukan
+dari berkas GraphML, sehingga aplikasi yang berjalan cukup membawa database.
+GraphML hanya dibutuhkan skrip 02 saat data disiapkan.
 
 ### 5.3 Kelengkapan OpenStreetMap tidak seragam
 

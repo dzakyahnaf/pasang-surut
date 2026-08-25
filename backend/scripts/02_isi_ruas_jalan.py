@@ -62,9 +62,20 @@ def ke_ruas_tunggal(graf):
         satu jam sudah berisi satu baris untuk setiap ruas
 
     to_undirected() menggabungkan pasangan bolak-balik itu jadi satu sisi.
-    Jalan satu arah tidak punya pasangan, jadi ia lolos apa adanya dan
-    ditandai lewat kolom satu_arah. Mesin routing nanti membaca kolom itu
-    untuk tahu arah mana yang boleh dilalui.
+
+    HATI-HATI DI SINI, DAN INI PERNAH SALAH. to_undirected() TIDAK menjamin
+    sisi hasil gabungan mempertahankan orientasi aslinya. Untuk jalan dua
+    arah itu tidak masalah, tetapi untuk jalan satu arah artinya pasangan
+    (osm_u, osm_v) yang tersimpan belum tentu searah dengan arah jalan yang
+    sebenarnya.
+
+    Akibatnya terukur: ketika mesin routing menghormati kolom satu_arah apa
+    adanya, hanya 13,6 persen simpul yang terjangkau dari Pelabuhan Tanjung
+    Emas. Jalan satu arah yang arahnya terbalik bekerja seperti tembok.
+
+    Karena itu arah TIDAK diambil dari atribut oneway hasil penggabungan,
+    melainkan diperiksa ulang terhadap graf berarah aslinya. Lihat
+    arah_sebenarnya().
     """
     graf_tak_berarah = ox.convert.to_undirected(graf)
     print(
@@ -72,6 +83,40 @@ def ke_ruas_tunggal(graf):
         f"-> ruas fisik {graf_tak_berarah.number_of_edges():,}"
     )
     return graf_tak_berarah
+
+
+def arah_sebenarnya(u, v, koordinat, pasangan_berarah):
+    """Tentukan arah jalan yang benar dengan melihat graf berarah aslinya.
+
+    Aturannya sederhana dan tidak menebak sama sekali:
+
+      - Kalau (u, v) DAN (v, u) sama-sama ada di graf berarah, jalan itu dua
+        arah. Simpan apa adanya, satu_arah bernilai salah.
+      - Kalau hanya (u, v) yang ada, jalan itu satu arah dari u ke v.
+      - Kalau hanya (v, u) yang ada, jalan itu satu arah dari v ke u, jadi
+        pasangan simpulnya DITUKAR dan geometrinya dibalik supaya
+        osm_u -> osm_v selalu berarti arah yang boleh dilalui.
+
+    Dengan begitu mesin routing cukup membaca osm_u dan osm_v tanpa perlu
+    tahu apa pun soal cara graf ini dibangun.
+
+    Mengembalikan (u, v, koordinat, satu_arah).
+    """
+    maju = (u, v) in pasangan_berarah
+    mundur = (v, u) in pasangan_berarah
+
+    if maju and mundur:
+        return u, v, koordinat, False
+    if maju:
+        return u, v, koordinat, True
+    if mundur:
+        return v, u, list(reversed(koordinat)), True
+
+    # Tidak ditemukan di graf berarah. Seharusnya mustahil, karena graf tak
+    # berarah diturunkan dari graf berarah itu sendiri. Diperlakukan sebagai
+    # dua arah supaya tidak diam-diam memutus jaringan, dan dihitung sebagai
+    # anomali di ringkasan.
+    return u, v, koordinat, False
 
 
 def hitung_panjang_meter(gdf: gpd.GeoDataFrame) -> gpd.GeoSeries:
@@ -130,60 +175,94 @@ def _ke_boolean(nilai) -> bool:
     return str(nilai).strip().lower() in {"true", "yes", "1"}
 
 
-def siapkan_baris(gdf: gpd.GeoDataFrame) -> list[tuple]:
-    """Susun baris siap sisip sesuai urutan kolom RepositoriRuas."""
-    baris = []
+def susun_daftar_ruas(gdf: gpd.GeoDataFrame, pasangan_berarah: set) -> list[dict]:
+    """Ubah GeoDataFrame jadi daftar ruas dengan arah yang sudah dibetulkan.
+
+    Satu tempat ini menjadi sumber untuk dua keluaran sekaligus, yaitu baris
+    database dan berkas GeoJSON cadangan, supaya keduanya tidak mungkin
+    berbeda isi.
+    """
+    daftar: list[dict] = []
+    ditukar = 0
+    anomali = 0
+
     for (u, v, _kunci), data in gdf.iterrows():
         geometri = data.geometry
         if geometri is None or geometri.is_empty:
             continue
 
+        koordinat = [
+            [round(x, DESIMAL_KOORDINAT), round(y, DESIMAL_KOORDINAT)]
+            for x, y in geometri.coords
+        ]
+
+        u_asli, v_asli = int(u), int(v)
+        if (u_asli, v_asli) not in pasangan_berarah and (v_asli, u_asli) not in pasangan_berarah:
+            anomali += 1
+
+        u_baru, v_baru, koordinat, satu_arah = arah_sebenarnya(
+            u_asli, v_asli, koordinat, pasangan_berarah
+        )
+        if (u_baru, v_baru) != (u_asli, v_asli):
+            ditukar += 1
+
+        daftar.append({
+            "osm_u": u_baru,
+            "osm_v": v_baru,
+            "nama": _teks_pertama(data.get("name")),
+            "jenis": _teks_pertama(data.get("highway"), "tidak diketahui"),
+            "panjang_m": float(data["panjang_m"]),
+            "kecepatan_kmh": float(data["kecepatan_kmh"]),
+            "satu_arah": satu_arah,
+            "koordinat": koordinat,
+        })
+
+    satu_arah_total = sum(1 for r in daftar if r["satu_arah"])
+    print(f"ruas satu arah        : {satu_arah_total:,}")
+    print(f"arah dibalik agar benar: {ditukar:,}")
+    if anomali:
+        print(f"PERINGATAN: {anomali:,} ruas tidak ditemukan di graf berarah")
+    return daftar
+
+
+def siapkan_baris(daftar: list[dict]) -> list[tuple]:
+    """Susun baris siap sisip sesuai urutan kolom RepositoriRuas."""
+    baris = []
+    for r in daftar:
+        titik = ", ".join(f"{x} {y}" for x, y in r["koordinat"])
         # EWKT membawa kode SRID di dalam teksnya, jadi tidak mungkin
         # geometri masuk ke database tanpa sistem koordinat yang jelas.
-        ewkt = f"SRID={config.EPSG_SIMPAN};{geometri.wkt}"
-
+        ewkt = f"SRID={config.EPSG_SIMPAN};LINESTRING({titik})"
         baris.append((
-            int(u),
-            int(v),
-            _teks_pertama(data.get("name")),
-            _teks_pertama(data.get("highway"), "tidak diketahui"),
-            float(data["panjang_m"]),
-            float(data["kecepatan_kmh"]),
-            _ke_boolean(data.get("oneway")),
-            ewkt,
+            r["osm_u"], r["osm_v"], r["nama"], r["jenis"],
+            r["panjang_m"], r["kecepatan_kmh"], r["satu_arah"], ewkt,
         ))
     return baris
 
 
-def tulis_geojson(gdf: gpd.GeoDataFrame) -> None:
+def tulis_geojson(daftar: list[dict]) -> None:
     """Ekspor jaringan jalan ke GeoJSON sebagai jalur cadangan offline.
 
     Berkas ini dipakai lapisan API kalau database belum tersedia, misalnya
     di laptop anggota tim yang belum menyiapkan Supabase. Dengan begitu peta
     tetap bisa dibuka tanpa database sama sekali.
     """
-    fitur = []
-    for (u, v, _kunci), data in gdf.iterrows():
-        geometri = data.geometry
-        if geometri is None or geometri.is_empty:
-            continue
-        koordinat = [
-            [round(x, DESIMAL_KOORDINAT), round(y, DESIMAL_KOORDINAT)]
-            for x, y in geometri.coords
-        ]
-        fitur.append({
+    fitur = [
+        {
             "type": "Feature",
             "properties": {
-                "osm_u": int(u),
-                "osm_v": int(v),
-                "nama": _teks_pertama(data.get("name")),
-                "jenis": _teks_pertama(data.get("highway"), "tidak diketahui"),
-                "panjang_m": round(float(data["panjang_m"]), 1),
-                "kecepatan_kmh": round(float(data["kecepatan_kmh"]), 1),
-                "satu_arah": _ke_boolean(data.get("oneway")),
+                "osm_u": r["osm_u"],
+                "osm_v": r["osm_v"],
+                "nama": r["nama"],
+                "jenis": r["jenis"],
+                "panjang_m": round(r["panjang_m"], 1),
+                "kecepatan_kmh": round(r["kecepatan_kmh"], 1),
+                "satu_arah": r["satu_arah"],
             },
-            "geometry": {"type": "LineString", "coordinates": koordinat},
-        })
+            "geometry": {"type": "LineString", "coordinates": r["koordinat"]},
+        }
+        for r in daftar
+    ]
 
     isi = {
         "type": "FeatureCollection",
@@ -207,8 +286,15 @@ def main() -> int:
     )
     argumen = pengurai.parse_args()
 
-    graf = muat_graf()
-    graf = ke_ruas_tunggal(graf)
+    graf_berarah = muat_graf()
+
+    # Rekam seluruh pasangan simpul yang benar-benar ada sebagai sisi
+    # BERARAH, sebelum graf disederhanakan. Inilah satu-satunya sumber yang
+    # sah untuk menentukan arah jalan satu arah. Lihat arah_sebenarnya().
+    pasangan_berarah = {(int(u), int(v)) for u, v in graf_berarah.edges()}
+    print(f"pasangan berarah unik : {len(pasangan_berarah):,}")
+
+    graf = ke_ruas_tunggal(graf_berarah)
 
     # Kecepatan bebas hambatan. OSMnx membaca tag maxspeed dari OSM bila ada.
     # Ruas tanpa tag maxspeed diisi rata-rata jenis jalan yang sama DI DALAM
@@ -234,13 +320,14 @@ def main() -> int:
     total_km = gdf["panjang_m"].sum() / 1000
     print(f"panjang jaringan: {total_km:,.1f} km")
 
-    tulis_geojson(gdf)
+    daftar = susun_daftar_ruas(gdf, pasangan_berarah)
+    tulis_geojson(daftar)
 
     if argumen.tanpa_database:
         print("dilewati: penyisipan ke database (--tanpa-database)")
         return 0
 
-    baris = siapkan_baris(gdf)
+    baris = siapkan_baris(daftar)
     print(f"menyisipkan {len(baris):,} ruas ke database ...")
 
     with db.koneksi() as kon:
