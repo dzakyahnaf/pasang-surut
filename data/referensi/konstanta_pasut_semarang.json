@@ -1,8 +1,6 @@
 {
-  "_status": "SEMENTARA — TERISI DARI SATU SUMBER, REKAMAN 15 HARI. Baca _peringatan sebelum memakai angka ini untuk klaim apa pun.",
-
+  "_status": "TERPAKAI. Acuan waktu fase sudah dipastikan 28 Agustus 2026 lewat kalibrasi terhadap data terukur. Rekaman sumbernya tetap hanya 15 hari; baca _peringatan.",
   "_ringkasan": "Konstanta harmonik pasang surut perairan Semarang hasil metode Admiralty atas pengamatan 15 hari pada Maret 2014. Ini satu-satunya tabel numerik lengkap yang berhasil ditemukan dan diverifikasi langsung dari makalah aslinya. Cukup untuk membangun domain/pasut.py dan menguji jalurnya, TIDAK cukup untuk diklaim sebagai prediksi pasut yang teliti di proposal.",
-
   "stasiun": {
     "nama": "Perairan Semarang",
     "lintang_dms": "6°56'55.78\" LS",
@@ -13,9 +11,12 @@
     "di_dalam_aoi": true,
     "catatan_lokasi": "Titik ini berjarak sekitar 120 meter dari stasiun pasut IOC berkode 'sema' yang dikelola Badan Informasi Geospasial (-6,9479 / 110,42012). Untuk keperluan proyek ini keduanya boleh dianggap stasiun yang sama, yaitu kawasan Pelabuhan Tanjung Emas."
   },
-
   "sumber": {
-    "penulis": ["Rifki Kurnia Rachman", "Dwi Haryo Ismunarti", "Gentur Handoyo"],
+    "penulis": [
+      "Rifki Kurnia Rachman",
+      "Dwi Haryo Ismunarti",
+      "Gentur Handoyo"
+    ],
     "judul": "Pengaruh Pasang Surut Terhadap Sebaran Genangan Banjir Rob di Kecamatan Semarang Utara",
     "jurnal": "Jurnal Oseanografi, Universitas Diponegoro",
     "volume": "Volume 4, Nomor 1",
@@ -25,7 +26,6 @@
     "diakses": "2026-08-24",
     "catatan_tahun": "Halaman sampul menulis Tahun 2015, tetapi kepala halaman di dalam menulis Tahun 2014. Kerja lapangan dilakukan 2014. Pakai 2015 sebagai tahun terbit dan sebutkan ketidakkonsistenan ini bila ditanya."
   },
-
   "metode": {
     "analisis": "Admiralty",
     "peramalan_di_makalah": "Least Square, MIKE 21 Toolbox modul Tidal Analysis and Prediction",
@@ -35,24 +35,64 @@
     "panjang_data_hari": 15,
     "mean_relative_error_peramalan_persen": 13.076
   },
-
   "satuan_amplitudo": "cm",
   "satuan_fase": "derajat",
-  "zona_waktu_fase": null,
-
+  "zona_waktu_fase": "WIB (UTC+7)",
   "konstituen": {
-    "S0": { "amplitudo": 59.0,  "fase": 0,   "diturunkan": false, "catatan": "Muka air rata-rata terhadap nol palem, bukan komponen harmonik" },
-    "M2": { "amplitudo": 13.3,  "fase": 267, "diturunkan": false },
-    "S2": { "amplitudo": 9.53,  "fase": 169, "diturunkan": false },
-    "N2": { "amplitudo": 5.8,   "fase": 229, "diturunkan": false },
-    "K2": { "amplitudo": 2.57,  "fase": 169, "diturunkan": true,  "catatan": "TIDAK diselesaikan sendiri. Diturunkan dari S2 memakai rasio baku Admiralty; K2/S2 = 0,270 dan fasenya disamakan dengan S2" },
-    "K1": { "amplitudo": 19.0,  "fase": 354, "diturunkan": false },
-    "O1": { "amplitudo": 6.65,  "fase": 191, "diturunkan": false },
-    "P1": { "amplitudo": 6.28,  "fase": 354, "diturunkan": true,  "catatan": "TIDAK diselesaikan sendiri. Diturunkan dari K1 memakai rasio baku Admiralty; P1/K1 = 0,331 dan fasenya disamakan dengan K1" },
-    "M4": { "amplitudo": 0.87,  "fase": 273, "diturunkan": false },
-    "MS4":{ "amplitudo": 0.12,  "fase": 301, "diturunkan": false }
+    "S0": {
+      "amplitudo": 59.0,
+      "fase": 0,
+      "diturunkan": false,
+      "catatan": "Muka air rata-rata terhadap nol palem, bukan komponen harmonik"
+    },
+    "M2": {
+      "amplitudo": 13.3,
+      "fase": 267,
+      "diturunkan": false
+    },
+    "S2": {
+      "amplitudo": 9.53,
+      "fase": 169,
+      "diturunkan": false
+    },
+    "N2": {
+      "amplitudo": 5.8,
+      "fase": 229,
+      "diturunkan": false
+    },
+    "K2": {
+      "amplitudo": 2.57,
+      "fase": 169,
+      "diturunkan": true,
+      "catatan": "TIDAK diselesaikan sendiri. Diturunkan dari S2 memakai rasio baku Admiralty; K2/S2 = 0,270 dan fasenya disamakan dengan S2"
+    },
+    "K1": {
+      "amplitudo": 19.0,
+      "fase": 354,
+      "diturunkan": false
+    },
+    "O1": {
+      "amplitudo": 6.65,
+      "fase": 191,
+      "diturunkan": false
+    },
+    "P1": {
+      "amplitudo": 6.28,
+      "fase": 354,
+      "diturunkan": true,
+      "catatan": "TIDAK diselesaikan sendiri. Diturunkan dari K1 memakai rasio baku Admiralty; P1/K1 = 0,331 dan fasenya disamakan dengan K1"
+    },
+    "M4": {
+      "amplitudo": 0.87,
+      "fase": 273,
+      "diturunkan": false
+    },
+    "MS4": {
+      "amplitudo": 0.12,
+      "fase": 301,
+      "diturunkan": false
+    }
   },
-
   "elevasi": {
     "_catatan": "Seluruhnya relatif terhadap nol palem pasut di stasiun, BUKAN terhadap datum vertikal nasional dan BUKAN terhadap EGM2008 yang dipakai DEMNAS.",
     "satuan": "cm",
@@ -62,30 +102,37 @@
     "hwl_teramati": 112,
     "lwl_teramati": 23
   },
-
   "tipe_pasut": {
     "formzahl": 1.121,
     "klasifikasi": "campuran condong ke harian ganda",
     "rumus": "F = (K1 + O1) / (M2 + S2)",
     "diperiksa_ulang": "(19,0 + 6,65) / (13,3 + 9,53) = 1,1235. Cocok dengan 1,121 yang ditulis makalah dalam batas pembulatan."
   },
-
   "_peringatan": [
     "REKAMAN HANYA 15 HARI. Analisis harmonik 15 hari tidak bisa memisahkan komponen yang frekuensinya berdekatan. Konsekuensinya nyata dan terlihat di tabel: P1 dan K2 bukan hasil pengukuran, melainkan diturunkan dari K1 dan S2 memakai rasio tetap. Dua dari tujuh komponen yang diminta PLAN.md 10.2 karena itu tidak berdiri sendiri.",
-
-    "ZONA WAKTU FASE TIDAK DISEBUT DI SUMBER. Ini blokade nyata untuk rekonstruksi. Fase Admiralty di Indonesia lazimnya mengacu waktu lokal, tetapi makalah ini tidak menyatakannya. Salah menebak menggeser seluruh kurva sampai 7 jam, dan untuk M2 yang periodenya 12,4 jam pergeseran itu bisa membalik pasang jadi surut. WAJIB diselesaikan sebelum angka pasut dipakai untuk klaim apa pun. Cara menyelesaikannya ada di _langkah_berikutnya.",
-
+    "KOREKSI NODAL BELUM DITERAPKAN. Faktor nodal f dan u yang berubah mengikuti siklus 18,6 tahun tidak dihitung, padahal konstanta diukur 2014 dan dipakai untuk 2026. Inilah dugaan penyebab sisa galat 0,9 jam pada kalibrasi acuan waktu.",
     "SUMBER LAIN TIDAK SEPAKAT SOAL TIPE PASUT. Az Zahro, Wahyu, dan Wulansari (Prosiding SNF Universitas Negeri Jakarta) menganalisis data Pushidrosal 12 Januari sampai 9 Februari 2018 selama 29 piantan dan memperoleh Formzahl 3,94, yaitu tipe HARIAN TUNGGAL, bukan campuran. Tabel komponennya berupa gambar sehingga angkanya tidak bisa disalin. Rekamannya lebih panjang daripada sumber utama di berkas ini, jadi perbedaan ini tidak boleh diabaikan. Tautan: https://journal.unj.ac.id/unj/index.php/prosidingsnf/article/download/52497/18786/145186",
-
     "DATUM BUKAN DATUM DEMNAS. Elevasi di sini relatif terhadap nol palem pasut setempat. DEMNAS memakai EGM2008. Keduanya TIDAK boleh dikurangkan langsung satu sama lain. Ini justru salah satu alasan aturan repo melarang ambang elevasi absolut untuk menentukan genangan.",
-
     "AMPLITUDO INI BUKAN TINGGI ROB. Jumlah seluruh amplitudo bukan tinggi genangan di jalan. Rob adalah muka air tinggi yang bertemu dengan tanah yang turun dan drainase yang tersumbat. Jangan pernah menyajikan angka di berkas ini sebagai prediksi kedalaman."
   ],
-
   "_langkah_berikutnya": {
     "1_sumber_data_mentah": "Stasiun IOC Sea Level Monitoring berkode 'sema', -6,9479 / 110,42012, dikelola Badan Informasi Geospasial bersama GeoForschungsZentrum. Empat sensor aktif: tekanan, tekanan cadangan, radar, dan baterai. Tautan: https://www.ioc-sealevelmonitoring.org/station.php?code=sema",
     "2_hitung_sendiri": "Unduh deret waktu multi-tahun dari stasiun itu lalu hitung konstanta sendiri. Rekaman satu tahun penuh memisahkan P1 dari K1 dan K2 dari S2 dengan benar, sekaligus menetapkan zona waktu fase tanpa keraguan karena kita sendiri yang menentukannya.",
     "3_uji_silang": "Rekonstruksi memakai konstanta di berkas ini, lalu bandingkan dengan data terukur stasiun 'sema' pada rentang tanggal yang sama. Jalankan dua kali, sekali menganggap fase mengacu UTC dan sekali mengacu WIB. Yang selisihnya jauh lebih kecil itulah acuan yang benar. Catat hasilnya di docs/validasi.md.",
     "4_kalau_tetap_meragukan": "Model global FES2014 lewat AVISO menyediakan konstanta di grid dan dipakai peneliti Indonesia untuk perairan barat Indonesia. Butuh pendaftaran dan persetujuannya bisa berhari-hari, jadi ini jalur cadangan, bukan jalur utama."
+  },
+  "_kalibrasi_zona_waktu": {
+    "tanggal": "2026-08-28",
+    "cara": "Rekonstruksi disisir pada seluruh offset -12 sampai +12 jam, lalu dibandingkan dengan muka air terukur stasiun pasut IOC 'sema' milik BIG, sekitar 120 m dari stasiun sumber konstanta.",
+    "skrip": "backend/scripts/04_kalibrasi_pasut.py",
+    "hasil": {
+      "acuan_terpilih": "WIB",
+      "korelasi_utc": "-0,29 sampai -0,46 pada jendela 2, 4, 7, dan 10 hari",
+      "korelasi_wib": "+0,78 sampai +0,91 pada jendela yang sama",
+      "offset_pencocokan_terbaik_jam": "+7,5 sampai +8,25, rerata sekitar +7,9",
+      "rmse_pada_wib_m": "0,097 sampai 0,116"
+    },
+    "kesimpulan": "Memakai UTC bukan sekadar kurang tepat, melainkan BERKEBALIKAN — korelasinya negatif di seluruh jendela uji. Acuan yang benar adalah waktu lokal WIB.",
+    "sisa_galat": "Pencocokan terbaik jatuh sekitar +7,9 jam, bukan tepat +7,0. Selisih sekitar 0,9 jam itu diperkirakan berasal dari koreksi nodal siklus 18,6 tahun yang belum diterapkan, ditambah rekaman sumber yang hanya 15 hari. Sistem memakai +7,0 karena berdasar, bukan +7,9 yang hasil pencocokan."
   }
 }

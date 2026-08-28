@@ -103,4 +103,17 @@ Satu sesi = satu milestone. Jangan mengerjakan milestone berikutnya tanpa
 diminta. Setelah selesai, perbarui `docs/PROGRESS.md`, commit, lalu berhenti
 dan laporkan.
 
+**Tiap sesi wajib menutup dengan tiga hal:**
+
+1. **Perbarui proposal.** `Anforcom2026_DSDC_TrioLaAlbiceleste_PasangSurut.docx`
+   diisi dengan apa pun yang ditemukan sesi itu — metrik model, angka rantai
+   dampak, sitasi, status modul, angka terukur. Jangan menunggu diminta.
+   Aturan nomor 1 tetap berlaku: yang belum ada sumbernya ditulis
+   "Belum tersedia", bukan diisi angka karangan. Jumlah halaman diperiksa
+   dengan Word, bukan diperkirakan. Sisa pekerjaannya dicatat di
+   `docs/sisa_proposal.md`.
+2. **Perbarui Papan Blokade** di puncak `docs/PROGRESS.md`.
+3. **Laporkan** blocker, yang perlu perhatian tim, dan yang hanya bisa
+   dikerjakan manual.
+
 Kalau ada yang ambigu: **berhenti dan tanya.** Jangan berasumsi.

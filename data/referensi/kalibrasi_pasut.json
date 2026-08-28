@@ -1,0 +1,39 @@
+{
+  "_catatan": "Hasil kalibrasi acuan waktu fase konstanta pasut terhadap data terukur stasiun IOC 'sema'. Dihasilkan oleh backend/scripts/04_kalibrasi_pasut.py.",
+  "dijalankan": "2026-08-28T07:27:03.474325+00:00",
+  "stasiun": "sema",
+  "sensor": "prs",
+  "sumber_data": "https://www.ioc-sealevelmonitoring.org/service.php?query=data&code=sema",
+  "waktu_layanan": "UTC, diperiksa empiris",
+  "rekaman": 12317,
+  "panjang_hari": 10.0,
+  "rentang_terukur_m": 0.92,
+  "komponen_dipakai": [
+    "M2",
+    "S2",
+    "N2",
+    "K2",
+    "K1",
+    "O1",
+    "P1"
+  ],
+  "offset_terbaik_jam": 8.0,
+  "korelasi_terbaik": 0.8465,
+  "rmse_terbaik_m": 0.097,
+  "hipotesis_utc": {
+    "korelasi": -0.4645,
+    "rmse_m": 0.3004
+  },
+  "hipotesis_wib": {
+    "korelasi": 0.7821,
+    "rmse_m": 0.1155
+  },
+  "acuan_terpilih": "WIB",
+  "selisih_korelasi": 1.2467,
+  "kesimpulan_tegas": true,
+  "_peringatan": [
+    "Koreksi nodal 18,6 tahun TIDAK diterapkan. Konstanta 2014 dipakai untuk 2026.",
+    "Konstanta berasal dari rekaman 15 hari; P1 dan K2 diturunkan dari K1 dan S2, bukan diukur.",
+    "Datum alat ukur IOC berbeda dari palem pasut 2014, sehingga yang dibandingkan hanya simpangan terhadap rata-rata."
+  ]
+}

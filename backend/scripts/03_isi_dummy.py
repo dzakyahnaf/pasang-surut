@@ -33,46 +33,54 @@ from app.domain import pasut
 SUMBER = "dummy"
 JUMLAH_JAM = 72
 
-# ── Pasut contoh ──────────────────────────────────────────────────────────
-# Satu sinusoid saja, periode 24,8 jam. Angka 24,8 dipilih karena itu
-# panjang satu hari bulan, yaitu ritme dasar pasang surut harian.
+# ── Pasut ─────────────────────────────────────────────────────────────────
+# Sejak 28 Agustus 2026 pasut yang dipakai BUKAN lagi sinusoid contoh,
+# melainkan rekonstruksi harmonik sungguhan dari app/domain/pasut.py, dengan
+# acuan fase WIB yang sudah dikalibrasi terhadap data terukur stasiun IOC.
 #
-# Pasut ASLI adalah jumlah dari banyak komponen harmonik (M2, S2, K1, O1,
-# dan seterusnya) dengan amplitudo dan fase yang harus diambil dari konstanta
-# terpublikasi. Itu pekerjaan modul domain/pasut.py, bukan di sini. Satu
-# sinusoid ini hanya memberi bentuk naik-turun supaya Pita Pasut di frontend
-# punya sesuatu untuk digambar.
-# Rumusnya kini tinggal di app/domain/pasut.py supaya Pita Pasut di frontend
-# menggambar kurva yang SAMA PERSIS dengan yang dipakai membuat data contoh
-# ini. Kalau keduanya berbeda, kurva di layar tidak akan cocok dengan
-# genangan yang tergambar di peta.
-PERIODE_PASUT_JAM = pasut.PERIODE_PASUT_JAM
-AMPLITUDO_PASUT_M = pasut.AMPLITUDO_PASUT_M
-EPOCH_PASUT = pasut.EPOCH_PASUT
+# Jadi status berkas ini berubah: PEMICUNYA sudah nyata, yang masih karangan
+# hanya cara pemicu itu diterjemahkan menjadi kedalaman genangan per ruas.
+tinggi_pasut_m = pasut.tinggi_pasut_m
 
 # ── Parameter kedalaman contoh ────────────────────────────────────────────
-# AMBANG_MAKS_CM sengaja jauh lebih besar daripada puncak muka air (50 cm).
-# Kalau tidak, ruas paling jauh dari pantai pun ikut tergenang saat pasut
-# puncak, seluruh peta jadi satu warna, dan tangga kedalaman tidak ada
-# gunanya.
+# Berapa persen ruas yang diharapkan tergenang pada jam pasut tertinggi di
+# dalam jendela. Ambangnya DIHITUNG dari angka ini, bukan ditulis tetap.
 #
-# Angka 112 bukan tebakan. Sebaran kerentanan ruas di AOI ini diukur lebih
-# dulu, dan ternyata condong ke selatan — persentil ke-50 hanya 0,274 —
-# karena jalan permukiman jauh lebih rapat di darat daripada di kawasan
-# pelabuhan. Dengan ambang 112 cm, sekitar 12 persen ruas tergenang saat
-# pasut puncak, dan keempat kelas tangga kedalaman muncul di peta.
-AMBANG_MAKS_CM = 112.0  # ambang ruas paling jauh dari pantai
+# KENAPA MENYESUAIKAN SENDIRI. Versi sebelumnya memakai ambang tetap 112 cm
+# yang ditala untuk sinusoid contoh beramplitudo 0,5 m. Begitu pasut diganti
+# rekonstruksi harmonik, tinggi puncaknya berubah mengikuti siklus purnama
+# dan perbani — jendela 72 jam saat perbani hanya mencapai sekitar 0,23 m,
+# sehingga ambang tetap itu membuat seluruh kota kering dan peta kehilangan
+# isinya. Dengan ambang yang diturunkan dari puncak pasut di jendela yang
+# sedang diisi, skrip ini tidak perlu ditala ulang setiap kali dijalankan.
+TARGET_TERGENANG_SAAT_PUNCAK = 0.12
+
 BIAS_CM = 4.0           # geser sedikit supaya pantai tetap tergenang saat puncak
 
-# Pengali kedalaman. Tanpa ini kedalaman maksimum berhenti di sekitar 48 cm
-# dan kelas terdalam (di atas 50 cm) tidak pernah muncul, sehingga pola
-# titik halftone yang diwajibkan DESIGN.md Bagian 3.4 tidak bisa diuji.
-FAKTOR_KEDALAMAN = 1.4
+# Kedalaman yang ingin dicapai ruas paling rentan pada jam pasut tertinggi.
+# Pengalinya diturunkan dari angka ini, dengan alasan yang sama seperti
+# ambang: tinggi puncak pasut berubah mengikuti purnama dan perbani, jadi
+# pengali tetap akan membuat kelas terdalam kadang muncul kadang tidak.
+# DESIGN.md Bagian 3.4 mewajibkan dua kelas terdalam ditumpuk pola titik
+# halftone, dan itu hanya bisa diuji kalau kelasnya benar-benar terisi.
+TARGET_KEDALAMAN_MAKS_CM = 65.0
 KEDALAMAN_MAKS_CM = 80.0
 SEBARAN_JITTER = 0.12   # keragaman antar ruas, lihat kerentanan()
 
 
-tinggi_pasut_m = pasut.tinggi_pasut_m
+def ambang_maks_cm(puncak_muka_air_cm: float, kerentanan_ruas) -> float:
+    """Ambang ruas terjauh dari pantai, diturunkan dari puncak pasut.
+
+    Ruas tergenang bila  muka_air + BIAS > AMBANG_MAKS * (1 - kerentanan).
+    Supaya tepat sebagian ruas yang tergenang saat puncak, ambangnya dipilih
+    sehingga persamaan itu terpenuhi persis pada persentil kerentanan yang
+    sesuai dengan TARGET_TERGENANG_SAAT_PUNCAK.
+    """
+    k_ambang = float(np.percentile(
+        kerentanan_ruas, 100.0 * (1.0 - TARGET_TERGENANG_SAAT_PUNCAK)
+    ))
+    sisa = max(1.0 - k_ambang, 1e-3)
+    return (puncak_muka_air_cm + BIAS_CM) / sisa
 
 
 def kerentanan(lintang: np.ndarray) -> np.ndarray:
@@ -115,24 +123,35 @@ def jitter_per_ruas(edge_id: np.ndarray) -> np.ndarray:
     return (sebar - 0.5) * 2 * SEBARAN_JITTER
 
 
+def faktor_kedalaman(puncak_muka_air_cm: float, kerentanan_ruas,
+                     ambang_maks: float) -> float:
+    """Pengali yang membuat ruas paling rentan mencapai TARGET saat puncak."""
+    k_maks = float(np.max(kerentanan_ruas))
+    lebih_maks = puncak_muka_air_cm - ambang_maks * (1.0 - k_maks) + BIAS_CM
+    if lebih_maks <= 0:
+        return 1.0
+    return TARGET_KEDALAMAN_MAKS_CM / lebih_maks
+
+
 def hitung_kedalaman(
-    muka_air_cm: float, kerentanan_ruas: np.ndarray
+    muka_air_cm: float, kerentanan_ruas: np.ndarray, ambang_maks: float,
+    faktor: float,
 ) -> tuple[np.ndarray, np.ndarray]:
     """Kedalaman contoh dalam cm dan probabilitas contoh, untuk satu jam.
 
     Modelnya, kalau boleh disebut model:
 
-        ambang   = AMBANG_MAKS * (1 - kerentanan)
+        ambang   = ambang_maks * (1 - kerentanan)
         kedalaman = muka_air - ambang + bias
 
     Ruas di pantai punya ambang mendekati nol, jadi ia mengikuti muka air
     hampir langsung. Ruas jauh di darat punya ambang tinggi, jadi ia tetap
     kering kecuali muka air naik sangat tinggi.
     """
-    ambang_cm = AMBANG_MAKS_CM * (1.0 - kerentanan_ruas)
+    ambang_cm = ambang_maks * (1.0 - kerentanan_ruas)
     lebih_cm = muka_air_cm - ambang_cm + BIAS_CM
 
-    kedalaman = np.clip(lebih_cm * FAKTOR_KEDALAMAN, 0.0, KEDALAMAN_MAKS_CM)
+    kedalaman = np.clip(lebih_cm * faktor, 0.0, KEDALAMAN_MAKS_CM)
 
     # Probabilitas contoh: kurva logistik terhadap selisih yang sama.
     # Dibuat mulus supaya frontend punya nilai yang berubah halus saat
@@ -169,11 +188,26 @@ def main() -> int:
     # menampilkan. Aturan repo: simpan UTC, tampilkan WIB.
     mulai = datetime.now(timezone.utc).replace(minute=0, second=0, microsecond=0)
 
+    # Puncak pasut di dalam jendela dihitung LEBIH DULU, karena ambang
+    # kedalaman diturunkan darinya. Lihat ambang_maks_cm().
+    jam_jendela = np.array([
+        pasut.jam_sejak_epoch(mulai + timedelta(hours=i))
+        for i in range(argumen.jam)
+    ])
+    muka_air_jendela_cm = np.asarray(tinggi_pasut_m(jam_jendela)) * 100.0
+    puncak_cm = float(muka_air_jendela_cm.max())
+    ambang = ambang_maks_cm(puncak_cm, kerentanan_ruas)
+    faktor = faktor_kedalaman(puncak_cm, kerentanan_ruas, ambang)
+
     print(f"ruas          : {len(edge_id):,}")
     print(f"jam diisi     : {argumen.jam}")
     print(f"mulai (UTC)   : {mulai.isoformat()}")
     print(f"mulai (WIB)   : {mulai.astimezone(config.ZONA_WAKTU_LOKAL).isoformat()}")
     print(f"sumber        : {SUMBER}")
+    print(f"pemicu pasut  : {pasut.SUMBER}, acuan fase WIB +{pasut.OFFSET_FASE_JAM:.0f} jam")
+    print(f"puncak pasut  : {puncak_cm:+.1f} cm di dalam jendela")
+    print(f"ambang maks   : {ambang:.1f} cm (dihitung, bukan ditulis tetap)")
+    print(f"pengali dalam : {faktor:.2f} (dihitung)")
     print()
 
     with db.koneksi() as kon:
@@ -185,11 +219,11 @@ def main() -> int:
 
     for indeks_jam in range(argumen.jam):
         waktu = mulai + timedelta(hours=indeks_jam)
-        jam_sejak_epoch = (waktu - EPOCH_PASUT).total_seconds() / 3600.0
-        pasut_m = float(tinggi_pasut_m(jam_sejak_epoch))
+        pasut_m = float(tinggi_pasut_m(pasut.jam_sejak_epoch(waktu)))
         muka_air_cm = pasut_m * 100.0
 
-        kedalaman, probabilitas = hitung_kedalaman(muka_air_cm, kerentanan_ruas)
+        kedalaman, probabilitas = hitung_kedalaman(
+            muka_air_cm, kerentanan_ruas, ambang, faktor)
 
         # HANYA ruas yang tergenang yang disimpan.
         #
@@ -223,9 +257,9 @@ def main() -> int:
     print()
     print("contoh 12 jam pertama, waktu ditampilkan WIB:")
     print("  jam WIB        pasut(m)   ruas tergenang   kedalaman maks(cm)")
-    for waktu, pasut, jumlah, maks in ringkasan_jam[:12]:
+    for waktu, tinggi_m, jumlah, maks in ringkasan_jam[:12]:
         lokal = waktu.astimezone(config.ZONA_WAKTU_LOKAL)
-        print(f"  {lokal:%a %d %H:%M}   {pasut:+6.2f}   {jumlah:>10,}   {maks:>14.1f}")
+        print(f"  {lokal:%a %d %H:%M}   {tinggi_m:+6.2f}   {jumlah:>10,}   {maks:>14.1f}")
 
     with db.koneksi() as kon:
         repo = db.RepositoriGenangan(kon)
