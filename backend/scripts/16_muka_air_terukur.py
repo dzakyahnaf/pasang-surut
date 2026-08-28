@@ -206,8 +206,34 @@ def uji(citra: list[dict], cache: dict[str, float]) -> int:
     if ada.sum() < 100:
         raise SystemExit("Terlalu sedikit bacaan terukur untuk diuji.")
 
-    # Simpangan terhadap rata-rata; datum alat ukur bukan nol palem.
+    # ── MELURUSKAN LAYANGAN SEPULUH TAHUN, DAN KENAPA WAJIB ────────────
+    #
+    # Rekaman stasiun ini MELAYANG NAIK sepanjang arsip: nilai tengahnya
+    # +0,861 m pada 2015 dan +1,781 m pada 2025, naik 0,92 meter dalam
+    # sepuluh tahun. Besarnya sepadan dengan laju penurunan muka tanah, yang
+    # masuk akal untuk alat yang terpasang di tanah yang turun, tetapi
+    # sebabnya bisa juga penggantian alat atau penggeseran datum.
+    #
+    # Apa pun sebabnya, layangan itu HARUS dibuang sebelum korelasi dihitung.
+    # Arsip Sentinel-1 juga berubah sepanjang dekade yang sama — satelitnya
+    # berganti dari 1A ke 1B lalu 1C, dan baseline pengolahannya diperbarui.
+    # Dua besaran yang sama-sama melayang akan berkorelasi kuat tanpa ada
+    # hubungan sebab sama sekali.
+    #
+    # Ini bukan kekhawatiran teoretis. Tanpa diluruskan, korelasinya -0,29;
+    # setelah diluruskan, +0,05. Seluruh "temuan" itu ternyata layangan.
+    tahun = np.array([w.year for w in waktu])
     terukur_rel = terukur - np.nanmean(terukur[ada])
+    for t in set(tahun[ada]):
+        s = ada & (tahun == t)
+        if s.sum() >= 10:
+            terukur_rel[s] = terukur[s] - np.median(terukur[s])
+    print("layangan tahunan diluruskan sebelum korelasi dihitung")
+    for t in sorted(set(tahun[ada])):
+        s = ada & (tahun == t)
+        if s.sum() >= 10:
+            print(f"  {t}  n={int(s.sum()):>3}  median mentah "
+                  f"{np.median(terukur[s]):+7.3f} m")
     print(f"rentang terukur : {np.nanmin(terukur_rel[ada]):+.3f} sampai "
           f"{np.nanmax(terukur_rel[ada]):+.3f} m")
     print(f"rentang astronomis: {astro[ada].min():+.3f} sampai "
@@ -273,6 +299,10 @@ def uji(citra: list[dict], cache: dict[str, float]) -> int:
         "korelasi_mutlak_tertinggi": round(terbaik, 4),
         "per_kriteria": hasil,
         "_peringatan": [
+            "Rekaman stasiun melayang naik 0,92 m sepanjang 2015 sampai 2025. "
+            "Layangan itu diluruskan per tahun sebelum korelasi dihitung; "
+            "tanpa itu muncul korelasi semu -0,29 yang seluruhnya berasal dari "
+            "dua deret yang sama-sama melayang.",
             "Muka air TERUKUR tidak bisa dipakai memprediksi 72 jam ke depan. "
             "Mengukur bukan meramal, dan kami tidak punya prakiraan gelombang "
             "badai.",

@@ -44,6 +44,7 @@ ini, baca bagian itu.
 | B14 | **Berkas DEMNAS tidak membawa CRS.** `rasterio` melaporkan `CRS: None` walau koordinatnya jelas derajat WGS84. | **Sudah ditangani** di `scripts/05_isi_fitur_ruas.py`, yang menetapkan `EPSG:4326` eksplisit dan mencetak peringatan saat berkas dibuka. Berlaku untuk setiap kode baru yang membuka berkas itu |
 | B16 | **Proposal tersisa 20 penanda `[[ISI]]` dari semula 58.** Seluruhnya tertahan pada tugas manual atau sumber yang belum ada: tautan deploy, repo, video, Figma; angka rantai dampak yang menunggu faktor emisi; dan dua sitasi tanpa sumber (leptospirosis dan WRI), turun dari tiga. | Rincian dan status per bagian ada di `docs/sisa_proposal.md` |
 | B17 | **Tujuh kotak `[ ISI MANUAL ]` sudah dikeluarkan dari proposal** dan dipindah ke `docs/sisa_proposal.md`. Isinya tidak hilang. | Kotak itu instruksi untuk penulis, bukan isi proposal, dan berisiko ikut tercetak ke PDF yang dibaca juri |
+| B34 | **Stasiun pasut IOC `sema` merekam kenaikan muka air relatif sekitar 9 cm per tahun** sepanjang 2015 sampai 2025, dari median +0,861 m menjadi +1,781 m. | Ini BUKAN kenaikan muka laut absolut — ia campuran kenaikan muka laut, penurunan tanah tempat alat berdiri, dan kemungkinan perubahan datum. Layak diperiksa lebih lanjut karena besarnya sepadan dengan laju subsidensi di literatur, tetapi jangan dikutip sebagai kenaikan muka laut |
 | B30 | **Uji responsif 360px BELUM terverifikasi.** Jendela peramban diubah tetapi viewport tetap 1440, jadi hasilnya tidak sah. | Butuh perangkat sungguhan atau devtools. Lantai mutu DESIGN.md Bagian 11 butir pertama |
 | B31 | **Uji baca di bawah matahari langsung dan uji cetak hitam putih BELUM dilakukan.** | Keduanya memerlukan orang, bukan kode. Pola halftone sudah dirancang untuk keduanya tetapi belum dibuktikan |
 | B32 | **Proposal kini 27 halaman**, naik dari 26 setelah paragraf perbandingan Sentinel-1 versus rekonstruksi pasut ditambahkan. | Masih di bawah batas rulebook 30. Diukur dengan Word |
@@ -103,6 +104,7 @@ berubah oleh tersedianya browser otomatis.
 | Curah hujan Open-Meteo belum diambil | 28 Agustus. 102.168 jam 2015–2026 masuk tabel `pemicu`, dengan cadangan mentahnya di `data/referensi/hujan_open_meteo.json` |
 | Jarak pantai belum dihitung | 28 Agustus. Terisi untuk seluruh 19.394 ruas, dihitung di EPSG:32749 terhadap garis pantai OSM |
 | Apakah label Sentinel-1 bisa dipakai melatih model genangan | 28 Agustus. TIDAK. Dibuktikan, bukan ditebak: korelasi anomali terhadap pasut +0,04 sampai +0,07, dan pada tanggal kejadian rob tandanya terbalik. Jangan ulangi percobaan yang sama dengan ambang berbeda — menyetel ambang tidak menciptakan isyarat yang tidak ada |
+| Apakah memakai muka air TERUKUR menyelamatkan label Sentinel-1 | 29 Agustus. TIDAK. Angka mentahnya -0,29 dan tampak menjanjikan, tetapi seluruhnya semu: rekaman stasiun melayang naik 0,92 m dalam sepuluh tahun, dan arsip Sentinel-1 juga berubah lintas dekade. Setelah diluruskan per tahun tinggal +0,05. Keempat jalur penyelamatan kini tertutup |
 | Apakah tombol tujuan cepat sebaiknya mengisi asal atau tujuan | 29 Agustus. Mengisi SLOT YANG KOSONG, asal lebih dulu. Ketahuan saat menjalankan skenario wajib: menekan satu tombol tidak menghasilkan apa-apa kalau selalu mengisi tujuan |
 | Apakah cuplikan radius 100 m menyelamatkan model Sentinel-1 | 29 Agustus. TIDAK. ROC-AUC 0,5982 pada ambang setara, lebih buruk daripada cuplikan titik 0,6579. Arsip ditarik ulang penuh untuk mengujinya |
 | Apakah genangan kota justru MENAIKKAN backscatter | 29 Agustus. Arahnya konsisten sesuai dugaan pantulan ganda, tetapi besarnya hanya 0,47 simpangan baku pada 12 citra. Tidak cukup untuk dijadikan label |
@@ -1044,3 +1046,48 @@ berangkat menembus air, prediksi basi lebih berbahaya daripada layar kosong.
 
 Uji responsif 360px sungguhan, uji baca di bawah matahari, dan uji cetak
 hitam putih. Ketiganya memerlukan perangkat atau orang, bukan kode.
+
+---
+
+## Tambahan 29 Agustus 2026: upaya penyelamatan keempat, dan korelasi semu
+
+Dijalankan setelah feature freeze karena tidak menyentuh fitur — hanya
+pengujian dan dokumentasi.
+
+**Dugaan yang diuji.** Seluruh pengujian sebelumnya membandingkan label
+Sentinel-1 terhadap pasut ASTRONOMIS. Rob sesungguhnya terjadi saat pasang
+astronomis bertemu angin, tekanan udara, dan gelombang badai. Bisa jadi
+labelnya benar dan pembandingnya yang kurang lengkap.
+
+**Hasil pertama tampak meyakinkan.** Muka air terukur stasiun IOC `sema`
+ditarik untuk 725 waktu akuisisi, 699 berhasil. Korelasi label melonjak dari
+-0,03 terhadap pasut astronomis menjadi **-0,29** terhadap muka air terukur.
+
+**Dan seluruhnya semu.** Dua hal yang menyingkapnya:
+
+Pertama, kriteria "turun" dan "naik" berkorelasi hampir sama besar dengan
+tanda berlawanan (-0,290 dan +0,291). Kalau genangan penyebabnya, salah satu
+arah seharusnya jauh lebih kuat. Simetri itu tanda khas pergeseran
+radiometrik SELURUH citra.
+
+Kedua, rekaman stasiun MELAYANG NAIK 0,92 meter dalam sepuluh tahun — median
++0,861 m pada 2015 menjadi +1,781 m pada 2025. Arsip Sentinel-1 juga berubah
+sepanjang dekade yang sama: 1A ke 1B lalu 1C, dengan baseline pengolahan yang
+diperbarui. Dua deret yang sama-sama melayang akan berkorelasi tanpa hubungan
+sebab.
+
+Setelah layangan diluruskan per tahun, korelasinya tinggal **+0,05** dan
+**-0,11**. Putusan skrip berubah dari "LABEL BERMAKNA" menjadi "TETAP DATAR".
+
+**Keempat jalur penyelamatan kini tertutup**, dan penutupannya dibuktikan
+bukan diasumsikan.
+
+**Pelajaran yang layak dicatat.** Angka -0,29 sempat saya laporkan sebagai
+petunjuk kuat sebelum diluruskan. Yang menyelamatkan bukan kehati-hatian
+melainkan dua pemeriksaan mekanis: memeriksa apakah rentang nilainya masuk
+akal secara fisik, dan memeriksa apakah tanda korelasinya simetris. Keduanya
+sekarang tertanam di dalam skrip 16 sehingga tidak bergantung pada ingatan.
+
+**Temuan sampingan.** Kenaikan muka air relatif sekitar 9 cm per tahun di
+stasiun itu tercatat sebagai B34. Bukan kenaikan muka laut absolut, dan
+jangan dikutip sebagai itu.

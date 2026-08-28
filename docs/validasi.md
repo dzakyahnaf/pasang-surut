@@ -373,10 +373,10 @@ Tiga dugaan, tidak satu pun sudah dibuktikan:
 3. **Jalan terlalu sempit terhadap piksel 30 m.** Satu piksel di atas jalan
    ikut memuat trotoar, kendaraan, pohon, dan bangunan.
 
-### 6.5 Tiga upaya penyelamatan, semuanya gagal
+### 6.5 Empat upaya penyelamatan, semuanya gagal
 
-Model tidak ditinggalkan setelah satu kegagalan. Tiga dugaan penyebab diuji
-satu per satu, dan ketiganya terbantah. Ini dicatat lengkap supaya tidak ada
+Model tidak ditinggalkan setelah satu kegagalan. Empat dugaan penyebab diuji
+satu per satu, dan keempatnya terbantah. Ini dicatat lengkap supaya tidak ada
 yang mengulang percobaan yang sama.
 
 **Upaya 1 — mencuplik lingkungan, bukan satu piksel.**
@@ -434,14 +434,58 @@ dicari — daratan berubah menjadi air — hanya beberapa persen luas dan
 tenggelam di bawah ragam itu. Uji lanjutan dengan membuang topeng air
 permanen dijalankan tetapi tidak selesai dalam waktu sesi ini.
 
-**Satu keterbatasan yang berlaku untuk ketiganya, dan patut disebut sendiri.**
-Rekonstruksi pasut yang dipakai sebagai pembanding hanya memuat komponen
-ASTRONOMIS. Rob sesungguhnya terjadi saat pasang astronomis bertemu
-tinggi-rendahnya muka air akibat angin, tekanan udara, dan gelombang badai —
-dan komponen non-astronomis itu tidak ada di dalam rekonstruksi kami. Jadi
-sebagian ketiadaan korelasi bisa saja berasal dari pembandingnya, bukan dari
-labelnya. Ini tidak menyelamatkan model — fitur yang tersedia tetap tidak
-menjelaskan labelnya — tetapi jujur untuk disebutkan.
+**Upaya 4 — memakai muka air TERUKUR, bukan pasut astronomis.**
+Dugaan yang paling menjanjikan, dan yang paling lama bertahan. Rekonstruksi
+harmonik hanya memuat komponen ASTRONOMIS, sementara rob sesungguhnya terjadi
+saat pasang astronomis bertemu kenaikan muka air akibat angin, tekanan udara,
+dan gelombang badai. Bisa jadi labelnya benar dan pembandingnya yang kurang.
+
+Muka air terukur stasiun IOC `sema` ditarik untuk 725 waktu akuisisi, satu
+sensor `prs` saja, 699 di antaranya berhasil. Hasil pertamanya tampak
+meyakinkan:
+
+| Pembanding | Korelasi label basah |
+|---|---:|
+| Pasut astronomis | −0,03 |
+| Muka air terukur, MENTAH | **−0,29** |
+
+Sepuluh kali lipat. **Dan seluruhnya semu.**
+
+Rekaman stasiun itu MELAYANG NAIK sepanjang arsip: nilai tengahnya +0,861 m
+pada 2015 dan +1,781 m pada 2025, naik **0,92 meter dalam sepuluh tahun**.
+Besarannya sepadan dengan laju penurunan muka tanah — masuk akal untuk alat
+yang terpasang di tanah yang turun — tetapi sebabnya bisa juga penggantian
+alat atau penggeseran datum.
+
+Arsip Sentinel-1 juga berubah sepanjang dekade yang sama: satelitnya berganti
+dari 1A ke 1B lalu 1C, dan baseline pengolahannya diperbarui. Dua besaran
+yang sama-sama melayang akan berkorelasi kuat tanpa ada hubungan sebab.
+
+Setelah layangan diluruskan per tahun:
+
+| Kriteria | Sebelum diluruskan | Setelah diluruskan |
+|---|---:|---:|
+| turun | −0,290 | **+0,052** |
+| naik | +0,291 | **−0,111** |
+
+Petunjuk bahwa angka mentah itu semu sudah terlihat sebelum diluruskan:
+kriteria "turun" dan "naik" berkorelasi hampir sama besar dengan tanda
+berlawanan. Kalau genangan yang menjadi penyebabnya, salah satu arah
+seharusnya jauh lebih kuat. Simetri seperti itu adalah tanda khas pergeseran
+radiometrik SELURUH citra, bukan genangan di ruas tertentu — dan memang
+begitu: rata-rata anomali seluruh citra ikut berkorelasi, dan setelah
+pergeseran itu dibuang sisanya tinggal −0,06.
+
+**Kesimpulan upaya 4: pembanding BUKAN penyebabnya.** Memakai muka air yang
+sebenarnya pun tidak memunculkan kaitan. Pembahasan label Sentinel-1 untuk
+AOI ini ditutup.
+
+Temuan sampingan yang layak disebut sendiri: **stasiun pasut Semarang
+merekam kenaikan muka air relatif sekitar 9 sentimeter per tahun** sepanjang
+2015–2025. Angka itu bukan kenaikan muka laut absolut — ia campuran kenaikan
+muka laut, penurunan tanah tempat alat berdiri, dan kemungkinan perubahan
+datum. Sebagai pengamatan mentah ia tetap berguna dan sejalan dengan besaran
+subsidensi di literatur.
 
 ### 6.6 Kesimpulan
 

@@ -1,0 +1,41 @@
+{
+  "_catatan": "Uji ulang label Sentinel-1 memakai muka air TERUKUR stasiun IOC 'sema', bukan rekonstruksi astronomis.",
+  "dijalankan": "2026-08-28T23:48:18.901795+00:00",
+  "citra_dengan_bacaan": 684,
+  "citra_total": 725,
+  "korelasi_astronomis_vs_terukur": 0.2869,
+  "putusan": "TETAP DATAR",
+  "kesimpulan": "Memakai muka air yang sebenarnya pun tidak memunculkan kaitan. Pembanding bukan penyebabnya, dan pembahasan label Sentinel-1 untuk AOI ini ditutup.",
+  "korelasi_mutlak_tertinggi": 0.1114,
+  "per_kriteria": {
+    "turun_2": {
+      "vs_astronomis": -0.0293,
+      "vs_terukur": 0.052
+    },
+    "turun_3": {
+      "vs_astronomis": -0.0331,
+      "vs_terukur": 0.0528
+    },
+    "turun_4": {
+      "vs_astronomis": -0.019,
+      "vs_terukur": 0.0476
+    },
+    "naik_2": {
+      "vs_astronomis": 0.0322,
+      "vs_terukur": -0.1114
+    },
+    "naik_3": {
+      "vs_astronomis": 0.0204,
+      "vs_terukur": -0.0989
+    },
+    "naik_4": {
+      "vs_astronomis": 0.0027,
+      "vs_terukur": -0.0816
+    }
+  },
+  "_peringatan": [
+    "Rekaman stasiun melayang naik 0,92 m sepanjang 2015 sampai 2025. Layangan itu diluruskan per tahun sebelum korelasi dihitung; tanpa itu muncul korelasi semu -0,29 yang seluruhnya berasal dari dua deret yang sama-sama melayang.",
+    "Muka air TERUKUR tidak bisa dipakai memprediksi 72 jam ke depan. Mengukur bukan meramal, dan kami tidak punya prakiraan gelombang badai.",
+    "Datum alat ukur IOC berbeda dari nol palem 2014, jadi yang dibandingkan hanya simpangan terhadap rata-rata."
+  ]
+}
