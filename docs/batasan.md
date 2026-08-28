@@ -258,6 +258,36 @@ sebagai rentang. Ini imputasi, bukan pengukuran.
 
 ---
 
+### 2.6 Angka bahan bakar dan emisi memakai faktor rata-rata per moda
+
+Panel dampak menghitung liter dan kilogram CO2 ekuivalen dari dua faktor di
+tabel `ambang_moda`: konsumsi per kilometer dan faktor emisi per liter.
+
+**Konsumsi per kilometer masih asumsi tanpa sitasi.** Angkanya setara 50 km
+per liter untuk motor, 11,1 untuk mobil, dan 4,0 untuk truk. Nilai itu masuk
+akal, tetapi masuk akal bukan sitasi. Sampai sumbernya ada, angka dampak
+disajikan sebagai RENTANG dengan lebar ±30 persen, dan lebar itu sendiri juga
+asumsi yang dinyatakan sekali di `KETIDAKPASTIAN_KONSUMSI`.
+
+**Faktor emisi 2,31 kg CO2 per liter bensin dan 2,68 untuk solar** adalah
+nilai baku pembakaran bahan bakar. Sitasi resminya belum dimasukkan ke repo;
+`data/referensi/faktor_emisi.json` masih `null`.
+
+Sejak M5 angka ini TAMPIL DI ANTARMUKA, tidak lagi hanya tersimpan di
+database. Konsekuensinya sitasinya menjadi lebih mendesak, bukan kurang.
+
+### 2.7 Peringatan paparan memakai ambang moda yang juga asumsi
+
+Peringatan kesehatan keluar bila rute sadar rob tetap menembus ruas dengan
+kedalaman di atas `berisiko_cm`. Angka ambang itu berasal dari tabel
+`ambang_moda` yang komentarnya di `db/schema.sql` sendiri menyebutnya asumsi.
+
+Artinya kapan peringatan muncul dan kapan tidak bergantung pada angka yang
+belum bersumber. Ambangnya sengaja dibaca dari tabel dan tidak pernah ditulis
+tetap di kode, supaya koreksinya cukup satu baris SQL.
+
+---
+
 ## 3. Batasan cakupan wilayah
 
 ### 3.1 Hanya wilayah pilot, bukan seluruh kota

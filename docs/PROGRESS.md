@@ -33,7 +33,7 @@ ini, baca bagian itu.
 | B3 | Commit membawa trailer `Co-Authored-By: Claude Opus 5`. | Kalau rulebook DSDC mempersoalkan, putuskan sekarang selagi baru empat commit |
 | ~~B4~~ | **SELESAI 29 Agustus.** Kolam koneksi `ThreadedConnectionPool` maksimum 5, ditambah cache kesehatan 5 detik sehingga `database_tersedia()` tidak lagi membuka koneksi sendiri. | — |
 | B5 | `copy.id.json` ada di dua tempat, akar dan `frontend/src/`, tanpa apa pun yang menjaganya sinkron. | Begitu satu disunting, keduanya menyimpang diam-diam |
-| B6 | Belum ada `manifest.json`. Bentuk produk yang dikunci PLAN.md bagian 3 adalah PWA. | PWA itu yang membuat rulebook "website ATAU mobile" terpenuhi keduanya |
+| ~~B6~~ | **SELESAI 29 Agustus.** `manifest.webmanifest`, service worker, dan tiga ikon. Service worker sengaja TIDAK luring penuh: `/api/` selalu menembus jaringan, karena prediksi basi lebih berbahaya daripada layar kosong. | — |
 | B7 | Test menutupi `config.py`, `routing.py`, `genangan.py`, `kerentanan.py`, dan fungsi murni di skrip 06 dan 07 — 43 uji lolos. `db.py`, `main.py`, skrip 01 sampai 05 dan 08 sampai 11, dan `teks.js` masih tanpa test. | `t()` adalah mekanisme pengaman yang melempar galat, dan tidak ada test yang membuktikan ia melempar |
 | B8 | Data contoh kedaluwarsa setelah 72 jam sejak dibuat. | Kalau Pita Pasut tampak kering seluruhnya, jalankan ulang `python -m scripts.03_isi_dummy` dari `backend/` |
 | B9 | Ada PostgreSQL lain di mesin ini yang memakai port 5433, jadi kontainer pengembangan dipindah ke 55433. | Jangan bingung kalau `docker run` di 5433 gagal |
@@ -44,6 +44,10 @@ ini, baca bagian itu.
 | B14 | **Berkas DEMNAS tidak membawa CRS.** `rasterio` melaporkan `CRS: None` walau koordinatnya jelas derajat WGS84. | **Sudah ditangani** di `scripts/05_isi_fitur_ruas.py`, yang menetapkan `EPSG:4326` eksplisit dan mencetak peringatan saat berkas dibuka. Berlaku untuk setiap kode baru yang membuka berkas itu |
 | B16 | **Proposal tersisa 20 penanda `[[ISI]]` dari semula 58.** Seluruhnya tertahan pada tugas manual atau sumber yang belum ada: tautan deploy, repo, video, Figma; angka rantai dampak yang menunggu faktor emisi; dan dua sitasi tanpa sumber (leptospirosis dan WRI), turun dari tiga. | Rincian dan status per bagian ada di `docs/sisa_proposal.md` |
 | B17 | **Tujuh kotak `[ ISI MANUAL ]` sudah dikeluarkan dari proposal** dan dipindah ke `docs/sisa_proposal.md`. Isinya tidak hilang. | Kotak itu instruksi untuk penulis, bukan isi proposal, dan berisiko ikut tercetak ke PDF yang dibaca juri |
+| B30 | **Uji responsif 360px BELUM terverifikasi.** Jendela peramban diubah tetapi viewport tetap 1440, jadi hasilnya tidak sah. | Butuh perangkat sungguhan atau devtools. Lantai mutu DESIGN.md Bagian 11 butir pertama |
+| B31 | **Uji baca di bawah matahari langsung dan uji cetak hitam putih BELUM dilakukan.** | Keduanya memerlukan orang, bukan kode. Pola halftone sudah dirancang untuk keduanya tetapi belum dibuktikan |
+| B32 | **Proposal kini 27 halaman**, naik dari 26 setelah paragraf perbandingan Sentinel-1 versus rekonstruksi pasut ditambahkan. | Masih di bawah batas rulebook 30. Diukur dengan Word |
+| B33 | **Konsumsi bahan bakar di `ambang_moda` masih asumsi tanpa sitasi**, dan kini angka itu tampil di antarmuka lewat panel dampak. | Sebelumnya hanya ada di database. Sekarang pengguna dan juri melihatnya, jadi sitasinya lebih mendesak daripada sebelumnya |
 | B26 | **Region Supabase ap-southeast-2 (Sydney), bukan Singapura.** Tiap kueri memakan sekitar 370 ms bolak-balik. | Endpoint `/api/ruas` 2,0 detik dan `/api/rute` 1,3 detik. Masih terpakai, tetapi region ap-southeast-1 akan memangkasnya kira-kira separuh. Memindahkan region berarti membuat proyek Supabase baru |
 | B27 | **Permintaan rute PERTAMA sempat 11,9 detik** karena graf 19.394 ruas dibangun saat permintaan datang. Sudah diperbaiki dengan pemanasan cache saat startup, kini 1,7 detik. | Kalau server di-deploy ke layanan yang tidur saat menganggur, cold start akan mengulang persoalan ini. Ping layanan sebelum juri memakainya |
 | B28 | **`sampel_latih` 1,8 juta baris TIDAK dipindahkan ke Supabase.** Itu artefak pelatihan, tidak dibutuhkan saat runtime, dan akan memakan sebagian besar kuota 500 MB paket gratis. | Kalau dibutuhkan untuk audit juri, jalankan skrip 09 tanpa `--tanpa-database` sambil menunjuk ke database lokal |
@@ -99,6 +103,7 @@ berubah oleh tersedianya browser otomatis.
 | Curah hujan Open-Meteo belum diambil | 28 Agustus. 102.168 jam 2015–2026 masuk tabel `pemicu`, dengan cadangan mentahnya di `data/referensi/hujan_open_meteo.json` |
 | Jarak pantai belum dihitung | 28 Agustus. Terisi untuk seluruh 19.394 ruas, dihitung di EPSG:32749 terhadap garis pantai OSM |
 | Apakah label Sentinel-1 bisa dipakai melatih model genangan | 28 Agustus. TIDAK. Dibuktikan, bukan ditebak: korelasi anomali terhadap pasut +0,04 sampai +0,07, dan pada tanggal kejadian rob tandanya terbalik. Jangan ulangi percobaan yang sama dengan ambang berbeda — menyetel ambang tidak menciptakan isyarat yang tidak ada |
+| Apakah tombol tujuan cepat sebaiknya mengisi asal atau tujuan | 29 Agustus. Mengisi SLOT YANG KOSONG, asal lebih dulu. Ketahuan saat menjalankan skenario wajib: menekan satu tombol tidak menghasilkan apa-apa kalau selalu mengisi tujuan |
 | Apakah cuplikan radius 100 m menyelamatkan model Sentinel-1 | 29 Agustus. TIDAK. ROC-AUC 0,5982 pada ambang setara, lebih buruk daripada cuplikan titik 0,6579. Arsip ditarik ulang penuh untuk mengujinya |
 | Apakah genangan kota justru MENAIKKAN backscatter | 29 Agustus. Arahnya konsisten sesuai dugaan pantulan ganda, tetapi besarnya hanya 0,47 simpangan baku pada 12 citra. Tidak cukup untuk dijadikan label |
 | Apakah jam lintasan tetap Sentinel-1 membuat pencuplikan pasut bias | 29 Agustus. Bias, tetapi ke arah yang MENGUNTUNGKAN. Persentil ke-95 pasut saat akuisisi +0,338 m berbanding +0,302 m pada seluruh jam. Yang tidak terwakili justru surut terdalam. Gambar buktinya di `docs/pasut_saat_akuisisi.png` |
@@ -939,3 +944,103 @@ pertama kini **1,7 detik**.
 Uji luas air kawasan terbuka setelah topeng air permanen dibuang belum
 selesai; ia menunggu Earth Engine lebih dari satu jam. Hasil parsialnya sudah
 cukup untuk menyimpulkan, dan skripnya bisa dijalankan ulang kapan saja.
+
+---
+
+## M5 — 29 Agustus 2026: panel dampak, halaman validasi, FEATURE FREEZE
+
+**Status: selesai.** Setelah entri ini tidak ada fitur baru sampai submit.
+
+### Skenario wajib berjalan tanpa dituntun
+
+Diuji di peramban sungguhan, bukan diasumsikan:
+
+    buka aplikasi -> tekan Pelabuhan Tanjung Emas -> tekan Kawasan Industri
+    Terboyo -> rute muncul -> panel dampak terisi -> peringatan paparan keluar
+    -> saran jam alternatif bisa ditekan -> geser Pita Pasut -> rute berubah
+
+**Nol galat di konsol.** Satu-satunya pengecualian terjadi saat pengembangan
+dan itu justru pengaman yang bekerja: `t()` melempar galat karena placeholder
+`{tanggal}` tidak diisi. Mekanisme yang dipasang di M2 menangkap kesalahan
+yang seharusnya lolos ke layar.
+
+### Satu perubahan rancangan yang lahir dari mengujinya
+
+Tombol tujuan cepat semula selalu mengisi TUJUAN. Saat skenario dijalankan,
+menekan satu tombol tidak menghasilkan apa-apa karena asal masih kosong —
+dan orang yang baru melihat aplikasi akan menyimpulkan aplikasinya rusak,
+bukan bahwa ia belum mengetuk peta.
+
+Sekarang tombol mengisi SLOT YANG KOSONG: asal lebih dulu, lalu tujuan. Dua
+kali tekan sudah menghasilkan rute tanpa perlu menyentuh peta sama sekali.
+
+### Fitur yang DIPOTONG, dan alasannya
+
+Brief M5 meminta perbandingan visual prediksi versus genangan teramati untuk
+dua sampai tiga kejadian uji. **Dipotong, dan bukan karena kehabisan waktu:
+bahannya tidak ada.** Tidak ada satu pun pengamatan genangan per ruas jalan
+di repo ini. Menyandingkan dua peta tanpa kebenaran lapangan berarti
+membandingkan tebakan dengan tebakan lalu menyebutnya validasi.
+
+Halaman validasi memuat blok khusus yang menyatakan hal itu, dan alasannya
+masuk peta jalan di proposal.
+
+### Lantai mutu DESIGN.md Bagian 11, diperiksa satu per satu
+
+| Butir | Status | Bukti |
+|---|---|---|
+| Responsif sampai 360px | **BELUM TERVERIFIKASI** | jendela diubah ke 360px tetapi viewport tetap 1440; perlu diuji di perangkat atau devtools sungguhan |
+| Fokus papan ketik terlihat | terpenuhi | `:focus-visible` 2px `--rute` offset 2px di `dasar.css` |
+| `prefers-reduced-motion` | terpenuhi | `dasar.css` baris 133, pudar silang 80 ms |
+| Pita Pasut lewat papan ketik | terpenuhi | `role="slider"`, `aria-valuetext` terisi, PageUp/Down berfungsi |
+| Kedalaman tidak lewat warna saja | terpenuhi | pola titik halftone dua kerapatan di peta DAN legenda |
+| Kontras teks minimal 4.5:1 | **terpenuhi setelah diperbaiki** | 3 kegagalan ditemukan dan dibetulkan, lihat di bawah |
+| Sasaran sentuh 44×44 | **terpenuhi setelah diperbaiki** | 8 elemen di bawah ambang ditemukan dan dibetulkan |
+| Terbaca di bawah matahari | **BELUM DIUJI** | perlu orang membawa laptop ke luar ruangan |
+| Terbaca saat dicetak hitam putih | terpenuhi secara rancangan | dua kelas terdalam dibedakan pola, bukan warna; belum diuji cetak sungguhan |
+
+**Dua kegagalan yang ditemukan dan diperbaiki.**
+
+Kontras: `--tinta-2` dipakai di atas rail gelap dan hanya mencapai **2,13:1**.
+Tokennya sendiri tidak salah — ia dirancang untuk latar TERANG, dan
+`--tinta-3` di latar yang sama mencapai 5,50:1. Yang keliru pemakaiannya.
+Diperbaiki di `.titik__kosong` dan `.tombol-utama:disabled`. Tombol nonaktif
+sebenarnya dikecualikan WCAG 1.4.3, tetapi 2,13:1 membuatnya nyaris hilang.
+
+Sasaran sentuh: enam tombol baru berukuran 40px dan dua kontrol zoom bawaan
+MapLibre berukuran 29px. Kontrol MapLibre tidak bisa diubah lewat opsinya,
+hanya lewat CSS. Seluruhnya kini 44px.
+
+### Yang dibuat
+
+- `backend/app/domain/dampak.py` — selisih waktu, jarak, liter, kg CO2e.
+  Setiap faktor membawa komentar sumbernya, termasuk pernyataan terbuka
+  bahwa konsumsi bahan bakar masih asumsi tanpa sitasi
+- `GET /api/tujuan-cepat` dan `GET /api/validasi`
+- `backend/scripts/17_tujuan_cepat.py` — empat POI diambil dari OSM lalu
+  DILEKATKAN ke simpul jalan terdekat, sehingga tombol tidak pernah
+  mengembalikan galat "terlalu jauh dari jalan"
+- `kedalaman_per_ruas_cm` pada `HasilRute`, dipakai peringatan paparan
+- `PanelDampak.jsx`, `PeringatanPaparan.jsx`, `TujuanCepat.jsx`,
+  `pages/HalamanValidasi.jsx`
+- Manifest PWA, service worker, dan tiga ikon
+- 15 kunci teks baru di kedua `copy.id.json`
+
+### Dua cacat tampilan yang ditemukan saat menguji
+
+Pemisah desimal tidak konsisten: panel lama memakai titik (`9.7`) sementara
+panel baru memakai koma (`1,7`). Seluruhnya kini koma.
+
+Bahan bakar tampil `0,000–0,000` untuk selisih rute yang sangat pendek.
+Angkanya benar tetapi terbaca seperti rusak. Kini ditampilkan `< 0,001`.
+
+### Service worker: sengaja TIDAK luring penuh
+
+Hanya cangkang aplikasi yang di-cache. Seluruh permintaan `/api/` selalu
+menembus ke jaringan. Untuk aplikasi yang menyarankan kapan orang boleh
+berangkat menembus air, prediksi basi lebih berbahaya daripada layar kosong.
+
+### Yang TIDAK dikerjakan
+
+Uji responsif 360px sungguhan, uji baca di bawah matahari, dan uji cetak
+hitam putih. Ketiganya memerlukan perangkat atau orang, bukan kode.

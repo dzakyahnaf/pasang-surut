@@ -31,7 +31,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
 from app import config, db
-from app.domain import pasut, routing
+from app.domain import dampak, pasut, routing
 
 app = FastAPI(
     title="PASANG SURUT",
@@ -53,6 +53,9 @@ app.add_middleware(
 )
 
 BERKAS_GEOJSON = config.DIR_DATA_OLAHAN / "ruas_jalan.geojson"
+BERKAS_TUJUAN = config.DIR_DATA_OLAHAN / "tujuan_cepat.geojson"
+BERKAS_METRIK = config.DIR_DATA_REFERENSI / "metrik_model.json"
+BERKAS_INDEKS = config.DIR_DATA_OLAHAN / "indeks_kerentanan.json"
 
 
 # ══════════════════════════════════════════════════════════════════════════
@@ -457,6 +460,145 @@ def _rute_ke_geojson(hasil: routing.HasilRute, jenis: str) -> dict:
     }
 
 
+def _jam_lebih_aman(edge_ids: list[int], mulai, ambang: dict,
+                    peta_kedalaman: dict, batas: int = 24) -> dict | None:
+    """Cari jam terdekat yang genangannya di bawah ambang berisiko moda ini.
+
+    Menyarankan "berangkat nanti saja" tanpa menyebut jam berapa adalah saran
+    kosong. Fungsi ini menelusuri jam-jam yang prediksinya sudah ada, ke depan
+    dan ke belakang secara berselang-seling, lalu mengembalikan yang PERTAMA
+    ditemukan aman — jadi yang disarankan selalu jam terdekat, bukan sekadar
+    jam mana pun yang kebetulan aman.
+
+    Yang diperiksa hanya ruas yang benar-benar dilewati rute, bukan seluruh
+    kota. Jam bisa saja buruk di tempat lain dan tetap aman di jalur ini.
+    """
+    berisiko = float(ambang["berisiko_cm"])
+    urutan = []
+    for langkah in range(1, batas + 1):
+        urutan.append(timedelta(hours=langkah))
+        urutan.append(timedelta(hours=-langkah))
+
+    for geser in urutan:
+        waktu = mulai + geser
+        per_jam = peta_kedalaman.get(waktu)
+        if per_jam is None:
+            continue
+        maks = 0.0
+        for e in edge_ids:
+            nilai = per_jam.get(e)
+            if nilai:
+                maks = max(maks, nilai[0])
+        if maks < berisiko:
+            return {
+                "waktu_utc": waktu.isoformat(),
+                "waktu_wib": waktu.astimezone(config.ZONA_WAKTU_LOKAL).isoformat(),
+                "geser_jam": int(geser.total_seconds() // 3600),
+                "kedalaman_maks_cm": round(maks, 1),
+            }
+    return None
+
+
+@app.get("/api/tujuan-cepat")
+def tujuan_cepat() -> dict:
+    """Titik tujuan penting, dibaca dari berkas yang disiapkan skrip 17.
+
+    Titiknya sudah dilekatkan ke simpul jalan terdekat saat disiapkan,
+    sehingga tombol tujuan cepat tidak pernah mengembalikan galat "terlalu
+    jauh dari jalan". Berkasnya luring; tidak ada panggilan OSM di sini.
+    """
+    if not BERKAS_TUJUAN.exists():
+        return {"tersedia": False, "tujuan": [],
+                "_catatan": ("Berkas tujuan cepat belum ada. Jalankan "
+                             "python -m scripts.17_tujuan_cepat")}
+    isi = json.loads(BERKAS_TUJUAN.read_text(encoding="utf-8"))
+    return {
+        "tersedia": True,
+        "tujuan": [{
+            "kunci": f["properties"]["kunci"],
+            "label": f["properties"]["label"],
+            "ikon": f["properties"]["ikon"],
+            "lon": f["geometry"]["coordinates"][0],
+            "lat": f["geometry"]["coordinates"][1],
+            "geser_m": f["properties"].get("geser_m"),
+        } for f in isi["features"]],
+    }
+
+
+@app.get("/api/validasi")
+def validasi() -> dict:
+    """Metrik model dan indeks, apa adanya.
+
+    ATURAN REPO NOMOR 1 DITEGAKKAN DI SINI, BUKAN DI ANTARMUKA. Bila model
+    belum ada, endpoint ini mengembalikan tersedia=false dan SELURUH metrik
+    null. Antarmuka tidak punya kesempatan untuk menampilkan angka karangan
+    karena tidak ada angka yang dikirim kepadanya.
+
+    Model yang ada sekarang berstatus DITOLAK, dan itu dinyatakan terbuka
+    lewat medan `dipakai`. Metriknya tetap dikirim justru supaya bisa
+    ditampilkan beserta alasan penolakannya.
+    """
+    kosong = {
+        "tersedia": False, "dipakai": False, "alasan_ditolak": None,
+        "roc_auc": None, "pr_auc": None, "f1": None,
+        "ambang_probabilitas": None, "matriks_konfusi": None,
+        "baris_latih": None, "baris_uji": None,
+        "periode_latih": None, "periode_uji": None,
+        "kepentingan_fitur": [], "pembanding_naif": {},
+        "kalibrasi": None, "sumber_label": None,
+    }
+    if not BERKAS_METRIK.exists():
+        return kosong
+
+    m = json.loads(BERKAS_METRIK.read_text(encoding="utf-8"))
+    uji = m.get("metrik_uji", {})
+    pemisahan = m.get("pemisahan", {})
+    label = m.get("label_info") or m.get("label", "")
+
+    with db.koneksi() as kon:
+        sumber = db.RepositoriGenangan(kon).sumber_yang_ada()
+    dipakai = "model_v1" in sumber
+
+    indeks = None
+    if BERKAS_INDEKS.exists():
+        d = json.loads(BERKAS_INDEKS.read_text(encoding="utf-8"))
+        indeks = {"bobot": d.get("bobot"), "sebaran": d.get("sebaran"),
+                  "ruas": d.get("ruas"), "peringatan": d.get("_peringatan", [])}
+
+    return {
+        "tersedia": True,
+        "dipakai": dipakai,
+        "alasan_ditolak": (None if dipakai else (
+            "Label basah Sentinel-1 tidak berkorelasi dengan pasang surut. "
+            "Aturan pasut saja menghasilkan ROC-AUC 0,4935 dan kepentingan "
+            "permutasi ketiga fitur waktu nol dalam batas ketidakpastiannya. "
+            "Rinciannya di docs/validasi.md bagian 6.")),
+        "sumber_data_aktif": sumber,
+        "model": m.get("model"),
+        "dilatih": m.get("dilatih"),
+        "roc_auc": uji.get("roc_auc"),
+        "pr_auc": uji.get("pr_auc"),
+        "proporsi_dasar": uji.get("proporsi_dasar_pr"),
+        "f1": uji.get("f1"),
+        "ambang_probabilitas": uji.get("ambang_probabilitas"),
+        "matriks_konfusi": uji.get("matriks_konfusi"),
+        "baris_latih": pemisahan.get("baris_latih"),
+        "baris_uji": pemisahan.get("baris_uji"),
+        "citra_latih": pemisahan.get("citra_latih"),
+        "citra_uji": pemisahan.get("citra_uji"),
+        "periode_latih": pemisahan.get("latih"),
+        "periode_uji": pemisahan.get("uji"),
+        "cara_pemisahan": pemisahan.get("cara"),
+        "kepentingan_fitur": m.get("kepentingan_fitur", []),
+        "pembanding_naif": m.get("pembanding_naif_roc_auc", {}),
+        "kalibrasi": m.get("kalibrasi"),
+        "sumber_label": (m.get("label") or {}).get("cara")
+        if isinstance(m.get("label"), dict) else None,
+        "peringatan": m.get("_peringatan", []),
+        "indeks_kerentanan": indeks,
+    }
+
+
 @app.post("/api/rute")
 def rute(permintaan: PermintaanRute) -> dict:
     """Hitung DUA rute: pembanding yang mengabaikan rob, dan yang sadar rob.
@@ -508,6 +650,15 @@ def rute(permintaan: PermintaanRute) -> dict:
     sadar: routing.HasilRute = hasil["rute_sadar_rob"]
     keduanya_ada = abai.ditemukan and sadar.ditemukan
 
+    # Rute sadar rob menghindari genangan sebisanya, tetapi tidak selalu bisa.
+    # Kalau ia tetap menembus, pengguna berhak tahu SEBELUM berangkat, bukan
+    # setelah rodanya masuk air.
+    paparan = dampak.paparan(sadar.kedalaman_per_ruas_cm, ambang)
+    jam_aman = (
+        _jam_lebih_aman(sadar.edge_ids, waktu_berangkat, ambang, peta_kedalaman)
+        if paparan["menembus"] else None
+    )
+
     return {
         "waktu_berangkat_utc": waktu_berangkat.isoformat(),
         "waktu_berangkat_wib": waktu_berangkat.astimezone(
@@ -540,4 +691,11 @@ def rute(permintaan: PermintaanRute) -> dict:
             ),
             "sama_persis": keduanya_ada and abai.edge_ids == sadar.edge_ids,
         },
+        "dampak": (
+            dampak.hitung((sadar.detik - abai.detik) / 60,
+                          (sadar.jarak_m - abai.jarak_m) / 1000, ambang)
+            if keduanya_ada else {"berarti": False}
+        ),
+        "paparan": paparan,
+        "jam_lebih_aman": jam_aman,
     }

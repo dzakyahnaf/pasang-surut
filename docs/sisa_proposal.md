@@ -156,9 +156,14 @@ Boleh dilewati tanpa mengurangi kelengkapan proposal.
 | **Setelah kotak scaffolding dipindah ke berkas ini** | **26** |
 | **Setelah pembaruan sesi kelima (+131 kata)** | **26** |
 | **Setelah pembaruan M4 (+86 kata)** | **26** |
+| **Setelah paragraf perbandingan Sentinel-1 vs pasut (M5)** | **27** |
 | Batas rulebook | 30 |
 
 Diukur dengan Word, bukan diperkirakan. Penanda `[[ISI]]` tersisa **20**.
+
+Naik ke 27 halaman disengaja: paragraf perbandingan kedua pendekatan
+menjawab langsung pertanyaan yang paling mungkin muncul di sesi tanya
+jawab, dan batas rulebook 30 masih longgar.
 
 Tersisa **4 halaman** untuk Bagian 10 yang seluruhnya berisi tangkapan
 layar. Enam gambar dengan keterangan kira-kira menghabiskan 3 sampai 4

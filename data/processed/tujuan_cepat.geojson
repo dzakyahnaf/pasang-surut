@@ -1,0 +1,87 @@
+{
+ "type": "FeatureCollection",
+ "_catatan": "Tujuan cepat, diambil sekali dari OpenStreetMap lalu dilekatkan ke simpul jalan terdekat. Dipakai luring; tidak ada panggilan OSM saat aplikasi berjalan.",
+ "diambil": "2026-08-28T23:13:56.507848+00:00",
+ "features": [
+  {
+   "type": "Feature",
+   "properties": {
+    "kunci": "pelabuhan",
+    "label": "Pelabuhan Tanjung Emas",
+    "ikon": "pelabuhan",
+    "nama_osm": "Pelabuhan Tanjung Emas Semarang",
+    "kandidat": 3,
+    "lon_asli": 110.424304,
+    "lat_asli": -6.947759,
+    "geser_m": 669.4
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     110.41853,
+     -6.94959
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kunci": "stasiun",
+    "label": "Stasiun Semarang Tawang",
+    "ikon": "stasiun",
+    "nama_osm": "Semarang Tawang",
+    "kandidat": 1,
+    "lon_asli": 110.427683,
+    "lat_asli": -6.964148,
+    "geser_m": 52.5
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     110.42744,
+     -6.96374
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kunci": "industri",
+    "label": "Kawasan Industri Terboyo",
+    "ikon": "industri",
+    "nama_osm": "Kawasan Industri Terboyo",
+    "kandidat": 2,
+    "lon_asli": 110.467181,
+    "lat_asli": -6.944025,
+    "geser_m": 524.6
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     110.46934,
+     -6.94825
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "kunci": "rumah_sakit",
+    "label": "RSI Sultan Agung Semarang",
+    "ikon": "rumah_sakit",
+    "nama_osm": "RSI Sultan Agung Semarang",
+    "kandidat": 16,
+    "lon_asli": 110.46164,
+    "lat_asli": -6.955095,
+    "geser_m": 173.9
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     110.46051,
+     -6.95619
+    ]
+   }
+  }
+ ]
+}

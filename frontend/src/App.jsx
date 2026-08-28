@@ -16,7 +16,11 @@ import PitaPasut from "./components/PitaPasut.jsx";
 import PanelRute from "./components/PanelRute.jsx";
 import LencanaContoh from "./components/LencanaContoh.jsx";
 import Legenda from "./components/Legenda.jsx";
-import { ambilJam, ambilRuas, hitungRute } from "./lib/api.js";
+import PanelDampak from "./components/PanelDampak.jsx";
+import PeringatanPaparan from "./components/PeringatanPaparan.jsx";
+import TujuanCepat from "./components/TujuanCepat.jsx";
+import HalamanValidasi from "./pages/HalamanValidasi.jsx";
+import { ambilJam, ambilRuas, ambilTujuanCepat, hitungRute } from "./lib/api.js";
 import { t } from "./lib/teks.js";
 import { labelHariJam } from "./lib/waktu.js";
 
@@ -47,6 +51,15 @@ export default function App() {
   const [galatRute, setGalatRute] = useState(null);
   const [tampilkanRuteBiasa, setTampilkanRuteBiasa] = useState(true);
 
+  const [tujuanCepat, setTujuanCepat] = useState([]);
+  const [memuatTujuan, setMemuatTujuan] = useState(true);
+  const [tujuanTerpilih, setTujuanTerpilih] = useState(null);
+
+  // Dua tampilan saja, jadi tidak perlu pustaka perutean. Menambah
+  // react-router untuk satu halaman berarti membawa dependency,
+  // pemuatan, dan satu lagi hal yang bisa rusak saat demo.
+  const [tampilan, setTampilan] = useState("peta");
+
   useEffect(() => {
     document.title = t("aplikasi.nama");
   }, []);
@@ -66,6 +79,26 @@ export default function App() {
         if (!dibatalkan) setGalatMuat(pesanGalat(e));
       } finally {
         if (!dibatalkan) setMemuat(false);
+      }
+    })();
+    return () => { dibatalkan = true; };
+  }, []);
+
+  // ── Muat tujuan cepat, sekali ─────────────────────────────────────
+  // Kegagalannya sengaja tidak memunculkan galat di layar: tujuan cepat
+  // adalah jalan pintas, bukan syarat. Peta dan perutean tetap berguna
+  // tanpanya, dan galat yang tidak menghalangi apa pun hanya menambah
+  // kebisingan.
+  useEffect(() => {
+    let dibatalkan = false;
+    (async () => {
+      try {
+        const data = await ambilTujuanCepat();
+        if (!dibatalkan) setTujuanCepat(data.tujuan ?? []);
+      } catch {
+        if (!dibatalkan) setTujuanCepat([]);
+      } finally {
+        if (!dibatalkan) setMemuatTujuan(false);
       }
     })();
     return () => { dibatalkan = true; };
@@ -130,6 +163,35 @@ export default function App() {
     setModePilih(peran);
   }, []);
 
+  // Tombol tujuan cepat mengisi SLOT YANG MASIH KOSONG: asal lebih dulu,
+  // lalu tujuan.
+  //
+  // Rancangan awalnya selalu mengisi tujuan, dan itu keliru untuk pameran.
+  // Orang yang baru melihat aplikasi ini menekan satu tombol lalu menunggu
+  // sesuatu terjadi. Kalau asal masih kosong, tidak ada yang terjadi, dan ia
+  // menyimpulkan aplikasinya rusak — padahal ia hanya belum tahu harus
+  // mengetuk peta lebih dulu. Dengan mengisi slot kosong, dua kali tekan
+  // sudah menghasilkan rute tanpa perlu dituntun sama sekali.
+  const pilihTujuanCepat = useCallback((tj) => {
+    setTujuanTerpilih(tj.kunci);
+    setAsal((asalSekarang) => {
+      if (!asalSekarang) {
+        setModePilih("tujuan");
+        return [tj.lon, tj.lat];
+      }
+      setTujuan([tj.lon, tj.lat]);
+      setModePilih("asal");
+      return asalSekarang;
+    });
+  }, []);
+
+  // Saran "berangkat pukul sekian" hanya berguna kalau bisa ditekan dan
+  // langsung memindahkan Pita Pasut ke jam itu.
+  const pilihJamAman = useCallback((jamAman) => {
+    const i = jam.findIndex((j) => j.waktu_utc === jamAman.waktu_utc);
+    if (i >= 0) setIndeksJam(i);
+  }, [jam]);
+
   const sumberData = hasil?.sumber_data ?? geojson?.sumber_data ?? [];
 
   // Rute yang dikirim ke peta. Rute pembanding bisa disembunyikan pengguna,
@@ -142,6 +204,10 @@ export default function App() {
         ),
       }
     : null;
+
+  if (tampilan === "validasi") {
+    return <HalamanValidasi onKembali={() => setTampilan("peta")} />;
+  }
 
   return (
     <div className="layar">
@@ -164,7 +230,32 @@ export default function App() {
           onGantiModa={setModa}
           onCari={() => setIndeksJam((i) => i)}
           onTampilkanRuteBiasa={() => setTampilkanRuteBiasa((v) => !v)}
-        />
+        >
+          <button
+            type="button"
+            className="rail__tautan-validasi"
+            onClick={() => setTampilan("validasi")}
+          >
+            {t("navigasi.validasi")}
+          </button>
+          <TujuanCepat
+            daftar={tujuanCepat}
+            memuat={memuatTujuan}
+            terpilih={tujuanTerpilih}
+            onPilih={pilihTujuanCepat}
+          />
+          <PeringatanPaparan
+            paparan={hasil?.paparan}
+            jamAman={hasil?.jam_lebih_aman}
+            namaJalan={
+              hasil?.rute?.features?.find(
+                (f) => f.properties.jenis === "rute_sadar_rob"
+              )?.properties?.nama_jalan
+            }
+            onPilihJam={pilihJamAman}
+          />
+          <PanelDampak dampak={hasil?.dampak} moda={moda} />
+        </PanelRute>
 
         <div className="jendela-peta">
           <Peta

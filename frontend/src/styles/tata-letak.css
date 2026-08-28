@@ -329,8 +329,11 @@
   color: var(--tinta-3);
 }
 
+/* --tinta-2 dirancang untuk latar TERANG. Di atas rail gelap ia hanya
+   mencapai 2,13:1, jauh di bawah lantai 4,5:1 di DESIGN.md Bagian 11.
+   --tinta-3 di latar yang sama mencapai 5,50:1. */
 .titik__kosong {
-  color: var(--tinta-2);
+  color: var(--tinta-3);
 }
 
 .titik__koordinat {
@@ -399,9 +402,12 @@
   background: var(--lambung-3);
 }
 
+/* Tombol nonaktif dikecualikan WCAG 1.4.3, tetapi 2,13:1 membuatnya nyaris
+   tidak terbaca sama sekali. --tinta-3 tetap terbaca lemah — cukup untuk
+   menandakan nonaktif tanpa menghilang. */
 .tombol-utama:disabled {
   border-color: var(--lambung-3);
-  color: var(--tinta-2);
+  color: var(--tinta-3);
   cursor: default;
 }
 
@@ -600,4 +606,316 @@
   .plat--kiri-bawah {
     display: none;
   }
+}
+
+/* ── Tujuan cepat ─────────────────────────────────────────────────────
+   Tombol besar dan berjarak lega. Di babak pameran, tombol inilah yang
+   pertama ditekan orang yang lewat, dan jari bukan kursor. */
+.tujuan-cepat {
+  margin-top: var(--s-4);
+  padding-top: var(--s-3);
+  border-top: var(--garis-rambut) solid var(--lambung-3);
+}
+
+.tujuan-cepat__judul {
+  margin: 0 0 var(--s-1);
+  color: var(--tinta-balik);
+}
+
+.tujuan-cepat__petunjuk,
+.tujuan-cepat__pesan {
+  margin: 0 0 var(--s-2);
+  color: var(--tinta-3);
+}
+
+.tujuan-cepat__daftar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tujuan-cepat__tombol {
+  min-height: 44px;
+  padding: var(--s-2) var(--s-3);
+  border: var(--garis-rambut) solid var(--lambung-3);
+  border-radius: var(--r-1);
+  background: var(--lambung-2);
+  color: var(--tinta-balik);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.tujuan-cepat__tombol:hover {
+  border-color: var(--rute);
+}
+
+.tujuan-cepat__tombol[aria-pressed="true"] {
+  border-color: var(--rute);
+  background: var(--lambung-3);
+}
+
+/* ── Panel dampak ─────────────────────────────────────────────────────
+   Empat angka dalam kisi dua kolom. Angka memakai IBM Plex Mono lewat
+   .t-data; satuannya selalu lebih kecil dan lebih redup, DESIGN.md 4. */
+.dampak {
+  margin-top: var(--s-4);
+  padding-top: var(--s-3);
+  border-top: var(--garis-rambut) solid var(--lambung-3);
+}
+
+.dampak__judul {
+  margin: 0 0 var(--s-1);
+  color: var(--tinta-balik);
+}
+
+.dampak__keterangan,
+.dampak__kosong {
+  margin: 0 0 var(--s-3);
+  color: var(--tinta-3);
+}
+
+.dampak__kisi {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s-3);
+}
+
+.dampak__butir {
+  display: flex;
+  flex-direction: column-reverse;   /* angka di atas, label di bawahnya */
+}
+
+.dampak__catatan {
+  margin: var(--s-3) 0 0;
+  color: var(--tinta-3);
+}
+
+/* ── Peringatan paparan ──────────────────────────────────────────────
+   Latar --bahaya, tanpa ikon, tanpa tanda seru. Nada datar disengaja. */
+.peringatan__kesehatan {
+  margin: 0 0 var(--s-2);
+  color: var(--tinta-balik);
+}
+
+.peringatan__saran {
+  display: block;
+  width: 100%;
+  min-height: 44px;
+  padding: var(--s-2) var(--s-3);
+  border: var(--garis-rambut) solid var(--tinta-balik);
+  border-radius: var(--r-1);
+  background: transparent;
+  color: var(--tinta-balik);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.peringatan__saran:hover {
+  background: rgb(255 255 255 / 12%);
+}
+
+.peringatan__tanpa-saran {
+  margin: 0;
+  color: var(--tinta-balik);
+  opacity: 0.85;
+}
+
+/* ── Halaman validasi ─────────────────────────────────────────────────
+   Ini satu-satunya layar yang BUKAN peta penuh. Ia dokumen, jadi ia boleh
+   punya lebar baca terbatas dan latar terang — larangan "kartu berbayang di
+   atas kisi" berlaku untuk layar peta, bukan untuk halaman teks. */
+.validasi {
+  max-width: 62rem;
+  margin: 0 auto;
+  padding: var(--s-6) var(--s-4) var(--s-12);
+  background: var(--dek-2);
+  color: var(--tinta-1);
+  min-height: 100vh;
+}
+
+.validasi__kepala {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-3);
+  margin-bottom: var(--s-2);
+}
+
+.validasi__judul {
+  margin: 0;
+}
+
+.validasi__kembali,
+.rail__tautan-validasi {
+  min-height: 44px;
+  padding: var(--s-2) var(--s-3);
+  border: var(--garis-rambut) solid var(--tinta-3);
+  border-radius: var(--r-1);
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.rail__tautan-validasi {
+  display: block;
+  width: 100%;
+  margin-top: var(--s-4);
+  border-color: var(--lambung-3);
+  color: var(--tinta-balik);
+  text-align: left;
+}
+
+.validasi__pengantar {
+  margin: 0 0 var(--s-4);
+  color: var(--tinta-2);
+}
+
+.validasi__blok {
+  margin-bottom: var(--s-6);
+  padding: var(--s-4);
+  border: var(--garis-rambut) solid var(--dek-3);
+  border-radius: var(--r-2);
+  background: var(--dek-1);
+}
+
+/* Blok model yang ditolak diberi garis tepi --bahaya, bukan latar penuh:
+   isinya panjang dan latar merah sepanjang layar akan melelahkan dibaca. */
+.validasi__blok--ditolak {
+  border-left: 3px solid var(--bahaya);
+}
+
+.validasi__alasan {
+  margin: 0 0 var(--s-3);
+  color: var(--tinta-2);
+}
+
+.validasi__kisi {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  gap: var(--s-3);
+  margin-bottom: var(--s-4);
+}
+
+.validasi__metrik {
+  display: flex;
+  flex-direction: column;
+}
+
+.validasi__metrik-label {
+  color: var(--tinta-3);
+}
+
+.validasi__metrik-nilai {
+  font-size: 1.5rem;
+  line-height: 1.1;
+}
+
+.validasi__metrik-catatan {
+  color: var(--tinta-3);
+}
+
+.validasi__kosong {
+  font-size: 0.9rem;
+  font-style: normal;
+  color: var(--tinta-3);
+}
+
+.validasi__matriks {
+  margin: 0 0 var(--s-4);
+  border-collapse: collapse;
+}
+
+.validasi__matriks th,
+.validasi__matriks td {
+  padding: var(--s-1) var(--s-3) var(--s-1) 0;
+  text-align: left;
+}
+
+.validasi__fitur,
+.validasi__pembanding,
+.validasi__bobot,
+.validasi__peringatan {
+  margin: 0 0 var(--s-3);
+  padding: 0;
+  list-style: none;
+}
+
+.validasi__peringatan {
+  padding-left: var(--s-4);
+  list-style: disc;
+}
+
+.validasi__fitur-baris {
+  display: grid;
+  grid-template-columns: 12rem 1fr auto;
+  align-items: center;
+  gap: var(--s-2);
+  margin-bottom: var(--s-1);
+}
+
+.validasi__fitur-batang {
+  height: 12px;
+  background: var(--dek-2);
+}
+
+.validasi__fitur-isi {
+  display: block;
+  height: 100%;
+  background: var(--air-3);
+}
+
+/* Fitur yang bergantung waktu diberi warna --bahaya justru karena ketiganya
+   nol. Itulah inti temuannya, dan mata harus menemukannya lebih dulu. */
+.validasi__fitur-isi--waktu {
+  background: var(--bahaya);
+}
+
+.validasi__fitur-tanda {
+  color: var(--bahaya);
+}
+
+.validasi__pembanding li,
+.validasi__bobot li {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--s-3);
+  max-width: 34rem;
+  padding: var(--s-1) 0;
+  border-bottom: var(--garis-rambut) solid var(--dek-2);
+}
+
+.validasi__catatan {
+  margin: var(--s-3) 0 0;
+  color: var(--tinta-3);
+}
+
+/* ── Lantai mutu: sasaran sentuh 44x44 ───────────────────────────────
+   DESIGN.md Bagian 11. Kontrol bawaan MapLibre berukuran 29px, di bawah
+   ambang, dan tidak bisa diubah lewat opsinya — hanya lewat CSS. Diperbesar
+   di sini, bukan dibiarkan, karena babak pameran dipakai dengan jari. */
+.jendela-peta .maplibregl-ctrl-group button,
+.jendela-peta .maplibregl-ctrl-group .maplibregl-ctrl-zoom-in,
+.jendela-peta .maplibregl-ctrl-group .maplibregl-ctrl-zoom-out,
+.jendela-peta .maplibregl-ctrl-group .maplibregl-ctrl-compass {
+  width: 44px;
+  height: 44px;
+}
+
+.maplibregl-ctrl-group button .maplibregl-ctrl-icon {
+  background-size: 20px 20px;
+}
+
+/* Tautan lewati juga sasaran sentuh saat tampak. */
+.lewati,
+.lewati:focus,
+.lewati:focus-visible {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
 }

@@ -67,3 +67,20 @@ export function hitungRute(isi) {
     body: JSON.stringify(isi),
   });
 }
+
+/** Titik tujuan penting, disiapkan luring oleh skrip 17. */
+export function ambilTujuanCepat() {
+  return ambil("/api/tujuan-cepat");
+}
+
+/**
+ * Metrik model dan indeks kerentanan.
+ *
+ * Endpoint ini mengembalikan `tersedia: false` dan seluruh metrik null
+ * selama model belum ada. Halaman validasi TIDAK boleh menambal nilai
+ * kosong dengan angka apa pun — kalau kosong, yang ditulis adalah
+ * validasi.belumDilatih.
+ */
+export function ambilValidasi() {
+  return ambil("/api/validasi");
+}

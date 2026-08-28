@@ -59,10 +59,13 @@ function BarisTitik({ label, kosong, titik, aktif, onPilihMode, onHapus, labelHa
 }
 
 function AngkaDampak({ nilai, satuan, label, bertanda = false }) {
+  // Pemisah desimal KOMA, sesuai kaidah bahasa Indonesia. Seluruh angka di
+  // aplikasi ini memakai koma; satu tempat yang memakai titik sudah cukup
+  // untuk membuat panel terlihat disusun dua orang yang tidak bicara.
   const teks =
     nilai === null || nilai === undefined
       ? "—"
-      : (bertanda && nilai > 0 ? "+" : "") + nilai.toFixed(bertanda ? 1 : 1);
+      : (bertanda && nilai > 0 ? "+" : "") + nilai.toFixed(1).replace(".", ",");
   return (
     <div className="dampak">
       <div className="dampak__angka t-angka">{teks}</div>
@@ -77,7 +80,7 @@ function AngkaDampak({ nilai, satuan, label, bertanda = false }) {
 export default function PanelRute({
   asal, tujuan, modePilih, moda, hasil, sedangMencari, galat,
   onPilihMode, onHapusTitik, onGantiModa, onCari, onTampilkanRuteBiasa,
-  tampilkanRuteBiasa,
+  tampilkanRuteBiasa, children,
 }) {
   const siap = Boolean(asal && tujuan);
 
@@ -282,6 +285,13 @@ export default function PanelRute({
           )}
         </section>
       ) : null}
+
+      {/* Tujuan cepat, peringatan paparan, dan panel dampak disisipkan dari
+          App.jsx sebagai anak. Panel ini yang memiliki tata letak rail-nya,
+          jadi urutan dan jaraknya diputuskan di sini; isinya diputuskan di
+          sana. Pemisahan itu membuat PanelRute tidak perlu tahu apa pun
+          tentang tujuan cepat maupun faktor emisi. */}
+      {children}
     </aside>
   );
 }

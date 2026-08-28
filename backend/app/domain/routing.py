@@ -217,6 +217,12 @@ class HasilRute:
     ruas_tergenang: int = 0
     kedalaman_maks_cm: float = 0.0
     nama_jalan: list[str] = field(default_factory=list)
+    # Kedalaman tiap ruas pada waktu TIBA di ruas itu, bukan pada waktu
+    # berangkat. Dipakai modul dampak untuk memutuskan apakah peringatan
+    # paparan kesehatan perlu keluar. Disimpan per ruas, bukan hanya
+    # maksimumnya, karena satu ruas dalam di tengah rute yang selebihnya
+    # kering adalah keadaan yang berbeda dari sepuluh ruas dangkal.
+    kedalaman_per_ruas_cm: list[float] = field(default_factory=list)
 
 
 def _jam_bulat(waktu: datetime) -> datetime:
@@ -331,6 +337,7 @@ def cari_rute(
     nama_jalan: list[str] = []
     tergenang = 0
     kedalaman_maks = 0.0
+    kedalaman_ruas: list[float] = []
     berjalan = 0.0
 
     for sisi in jalur:
@@ -347,6 +354,7 @@ def cari_rute(
         if kedalaman > 0:
             tergenang += 1
             kedalaman_maks = max(kedalaman_maks, kedalaman)
+        kedalaman_ruas.append(kedalaman)
 
         pengali = penalti_genangan(kedalaman, ambang) if sadar_rob else 1.0
         if not math.isfinite(pengali):
@@ -364,6 +372,7 @@ def cari_rute(
         jarak_m=sum(s.panjang_m for s in jalur),
         waktu_tiba=waktu_berangkat + timedelta(seconds=detik_terbaik[simpul_tujuan]),
         ruas_tergenang=tergenang,
+        kedalaman_per_ruas_cm=kedalaman_ruas,
         kedalaman_maks_cm=kedalaman_maks,
         nama_jalan=nama_jalan,
     )

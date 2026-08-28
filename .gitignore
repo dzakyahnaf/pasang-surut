@@ -61,3 +61,8 @@ desktop.ini
 data/processed/s1_vv_ruas.jsonl
 data/processed/s1_vv_contoh.jsonl
 data/processed/s1_vv_ruas_radius*.jsonl
+
+# Cache muka air terukur IOC: dibangun ulang oleh scripts/16, dan selama
+# penarikan berjalan berkasnya ditulis berkala sehingga bisa tertangkap
+# dalam keadaan setengah jadi.
+data/referensi/muka_air_terukur_akuisisi.json
