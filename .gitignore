@@ -53,3 +53,10 @@ Thumbs.db
 desktop.ini
 .idea/
 .vscode/
+
+# Tarikan mentah backscatter Sentinel-1 dari Earth Engine. Sekitar 300 MB
+# dan bisa dibangun ulang dengan `python -m scripts.08_ekstrak_s1`, yang
+# daftar ruas dan benih acaknya sudah dikunci di
+# data/processed/ruas_sampel_latih.json sehingga hasilnya sama persis.
+data/processed/s1_vv_ruas.jsonl
+data/processed/s1_vv_contoh.jsonl

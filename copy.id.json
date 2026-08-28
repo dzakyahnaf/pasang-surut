@@ -139,7 +139,10 @@
     "penjelasanContoh": "Angka di layar ini belum berasal dari model. Dipakai sementara selama pengembangan.",
     "lencanaModel": "Prediksi model",
     "diperbaruiPada": "Diperbarui {waktu}",
-    "hinggaJam": "Prediksi tersedia sampai {waktu}"
+    "hinggaJam": "Prediksi tersedia sampai {waktu}",
+    "lencanaKerentanan": "INDEKS KERENTANAN",
+    "lencanaKerentananPanjang": "INDEKS KERENTANAN — bukan prediksi genangan",
+    "penjelasanKerentanan": "Peta ini menampilkan indeks kerentanan rob per ruas, disusun dari elevasi relatif, jarak ke pantai, dan laju penurunan muka tanah, lalu diskalakan mengikuti tinggi pasut. Ini bukan prediksi genangan hasil model, dan tidak punya angka akurasi."
   },
   "validasi": {
     "judul": "Validasi model",
@@ -249,7 +252,8 @@
     "ruteBiasaLabel": "Rute biasa, {waktu} menit, {jarak} kilometer",
     "legendaLabel": "Legenda kedalaman genangan",
     "lencanaContohLabel": "Peringatan: data yang ditampilkan adalah data contoh, bukan prediksi model",
-    "lewatiKeKonten": "Lewati ke konten utama"
+    "lewatiKeKonten": "Lewati ke konten utama",
+    "lencanaKerentananLabel": "Peringatan: yang ditampilkan adalah indeks kerentanan, bukan prediksi genangan hasil model"
   },
   "tombol": {
     "tutup": "Tutup",

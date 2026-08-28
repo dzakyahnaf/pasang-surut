@@ -260,33 +260,223 @@ sebagai pekerjaan terbuka, bukan sebagai angka yang sudah sahih.
 
 ---
 
-## 6. Akurasi model genangan
+## 6. Model genangan Sentinel-1 — DILATIH, LALU DITOLAK
 
-**Belum tersedia.** Model belum dilatih.
+Bagian ini melaporkan hasil negatif. Modelnya ada, angkanya ada, dan
+kesimpulannya adalah **model itu tidak dipakai**. Ini keputusan sadar, bukan
+pekerjaan yang belum selesai.
 
-Akan diisi setelah skrip pelatihan berjalan. Yang akan dicatat di sini:
-metrik pada jendela uji 2024–2026, matriks konfusi, feature importance, dan
-perbandingan terhadap baseline naif.
+### 6.1 Apa yang dikerjakan
 
-Split berbasis waktu, tidak pernah acak: latih 2015–2023, uji 2024–2026.
+Seluruh arsip ditarik, bukan sebagian: **725 citra Sentinel-1 GRD IW VV**,
+2015 sampai 2026, dicuplik pada **2.502 ruas berstrata** menurut elevasi dan
+jarak pantai — **1.813.950 nilai backscatter**. Skala 30 m, dengan median
+fokal 30 m sebagai peredam speckle.
+
+Label basah dibuat dengan **deteksi perubahan**, bukan ambang mutlak. Ambang
+mutlak dikesampingkan setelah datanya sendiri menunjukkan sebabnya: pada
+jalan di dalam kota, nilai VV terendah hanya sekitar −13 dB, sedangkan ambang
+air terbuka yang lazim −15 sampai −18 dB. Ambang mutlak akan menyatakan
+seluruh kota kering sepanjang masa.
+
+Garis dasar dihitung per pasangan **(ruas, orbit relatif)** — dipisah per
+orbit karena backscatter bergantung geometri sudut pandang, dan mencampur
+ascending dengan descending memunculkan "perubahan" yang sebenarnya hanya
+beda arah lihat satelit.
+
+Pada ambang −3 dB, 33.858 dari 1.813.950 sampel berlabel basah (1,87 persen).
+
+### 6.2 Angka model
+
+`HistGradientBoostingClassifier`, pemisahan **berdasarkan waktu**: latih
+2015–2023 (1.366.092 baris), uji 2024–2026 (447.858 baris).
+
+| Metrik | Nilai |
+|---|---:|
+| ROC-AUC | 0,6579 |
+| PR-AUC | 0,0371 (proporsi dasar 0,0160) |
+| F1 | 0,0894 pada ambang 0,665 |
+
+Matriks konfusi pada data uji: TN 422.350 · FP 18.352 · FN 5.962 · TP 1.194.
+
+### 6.3 Kenapa angka itu ditolak
+
+**Label basahnya tidak berhubungan dengan pasut sama sekali.** Ini terdeteksi
+oleh pemeriksaan kewarasan yang sengaja dipasang sebelum pelatihan, bukan
+ditemukan belakangan:
+
+| Pemeriksaan | Hasil | Yang diharapkan |
+|---|---:|---|
+| Pasut rata-rata saat label basah | +0,092 m | jelas lebih tinggi |
+| Pasut rata-rata saat label kering | +0,095 m | — |
+| **Selisih** | **−0,003 m** | positif dan jelas |
+| ROC-AUC aturan "pasut saja" | 0,4935 | jauh di atas 0,5 |
+
+Diagnosis dilanjutkan pada agregat **per citra**, yang meratakan speckle atas
+2.502 titik sekaligus:
+
+| Uji | Korelasi terhadap pasut saat akuisisi |
+|---|---:|
+| Rata-rata anomali, seluruh sampel | +0,040 |
+| Idem, ruas < 1.000 m dari pantai | +0,054 |
+| Idem, ruas < 500 m dari pantai | +0,072 |
+
+Dan terhadap kejadian rob terdokumentasi — 12 citra jatuh pada atau
+berdekatan dengan tanggal kejadian:
+
+| Kelompok ruas | Saat kejadian | Di luar kejadian | Selisih |
+|---|---:|---:|---:|
+| Seluruh sampel | +0,217 dB | +0,070 dB | **+0,148 dB** |
+| < 1.000 m dari pantai | +0,186 dB | +0,074 dB | +0,112 dB |
+| < 500 m dari pantai | +0,213 dB | +0,054 dB | +0,159 dB |
+
+**Tandanya terbalik.** Genangan seharusnya MENURUNKAN backscatter, tetapi
+pada tanggal kejadian nilainya justru sedikit lebih tinggi — dan besarnya
+hanya 0,34 sampai 0,46 simpangan baku antar citra, jadi ini tidak signifikan
+ke arah mana pun.
+
+Yang tersisa: ROC-AUC 0,658 itu hampir seluruhnya berasal dari fitur STATIS.
+Kepentingan permutasi memperlihatkannya terang-terangan:
+
+| Fitur | Penurunan ROC-AUC saat diacak |
+|---|---:|
+| Jarak ke pantai | +0,1417 ± 0,0039 |
+| Elevasi DEMNAS | +0,0619 ± 0,0016 |
+| Laju subsidensi | +0,0342 ± 0,0014 |
+| **Tinggi pasut saat akuisisi** | **+0,0010 ± 0,0014** |
+| **Hujan 24 jam** | **+0,0004 ± 0,0010** |
+| **Hujan 72 jam** | **−0,0026 ± 0,0011** |
+
+Ketiga fitur waktu tidak menyumbang apa pun — dua di antaranya di dalam
+simpangan bakunya sendiri, satu bahkan negatif. Model ini mempelajari **ruas
+mana yang sering beranomali**, bukan **kapan ruas tergenang**. Untuk sistem
+perutean yang seluruh gunanya terletak pada kata "kapan", itu tidak berguna.
+
+Model tetap mengalahkan ketiga pembanding naif (pasut saja 0,4935, elevasi
+saja 0,5503, jarak pantai saja 0,6096), tetapi mengalahkan pembanding naif
+pada tugas yang salah bukan alasan untuk memakainya.
+
+### 6.4 Kemungkinan sebabnya
+
+Tiga dugaan, tidak satu pun sudah dibuktikan:
+
+1. **Pantulan ganda di kawasan terbangun.** Air dangkal di antara bangunan
+   memantul dua kali antara permukaan air dan dinding, dan itu MENAIKKAN
+   backscatter. Kriteria penurunan buta terhadap genangan semacam itu. Tanda
+   positif yang konsisten pada tanggal kejadian di 6.3 sejalan dengan dugaan
+   ini, tetapi 0,34 simpangan baku terlalu lemah untuk diklaim.
+2. **Waktu lintas satelit.** Akuisisi hanya terjadi pada 10.57–10.58 dan
+   22.16–22.17 UTC, yaitu 17.58 dan 05.16 WIB. Pasut saat akuisisi tetap
+   bervariasi penuh (−0,249 sampai +0,435 m, simpangan baku 0,147 m)
+   sehingga ini bukan pencuplikan yang beraliasi — tetapi puncak rob yang
+   berlangsung beberapa jam bisa saja terlewat.
+3. **Jalan terlalu sempit terhadap piksel 30 m.** Satu piksel di atas jalan
+   ikut memuat trotoar, kendaraan, pohon, dan bangunan.
+
+### 6.5 Kesimpulan
+
+`PLAN.md` bagian 9.A menyiapkan jalur cadangan untuk keadaan ini, dan
+kalimatnya dipatuhi apa adanya: *"Jangan panik dan jangan memaksakan model."*
+Sistem beralih ke **indeks kerentanan**, dan klaimnya diturunkan dari
+prediksi menjadi kerentanan. Lihat bagian 7.
+
+Model, metriknya, dan grafik kepentingan fiturnya **tetap disimpan** di
+`data/processed/model_genangan_v1.joblib`,
+`data/referensi/metrik_model.json`, dan `docs/kepentingan_fitur.svg`. Hasil
+negatif yang terdokumentasi adalah hasil, dan menyembunyikannya justru
+menghilangkan bagian paling informatif dari pekerjaan ini.
 
 ---
 
-## 7. Validasi rute
+## 7. Indeks kerentanan rob — yang benar-benar dipakai
 
-**Sebagian.** Mesin routing sudah dibangun di M3
-(`backend/app/domain/routing.py`) dan diuji lewat `pytest` untuk perilaku
-algoritmanya: biaya dihitung pada waktu TIBA bukan waktu berangkat, ruas
-dengan kedalaman di atas ambang moda dibuang dari graf, dan dua rute
-dikembalikan untuk tiap permintaan.
+Dasar pemikiran lengkap ada di `backend/app/domain/kerentanan.py`.
 
-**Yang belum ada** adalah validasi terhadap dunia nyata: apakah rute yang
-disarankan memang bisa dilalui saat rob. Itu memerlukan data genangan asli,
-bukan data contoh, sehingga bergantung pada bagian 6.
+Tiga komponen berbobot **sama rata**, masing-masing sepertiga:
+
+| Komponen | Arah | Sumber |
+|---|---|---|
+| Elevasi relatif terhadap tetangga radius 500 m | makin rendah makin rentan | DEMNAS |
+| Jarak ke garis pantai | makin dekat makin rentan | OSM `natural=coastline` |
+| Laju penurunan muka tanah | makin cepat makin rentan | Rahmawati dkk (2020) |
+
+**Elevasi RELATIF, bukan mutlak.** Aturan repo nomor 4: DEMNAS punya RMSE
+vertikal 2,79 m sementara rob yang dimodelkan 10–50 cm, jadi elevasi mutlak
+terlalu kasar untuk membedakan ruas dari tetangganya. Galat DEM sebagian
+besar berkorelasi spasial, sehingga pengurangan terhadap nilai tengah
+tetangga meniadakan sebagian besarnya. Terukur: simpangan baku turun dari
+**5,86 m (mutlak) menjadi 2,99 m (relatif)**.
+
+Ini tetap **bukan** ambang elevasi absolut. Tidak ada satu baris pun yang
+berbunyi `if elevasi < muka_air: tergenang`.
+
+Sebaran indeks atas 19.394 ruas: p5 0,269 · p25 0,446 · p50 0,572 ·
+p75 0,691 · p95 0,773 · p99 0,817.
+
+### 7.1 Pemeriksaan kewarasan, dan kenapa ia BUKAN akurasi
+
+| Jalan yang dilaporkan tergenang | Ruas | Persentil median indeks |
+|---|---:|---:|
+| Bandarharjo | 18 | 97,7 |
+| Kaligawe | 50 | 90,5 |
+| Genuk | 9 | 86,0 |
+| Terboyo | 9 | 68,7 |
+| *Seluruh ruas* | *19.394* | *50,0* |
+
+Keempatnya jauh di atas dasar 50. **Itu tidak boleh disebut akurasi.**
+Kawasan yang dilaporkan tergenang seluruhnya pesisir, sedangkan jarak ke
+pantai adalah salah satu komponen indeks — jadi indeks ini memang sudah
+seharusnya menempatkannya di atas. Kalau tidak, justru ada bug. Melaporkan
+angka ini sebagai akurasi berarti mengukur diri sendiri dengan penggaris
+buatan sendiri.
+
+**Tidak ada satu pun angka ROC-AUC, F1, atau akurasi yang dilaporkan untuk
+indeks ini,** karena tidak ada pengamatan genangan per ruas untuk mengujinya.
+
+### 7.2 Dari indeks menjadi genangan per jam
+
+Indeks bersifat statis; yang berubah tiap jam adalah pasut.
+
+- **Ruas MANA** yang terdampak ditentukan peringkat indeks
+- **BERAPA BANYAK** ditentukan pasut: nol saat pasut di atau di bawah nilai
+  tengahnya, naik hingga puncaknya saat pasut menyentuh persentil ke-99,9
+- Skala puncaknya **10 persen jaringan**, diikat ke perkiraan WRI Indonesia
+  bahwa sekitar 10 persen jaringan jalan Kota Semarang berpotensi terdampak
+  rob. Angka itu berlaku se-kota sementara AOI ini bagian terparahnya,
+  sehingga memakainya apa adanya bersifat konservatif
+- **Kedalaman** dari `app/domain/genangan.py`, dibatasi 10–50 cm sesuai
+  aturan repo nomor 4, monoton terhadap indeks dan terhadap pasut
+
+Hasil pada 72 jam mulai 28 Agustus 2026: **33 dari 72 jam tanpa genangan
+sama sekali**, puncak 1.028 ruas (5,3 persen), 21.778 baris prediksi.
+
+### 7.3 Yang wajib tampil di antarmuka
+
+Sumber `kerentanan_v1` memunculkan lencana **INDEKS KERENTANAN — bukan
+prediksi genangan**. Lencana ini tidak punya saklar manual, sama seperti
+lencana DATA CONTOH. Hanya sumber `model_v1` yang membuat peta tampil tanpa
+lencana, dan itu baru sah bila bagian 6 memuat angka akurasi yang
+benar-benar lolos.
 
 ---
 
-## 8. Validasi estimasi dampak
+## 8. Validasi rute
+
+**Sebagian.** Mesin routing diuji lewat `pytest` untuk perilaku algoritmanya:
+biaya dihitung pada waktu TIBA bukan waktu berangkat, ruas dengan kedalaman
+di atas ambang moda dibuang dari graf, dan dua rute dikembalikan tiap
+permintaan. 13 uji.
+
+Diuji juga ujung ke ujung di atas data kerentanan nyata: permintaan mobil
+dari Tanjungmas ke Genuk pada jam pasut tinggi mengembalikan dua rute yang
+berbeda 1,0 menit dan 0,44 km.
+
+**Yang belum ada:** apakah rute yang disarankan memang bisa dilalui saat rob.
+Itu memerlukan pengamatan lapangan, bukan hanya data yang lebih baik.
+
+---
+
+## 9. Validasi estimasi dampak
 
 **Belum tersedia.** Menunggu faktor emisi yang masih `null` di
 `data/referensi/faktor_emisi.json`.

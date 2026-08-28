@@ -158,28 +158,60 @@ AOI diperluas ke timur, tile tetangga wajib diunduh lebih dulu.
 
 ## 2. Batasan model
 
-### 2.1 Model belum dilatih
+### 2.1 Model genangan Sentinel-1 dilatih, lalu DITOLAK sendiri
 
-Belum ada satu pun angka akurasi. Selama itu, seluruh prediksi berasal dari
-data contoh bertanda `sumber = 'dummy'` dan antarmuka menampilkan lencana
-DATA CONTOH.
+Model berbasis 725 citra Sentinel-1 sudah dilatih. Hasilnya tidak dipakai,
+dan itu keputusan sadar. Angka lengkapnya di `docs/validasi.md` bagian 6.
 
-### 2.2 Fungsi data contoh tidak punya dasar fisik
+Alasannya satu kalimat: **label basah yang dibuat dari penurunan backscatter
+VV tidak berkorelasi dengan pasut sama sekali** (aturan "pasut saja"
+menghasilkan ROC-AUC 0,4935, setara lemparan koin), dan pada 12 citra yang
+jatuh di tanggal kejadian rob terdokumentasi tandanya justru terbalik. Yang
+dipelajari model adalah ruas mana yang sering beranomali, bukan kapan ruas
+tergenang — dan seluruh guna sistem perutean terletak pada kata "kapan".
 
-Selama model asli belum ada, kedalaman dihitung dari satu sinusoid pasut
-periode 24,8 jam dan satu pengganti elevasi berupa lintang, dengan anggapan
-makin ke utara makin dekat Laut Jawa. Kenyataannya genangan rob mengikuti
-elevasi, laju penurunan tanah, dan jaringan drainase, bukan garis lintang.
+ROC-AUC 0,6579 yang dicapai model itu hampir seluruhnya berasal dari fitur
+statis. Kepentingan permutasi tiga fitur waktu: pasut +0,0010 ± 0,0014,
+hujan 24 jam +0,0004 ± 0,0010, hujan 72 jam −0,0026 ± 0,0011. Ketiganya nol
+dalam batas ketidakpastiannya.
 
-Akibatnya: peta yang terlihat sekarang benar secara bentuk tetapi salah
-secara nilai. Fungsi ini dibuang begitu model asli masuk.
+`PLAN.md` bagian 9.A menyiapkan jalur cadangan untuk keadaan ini. Sistem
+memakainya, dan klaimnya diturunkan dari prediksi menjadi indeks kerentanan.
 
-### 2.3 Konversi probabilitas ke kedalaman akan jadi titik terlemah
+### 2.2 Indeks kerentanan tidak punya akurasi yang bisa dilaporkan
 
-Model menghasilkan probabilitas basah. Angka sentimeter yang dilihat pengguna
-lahir dari fungsi monotonik yang dikalibrasi terhadap tinggi pasut. Fungsi itu
-adalah asumsi, bukan hasil pengukuran, dan harus diakui sendiri sebelum juri
-menemukannya.
+Yang dipakai sekarang adalah indeks berbasis aturan dari tiga besaran:
+elevasi relatif, jarak ke pantai, dan laju subsidensi, masing-masing
+berbobot sepertiga.
+
+**Tidak ada satu pun angka akurasi untuk indeks ini, dan tidak akan ada
+sampai ada pengamatan genangan per ruas.** Pemeriksaan terhadap jalan yang
+dilaporkan tergenang di media memang memberi hasil yang bagus — Bandarharjo
+persentil 97,7, Kaligawe 90,5 — tetapi pemeriksaan itu **melingkar**:
+kawasan yang dilaporkan seluruhnya pesisir, dan jarak ke pantai adalah salah
+satu komponen indeks. Ia menunjukkan kodenya tidak keliru, bukan indeksnya
+benar.
+
+Bobot sepertiga itu sendiri asumsi. Tidak ada data untuk menyetelnya, dan
+menyetel tanpa data uji hanya menyembunyikan tebakan di balik desimal.
+
+### 2.3 Kedalaman sentimeter adalah asumsi berlapis dua
+
+Angka sentimeter yang dilihat pengguna lahir dari `app/domain/genangan.py`,
+yang memetakan indeks dan tinggi pasut ke rentang 10 sampai 50 cm.
+
+Dua lapis asumsi menumpuk di sini. Pertama, batas 10 dan 50 cm berasal dari
+aturan repo nomor 4, bukan dari pengukuran kami. Kedua, bobot 50 berbanding
+50 antara indeks dan pasut tidak dikalibrasi terhadap apa pun, karena tidak
+ada satu pun pengukuran kedalaman genangan di repo ini.
+
+Berapa banyak ruas yang terdampak diikat ke perkiraan WRI Indonesia bahwa
+sekitar 10 persen jaringan jalan Kota Semarang berpotensi terdampak rob.
+Angka itu se-kota sementara AOI ini bagian terparahnya, jadi pemakaiannya
+konservatif — tetapi tetap angka pinjaman, bukan hasil hitungan sendiri.
+
+**Setiap tampilan kedalaman wajib menyebut kata estimasi.** Aturan repo
+nomor 3.
 
 ### 2.4 Penalti genangan pada routing adalah angka rancangan
 

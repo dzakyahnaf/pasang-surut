@@ -34,9 +34,23 @@ menyatakan terus terang bahwa metrik model belum ada, sekaligus melaporkan
 apa yang SUDAH tervalidasi, yaitu komponen pasang surut. Tabel 8 sendiri
 tetap "Belum tersedia" seluruhnya.
 
-**Masih harus dikerjakan:** perbarui lagi pada 31 Agustus bila M4 selesai.
-Bila model tetap belum jadi, turunkan klaim menjadi indeks kerentanan
-sesuai rencana 9.A di PLAN.md.
+**Diperbarui 28 Agustus, M4 — dan ini perubahan besar.** Model Sentinel-1
+dilatih lalu DITOLAK sendiri karena labelnya tidak berkorelasi dengan pasut.
+Rencana 9.A dipakai: klaim diturunkan dari "memprediksi genangan" menjadi
+"indeks kerentanan". Yang sudah disunting di dokumen:
+
+- Abstrak: klaim prediksi diganti indeks kerentanan, dengan penolakan model
+  disebut terbuka dan dirujuk ke Bagian 9.2
+- Bagian 6.2: elevasi kini dijelaskan sebagai elevasi RELATIF terhadap
+  tetangga radius 500 m, bukan sebagai fitur mentah
+- Tabel 7: baris ekstraksi label dan pelatihan model diperbarui
+- Tabel 8: seluruh baris TERISI angka sebenarnya, dengan keterangan tabel
+  menyatakan model itu ditolak
+- Paragraf di bawah Tabel 8: ditulis ulang menjelaskan kenapa ditolak
+
+**Masih harus dikerjakan:** keputusan tim apakah penurunan klaim ini
+diterima. Saya menurunkannya karena aturan repo nomor 1, tetapi ini
+keputusan strategis. Tercatat sebagai C16 di Papan Blokade.
 
 ## 2. Bagian 10 — tangkapan layar
 
@@ -109,7 +123,12 @@ repo publik, deploy, video, dan Figma.
 > mempelajari pola yang masuk akal secara fisik, misalnya tinggi pasut dan
 > elevasi terkoreksi menempati peringkat teratas.
 
-**Menunggu M4.**
+**Sudah ada, tetapi untuk model yang DITOLAK.**
+`docs/kepentingan_fitur.svg` memuat kepentingan permutasi enam fitur.
+Grafik itu justru berguna: ia memperlihatkan dengan telak bahwa tiga fitur
+waktu — pasut dan dua hujan — tidak menyumbang apa pun, dan itulah alasan
+modelnya ditolak. Sisipkan dengan keterangan yang menyebut hal itu, jangan
+sebagai bukti model bekerja.
 
 ## 7. Logo tools — opsional
 
@@ -128,10 +147,10 @@ Boleh dilewati tanpa mengurangi kelengkapan proposal.
 | Setelah penanda terisi, kotak scaffolding masih ada | 27 |
 | **Setelah kotak scaffolding dipindah ke berkas ini** | **26** |
 | **Setelah pembaruan sesi kelima (+131 kata)** | **26** |
+| **Setelah pembaruan M4 (+86 kata)** | **26** |
 | Batas rulebook | 30 |
 
-Diukur dengan Word, bukan diperkirakan. Penanda `[[ISI]]` tersisa **20**,
-turun dari 21.
+Diukur dengan Word, bukan diperkirakan. Penanda `[[ISI]]` tersisa **20**.
 
 Tersisa **4 halaman** untuk Bagian 10 yang seluruhnya berisi tangkapan
 layar. Enam gambar dengan keterangan kira-kira menghabiskan 3 sampai 4

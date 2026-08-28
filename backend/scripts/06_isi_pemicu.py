@@ -2,6 +2,7 @@
 
     python -m scripts.06_isi_pemicu                    # 2015 sampai kemarin
     python -m scripts.06_isi_pemicu --mulai 2024-01-01 # rentang tertentu
+    python -m scripts.06_isi_pemicu --prakiraan        # 16 hari KE DEPAN
 
 Tabel `pemicu` adalah pasangan waktu untuk `sampel_latih`. Model genangan
 membaca keduanya lewat kolom `waktu`, jadi tabel ini harus mencakup seluruh
@@ -48,10 +49,12 @@ from app import config, db
 from app.domain import pasut
 
 LAYANAN = "https://archive-api.open-meteo.com/v1/archive"
+LAYANAN_PRAKIRAAN = "https://api.open-meteo.com/v1/forecast"
 AGEN = "PasangSurut-ANFORCOM2026/0.1 (riset akademik; dzakyahnf@gmail.com)"
 
 MULAI_BAWAAN = "2015-01-01"      # awal periode latih, sejalan aturan repo 5
 SUMBER_HUJAN = "open-meteo-era5"
+SUMBER_PRAKIRAAN = "open-meteo-prakiraan"
 
 BERKAS_CADANGAN = config.DIR_DATA_REFERENSI / "hujan_open_meteo.json"
 
@@ -92,6 +95,47 @@ def ambil_hujan(lintang: float, bujur: float,
     return jam, mm
 
 
+def ambil_prakiraan(lintang: float, bujur: float,
+                    hari: int = 16) -> tuple[list[str], np.ndarray]:
+    """Unduh prakiraan hujan per jam KE DEPAN.
+
+    Arsip ERA5 berhenti beberapa hari di belakang hari ini, sedangkan
+    prediksi genangan butuh 72 jam ke depan. Prakiraan diambil SEKALI di sini
+    lalu disimpan ke tabel `pemicu`, persis seperti data arsip, sehingga jalur
+    demo tetap luring: saat permintaan rute datang, hujan sudah ada di
+    database dan tidak ada satu pun panggilan keluar.
+
+    Konsekuensinya prakiraan menjadi basi. Kalau demo dijalankan lebih dari
+    beberapa hari setelah skrip ini, jalankan ulang.
+    """
+    kueri = urllib.parse.urlencode({
+        "latitude": f"{lintang:.4f}",
+        "longitude": f"{bujur:.4f}",
+        "hourly": "precipitation",
+        "forecast_days": hari,
+        "past_days": 7,          # menambal celah antara akhir arsip dan hari ini
+        "timezone": "UTC",
+    })
+    print(f"  prakiraan {hari} hari ke depan, plus 7 hari ke belakang",
+          end="", flush=True)
+    permintaan = urllib.request.Request(f"{LAYANAN_PRAKIRAAN}?{kueri}",
+                                        headers={"User-Agent": AGEN})
+    try:
+        with urllib.request.urlopen(permintaan, timeout=120) as r:
+            isi = json.load(r)
+    except urllib.error.HTTPError as e:
+        badan = e.read().decode("utf-8", "replace")[:300]
+        raise SystemExit(f"\nOpen-Meteo menolak: HTTP {e.code}. {badan}")
+
+    jam = isi["hourly"]["time"]
+    mm = np.array(
+        [0.0 if x is None else float(x) for x in isi["hourly"]["precipitation"]],
+        dtype=np.float64,
+    )
+    print(f"   -> {len(jam):,} jam")
+    return jam, mm
+
+
 def akumulasi(mm: np.ndarray, jendela: int) -> np.ndarray:
     """Jumlah hujan pada `jendela` jam terakhir, termasuk jam berjalan.
 
@@ -117,6 +161,8 @@ def per_potongan(mulai: date, selesai: date, tahun_per_potong: int = 3):
 
 def main() -> int:
     pengurai = argparse.ArgumentParser(description=__doc__)
+    pengurai.add_argument("--prakiraan", action="store_true",
+                          help="ambil prakiraan ke depan, bukan arsip")
     pengurai.add_argument("--mulai", default=MULAI_BAWAAN)
     pengurai.add_argument(
         "--selesai", default=None,
@@ -130,24 +176,58 @@ def main() -> int:
     lintang, bujur = titik_ambil()
 
     print(f"titik ambil : {lintang:.4f}, {bujur:.4f}  (tengah AOI)")
-    print(f"rentang     : {mulai} sampai {selesai}")
-    print("sumber      : Open-Meteo Archive, reanalisis ERA5\n")
+    if argumen.prakiraan:
+        print("rentang     : 7 hari ke belakang sampai 16 hari ke depan")
+        print("sumber      : Open-Meteo Forecast\n")
+    else:
+        print(f"rentang     : {mulai} sampai {selesai}")
+        print("sumber      : Open-Meteo Archive, reanalisis ERA5\n")
 
     print("mengunduh hujan per jam ...")
     waktu_semua: list[str] = []
     mm_semua: list[np.ndarray] = []
-    for a, b in per_potongan(mulai, selesai):
-        jam, mm_potong = ambil_hujan(lintang, bujur, a.isoformat(), b.isoformat())
+    if argumen.prakiraan:
+        jam, mm_potong = ambil_prakiraan(lintang, bujur)
         waktu_semua.extend(jam)
         mm_semua.append(mm_potong)
+    else:
+        for a, b in per_potongan(mulai, selesai):
+            jam, mm_potong = ambil_hujan(lintang, bujur,
+                                         a.isoformat(), b.isoformat())
+            waktu_semua.extend(jam)
+            mm_semua.append(mm_potong)
     mm = np.concatenate(mm_semua)
     print(f"total       : {len(waktu_semua):,} jam\n")
 
     if len(waktu_semua) != len(set(waktu_semua)):
         raise SystemExit("Ada jam ganda di hasil unduhan. Potongan tumpang tindih.")
 
-    h24 = akumulasi(mm, 24)
-    h72 = akumulasi(mm, 72)
+    # AKUMULASI BUTUH RIWAYAT. Deret prakiraan mulai dari nol, sehingga 72 jam
+    # pertamanya akan kurang hitung kalau dihitung sendirian. Riwayatnya
+    # diambil dari cadangan arsip yang sudah tersimpan, lalu disambung di
+    # depan, dan hanya bagian prakiraannya yang ditulis ke database.
+    #
+    # Saat ini hujannya nyaris nol sehingga selisihnya tidak terlihat. Justru
+    # karena itu perlu dibetulkan sekarang: kalau skrip ini dijalankan ulang
+    # pada musim hujan, kekurangan hitungnya akan besar dan tidak kentara.
+    awal_tulis = 0
+    if argumen.prakiraan and BERKAS_CADANGAN.exists():
+        arsip = json.loads(BERKAS_CADANGAN.read_text(encoding="utf-8"))
+        awal_prakiraan = datetime.strptime(
+            waktu_semua[0], "%Y-%m-%dT%H:%M").replace(tzinfo=timezone.utc)
+        jam_arsip = datetime.strptime(
+            arsip["mulai"], "%Y-%m-%dT%H:%M").replace(tzinfo=timezone.utc)
+        geser = int((awal_prakiraan - jam_arsip).total_seconds() // 3600)
+        riwayat = np.array(arsip["hujan_mm"][max(geser - 72, 0):geser])
+        if len(riwayat):
+            mm = np.concatenate([riwayat, mm])
+            awal_tulis = len(riwayat)
+            print(f"  {len(riwayat)} jam riwayat arsip disambung di depan "
+                  "supaya akumulasi 24 dan 72 jam benar sejak jam pertama\n")
+
+    h24 = akumulasi(mm, 24)[awal_tulis:]
+    h72 = akumulasi(mm, 72)[awal_tulis:]
+    mm = mm[awal_tulis:]
     tahun = len(mm) / 8766.0
     print("curah hujan")
     print(f"  jam berhujan          : {int((mm > 0).sum()):,} dari {len(mm):,} "
@@ -174,7 +254,11 @@ def main() -> int:
     print(f"  rentang : {tinggi.min():+.3f} sampai {tinggi.max():+.3f} m "
           "terhadap muka air rata-rata\n")
 
-    BERKAS_CADANGAN.write_text(
+    if argumen.prakiraan:
+        print("cadangan mentah dilewati: prakiraan cepat basi, dan "
+              "arsipnya sudah punya cadangan sendiri")
+    else:
+      BERKAS_CADANGAN.write_text(
         json.dumps({
             "_catatan": ("Cadangan mentah curah hujan Open-Meteo, supaya tabel "
                          "pemicu bisa dibangun ulang tanpa internet."),
@@ -191,11 +275,12 @@ def main() -> int:
         }, ensure_ascii=False, separators=(",", ":")),
         encoding="utf-8",
     )
-    print(f"cadangan mentah tersimpan: {BERKAS_CADANGAN.name}")
+      print(f"cadangan mentah tersimpan: {BERKAS_CADANGAN.name}")
 
     print("menulis ke database ...")
     baris = [
-        (w, float(t), float(a), float(b), SUMBER_HUJAN)
+        (w, float(t), float(a), float(b),
+         SUMBER_PRAKIRAAN if argumen.prakiraan else SUMBER_HUJAN)
         for w, t, a, b in zip(waktu_utc, tinggi, h24, h72)
     ]
     with db.koneksi() as kon:

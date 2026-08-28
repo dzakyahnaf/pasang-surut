@@ -551,3 +551,63 @@ class RepositoriPemicu:
             "hujan_72j_mm": float(b[3] or 0.0),
             "sumber_hujan": b[4],
         }
+
+
+class RepositoriSampelLatih:
+    """Akses tabel `sampel_latih` — satu baris per ruas per waktu akuisisi.
+
+    Ingat aturan PLAN.md bagian 8: SETIAP citra menjadi sampel, bukan hanya
+    citra pada tanggal rob. Sebagian besar baris di tabel ini karena itu
+    berlabel kering, dan memang seharusnya begitu. Ketidakseimbangan kelas
+    ditangani di sisi model, bukan dengan membuang baris kering.
+    """
+
+    def __init__(self, kon: psycopg2.extensions.connection) -> None:
+        self._kon = kon
+
+    def kosongkan(self) -> int:
+        with self._kon.cursor() as kur:
+            kur.execute("DELETE FROM sampel_latih")
+            return kur.rowcount
+
+    def sisipkan_banyak(self, baris: Iterable[Sequence]) -> int:
+        """Urutan kolom: (edge_id, waktu_akuisisi, s1_scene_id, basah,
+        tinggi_pasut_m, hujan_24j_mm, hujan_72j_mm)."""
+        baris = list(baris)
+        if not baris:
+            return 0
+        with self._kon.cursor() as kur:
+            psycopg2.extras.execute_values(
+                kur,
+                """
+                INSERT INTO sampel_latih
+                    (edge_id, waktu_akuisisi, s1_scene_id, basah,
+                     tinggi_pasut_m, hujan_24j_mm, hujan_72j_mm)
+                VALUES %s
+                """,
+                baris,
+                page_size=2000,
+            )
+        return len(baris)
+
+    def ringkasan(self) -> dict:
+        with self._kon.cursor() as kur:
+            kur.execute(
+                """
+                SELECT COUNT(*),
+                       COUNT(*) FILTER (WHERE basah),
+                       COUNT(DISTINCT edge_id),
+                       COUNT(DISTINCT waktu_akuisisi),
+                       MIN(waktu_akuisisi), MAX(waktu_akuisisi)
+                FROM sampel_latih
+                """
+            )
+            b = kur.fetchone()
+        return {
+            "baris": int(b[0]),
+            "basah": int(b[1] or 0),
+            "ruas": int(b[2] or 0),
+            "citra": int(b[3] or 0),
+            "awal": b[4],
+            "akhir": b[5],
+        }

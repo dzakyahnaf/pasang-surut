@@ -34,7 +34,7 @@ ini, baca bagian itu.
 | B4 | Koneksi database dibuka DUA KALI per permintaan, tanpa pooling. `database_tersedia()` membuka satu, endpoint membuka lagi. | Supabase paket gratis membatasi koneksi. Akan menggigit saat juri memakai aplikasi bersamaan di babak final |
 | B5 | `copy.id.json` ada di dua tempat, akar dan `frontend/src/`, tanpa apa pun yang menjaganya sinkron. | Begitu satu disunting, keduanya menyimpang diam-diam |
 | B6 | Belum ada `manifest.json`. Bentuk produk yang dikunci PLAN.md bagian 3 adalah PWA. | PWA itu yang membuat rulebook "website ATAU mobile" terpenuhi keduanya |
-| B7 | Test menutupi `config.py`, `routing.py`, dan fungsi murni di skrip 06 dan 07 — 24 uji lolos. `db.py`, `main.py`, skrip 01 sampai 05, dan `teks.js` masih tanpa test. | `t()` adalah mekanisme pengaman yang melempar galat, dan tidak ada test yang membuktikan ia melempar |
+| B7 | Test menutupi `config.py`, `routing.py`, `genangan.py`, `kerentanan.py`, dan fungsi murni di skrip 06 dan 07 — 43 uji lolos. `db.py`, `main.py`, skrip 01 sampai 05 dan 08 sampai 11, dan `teks.js` masih tanpa test. | `t()` adalah mekanisme pengaman yang melempar galat, dan tidak ada test yang membuktikan ia melempar |
 | B8 | Data contoh kedaluwarsa setelah 72 jam sejak dibuat. | Kalau Pita Pasut tampak kering seluruhnya, jalankan ulang `python -m scripts.03_isi_dummy` dari `backend/` |
 | B9 | Ada PostgreSQL lain di mesin ini yang memakai port 5433, jadi kontainer pengembangan dipindah ke 55433. | Jangan bingung kalau `docker run` di 5433 gagal |
 | B10 | Kontras kelas genangan paling dangkal `--air-1` terhadap latar dek hanya 1,39:1. | DESIGN.md Bagian 11 mensyaratkan terbaca di bawah matahari langsung dan saat dicetak hitam putih. Belum diuji di luar ruangan |
@@ -48,6 +48,10 @@ ini, baca bagian itu.
 | B19 | **Rerata hujan tahunan ERA5 1.830 mm belum diadu dengan normal BMKG.** Reanalisis diketahui meratakan hujan konvektif setempat. | Angka ini belum layak dikutip di proposal. Sudah tercatat di `docs/batasan.md` bagian 1.9 dan `docs/validasi.md` bagian 5 |
 | B20 | **Enam dari 16 kejadian rob terdokumentasi terjadi pada pasut yang TIDAK tinggi**, dan hujan 24 jamnya juga sedang saja (2,5 sampai 20,4 mm). | Dua pemicu yang kita punya belum menjelaskan seluruh kejadian. Ini memperkuat alasan memakai model, tetapi juga berarti fitur angin dan kondisi tanggul absen. Rincian di `docs/validasi.md` bagian 3.2 |
 | B21 | **990 dari 19.394 ruas tanpa nilai subsidensi, 26 tanpa elevasi.** Yang pertama karena kecamatannya tidak dilaporkan sumber; yang kedua karena jatuh di tepi timur tile DEMNAS. | Keduanya `NULL`, bukan nol — gradient boosting menangani `NULL`, tetapi jangan sampai ada kode yang mengisinya dengan nol diam-diam |
+| B22 | **MODEL GENANGAN SENTINEL-1 DITOLAK, DAN KLAIM PRODUK TURUN.** Model dilatih atas 725 citra dan 1,81 juta nilai backscatter, lalu ditolak sendiri karena label basahnya tidak berkorelasi dengan pasut (aturan "pasut saja" ROC-AUC 0,4935, dan pada tanggal kejadian rob tandanya terbalik). Sistem beralih ke indeks kerentanan sesuai PLAN.md 9.A. | **Ini perubahan terbesar sesi ini dan perlu keputusan tim.** Proposal sudah saya turunkan klaimnya dari "memprediksi genangan" menjadi "indeks kerentanan", dan Tabel 8 diisi angka model yang ditolak beserta alasannya. Rincian di `docs/validasi.md` bagian 6. Lihat C16 |
+| B23 | **Antarmuka kini punya DUA tingkat lencana**, bukan satu. `dummy` memunculkan DATA CONTOH, `kerentanan_v1` memunculkan INDEKS KERENTANAN. Hanya `model_v1` yang membuat peta tampil tanpa lencana. | Tanpa tingkat kedua, indeks kerentanan akan tampil polos dan terbaca seolah prediksi model — overclaim yang dilarang aturan repo nomor 1 |
+| B24 | **Tarikan mentah Sentinel-1 219 MB dan TIDAK di-commit.** Sudah masuk `.gitignore`. | Bisa dibangun ulang dengan `python -m scripts.08_ekstrak_s1`; daftar ruas dan benih acaknya terkunci di `data/processed/ruas_sampel_latih.json` sehingga hasilnya sama persis. Perlu kuota Earth Engine lagi, sekitar satu jam |
+| B25 | **Prakiraan hujan cepat basi.** Tabel `pemicu` kini memuat prakiraan Open-Meteo sampai 12 September 2026, bertanda `sumber_hujan = 'open-meteo-prakiraan'`. | Sebelum demo atau rekaman video, jalankan ulang `python -m scripts.06_isi_pemicu --prakiraan` lalu `python -m scripts.11_indeks_kerentanan` |
 | B15 | **Autentikasi Earth Engine memberi empat cakupan sekaligus**: earthengine, cloud-platform, drive, dan devstorage.full_control. | Itu bawaan alat resmi, bukan pilihan kita, tetapi cakupan Drive dan Cloud Storage luas. Token tersimpan di laptop yang menjalankan perintah |
 
 ### C. HANYA BISA DIKERJAKAN MANUAL — di luar jangkauan Claude Code
@@ -72,6 +76,7 @@ berubah oleh tersedianya browser otomatis.
 | C12 | Rekam video 3 sampai 7 menit, wajah peserta wajib tampil sepanjang video | Rulebook, bobot 10 persen |
 | C14 | Konfirmasi pembagian peran di Lampiran C proposal. Saya isi mengikuti pembagian kerja PLAN.md, bukan berdasarkan kesepakatan tim | `docs/sisa_proposal.md` |
 | C13 | Buka satu per satu 19 entri `perlu_verifikasi` di `kejadian_rob_semarang.json` dan salin angkanya dari isi artikel | Angka belum terverifikasi tidak boleh masuk proposal |
+| C16 | **Setujui atau tolak penurunan klaim produk** dari "prediksi genangan" menjadi "indeks kerentanan". Saya sudah menurunkannya di proposal karena aturan repo nomor 1, tetapi ini keputusan strategis tim, bukan keputusan teknis. | B22, `docs/validasi.md` bagian 6 |
 | C15 | **Putuskan angka subsidensi mana yang dipakai tim.** Kalau 9–13 cm/tahun hendak dipertahankan, sediakan sumber yang bisa dibuka dan dibaca sampai ke tabelnya. Kalau tidak, PLAN.md bagian 6 perlu diturunkan menyusul proposal. | B18 |
 
 ### D. SUDAH TERPECAHKAN — jangan dikerjakan lagi
@@ -89,6 +94,8 @@ berubah oleh tersedianya browser otomatis.
 | `laju_subsidensi.json` seluruhnya `null` | 28 Agustus. Terisi dari Rahmawati, Prasetyo & Sasmito (2020), PDF dibaca langsung sampai ke tabelnya. Angkanya lebih kecil daripada yang selama ini dipakai — lihat B18 |
 | Curah hujan Open-Meteo belum diambil | 28 Agustus. 102.168 jam 2015–2026 masuk tabel `pemicu`, dengan cadangan mentahnya di `data/referensi/hujan_open_meteo.json` |
 | Jarak pantai belum dihitung | 28 Agustus. Terisi untuk seluruh 19.394 ruas, dihitung di EPSG:32749 terhadap garis pantai OSM |
+| Apakah label Sentinel-1 bisa dipakai melatih model genangan | 28 Agustus. TIDAK. Dibuktikan, bukan ditebak: korelasi anomali terhadap pasut +0,04 sampai +0,07, dan pada tanggal kejadian rob tandanya terbalik. Jangan ulangi percobaan yang sama dengan ambang berbeda — menyetel ambang tidak menciptakan isyarat yang tidak ada |
+| Bagaimana memakai DEMNAS tanpa melanggar aturan repo nomor 4 | 28 Agustus. Elevasi RELATIF terhadap tetangga radius 500 m. Galat DEM berkorelasi spasial sehingga sebagian besar saling meniadakan; simpangan baku turun dari 5,86 m ke 2,99 m |
 
 ---
 
@@ -653,3 +660,154 @@ itu keputusan tim.** Lihat B18 dan C15.
 
 Ekstraksi label Sentinel-1 dan pelatihan model — itu M4 sebenarnya. Tidak ada
 satu pun metrik model di sesi ini, dan Tabel 8 di proposal tetap kosong.
+
+---
+
+## M4 — 28 Agustus 2026: model dilatih, model ditolak, sistem beralih
+
+**Status: selesai, dengan hasil negatif sebagai temuan utamanya.**
+
+Model genangan berbasis Sentinel-1 dibangun sampai tuntas, diuji, lalu
+**ditolak oleh tim sendiri**. Sistem beralih ke indeks kerentanan sesuai
+`PLAN.md` bagian 9.A. Ini bukan pekerjaan yang gagal diselesaikan; ini
+pekerjaan yang selesai dan jawabannya tidak enak.
+
+### Yang dikerjakan pada jalur utama
+
+Seluruh arsip ditarik, bukan sebagian: **725 citra**, 2.502 ruas berstrata,
+**1.813.950 nilai backscatter VV**, skala 30 m dengan median fokal 30 m.
+Ditarik lewat `toBands()` per tahun sehingga satu permintaan mengembalikan
+seluruh deret setahun untuk lima ratus ruas sekaligus — 72 permintaan, sekitar
+satu jam, jauh di bawah kuota bulanan.
+
+Keputusan rancangan yang menyelamatkan banyak waktu: **Earth Engine hanya
+menarik nilai mentah, seluruh klasifikasi basah/kering dilakukan di laptop.**
+Kalau ambang diputuskan di dalam GEE, tiap percobaan berarti menarik ulang
+seluruh arsip dan kuota bulanan habis untuk eksperimen. Karena mentahnya
+tersimpan, seluruh diagnosis di bawah ini gratis dan tanpa internet.
+
+Terlihat juga lubang arsip yang diperingatkan PLAN.md: 2019 punya 92 citra,
+2022 hanya 33.
+
+### Kenapa modelnya ditolak
+
+Pemeriksaan kewarasan dipasang **sebelum** pelatihan, bukan setelahnya, dan
+pemeriksaan itulah yang menyalakan lampu merah:
+
+| Pemeriksaan | Hasil |
+|---|---:|
+| Pasut rata-rata saat label basah | +0,092 m |
+| Pasut rata-rata saat label kering | +0,095 m |
+| Selisih | **−0,003 m** |
+
+Diagnosis dilanjutkan pada agregat per citra, yang meratakan speckle atas
+2.502 titik sekaligus. Korelasi anomali terhadap pasut: **+0,040** seluruh
+sampel, +0,054 untuk ruas di bawah 1.000 m dari pantai, +0,072 di bawah 500 m.
+Tidak ada isyarat.
+
+Uji terakhir, terhadap 12 citra yang jatuh pada atau berdekatan tanggal
+kejadian rob: anomali **+0,148 dB lebih TINGGI** saat kejadian. **Tandanya
+terbalik** — genangan seharusnya menurunkan backscatter — dan besarnya hanya
+0,34 sampai 0,46 simpangan baku, jadi tidak signifikan ke arah mana pun.
+
+Modelnya sendiri mencapai ROC-AUC 0,6579 pada uji 2024–2026 dan mengalahkan
+ketiga pembanding naif. Tetapi kepentingan permutasi membongkar dari mana
+angka itu berasal:
+
+| Fitur | Penurunan ROC-AUC |
+|---|---:|
+| Jarak ke pantai | +0,1417 ± 0,0039 |
+| Elevasi DEMNAS | +0,0619 ± 0,0016 |
+| Laju subsidensi | +0,0342 ± 0,0014 |
+| Tinggi pasut | +0,0010 ± 0,0014 |
+| Hujan 24 jam | +0,0004 ± 0,0010 |
+| Hujan 72 jam | −0,0026 ± 0,0011 |
+
+Ketiga fitur waktu nol dalam batas ketidakpastiannya. **Model ini mempelajari
+ruas mana yang sering beranomali, bukan kapan ruas tergenang.** Untuk sistem
+perutean yang seluruh gunanya ada pada kata "kapan", itu tidak berguna.
+
+Godaan yang ditolak: menurunkan ambang dari −3 dB ke −2 dB akan menaikkan
+jumlah label empat kali lipat dan mungkin menaikkan AUC. Itu tidak akan
+menciptakan isyarat yang tidak ada, hanya menyembunyikan ketiadaannya.
+
+### Jalur cadangan yang dipakai
+
+`app/domain/kerentanan.py` — indeks kerentanan berbasis aturan, tiga komponen
+berbobot **sama rata**:
+
+- Elevasi **relatif** terhadap tetangga radius 500 m
+- Jarak ke garis pantai
+- Laju penurunan muka tanah
+
+**Elevasi relatif, bukan mutlak, adalah temuan metodologis sesi ini.** Aturan
+repo nomor 4 melarang ambang elevasi absolut karena RMSE DEMNAS 2,79 m jauh
+lebih besar daripada rob 10–50 cm. Tetapi galat DEM sebagian besar
+**berkorelasi spasial**: bila satu petak terangkat, tetangganya ikut terangkat
+kira-kira sama. Mengurangkan nilai tengah tetangga meniadakan sebagian besar
+galat itu. Terukur: simpangan baku turun dari **5,86 m menjadi 2,99 m**.
+
+Bobot sama rata adalah keputusan sadar. Tidak ada data untuk menyetelnya, dan
+menyetel tanpa data uji hanya menyembunyikan tebakan di balik desimal.
+
+Pemeriksaan kewarasan terhadap jalan yang dilaporkan tergenang: Bandarharjo
+persentil 97,7, Kaligawe 90,5, Genuk 86,0, Terboyo 68,7, terhadap dasar 50.
+**Ini tidak dilaporkan sebagai akurasi** — kawasan itu pesisir dan jarak
+pantai adalah komponen indeks, jadi pemeriksaannya melingkar. Ia menunjukkan
+kodenya tidak keliru, bukan indeksnya benar.
+
+### Dari indeks menjadi genangan per jam
+
+Kesalahan yang sempat masuk database dan langsung diperbaiki: ambang indeks
+**tetap** menandai 44,7 persen jaringan tergenang pada SETIAP jam, termasuk
+saat surut terdalam. Itu jelas salah.
+
+Gantinya, proporsi ruas terdampak **mengikuti pasut** — nol saat pasut di atau
+di bawah nilai tengahnya, naik sampai puncaknya saat pasut menyentuh persentil
+ke-99,9. Skala puncaknya 10 persen jaringan, diikat ke perkiraan WRI Indonesia
+yang sudah menjadi jangkar proposal. Yang menentukan ruas MANA adalah indeks;
+yang menentukan BERAPA BANYAK adalah pasut.
+
+Hasil 72 jam sejak 28 Agustus: **33 dari 72 jam tanpa genangan sama sekali**,
+puncak 1.028 ruas (5,3 persen), 21.778 baris. Baris `dummy` dihapus.
+
+### Antarmuka: dua tingkat lencana, bukan satu
+
+`LencanaContoh.jsx` semula hanya mengenal `dummy`. Dengan sumber baru
+`kerentanan_v1`, lencana akan hilang dan indeks kerentanan tampil polos
+seolah prediksi model — persis overclaim yang dilarang aturan repo nomor 1.
+
+Kini ada dua tingkat: `dummy` memunculkan **DATA CONTOH**, `kerentanan_v1`
+memunculkan **INDEKS KERENTANAN — bukan prediksi genangan**. Hanya `model_v1`
+yang membuat peta tampil tanpa lencana, dan itu baru sah bila
+`docs/validasi.md` bagian 6 memuat angka yang benar-benar lolos.
+
+### Yang dibuat
+
+- `backend/scripts/08_ekstrak_s1.py`, `09_latih_model.py`, `10_prediksi.py`,
+  `11_indeks_kerentanan.py`
+- `backend/app/domain/genangan.py` — konversi ke kedalaman, 10–50 cm
+- `backend/app/domain/kerentanan.py` — indeks kerentanan
+- `db.RepositoriSampelLatih` — repositori keempat
+- `backend/tests/test_genangan.py` (9 uji), `test_kerentanan.py` (10 uji).
+  Total suite **43 uji**, seluruhnya lolos
+- `docs/kepentingan_fitur.svg` — ditulis langsung sebagai SVG. matplotlib
+  sengaja tidak ditambahkan: komentar di `requirements.txt` justru menyebut
+  penghindaran matplotlib sebagai alasan menolak `geemap`, jadi menariknya
+  masuk lewat pintu belakang tidak pantas
+- Mode `--prakiraan` pada skrip 06, karena tabel `pemicu` berhenti di 27
+  Agustus sementara prediksi butuh 72 jam ke depan
+- `data/referensi/metrik_model.json`, `data/processed/indeks_kerentanan.json`,
+  `ruas_sampel_latih.json`, `s1_daftar_citra.json`,
+  `model_genangan_v1.joblib`
+
+### Diperiksa ujung ke ujung
+
+`/api/kesehatan` melaporkan `sumber_data: ["kerentanan_v1"]` dan 21.778
+prediksi. Permintaan rute mobil Tanjungmas ke Genuk pada jam pasut tinggi
+mengembalikan dua rute yang berbeda 1,0 menit dan 0,44 km.
+
+### Yang TIDAK dikerjakan, sesuai batas sesi
+
+Panel dampak empat angka dan halaman validasi di antarmuka — itu M5.
+Faktor emisi masih `null` sehingga rantai dampak tetap tidak bisa dihitung.
