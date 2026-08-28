@@ -123,7 +123,15 @@ repo publik, deploy, video, dan Figma.
 > mempelajari pola yang masuk akal secara fisik, misalnya tinggi pasut dan
 > elevasi terkoreksi menempati peringkat teratas.
 
-**Sudah ada, tetapi untuk model yang DITOLAK.**
+**DUA gambar siap sisip, keduanya PNG dan SVG di `docs/`:**
+
+`pasut_saat_akuisisi` — bukti bahwa jam lintasan tetap Sentinel-1 justru
+MENGUNTUNGKAN pemantauan rob. Persentil ke-95 pasut saat akuisisi +0,338 m
+berbanding +0,302 m pada seluruh jam, jadi arsip memuat lebih banyak
+pengamatan pasang tinggi daripada pencuplikan acak. Gambar ini menjawab di
+muka keberatan yang hampir pasti muncul di sesi tanya jawab.
+
+`kepentingan_fitur` — **sudah ada, tetapi untuk model yang DITOLAK.**
 `docs/kepentingan_fitur.svg` memuat kepentingan permutasi enam fitur.
 Grafik itu justru berguna: ia memperlihatkan dengan telak bahwa tiga fitur
 waktu — pasut dan dua hujan — tidak menyumbang apa pun, dan itulah alasan

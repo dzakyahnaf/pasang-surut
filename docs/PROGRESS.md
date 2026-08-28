@@ -18,11 +18,11 @@ ini, baca bagian itu.
 
 | # | Blokade | Menghambat | Siapa |
 |---|---|---|---|
-| A1 | **Supabase belum ada.** Database yang dipakai masih PostGIS lokal di Docker. `db/schema.sql` belum pernah dijalankan di Supabase. | Deploy M6, dan kerja paralel antar anggota tim | Manual |
+| ~~A1~~ | **SELESAI 29 Agustus.** Supabase hidup di `aws-0-ap-southeast-2.pooler.supabase.com:6543`, PostGIS 3.3 aktif, skema terpasang, dan terisi 19.394 ruas berfitur, 102.552 baris pemicu, 21.778 prediksi. | — | — |
 | ~~A2~~ | **SELESAI 28 Agustus.** Acuan fase adalah WIB, dibuktikan dengan menyisir seluruh offset −12 sampai +12 jam terhadap data terukur stasiun IOC `sema`. UTC memberi korelasi NEGATIF di seluruh jendela uji, yang berarti pasang tertukar surut. | — | — |
 | A3 | **SEBAGIAN SELESAI.** Proyek pertama `pasang-surut-anforcom` terverifikasi: terdaftar nonkomersial, Community tier, pemakaian 0,07 persen, uji 723 lolos, dan Python sudah tersambung. **Proyek Daffa dan Naufal masih belum ada** — kuota per proyek, jadi jatah tim baru sepertiga. | Kapasitas kuota untuk ekstraksi label M4 | Manual, dua orang |
 | ~~A4~~ | **SELESAI 28 Agustus.** `data/raw/DEMNAS_1409-22_v1.0.tif`, 43 MB, terverifikasi menutupi seluruh AOI, 100 persen piksel valid, median elevasi 2,60 m. | — | — |
-| A5 | **Repo belum dipublikasikan.** M1 mensyaratkan repo publik, dan juri menilai Code Project 10 persen dari sana. | Penilaian | Manual |
+| ~~A5~~ | **SELESAI 29 Agustus.** github.com/dzakyahnaf/pasang-surut. Riwayat git diperiksa: `.env` tidak pernah masuk, dan tidak ada rahasia di seluruh riwayat. | — | — |
 
 ### B. PERLU PERHATIAN — tidak menghentikan, tetapi akan menggigit
 
@@ -31,7 +31,7 @@ ini, baca bagian itu.
 | B1 | `BAGIAN_3_TERISI.yaml` masih menulis `jumlah_citra_s1: "BELUM ADA"`, padahal angkanya 723. Blok `???` di PLAN.md bagian 3 juga masih kosong. | Sesi berikutnya bisa berhenti karena membaca angka yang salah |
 | B2 | Tautan **riset WRI April 2026** di README masih `TODO(verifikasi tautan)`. | Tautan mati di gerbang juri lebih buruk daripada tidak ada tautan |
 | B3 | Commit membawa trailer `Co-Authored-By: Claude Opus 5`. | Kalau rulebook DSDC mempersoalkan, putuskan sekarang selagi baru empat commit |
-| B4 | Koneksi database dibuka DUA KALI per permintaan, tanpa pooling. `database_tersedia()` membuka satu, endpoint membuka lagi. | Supabase paket gratis membatasi koneksi. Akan menggigit saat juri memakai aplikasi bersamaan di babak final |
+| ~~B4~~ | **SELESAI 29 Agustus.** Kolam koneksi `ThreadedConnectionPool` maksimum 5, ditambah cache kesehatan 5 detik sehingga `database_tersedia()` tidak lagi membuka koneksi sendiri. | — |
 | B5 | `copy.id.json` ada di dua tempat, akar dan `frontend/src/`, tanpa apa pun yang menjaganya sinkron. | Begitu satu disunting, keduanya menyimpang diam-diam |
 | B6 | Belum ada `manifest.json`. Bentuk produk yang dikunci PLAN.md bagian 3 adalah PWA. | PWA itu yang membuat rulebook "website ATAU mobile" terpenuhi keduanya |
 | B7 | Test menutupi `config.py`, `routing.py`, `genangan.py`, `kerentanan.py`, dan fungsi murni di skrip 06 dan 07 — 43 uji lolos. `db.py`, `main.py`, skrip 01 sampai 05 dan 08 sampai 11, dan `teks.js` masih tanpa test. | `t()` adalah mekanisme pengaman yang melempar galat, dan tidak ada test yang membuktikan ia melempar |
@@ -44,6 +44,10 @@ ini, baca bagian itu.
 | B14 | **Berkas DEMNAS tidak membawa CRS.** `rasterio` melaporkan `CRS: None` walau koordinatnya jelas derajat WGS84. | **Sudah ditangani** di `scripts/05_isi_fitur_ruas.py`, yang menetapkan `EPSG:4326` eksplisit dan mencetak peringatan saat berkas dibuka. Berlaku untuk setiap kode baru yang membuka berkas itu |
 | B16 | **Proposal tersisa 20 penanda `[[ISI]]` dari semula 58.** Seluruhnya tertahan pada tugas manual atau sumber yang belum ada: tautan deploy, repo, video, Figma; angka rantai dampak yang menunggu faktor emisi; dan dua sitasi tanpa sumber (leptospirosis dan WRI), turun dari tiga. | Rincian dan status per bagian ada di `docs/sisa_proposal.md` |
 | B17 | **Tujuh kotak `[ ISI MANUAL ]` sudah dikeluarkan dari proposal** dan dipindah ke `docs/sisa_proposal.md`. Isinya tidak hilang. | Kotak itu instruksi untuk penulis, bukan isi proposal, dan berisiko ikut tercetak ke PDF yang dibaca juri |
+| B26 | **Region Supabase ap-southeast-2 (Sydney), bukan Singapura.** Tiap kueri memakan sekitar 370 ms bolak-balik. | Endpoint `/api/ruas` 2,0 detik dan `/api/rute` 1,3 detik. Masih terpakai, tetapi region ap-southeast-1 akan memangkasnya kira-kira separuh. Memindahkan region berarti membuat proyek Supabase baru |
+| B27 | **Permintaan rute PERTAMA sempat 11,9 detik** karena graf 19.394 ruas dibangun saat permintaan datang. Sudah diperbaiki dengan pemanasan cache saat startup, kini 1,7 detik. | Kalau server di-deploy ke layanan yang tidur saat menganggur, cold start akan mengulang persoalan ini. Ping layanan sebelum juri memakainya |
+| B28 | **`sampel_latih` 1,8 juta baris TIDAK dipindahkan ke Supabase.** Itu artefak pelatihan, tidak dibutuhkan saat runtime, dan akan memakan sebagian besar kuota 500 MB paket gratis. | Kalau dibutuhkan untuk audit juri, jalankan skrip 09 tanpa `--tanpa-database` sambil menunjuk ke database lokal |
+| B29 | **Subjudul karya diubah** dari "Berbasis Kalibrasi Citra Radar Sentinel-1" menjadi "Berbasis Rekonstruksi Pasang Surut Terkalibrasi". | Subjudul lama mengklaim sistem dibangun di atas kalibrasi Sentinel-1, dan itu tidak lagi benar. **Perlu diselaraskan ke Figma, slide, dan judul video** |
 | B18 | **Angka subsidensi "9–13 cm/tahun" tidak didukung sumber yang kita punya.** Rahmawati dkk (2020) memilih varian SBAS tanpa koreksi karena RMSE-nya terkecil (±1,3 cm/th); menurut varian itu nilai TERTINGGI seluruh Kota Semarang 9,4 cm/th, rata-rata Semarang Utara 4,6 cm/th. Angka belasan hanya muncul pada varian terkoreksi atmosfer yang justru TIDAK dipilih penulisnya. | PLAN.md bagian 6 dan abstrak proposal memakai 9–13. Proposal SUDAH saya turunkan ke 9,4 karena aturan repo nomor 1, tetapi **PLAN.md belum**. Sitasinya jurnal Geodesi Undip, dan PLAN.md sendiri memperingatkan juri Geodesi Undip akan membantah. Lihat C15 |
 | B19 | **Rerata hujan tahunan ERA5 1.830 mm belum diadu dengan normal BMKG.** Reanalisis diketahui meratakan hujan konvektif setempat. | Angka ini belum layak dikutip di proposal. Sudah tercatat di `docs/batasan.md` bagian 1.9 dan `docs/validasi.md` bagian 5 |
 | B20 | **Enam dari 16 kejadian rob terdokumentasi terjadi pada pasut yang TIDAK tinggi**, dan hujan 24 jamnya juga sedang saja (2,5 sampai 20,4 mm). | Dua pemicu yang kita punya belum menjelaskan seluruh kejadian. Ini memperkuat alasan memakai model, tetapi juga berarti fitur angin dan kondisi tanggul absen. Rincian di `docs/validasi.md` bagian 3.2 |
@@ -95,6 +99,9 @@ berubah oleh tersedianya browser otomatis.
 | Curah hujan Open-Meteo belum diambil | 28 Agustus. 102.168 jam 2015–2026 masuk tabel `pemicu`, dengan cadangan mentahnya di `data/referensi/hujan_open_meteo.json` |
 | Jarak pantai belum dihitung | 28 Agustus. Terisi untuk seluruh 19.394 ruas, dihitung di EPSG:32749 terhadap garis pantai OSM |
 | Apakah label Sentinel-1 bisa dipakai melatih model genangan | 28 Agustus. TIDAK. Dibuktikan, bukan ditebak: korelasi anomali terhadap pasut +0,04 sampai +0,07, dan pada tanggal kejadian rob tandanya terbalik. Jangan ulangi percobaan yang sama dengan ambang berbeda — menyetel ambang tidak menciptakan isyarat yang tidak ada |
+| Apakah cuplikan radius 100 m menyelamatkan model Sentinel-1 | 29 Agustus. TIDAK. ROC-AUC 0,5982 pada ambang setara, lebih buruk daripada cuplikan titik 0,6579. Arsip ditarik ulang penuh untuk mengujinya |
+| Apakah genangan kota justru MENAIKKAN backscatter | 29 Agustus. Arahnya konsisten sesuai dugaan pantulan ganda, tetapi besarnya hanya 0,47 simpangan baku pada 12 citra. Tidak cukup untuk dijadikan label |
+| Apakah jam lintasan tetap Sentinel-1 membuat pencuplikan pasut bias | 29 Agustus. Bias, tetapi ke arah yang MENGUNTUNGKAN. Persentil ke-95 pasut saat akuisisi +0,338 m berbanding +0,302 m pada seluruh jam. Yang tidak terwakili justru surut terdalam. Gambar buktinya di `docs/pasut_saat_akuisisi.png` |
 | Bagaimana memakai DEMNAS tanpa melanggar aturan repo nomor 4 | 28 Agustus. Elevasi RELATIF terhadap tetangga radius 500 m. Galat DEM berkorelasi spasial sehingga sebagian besar saling meniadakan; simpangan baku turun dari 5,86 m ke 2,99 m |
 
 ---
@@ -811,3 +818,124 @@ mengembalikan dua rute yang berbeda 1,0 menit dan 0,44 km.
 
 Panel dampak empat angka dan halaman validasi di antarmuka — itu M5.
 Faktor emisi masih `null` sehingga rantai dampak tetap tidak bisa dihitung.
+
+---
+
+## M4 lanjutan — 29 Agustus 2026: tiga upaya penyelamatan, Supabase hidup
+
+**Status: selesai.** Model Sentinel-1 diberi tiga kesempatan lagi dan gagal
+ketiganya. Klaim produk diperbaiki, bukan diturunkan. Database pindah ke
+Supabase dan aplikasi berjalan di atasnya.
+
+### Tiga upaya penyelamatan model
+
+| Upaya | Hasil | Putusan |
+|---|---|---|
+| Cuplik radius 100 m, bukan piksel titik tengah | ROC-AUC 0,5982 pada ambang setara, turun dari 0,6579 | gagal |
+| Kriteria dua arah, dugaan pantulan ganda | arah benar tetapi hanya 0,47 simpangan baku pada 12 citra | gagal |
+| Luas air kawasan terbuka | korelasi terhadap pasut NEGATIF, −0,10 sampai −0,27 | gagal |
+
+Yang penting dari upaya pertama: perbandingannya dibuat ADIL. Perataan radius
+menekan ragam sampai label basah nyaris lenyap — pada ambang −3 dB yang sama
+hanya tersisa 838 label dari 1,8 juta. Ambang diturunkan ke −1,4 dB supaya
+laju labelnya setara, dan barulah dibandingkan. Tanpa penyesuaian itu
+kesimpulannya akan benar karena alasan yang salah.
+
+Yang penting dari upaya ketiga: korelasi negatifnya bukan kejanggalan. Luas
+gelap di AOI didominasi tambak dan muara, dan air dangkal yang tenang saat
+surut justru lebih halus, lebih gelap, dan lebih luas terlihat daripada air
+dalam yang beriak saat pasang.
+
+Rinciannya di `docs/validasi.md` bagian 6.5.
+
+### Temuan yang justru menguntungkan: jam lintasan Sentinel-1
+
+Keberatan yang hampir pasti muncul di sesi tanya jawab: Sentinel-1 sinkron
+matahari, selalu melintas pada jam lokal yang sama, jadi arsipnya tidak akan
+memuat pasang tinggi.
+
+Diukur, dan **keberatan itu terbalik**:
+
+| | Saat akuisisi | Seluruh jam |
+|---|---:|---:|
+| Median | **+0,097 m** | +0,014 m |
+| Persentil ke-95 | **+0,338 m** | +0,302 m |
+| Persentil ke-99 | **+0,396 m** | +0,370 m |
+| Minimum | −0,249 m | −0,575 m |
+
+Komponen S2 berperiode tepat 12,000 jam sehingga fasenya TERKUNCI pada waktu
+matahari, dan kedua jam lintasan (05.16 dan 17.58 WIB) kebetulan jatuh dekat
+fase tingginya. Arsip karena itu memuat LEBIH BANYAK pengamatan pasang tinggi
+daripada pencuplikan acak. Yang tidak terwakili justru surut terdalam, dan itu
+tidak menjadi masalah karena rob tidak terjadi saat surut.
+
+Perlu dicatat: argumen yang beredar di tim — bahwa fase bergeser sepanjang
+bulan lunar — hanya benar sebagian. M2 (12,42 jam) dan O1 (25,82 jam) memang
+menyapu penuh dalam dua minggu, tetapi S2 tidak pernah bergeser sama sekali,
+dan K1 serta P1 bergeser dengan periode sekitar satu tahun.
+
+Gambar: `docs/pasut_saat_akuisisi.png` dan `.svg`.
+
+### Klaim produk: diperbaiki, bukan diturunkan
+
+Sesi sebelumnya menurunkan klaim menjadi "indeks kerentanan". Itu terlalu
+merendahkan. Sistem ini memang MEMPREDIKSI — yang keliru hanya menyebut
+sumber prediksinya.
+
+Klaim yang dipakai sekarang: **memprediksi KAPAN tiap ruas berisiko tergenang
+untuk 72 jam ke depan, dengan komponen waktu dari rekonstruksi pasut yang
+tervalidasi terhadap data terukur stasiun BIG (korelasi 0,78 sampai 0,91,
+RMSE 0,10 sampai 0,12 m) dan komponen ruang dari indeks kerentanan per ruas.**
+
+Yang gugur hanyalah klaim bahwa prediksi itu dipelajari dari genangan teramati
+Sentinel-1.
+
+Subjudul karya ikut berubah, dari "Berbasis Kalibrasi Citra Radar Sentinel-1"
+menjadi "Berbasis Rekonstruksi Pasang Surut Terkalibrasi". **Ini perlu
+diselaraskan ke Figma, slide, dan judul video.**
+
+### Supabase hidup, aplikasi berjalan di atasnya
+
+Sambungan pertama gagal dengan pesan yang menyesatkan — psycopg2 menyebut
+socket lokal padahal host-nya Supabase. Penyebabnya kata sandi memuat `@`,
+sehingga pengurai URL memotong di `@` terakhir dan sisa sandi terbaca sebagai
+nama host. `scripts/13_periksa_database.py` dibuat untuk menemukan hal ini
+tanpa pernah mencetak kata sandinya.
+
+Setelah diperbaiki dan dipindah ke connection pooler: PostGIS 3.3 aktif,
+skema terpasang, dan seluruh pipeline dijalankan ulang dari nol menuju
+Supabase — 19.394 ruas berfitur, 102.552 baris pemicu, 21.778 prediksi. Itu
+sekaligus membuktikan pipeline-nya reprodusibel tanpa Docker lokal.
+
+### B4 selesai, dan satu masalah baru yang ditemukan karenanya
+
+Kolam koneksi `ThreadedConnectionPool` maksimum lima, ditambah cache kesehatan
+lima detik sehingga `database_tersedia()` tidak lagi membuka koneksi
+sendiri — sebelumnya tiap permintaan membuka DUA koneksi.
+
+Pengukuran setelahnya membongkar masalah yang tidak pernah terlihat di Docker:
+**permintaan rute pertama memakan 11,9 detik**, sisanya 1,3 detik. Graf 19.394
+ruas dibangun saat permintaan datang, dan lewat jaringan ke Sydney itu mahal.
+Sebelas detik itu jatuh tepat pada klik pertama, dan di babak final pengguna
+pertamanya adalah juri.
+
+Diperbaiki dengan memanaskan cache saat startup di utas terpisah. Permintaan
+pertama kini **1,7 detik**.
+
+### Yang dibuat
+
+- `backend/scripts/12_uji_isyarat_s1.py`, `13_periksa_database.py`,
+  `14_uji_dua_arah.py`, `15_gambar_bukti.py`
+- `--radius-m` pada skrip 08, `--berkas`, `--label`, dan kurva kalibrasi pada
+  skrip 09
+- Kolam koneksi dan cache kesehatan di `app/db.py`
+- Pemanasan cache dan penutupan kolam di `app/main.py`
+- `backend/requirements-analisis.txt` — matplotlib, terpisah dari
+  requirements utama supaya server yang di-deploy tetap ramping
+- `docs/pasut_saat_akuisisi.png` dan `.svg`, `docs/kepentingan_fitur.png`
+
+### Yang TIDAK dikerjakan
+
+Uji luas air kawasan terbuka setelah topeng air permanen dibuang belum
+selesai; ia menunggu Earth Engine lebih dari satu jam. Hasil parsialnya sudah
+cukup untuk menyimpulkan, dan skripnya bisa dijalankan ulang kapan saja.

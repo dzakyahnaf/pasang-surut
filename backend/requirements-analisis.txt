@@ -1,0 +1,18 @@
+# Dependency ANALISIS saja — TIDAK dipasang di server yang di-deploy.
+#
+# Aturan repo melarang menambah dependency tanpa alasan tertulis, jadi ini
+# alasannya. PLAN.md bagian 10.3 mewajibkan feature importance disimpan
+# sebagai gambar untuk proposal dan slide, dan brief M4 meminta histogram
+# tinggi pasut saat akuisisi sebagai PNG. Keduanya butuh alat gambar.
+#
+# Diletakkan di berkas terpisah, bukan di requirements.txt, karena:
+#   - backend/app/ tidak pernah mengimpornya, jadi server tidak perlu memuatnya
+#   - matplotlib menarik puluhan megabyte yang percuma di dalam kontainer
+#   - komentar di requirements.txt menyebut penghindaran matplotlib sebagai
+#     alasan menolak geemap; pemisahan ini menjaga alasan itu tetap berlaku
+#     untuk jalur runtime
+#
+# Pasang hanya saat menjalankan skrip analisis:
+#     pip install -r backend/requirements-analisis.txt
+
+matplotlib==3.10.7        # histogram pasut akuisisi + kepentingan fitur

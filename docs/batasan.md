@@ -175,8 +175,25 @@ statis. Kepentingan permutasi tiga fitur waktu: pasut +0,0010 ± 0,0014,
 hujan 24 jam +0,0004 ± 0,0010, hujan 72 jam −0,0026 ± 0,0011. Ketiganya nol
 dalam batas ketidakpastiannya.
 
+Tiga upaya penyelamatan dijalankan sebelum model ditinggalkan, dan ketiganya
+gagal: pencuplikan radius 100 meter (ROC-AUC turun ke 0,5982), kriteria dua
+arah untuk menangkap pantulan ganda (paling kuat hanya 0,47 simpangan baku),
+dan pengukuran luas air kawasan terbuka (korelasi terhadap pasut justru
+negatif). Rinciannya di `docs/validasi.md` bagian 6.5.
+
 `PLAN.md` bagian 9.A menyiapkan jalur cadangan untuk keadaan ini. Sistem
-memakainya, dan klaimnya diturunkan dari prediksi menjadi indeks kerentanan.
+memakainya. Klaim produk TIDAK diturunkan menjadi sekadar indeks: yang
+diklaim sekarang adalah memprediksi KAPAN tiap ruas berisiko, dengan komponen
+waktu dari rekonstruksi pasut yang tervalidasi terhadap data terukur dan
+komponen ruang dari indeks kerentanan. Yang gugur hanyalah klaim bahwa
+prediksi itu dipelajari dari genangan teramati Sentinel-1.
+
+**Satu keterbatasan yang berlaku untuk seluruh pengujian di atas.**
+Rekonstruksi pasut yang dipakai sebagai pembanding hanya memuat komponen
+ASTRONOMIS. Rob sesungguhnya terjadi saat pasang astronomis bertemu kenaikan
+muka air akibat angin, tekanan udara, dan gelombang badai, dan komponen itu
+tidak ada di dalam rekonstruksi kami. Sebagian ketiadaan korelasi bisa saja
+berasal dari pembandingnya, bukan dari labelnya.
 
 ### 2.2 Indeks kerentanan tidak punya akurasi yang bisa dilaporkan
 

@@ -1,0 +1,76 @@
+{
+  "_catatan": "Perbandingan kriteria label satu arah turun, satu arah naik, dan dua arah. Tidak memakai kuota Earth Engine; seluruhnya dari nilai mentah yang sudah ditarik skrip 08.",
+  "dijalankan": "2026-08-28T19:38:15.677087+00:00",
+  "citra": 725,
+  "citra_pada_kejadian": 12,
+  "putusan": "TIDAK ADA",
+  "kesimpulan": "Tidak satu pun dari tiga kriteria pada empat ambang menunjukkan kaitan dengan pasut maupun dengan tanggal kejadian. Dugaan pantulan ganda TIDAK terbukti. Arah kriteria bukan penyebab kegagalan.",
+  "korelasi_mutlak_tertinggi": 0.0408,
+  "selisih_sigma_tertinggi": 0.4693,
+  "per_kriteria": {
+    "turun_2": {
+      "korelasi": -0.0399,
+      "selisih_sigma": -0.3418,
+      "laju_label": 0.0726
+    },
+    "turun_2.5": {
+      "korelasi": -0.0377,
+      "selisih_sigma": -0.3797,
+      "laju_label": 0.0373
+    },
+    "turun_3": {
+      "korelasi": -0.0408,
+      "selisih_sigma": -0.3325,
+      "laju_label": 0.0187
+    },
+    "turun_4": {
+      "korelasi": -0.0282,
+      "selisih_sigma": -0.2456,
+      "laju_label": 0.0049
+    },
+    "naik_2": {
+      "korelasi": 0.0407,
+      "selisih_sigma": 0.425,
+      "laju_label": 0.0929
+    },
+    "naik_2.5": {
+      "korelasi": 0.0379,
+      "selisih_sigma": 0.4693,
+      "laju_label": 0.0571
+    },
+    "naik_3": {
+      "korelasi": 0.0317,
+      "selisih_sigma": 0.4434,
+      "laju_label": 0.0358
+    },
+    "naik_4": {
+      "korelasi": 0.0145,
+      "selisih_sigma": 0.39,
+      "laju_label": 0.0152
+    },
+    "dua arah_2": {
+      "korelasi": 0.0132,
+      "selisih_sigma": 0.2095,
+      "laju_label": 0.1655
+    },
+    "dua arah_2.5": {
+      "korelasi": 0.0144,
+      "selisih_sigma": 0.2449,
+      "laju_label": 0.0943
+    },
+    "dua arah_3": {
+      "korelasi": 0.0093,
+      "selisih_sigma": 0.273,
+      "laju_label": 0.0544
+    },
+    "dua arah_4": {
+      "korelasi": 0.003,
+      "selisih_sigma": 0.2896,
+      "laju_label": 0.0201
+    }
+  },
+  "_peringatan": [
+    "Hanya 12 citra jatuh pada atau berdekatan tanggal kejadian, jadi kolom sigma berdasar sampel yang sangat kecil.",
+    "Daftar kejadian sebagian besar berstatus perlu_verifikasi."
+  ]
+}

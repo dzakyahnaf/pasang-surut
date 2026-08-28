@@ -60,3 +60,4 @@ desktop.ini
 # data/processed/ruas_sampel_latih.json sehingga hasilnya sama persis.
 data/processed/s1_vv_ruas.jsonl
 data/processed/s1_vv_contoh.jsonl
+data/processed/s1_vv_ruas_radius*.jsonl

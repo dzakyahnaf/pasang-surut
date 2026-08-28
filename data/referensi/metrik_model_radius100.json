@@ -1,15 +1,15 @@
 {
   "_catatan": "Metrik model genangan v1. Dihasilkan oleh backend/scripts/09_latih_model.py. Seluruh angka di sini berasal dari data uji yang dipisah menurut WAKTU.",
-  "dilatih": "2026-08-28T20:03:37.979074+00:00",
+  "dilatih": "2026-08-28T19:54:12.072502+00:00",
   "model": "HistGradientBoostingClassifier",
-  "berkas_backscatter": "s1_vv_ruas.jsonl",
+  "berkas_backscatter": "s1_vv_ruas_radius100.jsonl",
   "label": {
     "cara": "deteksi perubahan backscatter VV terhadap nilai tengah tiap pasangan ruas dan orbit relatif",
-    "ambang_turun_db": -3.0,
-    "laju_basah_keseluruhan": 0.0187,
-    "laju_basah_latih": 0.0195,
-    "laju_basah_uji": 0.016,
-    "pasut_rata_saat_basah_m": 0.092,
+    "ambang_turun_db": -1.4,
+    "laju_basah_keseluruhan": 0.0148,
+    "laju_basah_latih": 0.0174,
+    "laju_basah_uji": 0.007,
+    "pasut_rata_saat_basah_m": 0.09,
     "pasut_rata_saat_kering_m": 0.095
   },
   "pemisahan": {
@@ -22,49 +22,49 @@
     "citra_uji": 179
   },
   "metrik_uji": {
-    "roc_auc": 0.6579,
-    "pr_auc": 0.0371,
-    "proporsi_dasar_pr": 0.016,
-    "f1": 0.0894,
-    "ambang_probabilitas": 0.6652,
+    "roc_auc": 0.5982,
+    "pr_auc": 0.0228,
+    "proporsi_dasar_pr": 0.007,
+    "f1": 0.0665,
+    "ambang_probabilitas": 0.8518,
     "matriks_konfusi": {
-      "TN": 422350,
-      "FP": 18352,
-      "FN": 5962,
-      "TP": 1194
+      "TN": 441289,
+      "FP": 3454,
+      "FN": 2889,
+      "TP": 226
     }
   },
   "pembanding_naif_roc_auc": {
-    "pasut saja": 0.4935,
-    "elevasi saja, makin rendah makin basah": 0.5503,
-    "jarak pantai saja, makin dekat makin basah": 0.6096
+    "pasut saja": 0.4793,
+    "elevasi saja, makin rendah makin basah": 0.5375,
+    "jarak pantai saja, makin dekat makin basah": 0.5926
   },
   "kalibrasi": {
-    "skor_brier": 0.19421,
-    "brier_tebakan_dasar": 0.01572,
+    "skor_brier": 0.13689,
+    "brier_tebakan_dasar": 0.00691,
     "probabilitas_rata": [
-      0.2105,
-      0.2877,
-      0.3309,
-      0.3656,
-      0.397,
-      0.4283,
-      0.4621,
-      0.5016,
-      0.5555,
-      0.6713
+      0.0827,
+      0.1434,
+      0.1834,
+      0.2202,
+      0.2595,
+      0.304,
+      0.3569,
+      0.4254,
+      0.5221,
+      0.7034
     ],
     "proporsi_nyata": [
+      0.0054,
+      0.0055,
+      0.0047,
+      0.0053,
+      0.0058,
+      0.0059,
+      0.0054,
       0.0071,
-      0.0084,
-      0.0101,
-      0.0111,
-      0.0118,
-      0.0131,
-      0.0137,
-      0.0171,
-      0.0224,
-      0.045
+      0.0071,
+      0.0174
     ],
     "_catatan": "Kelas dibobot seimbang saat latih, sehingga probabilitasnya sengaja tidak terkalibrasi. Jangan membaca angkanya sebagai peluang sebenarnya."
   },
@@ -72,38 +72,38 @@
     {
       "fitur": "jarak_pantai_m",
       "nama": "Jarak ke pantai",
-      "penurunan_roc_auc": 0.1417,
-      "simpangan_baku": 0.0039
+      "penurunan_roc_auc": 0.1169,
+      "simpangan_baku": 0.0038
     },
     {
       "fitur": "elevasi_m",
       "nama": "Elevasi DEMNAS",
-      "penurunan_roc_auc": 0.0619,
-      "simpangan_baku": 0.0016
+      "penurunan_roc_auc": 0.0438,
+      "simpangan_baku": 0.0023
     },
     {
       "fitur": "laju_subsidensi_cm_thn",
       "nama": "Laju subsidensi",
-      "penurunan_roc_auc": 0.0342,
-      "simpangan_baku": 0.0014
-    },
-    {
-      "fitur": "tinggi_pasut_m",
-      "nama": "Tinggi pasut saat akuisisi",
-      "penurunan_roc_auc": 0.001,
-      "simpangan_baku": 0.0014
+      "penurunan_roc_auc": 0.0172,
+      "simpangan_baku": 0.0019
     },
     {
       "fitur": "hujan_24j_mm",
       "nama": "Hujan 24 jam",
-      "penurunan_roc_auc": 0.0004,
-      "simpangan_baku": 0.001
+      "penurunan_roc_auc": 0.0067,
+      "simpangan_baku": 0.0028
+    },
+    {
+      "fitur": "tinggi_pasut_m",
+      "nama": "Tinggi pasut saat akuisisi",
+      "penurunan_roc_auc": 0.0002,
+      "simpangan_baku": 0.0018
     },
     {
       "fitur": "hujan_72j_mm",
       "nama": "Hujan 72 jam",
-      "penurunan_roc_auc": -0.0026,
-      "simpangan_baku": 0.0011
+      "penurunan_roc_auc": -0.0111,
+      "simpangan_baku": 0.003
     }
   ],
   "_peringatan": [

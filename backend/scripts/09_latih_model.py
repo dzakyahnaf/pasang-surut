@@ -51,6 +51,7 @@ import json
 import sys
 from collections import defaultdict
 from datetime import datetime, timedelta, timezone
+from pathlib import Path
 
 import numpy as np
 
@@ -90,8 +91,11 @@ NAMA_FITUR_ID = {
 # ══════════════════════════════════════════════════════════════════════════
 # PEMUATAN
 # ══════════════════════════════════════════════════════════════════════════
-def muat_backscatter() -> tuple[np.ndarray, np.ndarray, np.ndarray, list[dict]]:
+def muat_backscatter(berkas=None) -> tuple[np.ndarray, np.ndarray, np.ndarray, list[dict]]:
     """Baca hasil skrip 08. Kembalikan (edge_id, indeks_citra, vv_db, citra)."""
+    global BERKAS_VV
+    if berkas:
+        BERKAS_VV = Path(berkas)
     if not BERKAS_VV.exists():
         raise SystemExit(
             f"{BERKAS_VV.name} belum ada. Jalankan skrip 08 lebih dulu."
@@ -286,10 +290,16 @@ def main() -> int:
     pengurai.add_argument("--ambang-db", type=float, default=AMBANG_TURUN_DB)
     pengurai.add_argument("--sensitivitas", action="store_true")
     pengurai.add_argument("--tanpa-database", action="store_true")
+    pengurai.add_argument(
+        "--berkas", default=None,
+        help="berkas backscatter selain bawaan, misalnya hasil --radius-m")
+    pengurai.add_argument("--label", default="",
+                          help="penanda pada berkas metrik keluaran")
     argumen = pengurai.parse_args()
 
     print("memuat backscatter ...")
-    edge, idx, vv, citra = muat_backscatter()
+    edge, idx, vv, citra = muat_backscatter(argumen.berkas)
+    print(f"  berkas  : {BERKAS_VV.name}")
     print(f"  nilai   : {len(vv):,}")
     print(f"  ruas    : {len(np.unique(edge)):,}")
     print(f"  citra   : {len(np.unique(idx)):,} dari {len(citra):,} di daftar\n")
@@ -329,11 +339,12 @@ def main() -> int:
         print("Pertimbangkan rencana 9.A di PLAN.md: indeks kerentanan.")
         return 1
 
+    from sklearn.calibration import calibration_curve
     from sklearn.ensemble import HistGradientBoostingClassifier
     from sklearn.inspection import permutation_importance
-    from sklearn.metrics import (average_precision_score, confusion_matrix,
-                                 f1_score, precision_recall_curve,
-                                 roc_auc_score)
+    from sklearn.metrics import (average_precision_score, brier_score_loss,
+                                 confusion_matrix, f1_score,
+                                 precision_recall_curve, roc_auc_score)
 
     print("melatih HistGradientBoostingClassifier ...")
     model = HistGradientBoostingClassifier(
@@ -357,6 +368,30 @@ def main() -> int:
     ambang_pilih = float(ambang_p[terbaik])
     f1 = float(f1_score(y[uji], prob >= ambang_pilih))
     km = confusion_matrix(y[uji], prob >= ambang_pilih)
+
+    # ── KURVA KALIBRASI ────────────────────────────────────────────────
+    # ROC-AUC hanya menilai URUTAN, bukan apakah angka probabilitasnya
+    # bermakna. Model bisa ber-AUC bagus tetapi mengeluarkan 0,7 untuk
+    # kejadian yang sebenarnya hanya terjadi 2 persen dari waktu.
+    #
+    # Itu penting di sini karena probabilitasnya TIDAK berhenti sebagai
+    # angka: ia diubah menjadi kedalaman sentimeter yang dibaca pengguna.
+    # Probabilitas yang tidak terkalibrasi berarti kedalaman yang menyesatkan.
+    #
+    # Kelas dibobot seimbang saat latih, dan itu memang MERUSAK kalibrasi
+    # dengan sengaja karena pembobotan menaikkan probabilitas kelas minoritas.
+    # Skor Brier di bawah karena itu diharapkan buruk, dan disajikan justru
+    # supaya tidak ada yang memakai probabilitasnya mentah-mentah.
+    frak_nyata, frak_prediksi = calibration_curve(
+        y[uji], prob, n_bins=10, strategy="quantile")
+    brier = float(brier_score_loss(y[uji], prob))
+    print()
+    print("kalibrasi pada data uji")
+    print(f"  skor Brier: {brier:.4f}  (menebak proporsi dasar memberi "
+          f"{y[uji].mean() * (1 - y[uji].mean()):.4f})")
+    print(f"  {'prob rata':>10} {'nyata':>8}")
+    for a_, b_ in zip(frak_prediksi, frak_nyata):
+        print(f"  {a_:>10.3f} {b_:>8.3f}")
 
     # ── PEMBANDING NAIF ────────────────────────────────────────────────
     # Angka AUC tidak berarti apa-apa tanpa pembanding. Dua aturan satu
@@ -403,22 +438,28 @@ def main() -> int:
         print(f"  {NAMA_FITUR_ID[FITUR[i]]:<28} "
               f"{kp.importances_mean[i]:+.4f} ± {kp.importances_std[i]:.4f}")
 
+    berkas_grafik = (BERKAS_GRAFIK if not argumen.label else
+                     BERKAS_GRAFIK.with_name(
+                         f"kepentingan_fitur_{argumen.label}.svg"))
     gambar_kepentingan(
         [NAMA_FITUR_ID[f] for f in FITUR],
-        kp.importances_mean.copy(), kp.importances_std.copy(), BERKAS_GRAFIK)
-    print(f"  grafik: {BERKAS_GRAFIK.name}")
+        kp.importances_mean.copy(), kp.importances_std.copy(), berkas_grafik)
+    print(f"  grafik: {berkas_grafik.name}")
 
     # ── SIMPAN MODEL DAN METRIK ────────────────────────────────────────
     import joblib
 
+    berkas_model = (BERKAS_MODEL if not argumen.label else
+                    BERKAS_MODEL.with_name(
+                        f"model_genangan_{argumen.label}.joblib"))
     joblib.dump({
         "model": model,
         "fitur": FITUR,
         "ambang_probabilitas": ambang_pilih,
         "ambang_turun_db": argumen.ambang_db,
         "dilatih": datetime.now(timezone.utc).isoformat(),
-    }, BERKAS_MODEL)
-    print(f"  model : {BERKAS_MODEL.name}")
+    }, berkas_model)
+    print(f"  model : {berkas_model.name}")
 
     metrik = {
         "_catatan": ("Metrik model genangan v1. Dihasilkan oleh "
@@ -426,6 +467,8 @@ def main() -> int:
                      "berasal dari data uji yang dipisah menurut WAKTU."),
         "dilatih": datetime.now(timezone.utc).isoformat(),
         "model": "HistGradientBoostingClassifier",
+        "berkas_backscatter": BERKAS_VV.name,
+        "label": argumen.label,
         "pemisahan": {
             "cara": "berdasarkan waktu, tidak pernah acak",
             "latih": f"2015-{TAHUN_UJI_MULAI - 1}",
@@ -455,6 +498,16 @@ def main() -> int:
                                 "FN": int(km[1][0]), "TP": int(km[1][1])},
         },
         "pembanding_naif_roc_auc": {k: round(v, 4) for k, v in naif.items()},
+        "kalibrasi": {
+            "skor_brier": round(brier, 5),
+            "brier_tebakan_dasar": round(
+                float(y[uji].mean() * (1 - y[uji].mean())), 5),
+            "probabilitas_rata": [round(float(x), 4) for x in frak_prediksi],
+            "proporsi_nyata": [round(float(x), 4) for x in frak_nyata],
+            "_catatan": ("Kelas dibobot seimbang saat latih, sehingga "
+                         "probabilitasnya sengaja tidak terkalibrasi. Jangan "
+                         "membaca angkanya sebagai peluang sebenarnya."),
+        },
         "kepentingan_fitur": [
             {"fitur": FITUR[i], "nama": NAMA_FITUR_ID[FITUR[i]],
              "penurunan_roc_auc": round(float(kp.importances_mean[i]), 4),
@@ -474,9 +527,12 @@ def main() -> int:
             "karena belum dihitung.",
         ],
     }
-    BERKAS_METRIK.write_text(
+    berkas_metrik = (BERKAS_METRIK if not argumen.label else
+                     BERKAS_METRIK.with_name(
+                         f"metrik_model_{argumen.label}.json"))
+    berkas_metrik.write_text(
         json.dumps(metrik, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    print(f"  metrik: {BERKAS_METRIK.name}")
+    print(f"  metrik: {berkas_metrik.name}")
 
     # ── TULIS SAMPEL LATIH KE DATABASE ─────────────────────────────────
     if not argumen.tanpa_database:

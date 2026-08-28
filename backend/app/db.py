@@ -14,13 +14,48 @@ Tidak ada ORM. psycopg2 langsung sudah cukup dan tidak menambah dependency.
 
 from __future__ import annotations
 
+import atexit
+import threading
+import time
 from contextlib import contextmanager
 from typing import Iterable, Iterator, Sequence
 
 import psycopg2
 import psycopg2.extras
+import psycopg2.pool
 
 from app import config
+
+# ══════════════════════════════════════════════════════════════════════════
+# KOLAM KONEKSI
+# ══════════════════════════════════════════════════════════════════════════
+# KENAPA ADA KOLAM, PADAHAL SEBELUMNYA TANPA KOLAM SUDAH JALAN.
+#
+# Selama database berjalan di Docker pada mesin yang sama, membuka koneksi
+# baru tiap permintaan hanya memakan sepersekian milidetik dan tidak
+# terlihat. Begitu database pindah ke Supabase, dua hal berubah sekaligus:
+#
+#   1. Tiap koneksi baru menempuh jabat tangan TLS lintas benua. Yang tadinya
+#      tak terasa menjadi ratusan milidetik.
+#   2. Paket gratis membatasi jumlah koneksi. Beberapa juri yang membuka
+#      aplikasi bersamaan di babak final bisa menghabiskannya.
+#
+# Lebih buruk lagi, lapisan API dulu membuka koneksi DUA KALI per permintaan:
+# sekali oleh database_tersedia() untuk memeriksa keadaan, sekali lagi oleh
+# endpoint-nya. Keduanya diperbaiki di sini.
+#
+# CATATAN PENTING TENTANG PGBOUNCER. Supabase menyarankan connection pooler
+# di port 6543 yang berjalan dalam mode transaksi. Dalam mode itu satu
+# koneksi server dipakai bergantian antar transaksi, sehingga apa pun yang
+# menempel pada sesi — prepared statement bernama, kursor sisi server, hasil
+# SET — tidak bertahan. Kode di berkas ini sengaja tidak memakai satu pun
+# dari hal itu.
+
+_UKURAN_KOLAM_MIN = 1
+_UKURAN_KOLAM_MAKS = 5      # sengaja kecil: batas paket gratis, bukan performa
+
+_kolam: psycopg2.pool.ThreadedConnectionPool | None = None
+_kunci = threading.Lock()
 
 
 class DatabaseBelumDikonfigurasi(RuntimeError):
@@ -36,39 +71,102 @@ def _url_database() -> str:
     return config.DATABASE_URL
 
 
+def _dapatkan_kolam() -> psycopg2.pool.ThreadedConnectionPool:
+    """Buat kolam sekali, aman dipanggil dari banyak utas sekaligus."""
+    global _kolam
+    if _kolam is None:
+        with _kunci:
+            if _kolam is None:      # diperiksa dua kali, di dalam kunci
+                _kolam = psycopg2.pool.ThreadedConnectionPool(
+                    _UKURAN_KOLAM_MIN, _UKURAN_KOLAM_MAKS, _url_database(),
+                    # Tanpa ini, koneksi yang mati diam-diam karena jaringan
+                    # putus baru ketahuan saat kueri berikutnya gagal.
+                    keepalives=1,
+                    keepalives_idle=30,
+                    keepalives_interval=10,
+                    keepalives_count=3,
+                    connect_timeout=10,
+                    application_name="pasang-surut",
+                )
+    return _kolam
+
+
+def tutup_kolam() -> None:
+    """Tutup seluruh koneksi. Dipanggil saat proses berakhir."""
+    global _kolam
+    with _kunci:
+        if _kolam is not None:
+            try:
+                _kolam.closeall()
+            except Exception:
+                pass
+            _kolam = None
+
+
+atexit.register(tutup_kolam)
+
+
 @contextmanager
 def koneksi() -> Iterator[psycopg2.extensions.connection]:
-    """Buka koneksi, commit bila sukses, rollback bila ada galat, lalu tutup.
+    """Pinjam koneksi dari kolam, commit bila sukses, rollback bila galat.
 
-    Dipakai sebagai:
+    Dipakai sama seperti sebelumnya:
 
         with koneksi() as kon:
             repo = RepositoriRuas(kon)
+
+    Bedanya, koneksinya DIKEMBALIKAN ke kolam, bukan ditutup. Koneksi yang
+    transaksinya gagal dikembalikan dengan tanda buang supaya kolam tidak
+    menyimpan koneksi yang keadaannya sudah kotor.
     """
-    kon = psycopg2.connect(_url_database())
+    kolam = _dapatkan_kolam()
+    kon = kolam.getconn()
+    rusak = False
     try:
         yield kon
         kon.commit()
     except Exception:
-        kon.rollback()
+        rusak = True
+        try:
+            kon.rollback()
+        except Exception:
+            pass
         raise
     finally:
-        kon.close()
+        try:
+            kolam.putconn(kon, close=rusak)
+        except Exception:
+            pass
 
 
-def database_tersedia() -> bool:
-    """Cek apakah database bisa dihubungi. Tidak pernah melempar galat.
+# ── keadaan database, di-cache sebentar ───────────────────────────────────
+# database_tersedia() dipanggil hampir tiap endpoint. Tanpa cache, ia
+# menambah satu perjalanan bolak-balik ke Supabase pada tiap permintaan
+# hanya untuk menjawab pertanyaan yang jawabannya nyaris tidak pernah
+# berubah. Cache pendek membuat pemeriksaannya tetap jujur — kalau database
+# benar-benar mati, paling lama beberapa detik kemudian ketahuan — tanpa
+# membayar ongkos itu berulang kali.
+_TTL_KESEHATAN_DETIK = 5.0
+_kesehatan: tuple[float, bool] | None = None
 
-    Dipakai lapisan API untuk memutuskan membaca dari database atau dari
-    berkas cadangan di data/processed/.
-    """
+
+def database_tersedia(paksa: bool = False) -> bool:
+    """Cek apakah database bisa dihubungi. Tidak pernah melempar galat."""
+    global _kesehatan
+    sekarang = time.monotonic()
+    if not paksa and _kesehatan is not None:
+        dicek, hasil = _kesehatan
+        if sekarang - dicek < _TTL_KESEHATAN_DETIK:
+            return hasil
     try:
         with koneksi() as kon:
             with kon.cursor() as kur:
                 kur.execute("SELECT 1")
-        return True
+        hasil = True
     except Exception:
-        return False
+        hasil = False
+    _kesehatan = (time.monotonic(), hasil)
+    return hasil
 
 
 class RepositoriRuas:

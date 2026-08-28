@@ -373,7 +373,77 @@ Tiga dugaan, tidak satu pun sudah dibuktikan:
 3. **Jalan terlalu sempit terhadap piksel 30 m.** Satu piksel di atas jalan
    ikut memuat trotoar, kendaraan, pohon, dan bangunan.
 
-### 6.5 Kesimpulan
+### 6.5 Tiga upaya penyelamatan, semuanya gagal
+
+Model tidak ditinggalkan setelah satu kegagalan. Tiga dugaan penyebab diuji
+satu per satu, dan ketiganya terbantah. Ini dicatat lengkap supaya tidak ada
+yang mengulang percobaan yang sama.
+
+**Upaya 1 — mencuplik lingkungan, bukan satu piksel.**
+Dugaan: jalan selebar belasan meter berada di dalam piksel 30 meter yang
+isinya juga trotoar, kendaraan, dan dinding bangunan, sehingga yang terukur
+lebih banyak bangunan daripada permukaan jalan. Genangan bersifat areal, jadi
+seharusnya dicuplik areal juga.
+
+Seluruh arsip ditarik ULANG dengan rata-rata dalam radius 100 meter —
+1.813.950 nilai kedua kalinya. Hasilnya lebih buruk, bukan lebih baik.
+
+| | Cuplikan titik | Radius 100 m |
+|---|---:|---:|
+| ROC-AUC data uji | 0,6579 | **0,5982** |
+| ROC-AUC "pasut saja" | 0,4935 | 0,4793 |
+| Pasut saat basah − saat kering | −0,003 m | −0,006 m |
+
+Perbandingannya dibuat adil: ambang tidak dipertahankan di −3 dB, melainkan
+diturunkan ke −1,4 dB supaya laju labelnya setara (1,48 persen berbanding
+1,87 persen). Tanpa penyesuaian itu perataan radius menekan ragam sampai
+label basah nyaris lenyap — pada −3 dB hanya tersisa 838 label dari 1,8 juta.
+
+**Upaya 2 — kriteria dua arah, dugaan pantulan ganda.**
+Dugaan: di kawasan terbangun, air dangkal di antara bangunan membentuk
+pemantul sudut yang justru MENAIKKAN backscatter. Kalau begitu, kriteria
+penurunan melihat ke arah yang salah.
+
+Tiga kriteria dibandingkan pada empat ambang, seluruhnya dari data yang sudah
+ditarik sehingga tidak memakai kuota sama sekali:
+
+| Kriteria | Korelasi terhadap pasut | Selisih pada tanggal kejadian |
+|---|---:|---:|
+| turun (anomali < −X) | −0,028 sampai −0,041 | −0,25 sampai −0,38 σ |
+| **naik (anomali > +X)** | +0,015 sampai +0,041 | **+0,39 sampai +0,47 σ** |
+| dua arah (\|anomali\| > X) | +0,003 sampai +0,014 | +0,21 sampai +0,29 σ |
+
+Arahnya konsisten dan sesuai dugaan — kriteria "naik" selalu positif pada
+tanggal kejadian, kriteria "turun" selalu negatif. Jadi fisika pantulan ganda
+kemungkinan memang benar. Tetapi besarnya hanya 0,47 simpangan baku pada 12
+citra, jauh dari cukup untuk dijadikan label.
+
+**Upaya 3 — melihat kawasan terbuka, bukan jalan.**
+Dugaan: air pasang membentuk permukaan halus yang terlihat radar di tambak,
+lahan kosong, dan muara — bukan di jalan perkotaan.
+
+Proporsi luas AOI di bawah ambang air terbuka memang besar dan berubah-ubah
+(9,8 sampai 25,9 persen luas, simpangan baku 6,6 persen), jadi Sentinel-1
+jelas melihat air. Tetapi korelasinya terhadap pasut **negatif**: −0,10
+sampai −0,27 tergantung ambang dan orbit.
+
+Tanda negatif itu bukan kejanggalan. Luas gelap didominasi tambak dan muara,
+dan air dangkal yang tenang saat surut justru lebih halus, lebih gelap, dan
+lebih luas terlihat daripada air dalam yang beriak saat pasang. Isyarat yang
+dicari — daratan berubah menjadi air — hanya beberapa persen luas dan
+tenggelam di bawah ragam itu. Uji lanjutan dengan membuang topeng air
+permanen dijalankan tetapi tidak selesai dalam waktu sesi ini.
+
+**Satu keterbatasan yang berlaku untuk ketiganya, dan patut disebut sendiri.**
+Rekonstruksi pasut yang dipakai sebagai pembanding hanya memuat komponen
+ASTRONOMIS. Rob sesungguhnya terjadi saat pasang astronomis bertemu
+tinggi-rendahnya muka air akibat angin, tekanan udara, dan gelombang badai —
+dan komponen non-astronomis itu tidak ada di dalam rekonstruksi kami. Jadi
+sebagian ketiadaan korelasi bisa saja berasal dari pembandingnya, bukan dari
+labelnya. Ini tidak menyelamatkan model — fitur yang tersedia tetap tidak
+menjelaskan labelnya — tetapi jujur untuk disebutkan.
+
+### 6.6 Kesimpulan
 
 `PLAN.md` bagian 9.A menyiapkan jalur cadangan untuk keadaan ini, dan
 kalimatnya dipatuhi apa adanya: *"Jangan panik dan jangan memaksakan model."*

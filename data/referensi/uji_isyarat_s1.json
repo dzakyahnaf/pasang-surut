@@ -1,0 +1,82 @@
+{
+  "_catatan": "Uji apakah Sentinel-1 melihat pasang surut di AOI, diukur lewat proporsi luas AOI di bawah ambang air terbuka. Dihasilkan oleh backend/scripts/12_uji_isyarat_s1.py.",
+  "dijalankan": "2026-08-28T18:44:58.060151+00:00",
+  "skala_m": 50,
+  "putusan": "ISYARAT LEMAH",
+  "korelasi_mutlak_tertinggi": 0.268,
+  "kesimpulan": "Ada kaitan tetapi tipis. Membangun model prediksi di atasnya berisiko, dan hasilnya harus dilaporkan dengan ketidakpastian yang jujur.",
+  "per_ambang": {
+    "-15dB": {
+      "citra": 122,
+      "luas_air_rata_persen": 24.193,
+      "luas_air_simpangan_persen": 4.515,
+      "korelasi_gabungan": -0.0751,
+      "per_orbit": {
+        "76": {
+          "citra": 48,
+          "arah": "DESCENDING",
+          "korelasi": -0.02,
+          "proporsi_rata": 0.25866,
+          "proporsi_simpangan": 0.01338,
+          "pasut_simpangan": 0.1522
+        },
+        "127": {
+          "citra": 74,
+          "arah": "ASCENDING",
+          "korelasi": -0.1243,
+          "proporsi_rata": 0.23107,
+          "proporsi_simpangan": 0.05427,
+          "pasut_simpangan": 0.1415
+        }
+      }
+    },
+    "-17dB": {
+      "citra": 122,
+      "luas_air_rata_persen": 17.989,
+      "luas_air_simpangan_persen": 6.597,
+      "korelasi_gabungan": -0.0812,
+      "per_orbit": {
+        "76": {
+          "citra": 48,
+          "arah": "DESCENDING",
+          "korelasi": -0.1369,
+          "proporsi_rata": 0.22179,
+          "proporsi_simpangan": 0.03129,
+          "pasut_simpangan": 0.1522
+        },
+        "127": {
+          "citra": 74,
+          "arah": "ASCENDING",
+          "korelasi": -0.1325,
+          "proporsi_rata": 0.15271,
+          "proporsi_simpangan": 0.06828,
+          "pasut_simpangan": 0.1415
+        }
+      }
+    },
+    "-19dB": {
+      "citra": 122,
+      "luas_air_rata_persen": 9.791,
+      "luas_air_simpangan_persen": 6.565,
+      "korelasi_gabungan": -0.1053,
+      "per_orbit": {
+        "76": {
+          "citra": 48,
+          "arah": "DESCENDING",
+          "korelasi": -0.268,
+          "proporsi_rata": 0.13929,
+          "proporsi_simpangan": 0.04537,
+          "pasut_simpangan": 0.1522
+        },
+        "127": {
+          "citra": 74,
+          "arah": "ASCENDING",
+          "korelasi": -0.0983,
+          "proporsi_rata": 0.07106,
+          "proporsi_simpangan": 0.06277,
+          "pasut_simpangan": 0.1415
+        }
+      }
+    }
+  }
+}

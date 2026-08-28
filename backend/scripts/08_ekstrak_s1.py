@@ -188,7 +188,8 @@ def daftar_citra(ee, geom) -> list[dict]:
     return citra
 
 
-def tarik_setahun(ee, ruas: list[dict], tahun: int) -> list[dict]:
+def tarik_setahun(ee, ruas: list[dict], tahun: int,
+                  radius_m: float = 0.0) -> list[dict]:
     """Tarik VV dB tiap ruas untuk seluruh citra pada satu tahun.
 
     Seluruh citra setahun digabung jadi satu gambar bermultipita lewat
@@ -216,15 +217,35 @@ def tarik_setahun(ee, ruas: list[dict], tahun: int) -> list[dict]:
     hasil: list[dict] = []
     for i in range(0, len(ruas), RUAS_PER_PERMINTAAN):
         potongan = ruas[i:i + RUAS_PER_PERMINTAAN]
-        titik = ee.FeatureCollection([
-            ee.Feature(ee.Geometry.Point([r["lon"], r["lat"]]),
-                       {"edge_id": r["edge_id"]})
-            for r in potongan
-        ])
+        # KENAPA ADA PILIHAN RADIUS.
+        #
+        # Cuplikan satu piksel di titik tengah ruas menghadapi masalah yang
+        # tidak bisa diselesaikan dengan meredam derau: jalan selebar belasan
+        # meter berada di dalam piksel 30 meter yang isinya juga trotoar,
+        # kendaraan, pohon, dan dinding bangunan. Yang terukur lebih banyak
+        # bangunan daripada permukaan jalan.
+        #
+        # Genangan rob bersifat areal. Mencuplik rata-rata dalam radius
+        # seratus meter mengukur keadaan LINGKUNGAN ruas, dan itu yang
+        # sebenarnya menentukan apakah ruas bisa dilewati.
+        if radius_m > 0:
+            titik = ee.FeatureCollection([
+                ee.Feature(ee.Geometry.Point([r["lon"], r["lat"]]).buffer(radius_m),
+                           {"edge_id": r["edge_id"]})
+                for r in potongan
+            ])
+            pereduksi = ee.Reducer.mean()
+        else:
+            titik = ee.FeatureCollection([
+                ee.Feature(ee.Geometry.Point([r["lon"], r["lat"]]),
+                           {"edge_id": r["edge_id"]})
+                for r in potongan
+            ])
+            pereduksi = ee.Reducer.first()
         mulai = time.time()
         balasan = gabungan.reduceRegions(
             collection=titik,
-            reducer=ee.Reducer.first(),
+            reducer=pereduksi,
             scale=SKALA_M,
         ).getInfo()
         lama = time.time() - mulai
@@ -248,6 +269,9 @@ def main() -> int:
     pengurai.add_argument("--contoh", action="store_true",
                           help="uji cepat: 2024 saja, 200 ruas")
     pengurai.add_argument("--target-ruas", type=int, default=TARGET_RUAS)
+    pengurai.add_argument(
+        "--radius-m", type=float, default=0.0,
+        help="cuplik rata-rata dalam radius ini, bukan satu piksel")
     argumen = pengurai.parse_args()
 
     try:
@@ -273,8 +297,11 @@ def main() -> int:
     daftar_citra(ee, geom)
 
     sudah = set()
-    if BERKAS_KELUARAN.exists() and not argumen.contoh:
-        with BERKAS_KELUARAN.open(encoding="utf-8") as f:
+    berkas_periksa = (config.DIR_DATA_OLAHAN
+                      / f"s1_vv_ruas_radius{int(argumen.radius_m)}.jsonl"
+                      if argumen.radius_m > 0 else BERKAS_KELUARAN)
+    if berkas_periksa.exists() and not argumen.contoh:
+        with berkas_periksa.open(encoding="utf-8") as f:
             for garis in f:
                 try:
                     sudah.add(json.loads(garis)["tahun"])
@@ -284,15 +311,20 @@ def main() -> int:
             print(f"tahun yang sudah ada di berkas: {sorted(sudah)}\n")
 
     mode = "w" if argumen.contoh else "a"
-    berkas = (config.DIR_DATA_OLAHAN / "s1_vv_contoh.jsonl" if argumen.contoh
-              else BERKAS_KELUARAN)
+    if argumen.contoh:
+        berkas = config.DIR_DATA_OLAHAN / "s1_vv_contoh.jsonl"
+    elif argumen.radius_m > 0:
+        berkas = (config.DIR_DATA_OLAHAN
+                  / f"s1_vv_ruas_radius{int(argumen.radius_m)}.jsonl")
+    else:
+        berkas = BERKAS_KELUARAN
     total = 0
     with berkas.open(mode, encoding="utf-8") as keluar:
         for tahun in tahun_dipakai:
             if tahun in sudah:
                 print(f"  {tahun}: dilewati, sudah ada")
                 continue
-            baris = tarik_setahun(ee, ruas, tahun)
+            baris = tarik_setahun(ee, ruas, tahun, argumen.radius_m)
             for b in baris:
                 b["tahun"] = tahun
                 keluar.write(json.dumps(b, separators=(",", ":")) + "\n")
