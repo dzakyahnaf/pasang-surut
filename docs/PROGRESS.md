@@ -8,20 +8,20 @@ ini, baca bagian itu.
 
 ---
 
-## PAPAN BLOKADE — keadaan per 25 Agustus 2026 (diperbarui sore)
+## PAPAN BLOKADE — keadaan per 28 Agustus 2026
 
 > Bagian ini DIPERBARUI SETIAP SESI dan selalu menggambarkan keadaan
 > sekarang, bukan riwayat. Riwayat ada di entri per milestone di bawahnya.
-> Sisa waktu ke tenggat: **6 hari** (31 Agustus 2026, 23.59 WIB).
+> Sisa waktu ke tenggat: **3 hari** (31 Agustus 2026, 23.59 WIB).
 
 ### A. BLOKADE — menghentikan pekerjaan berikutnya
 
 | # | Blokade | Menghambat | Siapa |
 |---|---|---|---|
 | A1 | **Supabase belum ada.** Database yang dipakai masih PostGIS lokal di Docker. `db/schema.sql` belum pernah dijalankan di Supabase. | Deploy M6, dan kerja paralel antar anggota tim | Manual |
-| A2 | **Zona waktu acuan fase konstanta pasut belum dipastikan.** Sumbernya tidak menyebutkan. Salah menebak menggeser kurva sampai 7 jam. | Pasut asli menggantikan sinusoid contoh | Bisa saya kerjakan setelah A3 |
-| A3 | **Dua dari tiga proyek Earth Engine belum ada.** Minimal satu akun SUDAH ada — cek Sentinel-1 yang menghasilkan 723 citra mustahil berjalan tanpanya. Kuota 150 EECU-hours dihitung per proyek dan reset 1 September, yaitu SETELAH tenggat, jadi kuota Agustus adalah seluruh yang akan pernah ada. | Ekstraksi label Sentinel-1, dan karena itu seluruh model M4 | Manual — panduan di `docs/panduan_akun_dan_data.md` |
-| A4 | **DEMNAS belum diunduh.** Butuh registrasi. Tile yang dibutuhkan sudah dipastikan: **`1409-22`** saja, dikueri dari layanan indeks resmi BIG. Ada jalan cadangan tanpa registrasi, yaitu Copernicus DEM GLO-30 di dalam Earth Engine. | Fitur elevasi pada model M4 | Manual — panduan di `docs/panduan_akun_dan_data.md` |
+| A2 | **Zona waktu acuan fase konstanta pasut belum dipastikan.** Sumbernya tidak menyebutkan. Salah menebak menggeser kurva sampai 7 jam. | Pasut asli menggantikan sinusoid contoh | **Sudah bisa saya kerjakan** — akses GEE dan Python sudah hidup |
+| A3 | **SEBAGIAN SELESAI.** Proyek pertama `pasang-surut-anforcom` terverifikasi: terdaftar nonkomersial, Community tier, pemakaian 0,07 persen, uji 723 lolos, dan Python sudah tersambung. **Proyek Daffa dan Naufal masih belum ada** — kuota per proyek, jadi jatah tim baru sepertiga. | Kapasitas kuota untuk ekstraksi label M4 | Manual, dua orang |
+| ~~A4~~ | **SELESAI 28 Agustus.** `data/raw/DEMNAS_1409-22_v1.0.tif`, 43 MB, terverifikasi menutupi seluruh AOI, 100 persen piksel valid, median elevasi 2,60 m. | — | — |
 | A5 | **Repo belum dipublikasikan.** M1 mensyaratkan repo publik, dan juri menilai Code Project 10 persen dari sana. | Penilaian | Manual |
 
 ### B. PERLU PERHATIAN — tidak menghentikan, tetapi akan menggigit
@@ -29,7 +29,7 @@ ini, baca bagian itu.
 | # | Hal | Kenapa penting |
 |---|---|---|
 | B1 | `BAGIAN_3_TERISI.yaml` masih menulis `jumlah_citra_s1: "BELUM ADA"`, padahal angkanya 723. Blok `???` di PLAN.md bagian 3 juga masih kosong. | Sesi berikutnya bisa berhenti karena membaca angka yang salah |
-| B2 | Tautan **riset WRI April 2026** di README masih `TODO(verifikasi tautan)`. Tautan DEMNAS sudah diverifikasi hidup pada 25 Agustus dan sudah dimasukkan. | Tautan mati di gerbang juri lebih buruk daripada tidak ada tautan |
+| B2 | Tautan **riset WRI April 2026** di README masih `TODO(verifikasi tautan)`. | Tautan mati di gerbang juri lebih buruk daripada tidak ada tautan |
 | B3 | Commit membawa trailer `Co-Authored-By: Claude Opus 5`. | Kalau rulebook DSDC mempersoalkan, putuskan sekarang selagi baru empat commit |
 | B4 | Koneksi database dibuka DUA KALI per permintaan, tanpa pooling. `database_tersedia()` membuka satu, endpoint membuka lagi. | Supabase paket gratis membatasi koneksi. Akan menggigit saat juri memakai aplikasi bersamaan di babak final |
 | B5 | `copy.id.json` ada di dua tempat, akar dan `frontend/src/`, tanpa apa pun yang menjaganya sinkron. | Begitu satu disunting, keduanya menyimpang diam-diam |
@@ -41,6 +41,8 @@ ini, baca bagian itu.
 | B11 | Kecepatan ruas untuk jalan tanpa tag `maxspeed` berasal dari imputasi OSMnx. | Asumsi, bukan pengukuran. Sudah tercatat di `docs/batasan.md` bagian 2.4 |
 | B12 | Penalti genangan (1,0 → 2,5 → 8,0) adalah angka rancangan, bukan hasil pengukuran lapangan. | Juri berhak menanyakan dasarnya. Sudah tercatat di `docs/batasan.md` |
 | B13 | **`geemap` versi terbaru menuntut Python 3.12**, sementara proyek dikunci 3.11. PLAN.md bagian 4 menyebutnya sebagai bagian tech stack. | Rekomendasi: JANGAN pakai geemap. `earthengine-api` saja sudah cukup untuk pipeline yang mengekspor tabel, dan geemap 0.37.2 yang masih cocok menarik lebih dari 70 paket tambahan |
+| B14 | **Berkas DEMNAS tidak membawa CRS.** `rasterio` melaporkan `CRS: None` walau koordinatnya jelas derajat WGS84. | Setiap kali berkas dibuka, CRS harus ditetapkan eksplisit. Kalau dilewatkan, proyeksi dan sampling gagal atau, lebih buruk, diam-diam salah |
+| B15 | **Autentikasi Earth Engine memberi empat cakupan sekaligus**: earthengine, cloud-platform, drive, dan devstorage.full_control. | Itu bawaan alat resmi, bukan pilihan kita, tetapi cakupan Drive dan Cloud Storage luas. Token tersimpan di laptop yang menjalankan perintah |
 
 ### C. HANYA BISA DIKERJAKAN MANUAL — di luar jangkauan Claude Code
 
@@ -52,7 +54,7 @@ berubah oleh tersedianya browser otomatis.
 |---|---|---|
 | C1 | Daftar Google Earth Engine, **tiap anggota proyek sendiri** karena kuota per proyek. Pilih Community Tier, jangan Contributor karena menuntut akun billing | CHECKLIST nomor 1, panduan lengkap di `docs/panduan_akun_dan_data.md` |
 | C2 | Daftar Copernicus Data Space sebagai cadangan bila kuota GEE habis | CHECKLIST nomor 2 |
-| C3 | Daftar DEMNAS, unduh **tile `1409-22`**, simpan ke `data/raw/`, lalu clip ke AOI sebelum diolah | CHECKLIST nomor 3, panduan lengkap di `docs/panduan_akun_dan_data.md` |
+| ~~C3~~ | ~~Daftar DEMNAS, unduh tile `1409-22`~~ — **SELESAI 28 Agustus** | — |
 | C4 | Daftar AVISO — persetujuannya berhari-hari, daftar sekarang lalu lupakan | CHECKLIST nomor 4 |
 | C5 | Buat proyek Supabase, lalu jalankan `db/schema.sql` di SQL Editor | CHECKLIST nomor 5 dan 9 |
 | C6 | Buat akun Vercel dan Railway | CHECKLIST nomor 5 |
@@ -60,7 +62,7 @@ berubah oleh tersedianya browser otomatis.
 | C8 | Daftar Figma dan buat prototype — rulebook poin 7.9 mewajibkan, dan tautannya masuk Lampiran proposal | CHECKLIST nomor 6 |
 | C9 | Uji `pip install -r requirements.txt` dan `pytest -q` di laptop Daffa dan Naufal | Kriteria terima M1 |
 | C10 | Minta rekap kejadian rob 2015 sampai 2019 ke BPBD Kota Semarang | Melengkapi `kejadian_rob_semarang.json` |
-| C11 | Verifikasi tautan DEMNAS dan riset WRI April 2026 | B2 |
+| C11 | Verifikasi tautan **riset WRI April 2026**. Tautan DEMNAS sudah dikoreksi ke `/portal-web/unduh/demnas` | B2 |
 | C12 | Rekam video 3 sampai 7 menit, wajah peserta wajib tampil sepanjang video | Rulebook, bobot 10 persen |
 | C13 | Buka satu per satu 19 entri `perlu_verifikasi` di `kejadian_rob_semarang.json` dan salin angkanya dari isi artikel | Angka belum terverifikasi tidak boleh masuk proposal |
 
@@ -73,6 +75,8 @@ berubah oleh tersedianya browser otomatis.
 | Kontras garis jalan 2,80:1 di bawah ambang grafis | M3. Diganti `--tinta-2`, kini 5,92:1 |
 | `docs/batasan.md` kosong | Riset pendukung 24 Agustus. Kini 5 bagian, 17 batasan |
 | Konstanta pasut seluruhnya `null` | Riset pendukung 24 Agustus. Terisi dari Rachman dkk 2015, dengan seluruh keterbatasannya tercatat |
+| Tile DEMNAS mana yang dibutuhkan | 28 Agustus. `1409-22` saja, dikonfirmasi dua indeks independen dan dibuktikan dengan membuka berkasnya |
+| Apakah akses Earth Engine benar-benar bekerja | 28 Agustus. 723 direproduksi dari Code Editor dan dari Python |
 
 ---
 

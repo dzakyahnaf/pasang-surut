@@ -4,7 +4,9 @@ Dua blokade yang menghentikan M4. Keduanya hanya bisa dikerjakan manual —
 saya tidak membuat akun, tidak memasukkan kata sandi, dan tidak menyetujui
 syarat layanan atas nama tim.
 
-Seluruh angka dan tautan di halaman ini diverifikasi 25 Agustus 2026.
+Seluruh angka dan tautan di halaman ini diverifikasi 25 Agustus 2026, lalu
+dikoreksi dan sebagian dikerjakan pada 28 Agustus 2026. Bagian yang sudah
+selesai ditandai di tempatnya.
 
 ---
 
@@ -127,6 +129,30 @@ arsip sejak pengecekan terakhir, dan `docs/validasi.md` harus dikoreksi.
 Kalau muncul galat soal project, pastikan project yang benar terpilih di
 pojok kanan atas Code Editor.
 
+**SUDAH DIKERJAKAN 28 Agustus 2026, untuk proyek pertama.**
+
+| | |
+|---|---|
+| Project ID | **`pasang-surut-anforcom`** |
+| Organisasi | `dzakyahnf-org` |
+| Status registrasi | "Your Cloud project is registered for non-commercial use" |
+| Tier | **Community** |
+| Pemakaian EECU bulan ini | **0,07 persen** — kuota praktis masih utuh |
+| Hasil uji A6 | **723**, cocok dengan `docs/validasi.md` |
+
+Perhatikan Project ID-nya **tidak** berawalan `ee-`. Itu wajar: awalan `ee-`
+hanya muncul kalau ID dibuat otomatis oleh Google. Nama ini ditetapkan
+manual sesuai `CHECKLIST_MALAM_INI.md`.
+
+Selagi kredensialnya hidup, seluruh isi `docs/validasi.md` ikut diperiksa
+ulang dari sumber: **kedua belas angka per tahun dan kedua arah orbit cocok
+seluruhnya.** Tabel itu naik status dari "dilaporkan tim" menjadi
+"terverifikasi dari sumber".
+
+**Dua proyek lain — milik Daffa dan Naufal — masih belum ada.** Itu tetap
+penting: kuota dihitung per proyek, dan tanpa keduanya jatah tim hanya
+sepertiga.
+
 ### A7. Sambungkan ke Python
 
 Ini yang membuat pipeline bisa jalan dari repo, bukan dari peramban.
@@ -146,11 +172,22 @@ python -c "import ee; ee.Initialize(project='ISI-PROJECT-ID-ANDA'); print(ee.Num
 
 Harus mencetak `2`.
 
-> **Catatan dependency.** `earthengine-api` **belum ada** di
-> `backend/requirements.txt`. Saya belum menambahkannya karena itu pekerjaan
-> M4 dan aturan repo melarang menambah dependency tanpa alasan tertulis.
-> Versi terbaru 1.7.41 sudah saya uji resolusinya dan cocok dengan Python
-> 3.11 yang kita kunci.
+**SUDAH DIKERJAKAN 28 Agustus 2026.** `earthengine-api` 1.7.41 terpasang,
+`earthengine authenticate` berhasil dan tokennya tersimpan, dan
+`ee.Initialize(project='pasang-surut-anforcom')` berjalan dari venv proyek.
+Hitungan 723 juga direproduksi langsung dari Python, bukan hanya dari
+peramban.
+
+> **Cakupan izin yang diberikan.** Alur `earthengine authenticate` meminta
+> empat cakupan sekaligus: `earthengine`, `cloud-platform`, `drive`, dan
+> `devstorage.full_control`. Itu bawaan alat resmi Earth Engine, bukan
+> pilihan kita, tetapi cakupan Drive dan Cloud Storage memang luas. Token
+> tersimpan di komputer yang menjalankan perintah. Kalau ingin
+> mencabutnya nanti, lewat halaman Izin Akun Google.
+
+> **Catatan dependency.** `earthengine-api==1.7.41` kini SUDAH masuk
+> `backend/requirements.txt` beserta alasan tertulisnya, sesuai aturan repo.
+> Diuji tidak berkonflik dengan 14 paket yang sudah dikunci.
 >
 > **`geemap` sebaiknya TIDAK dipakai.** Versi terbarunya, 0.38.3, menuntut
 > Python 3.12 sementara proyek ini dikunci 3.11. Pip memang akan mundur ke
@@ -214,23 +251,35 @@ hanya karena batas timur AOI tepat bersinggungan di 110,500.
 
 ### C2. Buka portal
 
-<https://tanahair.indonesia.go.id/demnas/>
+<https://tanahair.indonesia.go.id/portal-web/unduh/demnas>
 
-Portal alternatif bila yang di atas bermasalah:
-<https://tanahair.indonesia.go.id/portal-web/unduh>
+**KOREKSI 28 Agustus 2026.** Panduan ini sebelumnya menunjuk
+`tanahair.indonesia.go.id/demnas/` dan menyatakan tautannya hidup karena
+mengembalikan HTTP 200. Itu SALAH: alamat itu mengembalikan HTTP 200 dengan
+badan KOSONG, `Content-Length: 0`, dan berkasnya terakhir diubah 20
+September 2024. Memeriksa kode status saja tidak cukup, isi respons juga
+harus dilihat.
 
-Keduanya saya cek hidup (HTTP 200) pada 25 Agustus 2026. Ini sekaligus
-menutup `TODO(verifikasi tautan)` untuk DEMNAS di README.
+Portal yang sebenarnya hidup adalah **Ina-Geoportal**, aplikasi React di
+`/portal-web/unduh`. Kartu yang dicari bernama **Data Demnas**.
 
 ### C3. Registrasi
 
-Gratis. Isi formulir pendaftaran, lalu masuk.
+Gratis. Isi formulir pendaftaran, lalu masuk. Setelah masuk, nama Anda
+muncul di kanan atas.
 
 ### C4. Cari dan unduh
 
-Cari wilayah Jawa Tengah atau Semarang, pilih tile **`1409-22`**, unduh
-sebagai GeoTIFF. Pastikan yang dipilih **DEMNAS**, bukan **BATNAS** —
-BATNAS adalah batimetri, kedalaman laut, dan kita tidak memerlukannya.
+Pada peta pemilih tile, klik kotak **`1409-22`**. Popup akan menawarkan
+tombol **UNDUH DEMNAS_1409-22_v1.0.tif**. Pastikan nama berkas di tombol
+benar-benar memuat `1409-22` sebelum diklik — tile tetangga `1409-21`
+letaknya persis di sebelah barat dan mudah tertukar.
+
+Pastikan pula yang dipilih **Demnas**, bukan **Batnas** — Batnas adalah
+batimetri, kedalaman laut, dan kita tidak memerlukannya.
+
+**SUDAH DIKERJAKAN 28 Agustus 2026.** Berkasnya sudah diunduh dan
+diverifikasi. Lihat C7.
 
 Spesifikasi yang akan kalian dapat:
 
@@ -257,7 +306,35 @@ Jangan mengolah tile penuh. Tile `1409-22` menutupi 0,25 × 0,25 derajat,
 sekitar 27 × 27 km, sementara AOI kita hanya 12,7 × 7,7 km. Mengolah tile
 penuh berarti membuang waktu dan memori untuk area yang tidak dipakai.
 
-Kabari saya setelah berkasnya ada, dan saya buatkan skripnya.
+### C7. Hasil verifikasi berkas, 28 Agustus 2026
+
+Berkas sudah ada di `data/raw/DEMNAS_1409-22_v1.0.tif`, 43 MB, dan sudah
+diperiksa dengan rasterio:
+
+| | |
+|---|---|
+| Ukuran | 3.333 × 3.333 piksel, satu band, float32 |
+| Cakupan | bujur 110,2500–110,5000 · lintang −7,0000 sampai −6,7500 |
+| Menutupi seluruh AOI | **ya** |
+| Resolusi | 0,00007501 derajat, sekitar 8,35 m |
+| Nodata | NaN |
+| Piksel valid di dalam AOI | 1.430.289 dari 1.430.289, yaitu 100 persen |
+| Elevasi di dalam AOI | minimum −1,15 m · median **2,60 m** · maksimum 55,95 m |
+| Persentil ke-25 | **0,16 m** |
+
+Angka terakhir itu layak masuk proposal: **seperempat wilayah pilot berada
+di bawah 0,16 meter.** Itulah alasan fisik kenapa rob melumpuhkan kawasan
+ini. Sekaligus penegasan kenapa ambang elevasi absolut tidak sah — RMSE
+vertikal DEMNAS 2,79 m jauh lebih besar daripada sebaran elevasi yang
+sedang dibedakan.
+
+> **JEBAKAN YANG WAJIB DIINGAT DI M4: berkas ini TIDAK membawa CRS.**
+> `rasterio` melaporkan `CRS: None`. Koordinatnya jelas derajat WGS84 —
+> cakupannya persis cocok dengan indeks tile — tetapi tidak dideklarasikan
+> di dalam berkas. Setiap kali berkas ini dibuka, CRS harus ditetapkan
+> secara eksplisit, misalnya lewat parameter `crs` saat membuka atau dengan
+> menulis ulang berkasnya. Kalau dilewatkan, proyeksi dan pengambilan
+> sampel akan gagal atau, lebih buruk, diam-diam salah.
 
 ### C7. Kalau registrasi DEMNAS macet
 
@@ -275,12 +352,14 @@ registrasi. **Jangan biarkan DEMNAS memblokir M4 lebih dari satu hari.**
 
 Setelah selesai, kirim ini supaya M4 bisa langsung dimulai:
 
-- [ ] **Tiga Project ID Earth Engine**, satu per anggota, format `ee-sesuatu`
-- [ ] **Angka yang muncul dari uji A6.** Harus 723
-- [ ] Konfirmasi `earthengine authenticate` berhasil di minimal satu laptop
-- [ ] Konfirmasi tier yang dipilih adalah **Community**
-- [ ] **Berkas DEMNAS `1409-22`** sudah ada di `data/raw/`, atau keputusan
-      memakai Copernicus DEM sebagai gantinya
+- [x] ~~Project ID pertama~~ — **`pasang-surut-anforcom`**, Community tier
+- [x] ~~Angka uji A6~~ — **723**, cocok
+- [x] ~~`earthengine authenticate`~~ — berhasil, diuji dari Python
+- [x] ~~Berkas DEMNAS `1409-22`~~ — ada di `data/raw/`, 43 MB, terverifikasi
+- [ ] **Project ID Daffa** — belum ada
+- [ ] **Project ID Naufal** — belum ada
+
+Dua baris terakhir itu satu-satunya yang tersisa di halaman ini.
 
 Begitu daftar ini lengkap, yang bisa saya kerjakan berikutnya adalah skrip
 ekstraksi label Sentinel-1 dan skrip sampling DEM ke tiap ruas — dua bahan

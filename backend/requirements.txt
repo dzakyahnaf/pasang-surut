@@ -17,6 +17,18 @@ rasterio==1.4.4           # baca raster DEMNAS
 shapely==2.1.2            # operasi geometri (potong, jarak, dalam-poligon)
 pyproj==3.7.2             # alih proyeksi antar CRS, mis. 4326 ke 32749
 
+# ── Citra satelit ──────────────────────────────────────────────────────
+# Alasan tertulis, sesuai aturan repo yang melarang dependency tanpa dasar:
+# PLAN.md bagian 4 mengunci Google Earth Engine sebagai sumber label
+# genangan, dan paket ini satu-satunya cara memanggilnya dari Python.
+# Diuji terpasang bersama 14 paket lain tanpa konflik pada 28 Agustus 2026.
+#
+# CATATAN: geemap SENGAJA TIDAK dipakai. Versi terbarunya menuntut Python
+# 3.12 sementara proyek ini dikunci 3.11, dan versi 0.37.2 yang masih cocok
+# menarik lebih dari 70 paket tambahan termasuk matplotlib dan ipywidgets.
+# Pipeline kita mengekspor tabel, bukan menggambar peta di notebook.
+earthengine-api==1.7.41   # Earth Engine Python API
+
 # ── Model & data ───────────────────────────────────────────────────────
 scikit-learn==1.9.0       # gradient boosting untuk model genangan
 pandas==3.0.5             # tabel fitur latih
