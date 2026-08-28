@@ -26,6 +26,14 @@ Status per 28 Agustus 2026. Sisa waktu **3 hari**.
 dari keadaan repo yang sebenarnya. Tabel 8 (metrik model) diisi
 "Belum tersedia" pada seluruh baris, karena model memang belum dilatih.
 
+**Diperbarui lagi 28 Agustus, sesi kelima.** Baris "Rekonstruksi harmonik
+pasang surut" berubah dari Belum menjadi Selesai setelah acuan fase
+terkalibrasi. Ditambahkan satu baris "Fitur ruas dan variabel pemicu"
+(19.394 ruas, 102.168 jam). Di bawah Tabel 8 ditambahkan satu paragraf yang
+menyatakan terus terang bahwa metrik model belum ada, sekaligus melaporkan
+apa yang SUDAH tervalidasi, yaitu komponen pasang surut. Tabel 8 sendiri
+tetap "Belum tersedia" seluruhnya.
+
 **Masih harus dikerjakan:** perbarui lagi pada 31 Agustus bila M4 selesai.
 Bila model tetap belum jadi, turunkan klaim menjadi indeks kerentanan
 sesuai rencana 9.A di PLAN.md.
@@ -66,17 +74,19 @@ bernilai `null` seluruhnya karena sumbernya belum ditemukan.
 > abjad. Tambahkan rujukan untuk konstanta harmonik pasang surut dan laju
 > penurunan muka tanah begitu sumbernya ditemukan.
 
-**Sudah dikerjakan 28 Agustus,** empat entri, seluruh tautannya dibuka dan
+**Sudah dikerjakan 28 Agustus,** lima entri, seluruh tautannya dibuka dan
 dipastikan berisi:
 
 - Badan Informasi Geospasial — DEMNAS, Ina-Geoportal
 - European Space Agency — Sentinel-1, SentiWiki Copernicus
 - Google Earth Engine — Sentinel-1 SAR GRD
 - Rachman, Ismunarti, dan Handoyo (2015) — konstanta harmonik pasut Semarang
+- Rahmawati, Prasetyo, dan Sasmito (2020) — laju penurunan muka tanah,
+  *Jurnal Geodesi Undip* 9(1):29–36. **Ditambahkan sesi kelima.** PDF-nya
+  dibaca sampai ke tabelnya, bukan dikutip dari ringkasan pencarian
 
 **Masih kosong, dan sengaja dibiarkan kosong sampai sumbernya ada:**
 
-- Laju penurunan muka tanah Kota Semarang
 - Data kasus leptospirosis Dinas Kesehatan Kota Semarang
 - Tautan riset WRI Indonesia April 2026
 
@@ -117,7 +127,11 @@ Boleh dilewati tanpa mengurangi kelengkapan proposal.
 | Draf awal, sebelum diisi | 26 |
 | Setelah penanda terisi, kotak scaffolding masih ada | 27 |
 | **Setelah kotak scaffolding dipindah ke berkas ini** | **26** |
+| **Setelah pembaruan sesi kelima (+131 kata)** | **26** |
 | Batas rulebook | 30 |
+
+Diukur dengan Word, bukan diperkirakan. Penanda `[[ISI]]` tersisa **20**,
+turun dari 21.
 
 Tersisa **4 halaman** untuk Bagian 10 yang seluruhnya berisi tangkapan
 layar. Enam gambar dengan keterangan kira-kira menghabiskan 3 sampai 4

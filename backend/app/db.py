@@ -151,6 +151,71 @@ class RepositoriRuas:
             )
             return [(int(a), float(b), float(c)) for a, b, c in kur.fetchall()]
 
+    def perbarui_fitur(self, baris: Iterable[Sequence]) -> int:
+        """Isi kolom fitur model. Urutan tiap baris:
+
+            (elevasi_m, jarak_pantai_m, laju_subsidensi_cm_thn, edge_id)
+
+        Diperbarui sekaligus lewat VALUES dan bukan satu UPDATE per ruas,
+        karena dua ribu perjalanan bolak-balik ke database untuk pekerjaan
+        yang sama adalah pemborosan yang terlihat jelas saat skrip dijalankan
+        ulang.
+
+        NULL diperbolehkan dan bermakna: piksel DEM tanpa data tetap NULL,
+        bukan nol. Nol adalah elevasi yang sah di kawasan pesisir, jadi
+        memakainya sebagai penanda "tidak ada data" akan mencemari fitur
+        model dengan ruas yang seolah-olah berada tepat di muka air.
+        """
+        baris = list(baris)
+        if not baris:
+            return 0
+        with self._kon.cursor() as kur:
+            psycopg2.extras.execute_values(
+                kur,
+                """
+                UPDATE ruas_jalan r SET
+                    elevasi_m              = v.elevasi,
+                    jarak_pantai_m         = v.jarak,
+                    laju_subsidensi_cm_thn = v.subsidensi
+                FROM (VALUES %s)
+                     AS v(elevasi, jarak, subsidensi, edge_id)
+                WHERE r.edge_id = v.edge_id
+                """,
+                baris,
+                template=(
+                    "(%s::double precision, %s::double precision,"
+                    " %s::double precision, %s::bigint)"
+                ),
+                page_size=500,
+            )
+        return len(baris)
+
+    def ringkasan_fitur(self) -> dict:
+        """Berapa ruas yang fiturnya sudah terisi. Dipakai untuk melapor."""
+        with self._kon.cursor() as kur:
+            kur.execute(
+                """
+                SELECT COUNT(*),
+                       COUNT(elevasi_m),
+                       COUNT(jarak_pantai_m),
+                       COUNT(laju_subsidensi_cm_thn),
+                       MIN(elevasi_m), MAX(elevasi_m),
+                       MIN(jarak_pantai_m), MAX(jarak_pantai_m)
+                FROM ruas_jalan
+                """
+            )
+            b = kur.fetchone()
+        return {
+            "ruas": int(b[0]),
+            "elevasi_terisi": int(b[1]),
+            "jarak_pantai_terisi": int(b[2]),
+            "subsidensi_terisi": int(b[3]),
+            "elevasi_min_m": None if b[4] is None else float(b[4]),
+            "elevasi_maks_m": None if b[5] is None else float(b[5]),
+            "jarak_pantai_min_m": None if b[6] is None else float(b[6]),
+            "jarak_pantai_maks_m": None if b[7] is None else float(b[7]),
+        }
+
     def geojson(self, waktu=None) -> dict:
         """Seluruh ruas sebagai FeatureCollection GeoJSON.
 
@@ -386,3 +451,103 @@ class RepositoriGenangan:
                 """
             )
             return [(w, int(n), float(m)) for w, n, m in kur.fetchall()]
+
+
+class RepositoriPemicu:
+    """Akses tabel `pemicu` — variabel pendorong genangan, satu baris per jam.
+
+    Isinya tinggi pasut hasil rekonstruksi harmonik dan hujan terakumulasi
+    24 dan 72 jam. Dua-duanya dihitung sekali lalu disimpan, tidak pernah
+    diambil saat permintaan rute datang. Aturan repo nomor 6 melarang
+    panggilan API eksternal saat runtime, dan hujan Open-Meteo adalah contoh
+    paling jelas dari hal yang menggoda untuk dipanggil langsung.
+    """
+
+    def __init__(self, kon: psycopg2.extensions.connection) -> None:
+        self._kon = kon
+
+    def sisipkan_banyak(self, baris: Iterable[Sequence]) -> int:
+        """Urutan kolom:
+        (waktu, tinggi_pasut_m, hujan_24j_mm, hujan_72j_mm, sumber_hujan).
+
+        ON CONFLICT dipakai supaya pengambilan ulang rentang tanggal yang
+        sama memperbarui, bukan menabrak kunci primer.
+        """
+        baris = list(baris)
+        if not baris:
+            return 0
+        with self._kon.cursor() as kur:
+            psycopg2.extras.execute_values(
+                kur,
+                """
+                INSERT INTO pemicu
+                    (waktu, tinggi_pasut_m, hujan_24j_mm, hujan_72j_mm,
+                     sumber_hujan)
+                VALUES %s
+                ON CONFLICT (waktu) DO UPDATE SET
+                    tinggi_pasut_m = EXCLUDED.tinggi_pasut_m,
+                    hujan_24j_mm   = EXCLUDED.hujan_24j_mm,
+                    hujan_72j_mm   = EXCLUDED.hujan_72j_mm,
+                    sumber_hujan   = EXCLUDED.sumber_hujan
+                """,
+                baris,
+                page_size=1000,
+            )
+        return len(baris)
+
+    def hitung(self) -> int:
+        with self._kon.cursor() as kur:
+            kur.execute("SELECT COUNT(*) FROM pemicu")
+            return kur.fetchone()[0]
+
+    def rentang_waktu(self) -> tuple[object | None, object | None]:
+        with self._kon.cursor() as kur:
+            kur.execute("SELECT MIN(waktu), MAX(waktu) FROM pemicu")
+            return kur.fetchone()
+
+    def ringkasan(self) -> dict:
+        """Statistik ringkas untuk dilaporkan setelah pengisian."""
+        with self._kon.cursor() as kur:
+            kur.execute(
+                """
+                SELECT COUNT(*),
+                       MIN(waktu), MAX(waktu),
+                       MIN(tinggi_pasut_m), MAX(tinggi_pasut_m),
+                       MAX(hujan_24j_mm), MAX(hujan_72j_mm),
+                       COUNT(*) FILTER (WHERE hujan_24j_mm > 0)
+                FROM pemicu
+                """
+            )
+            b = kur.fetchone()
+        return {
+            "baris": int(b[0]),
+            "awal": b[1],
+            "akhir": b[2],
+            "pasut_min_m": None if b[3] is None else float(b[3]),
+            "pasut_maks_m": None if b[4] is None else float(b[4]),
+            "hujan_24j_maks_mm": None if b[5] is None else float(b[5]),
+            "hujan_72j_maks_mm": None if b[6] is None else float(b[6]),
+            "jam_berhujan": int(b[7] or 0),
+        }
+
+    def pada(self, waktu) -> dict | None:
+        """Satu baris pemicu pada jam tertentu, atau None bila tidak ada."""
+        with self._kon.cursor() as kur:
+            kur.execute(
+                """
+                SELECT waktu, tinggi_pasut_m, hujan_24j_mm, hujan_72j_mm,
+                       sumber_hujan
+                FROM pemicu WHERE waktu = %s
+                """,
+                (waktu,),
+            )
+            b = kur.fetchone()
+        if b is None:
+            return None
+        return {
+            "waktu": b[0],
+            "tinggi_pasut_m": float(b[1]),
+            "hujan_24j_mm": float(b[2] or 0.0),
+            "hujan_72j_mm": float(b[3] or 0.0),
+            "sumber_hujan": b[4],
+        }

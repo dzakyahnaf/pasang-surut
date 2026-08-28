@@ -19,7 +19,7 @@ ini, baca bagian itu.
 | # | Blokade | Menghambat | Siapa |
 |---|---|---|---|
 | A1 | **Supabase belum ada.** Database yang dipakai masih PostGIS lokal di Docker. `db/schema.sql` belum pernah dijalankan di Supabase. | Deploy M6, dan kerja paralel antar anggota tim | Manual |
-| A2 | **Zona waktu acuan fase konstanta pasut belum dipastikan.** Sumbernya tidak menyebutkan. Salah menebak menggeser kurva sampai 7 jam. | Pasut asli menggantikan sinusoid contoh | **Sudah bisa saya kerjakan** — akses GEE dan Python sudah hidup |
+| ~~A2~~ | **SELESAI 28 Agustus.** Acuan fase adalah WIB, dibuktikan dengan menyisir seluruh offset −12 sampai +12 jam terhadap data terukur stasiun IOC `sema`. UTC memberi korelasi NEGATIF di seluruh jendela uji, yang berarti pasang tertukar surut. | — | — |
 | A3 | **SEBAGIAN SELESAI.** Proyek pertama `pasang-surut-anforcom` terverifikasi: terdaftar nonkomersial, Community tier, pemakaian 0,07 persen, uji 723 lolos, dan Python sudah tersambung. **Proyek Daffa dan Naufal masih belum ada** — kuota per proyek, jadi jatah tim baru sepertiga. | Kapasitas kuota untuk ekstraksi label M4 | Manual, dua orang |
 | ~~A4~~ | **SELESAI 28 Agustus.** `data/raw/DEMNAS_1409-22_v1.0.tif`, 43 MB, terverifikasi menutupi seluruh AOI, 100 persen piksel valid, median elevasi 2,60 m. | — | — |
 | A5 | **Repo belum dipublikasikan.** M1 mensyaratkan repo publik, dan juri menilai Code Project 10 persen dari sana. | Penilaian | Manual |
@@ -34,16 +34,20 @@ ini, baca bagian itu.
 | B4 | Koneksi database dibuka DUA KALI per permintaan, tanpa pooling. `database_tersedia()` membuka satu, endpoint membuka lagi. | Supabase paket gratis membatasi koneksi. Akan menggigit saat juri memakai aplikasi bersamaan di babak final |
 | B5 | `copy.id.json` ada di dua tempat, akar dan `frontend/src/`, tanpa apa pun yang menjaganya sinkron. | Begitu satu disunting, keduanya menyimpang diam-diam |
 | B6 | Belum ada `manifest.json`. Bentuk produk yang dikunci PLAN.md bagian 3 adalah PWA. | PWA itu yang membuat rulebook "website ATAU mobile" terpenuhi keduanya |
-| B7 | Test hanya menutupi `config.py` dan `routing.py`. `db.py`, `main.py`, ketiga skrip, dan `teks.js` tanpa test. | `t()` adalah mekanisme pengaman yang melempar galat, dan tidak ada test yang membuktikan ia melempar |
+| B7 | Test menutupi `config.py`, `routing.py`, dan fungsi murni di skrip 06 dan 07 — 24 uji lolos. `db.py`, `main.py`, skrip 01 sampai 05, dan `teks.js` masih tanpa test. | `t()` adalah mekanisme pengaman yang melempar galat, dan tidak ada test yang membuktikan ia melempar |
 | B8 | Data contoh kedaluwarsa setelah 72 jam sejak dibuat. | Kalau Pita Pasut tampak kering seluruhnya, jalankan ulang `python -m scripts.03_isi_dummy` dari `backend/` |
 | B9 | Ada PostgreSQL lain di mesin ini yang memakai port 5433, jadi kontainer pengembangan dipindah ke 55433. | Jangan bingung kalau `docker run` di 5433 gagal |
 | B10 | Kontras kelas genangan paling dangkal `--air-1` terhadap latar dek hanya 1,39:1. | DESIGN.md Bagian 11 mensyaratkan terbaca di bawah matahari langsung dan saat dicetak hitam putih. Belum diuji di luar ruangan |
 | B11 | Kecepatan ruas untuk jalan tanpa tag `maxspeed` berasal dari imputasi OSMnx. | Asumsi, bukan pengukuran. Sudah tercatat di `docs/batasan.md` bagian 2.4 |
 | B12 | Penalti genangan (1,0 → 2,5 → 8,0) adalah angka rancangan, bukan hasil pengukuran lapangan. | Juri berhak menanyakan dasarnya. Sudah tercatat di `docs/batasan.md` |
 | B13 | **`geemap` versi terbaru menuntut Python 3.12**, sementara proyek dikunci 3.11. PLAN.md bagian 4 menyebutnya sebagai bagian tech stack. | Rekomendasi: JANGAN pakai geemap. `earthengine-api` saja sudah cukup untuk pipeline yang mengekspor tabel, dan geemap 0.37.2 yang masih cocok menarik lebih dari 70 paket tambahan |
-| B14 | **Berkas DEMNAS tidak membawa CRS.** `rasterio` melaporkan `CRS: None` walau koordinatnya jelas derajat WGS84. | Setiap kali berkas dibuka, CRS harus ditetapkan eksplisit. Kalau dilewatkan, proyeksi dan sampling gagal atau, lebih buruk, diam-diam salah |
-| B16 | **Proposal tersisa 21 penanda `[[ISI]]` dari semula 58.** Seluruhnya tertahan pada tugas manual atau sumber yang belum ada: tautan deploy, repo, video, Figma; angka rantai dampak yang menunggu faktor emisi; dan tiga sitasi tanpa sumber. | Rincian dan status per bagian ada di `docs/sisa_proposal.md` |
+| B14 | **Berkas DEMNAS tidak membawa CRS.** `rasterio` melaporkan `CRS: None` walau koordinatnya jelas derajat WGS84. | **Sudah ditangani** di `scripts/05_isi_fitur_ruas.py`, yang menetapkan `EPSG:4326` eksplisit dan mencetak peringatan saat berkas dibuka. Berlaku untuk setiap kode baru yang membuka berkas itu |
+| B16 | **Proposal tersisa 20 penanda `[[ISI]]` dari semula 58.** Seluruhnya tertahan pada tugas manual atau sumber yang belum ada: tautan deploy, repo, video, Figma; angka rantai dampak yang menunggu faktor emisi; dan dua sitasi tanpa sumber (leptospirosis dan WRI), turun dari tiga. | Rincian dan status per bagian ada di `docs/sisa_proposal.md` |
 | B17 | **Tujuh kotak `[ ISI MANUAL ]` sudah dikeluarkan dari proposal** dan dipindah ke `docs/sisa_proposal.md`. Isinya tidak hilang. | Kotak itu instruksi untuk penulis, bukan isi proposal, dan berisiko ikut tercetak ke PDF yang dibaca juri |
+| B18 | **Angka subsidensi "9–13 cm/tahun" tidak didukung sumber yang kita punya.** Rahmawati dkk (2020) memilih varian SBAS tanpa koreksi karena RMSE-nya terkecil (±1,3 cm/th); menurut varian itu nilai TERTINGGI seluruh Kota Semarang 9,4 cm/th, rata-rata Semarang Utara 4,6 cm/th. Angka belasan hanya muncul pada varian terkoreksi atmosfer yang justru TIDAK dipilih penulisnya. | PLAN.md bagian 6 dan abstrak proposal memakai 9–13. Proposal SUDAH saya turunkan ke 9,4 karena aturan repo nomor 1, tetapi **PLAN.md belum**. Sitasinya jurnal Geodesi Undip, dan PLAN.md sendiri memperingatkan juri Geodesi Undip akan membantah. Lihat C15 |
+| B19 | **Rerata hujan tahunan ERA5 1.830 mm belum diadu dengan normal BMKG.** Reanalisis diketahui meratakan hujan konvektif setempat. | Angka ini belum layak dikutip di proposal. Sudah tercatat di `docs/batasan.md` bagian 1.9 dan `docs/validasi.md` bagian 5 |
+| B20 | **Enam dari 16 kejadian rob terdokumentasi terjadi pada pasut yang TIDAK tinggi**, dan hujan 24 jamnya juga sedang saja (2,5 sampai 20,4 mm). | Dua pemicu yang kita punya belum menjelaskan seluruh kejadian. Ini memperkuat alasan memakai model, tetapi juga berarti fitur angin dan kondisi tanggul absen. Rincian di `docs/validasi.md` bagian 3.2 |
+| B21 | **990 dari 19.394 ruas tanpa nilai subsidensi, 26 tanpa elevasi.** Yang pertama karena kecamatannya tidak dilaporkan sumber; yang kedua karena jatuh di tepi timur tile DEMNAS. | Keduanya `NULL`, bukan nol — gradient boosting menangani `NULL`, tetapi jangan sampai ada kode yang mengisinya dengan nol diam-diam |
 | B15 | **Autentikasi Earth Engine memberi empat cakupan sekaligus**: earthengine, cloud-platform, drive, dan devstorage.full_control. | Itu bawaan alat resmi, bukan pilihan kita, tetapi cakupan Drive dan Cloud Storage luas. Token tersimpan di laptop yang menjalankan perintah |
 
 ### C. HANYA BISA DIKERJAKAN MANUAL — di luar jangkauan Claude Code
@@ -68,6 +72,7 @@ berubah oleh tersedianya browser otomatis.
 | C12 | Rekam video 3 sampai 7 menit, wajah peserta wajib tampil sepanjang video | Rulebook, bobot 10 persen |
 | C14 | Konfirmasi pembagian peran di Lampiran C proposal. Saya isi mengikuti pembagian kerja PLAN.md, bukan berdasarkan kesepakatan tim | `docs/sisa_proposal.md` |
 | C13 | Buka satu per satu 19 entri `perlu_verifikasi` di `kejadian_rob_semarang.json` dan salin angkanya dari isi artikel | Angka belum terverifikasi tidak boleh masuk proposal |
+| C15 | **Putuskan angka subsidensi mana yang dipakai tim.** Kalau 9–13 cm/tahun hendak dipertahankan, sediakan sumber yang bisa dibuka dan dibaca sampai ke tabelnya. Kalau tidak, PLAN.md bagian 6 perlu diturunkan menyusul proposal. | B18 |
 
 ### D. SUDAH TERPECAHKAN — jangan dikerjakan lagi
 
@@ -80,6 +85,10 @@ berubah oleh tersedianya browser otomatis.
 | Konstanta pasut seluruhnya `null` | Riset pendukung 24 Agustus. Terisi dari Rachman dkk 2015, dengan seluruh keterbatasannya tercatat |
 | Tile DEMNAS mana yang dibutuhkan | 28 Agustus. `1409-22` saja, dikonfirmasi dua indeks independen dan dibuktikan dengan membuka berkasnya |
 | Apakah akses Earth Engine benar-benar bekerja | 28 Agustus. 723 direproduksi dari Code Editor dan dari Python |
+| Zona waktu acuan fase konstanta pasut | 28 Agustus. WIB, dibuktikan lewat penyisiran offset terhadap data terukur IOC `sema`. UTC memberi korelasi negatif. Sistem memakai +7,0 jam, bukan +7,9 hasil pencocokan terbaik |
+| `laju_subsidensi.json` seluruhnya `null` | 28 Agustus. Terisi dari Rahmawati, Prasetyo & Sasmito (2020), PDF dibaca langsung sampai ke tabelnya. Angkanya lebih kecil daripada yang selama ini dipakai — lihat B18 |
+| Curah hujan Open-Meteo belum diambil | 28 Agustus. 102.168 jam 2015–2026 masuk tabel `pemicu`, dengan cadangan mentahnya di `data/referensi/hujan_open_meteo.json` |
+| Jarak pantai belum dihitung | 28 Agustus. Terisi untuk seluruh 19.394 ruas, dihitung di EPSG:32749 terhadap garis pantai OSM |
 
 ---
 
@@ -494,3 +503,153 @@ supaya verifikasi otomatis bisa memproyeksikan bujur-lintang ke piksel layar.
 Model asli, panel dampak empat angka, halaman validasi, dan tombol tujuan
 cepat. Selisih waktu dan jarak antara kedua rute sudah dikembalikan API di
 field `selisih` sebagai bahan mentah panel dampak M5.
+
+---
+
+## Persiapan M4 — 28 Agustus 2026: pasut terbukti, fitur terisi, pemicu terkumpul
+
+**Status: selesai.** Ini pekerjaan penyiapan sebelum M4, bukan M4 itu
+sendiri. Model genangan belum dilatih dan tidak ada satu pun metrik model di
+sesi ini.
+
+### A2 tuntas — acuan waktu fase konstanta pasut adalah WIB
+
+Ini blokade tertua di papan. Rachman dkk (2015) tidak menyebutkan zona waktu
+acuan fase konstantanya, dan selisih tujuh jam setara 203 derajat pada M2 —
+lebih dari setengah siklus. Salah menebak berarti pasang tertukar surut pada
+fitur terpenting model.
+
+Rencana semula menguji dua tebakan. Yang dikerjakan lebih baik daripada itu:
+seluruh offset −12 sampai +12 jam disisir dengan langkah 0,25 jam terhadap
+data terukur stasiun IOC `sema`. Menyisir lebih baik karena hasilnya
+menunjukkan sendiri apakah ada puncak kecocokan yang tegas; kalau tidak ada,
+itu pertanda konstantanya yang bermasalah, bukan offsetnya.
+
+Lebih dulu dibuktikan bahwa waktu pada layanan IOC memang UTC, secara
+empiris: rekaman terbaru hanya berselang menit dari waktu UTC berjalan.
+Kalau dibaca sebagai waktu lokal ia akan tertinggal tujuh jam padahal
+stasiunnya melapor hampir seketika.
+
+| Jendela | Offset terbaik | Fase = UTC | Fase = WIB |
+|---|---:|---:|---:|
+| 2 hari | +7,50 j | −0,289 | +0,907 |
+| 4 hari | +7,75 j | −0,362 | +0,909 |
+| 7 hari | +8,25 j | −0,427 | +0,858 |
+| 10 hari | +8,00 j | −0,465 | +0,782 |
+
+**Memakai UTC bukan sekadar kurang tepat, melainkan berkebalikan.** Sistem
+memakai +7,0 jam, bukan +7,9 hasil pencocokan terbaik, karena +7,0 berdasar
+sedangkan +7,9 hasil pencocokan terhadap sepuluh hari data. Sisa ~0,9 jam
+diduga koreksi nodal 18,6 tahun yang belum diterapkan.
+
+Sinusoid data contoh di `domain/pasut.py` dihapus. Rekonstruksi harmonik kini
+satu-satunya jalur.
+
+### Uji silang kedua: apakah tanggal rob memang berpasut tinggi
+
+Kalibrasi di atas memakai sepuluh hari data terukur. Uji ini memakai bukti
+yang sama sekali terpisah — 21 entri kejadian rob dari pemberitaan dan
+dokumen resmi — dan bertanya apakah hari kejadian jatuh pada pasut tinggi.
+
+| Ukuran | Median persentil | ≥ p75 | ≥ p90 |
+|---|---:|---:|---:|
+| Per hari (37 hari) | 71,5 | 16 (43%) | 7 (19%) |
+| Per kejadian (16 kejadian) | 80,2 | 9 (56%) | 5 (31%) |
+
+Bila tanggal kejadian tidak berhubungan dengan pasut, medianya mendekati 50.
+**Putusan yang dicatat "sedang", diambil dari ukuran per hari yang angkanya
+lebih rendah** — ukuran per kejadian diperkenalkan setelah ukuran per hari
+dihitung, jadi memakainya sebagai dasar putusan akan terlihat seperti memilih
+ukuran yang hasilnya paling enak.
+
+Temuan yang lebih berguna daripada putusannya: **enam dari 16 kejadian justru
+terjadi pada pasut yang tidak tinggi**, dan hujan 24 jamnya juga sedang saja.
+Salah satunya, `2026-05-18`, berstatus verifikasi `primer` — sumber terkuat
+yang kita punya — dengan persentil pasut hanya 29,2. Pasut saja tidak
+menjelaskan rob, dan dua pemicu yang kita punya pun belum menjelaskan
+seluruhnya. Itu argumen untuk model, bukan ambang.
+
+### Fitur ruas terisi
+
+`scripts/05_isi_fitur_ruas.py`, atas 19.394 ruas:
+
+| Fitur | Terisi | Minimum | Median | Maksimum |
+|---|---:|---:|---:|---:|
+| Elevasi DEMNAS | 19.368 | −0,13 m | 4,07 m | 57,31 m |
+| Jarak ke garis pantai | 19.394 | 7 m | 3.565 m | 7.909 m |
+| Laju subsidensi | 18.404 | 2,1 cm/th | — | 5,8 cm/th |
+
+Garis pantai (21 garis, `natural=coastline`) dan batas delapan kecamatan
+diunduh sekali dari OSM lalu disimpan ke `data/processed/`. Poligon kecamatan
+diperiksa tidak saling tumpang tindih. Jarak dihitung di EPSG:32749, bukan di
+derajat.
+
+### Variabel pemicu terkumpul
+
+`scripts/06_isi_pemicu.py` mengisi tabel `pemicu` dengan **102.168 baris jam**
+dari 2015-01-01 sampai 2026-08-27, mencakup seluruh periode latih dan uji.
+Hujan dari Open-Meteo Archive (reanalisis ERA5), diakumulasi 24 dan 72 jam;
+pasut dari rekonstruksi harmonik. Cadangan mentahnya disimpan ke
+`data/referensi/hujan_open_meteo.json` supaya tabel bisa dibangun ulang tanpa
+internet — aturan repo nomor 6 melarang panggilan API saat runtime, dan hujan
+adalah godaan terbesar untuk melanggarnya.
+
+Rerata tahunan yang dihasilkan 1.830 mm. **Belum diadu dengan normal BMKG**,
+dan reanalisis diketahui meratakan hujan konvektif setempat, jadi angka itu
+belum layak dikutip. Dicatat sebagai B19.
+
+### Laju subsidensi: sumbernya ketemu, angkanya lebih kecil
+
+`laju_subsidensi.json` terisi dari Rahmawati, Prasetyo & Sasmito (2020),
+*Jurnal Geodesi Undip* 9(1):29–36 — SBAS atas 13 citra Sentinel-1A 2015–2018.
+PDF-nya dibaca langsung sampai ke tabelnya, bukan dikutip dari ringkasan
+pencarian, mengikuti disiplin yang dipakai sejak ringkasan pencarian pernah
+mengacaukan amplitudo pasut.
+
+Makalah menguji enam varian; **penulisnya memilih varian tanpa koreksi karena
+RMSE-nya terkecil**, ±1,3 cm/tahun. Berkas ini memakai varian yang dipilih
+penulisnya sendiri, bukan varian yang angkanya paling mengesankan.
+
+| Kecamatan | Minimum | Maksimum | Rata-rata |
+|---|---:|---:|---:|
+| Genuk | 2,3 | 9,4 | 5,8 |
+| Semarang Utara | 0,8 | 7,4 | 4,6 |
+| Semarang Timur | 0,1 | 7,4 | 4,5 |
+| Gayamsari | 0,1 | 8,1 | 3,6 |
+
+**Konsekuensinya tidak nyaman: "9–13 cm/tahun" di PLAN.md bagian 6 dan di
+abstrak proposal tidak didukung sumber ini.** Angka belasan memang muncul di
+makalah yang sama, tetapi hanya pada varian terkoreksi atmosfer yang RMSE-nya
+dua sampai lima kali lebih besar dan justru tidak dipilih penulisnya. Proposal
+sudah diturunkan ke 9,4 mengikuti aturan repo nomor 1; **PLAN.md belum, dan
+itu keputusan tim.** Lihat B18 dan C15.
+
+### Proposal
+
+26 halaman sebelum dan sesudah, diukur dengan Word, bukan diperkirakan.
+3.823 → 3.954 kata.
+
+- Abstrak dan bagian 3.1: 9–13 → 9,4 cm/tahun, dengan sitasinya
+- Tabel 6: sumber subsidensi dan hujan disebut spesifik
+- Tabel 7: baris pasut Belum → Selesai; ditambah baris "Fitur ruas dan
+  variabel pemicu" (19.394 ruas, 102.168 jam)
+- Bagian 9.2: satu paragraf baru yang menyatakan terus terang metrik model
+  belum ada, sekaligus melaporkan apa yang sudah tervalidasi. Tabel 8 tetap
+  "Belum tersedia" seluruhnya
+- Daftar Pustaka: satu `[[ISI]]` terisi. Sisa 20, turun dari 21
+
+### Yang dibuat
+
+- `backend/scripts/05_isi_fitur_ruas.py`, `06_isi_pemicu.py`,
+  `07_uji_silang_rob.py`
+- `db.RepositoriRuas.perbarui_fitur()` dan `ringkasan_fitur()`
+- `db.RepositoriPemicu` — repositori ketiga
+- `backend/tests/test_pemicu.py`, 10 uji. Total suite 24 uji, seluruhnya lolos
+- `data/referensi/laju_subsidensi.json`, `uji_silang_rob.json`,
+  `hujan_open_meteo.json`
+- `data/processed/garis_pantai.geojson`, `kecamatan.geojson`
+
+### Yang TIDAK dikerjakan, sesuai batas sesi
+
+Ekstraksi label Sentinel-1 dan pelatihan model — itu M4 sebenarnya. Tidak ada
+satu pun metrik model di sesi ini, dan Tabel 8 di proposal tetap kosong.

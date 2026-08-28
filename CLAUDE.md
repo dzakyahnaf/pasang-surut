@@ -35,6 +35,16 @@ Urutan pipeline data, dijalankan dari `backend/`:
 python -m scripts.01_bangun_graf        # SEKALI saja, menyentuh Overpass
 python -m scripts.02_isi_ruas_jalan     # graf -> tabel ruas_jalan
 python -m scripts.03_isi_dummy          # data contoh 72 jam, sumber='dummy'
+python -m scripts.05_isi_fitur_ruas     # elevasi, jarak pantai, subsidensi
+python -m scripts.06_isi_pemicu         # hujan Open-Meteo + pasut -> tabel pemicu
+```
+
+Dua skrip di luar urutan itu adalah verifikasi, bukan pengisi data. Keduanya
+boleh dijalankan kapan saja dan menulis hasilnya ke `data/referensi/`:
+
+```bash
+python -m scripts.04_kalibrasi_pasut    # acuan fase vs data terukur IOC
+python -m scripts.07_uji_silang_rob     # pasut vs tanggal kejadian rob
 ```
 
 ## Konvensi

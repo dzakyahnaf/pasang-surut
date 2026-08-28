@@ -1,16 +1,69 @@
 {
-  "_catatan": "TODO(sumber). PLAN.md bagian 6 menyebut kisaran 9 sampai 13 cm per tahun untuk wilayah pilot, tetapi angka itu belum punya sitasi di repo ini. Biarkan null sampai sumbernya ditemukan. Aturan repo: jangan pernah mengarang angka.",
-  "sumber": null,
-  "tautan_sumber": null,
-  "metode": null,
-  "periode_pengamatan": null,
+  "_status": "TERISI 28 Agustus 2026 dari sumber terpublikasi yang dibaca langsung dari PDF aslinya.",
+
+  "_ringkasan": "Laju penurunan muka tanah per kecamatan di Kota Semarang, hasil metode SBAS atas 13 citra Sentinel-1A SLC tahun 2015 sampai 2018.",
+
+  "sumber": {
+    "penulis": ["An Nisa Tri Rahmawati", "Yudo Prasetyo", "Bandi Sasmito"],
+    "judul": "Studi Penurunan Muka Tanah dengan Metode Small Baseline Area Subset (SBAS) Menggunakan Citra Sentinel-1A (Studi Kasus: Kota Semarang)",
+    "jurnal": "Jurnal Geodesi Undip",
+    "volume": "Volume 9, Nomor 1",
+    "halaman": "29-36",
+    "tahun": 2020,
+    "issn": "2337-845X",
+    "tautan": "https://ejournal3.undip.ac.id/index.php/geodesi/article/viewFile/26032/23173",
+    "diakses": "2026-08-28"
+  },
+
+  "metode": {
+    "teknik": "Small Baseline Area Subset (SBAS)",
+    "perangkat_lunak": "GMTSAR",
+    "citra": "13 citra Sentinel-1A SLC",
+    "periode": "2015 sampai 2018",
+    "verifikasi": "Dibandingkan dengan hasil PS-InSAR penelitian terpisah pada 50 titik acak. Uji Kolmogorov-Smirnov memberi signifikansi 0,2, di atas 0,05, sehingga kedua metode dinyatakan tidak berbeda signifikan.",
+    "varian_dipilih": "SBAS TANPA KOREKSI",
+    "alasan_varian": "Penulis menguji enam varian pengolahan dan memilih varian tanpa koreksi karena RMSE-nya terkecil, yaitu 1,3 cm/tahun. Varian dengan koreksi atmosfer dan ESD menghasilkan angka jauh lebih besar tetapi RMSE-nya 2,6 sampai 6,4 cm/tahun. Berkas ini memakai varian yang dipilih PENULISNYA SENDIRI, bukan varian yang angkanya paling mengesankan."
+  },
+
   "satuan": "cm/tahun",
-  "kelurahan": {
-    "Tanjungmas": { "laju": null },
-    "Bandarharjo": { "laju": null },
-    "Kemijen": { "laju": null },
-    "Kaligawe": { "laju": null },
-    "Terboyo Kulon": { "laju": null },
-    "Terboyo Wetan": { "laju": null }
-  }
+  "ketidakpastian_cm_thn": 1.3,
+  "kota_rata_rata_cm_thn": 0.4,
+  "kota_maksimum_cm_thn": 9.4,
+  "luas_terdampak_km2": 128.65,
+  "luas_terdampak_persen": 32.92,
+
+  "_catatan_cakupan": "Sumber melaporkan per KECAMATAN, bukan per kelurahan. Nilai di bawah karena itu berlaku untuk seluruh kecamatan, dan kelurahan sasaran mewarisi nilai kecamatannya.",
+
+  "kecamatan": {
+    "Genuk":           { "minimum": 2.3, "maksimum": 9.4, "rata_rata": 5.8, "luas_terdampak_persen": 100.0 },
+    "Semarang Utara":  { "minimum": 0.8, "maksimum": 7.4, "rata_rata": 4.6, "luas_terdampak_persen": 100.0 },
+    "Semarang Timur":  { "minimum": 0.1, "maksimum": 7.4, "rata_rata": 4.5, "luas_terdampak_persen": 99.60 },
+    "Gayamsari":       { "minimum": 0.1, "maksimum": 8.1, "rata_rata": 3.6, "luas_terdampak_persen": 99.87 },
+    "Pedurungan":      { "minimum": 0.1, "maksimum": 8.8, "rata_rata": 4.3, "luas_terdampak_persen": 94.83 },
+    "Tugu":            { "minimum": 0.1, "maksimum": 4.4, "rata_rata": 1.5, "luas_terdampak_persen": 65.82 },
+    "Semarang Barat":  { "minimum": 0.1, "maksimum": 5.6, "rata_rata": 2.1, "luas_terdampak_persen": 52.54 },
+    "Semarang Tengah": { "minimum": 0.1, "maksimum": 6.2, "rata_rata": 2.3, "luas_terdampak_persen": 9.19 }
+  },
+
+  "kelurahan_sasaran": {
+    "_catatan": "Pemetaan kelurahan sasaran AOI ke kecamatannya, supaya skrip pengisi fitur tidak perlu menebak.",
+    "Tanjungmas": "Semarang Utara",
+    "Bandarharjo": "Semarang Utara",
+    "Kemijen": "Semarang Timur",
+    "Kaligawe": "Gayamsari",
+    "Terboyo Kulon": "Genuk",
+    "Terboyo Wetan": "Genuk"
+  },
+
+  "_peringatan": [
+    "ANGKA 9 SAMPAI 13 CM PER TAHUN YANG BEREDAR DI PLAN.md DAN PROPOSAL TIDAK DIDUKUNG VARIAN YANG DIPILIH SUMBER INI. Menurut varian tanpa koreksi yang RMSE-nya terkecil, nilai TERTINGGI di seluruh Kota Semarang adalah 9,4 cm/tahun, dan rata-rata untuk Semarang Utara hanya 4,6 cm/tahun. Angka belasan memang muncul di makalah yang sama, tetapi hanya pada varian terkoreksi atmosfer yang RMSE-nya dua sampai lima kali lebih besar dan justru TIDAK dipilih penulisnya. Klaim di proposal perlu diturunkan atau diberi sumber lain yang mendukungnya.",
+
+    "SUMBER LAIN MEMBERI ANGKA LEBIH BESAR. Beberapa penelitian DInSAR lain melaporkan Genuk di kisaran 10 cm/tahun dan rata-rata kota 4,37 cm/tahun. Perbedaan sebesar itu wajar dalam literatur subsidensi karena bergantung metode, periode, dan koreksi yang dipakai. Kalau angka yang lebih besar hendak dipakai, sitasinya harus dibuka dan dibaca sendiri lebih dulu, bukan dikutip dari ringkasan.",
+
+    "KETIDAKPASTIAN 1,3 CM/TAHUN ITU BESAR RELATIF TERHADAP NILAINYA. Untuk Gayamsari yang rata-ratanya 3,6 cm/tahun, ketidakpastian itu sekitar 36 persen. Sajikan sebagai rentang, jangan sebagai angka tunggal.",
+
+    "PERIODE DATA 2015 SAMPAI 2018. Laju subsidensi berubah seiring waktu, terutama bila pengambilan air tanah berubah. Memakainya untuk 2026 adalah ekstrapolasi delapan tahun dan wajib disebut demikian.",
+
+    "RESOLUSI PER KECAMATAN, BUKAN PER RUAS. Seluruh ruas di dalam satu kecamatan akan menerima nilai yang sama. Sebagai fitur model itu berarti daya pisahnya kasar; ia lebih berperan sebagai penanda wilayah daripada sebagai ukuran lokal."
+  ]
 }

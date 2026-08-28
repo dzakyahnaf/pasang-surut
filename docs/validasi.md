@@ -111,24 +111,182 @@ bawah ketidakpastian alat ukurnya sendiri.
 
 ---
 
-## 3. Akurasi model genangan
+## 3. Rekonstruksi pasut
+
+Dua uji dijalankan, keduanya terhadap bukti di luar konstanta itu sendiri.
+
+### 3.1 Acuan waktu fase — diselesaikan 28 Agustus 2026
+
+Rachman dkk (2015) tidak menyatakan zona waktu acuan fase konstantanya.
+Taruhannya besar: selisih tujuh jam setara 203 derajat pada M2 yang
+periodenya 12,42 jam, lebih dari setengah siklus. Salah acuan berarti pasang
+tertukar surut, dan fitur pasut yang jadi masukan terpenting model akan
+salah tanda.
+
+Alih-alih menguji dua tebakan, seluruh offset −12 sampai +12 jam disisir
+dengan langkah 0,25 jam, lalu dibandingkan terhadap muka air terukur stasiun
+pasut IOC `sema` milik BIG, sekitar 120 m dari stasiun sumber konstanta.
+Skrip: `backend/scripts/04_kalibrasi_pasut.py`.
+
+Waktu pada layanan IOC lebih dulu dibuktikan UTC secara empiris: rekaman
+terbaru hanya berselang menit dari waktu UTC berjalan, sedangkan bila dibaca
+sebagai waktu lokal ia akan tertinggal tujuh jam padahal stasiunnya melapor
+hampir seketika.
+
+| Jendela | Offset terbaik | Korelasi terbaik | Fase = UTC (0 j) | Fase = WIB (+7 j) |
+|---|---:|---:|---:|---:|
+| 2 hari | +7,50 j | +0,914 | **−0,289** | +0,907 |
+| 4 hari | +7,75 j | +0,933 | **−0,362** | +0,909 |
+| 7 hari | +8,25 j | +0,925 | **−0,427** | +0,858 |
+| 10 hari | +8,00 j | +0,847 | **−0,465** | +0,782 |
+
+**Memakai UTC bukan sekadar kurang tepat, melainkan berkebalikan.**
+Korelasinya negatif di seluruh jendela uji. Acuan yang benar adalah WIB.
+RMSE pada WIB 0,097–0,116 m terhadap rentang terukur 0,920 m.
+
+Sistem memakai **+7,0 jam**, bukan +7,9 jam yang merupakan pencocokan
+terbaik. Alasannya: +7,0 adalah nilai berdasar, +7,9 adalah hasil pencocokan
+terhadap sepuluh hari data. Sisa selisih ~0,9 jam diperkirakan berasal dari
+koreksi nodal siklus 18,6 tahun yang belum diterapkan, ditambah rekaman
+sumber yang hanya 15 hari.
+
+### 3.2 Uji silang terhadap kejadian rob terdokumentasi
+
+Bukti yang sama sekali terpisah: 21 entri kejadian rob dari pemberitaan dan
+dokumen resmi. Yang tanggalnya pasti sampai hari menghasilkan 37 hari dari
+16 kejadian di dalam 2020–2026. Untuk tiap hari diambil pasut maksimum
+(cuplikan 15 menit), lalu dicari persentilnya di antara 2.431 hari pada
+periode yang sama. Skrip: `backend/scripts/07_uji_silang_rob.py`.
+
+Persentil dipakai supaya hasilnya tidak bergantung pada datum, dan supaya
+pembandingnya hari rob melawan hari biasa, bukan melawan ambang yang kita
+tentukan sendiri.
+
+| Ukuran | Median persentil | ≥ p75 | ≥ p90 |
+|---|---:|---:|---:|
+| Per hari (37 hari) | 71,5 | 16 (43%) | 7 (19%) |
+| Per kejadian (16 kejadian) | 80,2 | 9 (56%) | 5 (31%) |
+
+Bila tanggal kejadian tidak berhubungan dengan pasut, medianya akan mendekati
+50. **Putusan yang dicatat adalah "sedang", diambil dari ukuran per hari yang
+angkanya lebih rendah.** Ukuran per kejadian diperkenalkan setelah ukuran per
+hari dihitung, jadi memakainya sebagai dasar putusan akan terlihat seperti
+memilih ukuran yang hasilnya paling enak.
+
+**Enam dari 16 kejadian justru terjadi pada pasut yang tidak tinggi**
+(persentil di bawah 60), dan hujan 24 jam pada hari-hari itu juga sedang saja
+(2,5–20,4 mm):
+
+| Kejadian | Persentil pasut | Hujan 24 jam |
+|---|---:|---:|
+| 2020-12-10 | 47,5 | 7,3 mm |
+| 2022-12-19 | 23,5 | 11,8 mm |
+| 2024-04-07 | 37,1 | 3,9 mm |
+| 2024-11-18 | 53,8 | 20,4 mm |
+| 2026-05-04 | 11,9 | 9,2 mm |
+| 2026-05-18 | 29,2 | 2,5 mm |
+
+Ini temuan yang berguna, bukan kegagalan. Ia menunjukkan pasut saja tidak
+menjelaskan rob, dan dua pemicu yang kita punya pun belum menjelaskan
+seluruhnya. Angin, penurunan tanah, kondisi tanggul, dan kapasitas pompa
+ikut menentukan. **Itulah alasan sistem ini memakai model, bukan ambang.**
+
+Perlu jujur juga: `2026-05-18` berstatus verifikasi `primer` — kejadian yang
+sumbernya paling kuat — dan persentil pasutnya hanya 29,2.
+
+### 3.3 Yang belum diuji
+
+- Koreksi nodal 18,6 tahun belum diterapkan sama sekali
+- Sumber lain (Az Zahro dkk, 29 piantan data Pushidrosal 2018) memperoleh
+  Formzahl 3,94, yaitu tipe harian tunggal, bukan campuran seperti sumber
+  utama. Rekamannya lebih panjang. Perbedaan ini belum diselesaikan
+- Konstanta belum dihitung ulang dari rekaman IOC multi-tahun
+
+---
+
+## 4. Fitur ruas jalan
+
+Diisi 28 Agustus 2026 oleh `backend/scripts/05_isi_fitur_ruas.py`, atas
+**19.394 ruas** di dalam AOI.
+
+| Fitur | Terisi | Minimum | Median | Maksimum |
+|---|---:|---:|---:|---:|
+| Elevasi DEMNAS | 19.368 (99,87%) | −0,13 m | 4,07 m | 57,31 m |
+| Jarak ke garis pantai | 19.394 (100%) | 7 m | 3.565 m | 7.909 m |
+| Laju subsidensi | 18.404 (94,9%) | 2,1 cm/th | — | 5,8 cm/th |
+
+Catatan tiap fitur:
+
+- **Elevasi** dicuplik di titik tengah ruas. 26 ruas jatuh di piksel tanpa
+  data dan tetap `NULL`, bukan nol — nol adalah elevasi yang sah di pesisir,
+  jadi memakainya sebagai penanda "tidak ada data" akan mencemari fitur.
+  Median 4,07 m di sini lebih tinggi daripada median 2,60 m untuk seluruh
+  piksel AOI di bagian 2. Dugaan penjelasannya jalan cenderung dibangun dan
+  ditinggikan di atas lahan sekitarnya, tetapi itu belum diuji dan sebaiknya
+  tidak disajikan sebagai temuan.
+- **Jarak pantai** dihitung di EPSG:32749, bukan di derajat. Garis pantai
+  dari OpenStreetMap `natural=coastline`, 21 garis, diunduh sekali ke
+  `data/processed/garis_pantai.geojson`.
+- **Laju subsidensi** hanya tersedia per kecamatan, dipetakan lewat batas
+  kecamatan OSM ke `data/processed/kecamatan.geojson`. 990 ruas berada di
+  kecamatan yang tidak dilaporkan sumbernya dan tetap `NULL`. Delapan
+  poligon kecamatan diperiksa tidak saling tumpang tindih dan sentroidnya
+  jatuh di posisi yang benar. Luasnya belum dibandingkan terhadap angka resmi
+  BPS; itu pemeriksaan yang masih terbuka.
+
+---
+
+## 5. Variabel pemicu
+
+Diisi 28 Agustus 2026 oleh `backend/scripts/06_isi_pemicu.py`.
+**102.168 baris jam**, 2015-01-01 sampai 2026-08-27, mencakup seluruh
+periode latih (2015–2023) dan uji (2024–2026).
+
+| | |
+|---|---|
+| Sumber hujan | Open-Meteo Archive, reanalisis ERA5 |
+| Titik ambil | −6,9600 / 110,4425, tengah AOI |
+| Jam berhujan | 28.375 dari 102.168 (27,8 persen) |
+| Rerata tahunan | 1.830 mm |
+| Hujan sejam maksimum | 42,9 mm |
+| Hujan 24 jam maksimum | 181,6 mm |
+| Hujan 72 jam maksimum | 204,5 mm |
+| Rentang pasut rekonstruksi | −0,571 sampai +0,445 m terhadap muka air rata-rata |
+
+**Belum diverifikasi:** rerata tahunan 1.830 mm belum dibandingkan terhadap
+normal BMKG stasiun Semarang. Reanalisis diketahui cenderung meratakan hujan
+konvektif setempat, jadi angka ini patut diperiksa sebelum dikutip. Dicatat
+sebagai pekerjaan terbuka, bukan sebagai angka yang sudah sahih.
+
+---
+
+## 6. Akurasi model genangan
 
 **Belum tersedia.** Model belum dilatih.
 
-Akan diisi setelah `backend/scripts/03_latih_model.py` berjalan. Yang akan
-dicatat di sini: metrik pada jendela uji 2024–2026, matriks konfusi,
-feature importance, dan perbandingan terhadap baseline naif.
+Akan diisi setelah skrip pelatihan berjalan. Yang akan dicatat di sini:
+metrik pada jendela uji 2024–2026, matriks konfusi, feature importance, dan
+perbandingan terhadap baseline naif.
 
 Split berbasis waktu, tidak pernah acak: latih 2015–2023, uji 2024–2026.
 
 ---
 
-## 4. Validasi rute
+## 7. Validasi rute
 
-**Belum tersedia.** Mesin routing belum dibangun.
+**Sebagian.** Mesin routing sudah dibangun di M3
+(`backend/app/domain/routing.py`) dan diuji lewat `pytest` untuk perilaku
+algoritmanya: biaya dihitung pada waktu TIBA bukan waktu berangkat, ruas
+dengan kedalaman di atas ambang moda dibuang dari graf, dan dua rute
+dikembalikan untuk tiap permintaan.
+
+**Yang belum ada** adalah validasi terhadap dunia nyata: apakah rute yang
+disarankan memang bisa dilalui saat rob. Itu memerlukan data genangan asli,
+bukan data contoh, sehingga bergantung pada bagian 6.
 
 ---
 
-## 5. Validasi estimasi dampak
+## 8. Validasi estimasi dampak
 
-**Belum tersedia.**
+**Belum tersedia.** Menunggu faktor emisi yang masih `null` di
+`data/referensi/faktor_emisi.json`.

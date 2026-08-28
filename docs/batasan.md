@@ -84,14 +84,75 @@ kosong karena arsip berita daring dari rentang itu sulit ditemukan.
 Akibatnya: daftar ini belum layak dipakai sebagai dasar klaim frekuensi
 kejadian. Untuk itu perlu rekap resmi dari BPBD Kota Semarang.
 
-### 1.7 Laju penurunan tanah dan faktor emisi belum punya sitasi
+### 1.7 Laju penurunan tanah: sudah punya sitasi, tetapi angkanya lebih kecil daripada yang beredar
 
-`laju_subsidensi.json` dan `faktor_emisi.json` masih bernilai `null`
-seluruhnya. Angka 9 sampai 13 cm per tahun yang beredar untuk wilayah pilot
-belum punya rujukan yang bisa diverifikasi di repo ini.
+`laju_subsidensi.json` terisi 28 Agustus 2026 dari Rahmawati, Prasetyo &
+Sasmito (2020), *Jurnal Geodesi Undip* 9(1):29–36, ISSN 2337-845X — metode
+SBAS atas 13 citra Sentinel-1A SLC 2015–2018, diolah dengan GMTSAR.
 
-Akibatnya: panel dampak belum bisa menghitung emisi, dan model belum bisa
-memakai subsidensi sebagai fitur.
+Empat batasan melekat pada angka itu.
+
+**Pertama, angkanya lebih kecil daripada yang selama ini dipakai tim.**
+Makalah menguji enam varian pengolahan; penulisnya memilih varian **tanpa
+koreksi** karena RMSE-nya terkecil, ±1,3 cm/tahun. Menurut varian itu, nilai
+tertinggi di seluruh Kota Semarang adalah **9,4 cm/tahun** dan rata-rata
+Semarang Utara hanya **4,6 cm/tahun**.
+
+| Kecamatan | Minimum | Maksimum | Rata-rata |
+|---|---:|---:|---:|
+| Genuk | 2,3 | 9,4 | 5,8 |
+| Semarang Utara | 0,8 | 7,4 | 4,6 |
+| Semarang Timur | 0,1 | 7,4 | 4,5 |
+| Gayamsari | 0,1 | 8,1 | 3,6 |
+
+Angka belasan memang muncul di makalah yang sama, tetapi hanya pada varian
+terkoreksi atmosfer yang RMSE-nya dua sampai lima kali lebih besar dan justru
+**tidak** dipilih penulisnya. **Klaim "9–13 cm/tahun" di PLAN.md bagian 6 dan
+di abstrak proposal karena itu tidak didukung sumber ini.** Ini perlu
+keputusan tim: turunkan klaimnya, atau sediakan sitasi lain yang dibaca
+sendiri sampai ke tabelnya.
+
+**Kedua, ketidakpastiannya besar relatif terhadap nilainya.** Untuk Gayamsari
+yang rata-ratanya 3,6 cm/tahun, ±1,3 cm/tahun setara sekitar 36 persen.
+Sajikan sebagai rentang, jangan sebagai angka tunggal.
+
+**Ketiga, periodenya 2015–2018.** Memakainya untuk 2026 adalah ekstrapolasi
+delapan tahun dan wajib disebut demikian, terutama karena laju subsidensi
+berubah bila pengambilan air tanah berubah.
+
+**Keempat, daya pisahnya per kecamatan, bukan per ruas.** Seluruh ruas di
+dalam satu kecamatan menerima nilai yang sama, sehingga sebagai fitur model
+ia lebih berperan sebagai penanda wilayah daripada ukuran lokal. Dari 19.394
+ruas, 18.404 mendapat nilai; 990 sisanya berada di kecamatan yang tidak
+dilaporkan sumbernya dan tetap `NULL`.
+
+### 1.8 Faktor emisi masih `null`
+
+`faktor_emisi.json` belum terisi. Akibatnya panel dampak belum bisa
+menghitung emisi, dan seluruh baris rantai dampak di proposal masih
+"Belum tersedia".
+
+### 1.9 Curah hujan berasal dari reanalisis, satu titik untuk seluruh AOI
+
+Hujan diambil dari Open-Meteo Archive (reanalisis ERA5), 102.168 jam
+2015–2026, pada satu titik di tengah AOI. Dua konsekuensinya.
+
+**Petak reanalisis jauh lebih besar daripada AOI.** AOI hanya sekitar 13 × 8
+kilometer, sehingga seluruh wilayah pilot berbagi satu deret hujan yang sama.
+Hujan konvektif di Semarang kerap sangat setempat; perbedaan antara
+Tanjungmas yang deras dan Genuk yang kering tidak akan tertangkap.
+
+**Reanalisis bukan pengamatan.** Rerata tahunan yang dihasilkan 1.830 mm dan
+belum dibandingkan terhadap normal BMKG stasiun Semarang. Reanalisis
+diketahui cenderung meratakan hujan setempat, jadi angka ini belum layak
+dikutip sebelum diperiksa.
+
+### 1.10 Ruas di tepi timur AOI berada tepat di tepi tile DEMNAS
+
+Tile `1409-22` berakhir persis di bujur 110,5000, yang juga tepi timur AOI.
+26 dari 19.394 ruas jatuh di piksel tanpa data dan elevasinya tetap `NULL`.
+Jumlahnya kecil (0,13 persen) sehingga tidak diambil tindakan, tetapi bila
+AOI diperluas ke timur, tile tetangga wajib diunduh lebih dulu.
 
 ---
 
