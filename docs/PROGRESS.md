@@ -48,9 +48,13 @@ ini, baca bagian itu.
 | B35 | **Penerapan ke Render dan Vercel BELUM dilakukan.** Seluruh artefaknya siap dan sudah diuji: `Dockerfile` 244 MB yang jalan, `render.yaml`, `Procfile`, `vercel.json`, CORS dari lingkungan. | Hanya perlu menekan tombol. Dua variabel wajib diisi di dasbor: `DATABASE_URL` (pooler port 6543) dan `ASAL_DIIZINKAN` di sisi API, `VITE_API_URL` di sisi Vercel |
 | B36 | **`data/processed/potret_demo.json` 7,8 MB WAJIB ikut di-commit.** Tanpa berkas itu, aplikasi yang di-deploy mati begitu Supabase tersendat. | Jalankan ulang `python -m scripts.18_seed_demo` sebelum demo — potret membawa tanggal kedaluwarsa dan ditolak API setelah lewat |
 | B37 | **Uji dari HP di jaringan seluler belum dilakukan.** | Kriteria terima M6 menuntutnya. Perlu perangkat fisik |
-| B38 | **DUA SUMBER KEBENARAN untuk proposal.** `.docx` di akar (27 halaman, dirawat sejak sesi keempat) dan `docs/proposal_draft.md` (M7, 28,9 halaman perkiraan) kini memuat isi yang sama. | **Tetapkan satu sebagai acuan sebelum M8.** Saran: Markdown jadi acuan karena bisa di-diff di git, lalu `.docx` dibangun ulang darinya. Dibiarkan, keduanya akan menyimpang dalam satu sesi |
+| ~~B38~~ | **DIPUTUSKAN 29 Agustus:** Markdown jadi acuan, `.docx` dibangun ulang darinya di M8. Sebelumnya: **DUA SUMBER KEBENARAN untuk proposal.** `.docx` di akar (27 halaman, dirawat sejak sesi keempat) dan `docs/proposal_draft.md` (M7, 28,9 halaman perkiraan) kini memuat isi yang sama. | **Tetapkan satu sebagai acuan sebelum M8.** Saran: Markdown jadi acuan karena bisa di-diff di git, lalu `.docx` dibangun ulang darinya. Dibiarkan, keduanya akan menyimpang dalam satu sesi |
 | B39 | **Empat TODO(sumber) WAJIB diisi**: tautan riset WRI, konsumsi bahan bakar per km, faktor emisi, dan data leptospirosis. | Keempatnya angka yang sudah tercetak di proposal, dan dua di antaranya tampil di antarmuka. Rincian di `docs/proposal_draft.md` bagian Ringkasan TODO |
 | B40 | **Rantai dampak menghasilkan angka yang KECIL, dan itu dilaporkan apa adanya.** Median selisih rute 0,12 menit, median hemat menggeser jam 0,14 menit, p90 2,99 menit. | Bagian 11.5 menjelaskan mengapa nilai rupiah TIDAK dikalikan dari angka itu. Jangan tergoda mengubahnya menjadi angka besar sebelum ada data perjalanan per hari yang bersumber |
+| B41 | **LIMA COMMIT BELUM DI-PUSH.** Remote publik di `1b7c475` (M4), lokal di `438e261` (M7). Diuji dengan clone dari nol: repo publik TIDAK memuat panel dampak, halaman validasi, artefak deploy, potret tahan banting, maupun draft proposal. | **Paling mendesak.** Satu perintah `git push origin main`. Juri menilai Code Project 10 persen dari repo itu |
+| B42 | **Halaman sampul `.docx` masih memakai subjudul lama** "Berbasis Kalibrasi Citra Radar Sentinel-1", sementara Bagian 1 dokumen yang sama sudah memakai rumusan baru. | Dokumen memuat DUA subjudul berbeda, dan yang lama justru di halaman pertama yang dilihat juri |
+| B43 | **`pratinjau_proposal.pdf` di akar repo berasal dari 23 Agustus (M1)**, mendahului seluruh temuan M4 sampai M7. | Juri yang menelusuri repo bisa membukanya dan mengira itu proposalnya. Hapus atau ganti |
+| B44 | **`deret_pasut()` di `domain/pasut.py` tidak pernah dipanggil.** | Diwajibkan `PLAN.md` 10.2 sebagai API modul. Pertahankan atau buang — keputusan tim, bukan keputusan teknis |
 | B30 | **Uji responsif 360px BELUM terverifikasi.** Jendela peramban diubah tetapi viewport tetap 1440, jadi hasilnya tidak sah. | Butuh perangkat sungguhan atau devtools. Lantai mutu DESIGN.md Bagian 11 butir pertama |
 | B31 | **Uji baca di bawah matahari langsung dan uji cetak hitam putih BELUM dilakukan.** | Keduanya memerlukan orang, bukan kode. Pola halftone sudah dirancang untuk keduanya tetapi belum dibuktikan |
 | B32 | **Proposal kini 27 halaman**, naik dari 26 setelah paragraf perbandingan Sentinel-1 versus rekonstruksi pasut ditambahkan. | Masih di bawah batas rulebook 30. Diukur dengan Word |
@@ -1311,3 +1315,76 @@ tim. Tercatat sebagai B38.
 
 Pemformatan Word (M8), pengisian TODO yang butuh sumber luar, dan enam
 tangkapan layar aplikasi.
+
+---
+
+## M8 — 29 Agustus 2026: audit akhir sebelum unggah
+
+**Status: selesai.** Peran sesi ini audit, bukan perbaikan. Temuan dilaporkan,
+tidak diperbaiki diam-diam, kecuali dua berkas dokumentasi baru.
+
+### Temuan paling penting: repo publik tertinggal lima commit
+
+Diuji dengan `git clone` tanpa kredensial ke direktori bersih. Repo **memang
+publik** dan bisa di-clone, tetapi HEAD-nya `1b7c475` (M4) sementara lokal
+`438e261` (M7).
+
+Yang **tidak ada** di repo yang akan dibaca juri: `domain/dampak.py`,
+`HalamanValidasi.jsx`, `Dockerfile`, `render.yaml`, `vercel.json`,
+`potret_demo.json`, `proposal_draft.md`, `demo_script.md`.
+
+Tidak saya push sendiri: mendorong ke repo publik adalah tindakan keluar yang
+belum diizinkan di sesi ini. Tercatat sebagai B41 dan M1 di `tugas_manual.md`.
+
+### Temuan kedua: `.docx` memuat DUA subjudul
+
+Halaman sampul masih "Berbasis Kalibrasi Citra Radar Sentinel-1"; Bagian 1
+dokumen yang sama sudah "Berbasis Rekonstruksi Pasang Surut Terkalibrasi".
+Pembaruan pada M4-lanjutan hanya menyentuh Bagian 1, tidak sampulnya — dan
+sampullah yang pertama dilihat juri. B42.
+
+### Audit angka: bersih
+
+Audit pertama memakai regex atas seluruh angka memberi 63 "temuan". Diperiksa
+ulang pada tingkat kalimat, seluruhnya positif palsu: sitasi berada di akhir
+kalimat yang membentang beberapa baris, atau angkanya keluaran sistem sendiri
+dan parameter rancangan yang tidak menuntut sitasi luar.
+
+Audit terarah atas 15 klaim tentang dunia luar: **seluruhnya bersitasi atau
+ditandai `TODO(sumber)`**. Tidak ada angka karangan.
+
+Pelajarannya: heuristik kasar atas angka menghasilkan 63 alarm palsu dan nol
+temuan nyata. Yang menemukan sesuatu justru daftar klaim yang disusun manual.
+
+### Audit README versus proposal: nol pertentangan
+
+26 angka kunci dibandingkan. Setiap angka yang muncul di keduanya cocok
+persis. Beberapa hanya muncul di salah satu, dan itu wajar.
+
+Satu catatan kecil: kalimat pembuka README tidak menyebut "wilayah pilot"
+sementara proposal menyebutnya. Bukan pertentangan, tetapi README bisa terbaca
+seolah cakupannya seluruh kota. README menyebut "wilayah pilot" dua kali di
+bagian lain, jadi tidak menyesatkan pembaca yang membaca sampai selesai.
+
+### Audit repo
+
+| Yang diperiksa | Hasil |
+|---|---|
+| Rahasia di seluruh riwayat git | **bersih**, nol temuan pada 15 commit |
+| Berkas terlacak terbesar | 7,4 MB `potret_demo.json`, memang dibutuhkan |
+| Ukuran `.git` | 11 MB, sehat |
+| Komponen frontend yatim | nol |
+| Fungsi domain tak terpakai | satu: `deret_pasut()`, diwajibkan PLAN 10.2 |
+| Berkas basi di akar | `pratinjau_proposal.pdf` dari 23 Agustus |
+
+### Yang dibuat
+
+- `docs/checklist_submit.md` — 46 butir dari PLAN.md 12 dan 12B dengan status
+  per butir. Ringkasannya: **16 selesai, 7 sebagian, 23 belum**
+- `docs/tugas_manual.md` — satu tempat untuk seluruh tugas manual dari seluruh
+  sesi, 30 butir, diurutkan menurut kemendesakan
+
+### Yang TIDAK dikerjakan, sesuai batas peran
+
+Pemformatan Word, ekspor PDF, unggah video, Twibbon dan poster. Seluruhnya
+dikerjakan manusia menurut brief sesi ini.

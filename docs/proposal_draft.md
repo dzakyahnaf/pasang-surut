@@ -3,12 +3,17 @@
 > **Status berkas ini.** Draft Markdown untuk M7. Pemformatan Word dikerjakan
 > manusia di M8.
 >
-> **PERINGATAN DUA SUMBER KEBENARAN.** Berkas `.docx` di akar repo sudah
-> berisi 27 halaman dan dirawat sejak sesi keempat. Berkas ini diturunkan
-> darinya agar konsisten, tetapi begitu keduanya ada, keduanya bisa
-> menyimpang. **Tetapkan satu sebagai acuan sebelum M8 dimulai.** Saran:
-> jadikan berkas Markdown ini acuan, lalu `.docx` dibangun ulang darinya —
-> Markdown bisa di-diff di git, `.docx` tidak.
+> **BERKAS INI ADALAH SUMBER KEBENARAN.** Diputuskan 29 Agustus 2026.
+> `.docx` di akar repo dibangun ulang dari berkas ini pada M8, dan bukan
+> sebaliknya. Setiap perubahan isi proposal disunting di sini lebih dulu.
+>
+> Alasannya: Markdown bisa di-diff di git sehingga perubahan antar sesi
+> terlihat, sedangkan `.docx` tidak.
+>
+> **Catatan untuk M8:** halaman sampul `.docx` yang ada masih memakai
+> subjudul lama "Berbasis Kalibrasi Citra Radar Sentinel-1", sementara
+> Bagian 1 dokumen yang sama sudah memakai rumusan baru. Dokumen itu kini
+> memuat dua subjudul berbeda. Pembangunan ulang harus memperbaikinya.
 >
 > **Setiap angka di bawah punya sitasi, atau ditandai `TODO(sumber)`.**
 > Tidak ada angka yang dikarang. Ringkasan seluruh `TODO(sumber)` ada di
