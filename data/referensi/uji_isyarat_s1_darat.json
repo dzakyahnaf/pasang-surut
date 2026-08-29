@@ -1,0 +1,36 @@
+{
+  "_catatan": "Uji isyarat Sentinel-1 SETELAH air permanen dibuang. Piksel gelap pada lebih dari 40 persen akuisisi dianggap tubuh air tetap.",
+  "dijalankan": "2026-08-29T09:55:32.051667+00:00",
+  "tahun": [
+    2019,
+    2026
+  ],
+  "putusan": "ADA ISYARAT",
+  "korelasi_mutlak_tertinggi": 0.3624,
+  "per_kombinasi": {
+    "orbit76_-15dB": {
+      "citra": 195,
+      "darat_berair_rata_persen": 0.979,
+      "darat_berair_simpangan_persen": 0.234,
+      "korelasi": 0.3624
+    },
+    "orbit76_-17dB": {
+      "citra": 195,
+      "darat_berair_rata_persen": 1.093,
+      "darat_berair_simpangan_persen": 0.344,
+      "korelasi": 0.2847
+    },
+    "orbit127_-15dB": {
+      "citra": 316,
+      "darat_berair_rata_persen": 1.064,
+      "darat_berair_simpangan_persen": 0.323,
+      "korelasi": 0.0324
+    },
+    "orbit127_-17dB": {
+      "citra": 316,
+      "darat_berair_rata_persen": 2.055,
+      "darat_berair_simpangan_persen": 1.114,
+      "korelasi": 0.0497
+    }
+  }
+}

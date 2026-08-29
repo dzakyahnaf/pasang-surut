@@ -840,10 +840,20 @@ def rute(permintaan: PermintaanRute) -> dict:
             config.ZONA_WAKTU_LOKAL).isoformat(),
         "moda": permintaan.moda,
         "ambang_moda": ambang,
-        # Selama nilainya masih memuat dummy, antarmuka WAJIB menampilkan
-        # lencana DATA CONTOH. Tidak ada saklar manual yang bisa lupa
-        # dimatikan sebelum demo.
-        "sumber_data": sumber[0] if len(sumber) == 1 else sumber,
+        # SELALU LIST, TIDAK PERNAH STRING.
+        #
+        # Sebelumnya baris ini memadatkan list bersatu anggota menjadi string
+        # sebagai "kemudahan". Akibatnya fatal dan tidak kentara: endpoint
+        # /api/ruas mengembalikan ["kerentanan_v1"] sementara endpoint ini
+        # mengembalikan "kerentanan_v1", dan LencanaContoh.jsx menolak yang
+        # bukan array. Lencana peringatan karena itu HILANG tepat setelah
+        # pengguna menghitung rute — di tengah alur demo, pada layar yang
+        # dilihat juri.
+        #
+        # Aturan repo nomor 2 menuntut lencana muncul selama sumbernya belum
+        # model tervalidasi. Bentuk data yang tidak konsisten antar endpoint
+        # membatalkan jaminan itu tanpa satu pun galat yang terlihat.
+        "sumber_data": sumber,
         "rute": {
             "type": "FeatureCollection",
             "features": [

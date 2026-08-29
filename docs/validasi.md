@@ -431,8 +431,44 @@ Tanda negatif itu bukan kejanggalan. Luas gelap didominasi tambak dan muara,
 dan air dangkal yang tenang saat surut justru lebih halus, lebih gelap, dan
 lebih luas terlihat daripada air dalam yang beriak saat pasang. Isyarat yang
 dicari — daratan berubah menjadi air — hanya beberapa persen luas dan
-tenggelam di bawah ragam itu. Uji lanjutan dengan membuang topeng air
-permanen dijalankan tetapi tidak selesai dalam waktu sesi ini.
+tenggelam di bawah ragam itu.
+
+**Uji lanjutan dengan topeng air permanen kemudian SELESAI, dan hasilnya
+tidak nol.** Piksel yang gelap pada lebih dari 40 persen akuisisi dibuang
+sebagai tubuh air tetap, lalu proporsi piksel DARAT yang tampak berair
+dikorelasikan terhadap pasut, 2019 sampai 2026:
+
+| Orbit | Jam lintas | Citra | Korelasi vs pasut |
+|---|---|---:|---:|
+| **76, descending** | 05.16 WIB | 195 | **+0,362** |
+| 76, ambang −17 dB | | 195 | +0,285 |
+| 127, ascending | 17.58 WIB | 316 | +0,032 |
+| 127, ambang −17 dB | | 316 | +0,050 |
+
+Tandanya POSITIF — makin tinggi pasut, makin luas daratan tampak berair. Itu
+arah yang benar secara fisika, berbeda dari tiga upaya sebelumnya.
+
+**Tetap tidak dijadikan dasar menghidupkan model, karena empat hal.**
+
+Pertama, hanya satu dari dua orbit menunjukkannya. Genangan tidak peduli
+geometri sudut pandang, meski kedua orbit memang mencuplik jam yang berbeda.
+
+Kedua, dan ini yang paling mengganggu: **rancu musiman belum disingkirkan.**
+Pada jam lintas yang tetap, fase K1 dan P1 bergeser dengan periode sekitar
+satu tahun, sehingga rekonstruksi pasut memiliki siklus tahunan semu.
+Kebasahan lahan juga bersiklus tahunan kuat mengikuti musim hujan. Keduanya
+dapat menghasilkan +0,36 tanpa hubungan sebab apa pun. Mengujinya menuntut
+meregresikan hari-dalam-tahun, dan deret per-citra tidak ikut disimpan.
+
+Ketiga, besarnya sedang: 0,36 menjelaskan sekitar 13 persen ragam.
+
+Keempat, yang diukur adalah LUAS kawasan terbuka, bukan genangan per ruas
+jalan. Mengubahnya menjadi label per ruas menambah satu langkah inferensi
+yang belum tervalidasi.
+
+Kesimpulannya: **arah lanjutan yang layak, bukan dasar untuk mencabut
+penolakan model.** Skrip `12_uji_isyarat_s1.py --darat-saja` menyimpan
+hasilnya di `data/referensi/uji_isyarat_s1_darat.json`.
 
 **Upaya 4 — memakai muka air TERUKUR, bukan pasut astronomis.**
 Dugaan yang paling menjanjikan, dan yang paling lama bertahan. Rekonstruksi

@@ -51,10 +51,12 @@ ini, baca bagian itu.
 | ~~B38~~ | **DIPUTUSKAN 29 Agustus:** Markdown jadi acuan, `.docx` dibangun ulang darinya di M8. Sebelumnya: **DUA SUMBER KEBENARAN untuk proposal.** `.docx` di akar (27 halaman, dirawat sejak sesi keempat) dan `docs/proposal_draft.md` (M7, 28,9 halaman perkiraan) kini memuat isi yang sama. | **Tetapkan satu sebagai acuan sebelum M8.** Saran: Markdown jadi acuan karena bisa di-diff di git, lalu `.docx` dibangun ulang darinya. Dibiarkan, keduanya akan menyimpang dalam satu sesi |
 | B39 | **Empat TODO(sumber) WAJIB diisi**: tautan riset WRI, konsumsi bahan bakar per km, faktor emisi, dan data leptospirosis. | Keempatnya angka yang sudah tercetak di proposal, dan dua di antaranya tampil di antarmuka. Rincian di `docs/proposal_draft.md` bagian Ringkasan TODO |
 | B40 | **Rantai dampak menghasilkan angka yang KECIL, dan itu dilaporkan apa adanya.** Median selisih rute 0,12 menit, median hemat menggeser jam 0,14 menit, p90 2,99 menit. | Bagian 11.5 menjelaskan mengapa nilai rupiah TIDAK dikalikan dari angka itu. Jangan tergoda mengubahnya menjadi angka besar sebelum ada data perjalanan per hari yang bersumber |
-| B41 | **LIMA COMMIT BELUM DI-PUSH.** Remote publik di `1b7c475` (M4), lokal di `438e261` (M7). Diuji dengan clone dari nol: repo publik TIDAK memuat panel dampak, halaman validasi, artefak deploy, potret tahan banting, maupun draft proposal. | **Paling mendesak.** Satu perintah `git push origin main`. Juri menilai Code Project 10 persen dari repo itu |
-| B42 | **Halaman sampul `.docx` masih memakai subjudul lama** "Berbasis Kalibrasi Citra Radar Sentinel-1", sementara Bagian 1 dokumen yang sama sudah memakai rumusan baru. | Dokumen memuat DUA subjudul berbeda, dan yang lama justru di halaman pertama yang dilihat juri |
-| B43 | **`pratinjau_proposal.pdf` di akar repo berasal dari 23 Agustus (M1)**, mendahului seluruh temuan M4 sampai M7. | Juri yang menelusuri repo bisa membukanya dan mengira itu proposalnya. Hapus atau ganti |
+| ~~B41~~ | **SELESAI 29 Agustus, di-push tim.** Sebelumnya: **LIMA COMMIT BELUM DI-PUSH.** Remote publik di `1b7c475` (M4), lokal di `438e261` (M7). Diuji dengan clone dari nol: repo publik TIDAK memuat panel dampak, halaman validasi, artefak deploy, potret tahan banting, maupun draft proposal. | **Paling mendesak.** Satu perintah `git push origin main`. Juri menilai Code Project 10 persen dari repo itu |
+| ~~B42~~ | **SELESAI 29 Agustus.** Sampul diperbaiki, dokumen kini memuat satu subjudul saja. Sebelumnya: **halaman sampul memakai subjudul lama** "Berbasis Kalibrasi Citra Radar Sentinel-1", sementara Bagian 1 dokumen yang sama sudah memakai rumusan baru. | Dokumen memuat DUA subjudul berbeda, dan yang lama justru di halaman pertama yang dilihat juri |
+| ~~B43~~ | **SELESAI 29 Agustus, dihapus.** Sebelumnya: **`pratinjau_proposal.pdf` berasal dari 23 Agustus (M1)**, mendahului seluruh temuan M4 sampai M7. | Juri yang menelusuri repo bisa membukanya dan mengira itu proposalnya. Hapus atau ganti |
 | B44 | **`deret_pasut()` di `domain/pasut.py` tidak pernah dipanggil.** | Diwajibkan `PLAN.md` 10.2 sebagai API modul. Pertahankan atau buang — keputusan tim, bukan keputusan teknis |
+| B45 | **`VITE_API_URL` BELUM DIISI DI VERCEL.** Bundel yang di-deploy menunjuk ke `http://127.0.0.1:8000`, alamat cadangan localhost. Setiap panggilan API pergi ke laptop pengunjung sendiri. | **Aplikasi mati bagi siapa pun yang membukanya.** Vercel > Settings > Environment Variables > `VITE_API_URL` = `https://pasang-surut-api.onrender.com`, lalu Redeploy. API dan CORS-nya sendiri sudah benar |
+| B46 | **Uji topeng air permanen SELESAI dan hasilnya tidak nol:** orbit 76 memberi korelasi +0,362 terhadap pasut, orbit 127 hanya +0,032. Tandanya positif, arah yang benar secara fisika. | Tetap TIDAK mencabut penolakan model: hanya satu dari dua orbit, rancu musiman belum disingkirkan (fase K1 dan P1 bergeser setahunan pada jam lintas tetap), besarnya sedang, dan yang diukur luas bukan ruas. Dicatat sebagai arah lanjutan di `docs/validasi.md` 6.5 |
 | B30 | **Uji responsif 360px BELUM terverifikasi.** Jendela peramban diubah tetapi viewport tetap 1440, jadi hasilnya tidak sah. | Butuh perangkat sungguhan atau devtools. Lantai mutu DESIGN.md Bagian 11 butir pertama |
 | B31 | **Uji baca di bawah matahari langsung dan uji cetak hitam putih BELUM dilakukan.** | Keduanya memerlukan orang, bukan kode. Pola halftone sudah dirancang untuk keduanya tetapi belum dibuktikan |
 | B32 | **Proposal kini 27 halaman**, naik dari 26 setelah paragraf perbandingan Sentinel-1 versus rekonstruksi pasut ditambahkan. | Masih di bawah batas rulebook 30. Diukur dengan Word |
@@ -1388,3 +1390,47 @@ bagian lain, jadi tidak menyesatkan pembaca yang membaca sampai selesai.
 
 Pemformatan Word, ekspor PDF, unggah video, Twibbon dan poster. Seluruhnya
 dikerjakan manusia menurut brief sesi ini.
+
+---
+
+## M9 lanjutan — 29 Agustus 2026: perbaikan setelah verifikasi
+
+Dikerjakan setelah tim melakukan push dan deploy.
+
+### Bug lencana diperbaiki, dan ini yang paling penting
+
+`/api/rute` memadatkan list bersatu anggota menjadi string sebagai
+"kemudahan": `sumber[0] if len(sumber) == 1 else sumber`. Endpoint lain
+mengembalikan list. `LencanaContoh.jsx` menolak yang bukan array, sehingga
+**lencana peringatan hilang tepat setelah pengguna menghitung rute** — di
+tengah alur demo, pada layar yang dilihat juri.
+
+Aturan repo nomor 2 menuntut lencana muncul selama sumbernya belum model
+tervalidasi. Bentuk data yang tidak konsisten antar endpoint membatalkan
+jaminan itu tanpa satu pun galat yang terlihat.
+
+Diverifikasi di peramban setelah diperbaiki: lencana "INDEKS KERENTANAN —
+bukan prediksi genangan" bertahan saat aplikasi dibuka, setelah rute dihitung,
+dan pada jam pasut puncak.
+
+### Temuan deploy: frontend menunjuk ke localhost
+
+Bundel di Vercel memuat `http://127.0.0.1:8000`. `VITE_API_URL` tidak pernah
+diisi, jadi setiap panggilan API pergi ke laptop pengunjung sendiri. API dan
+CORS-nya sendiri sudah benar — `render.yaml` memasang `ASAL_POLA` berpola
+`*.vercel.app` sehingga Vercel diizinkan tanpa perlu variabel tambahan.
+Tercatat sebagai B45.
+
+### Yang diperbaiki di dokumen
+
+- Sampul `.docx` memakai subjudul lama; dokumen tadinya memuat DUA subjudul.
+  Kini satu. Tetap 27 halaman.
+- `pratinjau_proposal.pdf` dari 23 Agustus dihapus.
+- README menyematkan dua gambar dan mengisi tautan live.
+- Proposal merujuk pustaka [8] sampai [11] yang tadinya yatim.
+- Bagian 5 bertambah dua batasan: **penalti perutean 1,0/2,5/8,0 adalah angka
+  rancangan** yang menentukan seluruh isi Bagian 11, dan **sebagian besar
+  kejadian rob yang dipakai memvalidasi berstatus belum terverifikasi**.
+- `docs/validasi.md` 6.5 dikoreksi: uji topeng air permanen kini SELESAI,
+  bukan "tidak selesai dalam waktu sesi ini". Hasilnya dicatat apa adanya
+  beserta empat alasan mengapa ia tetap tidak mencabut penolakan model.

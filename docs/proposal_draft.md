@@ -121,7 +121,7 @@ tetap harus berangkat kerja.
 ### 3.4 Dampak berlapis pada kesehatan
 
 Kasus leptospirosis di Kota Semarang tercatat meningkat dari 32 kasus pada 2024
-menjadi 59 kasus pada 2025 — `TODO(sumber)`. Penularan terjadi lewat kontak
+menjadi 59 kasus pada 2025 [9] — sumber lengkapnya masih `TODO(sumber)`. Penularan terjadi lewat kontak
 kulit dengan air yang terkontaminasi urin tikus, dan genangan rob di jalan
 adalah medium yang tepat untuk itu.
 
@@ -215,6 +215,31 @@ kami tulis sendiri lebih baik daripada batasan yang ditemukan juri.
    Angka ini kini tampil di antarmuka lewat panel dampak, sehingga sitasinya
    lebih mendesak, bukan kurang.
 
+9. **Penalti genangan pada perutean adalah angka rancangan, bukan pengukuran.**
+   Biaya sebuah ruas dikalikan 1,0 saat kering, 2,5 saat kedalamannya melewati
+   ambang lambat, dan 8,0 saat melewati ambang berisiko; di atas ambang
+   tak-bisa-lewat ruas dibuang dari graf. Keempat angka itu ditetapkan tim
+   berdasarkan pertimbangan, bukan hasil pengamatan lapangan tentang seberapa
+   lambat kendaraan sesungguhnya melintasi genangan setinggi tertentu.
+
+   Ini perlu disebut sendiri karena penalti itulah yang menentukan selisih
+   antara kedua rute, dan selisih itulah yang menjadi seluruh isi Bagian 11.
+   Ambangnya sendiri dibaca dari tabel `ambang_moda` dan tidak pernah ditulis
+   tetap di dalam kode, sehingga dapat dikoreksi tanpa menyentuh program —
+   tetapi sampai ada pengukuran, angkanya tetap asumsi.
+
+10. **Sebagian besar kejadian rob yang dipakai memvalidasi berstatus belum
+    terverifikasi.** Uji silang pada Bagian 9.4 memakai 16 kejadian rob
+    terdokumentasi. Kejadian itu dikumpulkan dari pemberitaan dan dokumen
+    resmi, dan hanya dua di antaranya berstatus verifikasi primer; sisanya
+    masih `perlu_verifikasi`, artinya tanggalnya diambil dari judul atau isi
+    berita tanpa pemeriksaan silang ke catatan lapangan.
+
+    Cakupannya juga tidak merata: liputan 2015 sampai 2019 tipis, dan entri
+    yang ketelitian tanggalnya hanya bulan atau tahun dibuang dari uji.
+    Median persentil 80,2 yang dilaporkan karena itu berdiri di atas bukti
+    yang lebih lemah daripada kesan angkanya.
+
 ### 5.2 Batasan cakupan
 
 - Wilayah kerja dibatasi wilayah pilot Semarang Utara dan Semarang Timur,
@@ -278,8 +303,8 @@ dari citra radar**: mengambil seluruh citra Sentinel-1 di atas AOI sejak 2015,
 mencatat tinggi pasut dan curah hujan pada tiap akuisisi, lalu melatih model
 untuk mempelajari sendiri hubungan antara pemicu dan genangan teramati.
 
-Rencana itu dijalankan sampai tuntas: 725 citra, 2.502 ruas berstrata,
-1.813.950 nilai backscatter. Hasilnya ditolak. Rinciannya di Bagian 9.
+Rencana itu dijalankan sampai tuntas lewat Google Earth Engine [8]: 725
+citra, 2.502 ruas berstrata, 1.813.950 nilai backscatter. Hasilnya ditolak. Rinciannya di Bagian 9.
 
 Satu keberatan yang layak dijawab di muka: Sentinel-1 sinkron matahari,
 sehingga selalu melintas pada jam lokal yang hampir sama — 05.16 dan 17.58 WIB
@@ -478,7 +503,8 @@ berhubungan.
 
 | Bukti | Tautan |
 |---|---|
-| Aplikasi yang telah disebarkan | `TODO` |
+| Aplikasi yang telah disebarkan | https://pasang-surut.vercel.app |
+| API | https://pasang-surut-api.onrender.com |
 | Repositori GitHub | https://github.com/dzakyahnaf/pasang-surut |
 | Video demonstrasi | `TODO` |
 | Prototipe Figma | `TODO` |
@@ -545,7 +571,7 @@ Pada perjalanan persentil ke-75, selisih bahan bakar 0,002–0,004 liter dan
 emisi 0,004–0,008 kg CO₂e. Pada perjalanan median, keduanya di bawah 0,001.
 
 Faktor konsumsi dan emisi berasal dari tabel `ambang_moda` dan **belum
-bersitasi** — `TODO(sumber)`. Rentang ±30 persen pada konsumsi juga asumsi.
+bersitasi** [10] — `TODO(sumber)`. Rentang ±30 persen pada konsumsi juga asumsi.
 
 ### 11.4 Dampak kesehatan
 
@@ -649,6 +675,9 @@ Diponegoro Software Development Competition ANFORCOM 2026*. Semarang, 2026.
 
 ## 14. Lampiran
 
+Seluruh butir lampiran mengikuti ketentuan rulebook
+kompetisi [11].
+
 ### Lampiran A — Tautan wajib
 
 | Bukti | Tautan |
@@ -656,8 +685,8 @@ Diponegoro Software Development Competition ANFORCOM 2026*. Semarang, 2026.
 | Video demo YouTube | `TODO` — judul wajib `Anforcom2026_DSDC_TrioLaAlbiceleste_PasangSurut`, visibilitas publik |
 | Repositori GitHub | https://github.com/dzakyahnaf/pasang-surut |
 | Prototipe Figma | `TODO` — rulebook poin 7.9 mewajibkan |
-| Aplikasi live | `TODO` |
-| API | `TODO` |
+| Aplikasi live | https://pasang-surut.vercel.app |
+| API | https://pasang-surut-api.onrender.com |
 
 ### Lampiran B — Peta jalan pengembangan
 

@@ -43,8 +43,8 @@ berangkat.
 
 | | |
 |---|---|
-| Aplikasi live | `[ ISI setelah deploy Vercel ]` |
-| API | `[ ISI setelah deploy Render ]` |
+| Aplikasi live | https://pasang-surut.vercel.app |
+| API | https://pasang-surut-api.onrender.com |
 | Video YouTube | `[ ISI ]` |
 | Prototype Figma | `[ ISI ]` |
 | Repositori | https://github.com/dzakyahnaf/pasang-surut |
@@ -71,6 +71,23 @@ dan laju penurunan muka tanah. Indeks ini **tidak punya akurasi yang bisa
 dilaporkan**, dan tidak akan punya sampai ada pengamatan genangan per ruas.
 
 **Model Sentinel-1 — dilatih, lalu ditolak sendiri.** Lihat bagian 6.
+
+### Bukti visual
+
+![Sebaran tinggi pasut pada 725 waktu akuisisi Sentinel-1, dibandingkan
+sebaran pada seluruh jam](docs/pasut_saat_akuisisi.png)
+
+*Jam lintasan tetap Sentinel-1 justru menguntungkan pemantauan rob. Persentil
+ke-95 pasut saat akuisisi +0,338 m berbanding +0,302 m pada seluruh jam —
+arsipnya memuat lebih banyak pengamatan pasang tinggi daripada pencuplikan
+acak. Yang tidak terwakili justru surut terdalam.*
+
+![Kepentingan permutasi enam fitur model Sentinel-1 yang
+ditolak](docs/kepentingan_fitur.png)
+
+*Merah adalah ketiga fitur yang bergantung waktu. Ketiganya nol dalam batas
+ketidakpastiannya — model ini mempelajari ruas mana yang sering beranomali,
+bukan kapan ruas tergenang. Itulah alasan model ditolak.*
 
 ---
 
