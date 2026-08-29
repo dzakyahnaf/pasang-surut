@@ -66,3 +66,4 @@ data/processed/s1_vv_ruas_radius*.jsonl
 # penarikan berjalan berkasnya ditulis berkala sehingga bisa tertangkap
 # dalam keadaan setengah jadi.
 data/referensi/muka_air_terukur_akuisisi.json
+data/processed/s1_basah_luas_ruas.jsonl

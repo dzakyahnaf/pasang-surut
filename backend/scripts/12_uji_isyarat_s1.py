@@ -256,6 +256,22 @@ def uji_darat(ee, geom, tahun: list[int]) -> int:
     print(f"PUTUSAN setelah air permanen dibuang: {putusan}")
     print(f"korelasi mutlak tertinggi: {terbaik:.4f}")
 
+    # DERET PER-CITRA WAJIB IKUT DISIMPAN.
+    #
+    # Jalannya pertama hanya menyimpan ringkasan, dan itu keliru: begitu
+    # muncul korelasi +0,36 yang perlu diuji terhadap rancu musiman, deretnya
+    # tidak ada dan seluruh penarikan harus diulang satu jam. Ringkasan
+    # menjawab satu pertanyaan; deret menjawab pertanyaan yang belum terpikir.
+    deret = {}
+    for orbit in (76, 127):
+        for ambang in (-15.0, -17.0):
+            baris = proporsi_air_di_darat(ee, geom, tahun, orbit, ambang)
+            if baris:
+                deret[f"orbit{orbit}_{ambang:+.0f}dB"] = [
+                    {"waktu": b["waktu"], "proporsi": round(b["proporsi"], 6)}
+                    for b in baris
+                ]
+
     berkas = config.DIR_DATA_REFERENSI / "uji_isyarat_s1_darat.json"
     berkas.write_text(json.dumps({
         "_catatan": ("Uji isyarat Sentinel-1 SETELAH air permanen dibuang. "
@@ -266,6 +282,7 @@ def uji_darat(ee, geom, tahun: list[int]) -> int:
         "putusan": putusan,
         "korelasi_mutlak_tertinggi": round(terbaik, 4),
         "per_kombinasi": laporan,
+        "deret_per_citra": deret,
     }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"tersimpan: {berkas.name}")
     return 0
