@@ -28,7 +28,7 @@ ini, baca bagian itu.
 
 | # | Hal | Kenapa penting |
 |---|---|---|
-| B1 | `BAGIAN_3_TERISI.yaml` masih menulis `jumlah_citra_s1: "BELUM ADA"`, padahal angkanya 723. Blok `???` di PLAN.md bagian 3 juga masih kosong. | Sesi berikutnya bisa berhenti karena membaca angka yang salah |
+| ~~B1~~ | **SELESAI 29 Agustus.** Dipindah ke `docs/identitas_tim.yaml`, `jumlah_citra_s1` diperbaiki menjadi 725, dan komentar ambang keputusan lama dibuang karena sudah tidak berlaku. | — |
 | B2 | Tautan **riset WRI April 2026** di README masih `TODO(verifikasi tautan)`. | Tautan mati di gerbang juri lebih buruk daripada tidak ada tautan |
 | B3 | Commit membawa trailer `Co-Authored-By: Claude Opus 5`. | Kalau rulebook DSDC mempersoalkan, putuskan sekarang selagi baru empat commit |
 | ~~B4~~ | **SELESAI 29 Agustus.** Kolam koneksi `ThreadedConnectionPool` maksimum 5, ditambah cache kesehatan 5 detik sehingga `database_tersedia()` tidak lagi membuka koneksi sendiri. | — |
@@ -45,6 +45,9 @@ ini, baca bagian itu.
 | B16 | **Proposal tersisa 20 penanda `[[ISI]]` dari semula 58.** Seluruhnya tertahan pada tugas manual atau sumber yang belum ada: tautan deploy, repo, video, Figma; angka rantai dampak yang menunggu faktor emisi; dan dua sitasi tanpa sumber (leptospirosis dan WRI), turun dari tiga. | Rincian dan status per bagian ada di `docs/sisa_proposal.md` |
 | B17 | **Tujuh kotak `[ ISI MANUAL ]` sudah dikeluarkan dari proposal** dan dipindah ke `docs/sisa_proposal.md`. Isinya tidak hilang. | Kotak itu instruksi untuk penulis, bukan isi proposal, dan berisiko ikut tercetak ke PDF yang dibaca juri |
 | B34 | **Stasiun pasut IOC `sema` merekam kenaikan muka air relatif sekitar 9 cm per tahun** sepanjang 2015 sampai 2025, dari median +0,861 m menjadi +1,781 m. | Ini BUKAN kenaikan muka laut absolut — ia campuran kenaikan muka laut, penurunan tanah tempat alat berdiri, dan kemungkinan perubahan datum. Layak diperiksa lebih lanjut karena besarnya sepadan dengan laju subsidensi di literatur, tetapi jangan dikutip sebagai kenaikan muka laut |
+| B35 | **Penerapan ke Render dan Vercel BELUM dilakukan.** Seluruh artefaknya siap dan sudah diuji: `Dockerfile` 244 MB yang jalan, `render.yaml`, `Procfile`, `vercel.json`, CORS dari lingkungan. | Hanya perlu menekan tombol. Dua variabel wajib diisi di dasbor: `DATABASE_URL` (pooler port 6543) dan `ASAL_DIIZINKAN` di sisi API, `VITE_API_URL` di sisi Vercel |
+| B36 | **`data/processed/potret_demo.json` 7,8 MB WAJIB ikut di-commit.** Tanpa berkas itu, aplikasi yang di-deploy mati begitu Supabase tersendat. | Jalankan ulang `python -m scripts.18_seed_demo` sebelum demo — potret membawa tanggal kedaluwarsa dan ditolak API setelah lewat |
+| B37 | **Uji dari HP di jaringan seluler belum dilakukan.** | Kriteria terima M6 menuntutnya. Perlu perangkat fisik |
 | B30 | **Uji responsif 360px BELUM terverifikasi.** Jendela peramban diubah tetapi viewport tetap 1440, jadi hasilnya tidak sah. | Butuh perangkat sungguhan atau devtools. Lantai mutu DESIGN.md Bagian 11 butir pertama |
 | B31 | **Uji baca di bawah matahari langsung dan uji cetak hitam putih BELUM dilakukan.** | Keduanya memerlukan orang, bukan kode. Pola halftone sudah dirancang untuk keduanya tetapi belum dibuktikan |
 | B32 | **Proposal kini 27 halaman**, naik dari 26 setelah paragraf perbandingan Sentinel-1 versus rekonstruksi pasut ditambahkan. | Masih di bawah batas rulebook 30. Diukur dengan Word |
@@ -1091,3 +1094,143 @@ sekarang tertanam di dalam skrip 16 sehingga tidak bergantung pada ingatan.
 **Temuan sampingan.** Kenaikan muka air relatif sekitar 9 cm per tahun di
 stasiun itu tercatat sebagai B34. Bukan kenaikan muka laut absolut, dan
 jangan dikutip sebagai itu.
+
+---
+
+## M6 — 29 Agustus 2026: tahan banting, artefak deploy, audit kepatuhan
+
+**Status: selesai untuk bagian yang bisa dikerjakan kode.** Penerapan
+sesungguhnya ke Render dan Vercel menuntut pembuatan akun dan persetujuan
+OAuth, dan itu di luar batas yang boleh saya kerjakan. Seluruh artefaknya
+sudah siap dan sudah DIUJI, jadi yang tersisa hanya menekan tombol.
+
+### Yang terpenting: aplikasi tidak bisa mati
+
+`scripts/18_seed_demo.py` membekukan potret 72 jam ke
+`data/processed/potret_demo.json`. Diuji dengan `DATABASE_URL` sengaja
+dirusak:
+
+| Endpoint | Tanpa database |
+|---|---|
+| `/api/kesehatan` | 200 · 0,16 s |
+| `/api/jam` | 200 · 0,005 s |
+| `/api/ruas` | 200 · 0,095 s |
+| `/api/genangan` | 200 · 0,11 s |
+| `/api/validasi` | 200 · 0,009 s |
+| `/api/tujuan-cepat` | 200 · 0,004 s |
+| `/api/rute` | 200 · 0,069 s |
+
+Tujuh dari tujuh hidup, dan **peruteannya justru lebih cepat** daripada lewat
+Supabase (0,07 detik berbanding 1,3 detik).
+
+Yang TIDAK dibekukan: hasil rute. Membekukannya berarti menyiapkan jawaban
+untuk pasangan titik pilihan kita sendiri, dan juri yang mengetuk titik lain
+akan menemukan aplikasinya diam. Graf dibangun dari potret, jadi perutean
+tetap menghitung sungguhan.
+
+Potret membawa `berlaku_sampai` dan **ditolak API setelah kedaluwarsa**.
+Untuk sistem yang menyarankan kapan orang boleh menembus air, prediksi basi
+lebih berbahaya daripada layar kosong.
+
+### Dua bug ditemukan karena mengujinya, bukan karena membacanya
+
+**Potret tanpa simpul ujung.** `geojson()` tidak memuat `osm_u` dan `osm_v`
+karena frontend tidak membutuhkannya. Tetapi mesin routing membangun grafnya
+dari pasangan simpul itu; tanpa keduanya seluruh 19.394 ruas tersambung ke
+simpul yang sama, graf menjadi satu titik, dan perutean gagal dengan
+`IndexError` yang tidak menyebut sebabnya sama sekali.
+
+**Tiga `db.koneksi()` tanpa penjagaan.** Endpoint genangan, validasi, dan
+rute masih membuka koneksi langsung meski database mati. Ketiganya hanya
+ketahuan dengan benar-benar mematikan database, tidak dengan membaca kode.
+
+### Audit ketergantungan runtime: LULUS, ditegakkan tiga lapis
+
+1. `backend/app/` tidak mengimpor satu pun pustaka jaringan. Diperiksa dengan
+   AST, bukan dengan grep: yang dipakai hanya `fastapi`, `pydantic`,
+   `psycopg2`, `numpy`, `dotenv`.
+2. Gaya peta MapLibre ditulis inline — tanpa URL ubin, glyph, atau sprite.
+3. **Citra Docker tidak memasang** `earthengine-api`, `osmnx`, `geopandas`,
+   `rasterio`, `scikit-learn`, `pandas`. Diverifikasi dengan mengimpornya di
+   dalam kontainer yang berjalan; keenamnya `ImportError`.
+
+Lapis ketiga itu yang paling berharga. Aturan repo nomor 6 kini ditegakkan
+oleh isi kontainer, bukan oleh niat baik siapa pun.
+
+### Citra Docker: 1,44 GB menjadi 244 MB
+
+Dua sebab, keduanya ketahuan dari mengukur:
+
+`requirements.txt` memuat seluruh alat pipeline. Dibuat
+`requirements-runtime.txt` berisi lima paket yang benar-benar diimpor
+`backend/app/`. 1,44 GB → 723 MB.
+
+`.dockerignore` saya taruh di `backend/`, padahal konteks build-nya akar
+repo — jadi tidak pernah dibaca, dan `COPY data/processed` menyalin 471 MB
+tarikan Sentinel-1 ke dalam citra. Dipindah ke akar. 723 MB → **244 MB**.
+
+### 6a. Audit teks: NOL temuan
+
+Perintah bantu memberi 16 baris. Diperiksa satu per satu: dua di dalam
+komentar, sepuluh literal GeoJSON (`"FeatureCollection"`, `"Point"`), empat
+nama tombol DOM (`"ArrowLeft"`, `"PageDown"`). **Tidak ada satu pun kalimat
+antarmuka berbahasa Indonesia yang ditulis harfiah di komponen.**
+
+Diperiksa juga dengan dua pola yang lebih tajam — teks JSX yang benar-benar
+dirender, dan atribut `title`/`placeholder`/`alt`/`aria-label` berisi literal
+— keduanya nol.
+
+### 6b. Audit kepatuhan visual PLAN.md Bagian 12B
+
+| Butir | Status | Bukti |
+|---|---|---|
+| Warna, ukuran huruf, radius, jarak dari DESIGN.md | **LULUS setelah diperbaiki** | 2 nilai jarak `2px` di luar skala `--s-*` diganti `var(--s-1)`; 3 nilai `44px` diganti `var(--sentuh-min)` yang ternyata sudah ada |
+| Tidak ada heks di komponen | LULUS | 0 temuan; satu-satunya kemunculan ada di dalam komentar yang melarangnya |
+| Barlow + IBM Plex Mono termuat | LULUS | 6 `@import "@fontsource/..."` di `dasar.css`, swadaya bukan CDN |
+| Pita Pasut lewat papan ketik | LULUS | `role="slider"`, `aria-valuetext` terisi, PageUp/Down berfungsi |
+| Kedalaman lewat warna DAN pola | LULUS | pola titik dua kerapatan di peta dan legenda |
+| Tidak ada shadcn / Material | LULUS | `package.json` bersih dari shadcn, mui, antd, chakra, bootstrap, tailwind |
+| Tidak ada emoji sebagai ikon | LULUS | 0 temuan pada rentang Unicode emoji |
+| Peta konten penuh layar | LULUS | `.jendela-peta` mengisi layar, rail di sampingnya, bukan kartu di atas kisi |
+| Lantai mutu DESIGN.md Bagian 11 | **GAGAL SEBAGIAN** | 3 dari 9 butir belum terpenuhi — lihat B30 dan B31 |
+| Tidak ada kalimat Indonesia di komponen | LULUS | audit 6a, nol temuan |
+| `t()` melempar galat | LULUS | terbukti di M5: melempar karena placeholder `{tanggal}` tidak diisi |
+| Istilah mengikuti glosarium | LULUS | "segmen", "banjir rob", "transportasi" hanya muncul di dalam definisi glosarium yang melarangnya |
+
+**Sepuluh LULUS, satu LULUS setelah diperbaiki, satu GAGAL SEBAGIAN.**
+Yang gagal adalah lantai mutu Bagian 11: responsif 360px belum terverifikasi,
+uji baca di bawah matahari dan uji cetak hitam putih belum dilakukan.
+Ketiganya butuh perangkat atau orang.
+
+### Yang dirapikan
+
+- Tiga notebook rintisan berisi "Kosong. Diisi pada milestone model" dihapus.
+  Analisisnya ada di skrip 12, 14, 15, dan 16 — yang bisa dijalankan ulang
+  dan diuji, tidak seperti notebook.
+- `BAGIAN_3_TERISI.yaml` → `docs/identitas_tim.yaml`, dan `jumlah_citra_s1`
+  diperbaiki dari `"BELUM ADA"` menjadi 725. Komentar ambang keputusan lama
+  ("80-150 = pangkas fitur model") dibuang karena sudah tidak berlaku:
+  citranya 725 dan modelnya tetap ditolak, bukan karena kurang citra.
+- `CHECKLIST_MALAM_INI.md` → `docs/checklist_pendaftaran.md`.
+- Akar repo kini hanya memuat berkas yang memang milik akar.
+
+### Yang dibuat
+
+- `backend/scripts/18_seed_demo.py` — potret tahan banting
+- `backend/Dockerfile` (244 MB, diuji jalan), `.dockerignore` di akar,
+  `render.yaml`, `Procfile`, `frontend/vercel.json`
+- `backend/requirements-runtime.txt`
+- CORS dari `ASAL_DIIZINKAN` dan `ASAL_POLA`, daftar putih bukan `*` —
+  diuji: asal terdaftar lolos, asal asing tidak mendapat header
+- `README.md` ditulis ulang penuh sesuai PLAN.md bagian 11
+- `docs/demo_script.md` — naskah 4 menit 30 detik plus enam pertanyaan yang
+  hampir pasti muncul beserta jawabannya
+
+### Yang TIDAK bisa saya kerjakan
+
+**Penerapan sesungguhnya.** Render, Railway, dan Vercel semuanya menuntut
+pembuatan akun, kata sandi, dan persetujuan OAuth. Saya tidak membuat akun
+dan tidak menyetujui syarat layanan atas nama tim. Ini batas aturan, bukan
+batas alat.
+
+**Uji dari HP di jaringan seluler.** Perlu perangkat fisik.

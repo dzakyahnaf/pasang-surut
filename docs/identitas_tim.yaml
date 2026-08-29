@@ -1,6 +1,7 @@
 # ===================================================================
 # PLAN.md BAGIAN 3 — SUDAH TERISI
-# Tempel blok ini menggantikan blok "???" di bagian 3 PLAN.md
+# Identitas tim dan karya. Sumber tunggal untuk nama berkas, judul video,
+# dan Lampiran C proposal. Dipindahkan dari akar repo ke docs/ pada M6.
 # ===================================================================
 
 # WAJIB — memblokir deliverable
@@ -23,11 +24,11 @@ anggota:
     nrp:  "5027231022"
 
 # WAJIB — memblokir arsitektur
-jumlah_citra_s1:     "BELUM ADA"   # script v1 error di Map.centerObject.
-                                   # Jalankan ulang gee_cek_cakupan_s1.js v2.
-                                   # >150  = lanjut rencana ini
-                                   # 80-150 = pangkas fitur model, maksimal 5
-                                   # <80   = STOP, rombak pendekatan
+# Diperiksa ulang 29 Agustus 2026 lewat Earth Engine Python API.
+# Ambang keputusan di komentar lama sudah tidak berlaku: jumlahnya jauh di
+# atas 150, dan model TETAP ditolak bukan karena kurang citra melainkan
+# karena labelnya tidak berkorelasi dengan pasut. Lihat docs/validasi.md 6.
+jumlah_citra_s1:     725
 
 skill_tim:
   python:            "pernah"       # mahasiswa Teknologi Informasi ITS

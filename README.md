@@ -2,9 +2,9 @@
 
 **Perutean sadar rob untuk Semarang.**
 
-Memprediksi genangan rob di jaringan jalan sampai 72 jam ke depan, lalu
-merutekan warga dan logistik menghindari ruas yang akan tergenang pada jam
-keberangkatan mereka.
+Memprediksi **kapan** tiap ruas jalan berisiko tergenang rob untuk 72 jam ke
+depan, lalu merutekan warga dan logistik menghindarinya pada jam keberangkatan
+mereka — bukan pada kondisi saat ini.
 
 | | |
 |---|---|
@@ -12,7 +12,6 @@ keberangkatan mereka.
 | **Institusi** | Institut Teknologi Sepuluh Nopember (ITS), Surabaya |
 | **Lomba** | Diponegoro Software Development Competition — ANFORCOM 2026 |
 | **Subtema** | 4 — Smart Low-Carbon Urban Mobility |
-| **Status** | Dalam pengerjaan. Lihat [Status pengerjaan](#status-pengerjaan) |
 
 **Anggota**
 
@@ -31,18 +30,12 @@ persen jaringan jalan Semarang — setara 11 persen aktivitas mobilitas kota —
 berpotensi terdampak banjir rob, dengan total kerugian akibat gangguan
 transportasi sekitar **Rp848 miliar per tahun**. WRI menyatakan pendekatan
 berbasis infrastruktur fisik saja belum cukup dan diperlukan pergeseran ke
-perencanaan transportasi yang lebih adaptif. Tanggul tidak akan selesai
-sebelum besok pagi, sementara warga tetap harus berangkat kerja. PASANG SURUT
-menjawab celah waktu itu: bukan mencegah robnya, melainkan membuat orang tahu
-jalan mana yang akan tergenang pada jam mereka berangkat.
+perencanaan transportasi yang lebih adaptif.
 
-**Pembeda teknis.** Model genangan dikalibrasi dari genangan yang benar-benar
-teramati lewat citra radar Sentinel-1, bukan dari model bathtub berbasis
-ambang elevasi. Ini penting karena DEMNAS punya RMSE vertikal 2,79 m
-sementara rob yang dimodelkan setinggi 10 sampai 50 cm — membandingkan
-elevasi absolut terhadap tinggi muka air pada selisih sebesar itu secara
-statistik tidak sah. DEM tetap dipakai, tetapi sebagai fitur model, tidak
-pernah sebagai ambang.
+Tanggul tidak akan selesai sebelum besok pagi, sementara warga tetap harus
+berangkat kerja. PASANG SURUT menjawab celah waktu itu: bukan mencegah robnya,
+melainkan membuat orang tahu jalan mana yang berisiko pada jam mereka
+berangkat.
 
 ---
 
@@ -50,64 +43,89 @@ pernah sebagai ambang.
 
 | | |
 |---|---|
-| Aplikasi live | Belum tersedia |
-| Video YouTube | Belum tersedia |
-| Prototype Figma | Belum tersedia |
-| Repositori | Belum tersedia |
+| Aplikasi live | `[ ISI setelah deploy Vercel ]` |
+| API | `[ ISI setelah deploy Render ]` |
+| Video YouTube | `[ ISI ]` |
+| Prototype Figma | `[ ISI ]` |
+| Repositori | https://github.com/dzakyahnaf/pasang-surut |
 
 ---
 
-## 3. Tangkapan layar
+## 3. Apa yang benar-benar dilakukan sistem ini
 
-Belum dilampirkan ke README. Yang sudah berjalan: peta penuh layar dengan
-jaringan jalan wilayah pilot, lapisan genangan data contoh, Pita Pasut 72
-jam sebagai penggeser waktu, dan perutean sadar genangan yang menampilkan
-rute sadar rob bersama rute pembandingnya sekaligus.
+Ini bagian yang paling penting dibaca, karena judul "berbasis Sentinel-1"
+pernah benar lalu berhenti benar, dan kami mengubahnya.
+
+**Komponen waktu — tervalidasi.** Kapan tiap ruas berisiko ditentukan
+rekonstruksi harmonik pasang surut dari konstanta terpublikasi. Rekonstruksi
+itu diuji terhadap muka air **terukur** stasiun pasut Badan Informasi
+Geospasial: korelasi **0,78–0,91**, RMSE **0,10–0,12 m**. Diuji silang lagi
+secara independen terhadap 16 kejadian rob terdokumentasi, dan menempatkan
+hari kejadian pada median persentil **80,2** dari 50 yang diharapkan bila
+tidak berhubungan.
+
+**Komponen ruang — indeks berbasis aturan, TANPA angka akurasi.** Ruas mana
+yang lebih rentan ditentukan indeks dari tiga besaran fisik berbobot sama
+rata: elevasi relatif terhadap tetangga radius 500 m, jarak ke garis pantai,
+dan laju penurunan muka tanah. Indeks ini **tidak punya akurasi yang bisa
+dilaporkan**, dan tidak akan punya sampai ada pengamatan genangan per ruas.
+
+**Model Sentinel-1 — dilatih, lalu ditolak sendiri.** Lihat bagian 6.
 
 ---
 
 ## 4. Arsitektur
 
 ```
-Sentinel-1 GRD ──┐
-DEMNAS           ├──> ekstraksi fitur ──> gradient boosting ──┐
-pasut harmonik   │                                            │
-curah hujan    ──┘                                            v
-                                                    prediksi_genangan
-                                                    (edge_id, waktu,
-                                                     kedalaman_cm,
-                                                     probabilitas, sumber)
-                                                              │
-OpenStreetMap ──> OSMnx ──> GraphML ──> tabel ruas_jalan ──┐  │
-                            (sekali, saat siapkan data)      v  v
-                                          routing sadar waktu (Dijkstra)
-                                                              │
-                                                              v
-                                       FastAPI ──> React + MapLibre GL JS
+                 SEKALI, DI LAPTOP                    SAAT MELAYANI
+    ┌──────────────────────────────────────┐    ┌──────────────────────┐
+    │  OpenStreetMap ──► graf jalan        │    │                      │
+    │  DEMNAS ──────────► elevasi          │    │   FastAPI            │
+    │  Literatur ───────► subsidensi       │    │     │                │
+    │  Open-Meteo ──────► hujan            │    │     ├─ Dijkstra      │
+    │  Sentinel-1 ──────► label (DITOLAK)  │    │     │  sadar waktu   │
+    │  Konstanta pasut ─► rekonstruksi     │    │     │                │
+    │             │                        │    │     └─ indeks +      │
+    │             ▼                        │    │        pasut         │
+    │      PostGIS / Supabase ─────────────┼───►│          │           │
+    │             │                        │    │          ▼           │
+    │             └──► potret_demo.json ───┼───►│   React + MapLibre   │
+    └──────────────────────────────────────┘    └──────────────────────┘
+        tidak pernah dipanggil saat melayani      NOL panggilan keluar
 ```
 
-Rincian ada di [`docs/arsitektur.md`](docs/arsitektur.md) — belum diisi.
+**Nol ketergantungan jaringan saat melayani.** Diaudit dan ditegakkan tiga
+lapis:
 
-**Catatan desain yang menentukan bentuk sistem:** jalur demo harus jalan
-penuh offline. Tidak ada panggilan API eksternal saat runtime. Graf jalan
-diunduh sekali lalu disimpan ke file, pasut dihitung sekali lalu disimpan.
-Juri babak final memakai aplikasi ini langsung sebagai pengguna, jadi tidak
-boleh ada dependensi jaringan yang bisa gagal di tengah demo.
+1. `backend/app/` tidak mengimpor satu pun pustaka jaringan. Yang ada hanya
+   `fastapi`, `pydantic`, `psycopg2`, `numpy`, `dotenv`.
+2. Gaya peta MapLibre ditulis **inline** — tanpa URL ubin, glyph, atau
+   sprite. Tidak ada permintaan ke server peta mana pun.
+3. Citra Docker **tidak memasang** `earthengine-api`, `osmnx`, `geopandas`,
+   `rasterio`, `scikit-learn`, maupun `pandas`. Kode yang keliru memanggilnya
+   akan gagal saat start, bukan diam-diam saat juri memakainya.
 
-Konsekuensinya sampai ke peta: **tidak ada penyedia ubin peta dari luar.**
-Latar peta satu warna dek dan seluruh yang tergambar di atasnya adalah data
-sendiri. Huruf pun dimuat dari paket lokal, bukan dari Google Fonts.
+**Tahan banting.** `backend/scripts/18_seed_demo.py` membekukan potret 72 jam
+ke `data/processed/potret_demo.json`. Bila database tidak terjangkau, seluruh
+tujuh endpoint tetap melayani dari potret — termasuk **perutean, yang tetap
+menghitung sungguhan**, bukan mengembalikan rute yang sudah disiapkan.
+Terukur: 7/7 endpoint hidup dengan `DATABASE_URL` sengaja dirusak, dan
+peruteannya justru lebih cepat (0,07 s berbanding 1,3 s lewat Supabase).
+
+Potret membawa `berlaku_sampai` dan **ditolak setelah kedaluwarsa**. Untuk
+sistem yang menyarankan kapan orang boleh menembus air, prediksi basi lebih
+berbahaya daripada layar kosong.
 
 ### Tech stack
 
-| Lapisan | Pilihan |
-|---|---|
-| Backend | Python 3.11, FastAPI, Uvicorn |
-| Geospasial | OSMnx, NetworkX, GeoPandas, rasterio, Shapely, pyproj |
-| Model | scikit-learn — gradient boosting |
-| Citra satelit | Sentinel-1 GRD IW VV via Google Earth Engine |
-| Database | PostgreSQL + PostGIS (Supabase) |
-| Frontend | React, Vite, MapLibre GL JS, CSS custom property |
+| Lapisan | Pilihan | Alasan singkat |
+|---|---|---|
+| API | FastAPI + Uvicorn | dokumentasi OpenAPI otomatis, tipe terperiksa |
+| Database | PostgreSQL + PostGIS (Supabase) | kueri spasial tanpa ORM |
+| Perutean | Dijkstra sadar waktu, tulis sendiri | biaya dihitung pada waktu TIBA, bukan berangkat |
+| Frontend | React + Vite + MapLibre GL JS | MapLibre bebas token, bisa gaya inline |
+| Gaya | CSS custom property | tiap warna dari `DESIGN.md`, nol heks di komponen |
+| Model | HistGradientBoostingClassifier | dilatih lalu ditolak, lihat bagian 6 |
 
 ---
 
@@ -115,188 +133,223 @@ sendiri. Huruf pun dimuat dari paket lokal, bukan dari Google Fonts.
 
 | Data | Sumber | Tautan | Catatan |
 |---|---|---|---|
-| Jaringan jalan | OpenStreetMap via OSMnx | <https://www.openstreetmap.org> | Diunduh sekali, disimpan GraphML. Overpass tidak dipanggil saat runtime |
-| Label genangan | Sentinel-1 GRD IW VV, Google Earth Engine | <https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S1_GRD> | Jantung proyek. Hanya memberi label basah atau kering |
-| Elevasi | DEMNAS tile 1409-22, Ina-Geoportal BIG | <https://tanahair.indonesia.go.id/portal-web/unduh/demnas> | 0,27 arc-second sekitar 8 m, datum EGM2008. RMSE vertikal 2,79 m. Dipakai sebagai fitur, bukan ambang |
-| Curah hujan | Open-Meteo | <https://open-meteo.com> | Gratis tanpa kunci API |
-| Curah hujan sekunder | BMKG | <https://www.bmkg.go.id> | Pembanding |
-| Pasang surut | Rekonstruksi harmonik dari konstanta terpublikasi | TODO(sumber) | Offline penuh. Konstanta belum diisi, lihat `data/referensi/konstanta_pasut_semarang.json` |
-| Laju penurunan tanah | Literatur terpublikasi | TODO(sumber) | Belum diisi, lihat `data/referensi/laju_subsidensi.json` |
-| Faktor emisi | IPCC atau pedoman nasional | TODO(sumber) | Dinyatakan sebagai rentang, bukan angka tunggal |
-| Baseline dampak | WRI Indonesia, April 2026 | TODO(verifikasi tautan) | Rp848 miliar per tahun |
-
-Baris bertanda TODO belum punya sitasi yang bisa diverifikasi. Nilainya
-sengaja dibiarkan `null` di `data/referensi/` sampai sumbernya ditemukan.
+| Jaringan jalan | OpenStreetMap via OSMnx | [openstreetmap.org](https://www.openstreetmap.org) | ODbL. 19.394 ruas, 1.289 km |
+| Elevasi | DEMNAS, Badan Informasi Geospasial | [tanahair.indonesia.go.id](https://tanahair.indonesia.go.id/portal-web/unduh/demnas) | tile 1409-22. **RMSE vertikal 2,79 m** |
+| Garis pantai | OpenStreetMap `natural=coastline` | — | 21 garis, diambil sekali |
+| Penurunan muka tanah | Rahmawati, Prasetyo & Sasmito (2020) | [ejournal3.undip.ac.id](https://ejournal3.undip.ac.id/index.php/geodesi/article/viewFile/26032/23173) | *Jurnal Geodesi Undip* 9(1):29–36, SBAS Sentinel-1A |
+| Konstanta pasut | Rachman, Ismunarti & Handoyo (2015) | [ejournal3.undip.ac.id](https://ejournal3.undip.ac.id/index.php/joce/article/download/7646/7406) | *Jurnal Oseanografi* 4(1):1–9, Admiralty 15 hari |
+| Muka air terukur | Stasiun IOC `sema` (BIG + GFZ) | [ioc-sealevelmonitoring.org](https://www.ioc-sealevelmonitoring.org/station.php?code=sema) | dipakai memvalidasi rekonstruksi |
+| Curah hujan | Open-Meteo Archive (ERA5) | [open-meteo.com](https://open-meteo.com) | 102.552 jam, 2015–2026 |
+| Citra radar | Sentinel-1 GRD IW VV via Earth Engine | [developers.google.com](https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S1_GRD) | 725 citra, 2015–2026 |
+| Baseline dampak | WRI Indonesia, April 2026 | `[ ISI tautan ]` | Rp848 miliar/tahun |
+| Faktor emisi | belum bersitasi | — | `faktor_emisi.json` masih `null` |
 
 ---
 
-## 6. Validasi
+## 6. Validasi — angka apa adanya, termasuk yang jelek
 
-**Akurasi model: belum tersedia.** Model belum dilatih. Angka akan diisi apa
-adanya setelah pelatihan, termasuk kalau hasilnya jelek.
+### 6.1 Model Sentinel-1: DILATIH, LALU DITOLAK
 
-Yang sudah terverifikasi sejauh ini:
+725 citra ditarik seluruhnya, 2.502 ruas berstrata, **1.813.950 nilai
+backscatter**. Pemisahan berdasarkan **waktu**, tidak pernah acak: latih
+2015–2023 (1.366.092 baris), uji 2024–2026 (447.858 baris).
 
-- **Arsip Sentinel-1 di atas AOI: 723 citra** (2015 sampai 2026), diperiksa
-  23 Agustus 2026. Di atas ambang 150 yang ditetapkan rencana, sehingga model
-  dibangun dengan set fitur penuh.
+| Metrik | Nilai |
+|---|---:|
+| ROC-AUC | 0,6579 |
+| PR-AUC | 0,0371 (proporsi dasar 0,0160) |
+| F1 | 0,0894 pada ambang 0,665 |
+| Skor Brier | 0,1942 |
 
-Sebaran per tahun, sebaran per arah orbit, dan catatan soal lubang arsip
-2022 sampai 2024 ada di [`docs/validasi.md`](docs/validasi.md).
+Matriks konfusi: TN 422.350 · FP 18.352 · FN 5.962 · TP 1.194.
 
-**Split latih dan uji berbasis waktu, tidak pernah acak:** latih 2015–2023,
-uji 2024–2026.
+**Kenapa ditolak.** Kepentingan permutasi pada data uji:
 
-**Soal data contoh.** Selama model asli belum siap, tabel prediksi diisi data
-sintetis bertanda `sumber = 'dummy'` supaya routing, API, dan frontend bisa
-dibangun paralel. Setiap tampilan yang memakainya membawa badge **DATA
-CONTOH** yang hilang otomatis begitu sumbernya berganti ke model asli.
+| Fitur | Penurunan ROC-AUC |
+|---|---:|
+| Jarak ke pantai | +0,1417 ± 0,0039 |
+| Elevasi DEMNAS | +0,0619 ± 0,0016 |
+| Laju subsidensi | +0,0342 ± 0,0014 |
+| **Tinggi pasut saat akuisisi** | **+0,0010 ± 0,0014** |
+| **Hujan 24 jam** | **+0,0004 ± 0,0010** |
+| **Hujan 72 jam** | **−0,0026 ± 0,0011** |
 
-**Soal kedalaman.** Sentinel-1 hanya memberi label basah atau kering.
-Kedalaman genangan adalah estimasi turunan, dan setiap tampilan kedalaman
-menyebutkannya sebagai estimasi.
+Ketiga fitur yang bergantung waktu **nol dalam batas ketidakpastiannya**.
+Model ini mempelajari ruas mana yang sering beranomali, bukan **kapan** ruas
+tergenang — dan seluruh guna sistem perutean terletak pada kata "kapan".
+Aturan "pasut saja" menghasilkan ROC-AUC 0,4935, setara lemparan koin.
+
+### 6.2 Empat upaya penyelamatan, semuanya gagal
+
+| Upaya | Hasil |
+|---|---|
+| Cuplik radius 100 m, bukan piksel titik | ROC-AUC **0,5982** pada ambang setara — lebih buruk |
+| Kriteria dua arah (pantulan ganda kota) | arah benar, besarnya hanya **0,47σ** pada 12 citra |
+| Luas air kawasan terbuka | korelasi terhadap pasut **negatif** (tambak paling halus saat surut) |
+| Muka air **terukur**, bukan astronomis | mentah −0,29, **semu** — tinggal +0,05 setelah layangan diluruskan |
+
+Upaya keempat layak diceritakan sendiri. Korelasi mentahnya −0,29 tampak
+sepuluh kali lebih kuat. Dua hal menyingkapnya sebagai semu: kriteria "turun"
+dan "naik" berkorelasi hampir sama besar dengan tanda berlawanan (tanda khas
+pergeseran radiometrik seluruh citra, bukan genangan per ruas), dan rekaman
+stasiun **melayang naik 0,92 m dalam sepuluh tahun**. Dua deret yang
+sama-sama melayang berkorelasi tanpa hubungan sebab.
+
+### 6.3 Rekonstruksi pasut: INI yang tervalidasi
+
+Acuan waktu fase konstanta tidak disebutkan sumbernya, jadi seluruh offset
+−12 sampai +12 jam disisir terhadap muka air terukur:
+
+| Jendela | Fase = UTC | Fase = WIB |
+|---|---:|---:|
+| 2 hari | −0,289 | **+0,907** |
+| 4 hari | −0,362 | **+0,909** |
+| 7 hari | −0,427 | **+0,858** |
+| 10 hari | −0,465 | **+0,782** |
+
+Memakai UTC bukan sekadar kurang tepat, melainkan **berkebalikan**.
+
+### 6.4 Yang TIDAK kami klaim
+
+- Indeks kerentanan tidak punya angka akurasi
+- Kedalaman sentimeter adalah **estimasi turunan**, bukan pengukuran
+- Perbandingan visual prediksi versus genangan teramati tidak dibuat, karena
+  tidak ada pengamatan genangan per ruas untuk dijadikan pembanding
+
+Rincian lengkap: [`docs/validasi.md`](docs/validasi.md).
 
 ---
 
 ## 7. Menjalankan secara lokal
 
-**Prasyarat:** Python 3.11, Node.js 20 atau lebih baru, Git.
+### Prasyarat
+
+Python 3.11, Node 20+, dan PostgreSQL + PostGIS (Docker atau Supabase).
+
+### Langkah
 
 ```bash
-git clone <url-repo>
+git clone https://github.com/dzakyahnaf/pasang-surut
 cd pasang-surut
-```
 
-**1. Environment Python**
-
-```bash
-python3.11 -m venv .venv
-
+python -m venv .venv
+source .venv/Scripts/activate      # Windows Git Bash
 source .venv/bin/activate          # Linux dan macOS
-source .venv/Scripts/activate      # Windows, Git Bash
-.venv\Scripts\activate             # Windows, PowerShell
-
 pip install -r requirements.txt
-```
 
-**2. Variabel lingkungan**
-
-```bash
 cp .env.example .env               # lalu isi DATABASE_URL
 ```
 
-**3. Database**
-
-Jalankan `db/schema.sql` di Supabase SQL Editor.
-
-**4. Uji**
-
-```bash
-pytest -q
-```
-
-**5. Pipeline data**
-
-Dijalankan dari `backend/`, berurutan. Langkah pertama menyentuh Overpass dan
-cukup dijalankan SEKALI; hasilnya disimpan ke berkas dan dipakai selamanya.
+Periksa sambungan database sebelum apa pun dijalankan — skrip ini menemukan
+kesalahan URL yang paling sering terjadi tanpa pernah mencetak kata sandi:
 
 ```bash
 cd backend
-python -m scripts.01_bangun_graf        # unduh jaringan jalan OSM -> GraphML
-python -m scripts.02_isi_ruas_jalan     # graf -> tabel ruas_jalan + GeoJSON
-python -m scripts.03_isi_dummy          # data contoh 72 jam, sumber='dummy'
+python -m scripts.13_periksa_database              # memeriksa
+python -m scripts.13_periksa_database --perbaiki   # persen-encode sandi
+python -m scripts.13_periksa_database --pasang-skema
 ```
 
-**6. API**
+### Pipeline data, berurutan, dari `backend/`
 
 ```bash
-cd backend && uvicorn app.main:app --reload
+python -m scripts.01_bangun_graf        # SEKALI saja, menyentuh Overpass
+python -m scripts.02_isi_ruas_jalan     # graf -> tabel ruas_jalan
+python -m scripts.05_isi_fitur_ruas     # elevasi, jarak pantai, subsidensi
+python -m scripts.06_isi_pemicu         # hujan Open-Meteo + pasut
+python -m scripts.06_isi_pemicu --prakiraan   # 16 hari ke depan
+python -m scripts.11_indeks_kerentanan  # indeks -> prediksi_genangan
+python -m scripts.17_tujuan_cepat       # POI dari OSM, sekali
+python -m scripts.18_seed_demo          # potret tahan banting
 ```
 
-| Endpoint | Isi |
-|---|---|
-| `GET /api/kesehatan` | keadaan sistem, jumlah ruas, sumber data, rentang prediksi |
-| `GET /api/ruas?waktu=` | jaringan jalan GeoJSON dengan kedalaman pada satu jam |
-| `GET /api/genangan?waktu=` | ruas yang tergenang saja, jauh lebih ringan |
-| `GET /api/jam` | sumbu 72 jam Pita Pasut: tinggi pasut dan jam berisiko |
-| `POST /api/rute` | DUA rute sekaligus: pembanding dan sadar rob |
-
-**7. Frontend**
+### Skrip verifikasi — boleh dijalankan kapan saja
 
 ```bash
-cd frontend && npm install && npm run dev
+python -m scripts.04_kalibrasi_pasut    # acuan fase vs data terukur IOC
+python -m scripts.07_uji_silang_rob     # pasut vs tanggal kejadian rob
+python -m scripts.12_uji_isyarat_s1     # apakah S1 melihat pasut sama sekali
+python -m scripts.14_uji_dua_arah       # kriteria label, tanpa kuota GEE
+python -m scripts.16_muka_air_terukur   # label vs muka air terukur
 ```
 
-Peta terbuka di <http://localhost:5173>.
+### Menjalankan
 
-**Tanpa database.** Kalau `DATABASE_URL` belum diisi, API otomatis membaca
-`data/processed/ruas_jalan.geojson` yang ikut di-commit, sehingga peta tetap
-terbuka. Yang hilang hanya lapisan genangan.
+```bash
+cd backend && uvicorn app.main:app --reload   # API di :8000
+cd frontend && npm install && npm run dev     # UI di :5173
+pytest -q                                     # 43 uji, dari akar repo
+```
+
+### Deploy
+
+```bash
+docker build -f backend/Dockerfile -t pasang-surut-api .
+docker run -p 8000:8000 -e DATABASE_URL=... -e ASAL_DIIZINKAN=... pasang-surut-api
+```
+
+Render membaca [`render.yaml`](render.yaml) sebagai blueprint. Vercel membaca
+[`frontend/vercel.json`](frontend/vercel.json). Dua variabel wajib diisi di
+dasbor masing-masing: `DATABASE_URL` dan `ASAL_DIIZINKAN` di sisi API,
+`VITE_API_URL` di sisi frontend.
 
 ---
 
 ## 8. Batasan yang diketahui
 
-Lihat [`docs/batasan.md`](docs/batasan.md) — kerangka sudah ada, isinya
-ditulis sepanjang pengerjaan.
+Ringkasan. Daftar penuh di [`docs/batasan.md`](docs/batasan.md).
 
-Yang sudah pasti masuk daftar:
-
-- Kedalaman genangan adalah estimasi turunan, bukan hasil pengukuran. Radar
-  Sentinel-1 hanya membedakan permukaan basah dan kering
-- DEMNAS punya RMSE vertikal 2,79 m, jauh lebih besar dari tinggi rob yang
-  dimodelkan. DEM hanya dipakai sebagai fitur model
-- Cakupan hanya Semarang Utara dan Semarang Timur, bukan seluruh kota
-- Kepadatan citra Sentinel-1 di jendela uji 2024–2026 lebih rendah daripada
-  di jendela latih, akibat jeda antara berakhirnya Sentinel-1B dan mulai
-  regulernya Sentinel-1C
-- Tidak ada data lalu lintas real-time, sehingga estimasi waktu tempuh
-  berdasarkan kecepatan bebas hambatan yang dikoreksi genangan
+1. **Kedalaman adalah estimasi turunan.** Sentinel-1 hanya memberi label
+   basah atau kering. Angka sentimeter lahir dari fungsi monotonik yang
+   dibatasi 10–50 cm — batas itu sendiri asumsi.
+2. **Indeks kerentanan tanpa akurasi.** Bobot sepertiga tiap komponen adalah
+   keputusan sadar, bukan hasil penyetelan terhadap data.
+3. **DEMNAS RMSE 2,79 m** jauh lebih besar daripada rob 10–50 cm. Karena itu
+   dipakai elevasi **relatif** terhadap tetangga radius 500 m, yang
+   meniadakan galat berkorelasi spasial: simpangan baku turun 5,86 → 2,99 m.
+4. **Hujan dari reanalisis satu titik** untuk seluruh AOI 13×8 km. Hujan
+   konvektif setempat tidak tertangkap.
+5. **Subsidensi per kecamatan, periode 2015–2018.** Memakainya untuk 2026
+   adalah ekstrapolasi delapan tahun.
+6. **Konsumsi bahan bakar belum bersitasi**, dan angkanya kini tampil di
+   antarmuka lewat panel dampak.
+7. **Bukan peringatan dini resmi.** Untuk keputusan evakuasi, ikuti BPBD.
+8. **Hanya wilayah pilot**, bukan seluruh Kota Semarang.
 
 ---
 
 ## 9. Roadmap — ditunda dari MVP
 
-Cakupan seluruh kota; moda transit dan pejalan kaki; laporan genangan
-real-time dari warga; dashboard khusus BPBD dan Dishub; notifikasi push;
-model hidrodinamik penuh; integrasi data lalu lintas real-time; akun pengguna
-dan riwayat perjalanan.
-
----
-
-## Status pengerjaan
-
-| Milestone | Isi | Status |
-|---|---|---|
-| M1 | Fondasi repo, environment, AOI, cek arsip Sentinel-1 | Selesai |
-| M2 | Graf jalan, database terisi, peta jalan tampil | Selesai |
-| M3 | Perutean sadar genangan dan Pita Pasut | Selesai |
-| M4 | Model genangan asli | Belum |
-| M5 | Panel dampak dan integrasi | Belum |
-| M6 | Deploy | Belum |
-
-Rincian per hari ada di [`docs/PROGRESS.md`](docs/PROGRESS.md).
+- Perbandingan visual prediksi versus genangan teramati. **Dipotong di M5
+  karena bahannya tidak ada**, bukan karena kehabisan waktu — tidak ada
+  pengamatan genangan per ruas untuk dijadikan pembanding
+- Ground truth per ruas dari BPBD atau laporan warga
+- Cakupan seluruh kota, moda angkutan umum dan pejalan kaki
+- Model hidrodinamik dan integrasi lalu lintas waktu nyata
+- Koreksi nodal 18,6 tahun pada rekonstruksi pasut
+- Prakiraan gelombang badai, supaya komponen non-astronomis ikut diprediksi
 
 ---
 
 ## Struktur repo
 
 ```
-data/         AOI, data mentah (tidak di-commit), data olahan, referensi
-notebooks/    eksplorasi — dibersihkan sebelum submit
-gee/          skrip Earth Engine
-backend/      app/ (API, domain, schemas), scripts/, tests/
-frontend/     React dan MapLibre — dibangun di milestone berikutnya
-db/           schema.sql
-docs/         arsitektur, metodologi, batasan, validasi, progres
+backend/app/          lapisan API dan domain — TIDAK ada pustaka jaringan
+backend/scripts/      pipeline data dan verifikasi, 01 sampai 18
+backend/tests/        43 uji
+frontend/src/         React, MapLibre, seluruh teks lewat t()
+data/aoi/             batas wilayah pilot
+data/processed/       potret demo, jaringan jalan, indeks, tujuan cepat
+data/referensi/       konstanta pasut, metrik model, hasil tiap uji
+db/schema.sql         5 tabel, kontrak antar anggota tim
+docs/                 validasi, batasan, progres, naskah demo
+copy.id.json          SELURUH teks antarmuka
+DESIGN.md             sistem visual, dikunci
 ```
-
-Aturan pengembangan ada di `CLAUDE.md`. Rencana lengkap ada di `PLAN.md`.
-Keputusan visual ada di `DESIGN.md`. Seluruh teks antarmuka ada di
-`copy.id.json`.
 
 ---
 
 ## Lisensi
 
-MIT. Lihat [`LICENSE`](LICENSE).
+Kode di bawah [LICENSE](LICENSE). Data OpenStreetMap di bawah ODbL,
+© kontributor OpenStreetMap. DEMNAS © Badan Informasi Geospasial.

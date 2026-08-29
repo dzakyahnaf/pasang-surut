@@ -1,0 +1,31 @@
+# Konteks build adalah AKAR repo, jadi berkas ini harus di akar juga —
+# .dockerignore di dalam backend/ tidak pernah dibaca.
+#
+# Tanpa berkas ini, `COPY data/processed` menyalin 471 MB tarikan mentah
+# Sentinel-1 ke dalam citra. Terukur: citranya 723 MB sebelum, jauh lebih
+# kecil sesudah.
+
+.git
+.venv
+**/__pycache__
+**/*.pyc
+.pytest_cache
+
+# Data mentah dan tarikan besar. Tidak satu pun dibaca saat runtime.
+data/raw
+data/processed/*.jsonl
+data/processed/*.graphml
+data/processed/model_genangan_v1.joblib
+data/processed/s1_daftar_citra.json
+data/processed/ruas_sampel_latih.json
+
+# Frontend punya jalur penerapannya sendiri di Vercel.
+frontend
+
+# Skrip pipeline, uji, dan dokumentasi tidak ikut ke server.
+backend/scripts
+backend/tests
+docs
+notebooks
+gee
+*.docx

@@ -1,0 +1,29 @@
+# Blueprint Render untuk API PASANG SURUT.
+#
+# Cara pakai: Render > New > Blueprint > pilih repo ini. Render membaca
+# berkas ini dan menyiapkan layanannya. Yang WAJIB diisi manual sesudahnya
+# hanya DATABASE_URL dan ASAL_DIIZINKAN, keduanya ditandai sync: false
+# supaya Render meminta nilainya alih-alih menaruh rahasia di dalam repo.
+
+services:
+  - type: web
+    name: pasang-surut-api
+    runtime: docker
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: .
+    plan: free
+    region: singapore          # terdekat dengan Semarang di antara pilihan Render
+    healthCheckPath: /api/kesehatan
+    envVars:
+      # URL Supabase. WAJIB memakai connection pooler port 6543, bukan
+      # koneksi langsung port 5432: koneksi langsung disajikan lewat IPv6
+      # dan penyedia hosting umumnya masih IPv4-saja.
+      - key: DATABASE_URL
+        sync: false
+      # Alamat frontend produksi, dipisah koma. Tanpa ini peramban akan
+      # memblokir permintaan dari Vercel karena beda asal.
+      - key: ASAL_DIIZINKAN
+        sync: false
+      # Pratinjau Vercel memakai subdomain yang berubah tiap penerapan.
+      - key: ASAL_POLA
+        value: ^https://.*\.vercel\.app$

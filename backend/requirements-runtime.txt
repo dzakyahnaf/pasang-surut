@@ -1,0 +1,25 @@
+# Dependency RUNTIME saja — inilah yang dipasang di server yang di-deploy.
+#
+# KENAPA TERPISAH DARI requirements.txt.
+#
+# requirements.txt memuat seluruh alat pipeline: osmnx, geopandas, rasterio,
+# earthengine-api, scikit-learn, pandas. Tidak satu pun dipanggil saat API
+# melayani permintaan — seluruhnya hanya dipakai skrip penyiapan data yang
+# dijalankan di laptop.
+#
+# Citra Docker yang memasang seluruhnya berukuran 1,44 GB. Dengan daftar ini
+# jauh lebih kecil, dan bedanya bukan sekadar kerapian: penerapan di paket
+# gratis lebih cepat, dan citra yang tidak memuat earthengine-api TIDAK BISA
+# memanggil Earth Engine sekalipun ada kode yang keliru mencobanya. Aturan
+# repo nomor 6 jadi ditegakkan oleh isi kontainer, bukan oleh niat baik.
+#
+# Daftar ini disusun dari impor yang benar-benar ada di backend/app/, bukan
+# dari perkiraan. Kalau lapisan API menambah impor baru, tambahkan di sini
+# juga — kalau lupa, kontainer akan gagal start dan itu memang yang
+# diinginkan, jauh lebih baik daripada gagal diam-diam saat juri memakainya.
+
+fastapi==0.141.1          # framework API
+uvicorn==0.52.4           # server ASGI
+psycopg2-binary==2.9.12   # driver PostgreSQL untuk Supabase
+numpy==2.4.6              # dipakai domain/routing.py dan domain/kerentanan.py
+python-dotenv==1.2.3      # baca .env

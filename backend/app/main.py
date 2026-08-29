@@ -23,6 +23,7 @@ oleh skrip 01, jauh sebelum aplikasi dijalankan.
 from __future__ import annotations
 
 import json
+import os
 from datetime import datetime, timedelta, timezone
 from functools import lru_cache
 
@@ -42,12 +43,25 @@ app = FastAPI(
 # Frontend berjalan di port lain saat pengembangan, jadi peramban
 # memperlakukannya sebagai asal yang berbeda dan memblokir permintaan tanpa
 # izin CORS. Daftar ini hanya berisi alamat pengembangan lokal.
+# Asal yang diizinkan dibaca dari lingkungan, dipisah koma, supaya alamat
+# frontend produksi tidak perlu masuk ke dalam kode. Dua alamat pengembangan
+# selalu ikut karena keduanya tidak berbahaya dan menghemat satu langkah
+# konfigurasi tiap kali orang baru menjalankan repo ini.
+#
+# Daftar putih dipakai, BUKAN "*". Endpoint /api/rute menerima POST, dan
+# mengizinkan semua asal berarti situs mana pun bisa memakainya sebagai
+# mesin routing gratis atas biaya kuota Supabase kita.
+_ASAL_PENGEMBANGAN = ["http://localhost:5173", "http://127.0.0.1:5173"]
+_ASAL_PRODUKSI = [
+    a.strip() for a in os.getenv("ASAL_DIIZINKAN", "").split(",") if a.strip()
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",
-        "http://127.0.0.1:5173",
-    ],
+    allow_origins=_ASAL_PENGEMBANGAN + _ASAL_PRODUKSI,
+    # Pratinjau Vercel memakai subdomain yang berubah tiap penerapan, jadi
+    # polanya diizinkan sekalian. Hanya subdomain vercel.app, bukan mana pun.
+    allow_origin_regex=os.getenv("ASAL_POLA") or None,
     allow_methods=["GET", "POST"],
     allow_headers=["*"],
 )
@@ -56,6 +70,7 @@ BERKAS_GEOJSON = config.DIR_DATA_OLAHAN / "ruas_jalan.geojson"
 BERKAS_TUJUAN = config.DIR_DATA_OLAHAN / "tujuan_cepat.geojson"
 BERKAS_METRIK = config.DIR_DATA_REFERENSI / "metrik_model.json"
 BERKAS_INDEKS = config.DIR_DATA_OLAHAN / "indeks_kerentanan.json"
+BERKAS_POTRET = config.DIR_DATA_OLAHAN / "potret_demo.json"
 
 
 # ══════════════════════════════════════════════════════════════════════════
@@ -103,6 +118,47 @@ async def tutup_koneksi() -> None:
 # ══════════════════════════════════════════════════════════════════════════
 # SUMBER DATA
 # ══════════════════════════════════════════════════════════════════════════
+@lru_cache(maxsize=1)
+def _potret() -> dict | None:
+    """Potret beku dari skrip 18, dipakai HANYA bila database tidak terjangkau.
+
+    KENAPA ADA, DAN KENAPA BERTANGGAL.
+
+    Aplikasi ini dinilai di ruangan yang jaringannya bukan milik kita, sambil
+    menghubungi database di Sydney. Dua hal bisa gagal bersamaan tepat saat
+    juri memakainya. Potret ini membuat peta, sumbu waktu, genangan, dan
+    perutean tetap hidup tanpa satu pun kueri.
+
+    Tanggal kedaluwarsanya BUKAN kehati-hatian berlebihan. Sistem ini
+    menyarankan kapan orang boleh menembus air; menampilkan prediksi minggu
+    lalu seolah-olah berlaku hari ini lebih berbahaya daripada layar kosong.
+    Lewat `berlaku_sampai`, potret ditolak dan API mengembalikan galat yang
+    menjelaskan apa yang harus dijalankan.
+    """
+    if not BERKAS_POTRET.exists():
+        return None
+    try:
+        d = json.loads(BERKAS_POTRET.read_text(encoding="utf-8"))
+        sampai = datetime.fromisoformat(d["berlaku_sampai"])
+    except (json.JSONDecodeError, KeyError, ValueError):
+        return None
+    if datetime.now(timezone.utc) > sampai:
+        return None
+    return d
+
+
+def _potret_kedaluwarsa() -> bool:
+    """True bila potret ada tetapi sudah lewat masa berlakunya."""
+    if not BERKAS_POTRET.exists():
+        return False
+    try:
+        d = json.loads(BERKAS_POTRET.read_text(encoding="utf-8"))
+        return datetime.now(timezone.utc) > datetime.fromisoformat(
+            d["berlaku_sampai"])
+    except (json.JSONDecodeError, KeyError, ValueError):
+        return False
+
+
 @lru_cache(maxsize=1)
 def _ruas_dari_berkas() -> dict:
     """Baca jaringan jalan dari berkas cadangan, lalu simpan di memori.
@@ -164,7 +220,7 @@ def kesehatan() -> dict:
         "sumber_data": [],
         "prediksi_mulai_utc": None,
         "prediksi_selesai_utc": None,
-        "asal_jaringan": "berkas",
+        "asal_jaringan": "potret" if _potret() is not None else "berkas",
     }
 
     if db.database_tersedia():
@@ -213,10 +269,27 @@ def ruas(
             isi = db.RepositoriRuas(kon).geojson(waktu_utc)
             sumber = db.RepositoriGenangan(kon).sumber_yang_ada()
         asal = "database"
+    elif _potret() is not None:
+        # Jalur cadangan UTAMA: potret beku memuat ruas DAN genangannya, jadi
+        # peta tampil lengkap tanpa database. Ini yang dipakai saat demo.
+        potret = _potret()
+        per_ruas = potret["genangan"].get(waktu_utc.isoformat(), {})
+        fitur = []
+        for f in potret["ruas"]["features"]:
+            sifat = dict(f["properties"])
+            nilai = per_ruas.get(str(sifat["edge_id"]))
+            sifat["kedalaman_cm"] = nilai[0] if nilai else 0.0
+            sifat["probabilitas"] = nilai[1] if nilai else 0.0
+            sifat["sumber"] = potret["sumber_data"][0] if nilai else None
+            fitur.append({"type": "Feature", "id": sifat["edge_id"],
+                          "properties": sifat, "geometry": f["geometry"]})
+        isi = {"type": "FeatureCollection", "features": fitur}
+        sumber = potret["sumber_data"]
+        asal = "potret"
     else:
-        # Jalur cadangan: berkas tidak memuat prediksi sama sekali, jadi
-        # seluruh ruas dilaporkan kering. Peta tetap tampil, hanya tanpa
-        # lapisan genangan.
+        # Jalur cadangan TERAKHIR: hanya geometri jalan, tanpa prediksi sama
+        # sekali, jadi seluruh ruas dilaporkan kering. Peta tetap tampil.
+        # Dipakai kalau potret pun tidak ada atau sudah kedaluwarsa.
         berkas = _ruas_dari_berkas()
         fitur = []
         for indeks, f in enumerate(berkas.get("features", [])):
@@ -274,16 +347,41 @@ def _graf_routing() -> routing.GrafJalan:
     Kalau isi tabel ruas_jalan berubah, proses API harus dijalankan ulang.
     Itu wajar: ruas jalan hanya berubah saat skrip 02 dijalankan ulang.
     """
-    if not db.database_tersedia():
+    if db.database_tersedia():
+        with db.koneksi() as kon:
+            ruas_semua = db.RepositoriRuas(kon).semua_untuk_routing()
+        return routing.GrafJalan(ruas_semua)
+
+    # Database tidak terjangkau. Graf dibangun dari potret beku, sehingga
+    # perutean tetap MENGHITUNG SUNGGUHAN — bukan mengembalikan rute yang
+    # sudah disiapkan untuk pasangan titik pilihan kita sendiri. Juri boleh
+    # mengetuk titik mana pun.
+    potret = _potret()
+    if potret is None:
         raise HTTPException(
             status_code=503,
             detail=(
-                "Routing memerlukan database. Isi DATABASE_URL di .env, "
-                "jalankan db/schema.sql, lalu jalankan skrip 01 sampai 03."
+                "Routing memerlukan database atau potret demo yang masih "
+                "berlaku. Jalankan `python -m scripts.18_seed_demo` dari "
+                "backend/, atau perbaiki DATABASE_URL."
+                + (" Potret yang ada sudah kedaluwarsa."
+                   if _potret_kedaluwarsa() else "")
             ),
         )
-    with db.koneksi() as kon:
-        ruas_semua = db.RepositoriRuas(kon).semua_untuk_routing()
+    ruas_semua = []
+    for f in potret["ruas"]["features"]:
+        sifat = f["properties"]
+        ruas_semua.append({
+            "edge_id": int(sifat["edge_id"]),
+            "osm_u": int(sifat.get("osm_u", 0)),
+            "osm_v": int(sifat.get("osm_v", 0)),
+            "nama": sifat.get("nama"),
+            "jenis": sifat.get("jenis"),
+            "panjang_m": float(sifat["panjang_m"]),
+            "kecepatan_kmh": float(sifat.get("kecepatan_kmh") or 30.0),
+            "satu_arah": bool(sifat.get("satu_arah")),
+            "koordinat": f["geometry"]["coordinates"],
+        })
     return routing.GrafJalan(ruas_semua)
 
 
@@ -295,8 +393,16 @@ def _ambang_moda() -> dict:
     di tabel itu masih berstatus asumsi menurut komentar di schema.sql, jadi
     tim harus bisa mengoreksinya tanpa menyentuh kode.
     """
-    with db.koneksi() as kon:
-        return db.RepositoriRuas(kon).ambang_moda()
+    if db.database_tersedia():
+        with db.koneksi() as kon:
+            return db.RepositoriRuas(kon).ambang_moda()
+    potret = _potret()
+    if potret is None:
+        raise HTTPException(
+            status_code=503,
+            detail="Ambang moda memerlukan database atau potret demo.",
+        )
+    return potret["ambang_moda"]
 
 
 def _peta_kedalaman_penuh() -> dict:
@@ -306,12 +412,26 @@ def _peta_kedalaman_penuh() -> dict:
     contoh dijalankan ulang, dan berubah lagi saat model asli masuk.
     Ukurannya hanya puluhan ribu baris, jadi memuatnya murah.
     """
-    with db.koneksi() as kon:
-        repo = db.RepositoriGenangan(kon)
-        awal, akhir = repo.rentang_waktu()
-        if awal is None:
-            return {}
-        return repo.peta_kedalaman(awal, akhir)
+    if db.database_tersedia():
+        with db.koneksi() as kon:
+            repo = db.RepositoriGenangan(kon)
+            awal, akhir = repo.rentang_waktu()
+            if awal is None:
+                return {}
+            return repo.peta_kedalaman(awal, akhir)
+
+    # Bentuknya disamakan persis dengan yang dikembalikan repositori, yaitu
+    # { datetime: { edge_id: (kedalaman, probabilitas) } }, supaya mesin
+    # routing tidak perlu tahu dari mana angkanya datang.
+    potret = _potret()
+    if potret is None:
+        return {}
+    return {
+        datetime.fromisoformat(w): {
+            int(e): (v[0], v[1]) for e, v in per_ruas.items()
+        }
+        for w, per_ruas in potret["genangan"].items()
+    }
 
 
 # ══════════════════════════════════════════════════════════════════════════
@@ -332,15 +452,34 @@ def genangan(
     """
     waktu_utc = _jam_bulat(_urai_waktu(waktu))
 
-    if not db.database_tersedia():
-        raise HTTPException(
-            status_code=503,
-            detail="Prediksi genangan memerlukan database.",
-        )
-
-    with db.koneksi() as kon:
-        isi = db.RepositoriRuas(kon).geojson(waktu_utc)
-        sumber = db.RepositoriGenangan(kon).sumber_yang_ada()
+    if db.database_tersedia():
+        with db.koneksi() as kon:
+            isi = db.RepositoriRuas(kon).geojson(waktu_utc)
+            sumber = db.RepositoriGenangan(kon).sumber_yang_ada()
+    else:
+        potret = _potret()
+        if potret is None:
+            raise HTTPException(
+                status_code=503,
+                detail=(
+                    "Prediksi genangan memerlukan database atau potret demo "
+                    "yang masih berlaku."
+                    + (" Potret yang ada sudah kedaluwarsa."
+                       if _potret_kedaluwarsa() else "")
+                ),
+            )
+        per_ruas = potret["genangan"].get(waktu_utc.isoformat(), {})
+        fitur = []
+        for f in potret["ruas"]["features"]:
+            sifat = dict(f["properties"])
+            nilai = per_ruas.get(str(sifat["edge_id"]))
+            sifat["kedalaman_cm"] = nilai[0] if nilai else 0.0
+            sifat["probabilitas"] = nilai[1] if nilai else 0.0
+            sifat["sumber"] = potret["sumber_data"][0] if nilai else None
+            fitur.append({"type": "Feature", "id": sifat["edge_id"],
+                          "properties": sifat, "geometry": f["geometry"]})
+        isi = {"type": "FeatureCollection", "features": fitur}
+        sumber = potret["sumber_data"]
 
     basah = [f for f in isi["features"] if f["properties"]["kedalaman_cm"] > 0]
     return {
@@ -369,18 +508,41 @@ def jam_tersedia() -> dict:
     Jadi jendelanya ditetapkan di sini, lalu diisi dengan apa pun yang ada.
     Jam tanpa baris berarti kering, bukan berarti data hilang.
     """
-    if not db.database_tersedia():
-        raise HTTPException(status_code=503, detail="Memerlukan database.")
-
     mulai = _jam_bulat(datetime.now(timezone.utc))
+    asal = "database"
 
-    with db.koneksi() as kon:
-        repo = db.RepositoriGenangan(kon)
-        ringkasan = repo.ringkasan_per_jam()
-        sumber = repo.sumber_yang_ada()
-        awal_tabel, akhir_tabel = repo.rentang_waktu()
-
-    per_jam = {w: (n, m) for w, n, m in ringkasan}
+    if db.database_tersedia():
+        with db.koneksi() as kon:
+            repo = db.RepositoriGenangan(kon)
+            ringkasan = repo.ringkasan_per_jam()
+            sumber = repo.sumber_yang_ada()
+            awal_tabel, akhir_tabel = repo.rentang_waktu()
+        per_jam = {w: (n, m) for w, n, m in ringkasan}
+    else:
+        potret = _potret()
+        if potret is None:
+            raise HTTPException(
+                status_code=503,
+                detail=(
+                    "Memerlukan database atau potret demo yang masih berlaku."
+                    + (" Potret yang ada sudah kedaluwarsa; jalankan "
+                       "`python -m scripts.18_seed_demo`."
+                       if _potret_kedaluwarsa() else "")
+                ),
+            )
+        asal = "potret"
+        sumber = potret["sumber_data"]
+        # Potret dibekukan pada jam tertentu. Sumbu waktu mengikuti potret,
+        # bukan jam berjalan, supaya jam yang ditampilkan benar-benar punya
+        # prediksi di belakangnya.
+        mulai = datetime.fromisoformat(potret["mulai"])
+        awal_tabel = mulai
+        akhir_tabel = datetime.fromisoformat(potret["selesai"])
+        per_jam = {
+            datetime.fromisoformat(j["waktu_utc"]):
+                (j["ruas_tergenang"], j["kedalaman_maks_cm"])
+            for j in potret["jam"]
+        }
 
     jam = []
     for i in range(JAM_PITA_PASUT):
@@ -555,8 +717,14 @@ def validasi() -> dict:
     pemisahan = m.get("pemisahan", {})
     label = m.get("label_info") or m.get("label", "")
 
-    with db.koneksi() as kon:
-        sumber = db.RepositoriGenangan(kon).sumber_yang_ada()
+    # Halaman validasi harus tetap terbuka meski database mati; justru saat
+    # demo bermasalah itulah juri paling mungkin membuka halaman ini.
+    if db.database_tersedia():
+        with db.koneksi() as kon:
+            sumber = db.RepositoriGenangan(kon).sumber_yang_ada()
+    else:
+        potret = _potret()
+        sumber = potret["sumber_data"] if potret else []
     dipakai = "model_v1" in sumber
 
     indeks = None
@@ -643,8 +811,15 @@ def rute(permintaan: PermintaanRute) -> dict:
             },
         )
 
-    with db.koneksi() as kon:
-        sumber = db.RepositoriGenangan(kon).sumber_yang_ada()
+    # Sumber data menentukan lencana peringatan di antarmuka, jadi ia tidak
+    # boleh menggagalkan permintaan rute saat database mati. Potret membawa
+    # daftarnya sendiri.
+    if db.database_tersedia():
+        with db.koneksi() as kon:
+            sumber = db.RepositoriGenangan(kon).sumber_yang_ada()
+    else:
+        potret = _potret()
+        sumber = potret["sumber_data"] if potret else []
 
     abai: routing.HasilRute = hasil["rute_abai_rob"]
     sadar: routing.HasilRute = hasil["rute_sadar_rob"]

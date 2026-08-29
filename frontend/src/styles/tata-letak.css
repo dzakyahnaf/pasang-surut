@@ -314,7 +314,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 2px;
+  gap: var(--s-1);
   padding: var(--s-2) var(--s-3);
   background: transparent;
   border: 0;
@@ -463,7 +463,7 @@
 }
 
 .dampak__satuan {
-  margin-top: 2px;
+  margin-top: var(--s-1);
 }
 
 .dampak__label {
@@ -638,7 +638,7 @@
 }
 
 .tujuan-cepat__tombol {
-  min-height: 44px;
+  min-height: var(--sentuh-min);
   padding: var(--s-2) var(--s-3);
   border: var(--garis-rambut) solid var(--lambung-3);
   border-radius: var(--r-1);
@@ -704,7 +704,7 @@
 .peringatan__saran {
   display: block;
   width: 100%;
-  min-height: 44px;
+  min-height: var(--sentuh-min);
   padding: var(--s-2) var(--s-3);
   border: var(--garis-rambut) solid var(--tinta-balik);
   border-radius: var(--r-1);
@@ -752,7 +752,7 @@
 
 .validasi__kembali,
 .rail__tautan-validasi {
-  min-height: 44px;
+  min-height: var(--sentuh-min);
   padding: var(--s-2) var(--s-3);
   border: var(--garis-rambut) solid var(--tinta-3);
   border-radius: var(--r-1);
@@ -903,8 +903,8 @@
 .jendela-peta .maplibregl-ctrl-group .maplibregl-ctrl-zoom-in,
 .jendela-peta .maplibregl-ctrl-group .maplibregl-ctrl-zoom-out,
 .jendela-peta .maplibregl-ctrl-group .maplibregl-ctrl-compass {
-  width: 44px;
-  height: 44px;
+  width: var(--sentuh-min);
+  height: var(--sentuh-min);
 }
 
 .maplibregl-ctrl-group button .maplibregl-ctrl-icon {
@@ -915,7 +915,7 @@
 .lewati,
 .lewati:focus,
 .lewati:focus-visible {
-  min-height: 44px;
+  min-height: var(--sentuh-min);
   display: inline-flex;
   align-items: center;
 }
