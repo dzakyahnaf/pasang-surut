@@ -48,6 +48,9 @@ ini, baca bagian itu.
 | B35 | **Penerapan ke Render dan Vercel BELUM dilakukan.** Seluruh artefaknya siap dan sudah diuji: `Dockerfile` 244 MB yang jalan, `render.yaml`, `Procfile`, `vercel.json`, CORS dari lingkungan. | Hanya perlu menekan tombol. Dua variabel wajib diisi di dasbor: `DATABASE_URL` (pooler port 6543) dan `ASAL_DIIZINKAN` di sisi API, `VITE_API_URL` di sisi Vercel |
 | B36 | **`data/processed/potret_demo.json` 7,8 MB WAJIB ikut di-commit.** Tanpa berkas itu, aplikasi yang di-deploy mati begitu Supabase tersendat. | Jalankan ulang `python -m scripts.18_seed_demo` sebelum demo — potret membawa tanggal kedaluwarsa dan ditolak API setelah lewat |
 | B37 | **Uji dari HP di jaringan seluler belum dilakukan.** | Kriteria terima M6 menuntutnya. Perlu perangkat fisik |
+| B38 | **DUA SUMBER KEBENARAN untuk proposal.** `.docx` di akar (27 halaman, dirawat sejak sesi keempat) dan `docs/proposal_draft.md` (M7, 28,9 halaman perkiraan) kini memuat isi yang sama. | **Tetapkan satu sebagai acuan sebelum M8.** Saran: Markdown jadi acuan karena bisa di-diff di git, lalu `.docx` dibangun ulang darinya. Dibiarkan, keduanya akan menyimpang dalam satu sesi |
+| B39 | **Empat TODO(sumber) WAJIB diisi**: tautan riset WRI, konsumsi bahan bakar per km, faktor emisi, dan data leptospirosis. | Keempatnya angka yang sudah tercetak di proposal, dan dua di antaranya tampil di antarmuka. Rincian di `docs/proposal_draft.md` bagian Ringkasan TODO |
+| B40 | **Rantai dampak menghasilkan angka yang KECIL, dan itu dilaporkan apa adanya.** Median selisih rute 0,12 menit, median hemat menggeser jam 0,14 menit, p90 2,99 menit. | Bagian 11.5 menjelaskan mengapa nilai rupiah TIDAK dikalikan dari angka itu. Jangan tergoda mengubahnya menjadi angka besar sebelum ada data perjalanan per hari yang bersumber |
 | B30 | **Uji responsif 360px BELUM terverifikasi.** Jendela peramban diubah tetapi viewport tetap 1440, jadi hasilnya tidak sah. | Butuh perangkat sungguhan atau devtools. Lantai mutu DESIGN.md Bagian 11 butir pertama |
 | B31 | **Uji baca di bawah matahari langsung dan uji cetak hitam putih BELUM dilakukan.** | Keduanya memerlukan orang, bukan kode. Pola halftone sudah dirancang untuk keduanya tetapi belum dibuktikan |
 | B32 | **Proposal kini 27 halaman**, naik dari 26 setelah paragraf perbandingan Sentinel-1 versus rekonstruksi pasut ditambahkan. | Masih di bawah batas rulebook 30. Diukur dengan Word |
@@ -1234,3 +1237,77 @@ dan tidak menyetujui syarat layanan atas nama tim. Ini batas aturan, bukan
 batas alat.
 
 **Uji dari HP di jaringan seluler.** Perlu perangkat fisik.
+
+---
+
+## M7 — 29 Agustus 2026: draft proposal 14 bagian, dan rantai dampak yang jujur
+
+**Status: selesai.**
+
+### Rantai dampak: angkanya dihitung, bukan dikarang
+
+Placeholder `[[ISI]]` pada rantai estimasi sebagian bisa dihitung dari sistem
+sendiri. `scripts/19_rantai_dampak.py` merutekan 150 pasangan asal-tujuan acak
+berjarak minimal 2 km pada jam pasut tertinggi, lalu melaporkan median dan
+kuartil — bukan rata-rata, karena sebarannya sangat menceng.
+
+| Ukuran | Nilai |
+|---|---|
+| Rute berubah karena rob | 44 persen dari 150 pasangan |
+| Selisih waktu per perjalanan | median 0,12 mnt · p75 1,67 mnt |
+| Selisih jarak per perjalanan | median 0,00 km · p75 0,14 km |
+| Hemat menggeser jam berangkat | median 0,14 mnt · p90 2,99 mnt · maks 6,83 mnt |
+
+**Angkanya kecil, dan itu temuan.** Sebabnya bisa dijelaskan: jaringan jalan
+Semarang rapat sehingga memutar mengelilingi ruas tergenang biasanya pendek,
+dan pada jendela yang diuji tidak ada ruas yang melampaui ambang tak-bisa-lewat
+sehingga tidak ada ruas yang benar-benar dibuang dari graf.
+
+Ukuran pertama sempat memakai moda mobil dan hasilnya lebih kecil lagi (median
+0,03 menit). Sebabnya kedalaman puncak 40 cm sementara ambang tak-bisa-lewat
+mobil 50 cm — tidak ada satu pun ruas yang dibuang. Motor berambang 30 cm,
+sehingga dipakai untuk pelaporan, dan modanya disebutkan.
+
+Ditambahkan ukuran kedua yang lebih tepat mengukur klaim produk: nilai
+**menggeser jam berangkat**, bukan nilai memutar. Klaim sistem ini adalah
+memprediksi KAPAN, jadi nilainya muncul saat orang memindahkan jam berangkat.
+
+### Keputusan yang paling penting di sesi ini
+
+**Nilai rupiah TIDAK dihitung.** Mengalikan 0,14 menit dengan jumlah perjalanan
+per hari yang belum bersumber dan tingkat adopsi yang kami tetapkan sendiri
+akan menghasilkan angka rupiah besar yang seluruh besarnya berasal dari dua
+bilangan karangan.
+
+Bagian 11.5 menjelaskan hal itu terbuka, termasuk pengakuan bahwa nilai
+sesungguhnya sistem ini kemungkinan bukan pada menit yang dihemat melainkan
+pada kerusakan kendaraan dan paparan kesehatan yang dihindari — dan keduanya
+tidak kami ukur.
+
+### Draft proposal
+
+`docs/proposal_draft.md`, 14 bagian persis sesuai rulebook, **4.305 kata pada
+Bagian 1–14**, perkiraan **28,9 halaman** termasuk enam tangkapan layar. Masuk
+batas 30 dengan sisa sekitar satu halaman.
+
+Perkiraan halaman dihitung dari acuan terukur: `.docx` yang ada memuat 4.242
+kata dalam 27 halaman, yaitu 157 kata per halaman. Perkiraan pertama saya
+meleset karena menghitung seluruh berkas termasuk 711 kata materi untuk tim
+yang tidak masuk dokumen Word; dikoreksi.
+
+Delapan `TODO(sumber)` diurutkan menurut akibatnya bila ditanya juri. Empat
+wajib diisi, dua boleh tetap kosong karena Bagian 11.5 sudah berdiri tanpa
+keduanya, satu ringan, satu bukan TODO melainkan asumsi yang harus tetap
+ditulis sebagai asumsi.
+
+### Peringatan yang saya sampaikan, bukan saya putuskan sendiri
+
+Proposal kini punya **dua sumber kebenaran**: `.docx` di akar dan draft
+Markdown ini. Keduanya memuat isi yang sama hari ini dan akan menyimpang dalam
+satu sesi bila dibiarkan. Saya tidak menghapus salah satunya — itu keputusan
+tim. Tercatat sebagai B38.
+
+### Yang TIDAK dikerjakan
+
+Pemformatan Word (M8), pengisian TODO yang butuh sumber luar, dan enam
+tangkapan layar aplikasi.

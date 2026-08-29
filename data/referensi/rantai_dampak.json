@@ -1,0 +1,86 @@
+{
+  "_catatan": "Tautan rantai dampak yang dihitung dari sistem sendiri. Tautan yang butuh sumber luar TIDAK ada di sini dan wajib ditandai TODO(sumber) di proposal.",
+  "dijalankan": "2026-08-29T00:29:21.725582+00:00",
+  "moda": "motor",
+  "jam_puncak_utc": "2026-08-29T03:00:00+00:00",
+  "ruas_tergenang_saat_puncak": 1028,
+  "pasangan_diuji": 150,
+  "jarak_minimum_km": 2.0,
+  "proporsi_rute_berubah": 0.44,
+  "selisih_waktu_menit": {
+    "p25": 0.0,
+    "median": 0.12,
+    "p75": 1.672,
+    "rata": 0.941
+  },
+  "selisih_jarak_km": {
+    "p25": 0.0,
+    "median": 0.0,
+    "p75": 0.135,
+    "rata": 0.258
+  },
+  "hemat_geser_jam_menit": {
+    "p25": 0.0,
+    "median": 0.14,
+    "p75": 1.829,
+    "rata": 1.023
+  },
+  "hemat_geser_jam_p90": 2.99,
+  "hemat_geser_jam_maks": 6.83,
+  "perjalanan_diuji_geser": 120,
+  "dampak_perjalanan_median": {
+    "berarti": false,
+    "menit": 0.1,
+    "km": 0.0,
+    "liter": {
+      "bawah": 0.0,
+      "atas": 0.0,
+      "tengah": 0.0
+    },
+    "kg_co2e": {
+      "bawah": 0.0,
+      "atas": 0.0,
+      "tengah": 0.0
+    },
+    "faktor": {
+      "konsumsi_l_per_km": 0.02,
+      "faktor_emisi_kg_per_l": 2.31,
+      "ketidakpastian_konsumsi": 0.3,
+      "_sumber": "Kedua faktor dibaca dari tabel ambang_moda. Konsumsi masih berstatus asumsi tanpa sitasi; faktor emisi adalah nilai baku pembakaran bahan bakar yang sitasinya belum dimasukkan ke repo. Lihat docs/batasan.md."
+    }
+  },
+  "dampak_perjalanan_p75": {
+    "berarti": true,
+    "menit": 1.7,
+    "km": 0.14,
+    "liter": {
+      "bawah": 0.002,
+      "atas": 0.004,
+      "tengah": 0.003
+    },
+    "kg_co2e": {
+      "bawah": 0.004,
+      "atas": 0.008,
+      "tengah": 0.006
+    },
+    "faktor": {
+      "konsumsi_l_per_km": 0.02,
+      "faktor_emisi_kg_per_l": 2.31,
+      "ketidakpastian_konsumsi": 0.3,
+      "_sumber": "Kedua faktor dibaca dari tabel ambang_moda. Konsumsi masih berstatus asumsi tanpa sitasi; faktor emisi adalah nilai baku pembakaran bahan bakar yang sitasinya belum dimasukkan ke repo. Lihat docs/batasan.md."
+    }
+  },
+  "panjang_jaringan_aoi_km": 1289.4,
+  "_yang_tetap_kosong": {
+    "panjang_jaringan_kota_semarang_km": null,
+    "perjalanan_terdampak_per_hari": null,
+    "tingkat_adopsi": null,
+    "_catatan": "Ketiganya butuh sumber luar atau asumsi yang harus dinyatakan sebagai asumsi. Jangan diisi dari sini."
+  },
+  "_peringatan": [
+    "Dihitung pada JAM PASUT TERTINGGI, yaitu keadaan terburuk. Bukan rata-rata harian, dan tidak boleh disajikan sebagai rata-rata.",
+    "Median dilaporkan, bukan rata-rata, karena sebarannya menceng: sebagian besar perjalanan tidak terpengaruh sama sekali.",
+    "Bahan bakar dan emisi memakai faktor di tabel ambang_moda yang konsumsinya masih asumsi tanpa sitasi.",
+    "Genangan yang mendasarinya berasal dari indeks kerentanan, bukan model tervalidasi. Angka di sini mewarisi seluruh batasan itu."
+  ]
+}
