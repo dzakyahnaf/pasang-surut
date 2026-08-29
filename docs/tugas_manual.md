@@ -8,75 +8,66 @@ dan tidak menyetujui syarat layanan atau izin OAuth atas nama tim. Itu batas
 aturan, bukan batas alat, dan tidak berubah oleh tersedianya browser otomatis.
 Beberapa tugas lain butuh perangkat fisik atau orang.
 
-Diperbarui: 29 Agustus 2026. **Sisa waktu ke tenggat: 2 hari.**
+Diperbarui: 29 Agustus 2026, sore. **Sisa waktu ke tenggat: 2 hari.**
 
 ---
 
 ## MENDESAK — kerjakan hari ini
 
-### M1. Push lima commit ke GitHub
+### M1. Push perbaikan service worker, lalu REDEPLOY Vercel
 
-Repo publik masih di `1b7c475` (M4). Lokal di `438e261` (M7). Juri akan
-membaca repo **tanpa** panel dampak, halaman validasi, artefak deploy, potret
-tahan banting, dan draft proposal.
+Push sebelumnya sudah masuk — remote kini di `f09000c`. Tetapi perbaikan
+service worker ada di satu commit lokal yang belum terkirim, dan produksi
+**masih menyajikan versi lama**:
+
+```
+https://pasang-surut.vercel.app/sw.js  ->  const VERSI = "pasang-surut-v1"
+```
+
+Selama itu masih v1, siapa pun yang pernah membuka aplikasi sebelum perbaikan
+akan terus menerima cangkang lama dari cache — dan cangkang lama menunjuk
+bundel lama yang memuat alamat API `localhost`. Halamannya diam saja, tanpa
+pesan galat. Menguji dengan `curl` tidak memperlihatkan gejala ini karena
+`curl` tidak memakai service worker; harus dibuka di peramban.
 
 ```bash
 cd "C:/Users/Dzaky Ahnaf/kompetisi/anforcom"
 git push origin main
-git push origin feature-freeze     # tag M5
 ```
 
-Saya tidak melakukannya sendiri karena mendorong ke repo publik adalah
-tindakan keluar yang belum Anda izinkan di sesi ini. Verifikasi sesudahnya:
+Lalu **picu ulang deploy di Vercel** dan periksa dari peramban:
 
 ```bash
-git ls-remote origin HEAD          # harus 438e261 atau lebih baru
+curl -s https://pasang-surut.vercel.app/sw.js | grep VERSI   # harus v2
 ```
 
-### M2. Perbaiki subjudul di halaman sampul `.docx`
+Bagi yang sudah pernah membuka: muat ulang keras sekali (Ctrl+Shift+R), atau
+tutup seluruh tab aplikasi lalu buka lagi.
 
-Halaman sampul masih berbunyi *"Berbasis Kalibrasi Citra Radar Sentinel-1"*.
-Rumusan itu tidak lagi benar — kalibrasinya dikerjakan lalu ditolak. Yang
-benar, dan sudah dipakai di Bagian 1 dokumen yang sama:
+### M2 dan M3 — SELESAI, diverifikasi
 
-> Sistem Perutean Sadar Banjir Rob **Berbasis Rekonstruksi Pasang Surut
-> Terkalibrasi** untuk Mobilitas Rendah Karbon di Kota Semarang
+`.docx` kini memuat subjudul baru dua kali dan subjudul lama nol kali; diuji
+dengan membaca `word/document.xml` langsung, bukan dengan membuka Word.
+`pratinjau_proposal.pdf` yang berasal dari 23 Agustus sudah tidak ada di repo.
 
-Dokumen itu kini memuat DUA subjudul yang berbeda. Halaman sampul yang pertama
-dilihat juri.
+Yang masih perlu diselaraskan ke subjudul baru: **judul video YouTube, slide
+presentasi, dan Figma.**
 
-**Selaraskan juga ke:** judul video YouTube, slide presentasi, dan Figma.
+### M4 dan M5 — SELESAI, diverifikasi dari luar
 
-### M3. Hapus atau perbarui `pratinjau_proposal.pdf`
+Keduanya sudah hidup dan diperiksa 29 Agustus dari luar jaringan lokal:
 
-Berkas di akar repo itu berasal dari **23 Agustus (M1)**, mendahului seluruh
-temuan. Juri yang menelusuri repo bisa membukanya dan mengira itu proposalnya.
-Hapus, atau ganti dengan ekspor terbaru.
+| Bagian | Alamat | Hasil |
+|---|---|---|
+| Frontend | https://pasang-surut.vercel.app | bundel memuat alamat API yang benar |
+| API | https://pasang-surut-api.onrender.com | `database: true`, 19.394 ruas, 21.778 prediksi |
 
----
+Jendela prediksi terbentang sampai 1 September pukul 17.00 WIB, jadi menutupi
+tenggat. CORS meloloskan asal Vercel dan menolak asal asing. `/api/rute`
+mengembalikan `sumber_data` berupa list, sehingga lencana "DATA CONTOH" tidak
+lagi hilang setelah pengguna menghitung rute.
 
-## DEPLOY — artefaknya siap dan sudah diuji
-
-### M4. Render (API)
-
-Render → New → Blueprint → pilih repo. `render.yaml` sudah menyiapkan
-sisanya. Dua variabel wajib diisi di dasbor:
-
-| Variabel | Nilai |
-|---|---|
-| `DATABASE_URL` | URL Supabase **pooler port 6543**, bukan koneksi langsung 5432 |
-| `ASAL_DIIZINKAN` | alamat Vercel, tanpa garis miring di ujung |
-
-Citra Docker sudah dibangun dan dijalankan lokal: 244 MB, tujuh endpoint
-menjawab, CORS menolak asal yang tidak terdaftar.
-
-### M5. Vercel (frontend)
-
-Vercel → Import repo → root directory `frontend`. Satu variabel:
-
-| Variabel | Nilai |
-|---|---|
-| `VITE_API_URL` | alamat Render, tanpa garis miring di ujung |
+Yang tersisa hanya M1 di atas: service worker.
 
 ### M6. Uji dari HP di jaringan seluler, bukan wifi
 

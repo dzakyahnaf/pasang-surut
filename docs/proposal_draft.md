@@ -10,11 +10,6 @@
 > Alasannya: Markdown bisa di-diff di git sehingga perubahan antar sesi
 > terlihat, sedangkan `.docx` tidak.
 >
-> **Catatan untuk M8:** halaman sampul `.docx` yang ada masih memakai
-> subjudul lama "Berbasis Kalibrasi Citra Radar Sentinel-1", sementara
-> Bagian 1 dokumen yang sama sudah memakai rumusan baru. Dokumen itu kini
-> memuat dua subjudul berbeda. Pembangunan ulang harus memperbaikinya.
->
 > **Setiap angka di bawah punya sitasi, atau ditandai `TODO(sumber)`.**
 > Tidak ada angka yang dikarang. Ringkasan seluruh `TODO(sumber)` ada di
 > akhir berkas.
@@ -35,12 +30,11 @@ Terkalibrasi untuk Mobilitas Rendah Karbon di Kota Semarang*
 | Subtema | 4 — Smart Low-Carbon Urban Mobility |
 | Anggota | Muhammad Dzaky Ahnaf (5027231039), Daffa Rajendra Priyatama (5027231009), Naufal Syafi' Hakim (5027231022) |
 
-**Catatan atas perubahan subjudul.** Subjudul semula berbunyi "Berbasis
-Kalibrasi Citra Radar Sentinel-1". Kalibrasi itu benar-benar dikerjakan —
-725 citra, 1,81 juta nilai backscatter — tetapi hasilnya ditolak tim sendiri
-(Bagian 9). Karena sistem yang dikumpulkan tidak lagi berdiri di atas
-kalibrasi itu, subjudulnya diubah. Menyisakan klaim yang tidak lagi benar
-adalah overclaim, sekalipun pekerjaannya sungguh dilakukan.
+**Catatan atas perubahan subjudul.** Subjudul semula "Berbasis Kalibrasi
+Citra Radar Sentinel-1". Kalibrasi itu dikerjakan — 725 citra, 1,81 juta nilai
+backscatter — lalu ditolak tim sendiri (Bagian 9). Sistem yang dikumpulkan
+tidak lagi berdiri di atasnya, maka subjudulnya diubah: menyisakan klaim yang
+tidak lagi benar adalah overclaim.
 
 ---
 
@@ -95,11 +89,10 @@ sentimeter per tahun di Genuk dan 4,6 di Semarang Utara, dengan nilai tertinggi
 
 Dari atas, muka air laut naik. Rekaman stasiun pasut IOC `sema` menunjukkan
 kenaikan muka air **relatif** sekitar 9 sentimeter per tahun sepanjang
-2015–2025 [4]. Angka ini bukan kenaikan muka laut absolut — ia campuran
-kenaikan muka laut, penurunan tanah tempat alat berdiri, dan kemungkinan
-perubahan datum — tetapi besarnya sejalan dengan laju subsidensi di literatur.
+2015–2025 [4] — bukan kenaikan muka laut absolut, melainkan campuran kenaikan
+laut, penurunan tanah tempat alat berdiri, dan kemungkinan perubahan datum.
 
-Karena elevasi kawasan pesisir hampir setara permukaan laut, kombinasi keduanya
+Karena elevasi pesisirnya hampir setara permukaan laut, kombinasi keduanya
 membuat rob berulang bukan kejadian luar biasa melainkan kondisi harian yang
 dapat diperkirakan.
 
@@ -120,9 +113,9 @@ tetap harus berangkat kerja.
 
 ### 3.4 Dampak berlapis pada kesehatan
 
-Kasus leptospirosis di Kota Semarang tercatat meningkat dari 32 kasus pada 2024
-menjadi 59 kasus pada 2025 [9] — sumber lengkapnya masih `TODO(sumber)`. Penularan terjadi lewat kontak
-kulit dengan air yang terkontaminasi urin tikus, dan genangan rob di jalan
+Kasus leptospirosis di Kota Semarang tercatat naik dari 32 pada 2024 menjadi
+59 pada 2025 [9] — sumber lengkapnya masih `TODO(sumber)`. Penularannya lewat
+kontak kulit dengan air terkontaminasi urin tikus, dan genangan rob di jalan
 adalah medium yang tepat untuk itu.
 
 ### 3.5 Rumusan masalah
@@ -222,30 +215,24 @@ kami tulis sendiri lebih baik daripada batasan yang ditemukan juri.
    berdasarkan pertimbangan, bukan hasil pengamatan lapangan tentang seberapa
    lambat kendaraan sesungguhnya melintasi genangan setinggi tertentu.
 
-   Ini perlu disebut sendiri karena penalti itulah yang menentukan selisih
-   antara kedua rute, dan selisih itulah yang menjadi seluruh isi Bagian 11.
-   Ambangnya sendiri dibaca dari tabel `ambang_moda` dan tidak pernah ditulis
-   tetap di dalam kode, sehingga dapat dikoreksi tanpa menyentuh program —
-   tetapi sampai ada pengukuran, angkanya tetap asumsi.
+   Penalti inilah yang menentukan selisih antar-rute, dan selisih itulah
+   seluruh isi Bagian 11. Ambangnya dibaca dari tabel `ambang_moda`, bukan
+   ditulis tetap di kode, sehingga dapat dikoreksi tanpa menyentuh program.
 
 10. **Sebagian besar kejadian rob yang dipakai memvalidasi berstatus belum
-    terverifikasi.** Uji silang pada Bagian 9.4 memakai 16 kejadian rob
-    terdokumentasi. Kejadian itu dikumpulkan dari pemberitaan dan dokumen
-    resmi, dan hanya dua di antaranya berstatus verifikasi primer; sisanya
-    masih `perlu_verifikasi`, artinya tanggalnya diambil dari judul atau isi
-    berita tanpa pemeriksaan silang ke catatan lapangan.
-
-    Cakupannya juga tidak merata: liputan 2015 sampai 2019 tipis, dan entri
-    yang ketelitian tanggalnya hanya bulan atau tahun dibuang dari uji.
-    Median persentil 80,2 yang dilaporkan karena itu berdiri di atas bukti
-    yang lebih lemah daripada kesan angkanya.
+    terverifikasi.** Uji silang Bagian 9.4 memakai 16 kejadian terdokumentasi,
+    dan hanya dua berstatus verifikasi primer; sisanya `perlu_verifikasi` —
+    tanggalnya dari pemberitaan, tanpa pemeriksaan silang ke catatan lapangan.
+    Cakupannya juga tidak merata, liputan 2015–2019 tipis. Median persentil
+    80,2 karena itu berdiri di atas bukti yang lebih lemah daripada kesan
+    angkanya.
 
 ### 5.2 Batasan cakupan
 
-- Wilayah kerja dibatasi wilayah pilot Semarang Utara dan Semarang Timur,
-  mencakup Tanjungmas, Bandarharjo, Kemijen, Kaligawe, serta Terboyo Kulon dan
-  Terboyo Wetan. Bukan seluruh Kota Semarang.
-- Moda yang didukung sepeda motor dan mobil. Angkutan umum dan pejalan kaki
+- Wilayah kerja dibatasi pilot Semarang Utara dan Semarang Timur — Tanjungmas,
+  Bandarharjo, Kemijen, Kaligawe, Terboyo Kulon, Terboyo Wetan. Bukan seluruh
+  Kota Semarang.
+- Moda yang didukung sepeda motor dan mobil; angkutan umum dan pejalan kaki
   belum dimodelkan.
 - Horizon prediksi 72 jam.
 - Sistem tidak menerima laporan genangan dari warga secara waktu nyata.
@@ -254,13 +241,13 @@ kami tulis sendiri lebih baik daripada batasan yang ditemukan juri.
 
 ### 5.3 Batasan operasional
 
-- Seluruh prediksi dihitung sebelumnya secara luring dan disimpan. Sistem tidak
-  memanggil layanan eksternal saat berjalan, sehingga tahan gangguan jaringan
-  namun tidak memutakhirkan diri sendiri.
-- Waktu tempuh dihitung dari kecepatan bebas hambatan yang dikoreksi genangan.
-  Kemacetan biasa tidak diperhitungkan sama sekali.
-- Jaringan jalan adalah potret OpenStreetMap pada 24 Agustus 2026. Dari 19.394
-  ruas, 6.518 tidak memiliki nama jalan.
+- Seluruh prediksi dihitung sebelumnya secara luring. Sistem tidak memanggil
+  layanan eksternal saat berjalan: tahan gangguan jaringan, tetapi tidak
+  memutakhirkan diri sendiri.
+- Waktu tempuh dari kecepatan bebas hambatan yang dikoreksi genangan.
+  Kemacetan biasa tidak diperhitungkan.
+- Jaringan jalan adalah potret OpenStreetMap 24 Agustus 2026; dari 19.394
+  ruas, 6.518 tanpa nama jalan.
 - Kecepatan ruas untuk jalan tanpa tag `maxspeed` berasal dari imputasi OSMnx.
 
 ---
@@ -303,20 +290,16 @@ dari citra radar**: mengambil seluruh citra Sentinel-1 di atas AOI sejak 2015,
 mencatat tinggi pasut dan curah hujan pada tiap akuisisi, lalu melatih model
 untuk mempelajari sendiri hubungan antara pemicu dan genangan teramati.
 
-Rencana itu dijalankan sampai tuntas lewat Google Earth Engine [8]: 725
-citra, 2.502 ruas berstrata, 1.813.950 nilai backscatter. Hasilnya ditolak. Rinciannya di Bagian 9.
+Rencana itu dijalankan tuntas lewat Google Earth Engine [8]: 725 citra, 2.502
+ruas berstrata, 1.813.950 nilai backscatter. Hasilnya ditolak; angka, sebab,
+dan lima upaya penyelamatannya ada di Bagian 9.
 
-Satu keberatan yang layak dijawab di muka: Sentinel-1 sinkron matahari,
-sehingga selalu melintas pada jam lokal yang hampir sama — 05.16 dan 17.58 WIB
-di atas Semarang. Apakah arsipnya karena itu tidak pernah memuat pasang tinggi?
-
-Diukur, dan keberatan itu **terbalik**. Persentil ke-95 tinggi pasut saat
-akuisisi +0,338 meter berbanding +0,302 meter pada seluruh jam; medianya
-+0,097 berbanding +0,014. Arsipnya justru memuat **lebih banyak** pengamatan
-pasang tinggi daripada pencuplikan acak. Sebabnya komponen S2 berperiode tepat
-12,000 jam sehingga fasenya terkunci pada waktu matahari, dan kedua jam
-lintasan kebetulan jatuh dekat fase tingginya. Yang tidak terwakili justru
-surut terdalam, dan rob tidak terjadi saat surut.
+Satu keberatan atas rancangan itu sempat diperiksa dan **terbantah**:
+Sentinel-1 sinkron matahari, tetapi arsipnya justru memuat lebih banyak
+pasang tinggi daripada pencuplikan acak — persentil ke-95 +0,338 meter
+berbanding +0,302 meter. Yang tidak terwakili adalah surut terdalam, dan rob
+tidak terjadi saat surut. Sinkronisitas yang sama ternyata punya akibat kedua
+yang merugikan, dibahas di Bagian 9.3.
 
 ### 6.4 Pembagian data dan pencegahan kebocoran
 
@@ -431,7 +414,7 @@ start, bukan diam-diam saat juri memakainya.
 | Antarmuka PWA dan peta | Selesai | manifest + service worker |
 | Halaman validasi | Selesai | metrik apa adanya |
 | Potret tahan banting | Selesai | 7/7 endpoint hidup tanpa database |
-| Penerapan ke Render dan Vercel | **Belum** | artefak siap dan teruji |
+| Penerapan ke Render dan Vercel | Selesai | daring, lihat 9.5 |
 
 ### 9.2 Hasil validasi model — apa adanya
 
@@ -458,12 +441,11 @@ sebabnya:
 | **Hujan 24 jam** | **+0,0004 ± 0,0010** |
 | **Hujan 72 jam** | **−0,0026 ± 0,0011** |
 
-Ketiga fitur yang bergantung waktu nol dalam batas ketidakpastiannya. Model
-ini mempelajari ruas mana yang sering beranomali, bukan **kapan** ruas
-tergenang. Aturan "pasut saja" menghasilkan ROC-AUC 0,4935 — setara lemparan
-koin.
+Ketiga fitur bergantung waktu nol dalam batas ketidakpastiannya: model ini
+mempelajari ruas mana yang sering beranomali, bukan **kapan** ruas tergenang.
+Aturan "pasut saja" menghasilkan ROC-AUC 0,4935 — setara lemparan koin.
 
-### 9.3 Empat upaya penyelamatan, seluruhnya gagal
+### 9.3 Lima upaya penyelamatan, seluruhnya gagal
 
 | Upaya | Hasil |
 |---|---|
@@ -471,14 +453,30 @@ koin.
 | Kriteria dua arah (pantulan ganda di kawasan terbangun) | arah benar, besarnya hanya 0,47 simpangan baku pada 12 citra |
 | Luas air kawasan terbuka | korelasi terhadap pasut **negatif** |
 | Muka air **terukur**, bukan astronomis | mentah −0,29, ternyata **semu** |
+| Topeng air permanen, lalu label per ruas | mentah **+0,362**, tersisa **+0,107** |
 
-Upaya keempat layak diceritakan. Korelasi mentahnya −0,29 tampak sepuluh kali
-lebih kuat daripada terhadap pasut astronomis. Dua hal menyingkapnya sebagai
-semu: kriteria "turun" dan "naik" berkorelasi hampir sama besar dengan tanda
-berlawanan — tanda khas pergeseran radiometrik seluruh citra, bukan genangan
-per ruas — dan rekaman stasiun melayang naik 0,92 meter dalam sepuluh tahun.
-Dua deret yang sama-sama melayang berkorelasi tanpa hubungan sebab. Setelah
-layangan diluruskan per tahun, korelasinya tinggal +0,05.
+Dua upaya terakhir layak diceritakan karena keduanya sempat tampak berhasil.
+
+Upaya keempat memberi korelasi mentah −0,29, sepuluh kali lebih kuat daripada
+terhadap pasut astronomis, tetapi semu: rekaman stasiun melayang naik 0,92
+meter dalam sepuluh tahun, dan setelah layangan diluruskan sisanya +0,05.
+
+Upaya kelima bertahan paling lama. Setelah tubuh air tetap ditopengkan, luas
+DARATAN yang tampak berair berkorelasi **+0,362** terhadap pasut pada orbit
+76 — positif, arah yang benar secara fisika. Dua keberatan lalu diuji, bukan
+diasumsikan. **Pertama**, yang diukur luas kawasan sedangkan sistem merutekan
+per ruas; label per ruas dibangun dari 487.890 cuplikan atas 2.502 ruas, dan
+korelasinya turun ke +0,230. **Kedua**, Sentinel-1 sinkron matahari sehingga
+komponen pasut K1 dan P1 bergeser fase berperiode setahun dan dapat berkorelasi
+semu dengan musim hujan; setelah hari-dalam-tahun diregresikan dari kedua
+deret, sisanya **+0,107**. Musim ternyata menjelaskan 38,6 persen ragam pasut
+pada waktu akuisisi. Bukti yang sepenuhnya bebas — tanggal kejadian rob
+terdokumentasi — bahkan **berlawanan arah**: label basah lebih jarang muncul
+pada hari kejadian (−0,77 simpangan baku).
+
+Korelasi +0,11 dengan bukti kejadian yang berlawanan bukan dasar untuk
+melabeli 19.394 ruas. Penolakan tetap berdiri, kini setelah diuji tuntas.
+Rincian di `docs/validasi.md` bagian 6.5.
 
 ### 9.4 Yang tervalidasi: rekonstruksi pasang surut
 
@@ -579,8 +577,8 @@ Sistem menerbitkan peringatan paparan bila rute tetap menembus genangan di
 atas ambang berisiko moda.
 
 **Batas klaim.** Tim **tidak** mengklaim sistem ini menurunkan angka kasus
-leptospirosis. Hubungan antara penghindaran genangan dan penurunan kasus
-dipengaruhi banyak faktor di luar kendali perangkat lunak.
+leptospirosis; hubungan itu dipengaruhi banyak faktor di luar kendali
+perangkat lunak.
 
 ### 11.5 Keterbatasan proyeksi — dan mengapa nilai rupiah tidak dihitung
 
@@ -714,29 +712,31 @@ kompetisi [11].
 
 ## Perkiraan halaman
 
-Acuan: `.docx` yang sudah ada memuat 4.242 kata dalam 27 halaman, yaitu
-sekitar **157 kata per halaman** dengan tabel dan gambar.
+**Acuan, dan koreksi atas cara menghitungnya.** `.docx` yang ada memuat 4.213
+kata dalam 27 halaman, yaitu **156 kata per halaman**. Kepadatan itu sudah
+mencakup tabel DAN enam gambar — berkas `.docx` tersebut terbukti memuat enam
+PNG tertanam. Perkiraan sebelumnya membagi kata dengan kepadatan itu **lalu
+menambahkan 1,5 halaman lagi untuk enam tangkapan layar**, sehingga gambar
+yang sama dihitung dua kali dan draft tampak melewati batas padahal tidak.
 
-Draft ini **4.305 kata pada Bagian 1 sampai 14**. Sisanya — catatan kepala,
-bagian ini, dan ringkasan TODO di bawah — adalah materi untuk tim sebanyak 711
-kata yang **tidak masuk dokumen Word**.
+Draft ini **4.518 kata pada Bagian 1 sampai 14**. Sisanya — catatan kepala,
+bagian ini, dan ringkasan TODO di bawah — adalah materi untuk tim sebanyak
+824 kata yang **tidak masuk dokumen Word**.
 
 | Komponen | Perhitungan | Halaman |
 |---|---|---:|
-| Teks dan tabel Bagian 1–14 | 4.305 ÷ 157 | 27,4 |
-| Enam tangkapan layar Bagian 10 | tambahan di luar teks | +1,5 |
-| **Perkiraan total** | | **≈ 28,9** |
+| Teks, tabel, dan enam gambar Bagian 1–14 | 4.518 ÷ 156 | **29.0** |
 
 **Masuk batas 30 halaman**, dengan sisa sekitar satu halaman. Sisa itu tipis,
-jadi bila pemformatan Word menambah ruang lebih banyak daripada perkiraan,
-pangkas berurutan dari yang paling aman:
+dan pemformatan Word bisa memakannya. Bila itu terjadi, pangkas berurutan dari
+yang paling aman:
 
 | Bagian | Kata | Halaman | Cara memangkas |
 |---|---:|---:|---|
-| 9. Implementasi | 665 | 4,2 | ringkas narasi upaya keempat di 9.3 menjadi dua kalimat |
-| 11. Impact Projection | 584 | 3,7 | ringkas 11.2, **jangan sentuh 11.5** |
-| 5. Batasan | 467 | 3,0 | ringkas delapan butir metodologis menjadi lima, sisanya rujuk repositori |
-| 6. Metodologi | 428 | 2,7 | ringkas 6.3, pertahankan 6.2 |
+| 9. Implementasi | 800 | 5.1 | ringkas narasi upaya keempat dan kelima di 9.3 |
+| 11. Impact Projection | 580 | 3.7 | ringkas 11.2, **jangan sentuh 11.5** |
+| 5. Batasan | 601 | 3.9 | ringkas butir metodologis, sisanya rujuk repositori |
+| 6. Metodologi | 390 | 2.5 | ringkas 6.3, pertahankan 6.2 |
 
 **Yang tidak boleh dipangkas.**
 

@@ -1,0 +1,47 @@
+{
+  "_catatan": "Uji apakah isyarat luas air kawasan terbuka bertahan saat diubah menjadi label per ruas jalan.",
+  "dijalankan": "2026-08-29T11:24:23.749478+00:00",
+  "orbit": 76,
+  "ambang_air_db": -15.0,
+  "ambang_permanen": 0.4,
+  "radius_m": 100.0,
+  "tahun": [
+    2019,
+    2026
+  ],
+  "pembanding_tingkat_luas": 0.3624,
+  "korelasi_mutlak_tertinggi": 0.23,
+  "putusan": "MELEMAH",
+  "kesimpulan": "Isyarat melemah tetapi tidak hilang saat turun ke tingkat ruas. Layak disebut sebagai arah lanjutan yang lebih konkret, belum cukup untuk melatih model.",
+  "per_ambang_proporsi": {
+    "0.05": {
+      "laju_basah": 0.0092,
+      "korelasi_pasut": 0.23,
+      "selisih_kejadian_sigma": -0.774,
+      "citra_dipakai": 195
+    },
+    "0.10": {
+      "laju_basah": 0.0029,
+      "korelasi_pasut": 0.1851,
+      "selisih_kejadian_sigma": -0.413,
+      "citra_dipakai": 195
+    },
+    "0.20": {
+      "laju_basah": 0.0002,
+      "korelasi_pasut": 0.013,
+      "selisih_kejadian_sigma": -0.521,
+      "citra_dipakai": 195
+    },
+    "0.30": {
+      "laju_basah": 0.0,
+      "korelasi_pasut": -0.0119,
+      "selisih_kejadian_sigma": -0.196,
+      "citra_dipakai": 195
+    }
+  },
+  "_peringatan": [
+    "Radius 100 m dan ambang proporsi adalah PILIHAN tim, bukan hasil pengukuran. Keduanya dinyatakan sebagai pilihan.",
+    "Hanya orbit 76 yang ditarik, karena hanya orbit itu yang menunjukkan isyarat di tingkat luas.",
+    "Rancu musiman yang berlaku pada uji tingkat luas berlaku juga di sini; lihat skrip 21."
+  ]
+}

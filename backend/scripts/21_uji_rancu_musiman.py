@@ -85,8 +85,63 @@ def r2_musim(y: np.ndarray, X: np.ndarray) -> float:
     return float(1.0 - np.var(sisa) / total) if total > 0 else 0.0
 
 
+def deret_dari_ruas() -> dict:
+    """Susun deret per-citra dari tarikan tingkat RUAS milik skrip 20.
+
+    KENAPA INI LEBIH BERGUNA daripada menunggu deret tingkat luas.
+
+    Uji rancu musiman pada tingkat LUAS menjawab pertanyaan akademis: apakah
+    kaitan luas air dengan pasut nyata. Tingkat RUAS menjawab pertanyaan yang
+    sebenarnya dipakai sistem: apakah kaitan itu bertahan pada label yang
+    benar-benar akan memberi bobot pada graf jalan.
+
+    Kalau isyaratnya runtuh di sini, tidak penting lagi apakah ia bertahan di
+    tingkat luas — sistem ini merutekan per ruas, bukan per AOI.
+    """
+    cache = config.DIR_DATA_OLAHAN / "s1_basah_luas_ruas.jsonl"
+    if not cache.exists():
+        return {}
+    citra = json.loads(
+        (config.DIR_DATA_OLAHAN / "s1_daftar_citra.json")
+        .read_text(encoding="utf-8"))["citra"]
+    urutan = {c["indeks"]: i for i, c in enumerate(citra)}
+
+    import collections
+    jumlah = collections.defaultdict(list)
+    with cache.open(encoding="utf-8") as f:
+        for garis in f:
+            b = json.loads(garis)
+            nama = (b["pita"].rsplit("_", 1)[0]
+                    if b["pita"].endswith("_VV") else b["pita"])
+            i = urutan.get(nama)
+            if i is not None:
+                jumlah[i].append(b["basah"])
+
+    hasil = {}
+    for ambang in (0.05, 0.10):
+        baris = []
+        for i, nilai in sorted(jumlah.items()):
+            if len(nilai) < 100:
+                continue
+            arr = np.array(nilai)
+            baris.append({"waktu": citra[i]["waktu"],
+                          "proporsi": float((arr >= ambang).mean())})
+        if len(baris) >= 40:
+            hasil[f"ruas_ambang{ambang:.2f}"] = baris
+    return hasil
+
+
 def main() -> int:
-    argparse.ArgumentParser(description=__doc__).parse_args()
+    p_ = argparse.ArgumentParser(description=__doc__)
+    p_.add_argument("--dari-ruas", action="store_true",
+                    help="pakai tarikan tingkat ruas skrip 20")
+    a_ = p_.parse_args()
+
+    if a_.dari_ruas:
+        deret = deret_dari_ruas()
+        if not deret:
+            raise SystemExit("Tarikan tingkat ruas belum ada. Jalankan skrip 20.")
+        return jalankan(deret, "tingkat RUAS (skrip 20)")
 
     if not BERKAS.exists():
         raise SystemExit(f"{BERKAS.name} belum ada. Jalankan skrip 12 dulu.")
@@ -98,6 +153,11 @@ def main() -> int:
             "`python -m scripts.12_uji_isyarat_s1 --darat-saja` dengan versi\n"
             "skrip yang sudah menyimpan deret.")
 
+    return jalankan(deret, "tingkat LUAS (skrip 12)")
+
+
+def jalankan(deret: dict, asal: str) -> int:
+    print(f"sumber deret: {asal}\n")
     print(f"{'kombinasi':<22}{'n':>5}{'mentah':>10}{'parsial':>10}"
           f"{'musim jelaskan':>16}")
     print("-" * 64)
@@ -167,12 +227,18 @@ def main() -> int:
     print(f"PUTUSAN: {putusan}")
     print(kalimat)
 
-    BERKAS_HASIL.write_text(json.dumps({
+    # Dua mode menulis ke berkas berbeda. Menulis ke satu nama membuat
+    # hasil yang dijalankan belakangan menimpa yang sebelumnya, dan
+    # keduanya sama-sama dibutuhkan untuk menyusun kesimpulan.
+    berkas = (BERKAS_HASIL if "LUAS" in asal else
+              BERKAS_HASIL.with_name("uji_rancu_musiman_ruas.json"))
+    berkas.write_text(json.dumps({
         "_catatan": ("Uji rancu musiman atas korelasi luas air terhadap pasut. "
                      "Musim dimodelkan dua harmonik tahunan; yang dilaporkan "
                      "korelasi parsial setelah musim dikendalikan pada KEDUA "
                      "deret."),
         "dijalankan": datetime.now(timezone.utc).isoformat(),
+        "asal_deret": asal,
         "cara": "regresi hari-dalam-tahun, dua harmonik, lalu korelasi sisa",
         "korelasi_mutlak_mentah": round(terbaik_mentah, 4),
         "korelasi_mutlak_parsial": round(terbaik_parsial, 4),

@@ -373,10 +373,11 @@ Tiga dugaan, tidak satu pun sudah dibuktikan:
 3. **Jalan terlalu sempit terhadap piksel 30 m.** Satu piksel di atas jalan
    ikut memuat trotoar, kendaraan, pohon, dan bangunan.
 
-### 6.5 Empat upaya penyelamatan, semuanya gagal
+### 6.5 Lima upaya penyelamatan, semuanya gagal
 
-Model tidak ditinggalkan setelah satu kegagalan. Empat dugaan penyebab diuji
-satu per satu, dan keempatnya terbantah. Ini dicatat lengkap supaya tidak ada
+Model tidak ditinggalkan setelah satu kegagalan. Lima dugaan penyebab diuji
+satu per satu, dan kelimanya terbantah. Yang kelima sempat menjanjikan dan
+karena itu diuji paling dalam. Ini dicatat lengkap supaya tidak ada
 yang mengulang percobaan yang sama.
 
 **Upaya 1 — mencuplik lingkungan, bukan satu piksel.**
@@ -433,43 +434,6 @@ lebih luas terlihat daripada air dalam yang beriak saat pasang. Isyarat yang
 dicari — daratan berubah menjadi air — hanya beberapa persen luas dan
 tenggelam di bawah ragam itu.
 
-**Uji lanjutan dengan topeng air permanen kemudian SELESAI, dan hasilnya
-tidak nol.** Piksel yang gelap pada lebih dari 40 persen akuisisi dibuang
-sebagai tubuh air tetap, lalu proporsi piksel DARAT yang tampak berair
-dikorelasikan terhadap pasut, 2019 sampai 2026:
-
-| Orbit | Jam lintas | Citra | Korelasi vs pasut |
-|---|---|---:|---:|
-| **76, descending** | 05.16 WIB | 195 | **+0,362** |
-| 76, ambang −17 dB | | 195 | +0,285 |
-| 127, ascending | 17.58 WIB | 316 | +0,032 |
-| 127, ambang −17 dB | | 316 | +0,050 |
-
-Tandanya POSITIF — makin tinggi pasut, makin luas daratan tampak berair. Itu
-arah yang benar secara fisika, berbeda dari tiga upaya sebelumnya.
-
-**Tetap tidak dijadikan dasar menghidupkan model, karena empat hal.**
-
-Pertama, hanya satu dari dua orbit menunjukkannya. Genangan tidak peduli
-geometri sudut pandang, meski kedua orbit memang mencuplik jam yang berbeda.
-
-Kedua, dan ini yang paling mengganggu: **rancu musiman belum disingkirkan.**
-Pada jam lintas yang tetap, fase K1 dan P1 bergeser dengan periode sekitar
-satu tahun, sehingga rekonstruksi pasut memiliki siklus tahunan semu.
-Kebasahan lahan juga bersiklus tahunan kuat mengikuti musim hujan. Keduanya
-dapat menghasilkan +0,36 tanpa hubungan sebab apa pun. Mengujinya menuntut
-meregresikan hari-dalam-tahun, dan deret per-citra tidak ikut disimpan.
-
-Ketiga, besarnya sedang: 0,36 menjelaskan sekitar 13 persen ragam.
-
-Keempat, yang diukur adalah LUAS kawasan terbuka, bukan genangan per ruas
-jalan. Mengubahnya menjadi label per ruas menambah satu langkah inferensi
-yang belum tervalidasi.
-
-Kesimpulannya: **arah lanjutan yang layak, bukan dasar untuk mencabut
-penolakan model.** Skrip `12_uji_isyarat_s1.py --darat-saja` menyimpan
-hasilnya di `data/referensi/uji_isyarat_s1_darat.json`.
-
 **Upaya 4 — memakai muka air TERUKUR, bukan pasut astronomis.**
 Dugaan yang paling menjanjikan, dan yang paling lama bertahan. Rekonstruksi
 harmonik hanya memuat komponen ASTRONOMIS, sementara rob sesungguhnya terjadi
@@ -513,8 +477,8 @@ begitu: rata-rata anomali seluruh citra ikut berkorelasi, dan setelah
 pergeseran itu dibuang sisanya tinggal −0,06.
 
 **Kesimpulan upaya 4: pembanding BUKAN penyebabnya.** Memakai muka air yang
-sebenarnya pun tidak memunculkan kaitan. Pembahasan label Sentinel-1 untuk
-AOI ini ditutup.
+sebenarnya pun tidak memunculkan kaitan. Yang tersisa untuk diuji tinggal
+satu: cara labelnya dibuat, bukan pembandingnya.
 
 Temuan sampingan yang layak disebut sendiri: **stasiun pasut Semarang
 merekam kenaikan muka air relatif sekitar 9 sentimeter per tahun** sepanjang
@@ -522,6 +486,96 @@ merekam kenaikan muka air relatif sekitar 9 sentimeter per tahun** sepanjang
 muka laut, penurunan tanah tempat alat berdiri, dan kemungkinan perubahan
 datum. Sebagai pengamatan mentah ia tetap berguna dan sejalan dengan besaran
 subsidensi di literatur.
+
+**Upaya 5 — membuang topeng air permanen, lalu turun ke tingkat ruas.**
+Dugaan: Upaya 3 gagal karena luas gelap didominasi tubuh air yang MEMANG
+selalu ada. Kalau tambak, sungai, dan laut dibuang lebih dulu, yang
+tersisa adalah daratan — dan perubahan di daratan itulah rob.
+
+**Hasilnya tidak nol.** Piksel yang gelap pada lebih dari 40 persen akuisisi dibuang
+sebagai tubuh air tetap, lalu proporsi piksel DARAT yang tampak berair
+dikorelasikan terhadap pasut, 2019 sampai 2026:
+
+| Orbit | Jam lintas | Citra | Korelasi vs pasut |
+|---|---|---:|---:|
+| **76, descending** | 05.16 WIB | 195 | **+0,362** |
+| 76, ambang −17 dB | | 195 | +0,285 |
+| 127, ascending | 17.58 WIB | 316 | +0,032 |
+| 127, ambang −17 dB | | 316 | +0,050 |
+
+Tandanya POSITIF — makin tinggi pasut, makin luas daratan tampak berair. Itu
+arah yang benar secara fisika, berbeda dari empat upaya sebelumnya.
+
+**Dua keberatan itu kemudian DIUJI, bukan dibiarkan sebagai keberatan.**
+
+Sebelumnya dua hal disebut sebagai alasan tidak mencabut penolakan: rancu
+musiman belum disingkirkan, dan yang diukur luas bukan ruas. Keduanya kini
+sudah diuji, dan keduanya terbukti menjadi masalah.
+
+### Rancu musiman: benar, dan besar
+
+Sentinel-1 sinkron matahari sehingga melintas pada jam lokal yang hampir
+tetap. Pada jam tetap itu, komponen K1 (23,93 jam) dan P1 (24,07 jam)
+bergeser fasenya dengan periode sekitar SATU TAHUN, bukan sebulan. Akibatnya
+rekonstruksi pasut yang dicuplik pada waktu akuisisi punya siklus tahunan
+semu. Kebasahan lahan juga bersiklus tahunan kuat mengikuti musim hujan.
+
+Diuji dengan mengendalikan hari-dalam-tahun pada KEDUA deret — dua harmonik
+tahunan, lalu sisanya dikorelasikan. Hasilnya membenarkan kekhawatiran itu:
+
+| Deret | Mentah | Parsial | Susut |
+|---|---:|---:|---:|
+| Luas AOI, orbit 76, −15 dB | +0,362 | **+0,140** | 62 persen |
+| Luas AOI, orbit 76, −17 dB | +0,285 | +0,098 | 66 persen |
+| Luas AOI, orbit 127 | +0,032 | +0,041 | — |
+
+**Musim menjelaskan 38,6 persen ragam tinggi pasut** pada waktu akuisisi, dan
+32,8 persen ragam proporsi basah. Dua deret yang sama-sama bersiklus tahunan,
+persis mekanisme yang dikhawatirkan. Lebih dari separuh korelasi +0,36 itu
+ternyata musim, bukan pasut.
+
+### Dari luas ke ruas: melemah lagi, dan buktinya berbalik
+
+Langkah inferensi yang berulang kali disebut "belum tervalidasi" kini
+dikerjakan. Topeng air permanen dibangun per orbit, lalu tiap ruas dinilai
+dari proporsi piksel darat yang basah dalam radius 100 meter — 487.890 nilai
+atas 2.502 ruas dan 195 citra.
+
+| Ambang proporsi | Laju basah | Korelasi pasut | Parsial | Tanggal rob |
+|---:|---:|---:|---:|---:|
+| 0,05 | 0,92 persen | +0,230 | +0,107 | **−0,77 σ** |
+| 0,10 | 0,29 persen | +0,185 | +0,123 | −0,41 σ |
+| 0,20 | 0,02 persen | +0,013 | — | −0,52 σ |
+
+Dua hal terbaca dari tabel itu. Isyaratnya **melemah dua kali**: dari 0,362 di
+tingkat luas menjadi 0,230 di tingkat ruas, lalu menjadi 0,107 setelah musim
+dikendalikan. Dan bukti yang sepenuhnya bebas — tanggal kejadian rob
+terdokumentasi — **berbalik arah di seluruh ambang**: label basah justru
+lebih JARANG muncul pada hari kejadian.
+
+### Kesimpulan, kini di atas dasar yang jauh lebih kokoh
+
+Yang tersisa setelah kedua keberatan diuji adalah korelasi sekitar +0,11
+terhadap pasut, dengan bukti tanggal kejadian yang menunjuk arah berlawanan.
+Itu bukan dasar untuk melabeli 19.394 ruas jalan dan menghidupkan kembali
+model genangan.
+
+**Penolakan model tetap berdiri**, dan sekarang berdiri karena diuji sampai
+tuntas, bukan karena satu keberatan yang dibiarkan menggantung.
+
+Yang tetap patut dicatat sebagai arah lanjutan: tandanya positif dan
+konsisten pada orbit 76, dan orbit itu melintas pukul 05.16 WIB. Kalau suatu
+saat ada pengamatan genangan per ruas untuk diuji, lintasan pagi itulah yang
+paling layak diperiksa lebih dulu.
+
+Skripnya: `12_uji_isyarat_s1.py --darat-saja` untuk tingkat luas,
+`20_label_luas_ke_ruas.py` untuk tingkat ruas, dan
+`21_uji_rancu_musiman.py` untuk kedua uji musiman. Hasilnya di
+`data/referensi/uji_isyarat_s1_darat.json`,
+`uji_label_luas_ke_ruas.json`, `uji_rancu_musiman.json`, dan
+`uji_rancu_musiman_ruas.json`.
+
+---
 
 ### 6.6 Kesimpulan
 

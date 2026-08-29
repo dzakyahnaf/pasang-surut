@@ -94,16 +94,17 @@ def tarik(ee, ruas: list[dict]) -> int:
         raise SystemExit("Citra terlalu sedikit.")
 
     halus = kol.map(
-        lambda img: img.focal_median(30, "circle", "meters").rename("VV"))
+        lambda img: img.focal_median(30, "circle", "meters"))
     gelap = halus.map(lambda img: img.lt(AMBANG_AIR_DB))
     darat = gelap.mean().lt(AMBANG_PERMANEN)
     print(f"topeng air permanen: piksel gelap >{AMBANG_PERMANEN:.0%} akuisisi\n")
 
     # Basah = gelap DAN darat. toBands() menyusun seluruh citra jadi satu
     # gambar bermultipita supaya satu permintaan mengembalikan deret penuh.
-    basah = halus.map(
-        lambda img: img.lt(AMBANG_AIR_DB).And(darat).rename(
-            img.get("system:index")))
+    # toBands() sendiri yang memberi nama pita, berbentuk "<system:index>_VV".
+    # rename() menuntut List<String> dan gagal bila diberi satu string; itu
+    # kesalahan yang sama persis dengan yang pernah terjadi di skrip 08.
+    basah = halus.map(lambda img: img.lt(AMBANG_AIR_DB).And(darat))
     gabungan = basah.toBands()
 
     ditulis = 0

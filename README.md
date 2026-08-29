@@ -196,7 +196,7 @@ Model ini mempelajari ruas mana yang sering beranomali, bukan **kapan** ruas
 tergenang — dan seluruh guna sistem perutean terletak pada kata "kapan".
 Aturan "pasut saja" menghasilkan ROC-AUC 0,4935, setara lemparan koin.
 
-### 6.2 Empat upaya penyelamatan, semuanya gagal
+### 6.2 Lima upaya penyelamatan, semuanya gagal
 
 | Upaya | Hasil |
 |---|---|
@@ -204,13 +204,30 @@ Aturan "pasut saja" menghasilkan ROC-AUC 0,4935, setara lemparan koin.
 | Kriteria dua arah (pantulan ganda kota) | arah benar, besarnya hanya **0,47σ** pada 12 citra |
 | Luas air kawasan terbuka | korelasi terhadap pasut **negatif** (tambak paling halus saat surut) |
 | Muka air **terukur**, bukan astronomis | mentah −0,29, **semu** — tinggal +0,05 setelah layangan diluruskan |
+| Topeng air permanen, lalu label per ruas | mentah **+0,362**, tersisa **+0,107** setelah musim dikendalikan |
 
-Upaya keempat layak diceritakan sendiri. Korelasi mentahnya −0,29 tampak
-sepuluh kali lebih kuat. Dua hal menyingkapnya sebagai semu: kriteria "turun"
-dan "naik" berkorelasi hampir sama besar dengan tanda berlawanan (tanda khas
+Dua upaya terakhir sempat tampak berhasil, dan keduanya runtuh saat diperiksa.
+
+Upaya keempat memberi −0,29, sepuluh kali lebih kuat. Ia semu: kriteria "turun"
+dan "naik" berkorelasi hampir sama besar dengan tanda berlawanan (khas
 pergeseran radiometrik seluruh citra, bukan genangan per ruas), dan rekaman
-stasiun **melayang naik 0,92 m dalam sepuluh tahun**. Dua deret yang
-sama-sama melayang berkorelasi tanpa hubungan sebab.
+stasiun **melayang naik 0,92 m dalam sepuluh tahun**.
+
+Upaya kelima bertahan paling lama. Setelah tubuh air tetap ditopengkan, luas
+**daratan** yang tampak berair berkorelasi **+0,362** terhadap pasut pada orbit
+76 — positif, arah yang benar secara fisika. Dua keberatan lalu diuji, bukan
+diasumsikan:
+
+| Keberatan | Uji | Hasil |
+|---|---|---|
+| Yang diukur luas kawasan, sistem merutekan per ruas | 487.890 cuplikan atas 2.502 ruas | +0,362 → **+0,230** |
+| Sinkron matahari: K1 dan P1 bergeser fase berperiode setahun, bisa rancu dengan musim hujan | regresi hari-dalam-tahun dari kedua deret | +0,230 → **+0,107** |
+
+Musim ternyata menjelaskan **38,6 persen ragam pasut** pada waktu akuisisi.
+Dan bukti yang sepenuhnya bebas — tanggal kejadian rob terdokumentasi —
+**berlawanan arah**: label basah justru lebih jarang muncul pada hari kejadian
+(−0,77σ). Korelasi +0,11 dengan bukti kejadian yang berlawanan bukan dasar
+untuk melabeli 19.394 ruas.
 
 ### 6.3 Rekonstruksi pasut: INI yang tervalidasi
 

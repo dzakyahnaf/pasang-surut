@@ -1,0 +1,49 @@
+{
+  "_catatan": "Uji rancu musiman atas korelasi luas air terhadap pasut. Musim dimodelkan dua harmonik tahunan; yang dilaporkan korelasi parsial setelah musim dikendalikan pada KEDUA deret.",
+  "dijalankan": "2026-08-29T11:26:32.048281+00:00",
+  "asal_deret": "tingkat LUAS (skrip 12)",
+  "cara": "regresi hari-dalam-tahun, dua harmonik, lalu korelasi sisa",
+  "korelasi_mutlak_mentah": 0.3624,
+  "korelasi_mutlak_parsial": 0.1395,
+  "susut_karena_musim": 0.2229,
+  "putusan": "RANCU MUSIMAN",
+  "kesimpulan": "Korelasi runtuh setelah musim dikendalikan. Yang terlihat sebagai kaitan dengan pasut sesungguhnya kaitan dengan musim hujan, dan penolakan model tetap berdiri.",
+  "per_kombinasi": {
+    "orbit76_-15dB": {
+      "citra": 195,
+      "korelasi_mentah": 0.3624,
+      "korelasi_parsial": 0.1395,
+      "musim_jelaskan_proporsi_basah": 0.3279,
+      "musim_jelaskan_pasut": 0.3858,
+      "susut": 0.2229
+    },
+    "orbit76_-17dB": {
+      "citra": 195,
+      "korelasi_mentah": 0.2847,
+      "korelasi_parsial": 0.0975,
+      "musim_jelaskan_proporsi_basah": 0.2284,
+      "musim_jelaskan_pasut": 0.3858,
+      "susut": 0.1872
+    },
+    "orbit127_-15dB": {
+      "citra": 316,
+      "korelasi_mentah": 0.0324,
+      "korelasi_parsial": 0.0408,
+      "musim_jelaskan_proporsi_basah": 0.1999,
+      "musim_jelaskan_pasut": 0.3913,
+      "susut": -0.0084
+    },
+    "orbit127_-17dB": {
+      "citra": 316,
+      "korelasi_mentah": 0.0497,
+      "korelasi_parsial": 0.0079,
+      "musim_jelaskan_proporsi_basah": 0.1666,
+      "musim_jelaskan_pasut": 0.3913,
+      "susut": 0.0418
+    }
+  },
+  "_peringatan": [
+    "Regresi musiman hanya menyingkirkan rancu yang BERBENTUK siklus tahunan. Rancu lain yang tidak berpola tahunan tidak tersentuh.",
+    "Kalau musim menjelaskan sebagian besar ragam kedua deret, sisa yang dikorelasikan menjadi kecil dan korelasi parsialnya lebih berderau daripada korelasi mentahnya."
+  ]
+}

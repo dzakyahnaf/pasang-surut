@@ -8,11 +8,11 @@ ini, baca bagian itu.
 
 ---
 
-## PAPAN BLOKADE — keadaan per 28 Agustus 2026
+## PAPAN BLOKADE — keadaan per 29 Agustus 2026
 
 > Bagian ini DIPERBARUI SETIAP SESI dan selalu menggambarkan keadaan
 > sekarang, bukan riwayat. Riwayat ada di entri per milestone di bawahnya.
-> Sisa waktu ke tenggat: **3 hari** (31 Agustus 2026, 23.59 WIB).
+> Sisa waktu ke tenggat: **2 hari** (31 Agustus 2026, 23.59 WIB).
 
 ### A. BLOKADE — menghentikan pekerjaan berikutnya
 
@@ -45,7 +45,10 @@ ini, baca bagian itu.
 | B16 | **Proposal tersisa 20 penanda `[[ISI]]` dari semula 58.** Seluruhnya tertahan pada tugas manual atau sumber yang belum ada: tautan deploy, repo, video, Figma; angka rantai dampak yang menunggu faktor emisi; dan dua sitasi tanpa sumber (leptospirosis dan WRI), turun dari tiga. | Rincian dan status per bagian ada di `docs/sisa_proposal.md` |
 | B17 | **Tujuh kotak `[ ISI MANUAL ]` sudah dikeluarkan dari proposal** dan dipindah ke `docs/sisa_proposal.md`. Isinya tidak hilang. | Kotak itu instruksi untuk penulis, bukan isi proposal, dan berisiko ikut tercetak ke PDF yang dibaca juri |
 | B34 | **Stasiun pasut IOC `sema` merekam kenaikan muka air relatif sekitar 9 cm per tahun** sepanjang 2015 sampai 2025, dari median +0,861 m menjadi +1,781 m. | Ini BUKAN kenaikan muka laut absolut — ia campuran kenaikan muka laut, penurunan tanah tempat alat berdiri, dan kemungkinan perubahan datum. Layak diperiksa lebih lanjut karena besarnya sepadan dengan laju subsidensi di literatur, tetapi jangan dikutip sebagai kenaikan muka laut |
-| B35 | **Penerapan ke Render dan Vercel BELUM dilakukan.** Seluruh artefaknya siap dan sudah diuji: `Dockerfile` 244 MB yang jalan, `render.yaml`, `Procfile`, `vercel.json`, CORS dari lingkungan. | Hanya perlu menekan tombol. Dua variabel wajib diisi di dasbor: `DATABASE_URL` (pooler port 6543) dan `ASAL_DIIZINKAN` di sisi API, `VITE_API_URL` di sisi Vercel |
+| ~~B35~~ | **SELESAI 29 Agustus, diverifikasi dari luar.** https://pasang-surut.vercel.app dan https://pasang-surut-api.onrender.com hidup. `database: true`, 19.394 ruas, 21.778 prediksi, jendela 72 jam sampai 1 September. CORS meloloskan asal Vercel dan menolak asal asing. `/api/rute` mengembalikan `sumber_data` berupa LIST, jadi bug lencana benar-benar hilang di produksi. | — |
+| B43 | **PRODUKSI MASIH MENYAJIKAN SERVICE WORKER v1.** Diperiksa 29 Agustus: `https://pasang-surut.vercel.app/sw.js` berbunyi `const VERSI = "pasang-surut-v1"`. Perbaikannya sudah di-commit lokal (`8e34501`) tetapi **belum di-push**, dan remote masih di `f09000c`. | Akibatnya nyata, bukan teoretis: siapa pun yang membuka aplikasi SEBELUM perbaikan akan terus mendapat cangkang lama dari cache selamanya, dan cangkang lama menunjuk bundel lama yang memuat alamat API `localhost`. Halamannya diam tanpa galat. **Push lalu redeploy Vercel.** curl tidak memperlihatkan gejalanya karena curl tidak memakai service worker |
+| B44 | **Rancu musiman diuji, dan penolakan model Sentinel-1 kini berdiri di atas dasar yang jauh lebih kokoh.** Musim menjelaskan **38,6 persen ragam pasut** pada waktu akuisisi. Korelasi +0,362 di tingkat luas menyusut ke +0,230 di tingkat ruas, lalu ke **+0,107** setelah hari-dalam-tahun dikendalikan. Bukti bebas — tanggal kejadian rob — **berlawanan arah** (−0,77σ). | Dua keberatan terakhir yang menggantung sudah dijawab. Tidak ada lagi jalan penyelamatan yang tersisa untuk diuji, dan itu justru kabar baik: keputusan beralih ke indeks kerentanan kini terdokumentasi tuntas. Rinciannya di `docs/validasi.md` 6.5, skripnya `20_label_luas_ke_ruas.py` dan `21_uji_rancu_musiman.py` |
+| B45 | **Perkiraan halaman proposal sempat salah hitung dan hampir memicu pemangkasan yang tidak perlu.** Kepadatan 156 kata/halaman diturunkan dari `.docx` yang SUDAH memuat enam gambar, lalu 1,5 halaman untuk enam tangkapan layar ditambahkan lagi di atasnya. | Gambar yang sama terhitung dua kali dan draft tampak 30,3 halaman padahal 29,0. Diperiksa dengan membuka `word/media/` di dalam `.docx`: enam PNG tertanam. **Jumlah halaman final tetap wajib diperiksa dengan Word, bukan dengan perkiraan ini** |
 | B36 | **`data/processed/potret_demo.json` 7,8 MB WAJIB ikut di-commit.** Tanpa berkas itu, aplikasi yang di-deploy mati begitu Supabase tersendat. | Jalankan ulang `python -m scripts.18_seed_demo` sebelum demo — potret membawa tanggal kedaluwarsa dan ditolak API setelah lewat |
 | B37 | **Uji dari HP di jaringan seluler belum dilakukan.** | Kriteria terima M6 menuntutnya. Perlu perangkat fisik |
 | ~~B38~~ | **DIPUTUSKAN 29 Agustus:** Markdown jadi acuan, `.docx` dibangun ulang darinya di M8. Sebelumnya: **DUA SUMBER KEBENARAN untuk proposal.** `.docx` di akar (27 halaman, dirawat sejak sesi keempat) dan `docs/proposal_draft.md` (M7, 28,9 halaman perkiraan) kini memuat isi yang sama. | **Tetapkan satu sebagai acuan sebelum M8.** Saran: Markdown jadi acuan karena bisa di-diff di git, lalu `.docx` dibangun ulang darinya. Dibiarkan, keduanya akan menyimpang dalam satu sesi |
