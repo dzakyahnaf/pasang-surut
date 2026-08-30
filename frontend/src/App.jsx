@@ -64,21 +64,42 @@ export default function App() {
     document.title = t("aplikasi.nama");
   }, []);
 
-  // ── Muat sumbu waktu dan jaringan jalan ───────────────────────────
+  // ── Muat sumbu waktu SAJA ─────────────────────────────────────────
+  //
+  // KENAPA HANYA JAM, DAN KENAPA INI PERNAH SALAH.
+  //
+  // Versi sebelumnya menarik `/api/jam` dan `/api/ruas` bersama-sama dengan
+  // `Promise.all`. Keduanya lalu menunggu yang paling lambat, dan yang paling
+  // lambat jauh lebih besar: sumbu waktu 72 jam hanya beberapa kilobita,
+  // sedangkan jaringan jalan 19.394 ruas berukuran 6,6 MB.
+  //
+  // Akibatnya Pita Pasut — elemen tanda tangan antarmuka ini — menampilkan
+  // "belum dihitung" selama seluruh unduhan berlangsung, padahal datanya
+  // sudah tiba sejak detik pertama. Di ponsel kelas menengah pada jaringan
+  // seluler, yaitu pengguna yang disebut DESIGN.md bagian 1, layar pertama
+  // tampak rusak selama puluhan detik.
+  //
+  // Lebih buruk lagi, `ambilRuas()` tanpa argumen di sini SIA-SIA: begitu
+  // `jam` masuk, `waktuAktif` terisi dan efek di bawah segera menarik ulang
+  // jaringan yang sama untuk jam aktif. Muat pertama mengunduh 13,2 MB dan
+  // membuang separuhnya.
+  //
+  // Jadi di sini hanya sumbu waktu. Jaringan jalan dibiarkan diambil satu
+  // kali oleh efek `waktuAktif`, yang memang harus berjalan.
   useEffect(() => {
     let dibatalkan = false;
     (async () => {
-      setMemuat(true);
       setGalatMuat(null);
       try {
-        const [dataJam, dataRuas] = await Promise.all([ambilJam(), ambilRuas()]);
-        if (dibatalkan) return;
-        setJam(dataJam.jam ?? []);
-        setGeojson(dataRuas);
+        const dataJam = await ambilJam();
+        if (!dibatalkan) setJam(dataJam.jam ?? []);
       } catch (e) {
-        if (!dibatalkan) setGalatMuat(pesanGalat(e));
-      } finally {
-        if (!dibatalkan) setMemuat(false);
+        if (dibatalkan) return;
+        setGalatMuat(pesanGalat(e));
+        // Tanpa jam, `waktuAktif` tidak pernah ada dan efek di bawah tidak
+        // pernah berjalan. Penanda muat harus dilepas di sini, kalau tidak
+        // peta tertahan pada "memuat" selamanya tanpa galat apa pun.
+        setMemuat(false);
       }
     })();
     return () => { dibatalkan = true; };
@@ -116,6 +137,10 @@ export default function App() {
         if (!dibatalkan) setGeojson(data);
       } catch (e) {
         if (!dibatalkan) setGalatMuat(pesanGalat(e));
+      } finally {
+        // Penanda muat peta ditutup DI SINI, bukan saat sumbu waktu tiba,
+        // karena yang digerbanginya memang jaringan jalan.
+        if (!dibatalkan) setMemuat(false);
       }
     })();
     return () => { dibatalkan = true; };

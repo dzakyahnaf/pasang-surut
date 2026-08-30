@@ -8,41 +8,16 @@ dan tidak menyetujui syarat layanan atau izin OAuth atas nama tim. Itu batas
 aturan, bukan batas alat, dan tidak berubah oleh tersedianya browser otomatis.
 Beberapa tugas lain butuh perangkat fisik atau orang.
 
-Diperbarui: 29 Agustus 2026, sore. **Sisa waktu ke tenggat: 2 hari.**
+Diperbarui: 30 Agustus 2026. **Sisa waktu ke tenggat: sekitar 36 jam.**
 
 ---
 
 ## MENDESAK — kerjakan hari ini
 
-### M1. Push perbaikan service worker, lalu REDEPLOY Vercel
+### M1 — SELESAI, diverifikasi 30 Agustus
 
-Push sebelumnya sudah masuk — remote kini di `f09000c`. Tetapi perbaikan
-service worker ada di satu commit lokal yang belum terkirim, dan produksi
-**masih menyajikan versi lama**:
-
-```
-https://pasang-surut.vercel.app/sw.js  ->  const VERSI = "pasang-surut-v1"
-```
-
-Selama itu masih v1, siapa pun yang pernah membuka aplikasi sebelum perbaikan
-akan terus menerima cangkang lama dari cache — dan cangkang lama menunjuk
-bundel lama yang memuat alamat API `localhost`. Halamannya diam saja, tanpa
-pesan galat. Menguji dengan `curl` tidak memperlihatkan gejala ini karena
-`curl` tidak memakai service worker; harus dibuka di peramban.
-
-```bash
-cd "C:/Users/Dzaky Ahnaf/kompetisi/anforcom"
-git push origin main
-```
-
-Lalu **picu ulang deploy di Vercel** dan periksa dari peramban:
-
-```bash
-curl -s https://pasang-surut.vercel.app/sw.js | grep VERSI   # harus v2
-```
-
-Bagi yang sudah pernah membuka: muat ulang keras sekali (Ctrl+Shift+R), atau
-tutup seluruh tab aplikasi lalu buka lagi.
+`https://pasang-surut.vercel.app/sw.js` kini berbunyi `pasang-surut-v2`, dan
+remote sejajar dengan lokal. Bug cangkang basi tertutup.
 
 ### M2 dan M3 — SELESAI, diverifikasi
 
@@ -102,36 +77,42 @@ Permintaan rute pertama setelah tidur bisa memakan puluhan detik.
 
 ---
 
-## SUMBER ANGKA — empat yang wajib
+## SUMBER ANGKA — tiga dari empat SELESAI
 
-Rincian dan urutan prioritas di `docs/proposal_draft.md`.
+Ditelusuri 30 Agustus. Provenans lengkap di **`docs/sumber_angka.md`**.
 
-| # | Angka | Di mana muncul |
+| # | Angka | Status |
 |---|---|---|
-| M9 | **Tautan riset WRI April 2026** | Abstrak, 3.2, 11.1 — baseline seluruh Bagian 11 |
-| M10 | **Konsumsi BBM per km** (0,020 / 0,090 / 0,250 L/km) | tabel `ambang_moda`, **tampil di antarmuka** |
-| M11 | **Faktor emisi** (2,31 bensin / 2,68 solar kg CO₂/L) | idem |
-| M12 | **Kasus leptospirosis** (32 pada 2024, 59 pada 2025) | Bagian 3.4 |
+| ~~M9~~ | Riset WRI April 2026, Rp848 miliar | **SELESAI.** Paparan Afrizal Ma'arif (WRI Indonesia) 8 April 2026, dilaporkan Suara.com 9 April 2026. Laporan primer WRI belum terbit — dicatat apa adanya |
+| ~~M11~~ | Faktor emisi 2,31 dan 2,68 | **SELESAI.** Bukan kutipan melainkan hitungan baku IPCC 2006 Tabel 1.4 dikali nilai kalor KLHK. Keduanya bahan bakar murni, jadi emisi solar cenderung DILEBIHKAN untuk Indonesia yang memakai biodiesel — arah kesalahan yang aman |
+| ~~M12~~ | Leptospirosis 32 dan 59 kasus | **SELESAI.** Abdul Hakam, Kepala Dinkes Kota Semarang, dikutip tiga media. Data primer Dinkes tidak dapat diakses (HTTP 403) — dicatat apa adanya |
+| **M10** | **Konsumsi BBM mobil 0,090 dan truk 0,250 L/km** | **MASIH KOSONG.** Motor 0,020 L/km sudah bersitasi angka pabrikan skuter. Tidak ada rata-rata nasional resmi untuk mobil dan truk |
 
-Bila sumbernya benar-benar tidak ditemukan, **turunkan klaimnya**, jangan
-diisi angka lain. Tiga sumber lain (panjang jaringan kota, perjalanan per
-hari, normal hujan BMKG) boleh tetap kosong — Bagian 11.5 sudah berdiri
-tanpa ketiganya.
+**Untuk M10, jangan diisi angka karangan.** Sudah ditulis sebagai asumsi
+rancangan di Bagian 5 butir 8. Kalau menemukan sumber, ganti; kalau tidak,
+biarkan sebagai asumsi.
 
----
+### M9b. Keputusan tim yang keluar dari proposal
+
+Catatan pada Lampiran C yang berbunyi *"Diisi mengikuti pembagian kerja pada
+rencana kerja, bukan berdasarkan kesepakatan tim"* **dikeluarkan dari
+proposal** 30 Agustus. Alasannya sama dengan B17: itu instruksi untuk penulis,
+bukan isi proposal, dan berisiko ikut tercetak ke PDF yang dibaca juri.
+
+**Pembagian perannya sendiri tetap wajib dikonfirmasi tim sebelum kirim.**
 
 ## RULEBOOK — administratif
 
 | # | Tugas | Catatan |
 |---|---|---|
 | M13 | Video YouTube | delapan butir rulebook; naskah 4 menit 30 detik siap di `docs/demo_script.md`. **Peserta wajib tampil dari awal hingga akhir**, dan visibilitas wajib **PUBLIK** bukan unlisted |
-| M14 | Prototipe Figma | diwajibkan rulebook poin 7.9 |
+| M14 | Prototipe Figma | diwajibkan rulebook 7.9. **Bahan sudah siap di `docs/prompt_figma.md`** — dua jalur, dan Jalur A (impor aplikasi lewat plugin html.to.design) makan 10–20 menit. Saya tidak mengerjakannya sendiri karena butuh login akun dan penerimaan syarat layanan plugin |
 | M15 | Twibbon ke Instagram tiap anggota, tag @anforcom | tiga anggota |
 | M16 | Poster ke Instagram tiap anggota, tag @anforcom | tiga anggota |
 | M17 | Unggah lewat app.anforcom.com | langkah terakhir |
 | M18 | Format Word A4, TNR 12, spasi 1,5, margin 4-3-3-3 | maksimal 30 halaman |
 | M19 | Ekspor PDF bernama `Anforcom2026_DSDC_TrioLaAlbiceleste_PasangSurut.pdf` | tanpa spasi |
-| M20 | Enam tangkapan layar aplikasi | dua gambar sudah siap di `docs/` |
+| ~~M20~~ | Enam tangkapan layar aplikasi | **SELESAI.** Ada di `docs/tangkapan/`, diambil dari aplikasi yang berjalan |
 | M21 | Konfirmasi pembagian peran tim | Lampiran C proposal; saya isi mengikuti rencana kerja, **bukan** kesepakatan tim |
 
 ---

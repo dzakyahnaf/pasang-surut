@@ -784,11 +784,14 @@
   background: var(--dek-1);
 }
 
-/* Blok model yang ditolak diberi garis tepi --bahaya, bukan latar penuh:
-   isinya panjang dan latar merah sepanjang layar akan melelahkan dibaca. */
-.validasi__blok--ditolak {
-  border-left: 3px solid var(--bahaya);
-}
+/* Blok model yang ditolak TIDAK diberi penanda warna.
+   Sebelumnya ada `border-left: 3px solid var(--bahaya)` di sini. Itu
+   melanggar DESIGN.md 3.6.1, yang membatasi --bahaya hanya pada dua hal:
+   ruas yang tidak bisa dilewati, dan pita jam bahaya di Pita Pasut —
+   "dilarang untuk dekorasi apa pun". Garis tebal berwarna di satu sisi
+   kartu juga penanda paling khas antarmuka buatan AI.
+   Status ditolak sudah disampaikan judul dan isi bloknya sendiri, dalam
+   kata, dan kata tidak perlu dibantu warna untuk terbaca. */
 
 .validasi__alasan {
   margin: 0 0 var(--s-3);

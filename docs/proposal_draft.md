@@ -114,7 +114,7 @@ tetap harus berangkat kerja.
 ### 3.4 Dampak berlapis pada kesehatan
 
 Kasus leptospirosis di Kota Semarang tercatat naik dari 32 pada 2024 menjadi
-59 pada 2025 [9] — sumber lengkapnya masih `TODO(sumber)`. Penularannya lewat
+59 pada 2025 [9]. Penularannya lewat
 kontak kulit dengan air terkontaminasi urin tikus, dan genangan rob di jalan
 adalah medium yang tepat untuk itu.
 
@@ -204,9 +204,12 @@ kami tulis sendiri lebih baik daripada batasan yang ditemukan juri.
    K1 dan S2 memakai rasio baku Admiralty. Koreksi nodal siklus 18,6 tahun
    belum diterapkan.
 
-8. **Faktor konsumsi bahan bakar dan emisi belum bersitasi** — `TODO(sumber)`.
-   Angka ini kini tampil di antarmuka lewat panel dampak, sehingga sitasinya
-   lebih mendesak, bukan kurang.
+8. **Faktor emisi bersitasi, konsumsi hanya sebagian.** Faktor emisi
+   diturunkan dengan cara baku IPCC [10]; keduanya faktor bahan bakar murni,
+   sehingga emisi solar cenderung DILEBIHKAN untuk Indonesia yang memakai
+   biodiesel. Konsumsi motor cocok dengan angka pabrikan skuter [11], tetapi
+   **konsumsi mobil dan truk tetap tanpa sitasi**. Semuanya tampil di
+   antarmuka lewat panel dampak.
 
 9. **Penalti genangan pada perutean adalah angka rancangan, bukan pengukuran.**
    Biaya sebuah ruas dikalikan 1,0 saat kering, 2,5 saat kedalamannya melewati
@@ -390,8 +393,10 @@ start, bukan diam-diam saat juri memakainya.
 | Muka air terukur | Stasiun IOC `sema`, BIG dan GFZ [4] | terbuka |
 | Curah hujan | Open-Meteo Archive, reanalisis ERA5 [6] | terbuka |
 | Label genangan | Sentinel-1 GRD IW VV via Earth Engine [7] | terbuka |
-| Faktor emisi dan konsumsi BBM | belum bersitasi | `TODO(sumber)` |
-| Baseline dampak | WRI Indonesia, April 2026 [2] | `TODO(sumber)` tautan |
+| Faktor emisi bahan bakar | IPCC 2006 x nilai kalor [10] | selesai |
+| Konsumsi BBM motor | angka pabrikan [11] | selesai |
+| Konsumsi BBM mobil dan truk | asumsi rancangan | belum |
+| Baseline dampak | WRI Indonesia, 8 April 2026 [2] | selesai, lewat pemberitaan |
 
 ---
 
@@ -568,8 +573,9 @@ sebagian besar perjalanan tidak terpengaruh sama sekali.
 Pada perjalanan persentil ke-75, selisih bahan bakar 0,002–0,004 liter dan
 emisi 0,004–0,008 kg CO₂e. Pada perjalanan median, keduanya di bawah 0,001.
 
-Faktor konsumsi dan emisi berasal dari tabel `ambang_moda` dan **belum
-bersitasi** [10] — `TODO(sumber)`. Rentang ±30 persen pada konsumsi juga asumsi.
+Faktor emisi mengikuti cara baku IPCC [10]; konsumsi motor bersitasi angka
+pabrikan [11], konsumsi mobil dan truk **masih asumsi**, begitu pula rentang
+±30 persen.
 
 ### 11.4 Dampak kesehatan
 
@@ -635,9 +641,11 @@ Tanah dengan Metode Small Baseline Area Subset (SBAS) Menggunakan Citra
 Sentinel-1A: Studi Kasus Kota Semarang." *Jurnal Geodesi Undip*, 9(1), 29–36,
 2020. ISSN 2337-845X.
 
-[2] World Resources Institute Indonesia. "Analisis dampak banjir rob terhadap
-transportasi Kota Semarang." April 2026. `TODO(sumber)` — tautan dan tanggal
-akses.
+[2] Ma'arif, A. (Sustainable Mobility Analyst, WRI Indonesia). Paparan studi
+kasus banjir rob Semarang pada diskusi WRI Indonesia "Mengelola Risiko Banjir",
+8 April 2026, dilaporkan Suara.com 9 April 2026,
+suara.com/news/2026/04/09/165500 (30 Agustus 2026). Laporan riset primer WRI
+belum terbit; provenans lengkap dicatat di `docs/sumber_angka.md`.
 
 [3] Rachman, R. K., Ismunarti, D. H., dan Handoyo, G. "Pengaruh Pasang Surut
 Terhadap Sebaran Genangan Banjir Rob di Kecamatan Semarang Utara." *Jurnal
@@ -660,13 +668,23 @@ sentiwiki.copernicus.eu/web/s1-mission (28 Agustus 2026).
 developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S1_GRD
 (28 Agustus 2026).
 
-[9] Dinas Kesehatan Kota Semarang. Data kasus leptospirosis.
-`TODO(sumber)` — sumber lengkap dan tahun.
+[9] Hakam, A. (Kepala Dinas Kesehatan Kota Semarang), dikutip Beritajateng.id,
+Tribun Jateng, dan JPNN Jateng: 32 kasus leptospirosis pada 2024, 59 kasus dan
+8 kematian pada 2025 (30 Agustus 2026). Data primer Dinkes tidak dapat diakses;
+lihat `docs/sumber_angka.md`.
 
-[10] `TODO(sumber)` — faktor emisi bahan bakar dan konsumsi per kilometer
-per moda.
+[10] IPCC, *2006 Guidelines for National Greenhouse Gas Inventories*, Vol. 2
+Tabel 1.4 (bensin 69.300, solar 74.100 kg CO2/TJ) dikali nilai kalor acuan KLHK
+(solar 36 x 10^-6 TJ/liter): solar 2,67 dan bensin 2,31 kg CO2/liter. Keduanya
+faktor bahan bakar MURNI, sehingga emisi solar cenderung DILEBIHKAN untuk
+Indonesia yang memakai biodiesel — DEFRA 2026 memakai 2,584.
 
-[11] Himpunan Mahasiswa Informatika Universitas Diponegoro. *Rulebook
+[11] Konsumsi motor 0,020 liter/km setara 50 km/liter, di dalam rentang angka
+pabrikan skuter Indonesia (Honda BeAT 55–60, Suzuki Nex II 44–49 km/liter;
+Kompas Otomotif, 30 Agustus 2026). Rata-rata nasional resmi tidak ada. Konsumsi
+mobil dan truk **belum bersitasi**.
+
+[12] Himpunan Mahasiswa Informatika Universitas Diponegoro. *Rulebook
 Diponegoro Software Development Competition ANFORCOM 2026*. Semarang, 2026.
 
 ---
@@ -704,10 +722,6 @@ kompetisi [11].
 | Daffa Rajendra Priyatama | `TODO` — konfirmasi tim |
 | Naufal Syafi' Hakim | `TODO` — konfirmasi tim |
 
-> Diisi mengikuti pembagian kerja pada rencana kerja, **bukan** berdasarkan
-> kesepakatan tim yang sudah dikonfirmasi. Wajib diperiksa sebelum
-> pengumpulan.
-
 ---
 
 ## Perkiraan halaman
@@ -719,24 +733,25 @@ PNG tertanam. Perkiraan sebelumnya membagi kata dengan kepadatan itu **lalu
 menambahkan 1,5 halaman lagi untuk enam tangkapan layar**, sehingga gambar
 yang sama dihitung dua kali dan draft tampak melewati batas padahal tidak.
 
-Draft ini **4.518 kata pada Bagian 1 sampai 14**. Sisanya — catatan kepala,
+Draft ini **4.679 kata pada Bagian 1 sampai 14**. Sisanya — catatan kepala,
 bagian ini, dan ringkasan TODO di bawah — adalah materi untuk tim sebanyak
-824 kata yang **tidak masuk dokumen Word**.
+778 kata yang **tidak masuk dokumen Word**.
 
 | Komponen | Perhitungan | Halaman |
 |---|---|---:|
-| Teks, tabel, dan enam gambar Bagian 1–14 | 4.518 ÷ 156 | **29.0** |
+| Teks, tabel, dan enam gambar Bagian 1–14 | 4.679 ÷ 156 | **30.0** |
 
-**Masuk batas 30 halaman**, dengan sisa sekitar satu halaman. Sisa itu tipis,
-dan pemformatan Word bisa memakannya. Bila itu terjadi, pangkas berurutan dari
-yang paling aman:
+**PERSIS DI BATAS, TANPA SISA.** Sitasi yang ditambahkan pada 30 Agustus
+memakan seluruh margin yang tadinya sekitar satu halaman. Pemformatan Word
+hampir pasti mendorongnya melewati 30, jadi **pangkas lebih dulu, jangan
+tunggu**. Urutan yang paling aman:
 
 | Bagian | Kata | Halaman | Cara memangkas |
 |---|---:|---:|---|
 | 9. Implementasi | 800 | 5.1 | ringkas narasi upaya keempat dan kelima di 9.3 |
-| 11. Impact Projection | 580 | 3.7 | ringkas 11.2, **jangan sentuh 11.5** |
-| 5. Batasan | 601 | 3.9 | ringkas butir metodologis, sisanya rujuk repositori |
-| 6. Metodologi | 390 | 2.5 | ringkas 6.3, pertahankan 6.2 |
+| 11. Impact Projection | 583 | 3.7 | ringkas 11.2, **jangan sentuh 11.5** |
+| 5. Batasan | 628 | 4.0 | ringkas butir metodologis, sisanya rujuk repositori |
+| 13. Daftar Pustaka | 328 | 2.1 | catatan panjang di [2], [9], [10], [11] boleh dipindah seluruhnya ke `docs/sumber_angka.md` |
 
 **Yang tidak boleh dipangkas.**
 
