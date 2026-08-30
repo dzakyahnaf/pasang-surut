@@ -54,6 +54,17 @@ from app import config
 _UKURAN_KOLAM_MIN = 1
 _UKURAN_KOLAM_MAKS = 5      # sengaja kecil: batas paket gratis, bukan performa
 
+# Berapa lama sebuah permintaan boleh MENGANTRE saat kolam penuh sebelum
+# menyerah. Diperlukan karena `getconn()` melempar galat SEKETIKA begitu
+# kelima koneksi terpakai, dan galat itu keluar sebagai HTTP 500.
+#
+# Ditemukan dengan enam permintaan serentak ke `/api/jam`: lima dijawab 200,
+# yang keenam 500. Kolamnya sendiri tidak salah ukuran — yang salah adalah
+# menyerah tanpa menunggu. Antre 200 milidetik tidak terasa oleh pengguna,
+# sedangkan satu balasan 500 merusak seluruh layar.
+_ANTRE_KOLAM_DETIK = 10.0
+_ANTRE_JEDA_DETIK = 0.05
+
 _kolam: psycopg2.pool.ThreadedConnectionPool | None = None
 _kunci = threading.Lock()
 
@@ -106,6 +117,27 @@ def tutup_kolam() -> None:
 atexit.register(tutup_kolam)
 
 
+def _pinjam(kolam: psycopg2.pool.ThreadedConnectionPool):
+    """Ambil koneksi, MENGANTRE bila kolam sedang penuh.
+
+    `getconn()` melempar `PoolError` seketika saat seluruh koneksi terpakai.
+    Di lapisan HTTP itu menjadi 500, dan pengguna melihat layar rusak padahal
+    yang terjadi hanya ramai sesaat. Fungsi ini mengubah kegagalan seketika
+    menjadi antrean pendek.
+
+    Batas waktunya tetap ada. Menunggu selamanya hanya memindahkan masalah
+    dari galat yang terlihat menjadi permintaan yang menggantung.
+    """
+    tenggat = time.monotonic() + _ANTRE_KOLAM_DETIK
+    while True:
+        try:
+            return kolam.getconn()
+        except psycopg2.pool.PoolError:
+            if time.monotonic() >= tenggat:
+                raise
+            time.sleep(_ANTRE_JEDA_DETIK)
+
+
 @contextmanager
 def koneksi() -> Iterator[psycopg2.extensions.connection]:
     """Pinjam koneksi dari kolam, commit bila sukses, rollback bila galat.
@@ -120,7 +152,7 @@ def koneksi() -> Iterator[psycopg2.extensions.connection]:
     menyimpan koneksi yang keadaannya sudah kotor.
     """
     kolam = _dapatkan_kolam()
-    kon = kolam.getconn()
+    kon = _pinjam(kolam)
     rusak = False
     try:
         yield kon

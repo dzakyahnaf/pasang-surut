@@ -236,9 +236,13 @@ Daftar ini lengkap.
 
 7. **Penalti perutean adalah angka rancangan, bukan pengukuran.** Biaya ruas
    dikalikan 1,0 saat kering, 2,5 di atas ambang lambat, 8,0 di atas ambang
-   berisiko; di atas ambang tak-bisa-lewat ruas dibuang dari graf. Penalti
-   inilah yang menentukan selisih antar-rute, dan selisih itulah seluruh isi
-   Bagian 11.
+   berisiko; di atas ambang tak-bisa-lewat ruas dibuang dari graf. Keempat
+   angka itu ditetapkan tim berdasarkan pertimbangan, bukan hasil pengamatan
+   lapangan tentang seberapa lambat kendaraan sesungguhnya melintasi genangan
+   setinggi tertentu. Penalti inilah yang menentukan selisih antar-rute, dan
+   selisih itulah seluruh isi Bagian 11. Ambangnya sendiri dibaca dari tabel
+   konfigurasi moda, bukan ditulis tetap di dalam kode, sehingga dapat
+   dikoreksi tanpa menyentuh program begitu ada pengukuran.
 
 8. **Sebagian besar kejadian rob pemvalidasi belum terverifikasi.** Uji silang
    Bagian 9.4 memakai 16 kejadian; hanya dua berstatus verifikasi primer,
@@ -287,7 +291,9 @@ elevasinya di bawah tinggi muka air sebagai tergenang. Untuk kasus ini
 pendekatan itu **tidak sah**, dan alasannya aritmetis. DEMNAS bergalat vertikal
 RMSE 2,79 meter [5] sementara rob yang dimodelkan 10 sampai 50 sentimeter —
 alat ukurnya lima sampai dua puluh delapan kali lebih kasar daripada besaran
-yang diukur.
+yang diukur. Terlihat pula dari data wilayah pilot sendiri: selisih antara
+persentil ke-25 dan median elevasi di dalam AOI hanya 2,44 meter, masih di
+bawah ketidakpastian alat ukurnya.
 
 Karena itu elevasi dipakai secara **relatif** terhadap ruas tetangga dalam
 radius 500 meter. Galat DEM sebagian besar berkorelasi spasial: bila satu petak
@@ -309,7 +315,8 @@ dan lima upaya penyelamatannya ada di Bagian 9.
 
 Satu keberatan sempat diperiksa dan **terbantah**: meski Sentinel-1 sinkron
 matahari, arsipnya justru memuat lebih banyak pasang tinggi daripada
-pencuplikan acak — persentil ke-95 +0,338 berbanding +0,302 meter. Akibat kedua
+pencuplikan acak — persentil ke-95 +0,338 berbanding +0,302 meter. Yang tidak
+terwakili justru surut terdalam, dan rob tidak terjadi saat surut. Akibat kedua
 dari sinkronisitas yang sama dibahas di Bagian 9.3.
 
 ### 6.4 Pembagian data dan pencegahan kebocoran
@@ -370,8 +377,12 @@ muncul, tekan saran jam alternatif → Pita Pasut melompat ke jam itu.
 
 Sistem dipisah tegas menjadi dua dunia. **Dunia penyiapan** berjalan di laptop
 dan menyentuh OpenStreetMap, DEMNAS, Open-Meteo, dan Earth Engine. **Dunia
-melayani** berjalan di server dan tidak menyentuh satu pun di antaranya —
-ditegakkan sebagaimana diuraikan pada 7.3.
+melayani** berjalan di server dan tidak menyentuh satu pun di antaranya.
+
+Pemisahan itu ditegakkan, bukan sekadar disepakati: citra Docker yang di-deploy
+**tidak memasang** `earthengine-api`, `osmnx`, `geopandas`, `rasterio`,
+`scikit-learn`, maupun `pandas`. Kode yang keliru memanggilnya gagal saat
+start, bukan diam-diam saat juri memakainya.
 
 ### 8.2 Spesifikasi teknologi
 
@@ -401,19 +412,22 @@ Indonesia [2]. **Konsumsi BBM mobil dan truk tetap asumsi rancangan.**
 
 ### 9.1 Status modul
 
-**Seluruh modul selesai dan berjalan di alamat pada Lampiran A.** Graf jalan
-19.394 ruas sepanjang 1.289,4 km dari OpenStreetMap; skema basis data lima
-tabel dengan empat repositori; rekonstruksi pasut terkalibrasi acuan WIB; fitur
-ruas dan variabel pemicu untuk 102.552 jam; ekstraksi label Sentinel-1 dari 725
-citra menghasilkan 1,81 juta nilai; indeks kerentanan 19.394 ruas; mesin
-perutean bergantung waktu dengan 13 uji lolos; modul akuntansi dampak yang
-melaporkan rentang, bukan angka tunggal; REST API tujuh endpoint; antarmuka
-PWA berpeta; halaman validasi; potret tahan banting yang membuat tujuh dari
-tujuh endpoint tetap menjawab tanpa basis data; serta penerapan ke Render dan
-Vercel.
-
-**Satu modul selesai lalu DITOLAK:** pelatihan dan validasi model genangan
-(9.2 dan 9.3).
+| Modul | Status | Progres |
+|---|---|---|
+| Pembangunan graf jalan dari OpenStreetMap | Selesai | 19.394 ruas, 1.289,4 km |
+| Skema basis data dan lapisan repositori | Selesai | 5 tabel, 4 repositori |
+| Rekonstruksi harmonik pasang surut | Selesai | acuan fase WIB, terkalibrasi |
+| Fitur ruas dan variabel pemicu | Selesai | 19.394 ruas, 102.552 jam |
+| Ekstraksi label genangan Sentinel-1 | Selesai | 725 citra, 1,81 juta nilai |
+| Pelatihan dan validasi model genangan | Selesai, **ditolak** | lihat 9.2 dan 9.3 |
+| Indeks kerentanan | Selesai | 19.394 ruas |
+| Mesin perutean bergantung waktu | Selesai | 13 uji lolos |
+| Modul akuntansi dampak | Selesai | rentang, bukan angka tunggal |
+| REST API | Selesai | 7 endpoint, 35 uji lapisan HTTP lolos |
+| Antarmuka PWA dan peta | Selesai | manifest dan service worker |
+| Halaman validasi | Selesai | metrik apa adanya |
+| Potret tahan banting | Selesai | 7/7 endpoint hidup tanpa basis data |
+| Penerapan ke Render dan Vercel | Selesai | daring, lihat Lampiran A |
 
 ### 9.2 Hasil validasi model — apa adanya
 
@@ -756,15 +770,32 @@ lalu dibuka dengan Microsoft Word dan dibaca statistiknya:
 | Huruf | Times New Roman 12 pt | Times New Roman 12 |
 | Spasi baris | 1,5 | 1,5 |
 | Gambar tertanam | 8 | — |
+| Tabel | 11 | — |
 
-**Perkiraan sebelumnya keliru dan terlalu ketat.** Kepadatan 156 kata/halaman
-diturunkan dari `.docx` lama, dan menghasilkan taksiran 30 halaman padahal
-hasil sesungguhnya 23. Selisih tujuh halaman itu membuat sejumlah pemangkasan
-dikerjakan tanpa perlu. **Yang berlaku sekarang hanya angka dari Word**;
-jalankan ulang skripnya, buka di Word, baca jumlah halamannya.
+### Kenapa perkiraan lama meleset tujuh halaman
 
-Ada sisa tujuh halaman. Bila ingin menambah isi, yang paling layak
-dikembalikan adalah rincian batasan pada Bagian 5 yang sempat diringkas.
+Kepadatan 156 kata/halaman diturunkan dari `.docx` lama, yang memuat **14
+page break manual** — tiap bagian dimulai di halaman baru. Bagian yang berakhir
+di tengah halaman menyisakan sisanya kosong, dan dengan 14 bagian itu berarti
+sekitar tujuh halaman ruang putih. Dokumen sekarang hanya punya satu page
+break, yaitu setelah sampul, sehingga teksnya mengalir menerus: **193
+kata/halaman**, bukan 156.
+
+Artinya taksiran 30 halaman itu sebetulnya mengukur ruang putih, bukan isi.
+Beberapa pemangkasan dikerjakan tanpa perlu, dan seluruhnya sudah dikembalikan.
+
+### Ada tujuh halaman sisa
+
+Bila ingin memakainya, urutan yang paling menambah nilai:
+
+| Yang ditambahkan | Kriteria yang dilayani |
+|---|---|
+| Diagram arsitektur sistem pada Bagian 8 | Metodologi dan arsitektur, 10 persen — bagian ini satu-satunya yang belum punya gambar |
+| Tangkapan layar lebar ponsel | Progres dan validasi, 20 persen — membuktikan tata letak responsif yang diklaim 7.3 |
+| Page break di tiap awal bagian | Format dan struktur, 10 persen. Memakan sekitar tujuh halaman, jadi hanya bila tidak ada tambahan lain |
+
+**Jumlah halaman hanya dibaca dari Word.** Jalankan ulang skripnya, buka
+dokumennya, baca statistiknya.
 
 ## Proposal ini harus berdiri sendiri
 

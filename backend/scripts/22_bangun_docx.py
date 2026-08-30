@@ -210,7 +210,17 @@ def _sampul(dok: Document, judul: str, subjudul: str, meta: list[tuple[str, str]
 
 def bangun() -> int:
     teks = SUMBER.read_text(encoding="utf-8")
-    badan = teks[teks.index("## 1. Judul Karya"):teks.index("## Perkiraan halaman")]
+    # Bagian 1-14 saja. Judul penutupnya pernah berganti dari "Perkiraan
+    # halaman" menjadi "Jumlah halaman" setelah angkanya diukur, jadi
+    # keduanya diterima — dan bila tidak satu pun ditemukan, skrip berhenti
+    # dengan pesan yang jelas alih-alih diam-diam menulis seluruh berkas.
+    penutup = next((j for j in ("## Jumlah halaman", "## Perkiraan halaman")
+                    if j in teks), None)
+    if penutup is None:
+        raise SystemExit(
+            "Batas akhir Bagian 14 tidak ditemukan di proposal_draft.md. "
+            "Dicari judul '## Jumlah halaman' atau '## Perkiraan halaman'.")
+    badan = teks[teks.index("## 1. Judul Karya"):teks.index(penutup)]
 
     dok = Document()
     _atur_halaman(dok)

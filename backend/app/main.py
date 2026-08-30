@@ -25,6 +25,8 @@ from __future__ import annotations
 import json
 import os
 from datetime import datetime, timedelta, timezone
+import threading
+import time
 from functools import lru_cache
 
 from fastapi import FastAPI, HTTPException, Query
@@ -495,8 +497,42 @@ def genangan(
 JAM_PITA_PASUT = 72
 
 
+# Cache sumbu waktu. Umurnya pendek dengan sengaja.
+#
+# `/api/jam` adalah panggilan PERTAMA setiap pengunjung, dan isinya hanya
+# berubah saat skrip data dijalankan ulang. Tanpa cache, setiap pemuatan
+# halaman menembus database — dan saat beberapa orang membuka aplikasi
+# bersamaan, kelima koneksi kolam terpakai untuk menjawab pertanyaan yang
+# jawabannya sama persis.
+#
+# Diukur: 20 permintaan serentak menghasilkan sebagian HTTP 500 sebelum
+# cache ini ada. TTL 60 detik dipilih karena jendela 72 jam hanya bergeser
+# saat jamnya berganti, jadi data basi paling lama satu menit dan itu tidak
+# pernah mengubah apa yang dilihat pengguna.
+_CACHE_JAM_DETIK = 60.0
+_cache_jam: tuple[float, dict] | None = None
+_kunci_jam = threading.Lock()
+
+
 @app.get("/api/jam")
 def jam_tersedia() -> dict:
+    """Pembungkus ber-cache. Perhitungan sesungguhnya ada di `_hitung_jam()`."""
+    global _cache_jam
+    sekarang = time.monotonic()
+    tersimpan = _cache_jam
+    if tersimpan is not None and sekarang - tersimpan[0] < _CACHE_JAM_DETIK:
+        return tersimpan[1]
+    with _kunci_jam:
+        # Diperiksa ulang: utas lain bisa sudah mengisinya sementara menunggu.
+        tersimpan = _cache_jam
+        if tersimpan is not None and time.monotonic() - tersimpan[0] < _CACHE_JAM_DETIK:
+            return tersimpan[1]
+        hasil = _hitung_jam()
+        _cache_jam = (time.monotonic(), hasil)
+        return hasil
+
+
+def _hitung_jam() -> dict:
     """Sumbu waktu Pita Pasut: 72 jam ke depan sejak jam berjalan.
 
     KENAPA JENDELANYA DIHITUNG DARI JAM BERJALAN, BUKAN DARI ISI TABEL.
