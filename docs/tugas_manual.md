@@ -105,15 +105,12 @@ bukan isi proposal, dan berisiko ikut tercetak ke PDF yang dibaca juri.
 
 | # | Tugas | Catatan |
 |---|---|---|
-| M13 | Video YouTube | delapan butir rulebook; naskah 4 menit 30 detik siap di `docs/demo_script.md`. **Peserta wajib tampil dari awal hingga akhir**, dan visibilitas wajib **PUBLIK** bukan unlisted |
+| M13 | **Video YouTube — 10 persen penilaian, masih nol** | **Panduan lengkap siap:** https://claude.ai/code/artifact/40ee9168-8481-4c13-8c1f-ff305b15c875 — memuat sembilan ketentuan rulebook, pembagian peran bertiga beserta alasannya, naskah bertimestamp 4 menit 40 detik, daftar periksa teknis, judul dan deskripsi YouTube siap salin, serta enam pertanyaan juri beserta jawabannya |
 | M14 | Prototipe Figma | diwajibkan rulebook 7.9. **Bahan sudah siap di `docs/prompt_figma.md`** — dua jalur, dan Jalur A (impor aplikasi lewat plugin html.to.design) makan 10–20 menit. Saya tidak mengerjakannya sendiri karena butuh login akun dan penerimaan syarat layanan plugin |
-| M15 | Twibbon ke Instagram tiap anggota, tag @anforcom | tiga anggota |
-| M16 | Poster ke Instagram tiap anggota, tag @anforcom | tiga anggota |
 | M17 | Unggah lewat app.anforcom.com | langkah terakhir |
-| M18 | Format Word A4, TNR 12, spasi 1,5, margin 4-3-3-3 | maksimal 30 halaman |
-| M19 | Ekspor PDF bernama `Anforcom2026_DSDC_TrioLaAlbiceleste_PasangSurut.pdf` | tanpa spasi |
+| ~~M18~~ | Format Word A4, TNR 12, spasi 1,5, margin 4-3-3-3 | **SELESAI, dikerjakan skrip.** `python -m scripts.22_bangun_docx` membangun ulang `.docx` dari Markdown. Diverifikasi dengan membuka di Word: **23 halaman** dari batas 30, kertas 21×29,7 cm, margin 4-3-3-3, TNR 12, spasi 1,5, 8 gambar |
+| ~~M19~~ | Ekspor PDF | **SELESAI.** `Anforcom2026_DSDC_TrioLaAlbiceleste_PasangSurut.pdf`, 23 halaman, 8 gambar. Ekspor ulang bila Markdown berubah |
 | ~~M20~~ | Enam tangkapan layar aplikasi | **SELESAI.** Ada di `docs/tangkapan/`, diambil dari aplikasi yang berjalan |
-| M21 | Konfirmasi pembagian peran tim | Lampiran C proposal; saya isi mengikuti rencana kerja, **bukan** kesepakatan tim |
 
 ---
 
@@ -137,6 +134,16 @@ bukan isi proposal, dan berisiko ikut tercetak ke PDF yang dibaca juri.
 | M28 | Region Supabase | sekarang ap-southeast-2 Sydney, ±370 ms per kueri. Singapura memangkas separuh, tetapi berarti membuat proyek baru |
 | M29 | Trailer `Co-Authored-By: Claude Opus 5` di commit | bila rulebook DSDC mempersoalkannya, putuskan sekarang selagi baru 15 commit |
 | M30 | Nasib `deret_pasut()` di `domain/pasut.py` | diwajibkan `PLAN.md` 10.2 tetapi tidak pernah dipanggil. Pertahankan sebagai API modul, atau buang |
+
+---
+
+## DIPUTUSKAN 30 Agustus — jangan diangkat lagi
+
+| Hal | Keputusan |
+|---|---|
+| Pembagian peran tim di Lampiran C | **Disetujui apa adanya.** Dzaky ketua dan rekayasa data serta pemodelan; Daffa antarmuka dan visualisasi peta; Naufal analisis dampak, dokumentasi, dan pengujian |
+| Twibbon dan poster Instagram | Dikeluarkan dari daftar atas permintaan tim |
+| Karya belum pernah menang lomba | **Terkonfirmasi.** Karya ini baru diikutkan pada ANFORCOM 2026 |
 
 ---
 

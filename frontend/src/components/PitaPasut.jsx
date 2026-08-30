@@ -39,7 +39,7 @@ function garis(titik) {
   return titik.map(([x, y], i) => `${i === 0 ? "M" : "L"}${x.toFixed(1)} ${y.toFixed(1)}`).join(" ");
 }
 
-export default function PitaPasut({ jam, indeks, onPilih }) {
+export default function PitaPasut({ jam, indeks, onPilih, memuat = false }) {
   const wadahRef = useRef(null);
   const [lebar, setLebar] = useState(720);
   const [tinggi, setTinggi] = useState(120);
@@ -145,9 +145,15 @@ export default function PitaPasut({ jam, indeks, onPilih }) {
   };
 
   if (!n) {
+    // Selama sumbu waktu masih dalam perjalanan, yang benar adalah
+    // mengatakan sedang memuat. Menampilkan keadaan kosong di sini menyuruh
+    // pengguna memuat ulang halaman yang sebenarnya baik-baik saja — saran
+    // yang salah, dan saran yang salah lebih buruk daripada diam.
     return (
       <div className="pita pita--kosong">
-        <span className="t-label">{t("pitaPasut.tidakAdaData")}</span>
+        <span className="t-label">
+          {t(memuat ? "memuat.pasut" : "pitaPasut.tidakAdaData")}
+        </span>
       </div>
     );
   }

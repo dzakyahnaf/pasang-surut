@@ -129,6 +129,33 @@ latar biru gelap.
    menandai kolom air. Tidak ada gradien lain di seluruh aplikasi.
 4. Kontras teks utama terhadap latarnya minimal 4.5:1, teks besar minimal 3:1.
 
+### 3.7 Keadaan interaksi — ditambahkan 30 Agustus 2026
+
+**Kenapa bagian ini ada.** Berkas ini semula hanya mengatur hover dan fokus.
+Audit terhadap panduan mode *Operate* (antarmuka yang dipakai untuk
+menyelesaikan tugas, bukan untuk dilihat) menunjukkan kekurangan yang nyata:
+setiap kontrol wajib punya **default, hover, fokus, ditekan, nonaktif, memuat,
+dan galat** — dan ditemukan `:active` tidak ada sama sekali di seluruh CSS.
+
+Kekurangan itu bukan soal estetika. Antarmuka ini dipakai sambil berdiri dan
+terburu-buru, dan **jari menutupi tombol yang sedang disentuh**. Tanpa keadaan
+ditekan, umpan balik satu-satunya adalah perubahan yang tertutup jari itu
+sendiri.
+
+| Keadaan | Cara menyatakan | Token |
+|---|---|---|
+| Default | latar panel | `--lambung-1` atau `--dek-1` |
+| Hover | panel naik satu tingkat, transisi 120ms | `--lambung-3` |
+| Fokus papan ketik | garis luar 2px, offset 2px | `--rute` |
+| **Ditekan** | panel turun satu tingkat + tepi `--rute` | `--lambung-2` |
+| Nonaktif | teks diredupkan, kursor default | `--tinta-3` |
+| Memuat | lihat Bagian 8, "Keadaan memuat" | — |
+| Galat | tepi, bukan latar penuh | `--bahaya` |
+
+**Ditekan dinyatakan lewat pergeseran warna panel, bukan lewat gerak.**
+Bagian 9 hanya mengizinkan satu animasi terkoreografi, dan aturan itu tetap
+berlaku.
+
 ---
 
 ## 4. Huruf
@@ -276,6 +303,23 @@ Keduanya tampil bersamaan — selisihnya adalah argumen produk ini.
 Empat angka mono berjajar dengan label kecil di bawahnya. Selisih ditulis
 bertanda: `+4` menit, `+1,1` km. Ditampilkan sebagai rentang bila tersedia.
 
+### Keadaan memuat, dan bedanya dari keadaan kosong
+
+Ditambahkan 30 Agustus 2026 setelah cacat yang ditemukan di produksi.
+
+**Keduanya wajib dibedakan.** Selama data masih dalam perjalanan, yang benar
+adalah mengatakan sedang memuat. Menampilkan keadaan kosong pada saat itu
+membuat antarmuka menyarankan tindakan yang tidak perlu — misalnya menyuruh
+memuat ulang halaman yang sebenarnya baik-baik saja. **Saran yang salah lebih
+buruk daripada diam.**
+
+Aturannya:
+
+- Kontrol yang datanya belum tiba menampilkan teks memuat, bukan teks kosong.
+- Keadaan kosong hanya muncul setelah pemuatan **selesai** dan hasilnya nihil.
+- Keadaan kosong adalah ajakan bertindak, bukan pengumuman kekosongan.
+  Aturan ini sudah ada di Bagian 10 dan berlaku penuh di sini.
+
 ### Lencana data contoh
 `--bahaya` sebagai latar, teks `--tinta-balik`, huruf besar 12px, radius 3px,
 melekat di kanan atas peta. Berbunyi: **DATA CONTOH — bukan prediksi**.
@@ -295,10 +339,32 @@ Saat Pita Pasut digeser, ruas tergenang **terisi dan surut** selama 180ms dengan
 `cubic-bezier(.4,0,.2,1)`. Air naik dan turun. Itu satu-satunya animasi yang
 menceritakan isi produk.
 
-Selain itu: transisi warna 120ms pada hover dan fokus. Titik.
+Selain itu: transisi warna 120ms pada hover, fokus, dan keadaan ditekan.
 
-**Dilarang**: animasi masuk saat gulir, efek parallax, pemuatan berdenyut,
-angka berputar, hover mengambang.
+**Dilarang**: animasi masuk saat gulir, efek parallax, angka berputar, hover
+mengambang, dan **denyut pada indikator pemuatan**.
+
+### Revisi 30 Agustus 2026 — larangan pemuatan dipersempit
+
+Aturan sebelumnya berbunyi "dilarang pemuatan berdenyut" dan dibaca sebagai
+larangan atas **seluruh** rangka pemuatan. Pembacaan itu keliru dan merugikan.
+
+Panduan mode *Operate* menyatakan: *rangka pemuatan, bukan pemutar di tengah
+konten.* Alasannya benar dan dapat diuji — nilai sebuah rangka pemuatan
+terletak pada **bentuknya**, yang menunjukkan apa yang akan datang dan menjaga
+tata letak tidak melompat. Nilainya **tidak** terletak pada denyutnya.
+
+Maka aturannya dipersempit menjadi:
+
+| Boleh | Dilarang |
+|---|---|
+| Rangka statis yang meniru bentuk isi yang akan datang | Rangka yang berdenyut atau berkilau |
+| Strip status berlabuh di tepi, menyebut apa yang sedang dimuat | Kotak pemuatan melayang di tengah kanvas |
+| Menyebutkan bagian yang **sudah** bisa dipakai | Menutupi seluruh layar saat sebagian sudah siap |
+
+**Kotak di tengah kanvas kosong terbaca sebagai dialog yang menghalangi**, dan
+selama unduhan berlangsung layarnya tampak rusak alih-alih tampak sedang
+bekerja. Itu ditemukan langsung di produksi, bukan dalam teori.
 
 `prefers-reduced-motion: reduce` mengganti isi-surut menjadi pudar silang 80ms.
 
@@ -338,6 +404,8 @@ Bukan tambahan, ini syarat selesai.
 - [ ] Kedalaman tidak pernah hanya disampaikan lewat warna
 - [ ] Kontras teks utama minimal 4.5:1
 - [ ] Sasaran sentuh minimal 44×44px
+- [ ] Setiap kontrol punya tujuh keadaan Bagian 3.7, termasuk ditekan
+- [ ] Keadaan memuat tidak pernah tertukar dengan keadaan kosong
 - [ ] Terbaca di bawah matahari langsung — sudah diuji di luar ruangan
 - [ ] Tangkapan layar tetap terbaca saat dicetak hitam putih
 

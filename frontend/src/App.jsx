@@ -39,6 +39,10 @@ export default function App() {
   const [indeksJam, setIndeksJam] = useState(0);
   const [geojson, setGeojson] = useState(null);
   const [memuat, setMemuat] = useState(true);
+  // Sumbu waktu punya penanda muatnya SENDIRI. Tanpa ini Pita Pasut
+  // menampilkan keadaan kosong selama sedetik pertama, dan keadaan kosong
+  // itu menyuruh pengguna melakukan sesuatu yang tidak perlu.
+  const [memuatJam, setMemuatJam] = useState(true);
   const [galatMuat, setGalatMuat] = useState(null);
 
   const [asal, setAsal] = useState(null);
@@ -100,6 +104,8 @@ export default function App() {
         // pernah berjalan. Penanda muat harus dilepas di sini, kalau tidak
         // peta tertahan pada "memuat" selamanya tanpa galat apa pun.
         setMemuat(false);
+      } finally {
+        if (!dibatalkan) setMemuatJam(false);
       }
     })();
     return () => { dibatalkan = true; };
@@ -317,8 +323,11 @@ export default function App() {
           </div>
 
           {memuat ? (
-            <div className="pesan" role="status">
+            <div className="pesan pesan--muat" role="status" aria-live="polite">
               <span className="t-bagian">{t("memuat.jaringanJalan")}</span>
+              <span className="t-label pesan__rincian">
+                {t("memuat.jaringanJalanRincian")}
+              </span>
             </div>
           ) : null}
 
@@ -330,7 +339,8 @@ export default function App() {
         </div>
       </div>
 
-      <PitaPasut jam={jam} indeks={indeksJam} onPilih={setIndeksJam} />
+      <PitaPasut jam={jam} indeks={indeksJam} onPilih={setIndeksJam}
+                 memuat={memuatJam} />
     </div>
   );
 }

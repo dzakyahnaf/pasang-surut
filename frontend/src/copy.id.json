@@ -53,7 +53,7 @@
     "tinggiAir": "Tinggi air",
     "berangkatPada": "Berangkat {hari}, pukul {jam}",
     "labelSumbu": "Jam",
-    "tidakAdaData": "Data pasut untuk rentang ini belum dihitung."
+    "tidakAdaData": "Muat ulang halaman untuk mengambil data pasut."
   },
   "moda": {
     "judul": "MODA",
@@ -131,7 +131,7 @@
     "judul": "TUJUAN CEPAT",
     "petunjuk": "Pilih tujuan yang sering dituju",
     "muat": "Memuat daftar tujuan",
-    "kosong": "Daftar tujuan belum tersedia."
+    "kosong": "Ketuk peta untuk memilih titik mana pun."
   },
   "sumberData": {
     "lencanaContoh": "DATA CONTOH",
@@ -226,6 +226,7 @@
   "memuat": {
     "peta": "Memuat peta",
     "jaringanJalan": "Memuat jaringan jalan",
+    "jaringanJalanRincian": "Pita Pasut sudah bisa digeser sekarang.",
     "genangan": "Memuat prediksi genangan",
     "rute": "Menghitung rute",
     "pasut": "Memuat data pasut",

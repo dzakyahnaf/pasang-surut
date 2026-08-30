@@ -131,6 +131,10 @@
   transition: background var(--gerak-warna) linear;
 }
 
+.legenda__saklar:active {
+  background: var(--lambung-3);
+}
+
 .legenda__saklar:hover {
   background: var(--lambung-2);
 }
@@ -214,6 +218,30 @@
 
 .pesan--galat {
   border-color: var(--bahaya);
+}
+
+/* Keadaan MEMUAT berlabuh di tepi atas, tidak melayang di tengah.
+   Alasannya bukan gaya. Kotak di tengah kanvas kosong terbaca sebagai
+   dialog yang menghalangi, dan selama jaringan jalan diunduh layarnya
+   tampak rusak alih-alih tampak sedang bekerja. Instrumen menyatakan
+   status pada strip, bukan pada dialog.
+
+   Rangka berdenyut yang lazim dipakai untuk ini DILARANG DESIGN.md
+   Bagian 9 — "pemuatan berdenyut" disebut namanya. Jadi tidak ada gerak
+   sama sekali di sini, hanya penempatan dan lebar penuh. */
+.pesan--muat {
+  top: var(--s-4);
+  left: 50%;
+  transform: translateX(-50%);
+  flex-direction: row;
+  align-items: center;
+  gap: var(--s-3);
+  padding: var(--s-2) var(--s-4);
+  border-radius: var(--r-1);
+}
+
+.pesan--muat .pesan__rincian {
+  color: var(--tinta-3);
 }
 
 .pesan__rincian {
@@ -400,6 +428,16 @@
 
 .tombol-utama:hover:not(:disabled) {
   background: var(--lambung-3);
+}
+
+/* Keadaan ditekan. Antarmuka ini dipakai sambil berdiri dan terburu-buru,
+   dan jari menutupi tombol yang sedang disentuh — umpan balik tekan harus
+   terbaca di tepi yang masih terlihat, bukan hanya di tengah. Dinyatakan
+   lewat pergeseran warna panel, bukan gerak, karena DESIGN.md Bagian 9
+   hanya mengizinkan satu animasi terkoreografi. */
+.tombol-utama:active:not(:disabled) {
+  background: var(--lambung-2);
+  border-color: var(--rute);
 }
 
 /* Tombol nonaktif dikecualikan WCAG 1.4.3, tetapi 2,13:1 membuatnya nyaris
@@ -649,7 +687,22 @@
   cursor: pointer;
 }
 
+/* Rangka pemuatan daftar tujuan. Bentuk dan tinggi sama persis dengan
+   tombol yang akan menggantikannya, sehingga tata letak tidak melompat.
+   TIDAK berdenyut — DESIGN.md Bagian 9. */
+.tujuan-cepat__rangka {
+  min-height: var(--sentuh-min);
+  border: var(--garis-rambut) solid var(--lambung-3);
+  border-radius: var(--r-1);
+  background: var(--lambung-1);
+}
+
 .tujuan-cepat__tombol:hover {
+  border-color: var(--rute);
+}
+
+.tujuan-cepat__tombol:active {
+  background: var(--lambung-3);
   border-color: var(--rute);
 }
 

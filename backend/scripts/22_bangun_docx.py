@@ -1,0 +1,328 @@
+"""Bangun ulang proposal .docx dari Markdown yang menjadi sumber kebenaran.
+
+    python -m scripts.22_bangun_docx
+
+KENAPA SKRIP INI ADA.
+
+Sejak 29 Agustus, `docs/proposal_draft.md` adalah sumber kebenaran proposal dan
+`.docx` dibangun ulang darinya, bukan sebaliknya. Alasannya: Markdown bisa
+di-diff di git sehingga perubahan antar sesi terlihat, sedangkan `.docx` tidak.
+
+Selama ini pembangunan ulang itu dikerjakan manual. Skrip ini membuatnya dapat
+diulang, sehingga setiap koreksi pada Markdown cukup dijalankan sekali lagi
+tanpa mengulang seluruh pemformatan dari nol.
+
+FORMAT YANG DIWAJIBKAN RULEBOOK, dan diterapkan di sini:
+
+    kertas A4, huruf Times New Roman 12, spasi 1,5, margin 4-3-3-3 cm,
+    maksimal 30 halaman TERMASUK sampul dan lampiran
+
+BATAS SKRIP INI, dan kenapa hasilnya tetap wajib diperiksa manusia.
+
+Konversi Markdown ke Word bukan pemetaan satu-satu. Yang paling rawan meleset:
+tabel lebar yang melewati batas margin, gambar yang penskalaannya menggeser
+halaman, dan pemenggalan baris di dalam sel. Skrip ini menangani ketiganya
+dengan aturan yang eksplisit, tetapi **jumlah halaman tetap wajib dibaca dari
+Word**, bukan dari perkiraan mana pun.
+"""
+
+from __future__ import annotations
+
+import re
+import sys
+from pathlib import Path
+
+from docx import Document
+from docx.enum.section import WD_SECTION
+from docx.enum.table import WD_TABLE_ALIGNMENT
+from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_BREAK
+from docx.oxml import OxmlElement
+from docx.oxml.ns import qn
+from docx.shared import Cm, Pt, RGBColor
+
+AKAR = Path(__file__).resolve().parents[2]
+SUMBER = AKAR / "docs" / "proposal_draft.md"
+DIR_GAMBAR = AKAR / "docs"
+KELUARAN = AKAR / "Anforcom2026_DSDC_TrioLaAlbiceleste_PasangSurut.docx"
+
+HURUF = "Times New Roman"
+UKURAN = Pt(12)
+SPASI = 1.5
+
+# Lebar halaman A4 dikurangi margin kiri 4 cm dan kanan 3 cm.
+LEBAR_ISI_CM = 21.0 - 4.0 - 3.0
+
+
+def _atur_halaman(dok: Document) -> None:
+    """A4 dengan margin 4-3-3-3, sesuai rulebook 8.1."""
+    for bagian in dok.sections:
+        bagian.page_width = Cm(21.0)
+        bagian.page_height = Cm(29.7)
+        bagian.left_margin = Cm(4.0)
+        bagian.right_margin = Cm(3.0)
+        bagian.top_margin = Cm(3.0)
+        bagian.bottom_margin = Cm(3.0)
+
+
+def _atur_gaya(dok: Document) -> None:
+    """Times New Roman 12 dan spasi 1,5 sebagai bawaan seluruh dokumen."""
+    normal = dok.styles["Normal"]
+    normal.font.name = HURUF
+    normal.font.size = UKURAN
+    # Word memilih huruf untuk aksara non-Latin lewat atribut terpisah. Tanpa
+    # baris ini, tanda seperti en dash dan sigma bisa jatuh ke huruf lain.
+    normal.element.rPr.rFonts.set(qn("w:eastAsia"), HURUF)
+    p = normal.paragraph_format
+    p.line_spacing = SPASI
+    p.space_before = Pt(0)
+    p.space_after = Pt(6)
+
+    for nama, ukuran, tebal in (("Heading 1", 14, True), ("Heading 2", 12, True)):
+        g = dok.styles[nama]
+        g.font.name = HURUF
+        g.font.size = Pt(ukuran)
+        g.font.bold = tebal
+        g.font.color.rgb = RGBColor(0, 0, 0)
+        g.paragraph_format.line_spacing = SPASI
+        g.paragraph_format.space_before = Pt(12)
+        g.paragraph_format.space_after = Pt(6)
+        g.paragraph_format.keep_with_next = True
+
+
+def _hias_teks(par, teks: str) -> None:
+    """Terjemahkan **tebal**, *miring*, dan `kode` menjadi run Word.
+
+    Ditulis sebagai satu regex bergantian, bukan tiga lintasan berurutan,
+    supaya penanda yang bersarang tidak saling merusak.
+    """
+    teks = teks.replace(" ", " ")
+    for potong in re.split(r"(\*\*[^*]+\*\*|`[^`]+`|\*[^*]+\*)", teks):
+        if not potong:
+            continue
+        if potong.startswith("**") and potong.endswith("**"):
+            r = par.add_run(potong[2:-2])
+            r.bold = True
+        elif potong.startswith("`") and potong.endswith("`"):
+            # Istilah teknis tetap Times New Roman: rulebook mewajibkan satu
+            # huruf untuk seluruh dokumen. Dibedakan lewat miring saja.
+            r = par.add_run(potong[1:-1])
+            r.italic = True
+        elif potong.startswith("*") and potong.endswith("*") and len(potong) > 2:
+            r = par.add_run(potong[1:-1])
+            r.italic = True
+        else:
+            par.add_run(potong)
+
+
+def _sel_border(sel) -> None:
+    """Garis tipis pada empat sisi sel."""
+    tcPr = sel._tc.get_or_add_tcPr()
+    borders = OxmlElement("w:tcBorders")
+    for sisi in ("top", "left", "bottom", "right"):
+        el = OxmlElement(f"w:{sisi}")
+        el.set(qn("w:val"), "single")
+        el.set(qn("w:sz"), "4")
+        el.set(qn("w:color"), "808080")
+        borders.append(el)
+    tcPr.append(borders)
+
+
+def _tulis_tabel(dok: Document, baris: list[str]) -> None:
+    """Ubah blok tabel Markdown menjadi tabel Word selebar area isi."""
+    kotak = []
+    for b in baris:
+        if re.match(r"^\|[\s:|-]+\|$", b.strip()):
+            continue  # baris pemisah header
+        sel = [s.strip() for s in b.strip().strip("|").split("|")]
+        kotak.append(sel)
+    if not kotak:
+        return
+
+    kolom = max(len(r) for r in kotak)
+    tabel = dok.add_table(rows=0, cols=kolom)
+    tabel.style = "Table Grid"
+    tabel.alignment = WD_TABLE_ALIGNMENT.CENTER
+    tabel.autofit = True
+
+    for i, isi in enumerate(kotak):
+        sel_baris = tabel.add_row().cells
+        for j in range(kolom):
+            sel = sel_baris[j]
+            sel.text = ""
+            par = sel.paragraphs[0]
+            par.paragraph_format.line_spacing = 1.0
+            par.paragraph_format.space_after = Pt(2)
+            _hias_teks(par, isi[j] if j < len(isi) else "")
+            for r in par.runs:
+                r.font.size = Pt(10)   # tabel sedikit lebih kecil agar muat
+                r.font.name = HURUF
+                if i == 0:
+                    r.bold = True
+            _sel_border(sel)
+    dok.add_paragraph()
+
+
+def _tulis_gambar(dok: Document, jalur: str) -> None:
+    """Sisipkan gambar, diskalakan agar tidak pernah melewati margin."""
+    berkas = DIR_GAMBAR / jalur
+    if not berkas.exists():
+        raise SystemExit(f"Gambar tidak ditemukan: {berkas}")
+    par = dok.add_paragraph()
+    par.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    par.paragraph_format.space_after = Pt(3)
+    par.add_run().add_picture(str(berkas), width=Cm(LEBAR_ISI_CM))
+
+
+def _sampul(dok: Document, judul: str, subjudul: str, meta: list[tuple[str, str]]) -> None:
+    """Halaman sampul. Ikut dihitung ke dalam batas 30 halaman."""
+    for _ in range(4):
+        dok.add_paragraph()
+
+    p = dok.add_paragraph()
+    p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    r = p.add_run(judul)
+    r.bold = True
+    r.font.size = Pt(20)
+    r.font.name = HURUF
+
+    p = dok.add_paragraph()
+    p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    r = p.add_run(subjudul)
+    r.italic = True
+    r.font.size = Pt(13)
+    r.font.name = HURUF
+
+    for _ in range(3):
+        dok.add_paragraph()
+
+    for label, nilai in meta:
+        p = dok.add_paragraph()
+        p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        r = p.add_run(f"{label}: ")
+        r.bold = True
+        r.font.name = HURUF
+        r2 = p.add_run(nilai)
+        r2.font.name = HURUF
+
+    p = dok.add_paragraph()
+    p.add_run().add_break(WD_BREAK.PAGE)
+
+
+def bangun() -> int:
+    teks = SUMBER.read_text(encoding="utf-8")
+    badan = teks[teks.index("## 1. Judul Karya"):teks.index("## Perkiraan halaman")]
+
+    dok = Document()
+    _atur_halaman(dok)
+    _atur_gaya(dok)
+
+    _sampul(
+        dok,
+        "PASANG SURUT",
+        "Sistem Perutean Sadar Banjir Rob Berbasis Rekonstruksi Pasang Surut "
+        "Terkalibrasi untuk Mobilitas Rendah Karbon di Kota Semarang",
+        [("Tim", "trio la albiceleste"),
+         ("Institusi", "Institut Teknologi Sepuluh Nopember (ITS), Surabaya"),
+         ("Subtema", "4 — Smart Low-Carbon Urban Mobility"),
+         ("Kompetisi", "Diponegoro Software Development Competition, ANFORCOM 2026")],
+    )
+
+    baris = badan.split("\n")
+    i = 0
+    n_gambar = n_tabel = 0
+    while i < len(baris):
+        b = baris[i].rstrip()
+
+        if not b.strip() or b.strip() == "---":
+            i += 1
+            continue
+
+        if b.startswith("## "):
+            dok.add_heading(b[3:].strip(), level=1)
+            i += 1
+            continue
+
+        if b.startswith("### "):
+            dok.add_heading(b[4:].strip(), level=2)
+            i += 1
+            continue
+
+        m = re.match(r"^!\[[^\]]*\]\(([^)]+)\)$", b.strip())
+        if m:
+            _tulis_gambar(dok, m.group(1))
+            n_gambar += 1
+            i += 1
+            continue
+
+        if b.lstrip().startswith("|"):
+            blok = []
+            while i < len(baris) and baris[i].lstrip().startswith("|"):
+                blok.append(baris[i])
+                i += 1
+            _tulis_tabel(dok, blok)
+            n_tabel += 1
+            continue
+
+        if b.startswith("> "):
+            par = dok.add_paragraph()
+            par.paragraph_format.left_indent = Cm(1.0)
+            _hias_teks(par, b[2:].strip())
+            for r in par.runs:
+                r.italic = True
+            i += 1
+            continue
+
+        # Butir bernomor atau bertitik, termasuk baris lanjutannya yang
+        # menjorok. Baris lanjutan digabung ke butir yang sama supaya tidak
+        # pecah menjadi paragraf sendiri di Word.
+        m = re.match(r"^(\s*)(\d+)\.\s+(.*)$", b)
+        mb = re.match(r"^(\s*)-\s+(.*)$", b)
+        if m or mb:
+            isi = m.group(3) if m else mb.group(2)
+            i += 1
+            while i < len(baris):
+                lanjut = baris[i]
+                if (lanjut.strip() and lanjut.startswith(("   ", "\t"))
+                        and not re.match(r"^\s*(\d+\.|-)\s", lanjut)
+                        and not lanjut.lstrip().startswith("|")):
+                    isi += " " + lanjut.strip()
+                    i += 1
+                else:
+                    break
+            gaya = "List Number" if m else "List Bullet"
+            par = dok.add_paragraph(style=gaya)
+            par.paragraph_format.line_spacing = SPASI
+            _hias_teks(par, isi)
+            for r in par.runs:
+                r.font.name = HURUF
+                r.font.size = UKURAN
+            continue
+
+        # Paragraf biasa: kumpulkan baris sampai baris kosong.
+        blok = [b.strip()]
+        i += 1
+        while i < len(baris) and baris[i].strip() and not baris[i].lstrip().startswith(
+                ("|", "#", "!", ">", "-")) and not re.match(r"^\s*\d+\.\s", baris[i]):
+            blok.append(baris[i].strip())
+            i += 1
+        par = dok.add_paragraph()
+        par.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+        _hias_teks(par, " ".join(blok))
+        for r in par.runs:
+            r.font.name = HURUF
+            r.font.size = UKURAN
+
+    dok.save(KELUARAN)
+
+    print(f"tersimpan   : {KELUARAN.name}")
+    print(f"gambar      : {n_gambar}")
+    print(f"tabel       : {n_tabel}")
+    print(f"kata sumber : {len(badan.split())}")
+    print()
+    print("A4, Times New Roman 12, spasi 1,5, margin 4-3-3-3 diterapkan.")
+    print("JUMLAH HALAMAN WAJIB DIBACA DARI WORD, bukan dari skrip ini.")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(bangun())

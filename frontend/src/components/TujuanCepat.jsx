@@ -15,10 +15,19 @@ import { t } from "../lib/teks.js";
 
 export default function TujuanCepat({ daftar, memuat, terpilih, onPilih }) {
   if (memuat) {
+    // Rangka STATIS, tidak berdenyut. DESIGN.md Bagian 9 revisi 30 Agustus:
+    // nilai sebuah rangka pemuatan ada pada BENTUKNYA — ia menunjukkan apa
+    // yang akan datang dan menjaga tata letak tidak melompat saat data tiba.
+    // Nilainya bukan pada denyutnya, dan denyut tetap dilarang.
     return (
-      <section className="tujuan-cepat">
+      <section className="tujuan-cepat" aria-busy="true">
         <h2 className="tujuan-cepat__judul t-bagian">{t("tujuanCepat.judul")}</h2>
         <p className="tujuan-cepat__pesan t-label">{t("tujuanCepat.muat")}</p>
+        <div className="tujuan-cepat__daftar" aria-hidden="true">
+          {[0, 1, 2, 3].map((i) => (
+            <div key={i} className="tujuan-cepat__rangka" />
+          ))}
+        </div>
       </section>
     );
   }

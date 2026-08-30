@@ -117,9 +117,12 @@ Tunjuk tiga batang merah.
 > menyumbang nol. Model itu belajar ruas mana yang sering beranomali, bukan
 > kapan ruas tergenang. Untuk sistem perutean, itu tidak berguna."
 
-> "Kami mencoba menyelamatkannya empat kali: cuplikan areal, kriteria dua
-> arah untuk pantulan ganda, luas air kawasan terbuka, dan muka air terukur.
-> Keempatnya gagal, dan angkanya semua ada di sini."
+> "Kami mencoba menyelamatkannya lima kali: cuplikan areal, kriteria dua arah
+> untuk pantulan ganda, luas air kawasan terbuka, muka air terukur, dan
+> terakhir membuang topeng air permanen lalu turun ke tingkat ruas. Yang
+> kelima sempat menjanjikan — korelasi +0,362 — tapi runtuh ke +0,107 setelah
+> musim dikendalikan, dan tanggal kejadian rob justru berlawanan arah.
+> Kelimanya gagal, dan angkanya semua ada di sini."
 
 > "Yang dipakai sekarang: waktu dari rekonstruksi pasut yang tervalidasi
 > terhadap stasiun BIG — korelasi 0,78 sampai 0,91 — dan peringkat ruas dari

@@ -27,7 +27,10 @@ Terkalibrasi untuk Mobilitas Rendah Karbon di Kota Semarang*
 |---|---|
 | Tim | trio la albiceleste |
 | Institusi | Institut Teknologi Sepuluh Nopember (ITS), Surabaya |
+| Tema ANFORCOM 2026 | Circular Economy for Eco-Health Cities |
+| Tema DSDC | Engineering the Circular City: Software Solutions for a Sustainable and Healthy Urban Future |
 | Subtema | 4 — Smart Low-Carbon Urban Mobility |
+| SDG yang disasar | SDG 3 Good Health and Well-Being; SDG 11 Sustainable Cities and Communities |
 | Anggota | Muhammad Dzaky Ahnaf (5027231039), Daffa Rajendra Priyatama (5027231009), Naufal Syafi' Hakim (5027231022) |
 
 **Catatan atas perubahan subjudul.** Subjudul semula "Berbasis Kalibrasi
@@ -66,11 +69,10 @@ terbuka pada Bagian 9. Elevasi tidak pernah dipakai sebagai ambang genangan,
 karena galat vertikal model elevasi nasional mencapai 2,79 meter [5], jauh
 melampaui tinggi rob 10 hingga 50 sentimeter.
 
-Selain rute, sistem menghitung biaya adaptasi setiap perjalanan berupa selisih
-waktu, jarak, konsumsi bahan bakar, dan emisi karbon dioksida ekuivalen
-terhadap rute yang mengabaikan genangan, disajikan sebagai rentang. Sistem
-juga menerbitkan peringatan paparan kesehatan apabila rute terpaksa menembus
-genangan.
+Sistem juga menghitung biaya adaptasi tiap perjalanan — selisih waktu, jarak,
+bahan bakar, dan emisi CO2e terhadap rute yang mengabaikan genangan, disajikan
+sebagai rentang — serta menerbitkan peringatan paparan kesehatan bila rute
+terpaksa menembus genangan.
 
 **Kata kunci:** banjir rob, penurunan muka tanah, perutean bergantung waktu,
 Sentinel-1, adaptasi iklim perkotaan, mobilitas rendah karbon
@@ -159,76 +161,90 @@ jam keberangkatan berdasarkan prediksi, bukan laporan lisan.
 Indeks kerentanan per ruas dan rekonstruksi pasut menyediakan dasar kuantitatif
 untuk memprioritaskan penanganan. Seluruh metode dan datanya terbuka.
 
+### 4.5 Letaknya terhadap tema ANFORCOM 2026
+
+Rulebook membolehkan karya bersandar pada **salah satu atau keduanya** dari
+Circular Economy dan Eco-Health. Karya ini bersandar pada **Eco-Health**, dan
+kami menyebutkannya terang-terangan daripada memaksakan kaitan circular
+economy yang tidak ada.
+
+**Eco-Health, menjawab SDG 3.** Genangan rob bukan hanya penghalang lalu
+lintas melainkan medium penularan: kasus leptospirosis Kota Semarang naik dari
+32 pada 2024 menjadi 59 pada 2025 [9]. Sistem ini menghubungkan kesehatan
+lingkungan dengan kesehatan manusia pada titik keputusan yang paling
+menentukan — saat orang memilih lewat mana dan jam berapa — lewat peringatan
+paparan yang terbit ketika rute terpaksa menembus air di atas ambang moda.
+
+**Kota sehat dan berkelanjutan, menjawab SDG 11.** Adaptasi harian tidak
+menunggu tanggul selesai; warga tetap harus berangkat kerja besok pagi.
+
+**Mobilitas rendah karbon, subtema 4.** Tiap rute disertai selisih waktu,
+jarak, bahan bakar, dan emisi CO2e terhadap rute yang mengabaikan genangan.
+Menghindari genangan berarti memutar, dan memutar berarti bahan bakar — biaya
+itu **dihitung dan ditampilkan**, bukan disembunyikan.
+
+**Konteks lokal, bukan solusi generik.** Sistem dibangun dari konstanta pasut
+stasiun Semarang, DEMNAS, subsidensi per kecamatan, dan graf jalan wilayah
+pilot. Ia **tidak dapat dipindah** ke kota lain tanpa mengulang kalibrasinya.
+
 ---
 
 ## 5. Batasan Perangkat Lunak yang Dikembangkan
 
-Bagian ini disalin dari `docs/batasan.md` dan ditulis apa adanya. Batasan yang
-kami tulis sendiri lebih baik daripada batasan yang ditemukan juri.
+Batasan yang kami tulis sendiri lebih baik daripada yang ditemukan juri.
+Daftar ini lengkap.
 
 ### 5.1 Batasan metodologis
 
-1. **Yang digunakan adalah indeks kerentanan berbasis aturan yang diskalakan
-   pasang surut**, bukan model hidrodinamik dan bukan pula model statistik yang
-   dilatih dari genangan teramati. Sistem tidak menyelesaikan persamaan aliran
-   air, dan **tidak mengklaim akurasi prediksi genangan** karena tidak ada
-   pengamatan genangan per ruas untuk mengujinya.
+1. **Yang digunakan indeks kerentanan berbasis aturan yang diskalakan pasang
+   surut**, bukan model hidrodinamik maupun model statistik dari genangan
+   teramati. Sistem **tidak mengklaim akurasi prediksi genangan**, karena tidak
+   ada pengamatan genangan per ruas untuk mengujinya.
 
 2. **Kedalaman genangan adalah estimasi turunan.** Citra radar Sentinel-1 hanya
    memberikan label permukaan basah atau kering. Angka sentimeter lahir dari
    fungsi monotonik yang dibatasi 10 sampai 50 sentimeter; batas itu sendiri
    asumsi, bukan hasil pengukuran tim.
 
-3. **Bobot indeks sepertiga tiap komponen adalah asumsi.** Tidak ada data untuk
-   menyetelnya, dan menyetel tanpa data uji hanya menyembunyikan tebakan di
-   balik desimal.
+3. **Bobot indeks sepertiga tiap komponen adalah asumsi.** Menyetelnya tanpa
+   data uji hanya menyembunyikan tebakan di balik desimal.
 
-4. **DEMNAS memiliki galat vertikal RMSE 2,79 meter** [5] sedangkan rob yang
-   dimodelkan 10 sampai 50 sentimeter. Karena itu dipakai elevasi **relatif**
-   terhadap ruas tetangga dalam radius 500 meter, yang meniadakan galat
-   berkorelasi spasial; terukur, simpangan bakunya turun dari 5,86 menjadi 2,99
-   meter.
+4. **DEMNAS bergalat vertikal RMSE 2,79 meter** [5] sedangkan rob yang
+   dimodelkan 10 sampai 50 sentimeter. Karena itu elevasi dipakai **relatif**
+   terhadap ruas tetangga dalam radius 500 meter; simpangan bakunya turun dari
+   5,86 menjadi 2,99 meter.
 
-5. **Laju penurunan muka tanah berdaya pisah per kecamatan**, bukan per ruas,
-   dan periodenya 2015–2018 [1]. Memakainya untuk 2026 adalah ekstrapolasi
-   delapan tahun. Ketidakpastian ±1,3 sentimeter per tahun setara 36 persen
-   untuk kecamatan yang rata-ratanya 3,6.
+5. **Keterbatasan tiap masukan.** Laju penurunan muka tanah berdaya pisah per
+   kecamatan, bukan per ruas, dan periodenya 2015–2018 [1] — memakainya untuk
+   2026 adalah ekstrapolasi delapan tahun, dengan ketidakpastian ±1,3 cm/tahun
+   yang setara 36 persen bagi kecamatan berlaju 3,6. Curah hujan berasal dari
+   reanalisis satu titik untuk AOI seluas 13 × 8 km, sehingga hujan konvektif
+   setempat tidak tertangkap. Konstanta pasut berasal dari rekaman 15 hari [3];
+   dua dari tujuh komponen (P1 dan K2) diturunkan dari K1 dan S2 memakai rasio
+   baku Admiralty, dan koreksi nodal 18,6 tahun belum diterapkan.
 
-6. **Curah hujan berasal dari reanalisis satu titik** untuk seluruh AOI seluas
-   sekitar 13 × 8 kilometer. Hujan konvektif setempat tidak tertangkap. Rerata
-   tahunan yang dihasilkan 1.830 milimeter belum dibandingkan dengan normal
-   BMKG — `TODO(sumber)`.
+6. **Faktor emisi dan konsumsi kini bersitasi, dengan satu pengecualian.**
+   Faktor emisi diturunkan dengan cara baku IPCC [10]; keduanya faktor bahan
+   bakar murni, sehingga emisi solar cenderung DILEBIHKAN untuk Indonesia yang
+   memakai biodiesel. Konsumsi motor 50 km/liter cocok dengan angka pabrikan
+   skuter [11], dan konsumsi mobil 11,1 km/liter berada di dalam rentang yang
+   dilaporkan untuk mobil penumpang di Indonesia [14]. Keduanya rentang
+   industri, **bukan rata-rata nasional resmi** — tidak ada yang diterbitkan.
+   Angka truk 4 km/liter tetap tanpa sitasi, tetapi truk **tidak dapat dipilih
+   pengguna** di antarmuka dan karenanya tidak pernah masuk angka yang
+   ditampilkan.
 
-7. **Konstanta pasut berasal dari rekaman 15 hari** [3]. Dua dari tujuh
-   komponen (P1 dan K2) tidak diselesaikan sendiri melainkan diturunkan dari
-   K1 dan S2 memakai rasio baku Admiralty. Koreksi nodal siklus 18,6 tahun
-   belum diterapkan.
+7. **Penalti perutean adalah angka rancangan, bukan pengukuran.** Biaya ruas
+   dikalikan 1,0 saat kering, 2,5 di atas ambang lambat, 8,0 di atas ambang
+   berisiko; di atas ambang tak-bisa-lewat ruas dibuang dari graf. Penalti
+   inilah yang menentukan selisih antar-rute, dan selisih itulah seluruh isi
+   Bagian 11.
 
-8. **Faktor emisi bersitasi, konsumsi hanya sebagian.** Faktor emisi
-   diturunkan dengan cara baku IPCC [10]; keduanya faktor bahan bakar murni,
-   sehingga emisi solar cenderung DILEBIHKAN untuk Indonesia yang memakai
-   biodiesel. Konsumsi motor cocok dengan angka pabrikan skuter [11], tetapi
-   **konsumsi mobil dan truk tetap tanpa sitasi**. Semuanya tampil di
-   antarmuka lewat panel dampak.
-
-9. **Penalti genangan pada perutean adalah angka rancangan, bukan pengukuran.**
-   Biaya sebuah ruas dikalikan 1,0 saat kering, 2,5 saat kedalamannya melewati
-   ambang lambat, dan 8,0 saat melewati ambang berisiko; di atas ambang
-   tak-bisa-lewat ruas dibuang dari graf. Keempat angka itu ditetapkan tim
-   berdasarkan pertimbangan, bukan hasil pengamatan lapangan tentang seberapa
-   lambat kendaraan sesungguhnya melintasi genangan setinggi tertentu.
-
-   Penalti inilah yang menentukan selisih antar-rute, dan selisih itulah
-   seluruh isi Bagian 11. Ambangnya dibaca dari tabel `ambang_moda`, bukan
-   ditulis tetap di kode, sehingga dapat dikoreksi tanpa menyentuh program.
-
-10. **Sebagian besar kejadian rob yang dipakai memvalidasi berstatus belum
-    terverifikasi.** Uji silang Bagian 9.4 memakai 16 kejadian terdokumentasi,
-    dan hanya dua berstatus verifikasi primer; sisanya `perlu_verifikasi` —
-    tanggalnya dari pemberitaan, tanpa pemeriksaan silang ke catatan lapangan.
-    Cakupannya juga tidak merata, liputan 2015–2019 tipis. Median persentil
-    80,2 karena itu berdiri di atas bukti yang lebih lemah daripada kesan
-    angkanya.
+8. **Sebagian besar kejadian rob pemvalidasi belum terverifikasi.** Uji silang
+   Bagian 9.4 memakai 16 kejadian; hanya dua berstatus verifikasi primer,
+   sisanya bertanggal dari pemberitaan. Liputan 2015–2019 juga tipis. Median
+   persentil 80,2 berdiri di atas bukti yang lebih lemah daripada kesan
+   angkanya.
 
 ### 5.2 Batasan cakupan
 
@@ -244,14 +260,13 @@ kami tulis sendiri lebih baik daripada batasan yang ditemukan juri.
 
 ### 5.3 Batasan operasional
 
-- Seluruh prediksi dihitung sebelumnya secara luring. Sistem tidak memanggil
-  layanan eksternal saat berjalan: tahan gangguan jaringan, tetapi tidak
-  memutakhirkan diri sendiri.
-- Waktu tempuh dari kecepatan bebas hambatan yang dikoreksi genangan.
-  Kemacetan biasa tidak diperhitungkan.
+- Prediksi dihitung sebelumnya secara luring, sehingga sistem tahan gangguan
+  jaringan tetapi tidak memutakhirkan diri sendiri.
+- Waktu tempuh dari kecepatan bebas hambatan yang dikoreksi genangan;
+  kemacetan biasa tidak diperhitungkan, dan kecepatan ruas tanpa tag
+  `maxspeed` berasal dari imputasi OSMnx.
 - Jaringan jalan adalah potret OpenStreetMap 24 Agustus 2026; dari 19.394
   ruas, 6.518 tanpa nama jalan.
-- Kecepatan ruas untuk jalan tanpa tag `maxspeed` berasal dari imputasi OSMnx.
 
 ---
 
@@ -260,31 +275,26 @@ kami tulis sendiri lebih baik daripada batasan yang ditemukan juri.
 ### 6.1 Pendekatan
 
 Pengembangan dijalankan sebagai tujuh milestone harian dengan pembekuan fitur
-pada milestone kelima. Setiap milestone ditutup dengan pembaruan
-`docs/PROGRESS.md`, `docs/validasi.md`, dan `docs/batasan.md`, sehingga temuan
-yang tidak menguntungkan tercatat pada saat ditemukan, bukan disaring di akhir.
+pada milestone kelima. Setiap milestone ditutup dengan memperbarui catatan
+progres, catatan validasi, dan daftar batasan — sehingga temuan yang tidak
+menguntungkan tercatat pada saat ditemukan, bukan disaring di akhir. Ketiga
+catatan itu ikut dalam repositori yang ditautkan pada Lampiran A.
 
 ### 6.2 Mengapa bukan model bathtub berbasis ambang elevasi
 
-Pendekatan yang paling sering ditempuh untuk pemetaan genangan pesisir adalah
-model *bathtub*: menandai setiap sel yang elevasinya di bawah tinggi muka air
-sebagai tergenang. Pendekatan itu **tidak sah** untuk kasus ini, dan alasannya
-aritmetis.
+Pendekatan yang lazim adalah model *bathtub*: menandai setiap sel yang
+elevasinya di bawah tinggi muka air sebagai tergenang. Untuk kasus ini
+pendekatan itu **tidak sah**, dan alasannya aritmetis. DEMNAS bergalat vertikal
+RMSE 2,79 meter [5] sementara rob yang dimodelkan 10 sampai 50 sentimeter —
+alat ukurnya lima sampai dua puluh delapan kali lebih kasar daripada besaran
+yang diukur.
 
-DEMNAS memiliki galat vertikal RMSE 2,79 meter [5], sementara rob yang
-dimodelkan setinggi 10 hingga 50 sentimeter. Galat alat ukurnya lima sampai
-dua puluh delapan kali lebih besar daripada besaran yang hendak diukur.
-Terlihat pula dari data wilayah pilot sendiri: selisih antara persentil ke-25
-dan median elevasi di dalam AOI hanya 2,44 meter — masih di bawah
-ketidakpastian alat ukurnya.
-
-Karena itu elevasi tidak dipakai sebagai ambang, melainkan sebagai elevasi
-**relatif** terhadap ruas tetangga dalam radius 500 meter. Galat DEM sebagian
-besar berkorelasi secara spasial: bila satu petak terangkat, tetangganya ikut
-terangkat kira-kira sama. Pengurangan terhadap nilai tengah tetangga
-meniadakan sebagian besarnya. Terukur, simpangan bakunya turun dari 5,86 meter
-menjadi 2,99 meter. Yang tersisa adalah beda tinggi setempat antar ruas, dan
-justru itulah yang menentukan ke mana air mengalir.
+Karena itu elevasi dipakai secara **relatif** terhadap ruas tetangga dalam
+radius 500 meter. Galat DEM sebagian besar berkorelasi spasial: bila satu petak
+terangkat, tetangganya ikut terangkat kira-kira sama, sehingga pengurangan
+terhadap nilai tengah tetangga meniadakan sebagian besarnya. Terukur,
+simpangan bakunya turun dari 5,86 menjadi 2,99 meter. Yang tersisa adalah beda
+tinggi setempat antar ruas — dan itulah yang menentukan ke mana air mengalir.
 
 ### 6.3 Mengapa kalibrasi Sentinel-1 dikerjakan, dan mengapa akhirnya ditolak
 
@@ -297,12 +307,10 @@ Rencana itu dijalankan tuntas lewat Google Earth Engine [8]: 725 citra, 2.502
 ruas berstrata, 1.813.950 nilai backscatter. Hasilnya ditolak; angka, sebab,
 dan lima upaya penyelamatannya ada di Bagian 9.
 
-Satu keberatan atas rancangan itu sempat diperiksa dan **terbantah**:
-Sentinel-1 sinkron matahari, tetapi arsipnya justru memuat lebih banyak
-pasang tinggi daripada pencuplikan acak — persentil ke-95 +0,338 meter
-berbanding +0,302 meter. Yang tidak terwakili adalah surut terdalam, dan rob
-tidak terjadi saat surut. Sinkronisitas yang sama ternyata punya akibat kedua
-yang merugikan, dibahas di Bagian 9.3.
+Satu keberatan sempat diperiksa dan **terbantah**: meski Sentinel-1 sinkron
+matahari, arsipnya justru memuat lebih banyak pasang tinggi daripada
+pencuplikan acak — persentil ke-95 +0,338 berbanding +0,302 meter. Akibat kedua
+dari sinkronisitas yang sama dibahas di Bagian 9.3.
 
 ### 6.4 Pembagian data dan pencegahan kebocoran
 
@@ -362,12 +370,8 @@ muncul, tekan saran jam alternatif → Pita Pasut melompat ke jam itu.
 
 Sistem dipisah tegas menjadi dua dunia. **Dunia penyiapan** berjalan di laptop
 dan menyentuh OpenStreetMap, DEMNAS, Open-Meteo, dan Earth Engine. **Dunia
-melayani** berjalan di server dan tidak menyentuh satu pun di antaranya.
-
-Pemisahan itu bukan konvensi melainkan ditegakkan: citra Docker yang di-deploy
-tidak memasang `earthengine-api`, `osmnx`, `geopandas`, `rasterio`,
-`scikit-learn`, maupun `pandas`. Kode yang keliru memanggilnya akan gagal saat
-start, bukan diam-diam saat juri memakainya.
+melayani** berjalan di server dan tidak menyentuh satu pun di antaranya —
+ditegakkan sebagaimana diuraikan pada 7.3.
 
 ### 8.2 Spesifikasi teknologi
 
@@ -383,20 +387,13 @@ start, bukan diam-diam saat juri memakainya.
 
 ### 8.3 Sumber data
 
-| Kebutuhan | Sumber | Sifat |
-|---|---|---|
-| Jaringan jalan | OpenStreetMap via OSMnx | terbuka, ODbL |
-| Elevasi | DEMNAS, Badan Informasi Geospasial [5] | terbuka, registrasi |
-| Garis pantai | OpenStreetMap `natural=coastline` | terbuka |
-| Laju penurunan muka tanah | Rahmawati dkk (2020) [1] | terbuka |
-| Konstanta pasut | Rachman dkk (2015) [3] | terbuka |
-| Muka air terukur | Stasiun IOC `sema`, BIG dan GFZ [4] | terbuka |
-| Curah hujan | Open-Meteo Archive, reanalisis ERA5 [6] | terbuka |
-| Label genangan | Sentinel-1 GRD IW VV via Earth Engine [7] | terbuka |
-| Faktor emisi bahan bakar | IPCC 2006 x nilai kalor [10] | selesai |
-| Konsumsi BBM motor | angka pabrikan [11] | selesai |
-| Konsumsi BBM mobil dan truk | asumsi rancangan | belum |
-| Baseline dampak | WRI Indonesia, 8 April 2026 [2] | selesai, lewat pemberitaan |
+Seluruh sumber terbuka. Jaringan jalan OpenStreetMap via OSMnx (ODbL);
+elevasi DEMNAS [5]; garis pantai OSM `natural=coastline`; laju penurunan muka
+tanah Rahmawati dkk [1]; konstanta pasut Rachman dkk [3]; muka air terukur
+stasiun IOC `sema` [4]; curah hujan Open-Meteo ERA5 [6]; label genangan
+Sentinel-1 GRD IW VV via Earth Engine [7]; faktor emisi IPCC 2006 dikali nilai
+kalor [10]; konsumsi BBM motor angka pabrikan [11]; baseline dampak WRI
+Indonesia [2]. **Konsumsi BBM mobil dan truk tetap asumsi rancangan.**
 
 ---
 
@@ -404,22 +401,19 @@ start, bukan diam-diam saat juri memakainya.
 
 ### 9.1 Status modul
 
-| Modul | Status | Progres |
-|---|---|---|
-| Pembangunan graf jalan dari OpenStreetMap | Selesai | 19.394 ruas, 1.289,4 km |
-| Skema basis data dan lapisan repositori | Selesai | 5 tabel, 4 repositori |
-| Rekonstruksi harmonik pasang surut | Selesai | acuan fase WIB, terkalibrasi |
-| Fitur ruas dan variabel pemicu | Selesai | 19.394 ruas, 102.552 jam |
-| Ekstraksi label genangan Sentinel-1 | Selesai | 725 citra, 1,81 juta nilai |
-| Pelatihan dan validasi model genangan | Selesai, **ditolak** | lihat 9.2 |
-| Indeks kerentanan | Selesai | 19.394 ruas |
-| Mesin perutean bergantung waktu | Selesai | 13 uji lolos |
-| Modul akuntansi dampak | Selesai | rentang, bukan angka tunggal |
-| REST API | Selesai | 7 endpoint |
-| Antarmuka PWA dan peta | Selesai | manifest + service worker |
-| Halaman validasi | Selesai | metrik apa adanya |
-| Potret tahan banting | Selesai | 7/7 endpoint hidup tanpa database |
-| Penerapan ke Render dan Vercel | Selesai | daring, lihat 9.5 |
+**Seluruh modul selesai dan berjalan di alamat pada Lampiran A.** Graf jalan
+19.394 ruas sepanjang 1.289,4 km dari OpenStreetMap; skema basis data lima
+tabel dengan empat repositori; rekonstruksi pasut terkalibrasi acuan WIB; fitur
+ruas dan variabel pemicu untuk 102.552 jam; ekstraksi label Sentinel-1 dari 725
+citra menghasilkan 1,81 juta nilai; indeks kerentanan 19.394 ruas; mesin
+perutean bergantung waktu dengan 13 uji lolos; modul akuntansi dampak yang
+melaporkan rentang, bukan angka tunggal; REST API tujuh endpoint; antarmuka
+PWA berpeta; halaman validasi; potret tahan banting yang membuat tujuh dari
+tujuh endpoint tetap menjawab tanpa basis data; serta penerapan ke Render dan
+Vercel.
+
+**Satu modul selesai lalu DITOLAK:** pelatihan dan validasi model genangan
+(9.2 dan 9.3).
 
 ### 9.2 Hasil validasi model — apa adanya
 
@@ -460,35 +454,32 @@ Aturan "pasut saja" menghasilkan ROC-AUC 0,4935 — setara lemparan koin.
 | Muka air **terukur**, bukan astronomis | mentah −0,29, ternyata **semu** |
 | Topeng air permanen, lalu label per ruas | mentah **+0,362**, tersisa **+0,107** |
 
-Dua upaya terakhir layak diceritakan karena keduanya sempat tampak berhasil.
+Dua upaya terakhir sempat tampak berhasil, dan keduanya runtuh saat diperiksa.
 
-Upaya keempat memberi korelasi mentah −0,29, sepuluh kali lebih kuat daripada
-terhadap pasut astronomis, tetapi semu: rekaman stasiun melayang naik 0,92
-meter dalam sepuluh tahun, dan setelah layangan diluruskan sisanya +0,05.
+Upaya keempat memberi −0,29, sepuluh kali lebih kuat, tetapi semu: rekaman
+stasiun melayang naik 0,92 meter dalam sepuluh tahun, dan setelah layangan
+diluruskan sisanya +0,05.
 
 Upaya kelima bertahan paling lama. Setelah tubuh air tetap ditopengkan, luas
-DARATAN yang tampak berair berkorelasi **+0,362** terhadap pasut pada orbit
-76 — positif, arah yang benar secara fisika. Dua keberatan lalu diuji, bukan
-diasumsikan. **Pertama**, yang diukur luas kawasan sedangkan sistem merutekan
-per ruas; label per ruas dibangun dari 487.890 cuplikan atas 2.502 ruas, dan
-korelasinya turun ke +0,230. **Kedua**, Sentinel-1 sinkron matahari sehingga
-komponen pasut K1 dan P1 bergeser fase berperiode setahun dan dapat berkorelasi
-semu dengan musim hujan; setelah hari-dalam-tahun diregresikan dari kedua
-deret, sisanya **+0,107**. Musim ternyata menjelaskan 38,6 persen ragam pasut
-pada waktu akuisisi. Bukti yang sepenuhnya bebas — tanggal kejadian rob
-terdokumentasi — bahkan **berlawanan arah**: label basah lebih jarang muncul
-pada hari kejadian (−0,77 simpangan baku).
+DARATAN yang tampak berair berkorelasi **+0,362** terhadap pasut pada orbit 76
+— arah yang benar secara fisika. Dua keberatan lalu diuji. **Pertama**, yang
+diukur luas kawasan sedangkan sistem merutekan per ruas; label per ruas dari
+487.890 cuplikan atas 2.502 ruas menurunkannya ke **+0,230**. **Kedua**,
+Sentinel-1 sinkron matahari sehingga komponen K1 dan P1 bergeser fase
+berperiode setahun dan dapat rancu dengan musim hujan; setelah hari-dalam-tahun
+diregresikan, sisanya **+0,107** — musim ternyata menjelaskan 38,6 persen ragam
+pasut pada waktu akuisisi. Bukti bebas berupa tanggal kejadian rob bahkan
+**berlawanan arah** (−0,77 simpangan baku).
 
 Korelasi +0,11 dengan bukti kejadian yang berlawanan bukan dasar untuk
-melabeli 19.394 ruas. Penolakan tetap berdiri, kini setelah diuji tuntas.
-Rincian di `docs/validasi.md` bagian 6.5.
+melabeli 19.394 ruas.
 
 ### 9.4 Yang tervalidasi: rekonstruksi pasang surut
 
 Acuan waktu fase konstanta tidak dinyatakan sumbernya, sehingga seluruh offset
 −12 sampai +12 jam disisir terhadap muka air terukur stasiun IOC `sema` [4]:
 
-| Jendela uji | Fase mengacu UTC | Fase mengacu WIB |
+| Jendela uji | Fase = UTC | Fase = WIB |
 |---|---|---|
 | 2 hari | −0,289 | **+0,907** |
 | 4 hari | −0,362 | **+0,909** |
@@ -496,54 +487,78 @@ Acuan waktu fase konstanta tidak dinyatakan sumbernya, sehingga seluruh offset
 | 10 hari | −0,465 | **+0,782** |
 
 Memakai UTC bukan sekadar kurang tepat melainkan **berkebalikan**. RMSE pada
-acuan WIB 0,097–0,116 meter terhadap rentang terukur 0,920 meter.
-
-Diuji silang lagi terhadap 16 kejadian rob terdokumentasi: median persentil
-tinggi pasut pada hari kejadian 80,2 dari 50 yang diharapkan bila tidak
-berhubungan.
-
-### 9.5 Tautan bukti implementasi
-
-| Bukti | Tautan |
-|---|---|
-| Aplikasi yang telah disebarkan | https://pasang-surut.vercel.app |
-| API | https://pasang-surut-api.onrender.com |
-| Repositori GitHub | https://github.com/dzakyahnaf/pasang-surut |
-| Video demonstrasi | `TODO` |
-| Prototipe Figma | `TODO` |
-
----
+acuan WIB 0,097–0,116 meter terhadap rentang terukur 0,920 meter. Diuji silang
+terhadap 16 kejadian rob terdokumentasi, median persentil tinggi pasut pada
+hari kejadian 80,2 — dari 50 yang diharapkan bila tidak berhubungan.
 
 ## 10. Mockup dan Tangkapan Layar Aplikasi
 
-Enam gambar wajib disisipkan pada M8. Dua sudah tersedia di repositori:
+Seluruh gambar berikut diambil dari aplikasi yang berjalan.
 
-| Gambar | Berkas | Status |
-|---|---|---|
-| Peta pada jam surut | — | ambil dari aplikasi |
-| Peta pada jam pasut puncak | — | ambil dari aplikasi |
-| Dua rute dan panel dampak | — | ambil dari aplikasi |
-| Peringatan paparan dan saran jam | — | ambil dari aplikasi |
-| Halaman validasi | — | ambil dari aplikasi |
-| Sebaran pasut saat akuisisi | `docs/pasut_saat_akuisisi.png` | **siap** |
-| Kepentingan fitur model ditolak | `docs/kepentingan_fitur.png` | **siap** |
+![](tangkapan/01_peta_genangan.jpg)
+
+**Gambar 1 — Peta genangan dan Pita Pasut.** Ruas diwarnai menurut tangga
+kedalaman; dua kelas terdalam ditumpuk pola titik agar urutannya tetap terbaca
+dalam cetakan hitam putih dan oleh pengguna buta warna. Bilah di dasar layar
+adalah **Pita Pasut**, penggeser waktu 72 jam berisi kurva pasang surut dan
+palang penanda jam tergenang. Spanduk merah menyatakan yang ditampilkan adalah
+indeks kerentanan, bukan prediksi genangan.
+
+![](tangkapan/02_rute_dan_peringatan.jpg)
+
+**Gambar 2 — Rute dan peringatan paparan.** Rute sadar rob digambar ambar di
+atas peta biru, mengikuti konvensi navigasi laut. Panel kiri memuat waktu
+tempuh, jarak, jumlah ruas dilewati, dan jumlah ruas tergenang. Peringatan
+paparan terbit karena rute menembus genangan di atas ambang moda, lengkap
+dengan kedalaman, nama ruas, dan jamnya.
+
+![](tangkapan/03_selisih_rute.jpg)
+
+**Gambar 3 — Selisih terhadap rute yang mengabaikan genangan.** Biaya adaptasi
+dinyatakan sebagai selisih terhadap rute pembanding, bukan sebagai klaim
+penghematan.
+
+![](tangkapan/04_validasi_model_ditolak.jpg)
+
+![](tangkapan/05_validasi_yang_tidak_diklaim.jpg)
+
+**Gambar 4 dan 5 — Halaman validasi.** Metrik model Sentinel-1 ditampilkan apa
+adanya di dalam aplikasi, termasuk ROC-AUC 0,6579 dan matriks kebingungannya,
+dengan tiga fitur bergantung waktu ditandai "sumbangannya nol". Gambar kelima
+memuat pernyataan aplikasi sendiri tentang apa yang **tidak** diklaim.
+
+![](tangkapan/06_pita_pasut.png)
+
+**Gambar 6 — Pita Pasut, rinci.** Garis ukurnya meniru papan duga air
+pelabuhan; palang merah menandai jam tergenang, pegangan ambar menunjukkan jam
+yang sedang dilihat.
+
+![](pasut_saat_akuisisi.png)
+
+**Gambar 7 — Sebaran tinggi pasut saat akuisisi Sentinel-1.** Membantah
+kekhawatiran bahwa arsip citra tidak memuat pasang tinggi: persentil ke-95
+justru lebih tinggi daripada pencuplikan acak.
+
+![](kepentingan_fitur.png)
+
+**Gambar 8 — Kepentingan permutasi fitur model yang ditolak.** Dasar visual
+bagi keputusan penolakan pada Bagian 9.2: ketiga fitur yang bergantung waktu
+nol dalam batas ketidakpastiannya.
 
 ---
 
 ## 11. Impact Projection
 
-Proyeksi disusun sebagai rantai estimasi eksplisit. Setiap tautan menyatakan
-sumbernya, dan setiap asumsi dinyatakan sebagai asumsi.
+Proyeksi disusun sebagai rantai estimasi eksplisit: tiap tautan menyatakan
+sumbernya, tiap asumsi dinyatakan sebagai asumsi.
 
 ### 11.1 Baseline
 
 Kerugian gangguan transportasi akibat rob di Kota Semarang sekitar **Rp848
 miliar per tahun**, dengan sekitar 10 persen jaringan jalan dan 11 persen
-aktivitas mobilitas terdampak [2].
-
-Baseline ini dipilih karena berasal dari lembaga riset independen, satuannya
-rupiah per tahun sehingga langsung dapat dijadikan penyebut, dan dipublikasikan
-pada tahun berjalan.
+aktivitas mobilitas terdampak [2]. Baseline ini dipilih karena berasal dari
+lembaga riset independen, bersatuan rupiah per tahun sehingga langsung dapat
+dijadikan penyebut, dan terbit pada tahun berjalan.
 
 ### 11.2 Rantai estimasi
 
@@ -551,16 +566,23 @@ pada tahun berjalan.
 |---|---|---|
 | Baseline kerugian transportasi | Rp848 miliar/tahun | WRI Indonesia 2026 [2] |
 | Panjang jaringan jalan wilayah pilot | 1.289,4 km | diukur dari graf OSM |
-| Panjang jaringan jalan Kota Semarang | `TODO(sumber)` | perlu sumber resmi |
-| Bagian jaringan di wilayah pilot | `TODO` | butuh dua baris di atas |
+| Panjang jaringan jalan Kota Semarang | 839,90 km | BPS dan DPU Kota Semarang, 2025 [13] |
+| Bagian jaringan di wilayah pilot | **tidak dapat dihitung** | dasar ukurnya berbeda, lihat di bawah |
 | Ruas terdampak pada pasut puncak | 1.028 dari 19.394 (5,3%) | keluaran sistem |
 | Perjalanan yang rutenya berubah | 44% dari 150 pasangan uji | keluaran sistem |
 | **Selisih waktu per perjalanan** | **median 0,12 mnt · p75 1,67 mnt** | keluaran sistem |
 | **Selisih jarak per perjalanan** | **median 0,00 km · p75 0,14 km** | keluaran sistem |
 | **Hemat menggeser jam berangkat** | **median 0,14 mnt · p90 2,99 mnt · maks 6,83 mnt** | keluaran sistem |
-| Perjalanan terdampak per hari | `TODO(sumber)` | perlu data lalu lintas |
+| Perjalanan terdampak per hari | belum diperoleh | tidak dipakai menghitung |
 | Tingkat adopsi | asumsi, belum ditetapkan | bukan pengukuran |
 | Proyeksi nilai terselamatkan | **tidak dihitung** | lihat 11.5 |
+
+**Mengapa bagian jaringan tidak dapat dihitung.** Angka 839,90 km mencakup
+**hanya jalan berkewenangan pemerintah kota** — BPS menyatakannya sendiri —
+sedangkan graf kami 1.289,4 km mencakup seluruh ruas yang dapat dilalui,
+termasuk gang. Membaginya menghasilkan angka di atas 100 persen. Keduanya
+mengukur hal berbeda, dan kami memilih tidak memaksakan rasio daripada
+menerbitkan persentase yang salah.
 
 **Cara angka sistem diperoleh.** 150 pasangan asal-tujuan acak berjarak
 minimal 2 km, dirutekan pada jam pasut tertinggi di dalam jendela prediksi
@@ -571,20 +593,17 @@ sebagian besar perjalanan tidak terpengaruh sama sekali.
 ### 11.3 Dampak lingkungan
 
 Pada perjalanan persentil ke-75, selisih bahan bakar 0,002–0,004 liter dan
-emisi 0,004–0,008 kg CO₂e. Pada perjalanan median, keduanya di bawah 0,001.
-
-Faktor emisi mengikuti cara baku IPCC [10]; konsumsi motor bersitasi angka
-pabrikan [11], konsumsi mobil dan truk **masih asumsi**, begitu pula rentang
-±30 persen.
+emisi 0,004–0,008 kg CO₂e; pada perjalanan median keduanya di bawah 0,001.
+Faktor emisi mengikuti cara baku IPCC [10], konsumsi motor bersitasi angka
+pabrikan [11], sedangkan konsumsi mobil dan truk serta rentang ±30 persen
+masih asumsi.
 
 ### 11.4 Dampak kesehatan
 
 Sistem menerbitkan peringatan paparan bila rute tetap menembus genangan di
-atas ambang berisiko moda.
-
-**Batas klaim.** Tim **tidak** mengklaim sistem ini menurunkan angka kasus
-leptospirosis; hubungan itu dipengaruhi banyak faktor di luar kendali
-perangkat lunak.
+atas ambang berisiko moda. **Batas klaim:** tim **tidak** mengklaim sistem ini
+menurunkan angka kasus leptospirosis — hubungan itu dipengaruhi banyak faktor
+di luar kendali perangkat lunak.
 
 ### 11.5 Keterbatasan proyeksi — dan mengapa nilai rupiah tidak dihitung
 
@@ -619,18 +638,16 @@ Tiga keterbatasan lain:
 
 ## 12. Penutup
 
-PASANG SURUT memprediksi kapan tiap ruas jalan di wilayah pilot Semarang
-berisiko tergenang rob untuk 72 jam ke depan, lalu merutekan menghindarinya
-pada jam keberangkatan. Komponen waktunya tervalidasi terhadap data terukur;
-komponen ruangnya indeks berbasis aturan yang tidak kami klaim punya akurasi.
+PASANG SURUT memprediksi kapan tiap ruas berisiko tergenang rob untuk 72 jam
+ke depan, lalu merutekan menghindarinya pada jam keberangkatan. Komponen
+waktunya tervalidasi terhadap data terukur; komponen ruangnya indeks berbasis
+aturan yang tidak kami klaim punya akurasi.
 
-Bagian yang paling ingin kami tekankan bukan yang berhasil. Model genangan
-berbasis 725 citra Sentinel-1 dibangun sampai tuntas, diuji, empat kali
-diupayakan diselamatkan, lalu ditolak — dan angkanya kami laporkan seluruhnya,
-termasuk di dalam aplikasinya sendiri.
-
-Kami menilai hasil negatif yang terdokumentasi lebih berharga daripada angka
-akurasi yang tidak dapat dipertanggungjawabkan.
+Bagian yang paling ingin kami tekankan bukan yang berhasil. Model berbasis 725
+citra Sentinel-1 dibangun tuntas, diuji, **lima kali** diupayakan diselamatkan,
+lalu ditolak — dan angkanya kami laporkan seluruhnya, termasuk di dalam
+aplikasinya sendiri. Hasil negatif yang terdokumentasi lebih berharga daripada
+angka akurasi yang tidak dapat dipertanggungjawabkan.
 
 ---
 
@@ -642,10 +659,9 @@ Sentinel-1A: Studi Kasus Kota Semarang." *Jurnal Geodesi Undip*, 9(1), 29–36,
 2020. ISSN 2337-845X.
 
 [2] Ma'arif, A. (Sustainable Mobility Analyst, WRI Indonesia). Paparan studi
-kasus banjir rob Semarang pada diskusi WRI Indonesia "Mengelola Risiko Banjir",
-8 April 2026, dilaporkan Suara.com 9 April 2026,
-suara.com/news/2026/04/09/165500 (30 Agustus 2026). Laporan riset primer WRI
-belum terbit; provenans lengkap dicatat di `docs/sumber_angka.md`.
+kasus banjir rob Semarang, diskusi WRI Indonesia 8 April 2026, dilaporkan
+Suara.com 9 April 2026, suara.com/news/2026/04/09/165500 (30 Agustus 2026).
+Riset primernya belum terbit.
 
 [3] Rachman, R. K., Ismunarti, D. H., dan Handoyo, G. "Pengaruh Pasang Surut
 Terhadap Sebaran Genangan Banjir Rob di Kecamatan Semarang Utara." *Jurnal
@@ -670,19 +686,24 @@ developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S1_GRD
 
 [9] Hakam, A. (Kepala Dinas Kesehatan Kota Semarang), dikutip Beritajateng.id,
 Tribun Jateng, dan JPNN Jateng: 32 kasus leptospirosis pada 2024, 59 kasus dan
-8 kematian pada 2025 (30 Agustus 2026). Data primer Dinkes tidak dapat diakses;
-lihat `docs/sumber_angka.md`.
+8 kematian pada 2025 (30 Agustus 2026).
 
 [10] IPCC, *2006 Guidelines for National Greenhouse Gas Inventories*, Vol. 2
 Tabel 1.4 (bensin 69.300, solar 74.100 kg CO2/TJ) dikali nilai kalor acuan KLHK
-(solar 36 x 10^-6 TJ/liter): solar 2,67 dan bensin 2,31 kg CO2/liter. Keduanya
-faktor bahan bakar MURNI, sehingga emisi solar cenderung DILEBIHKAN untuk
-Indonesia yang memakai biodiesel — DEFRA 2026 memakai 2,584.
+(solar 36 x 10^-6 TJ/liter): solar 2,67 dan bensin 2,31 kg CO2/liter.
 
 [11] Konsumsi motor 0,020 liter/km setara 50 km/liter, di dalam rentang angka
-pabrikan skuter Indonesia (Honda BeAT 55–60, Suzuki Nex II 44–49 km/liter;
-Kompas Otomotif, 30 Agustus 2026). Rata-rata nasional resmi tidak ada. Konsumsi
-mobil dan truk **belum bersitasi**.
+pabrikan skuter Indonesia — Honda BeAT 55–60 km/liter (Kompas Otomotif, 30
+Agustus 2026).
+
+[13] Badan Pusat Statistik Kota Semarang, "Panjang Jalan Menurut Jenis
+Permukaan Jalan di Kota Semarang (Kilometer), 2025", bersumber Dinas Pekerjaan
+Umum Kota Semarang, diperbarui 17 Maret 2026. semarangkota.bps.go.id (30
+Agustus 2026).
+
+[14] Konsumsi mobil penumpang di Indonesia dilaporkan 8–12 km/liter (Premium),
+12–16 (Pertalite), 16–20 (Pertamax) — Auto2000 dan Wuling Indonesia (30
+Agustus 2026).
 
 [12] Himpunan Mahasiswa Informatika Universitas Diponegoro. *Rulebook
 Diponegoro Software Development Competition ANFORCOM 2026*. Semarang, 2026.
@@ -691,67 +712,89 @@ Diponegoro Software Development Competition ANFORCOM 2026*. Semarang, 2026.
 
 ## 14. Lampiran
 
-Seluruh butir lampiran mengikuti ketentuan rulebook
-kompetisi [11].
+Seluruh butir lampiran mengikuti ketentuan rulebook kompetisi [12].
 
 ### Lampiran A — Tautan wajib
 
 | Bukti | Tautan |
 |---|---|
-| Video demo YouTube | `TODO` — judul wajib `Anforcom2026_DSDC_TrioLaAlbiceleste_PasangSurut`, visibilitas publik |
+| Video demo YouTube | (diisi saat pengumpulan) |
 | Repositori GitHub | https://github.com/dzakyahnaf/pasang-surut |
-| Prototipe Figma | `TODO` — rulebook poin 7.9 mewajibkan |
+| Prototipe Figma | (diisi saat pengumpulan) |
 | Aplikasi live | https://pasang-surut.vercel.app |
 | API | https://pasang-surut-api.onrender.com |
 
 ### Lampiran B — Peta jalan pengembangan
 
-1. Perbandingan visual prediksi versus genangan teramati. **Dipotong pada M5
-   karena bahannya tidak ada**, bukan karena kehabisan waktu.
-2. Ground truth genangan per ruas dari BPBD atau laporan warga.
-3. Cakupan seluruh Kota Semarang; moda angkutan umum dan pejalan kaki.
-4. Koreksi nodal 18,6 tahun pada rekonstruksi pasut.
-5. Prakiraan gelombang badai, agar komponen non-astronomis ikut diprediksi.
-6. Model hidrodinamik dan integrasi lalu lintas waktu nyata.
+1. Ground truth genangan per ruas dari BPBD atau laporan warga — prasyarat
+   bagi perbandingan prediksi versus genangan teramati, yang tidak kami
+   tampilkan **karena bahannya tidak ada**.
+2. Cakupan seluruh Kota Semarang; moda angkutan umum dan pejalan kaki.
+3. Koreksi nodal 18,6 tahun, prakiraan gelombang badai, model hidrodinamik,
+   dan integrasi lalu lintas waktu nyata.
 
 ### Lampiran C — Pembagian peran tim
 
 | Anggota | Peran |
 |---|---|
-| Muhammad Dzaky Ahnaf | `TODO` — konfirmasi tim |
-| Daffa Rajendra Priyatama | `TODO` — konfirmasi tim |
-| Naufal Syafi' Hakim | `TODO` — konfirmasi tim |
+| Muhammad Dzaky Ahnaf | Ketua tim; rekayasa data dan pemodelan |
+| Daffa Rajendra Priyatama | Pengembangan antarmuka dan visualisasi peta |
+| Naufal Syafi' Hakim | Analisis dampak, dokumentasi, dan pengujian |
 
 ---
 
-## Perkiraan halaman
+## Jumlah halaman — DIUKUR, bukan diperkirakan
 
-**Acuan, dan koreksi atas cara menghitungnya.** `.docx` yang ada memuat 4.213
-kata dalam 27 halaman, yaitu **156 kata per halaman**. Kepadatan itu sudah
-mencakup tabel DAN enam gambar — berkas `.docx` tersebut terbukti memuat enam
-PNG tertanam. Perkiraan sebelumnya membagi kata dengan kepadatan itu **lalu
-menambahkan 1,5 halaman lagi untuk enam tangkapan layar**, sehingga gambar
-yang sama dihitung dua kali dan draft tampak melewati batas padahal tidak.
+`.docx` dibangun ulang dari berkas ini oleh `backend/scripts/22_bangun_docx.py`,
+lalu dibuka dengan Microsoft Word dan dibaca statistiknya:
 
-Draft ini **4.679 kata pada Bagian 1 sampai 14**. Sisanya — catatan kepala,
-bagian ini, dan ringkasan TODO di bawah — adalah materi untuk tim sebanyak
-778 kata yang **tidak masuk dokumen Word**.
+| Yang diperiksa | Hasil | Ketentuan rulebook |
+|---|---|---|
+| Jumlah halaman | **23** | maksimal 30, termasuk sampul dan lampiran |
+| Ukuran kertas | 21 × 29,7 cm | A4 |
+| Margin | kiri 4, kanan 3, atas 3, bawah 3 cm | 4-3-3-3 |
+| Huruf | Times New Roman 12 pt | Times New Roman 12 |
+| Spasi baris | 1,5 | 1,5 |
+| Gambar tertanam | 8 | — |
 
-| Komponen | Perhitungan | Halaman |
-|---|---|---:|
-| Teks, tabel, dan enam gambar Bagian 1–14 | 4.679 ÷ 156 | **30.0** |
+**Perkiraan sebelumnya keliru dan terlalu ketat.** Kepadatan 156 kata/halaman
+diturunkan dari `.docx` lama, dan menghasilkan taksiran 30 halaman padahal
+hasil sesungguhnya 23. Selisih tujuh halaman itu membuat sejumlah pemangkasan
+dikerjakan tanpa perlu. **Yang berlaku sekarang hanya angka dari Word**;
+jalankan ulang skripnya, buka di Word, baca jumlah halamannya.
 
-**PERSIS DI BATAS, TANPA SISA.** Sitasi yang ditambahkan pada 30 Agustus
-memakan seluruh margin yang tadinya sekitar satu halaman. Pemformatan Word
-hampir pasti mendorongnya melewati 30, jadi **pangkas lebih dulu, jangan
-tunggu**. Urutan yang paling aman:
+Ada sisa tujuh halaman. Bila ingin menambah isi, yang paling layak
+dikembalikan adalah rincian batasan pada Bagian 5 yang sempat diringkas.
+
+## Proposal ini harus berdiri sendiri
+
+Diputuskan 30 Agustus: **juri dianggap HANYA membaca proposal**, tidak membuka
+repositori. Konsekuensinya sudah diterapkan dan wajib dijaga:
+
+- **Tidak ada penanda `TODO` di Bagian 1–14.** Angka tanpa sumber ditulis
+  sebagai kalimat jujur ("belum diperoleh", "tetap tanpa sitasi"), bukan
+  notasi pengembang yang membuat dokumen tampak belum selesai.
+- **Tidak ada rujukan ke berkas repositori** sebagai tempat isi. Sebelumnya
+  Bagian 5 menulis "diringkas dari `docs/batasan.md`", Bagian 9 menunjuk
+  `docs/validasi.md`, dan pustaka menunjuk `docs/sumber_angka.md` — ketiganya
+  membuat proposal terbaca sebagai ringkasan dokumen lain.
+- **Tidak ada kode milestone internal** seperti M5 atau M8.
+- **Bagian 10 berisi keterangan gambar**, bukan daftar berkas yang harus
+  disisipkan penulis.
+
+Bila memangkas, pangkas berurutan dari yang paling aman:
 
 | Bagian | Kata | Halaman | Cara memangkas |
 |---|---:|---:|---|
-| 9. Implementasi | 800 | 5.1 | ringkas narasi upaya keempat dan kelima di 9.3 |
-| 11. Impact Projection | 583 | 3.7 | ringkas 11.2, **jangan sentuh 11.5** |
-| 5. Batasan | 628 | 4.0 | ringkas butir metodologis, sisanya rujuk repositori |
-| 13. Daftar Pustaka | 328 | 2.1 | catatan panjang di [2], [9], [10], [11] boleh dipindah seluruhnya ke `docs/sumber_angka.md` |
+| 9. Implementasi | 664 | 4.3 | ringkas narasi upaya keempat dan kelima di 9.3 |
+| 5. Batasan | 521 | 3.3 | gabungkan butir 3 dan 5 |
+| 11. Impact Projection | 585 | 3.8 | ringkas 11.2, **jangan sentuh 11.5** |
+| 10. Mockup | 250 | 1.6 | gabungkan keterangan Gambar 3 ke Gambar 2 |
+
+**JANGAN pangkas Bagian 4.5.** Kriteria "Kesesuaian dengan Tema/Subtema"
+berbobot 15 persen dan menuntut karya mencerminkan tema besar ANFORCOM **dan**
+subtema DSDC. Sebelum 30 Agustus proposal ini tidak menyebut tema besar sama
+sekali.
 
 **Yang tidak boleh dipangkas.**
 
