@@ -16,14 +16,14 @@
 
 ---
 
-## 1. Judul Karya
+## I. JUDUL KARYA
 
 **PASANG SURUT**
 
 *Sistem Perutean Sadar Banjir Rob Berbasis Rekonstruksi Pasang Surut
 Terkalibrasi untuk Mobilitas Rendah Karbon di Kota Semarang*
 
-**Tabel 1.** Identitas karya
+**Tabel 1.1** Identitas karya
 
 | Atribut | Keterangan |
 |---|---|
@@ -43,7 +43,7 @@ diubah. Menyisakan klaim yang sudah tidak benar sama saja dengan overclaim.
 
 ---
 
-## 2. Abstrak
+## II. ABSTRAK
 
 Kota Semarang mengalami penurunan muka tanah terukur hingga 9,4 sentimeter
 per tahun, dengan rata-rata 5,8 sentimeter per tahun di Kecamatan Genuk yang
@@ -81,7 +81,7 @@ Sentinel-1, adaptasi iklim perkotaan, mobilitas rendah karbon
 
 ---
 
-## 3. Latar Belakang Masalah
+## III. LATAR BELAKANG MASALAH
 
 ### 3.1 Kota yang turun sementara lautnya naik
 
@@ -123,7 +123,29 @@ Kasus leptospirosis di Kota Semarang tercatat naik dari 32 pada 2024 menjadi
 kontak kulit dengan air terkontaminasi urin tikus, dan genangan rob di jalan
 adalah medium yang tepat untuk itu.
 
-### 3.5 Rumusan masalah
+### 3.5 Celah pada solusi yang sudah ada
+
+Warga Semarang tidak kekurangan informasi. Yang kurang adalah informasi yang
+menjawab pertanyaan perjalanan pada jam tertentu di ruas tertentu. Perbandingan
+di bawah menyebutkan apa yang tiap layanan sediakan, bukan apa yang tidak
+disediakannya, dan disusun dari kemampuan yang terdokumentasi publik per
+Agustus 2026.
+
+**Tabel 3.1** Apa yang disediakan solusi yang sudah ada
+
+| Yang sudah ada | Yang disediakan | Yang masih dicari warga |
+|---|---|---|
+| Aplikasi peta umum | Rute tercepat dan kondisi lalu lintas saat ini | Kondisi jam nanti, saat ia benar-benar tiba di ruas itu |
+| Peta laporan warga | Titik genangan yang sedang dilaporkan orang | Ruas yang belum tergenang tetapi akan tergenang |
+| Prakiraan pasut instansi | Tinggi muka air per wilayah, dalam tabel dan grafik | Terjemahannya menjadi ruas jalan mana yang terdampak |
+| Berita dan pesan berantai | Kabar setelah kejadian | Perkiraan sebelum berangkat |
+
+Ketiganya berguna, dan sistem ini tidak menggantikan satu pun. Yang
+ditambahkannya satu: menerjemahkan pasang surut menjadi peringkat risiko per
+ruas per jam, lalu memasukkannya ke keputusan rute. Itu sebabnya keluarannya
+bukan peta genangan, melainkan rute beserta ongkos menghindarinya.
+
+### 3.6 Rumusan masalah
 
 1. Bagaimana memperkirakan kapan ruas jalan tertentu berisiko tergenang
    rob, bukan sekadar apakah ia rawan?
@@ -134,7 +156,7 @@ adalah medium yang tepat untuk itu.
 
 ---
 
-## 4. Tujuan dan Manfaat Dikembangkannya Perangkat Lunak
+## IV. TUJUAN DAN MANFAAT DIKEMBANGKANNYA PERANGKAT LUNAK
 
 ### 4.1 Tujuan
 
@@ -192,7 +214,7 @@ pilot. Ia tidak dapat dipindah ke kota lain tanpa mengulang kalibrasinya.
 
 ---
 
-## 5. Batasan Perangkat Lunak yang Dikembangkan
+## V. BATASAN PERANGKAT LUNAK YANG DIKEMBANGKAN
 
 Batasan yang kami tulis sendiri lebih baik daripada yang ditemukan juri.
 Daftar ini lengkap.
@@ -278,7 +300,7 @@ Daftar ini lengkap.
 
 ---
 
-## 6. Metodologi Pengembangan
+## VI. METODOLOGI PENGEMBANGAN
 
 ### 6.1 Pendekatan
 
@@ -331,11 +353,11 @@ citra yang sama di kedua sisi, dan akurasi yang dihasilkan akan palsu.
 
 ---
 
-## 7. Analisis Kebutuhan dan Desain Solusi Perangkat Lunak
+## VII. ANALISIS KEBUTUHAN DAN DESAIN SOLUSI PERANGKAT LUNAK
 
 ### 7.1 Pengguna sasaran
 
-**Tabel 2.** Pengguna sasaran dan kebutuhan utamanya
+**Tabel 7.1** Pengguna sasaran dan kebutuhan utamanya
 
 | Pengguna | Kebutuhan utama |
 |---|---|
@@ -383,7 +405,7 @@ muncul, tekan saran jam alternatif → Pita Pasut melompat ke jam itu.
 
 ---
 
-## 8. Arsitektur Sistem dan Spesifikasi Tools/Teknologi
+## VIII. ARSITEKTUR SISTEM DAN SPESIFIKASI TOOLS/TEKNOLOGI
 
 ### 8.1 Arsitektur
 
@@ -398,15 +420,15 @@ start, bukan diam-diam saat juri memakainya.
 
 ![](arsitektur.png)
 
-**Gambar 1.** Arsitektur sistem. Empat sumber terbuka di kiri masuk ke dunia
-penyiapan yang berjalan di laptop; hasilnya mengendap di basis data dan satu
-potret beku. Dunia melayani di kanan hanya membaca keduanya. Garis merah
-menandai batas yang tidak dilewati kode pipeline, dan pita di bawah menyebut
-pustaka mana saja yang sengaja tidak dipasang di server.
+**Gambar 8.1** Arsitektur sistem. Empat sumber terbuka di kiri masuk ke sisi
+penyiapan data yang berjalan di laptop, dan hasilnya mengendap di basis data
+serta satu salinan beku. Sisi kanan yang melayani pengguna hanya membaca
+keduanya. Garis merah menandai batas yang tidak dilewati kode penyiapan, dan
+pita di bawah menyebut pustaka mana saja yang sengaja tidak dipasang di server.
 
 ### 8.2 Spesifikasi teknologi
 
-**Tabel 3.** Pilihan teknologi tiap lapisan beserta alasannya
+**Tabel 8.1** Pilihan teknologi tiap lapisan beserta alasannya
 
 | Lapisan | Pilihan | Alasan |
 |---|---|---|
@@ -422,7 +444,7 @@ pustaka mana saja yang sengaja tidak dipasang di server.
 
 Seluruh sumber di bawah ini terbuka.
 
-**Tabel 4.** Sumber data yang dipakai sistem
+**Tabel 8.2** Sumber data yang dipakai sistem
 
 | Kebutuhan | Sumber |
 |---|---|
@@ -442,11 +464,11 @@ Konsumsi BBM mobil dan truk tetap asumsi rancangan, bukan angka bersumber.
 
 ---
 
-## 9. Implementasi Perangkat Lunak
+## IX. IMPLEMENTASI PERANGKAT LUNAK
 
 ### 9.1 Status modul
 
-**Tabel 5.** Status penyelesaian tiap modul
+**Tabel 9.1** Status penyelesaian tiap modul
 
 | Modul | Status | Progres |
 |---|---|---|
@@ -470,7 +492,7 @@ Konsumsi BBM mobil dan truk tetap asumsi rancangan, bukan angka bersumber.
 Pemisahan berdasarkan waktu: latih 2015–2023 (1.366.092 baris, 546 citra),
 uji 2024–2026 (447.858 baris, 179 citra).
 
-**Tabel 6.** Metrik model genangan Sentinel-1
+**Tabel 9.2** Metrik model genangan Sentinel-1
 
 | Metrik | Nilai |
 |---|---|
@@ -483,7 +505,7 @@ uji 2024–2026 (447.858 baris, 179 citra).
 **Model ini ditolak.** Kepentingan permutasi pada data uji menunjukkan
 sebabnya:
 
-**Tabel 7.** Kepentingan permutasi fitur pada data uji
+**Tabel 9.3** Kepentingan permutasi fitur pada data uji
 
 | Fitur | Penurunan ROC-AUC |
 |---|---|
@@ -500,7 +522,7 @@ Aturan "pasut saja" menghasilkan ROC-AUC 0,4935, setara lemparan koin.
 
 ### 9.3 Lima upaya penyelamatan, seluruhnya gagal
 
-**Tabel 8.** Lima upaya penyelamatan model dan hasilnya
+**Tabel 9.4** Lima upaya penyelamatan model dan hasilnya
 
 | Upaya | Hasil |
 |---|---|
@@ -539,7 +561,7 @@ melabeli 19.394 ruas.
 Acuan waktu fase konstanta tidak dinyatakan sumbernya, sehingga seluruh offset
 −12 sampai +12 jam disisir terhadap muka air terukur stasiun IOC `sema` [4]:
 
-**Tabel 9.** Korelasi rekonstruksi pasut terhadap muka air terukur
+**Tabel 9.5** Korelasi rekonstruksi pasut terhadap muka air terukur
 
 | Jendela uji | Fase = UTC | Fase = WIB |
 |---|---|---|
@@ -553,13 +575,13 @@ acuan WIB 0,097–0,116 meter terhadap rentang terukur 0,920 meter. Diuji silang
 terhadap 16 kejadian rob terdokumentasi, median persentil tinggi pasut pada
 hari kejadian 80,2, dari 50 yang diharapkan bila keduanya tidak berhubungan.
 
-## 10. Mockup dan Tangkapan Layar Aplikasi
+## X. MOCKUP DAN TANGKAPAN LAYAR APLIKASI
 
 Seluruh gambar berikut diambil dari aplikasi yang berjalan.
 
 ![](tangkapan/01_peta_genangan.jpg)
 
-**Gambar 2.** Peta genangan dan Pita Pasut. Ruas diwarnai menurut tangga
+**Gambar 10.1** Peta genangan dan Pita Pasut. Ruas diwarnai menurut tangga
 kedalaman; dua kelas terdalam ditumpuk pola titik agar urutannya tetap terbaca
 dalam cetakan hitam putih dan oleh pengguna buta warna. Bilah di dasar layar
 adalah **Pita Pasut**, penggeser waktu 72 jam berisi kurva pasang surut dan
@@ -568,7 +590,7 @@ indeks kerentanan, bukan prediksi genangan.
 
 ![](tangkapan/02_rute_dan_peringatan.jpg)
 
-**Gambar 3.** Rute dan peringatan paparan. Rute sadar rob digambar ambar di
+**Gambar 10.2** Rute dan peringatan paparan. Rute sadar rob digambar ambar di
 atas peta biru, mengikuti konvensi navigasi laut. Panel kiri memuat waktu
 tempuh, jarak, jumlah ruas dilewati, dan jumlah ruas tergenang. Peringatan
 paparan terbit karena rute menembus genangan di atas ambang moda, lengkap
@@ -576,43 +598,43 @@ dengan kedalaman, nama ruas, dan jamnya.
 
 ![](tangkapan/03_selisih_rute.jpg)
 
-**Gambar 4.** Selisih terhadap rute yang mengabaikan genangan. Biaya adaptasi
+**Gambar 10.3** Selisih terhadap rute yang mengabaikan genangan. Biaya adaptasi
 dinyatakan sebagai selisih terhadap rute pembanding, bukan sebagai klaim
 penghematan.
 
 ![](tangkapan/04_validasi_model_ditolak.jpg)
 
-**Gambar 5.** Halaman validasi, bagian model yang ditolak. Metrik model
+**Gambar 10.4** Halaman validasi, bagian model yang ditolak. Metrik model
 Sentinel-1 ditampilkan apa adanya di dalam aplikasi, termasuk ROC-AUC 0,6579
 dan matriks kebingungannya, dengan tiga fitur bergantung waktu ditandai
 "sumbangannya nol".
 
 ![](tangkapan/05_validasi_yang_tidak_diklaim.jpg)
 
-**Gambar 6.** Halaman validasi, bagian yang tidak kami klaim. Aplikasi
+**Gambar 10.5** Halaman validasi, bagian yang tidak kami klaim. Aplikasi
 menyatakan sendiri bahwa indeks kerentanan tidak punya angka akurasi.
 
 ![](tangkapan/06_pita_pasut.png)
 
-**Gambar 7.** Pita Pasut, rinci. Garis ukurnya meniru papan duga air
+**Gambar 10.6** Pita Pasut, rinci. Garis ukurnya meniru papan duga air
 pelabuhan; palang merah menandai jam tergenang, pegangan ambar menunjukkan jam
 yang sedang dilihat.
 
 ![](pasut_saat_akuisisi.png)
 
-**Gambar 8.** Sebaran tinggi pasut saat akuisisi Sentinel-1. Membantah
+**Gambar 10.7** Sebaran tinggi pasut saat akuisisi Sentinel-1. Membantah
 kekhawatiran bahwa arsip citra tidak memuat pasang tinggi: persentil ke-95
 justru lebih tinggi daripada pencuplikan acak.
 
 ![](kepentingan_fitur.png)
 
-**Gambar 9.** Kepentingan permutasi fitur model yang ditolak. Dasar visual
+**Gambar 10.8** Kepentingan permutasi fitur model yang ditolak. Dasar visual
 bagi keputusan penolakan pada Bagian 9.2: ketiga fitur yang bergantung waktu
 nol dalam batas ketidakpastiannya.
 
 ---
 
-## 11. Impact Projection
+## XI. IMPACT PROJECTION
 
 Proyeksi disusun sebagai rantai estimasi eksplisit: tiap tautan menyatakan
 sumbernya, tiap asumsi dinyatakan sebagai asumsi.
@@ -627,7 +649,7 @@ dijadikan penyebut, dan terbit pada tahun berjalan.
 
 ### 11.2 Rantai estimasi
 
-**Tabel 10.** Rantai estimasi dampak, tautan demi tautan
+**Tabel 11.1** Rantai estimasi dampak, tautan demi tautan
 
 | Tautan | Nilai | Dasar |
 |---|---|---|
@@ -705,7 +727,7 @@ Tiga keterbatasan lain:
 
 ---
 
-## 12. Penutup
+## XII. PENUTUP
 
 PASANG SURUT memprediksi kapan tiap ruas berisiko tergenang rob untuk 72 jam
 ke depan, lalu merutekan menghindarinya pada jam keberangkatan. Komponen
@@ -720,7 +742,7 @@ angka akurasi yang tidak dapat dipertanggungjawabkan.
 
 ---
 
-## 13. Daftar Pustaka
+## XIII. DAFTAR PUSTAKA
 
 [1] Rahmawati, A. N. T., Prasetyo, Y., dan Sasmito, B. "Studi Penurunan Muka
 Tanah dengan Metode Small Baseline Area Subset (SBAS) Menggunakan Citra
@@ -779,13 +801,13 @@ Diponegoro Software Development Competition ANFORCOM 2026*. Semarang, 2026.
 
 ---
 
-## 14. Lampiran
+## XIV. LAMPIRAN
 
 Seluruh butir lampiran mengikuti ketentuan rulebook kompetisi [12].
 
 ### Lampiran A. Tautan wajib
 
-**Tabel 11.** Tautan bukti implementasi
+**Tabel 14.1** Tautan bukti implementasi
 
 | Bukti | Tautan |
 |---|---|
@@ -806,7 +828,7 @@ Seluruh butir lampiran mengikuti ketentuan rulebook kompetisi [12].
 
 ### Lampiran C. Pembagian peran tim
 
-**Tabel 12.** Pembagian peran tim
+**Tabel 14.2** Pembagian peran tim
 
 | Anggota | Peran |
 |---|---|

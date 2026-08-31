@@ -379,7 +379,15 @@ def bangun(pecah_per_bagian: bool = False) -> int:
         raise SystemExit(
             "Batas akhir Bagian 14 tidak ditemukan di proposal_draft.md. "
             "Dicari judul '## Jumlah halaman' atau '## Perkiraan halaman'.")
-    badan = teks[teks.index("## 1. Judul Karya"):teks.index(penutup)]
+    # Judul bagian pernah berganti gaya dari "## 1. Judul Karya" menjadi
+    # "## I. JUDUL KARYA". Awal badan dicari lewat pola, bukan teks tetap,
+    # supaya pergantian gaya berikutnya tidak mematikan skrip.
+    m_awal = re.search(r"^## (?:\d+|[IVX]+)\.\s", teks, re.M)
+    if m_awal is None:
+        raise SystemExit(
+            "Judul bagian pertama tidak ditemukan di proposal_draft.md. "
+            "Dicari pola '## 1. ...' atau '## I. ...'.")
+    badan = teks[m_awal.start():teks.index(penutup)]
 
     dok = Document()
     _atur_halaman(dok)

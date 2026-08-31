@@ -49,7 +49,13 @@ try {
   foreach ($p in $d.Paragraphs) {
     $t = $p.Range.Text.Trim()
     if ($t.Length -eq 0) { continue }
-    $hal = $p.Range.Information(3)
+    # Information(3) melaporkan halaman tempat rentang BERAKHIR. Keterangan
+    # gambar yang panjang bisa melimpah ke halaman berikutnya, sehingga
+    # dilaporkan satu halaman terlalu jauh. Rentangnya dikuncupkan ke awal
+    # lebih dulu supaya yang terbaca halaman tempat ia MULAI.
+    $r = $p.Range.Duplicate
+    $r.Collapse(1)
+    $hal = $r.Information(3)
     $gaya = $p.Style.NameLocal
     Write-Output ("{0}`t{1}`t{2}" -f $hal, $gaya, $t)
   }
@@ -96,16 +102,19 @@ def _kumpulkan(baris) -> tuple[list, list, list]:
             isi.append((t, hal, 1))
         elif gaya.startswith("Heading 2"):
             isi.append((t, hal, 2))
-        elif re.match(r"^Gambar \d+", t):
-            # Keterangan gambar diambil sampai titik kalimat pertama.
-            judul = re.match(r"^(Gambar [\d dan]+\.)\s*(.*)$", t)
+        elif re.match(r"^Gambar \d", t):
+            # Nomornya bisa bergaya "8.1" maupun "1.", jadi polanya harus
+            # mengambil nomor UTUH lebih dulu. Versi sebelumnya memotong di
+            # titik pertama dan menghasilkan "Gambar 8. 1 Arsitektur".
+            judul = re.match(r"^(Gambar \d+(?:\.\d+)?)\.?\s+(.*)$", t)
             if judul:
-                inti = judul.group(2).split(".")[0].strip()
+                inti = judul.group(2).split(". ")[0].rstrip(".").strip()
                 gambar.append((f"{judul.group(1)} {inti}", hal))
-        elif re.match(r"^Tabel \d+", t):
-            judul = re.match(r"^(Tabel \d+\.)\s*(.*)$", t)
+        elif re.match(r"^Tabel \d", t):
+            judul = re.match(r"^(Tabel \d+(?:\.\d+)?)\.?\s+(.*)$", t)
             if judul:
-                tabel.append((f"{judul.group(1)} {judul.group(2).strip()}", hal))
+                inti = judul.group(2).split(". ")[0].rstrip(".").strip()
+                tabel.append((f"{judul.group(1)} {inti}", hal))
     return isi, gambar, tabel
 
 
