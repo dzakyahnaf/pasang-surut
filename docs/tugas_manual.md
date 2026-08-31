@@ -118,7 +118,7 @@ bukan isi proposal, dan berisiko ikut tercetak ke PDF yang dibaca juri.
 
 | # | Tugas | Kenapa saya tidak bisa |
 |---|---|---|
-| M22 | Uji responsif 360px | jendela peramban diubah tetapi viewport tetap 1440; perlu perangkat atau devtools sungguhan |
+| M22 | Tangkapan layar dari HP sungguhan | **Uji responsifnya SUDAH dikerjakan** dengan merender aplikasi di dalam iframe 390×844 — media query merespons lebar iframe, bukan lebar jendela. Ditemukan dan diperbaiki: spanduk peringatan menimpa pelat judul. Yang masih perlu perangkat hanya **tangkapan layarnya**, karena MapLibre gagal menggambar peta di dalam iframe bersarang. Bila diambil, tambahkan ke Bagian 10 proposal — masih ada enam halaman sisa |
 | M23 | Uji baca di bawah matahari langsung | perlu orang membawa laptop ke luar ruangan |
 | M24 | Uji cetak hitam putih | dirancang untuk itu lewat pola halftone, belum dibuktikan |
 

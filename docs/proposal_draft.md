@@ -362,6 +362,11 @@ citra yang sama di kedua sisi, dan akurasi yang dihasilkan akan palsu.
 4. Kedalaman tidak pernah disampaikan lewat warna saja — dua kelas terdalam
    ditumpuk pola titik agar terbaca dalam cetakan hitam putih.
 5. Sasaran sentuh minimal 44 × 44 piksel; kontras teks minimal 4,5:1.
+6. **Tata letak ponsel diuji pada lebar 390 piksel**, bukan hanya dirancang.
+   Pada lebar itu rail kiri berubah menjadi lembar bawah dan peta mengisi
+   bagian atas layar. Pengujian menemukan satu cacat — spanduk peringatan
+   dan pelat judul saling menimpa — yang kemudian diperbaiki dengan menyusun
+   keduanya bertingkat.
 
 ### 7.4 Alur pengguna
 
@@ -383,6 +388,14 @@ Pemisahan itu ditegakkan, bukan sekadar disepakati: citra Docker yang di-deploy
 **tidak memasang** `earthengine-api`, `osmnx`, `geopandas`, `rasterio`,
 `scikit-learn`, maupun `pandas`. Kode yang keliru memanggilnya gagal saat
 start, bukan diam-diam saat juri memakainya.
+
+![](arsitektur.png)
+
+**Gambar 9 — Arsitektur sistem.** Empat sumber terbuka di kiri masuk ke dunia
+penyiapan yang berjalan di laptop; hasilnya mengendap di basis data dan satu
+potret beku. Dunia melayani di kanan hanya membaca keduanya. Garis merah
+menandai batas yang tidak dilewati kode pipeline, dan pita di bawah menyebut
+pustaka mana saja yang sengaja tidak dipasang di server.
 
 ### 8.2 Spesifikasi teknologi
 
@@ -764,38 +777,37 @@ lalu dibuka dengan Microsoft Word dan dibaca statistiknya:
 
 | Yang diperiksa | Hasil | Ketentuan rulebook |
 |---|---|---|
-| Jumlah halaman | **23** | maksimal 30, termasuk sampul dan lampiran |
+| Jumlah halaman | **24** | maksimal 30, termasuk sampul dan lampiran |
 | Ukuran kertas | 21 × 29,7 cm | A4 |
 | Margin | kiri 4, kanan 3, atas 3, bawah 3 cm | 4-3-3-3 |
 | Huruf | Times New Roman 12 pt | Times New Roman 12 |
 | Spasi baris | 1,5 | 1,5 |
-| Gambar tertanam | 8 | — |
+| Gambar tertanam | 9 | — |
 | Tabel | 11 | — |
 
 ### Kenapa perkiraan lama meleset tujuh halaman
 
 Kepadatan 156 kata/halaman diturunkan dari `.docx` lama, yang memuat **14
-page break manual** — tiap bagian dimulai di halaman baru. Bagian yang berakhir
-di tengah halaman menyisakan sisanya kosong, dan dengan 14 bagian itu berarti
-sekitar tujuh halaman ruang putih. Dokumen sekarang hanya punya satu page
-break, yaitu setelah sampul, sehingga teksnya mengalir menerus: **193
-kata/halaman**, bukan 156.
+page break manual** — tiap bagian dimulai di halaman baru, dan bagian yang
+berakhir di tengah halaman menyisakan sisanya kosong. Taksiran itu sebetulnya
+mengukur ruang putih, bukan isi. Dokumen sekarang hanya punya satu page break,
+yaitu setelah sampul.
 
-Artinya taksiran 30 halaman itu sebetulnya mengukur ruang putih, bukan isi.
-Beberapa pemangkasan dikerjakan tanpa perlu, dan seluruhnya sudah dikembalikan.
+### Page break per bagian sudah dicoba, dan ditolak
 
-### Ada tujuh halaman sisa
+Skrip pembangun punya opsi `--pecah-per-bagian`. Dijalankan dan diukur:
+**31 halaman, melewati batas 30.** Biayanya tujuh halaman, persis sebesar
+ruang putih yang dulu membuat perkiraan meleset. Karena itu opsinya ada
+tetapi tidak dipakai.
 
-Bila ingin memakainya, urutan yang paling menambah nilai:
+### Sisa enam halaman
 
-| Yang ditambahkan | Kriteria yang dilayani |
-|---|---|
-| Diagram arsitektur sistem pada Bagian 8 | Metodologi dan arsitektur, 10 persen — bagian ini satu-satunya yang belum punya gambar |
-| Tangkapan layar lebar ponsel | Progres dan validasi, 20 persen — membuktikan tata letak responsif yang diklaim 7.3 |
-| Page break di tiap awal bagian | Format dan struktur, 10 persen. Memakan sekitar tujuh halaman, jadi hanya bila tidak ada tambahan lain |
-
-**Jumlah halaman hanya dibaca dari Word.** Jalankan ulang skripnya, buka
-dokumennya, baca statistiknya.
+Bila ingin menambah isi, yang paling menambah nilai adalah **tangkapan layar
+aplikasi pada lebar ponsel**. Tata letaknya sudah diuji pada 390 piksel dan
+satu cacat sudah diperbaiki, tetapi gambarnya harus diambil dari perangkat
+sungguhan: merender peta di dalam iframe sempit membuat MapLibre gagal
+menggambar, dan tangkapan layar berpeta kosong akan membuat aplikasi tampak
+rusak — lebih buruk daripada tidak ada gambar sama sekali.
 
 ## Proposal ini harus berdiri sendiri
 

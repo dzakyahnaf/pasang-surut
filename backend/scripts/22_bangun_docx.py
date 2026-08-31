@@ -28,6 +28,7 @@ Word**, bukan dari perkiraan mana pun.
 
 from __future__ import annotations
 
+import argparse
 import re
 import sys
 from pathlib import Path
@@ -208,7 +209,7 @@ def _sampul(dok: Document, judul: str, subjudul: str, meta: list[tuple[str, str]
     p.add_run().add_break(WD_BREAK.PAGE)
 
 
-def bangun() -> int:
+def bangun(pecah_per_bagian: bool = False) -> int:
     teks = SUMBER.read_text(encoding="utf-8")
     # Bagian 1-14 saja. Judul penutupnya pernah berganti dari "Perkiraan
     # halaman" menjadi "Jumlah halaman" setelah angkanya diukur, jadi
@@ -248,6 +249,12 @@ def bangun() -> int:
             continue
 
         if b.startswith("## "):
+            # Tiap bagian boleh dimulai di halaman baru. Rapi dibaca, tetapi
+            # mahal: bagian yang berakhir di tengah halaman menyisakan sisanya
+            # kosong. Itulah yang membuat .docx lama memakan 27 halaman untuk
+            # isi yang lebih sedikit. Karena itu ini PILIHAN, bukan bawaan.
+            if pecah_per_bagian and not b.startswith("## 1."):
+                dok.add_paragraph().add_run().add_break(WD_BREAK.PAGE)
             dok.add_heading(b[3:].strip(), level=1)
             i += 1
             continue
@@ -329,10 +336,14 @@ def bangun() -> int:
     print(f"tabel       : {n_tabel}")
     print(f"kata sumber : {len(badan.split())}")
     print()
+    print(f"page break per bagian: {'ya' if pecah_per_bagian else 'tidak'}")
     print("A4, Times New Roman 12, spasi 1,5, margin 4-3-3-3 diterapkan.")
     print("JUMLAH HALAMAN WAJIB DIBACA DARI WORD, bukan dari skrip ini.")
     return 0
 
 
 if __name__ == "__main__":
-    sys.exit(bangun())
+    _p = argparse.ArgumentParser(description=__doc__)
+    _p.add_argument("--pecah-per-bagian", action="store_true",
+                    help="mulai tiap bagian di halaman baru")
+    sys.exit(bangun(_p.parse_args().pecah_per_bagian))

@@ -251,8 +251,33 @@
 
 /* ── Responsif sampai 360px, DESIGN.md Bagian 11 ─────────────────────── */
 @media (max-width: 420px) {
+  /* Pelat judul dan lencana peringatan sama-sama melekat di tepi atas,
+     satu kiri satu kanan. Pada lebar 390px teks lencana "INDEKS KERENTANAN
+     — BUKAN PREDIKSI GENANGAN" lebih panjang daripada ruang yang tersisa,
+     sehingga ia meluber ke kiri dan MENUTUPI judul aplikasi.
+
+     Ditemukan 31 Agustus dengan merender aplikasi di dalam iframe 390x844,
+     karena mengubah ukuran jendela tidak mengubah viewport.
+
+     Di layar sempit keduanya disusun bertingkat: lencana selebar layar di
+     paling atas karena ia pernyataan kejujuran yang tidak boleh tertutup,
+     lalu judul di bawahnya. */
+  .lencana-contoh {
+    left: var(--s-3);
+    right: var(--s-3);
+    justify-content: center;
+  }
+
+  .lencana-contoh__teks {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
   .plat--kiri-atas {
+    top: calc(var(--s-3) + var(--sentuh-min) + var(--s-2));
     padding: var(--s-2) var(--s-3);
+    max-width: calc(100% - var(--s-3) * 2);
   }
 
   .legenda {
