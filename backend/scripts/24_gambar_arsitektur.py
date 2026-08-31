@@ -107,7 +107,7 @@ def gambar() -> int:
     fig.patch.set_facecolor(DEK_1)
 
     # ── Kolom 1: sumber data luar ───────────────────────────────────────
-    ax.text(2, 46.8, _renggang("SUMBER TERBUKA"), fontsize=8.5, color=TINTA_3,
+    ax.text(2, 46.8, _renggang("Sumber data"), fontsize=8.5, color=TINTA_3,
             fontweight="bold")
     sumber = [
         ("OpenStreetMap\nvia OSMnx", 36.5),
@@ -123,13 +123,13 @@ def gambar() -> int:
     ax.add_patch(FancyBboxPatch(
         (27, 8.5), 27, 38, boxstyle="round,pad=0,rounding_size=0.02",
         linewidth=1.2, edgecolor=LAMBUNG_3, facecolor=LAMBUNG_1, zorder=0))
-    ax.text(28.5, 42.4, _renggang("DUNIA PENYIAPAN"), fontsize=9, color=RUTE,
+    ax.text(28.5, 42.4, _renggang("Penyiapan data"), fontsize=9, color=RUTE,
             fontweight="bold")
-    ax.text(28.5, 39.9, "berjalan di laptop, sekali jalan", fontsize=8,
+    ax.text(28.5, 39.9, "Dijalankan di laptop, sekali saja", fontsize=8,
             color=TINTA_3)
 
     _kotak(ax, 29, 29.5, 23, 8.4,
-           "Sebelas skrip pipeline\n01 graf jalan  ·  05 fitur ruas\n"
+           "Sebelas skrip penyiapan\n01 graf jalan  ·  05 fitur ruas\n"
            "06 pemicu  ·  09 model  ·  11 kerentanan",
            latar=LAMBUNG_2, tepi=LAMBUNG_3, warna_teks=BALIK, ukuran=8.2)
 
@@ -139,7 +139,7 @@ def gambar() -> int:
            tebal="bold")
 
     _kotak(ax, 29, 9.6, 23, 6.8,
-           "Potret beku 72 jam\ncadangan bila basis data tersendat",
+           "Salinan 72 jam yang dibekukan\nDipakai kalau basis data mati",
            latar=LAMBUNG_1, tepi=LAMBUNG_3, warna_teks=TINTA_3, ukuran=8)
 
     for y in (36.5 + 3.3, 27.5 + 3.3, 18.5 + 3.3, 9.5 + 3.3):
@@ -154,30 +154,30 @@ def gambar() -> int:
     # kiri dan kanan — cacat yang baru terlihat setelah gambarnya dibuka.
     # Sekarang garisnya saja yang di tengah, penjelasannya di pita bawah.
     ax.plot([61, 61], [10, 46.5], color=BAHAYA, linewidth=2.4, zorder=4)
-    ax.text(61, 47.6, _renggang("BATAS"), fontsize=8.4, color=BAHAYA,
+    ax.text(61, 47.6, _renggang("Batas"), fontsize=8.4, color=BAHAYA,
             fontweight="bold", ha="center")
 
     # ── Kolom 3: dunia melayani ─────────────────────────────────────────
     ax.add_patch(FancyBboxPatch(
         (68, 8.5), 30, 38, boxstyle="round,pad=0,rounding_size=0.02",
         linewidth=1.2, edgecolor=LAMBUNG_3, facecolor=LAMBUNG_1, zorder=0))
-    ax.text(69.5, 42.4, _renggang("DUNIA MELAYANI"), fontsize=9, color=RUTE,
+    ax.text(69.5, 42.4, _renggang("Melayani pengguna"), fontsize=9, color=RUTE,
             fontweight="bold")
-    ax.text(69.5, 39.9, "berjalan di server, nol panggilan keluar",
+    ax.text(69.5, 39.9, "Dijalankan di server, tanpa panggilan keluar",
             fontsize=8, color=TINTA_3)
 
     _kotak(ax, 70, 29.5, 26, 8.4,
-           "FastAPI  ·  tujuh endpoint\nkesehatan · ruas · genangan · jam\n"
+           "FastAPI, tujuh endpoint\nkesehatan · ruas · genangan · jam\n"
            "tujuan-cepat · validasi · rute",
            latar=LAMBUNG_2, tepi=LAMBUNG_3, warna_teks=BALIK, ukuran=8.2)
 
     _kotak(ax, 70, 18.5, 26, 7.6,
-           "Dijkstra bergantung waktu\nbiaya ruas dihitung pada jam TIBA",
+           "Dijkstra bergantung waktu\nBiaya ruas dihitung pada jam tiba",
            latar=LAMBUNG_2, tepi=RUTE, warna_teks=BALIK, ukuran=8.4,
            tebal="bold")
 
     _kotak(ax, 70, 9.6, 26, 6.8,
-           "React + MapLibre GL JS\ngaya peta inline, tanpa ubin eksternal",
+           "React + MapLibre GL JS\nGaya peta ditulis inline, tanpa ubin luar",
            latar=LAMBUNG_2, tepi=LAMBUNG_3, warna_teks=BALIK, ukuran=8.2)
 
     _panah(ax, (83, 29.3), (83, 26.3), warna=RUTE, lebar=1.4)
@@ -191,8 +191,8 @@ def gambar() -> int:
         (2, 0.4), 96, 4.2, boxstyle="round,pad=0,rounding_size=0.02",
         linewidth=1.1, edgecolor=BAHAYA, facecolor=DEK_1, zorder=2))
     ax.text(50, 3.4,
-            "Yang menyeberang batas hanya DATA yang sudah dihitung. "
-            "Citra Docker di server TIDAK MEMASANG pustaka pipeline apa pun:",
+            "Yang melewati batas hanya data yang sudah selesai dihitung. "
+            "Citra Docker di server tidak memasang satu pun pustaka penyiapan:",
             fontsize=8, color=TINTA_1, ha="center", va="center", zorder=3)
     ax.text(50, 1.5,
             "earthengine-api   ·   osmnx   ·   geopandas   ·   rasterio   ·   "
@@ -200,8 +200,8 @@ def gambar() -> int:
             fontsize=8.2, color=BAHAYA, ha="center", va="center",
             fontweight="bold", zorder=3)
     ax.text(50, -1.6,
-            "Kode yang keliru memanggilnya gagal saat start, bukan diam-diam "
-            "saat juri sedang memakai aplikasinya.",
+            "Kalau ada kode yang keliru memanggilnya, server gagal menyala. "
+            "Kegagalannya terlihat saat itu juga, bukan saat juri sedang memakai aplikasinya.",
             fontsize=7.6, color=TINTA_2, ha="center", va="center",
             style="italic")
 
