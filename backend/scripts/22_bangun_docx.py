@@ -134,6 +134,42 @@ def _paksa_huruf(el) -> None:
         rf.set(qn("w:" + langsung), HURUF)
 
 
+
+def _nomor_halaman(dok: Document) -> None:
+    """Pasang nomor halaman di kaki, rata tengah, kecuali di sampul.
+
+    Diperlukan begitu daftar isi masuk: daftar yang menyebut "halaman 17"
+    tidak berguna kalau halamannya sendiri tidak bernomor.
+
+    Nomornya ditulis sebagai FIELD Word, bukan angka mati. Word yang
+    menghitungnya, sehingga tetap benar bila isinya bergeser nanti.
+
+    Penomorannya menerus dari sampul, jadi angka yang tercetak sama persis
+    dengan angka yang diukur `25_daftar_isi.py`. Kalau bagian depan diberi
+    angka Romawi tersendiri, seluruh nomor di daftar isi harus dihitung ulang.
+    """
+    bagian = dok.sections[0]
+    bagian.different_first_page_header_footer = True   # sampul tanpa nomor
+
+    par = bagian.footer.paragraphs[0]
+    par.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    par.paragraph_format.first_line_indent = Cm(0)
+
+    r = par.add_run()
+    r.font.name = HURUF
+    r.font.size = Pt(11)
+
+    mulai = OxmlElement("w:fldChar")
+    mulai.set(qn("w:fldCharType"), "begin")
+    kode = OxmlElement("w:instrText")
+    kode.set(qn("xml:space"), "preserve")
+    kode.text = " PAGE "
+    akhir = OxmlElement("w:fldChar")
+    akhir.set(qn("w:fldCharType"), "end")
+    for el in (mulai, kode, akhir):
+        r._r.append(el)
+
+
 def _hias_teks(par, teks: str) -> None:
     """Terjemahkan **tebal**, *miring*, dan `kode` menjadi run Word.
 
@@ -348,6 +384,7 @@ def bangun(pecah_per_bagian: bool = False) -> int:
     dok = Document()
     _atur_halaman(dok)
     _atur_gaya(dok)
+    _nomor_halaman(dok)
 
     _sampul(
         dok,
