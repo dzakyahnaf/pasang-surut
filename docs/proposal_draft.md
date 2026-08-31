@@ -23,6 +23,8 @@
 *Sistem Perutean Sadar Banjir Rob Berbasis Rekonstruksi Pasang Surut
 Terkalibrasi untuk Mobilitas Rendah Karbon di Kota Semarang*
 
+**Tabel 1.** Identitas karya
+
 | Atribut | Keterangan |
 |---|---|
 | Tim | trio la albiceleste |
@@ -333,6 +335,8 @@ citra yang sama di kedua sisi, dan akurasi yang dihasilkan akan palsu.
 
 ### 7.1 Pengguna sasaran
 
+**Tabel 2.** Pengguna sasaran dan kebutuhan utamanya
+
 | Pengguna | Kebutuhan utama |
 |---|---|
 | Warga pesisir Semarang Utara dan Timur | tahu jam berapa jalur biasanya berisiko |
@@ -394,13 +398,15 @@ start, bukan diam-diam saat juri memakainya.
 
 ![](arsitektur.png)
 
-**Gambar 9.** Arsitektur sistem. Empat sumber terbuka di kiri masuk ke dunia
+**Gambar 1.** Arsitektur sistem. Empat sumber terbuka di kiri masuk ke dunia
 penyiapan yang berjalan di laptop; hasilnya mengendap di basis data dan satu
 potret beku. Dunia melayani di kanan hanya membaca keduanya. Garis merah
 menandai batas yang tidak dilewati kode pipeline, dan pita di bawah menyebut
 pustaka mana saja yang sengaja tidak dipasang di server.
 
 ### 8.2 Spesifikasi teknologi
+
+**Tabel 3.** Pilihan teknologi tiap lapisan beserta alasannya
 
 | Lapisan | Pilihan | Alasan |
 |---|---|---|
@@ -415,6 +421,8 @@ pustaka mana saja yang sengaja tidak dipasang di server.
 ### 8.3 Sumber data
 
 Seluruh sumber di bawah ini terbuka.
+
+**Tabel 4.** Sumber data yang dipakai sistem
 
 | Kebutuhan | Sumber |
 |---|---|
@@ -438,6 +446,8 @@ Konsumsi BBM mobil dan truk tetap asumsi rancangan, bukan angka bersumber.
 
 ### 9.1 Status modul
 
+**Tabel 5.** Status penyelesaian tiap modul
+
 | Modul | Status | Progres |
 |---|---|---|
 | Pembangunan graf jalan dari OpenStreetMap | Selesai | 19.394 ruas, 1.289,4 km |
@@ -460,6 +470,8 @@ Konsumsi BBM mobil dan truk tetap asumsi rancangan, bukan angka bersumber.
 Pemisahan berdasarkan waktu: latih 2015–2023 (1.366.092 baris, 546 citra),
 uji 2024–2026 (447.858 baris, 179 citra).
 
+**Tabel 6.** Metrik model genangan Sentinel-1
+
 | Metrik | Nilai |
 |---|---|
 | ROC-AUC | 0,6579 |
@@ -470,6 +482,8 @@ uji 2024–2026 (447.858 baris, 179 citra).
 
 **Model ini ditolak.** Kepentingan permutasi pada data uji menunjukkan
 sebabnya:
+
+**Tabel 7.** Kepentingan permutasi fitur pada data uji
 
 | Fitur | Penurunan ROC-AUC |
 |---|---|
@@ -485,6 +499,8 @@ mempelajari ruas mana yang sering beranomali, bukan kapan ruas tergenang.
 Aturan "pasut saja" menghasilkan ROC-AUC 0,4935, setara lemparan koin.
 
 ### 9.3 Lima upaya penyelamatan, seluruhnya gagal
+
+**Tabel 8.** Lima upaya penyelamatan model dan hasilnya
 
 | Upaya | Hasil |
 |---|---|
@@ -523,6 +539,8 @@ melabeli 19.394 ruas.
 Acuan waktu fase konstanta tidak dinyatakan sumbernya, sehingga seluruh offset
 −12 sampai +12 jam disisir terhadap muka air terukur stasiun IOC `sema` [4]:
 
+**Tabel 9.** Korelasi rekonstruksi pasut terhadap muka air terukur
+
 | Jendela uji | Fase = UTC | Fase = WIB |
 |---|---|---|
 | 2 hari | −0,289 | **+0,907** |
@@ -541,7 +559,7 @@ Seluruh gambar berikut diambil dari aplikasi yang berjalan.
 
 ![](tangkapan/01_peta_genangan.jpg)
 
-**Gambar 1.** Peta genangan dan Pita Pasut. Ruas diwarnai menurut tangga
+**Gambar 2.** Peta genangan dan Pita Pasut. Ruas diwarnai menurut tangga
 kedalaman; dua kelas terdalam ditumpuk pola titik agar urutannya tetap terbaca
 dalam cetakan hitam putih dan oleh pengguna buta warna. Bilah di dasar layar
 adalah **Pita Pasut**, penggeser waktu 72 jam berisi kurva pasang surut dan
@@ -550,7 +568,7 @@ indeks kerentanan, bukan prediksi genangan.
 
 ![](tangkapan/02_rute_dan_peringatan.jpg)
 
-**Gambar 2.** Rute dan peringatan paparan. Rute sadar rob digambar ambar di
+**Gambar 3.** Rute dan peringatan paparan. Rute sadar rob digambar ambar di
 atas peta biru, mengikuti konvensi navigasi laut. Panel kiri memuat waktu
 tempuh, jarak, jumlah ruas dilewati, dan jumlah ruas tergenang. Peringatan
 paparan terbit karena rute menembus genangan di atas ambang moda, lengkap
@@ -558,34 +576,37 @@ dengan kedalaman, nama ruas, dan jamnya.
 
 ![](tangkapan/03_selisih_rute.jpg)
 
-**Gambar 3.** Selisih terhadap rute yang mengabaikan genangan. Biaya adaptasi
+**Gambar 4.** Selisih terhadap rute yang mengabaikan genangan. Biaya adaptasi
 dinyatakan sebagai selisih terhadap rute pembanding, bukan sebagai klaim
 penghematan.
 
 ![](tangkapan/04_validasi_model_ditolak.jpg)
 
+**Gambar 5.** Halaman validasi, bagian model yang ditolak. Metrik model
+Sentinel-1 ditampilkan apa adanya di dalam aplikasi, termasuk ROC-AUC 0,6579
+dan matriks kebingungannya, dengan tiga fitur bergantung waktu ditandai
+"sumbangannya nol".
+
 ![](tangkapan/05_validasi_yang_tidak_diklaim.jpg)
 
-**Gambar 4 dan 5.** Halaman validasi. Metrik model Sentinel-1 ditampilkan apa
-adanya di dalam aplikasi, termasuk ROC-AUC 0,6579 dan matriks kebingungannya,
-dengan tiga fitur bergantung waktu ditandai "sumbangannya nol". Gambar kelima
-memuat pernyataan aplikasi sendiri tentang apa yang tidak diklaim.
+**Gambar 6.** Halaman validasi, bagian yang tidak kami klaim. Aplikasi
+menyatakan sendiri bahwa indeks kerentanan tidak punya angka akurasi.
 
 ![](tangkapan/06_pita_pasut.png)
 
-**Gambar 6.** Pita Pasut, rinci. Garis ukurnya meniru papan duga air
+**Gambar 7.** Pita Pasut, rinci. Garis ukurnya meniru papan duga air
 pelabuhan; palang merah menandai jam tergenang, pegangan ambar menunjukkan jam
 yang sedang dilihat.
 
 ![](pasut_saat_akuisisi.png)
 
-**Gambar 7.** Sebaran tinggi pasut saat akuisisi Sentinel-1. Membantah
+**Gambar 8.** Sebaran tinggi pasut saat akuisisi Sentinel-1. Membantah
 kekhawatiran bahwa arsip citra tidak memuat pasang tinggi: persentil ke-95
 justru lebih tinggi daripada pencuplikan acak.
 
 ![](kepentingan_fitur.png)
 
-**Gambar 8.** Kepentingan permutasi fitur model yang ditolak. Dasar visual
+**Gambar 9.** Kepentingan permutasi fitur model yang ditolak. Dasar visual
 bagi keputusan penolakan pada Bagian 9.2: ketiga fitur yang bergantung waktu
 nol dalam batas ketidakpastiannya.
 
@@ -605,6 +626,8 @@ lembaga riset independen, bersatuan rupiah per tahun sehingga langsung dapat
 dijadikan penyebut, dan terbit pada tahun berjalan.
 
 ### 11.2 Rantai estimasi
+
+**Tabel 10.** Rantai estimasi dampak, tautan demi tautan
 
 | Tautan | Nilai | Dasar |
 |---|---|---|
@@ -762,6 +785,8 @@ Seluruh butir lampiran mengikuti ketentuan rulebook kompetisi [12].
 
 ### Lampiran A. Tautan wajib
 
+**Tabel 11.** Tautan bukti implementasi
+
 | Bukti | Tautan |
 |---|---|
 | Video demo YouTube | (diisi saat pengumpulan) |
@@ -780,6 +805,8 @@ Seluruh butir lampiran mengikuti ketentuan rulebook kompetisi [12].
    dan integrasi lalu lintas waktu nyata.
 
 ### Lampiran C. Pembagian peran tim
+
+**Tabel 12.** Pembagian peran tim
 
 | Anggota | Peran |
 |---|---|

@@ -36,13 +36,15 @@ from pathlib import Path
 from docx import Document
 from docx.enum.section import WD_SECTION
 from docx.enum.table import WD_TABLE_ALIGNMENT
-from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_BREAK
+from docx.enum.text import (WD_ALIGN_PARAGRAPH, WD_BREAK,
+                            WD_TAB_ALIGNMENT, WD_TAB_LEADER)
 from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
 from docx.shared import Cm, Pt, RGBColor
 
 AKAR = Path(__file__).resolve().parents[2]
 SUMBER = AKAR / "docs" / "proposal_draft.md"
+DAFTAR = AKAR / "docs" / "daftar_isi.md"
 DIR_GAMBAR = AKAR / "docs"
 KELUARAN = AKAR / "Anforcom2026_DSDC_TrioLaAlbiceleste_PasangSurut.docx"
 
@@ -52,6 +54,9 @@ SPASI = 1.5
 
 # Lebar halaman A4 dikurangi margin kiri 4 cm dan kanan 3 cm.
 LEBAR_ISI_CM = 21.0 - 4.0 - 3.0
+
+# Indentasi baris pertama paragraf. Satu tab baku Word adalah 1,27 cm.
+INDENT_PARAGRAF = Cm(1.27)
 
 
 def _atur_halaman(dok: Document) -> None:
@@ -73,10 +78,14 @@ def _atur_gaya(dok: Document) -> None:
     # Word memilih huruf untuk aksara non-Latin lewat atribut terpisah. Tanpa
     # baris ini, tanda seperti en dash dan sigma bisa jatuh ke huruf lain.
     normal.element.rPr.rFonts.set(qn("w:eastAsia"), HURUF)
+    _paksa_huruf(normal.element)
     p = normal.paragraph_format
     p.line_spacing = SPASI
     p.space_before = Pt(0)
     p.space_after = Pt(6)
+    # Indentasi baris pertama, satu tab. Diminta supaya paragraf terbaca rapi
+    # dan batas antar paragraf terlihat tanpa perlu baris kosong tambahan.
+    p.first_line_indent = INDENT_PARAGRAF
 
     for nama, ukuran, tebal in (("Heading 1", 14, True), ("Heading 2", 12, True)):
         g = dok.styles[nama]
@@ -84,10 +93,45 @@ def _atur_gaya(dok: Document) -> None:
         g.font.size = Pt(ukuran)
         g.font.bold = tebal
         g.font.color.rgb = RGBColor(0, 0, 0)
+        _paksa_huruf(g.element)
         g.paragraph_format.line_spacing = SPASI
         g.paragraph_format.space_before = Pt(12)
         g.paragraph_format.space_after = Pt(6)
         g.paragraph_format.keep_with_next = True
+
+    # Gaya daftar ikut dipaksa: keduanya juga mewarisi huruf tema.
+    for nama in ("List Number", "List Bullet", "List Paragraph"):
+        try:
+            g = dok.styles[nama]
+        except KeyError:
+            continue
+        g.font.name = HURUF
+        g.font.size = UKURAN
+        _paksa_huruf(g.element)
+
+
+def _paksa_huruf(el) -> None:
+    """Buang atribut huruf TEMA supaya Times New Roman benar-benar dipakai.
+
+    Ini penyebab keluhan "judulnya kok bukan Times New Roman". Gaya Heading
+    bawaan Word membawa `asciiTheme="majorHAnsi"`, dan Word MEMPRIORITASKAN
+    atribut tema itu di atas nama huruf yang ditulis eksplisit. Selama atribut
+    tema masih ada, `font.name = "Times New Roman"` tidak berpengaruh apa pun
+    pada tampilan judul.
+
+    Jadi atribut temanya dihapus lebih dulu, baru nama hurufnya ditulis.
+    """
+    rpr = el.get_or_add_rPr()
+    rf = rpr.find(qn("w:rFonts"))
+    if rf is None:
+        rf = OxmlElement("w:rFonts")
+        rpr.append(rf)
+    for tema in ("asciiTheme", "hAnsiTheme", "eastAsiaTheme", "cstheme"):
+        atr = qn("w:" + tema)
+        if atr in rf.attrib:
+            del rf.attrib[atr]
+    for langsung in ("ascii", "hAnsi", "eastAsia", "cs"):
+        rf.set(qn("w:" + langsung), HURUF)
 
 
 def _hias_teks(par, teks: str) -> None:
@@ -153,6 +197,7 @@ def _tulis_tabel(dok: Document, baris: list[str]) -> None:
             par = sel.paragraphs[0]
             par.paragraph_format.line_spacing = 1.0
             par.paragraph_format.space_after = Pt(2)
+            par.paragraph_format.first_line_indent = Cm(0)
             _hias_teks(par, isi[j] if j < len(isi) else "")
             for r in par.runs:
                 r.font.size = Pt(10)   # tabel sedikit lebih kecil agar muat
@@ -171,6 +216,7 @@ def _tulis_gambar(dok: Document, jalur: str) -> None:
     par = dok.add_paragraph()
     par.alignment = WD_ALIGN_PARAGRAPH.CENTER
     par.paragraph_format.space_after = Pt(3)
+    par.paragraph_format.first_line_indent = Cm(0)
     par.add_run().add_picture(str(berkas), width=Cm(LEBAR_ISI_CM))
 
 
@@ -181,6 +227,7 @@ def _sampul(dok: Document, judul: str, subjudul: str, meta: list[tuple[str, str]
 
     p = dok.add_paragraph()
     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    p.paragraph_format.first_line_indent = Cm(0)
     r = p.add_run(judul)
     r.bold = True
     r.font.size = Pt(20)
@@ -188,6 +235,7 @@ def _sampul(dok: Document, judul: str, subjudul: str, meta: list[tuple[str, str]
 
     p = dok.add_paragraph()
     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    p.paragraph_format.first_line_indent = Cm(0)
     r = p.add_run(subjudul)
     r.italic = True
     r.font.size = Pt(13)
@@ -199,6 +247,7 @@ def _sampul(dok: Document, judul: str, subjudul: str, meta: list[tuple[str, str]
     for label, nilai in meta:
         p = dok.add_paragraph()
         p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        p.paragraph_format.first_line_indent = Cm(0)
         r = p.add_run(f"{label}: ")
         r.bold = True
         r.font.name = HURUF
@@ -207,6 +256,79 @@ def _sampul(dok: Document, judul: str, subjudul: str, meta: list[tuple[str, str]
 
     p = dok.add_paragraph()
     p.add_run().add_break(WD_BREAK.PAGE)
+
+
+
+def _tulis_daftar(dok: Document) -> int:
+    """Susun daftar isi, daftar gambar, dan daftar tabel dari docs/daftar_isi.md.
+
+    Nomor halamannya diukur oleh `25_daftar_isi.py` dengan membuka dokumen ini
+    lewat Word. Kalau berkasnya belum ada, ketiga daftar dilewati begitu saja
+    dan dokumennya tetap terbangun. Itu disengaja: pada pembangunan pertama
+    memang belum ada yang bisa diukur.
+    """
+    if not DAFTAR.exists():
+        return 0
+
+    isi = DAFTAR.read_text(encoding="utf-8")
+    bagian = {}
+    kini = None
+    for baris in isi.split("\n"):
+        if baris.startswith("## "):
+            kini = baris[3:].strip()
+            bagian[kini] = []
+        elif kini and "::" in baris and baris.lstrip().startswith("-"):
+            menjorok = len(baris) - len(baris.lstrip())
+            teks, _, hal = baris.lstrip()[1:].rpartition("::")
+            bagian[kini].append((teks.strip(), hal.strip(), menjorok))
+
+    ditulis = 0
+    for nama in ("DAFTAR ISI", "DAFTAR GAMBAR", "DAFTAR TABEL"):
+        butir = bagian.get(nama)
+        if not butir:
+            continue
+
+        j = dok.add_paragraph()
+        j.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        j.paragraph_format.first_line_indent = Cm(0)
+        j.paragraph_format.space_after = Pt(10)
+        r = j.add_run(nama)
+        r.bold = True
+        r.font.size = Pt(14)
+        r.font.name = HURUF
+
+        for teks, hal, menjorok in butir:
+            par = dok.add_paragraph()
+            pf = par.paragraph_format
+            pf.first_line_indent = Cm(0)
+            pf.left_indent = Cm(0.6 * (menjorok // 2))
+            # Daftar berspasi tunggal. Spasi 1,5 yang diwajibkan rulebook
+            # berlaku untuk badan tulisan; daftar isi yang direnggangkan
+            # justru memakan lima halaman dan mendorong dokumen ke batas.
+            pf.line_spacing = 1.0
+            pf.space_after = Pt(2)
+            # Titik-titik penghubung dibuat Word lewat tab stop kanan, bukan
+            # diketik manual. Diketik manual, panjangnya akan meleset begitu
+            # judulnya berubah satu huruf saja.
+            pf.tab_stops.add_tab_stop(
+                Cm(LEBAR_ISI_CM), WD_TAB_ALIGNMENT.RIGHT, WD_TAB_LEADER.DOTS)
+            r = par.add_run(teks)
+            r.font.name = HURUF
+            r.font.size = UKURAN
+            r2 = par.add_run("\t" + hal)
+            r2.font.name = HURUF
+            r2.font.size = UKURAN
+
+        # Daftar gambar dan daftar tabel pendek dan muat berdua dalam satu
+        # halaman, jadi hanya daftar isi dan daftar tabel yang diakhiri
+        # pemisah halaman. Tanpa ini dokumen memakan satu halaman lebih dan
+        # menempel persis di batas 30.
+        if nama != "DAFTAR GAMBAR":
+            dok.add_paragraph().add_run().add_break(WD_BREAK.PAGE)
+        else:
+            dok.add_paragraph()
+        ditulis += 1
+    return ditulis
 
 
 def bangun(pecah_per_bagian: bool = False) -> int:
@@ -237,6 +359,8 @@ def bangun(pecah_per_bagian: bool = False) -> int:
          ("Subtema", "4 — Smart Low-Carbon Urban Mobility"),
          ("Kompetisi", "Diponegoro Software Development Competition, ANFORCOM 2026")],
     )
+
+    n_daftar = _tulis_daftar(dok)
 
     baris = badan.split("\n")
     i = 0
@@ -283,6 +407,7 @@ def bangun(pecah_per_bagian: bool = False) -> int:
         if b.startswith("> "):
             par = dok.add_paragraph()
             par.paragraph_format.left_indent = Cm(1.0)
+            par.paragraph_format.first_line_indent = Cm(0)
             _hias_teks(par, b[2:].strip())
             for r in par.runs:
                 r.italic = True
@@ -306,9 +431,27 @@ def bangun(pecah_per_bagian: bool = False) -> int:
                     i += 1
                 else:
                     break
-            gaya = "List Number" if m else "List Bullet"
-            par = dok.add_paragraph(style=gaya)
-            par.paragraph_format.line_spacing = SPASI
+            # PENOMORAN DITULIS SENDIRI, BUKAN DISERAHKAN KE WORD.
+            #
+            # Versi sebelumnya memakai gaya "List Number", dan Word menomori
+            # gaya itu SECARA BERURUTAN di seluruh dokumen. Akibatnya daftar
+            # di Bagian 3.5 memakai 1 sampai 3, lalu daftar berikutnya di
+            # Bagian 4.1 melanjutkan dari 4, bukan mulai lagi dari 1. Itulah
+            # penomoran ngawur yang terlihat di dokumen jadi.
+            #
+            # Angkanya sudah ada di Markdown dan sudah benar di sana, jadi
+            # yang paling sederhana adalah menuliskannya apa adanya. Word
+            # tidak lagi diberi kesempatan menomori sendiri.
+            par = dok.add_paragraph()
+            pf = par.paragraph_format
+            pf.line_spacing = SPASI
+            pf.space_after = Pt(4)
+            pf.left_indent = INDENT_PARAGRAF + Cm(0.5)
+            pf.first_line_indent = -Cm(0.75)   # gantung: angka menonjol keluar
+            penanda = f"{m.group(2)}. " if m else "\u2022 "
+            r = par.add_run(penanda)
+            r.font.name = HURUF
+            r.font.size = UKURAN
             _hias_teks(par, isi)
             for r in par.runs:
                 r.font.name = HURUF
@@ -332,6 +475,7 @@ def bangun(pecah_per_bagian: bool = False) -> int:
     dok.save(KELUARAN)
 
     print(f"tersimpan   : {KELUARAN.name}")
+    print(f"daftar      : {n_daftar} dari 3 (isi, gambar, tabel)")
     print(f"gambar      : {n_gambar}")
     print(f"tabel       : {n_tabel}")
     print(f"kata sumber : {len(badan.split())}")
