@@ -8,7 +8,7 @@ ini, baca bagian itu.
 
 ---
 
-## PAPAN BLOKADE — keadaan per 19 September 2026
+## PAPAN BLOKADE — keadaan per 19 September 2026, malam
 
 > Bagian ini DIPERBARUI SETIAP SESI dan selalu menggambarkan keadaan
 > sekarang, bukan riwayat. Riwayat ada di entri per milestone di bawahnya.
@@ -25,16 +25,19 @@ ini, baca bagian itu.
 | A3 | **SEBAGIAN SELESAI.** Proyek pertama `pasang-surut-anforcom` terverifikasi: terdaftar nonkomersial, Community tier, pemakaian 0,07 persen, uji 723 lolos, dan Python sudah tersambung. **Proyek Daffa dan Naufal masih belum ada** — kuota per proyek, jadi jatah tim baru sepertiga. | Kapasitas kuota untuk ekstraksi label M4 | Manual, dua orang |
 | ~~A4~~ | **SELESAI 28 Agustus.** `data/raw/DEMNAS_1409-22_v1.0.tif`, 43 MB, terverifikasi menutupi seluruh AOI, 100 persen piksel valid, median elevasi 2,60 m. | — | — |
 | ~~A5~~ | **SELESAI 29 Agustus.** github.com/dzakyahnaf/pasang-surut. Riwayat git diperiksa: `.env` tidak pernah masuk, dan tidak ada rahasia di seluruh riwayat. | — | — |
-| **A6** | **PRODUKSI MATI SEJAK SEKITAR AKHIR AGUSTUS.** Proyek Supabase dijeda karena seminggu tanpa aktivitas (`tenant/user postgres.<ref-proyek> not found`), dan potret cadangan kedaluwarsa 31 Agustus 23.00 UTC. `/api/jam`, `/api/genangan`, dan `/api/rute` menjawab 503. Juri yang membuka aplikasi hari ini melihat peta kosong, pesan "Server tidak merespons", dan Pita Pasut kosong. | Seluruh demo final; implementasi dan pameran berbobot 40 persen | Pemilik akun Supabase memulihkan proyek di dasbor, lalu Claude menjalankan ulang pipeline |
+| ~~A6~~ | **SELESAI 19 September malam.** Tim memulihkan Supabase, pipeline dijalankan ulang, dan seluruh commit di-push. Produksi lulus `23_uji_menyeluruh` 35 dari 35. Sebelumnya: proyek Supabase dijeda karena seminggu tanpa aktivitas dan potret cadangan kedaluwarsa 31 Agustus, sehingga `/api/jam`, `/api/genangan`, dan `/api/rute` menjawab 503. | — | — |
 
 ### B. PERLU PERHATIAN — tidak menghentikan, tetapi akan menggigit
 
 | # | Hal | Kenapa penting |
 |---|---|---|
 | **B56** | **Peta kosong total ketika sumbu waktu gagal dimuat.** `/api/ruas` tetap menjawab 19.394 ruas dari berkas, tetapi `App.jsx` baru memintanya setelah `/api/jam` mengisi `waktuAktif`. Begitu `/api/jam` gagal, jaringan jalan tidak pernah diminta. | Kegagalan basis data berubah menjadi layar kosong, bukan peta tanpa lapisan genangan. Perbaikannya kecil, tetapi menunggu persetujuan tim |
-| **B57** | **Lima commit lokal belum di-push** (remote `9dc8445`), termasuk perbaikan tampilan 390 piksel B53. Setelah commit sesi 19 September jumlahnya enam. | Juri yang membuka dari ponsel masih mendapat spanduk yang menutupi judul aplikasi, dan repo yang dinilai Code Project tertinggal |
-| **B58** | **Jam di luar jangkauan prediksi tampil sebagai kering.** `/api/jam` mengisi jam tanpa baris dengan nol, dan `prediksi_mencakup_jendela` bernilai benar asal ADA irisan dengan jendela. Frontend tidak membaca penanda itu sama sekali. | Kalau prediksi berakhir di tengah jendela 72 jam, sisa Pita Pasut terbaca kering padahal tidak ada prediksi di baliknya. Untuk final, cegah dengan `--mulai` dan `--jam` yang menutupi seluruh jendela hari H |
+| ~~B57~~ | **SELESAI 19 September.** Tujuh commit di-push, Vercel dan Render menayangkan `9b1229a`. Perbaikan 390 piksel diperiksa di produksi lewat iframe 390×844: spanduk dan judul tidak bertumpuk, tanpa gulir mendatar. | — |
+| **B58** | **Jam di luar jangkauan prediksi tampil sebagai kering.** `/api/jam` mengisi jam tanpa baris dengan nol, dan `prediksi_mencakup_jendela` bernilai benar asal ADA irisan dengan jendela. Frontend tidak membaca penanda itu. | **Diredam, belum diperbaiki.** Prediksi kini sampai 1 Oktober, jadi jendela 72 jam tertutup penuh sampai 27 September. Workflow `jaga_hidup` memberi peringatan begitu sisa prediksi kurang dari 72 jam |
 | **B59** | **Benchmark finalis: RobSense (Telkom University) menggarap rob Semarang dan penurunan muka tanah**, masalah yang sama dengan kita. PRAKIRA (UGM) bersinggungan di leptospirosis dan memakai ensemble machine learning. | Juri hampir pasti membandingkan. Pembeda kita: keputusan per ruas per jam keberangkatan, dan model yang ditolak secara terbuka. Rincian dan tautan video di `docs/persiapan_final.md` |
+| **B60** | **Waktu rute di produksi 3,0 sampai 3,9 detik**, naik dari 1,3 detik pada 29 Agustus. Kueri genangan per jam memakai indeks dan selesai 0,4 ms di server; yang lambat bolak-balik jaringan ke Sydney. Dari laptop, `SELECT 1` 1,2 detik, dan satu rute lewat basis data sampai 60 detik. | Masih layak untuk demo. Ukur ulang Kamis. **Jalur cadangan laptop wajib mode potret** (`DATABASE_URL=` dikosongkan), yang menjawab rute di bawah 0,1 detik |
+| **B61** | **`_potret()` dulu memeriksa masa berlaku di dalam `lru_cache`.** Potret yang berlaku saat pertama dibaca akan terus dipakai setelah basi selama proses hidup. Tidak pernah terlihat karena Render gratis sering tidur dan memulai proses baru. | **Diperbaiki 19 September**, karena workflow `jaga_hidup` membuat proses bisa hidup berhari-hari. Pembacaan berkas tetap di-cache, pemeriksaan tanggal kini tiap panggilan |
+| **B62** | **Sambungan SSL ke Supabase putus sekali** saat `18_seed_demo` menarik GeoJSON 19.394 ruas, sesaat setelah proyek dipulihkan. Percobaan kedua berhasil. | Koneksi yang gagal dibuang dari kolam (`close=rusak`), jadi di API dampaknya paling banyak satu permintaan gagal. Belum terulang |
 | ~~B1~~ | **SELESAI 29 Agustus.** Dipindah ke `docs/identitas_tim.yaml`, `jumlah_citra_s1` diperbaiki menjadi 725, dan komentar ambang keputusan lama dibuang karena sudah tidak berlaku. | — |
 | B2 | Tautan **riset WRI April 2026** di README masih `TODO(verifikasi tautan)`. | Tautan mati di gerbang juri lebih buruk daripada tidak ada tautan |
 | B3 | Commit membawa trailer `Co-Authored-By: Claude Opus 5`. | Kalau rulebook DSDC mempersoalkan, putuskan sekarang selagi baru empat commit |
@@ -66,7 +69,7 @@ ini, baca bagian itu.
 | B49 | **Tiga dari empat TODO(sumber) wajib SELESAI.** WRI Rp848 miliar, faktor emisi, dan leptospirosis kini bersitasi. | Yang tersisa hanya **konsumsi BBM mobil 0,090 dan truk 0,250 L/km** — tidak ada rata-rata nasional resmi. Sudah ditulis sebagai asumsi rancangan, jangan diisi angka karangan. Provenans penuh di `docs/sumber_angka.md` |
 | B44 | **Rancu musiman diuji, dan penolakan model Sentinel-1 kini berdiri di atas dasar yang jauh lebih kokoh.** Musim menjelaskan **38,6 persen ragam pasut** pada waktu akuisisi. Korelasi +0,362 di tingkat luas menyusut ke +0,230 di tingkat ruas, lalu ke **+0,107** setelah hari-dalam-tahun dikendalikan. Bukti bebas — tanggal kejadian rob — **berlawanan arah** (−0,77σ). | Dua keberatan terakhir yang menggantung sudah dijawab. Tidak ada lagi jalan penyelamatan yang tersisa untuk diuji, dan itu justru kabar baik: keputusan beralih ke indeks kerentanan kini terdokumentasi tuntas. Rinciannya di `docs/validasi.md` 6.5, skripnya `20_label_luas_ke_ruas.py` dan `21_uji_rancu_musiman.py` |
 | B45 | **Perkiraan halaman proposal sempat salah hitung dan hampir memicu pemangkasan yang tidak perlu.** Kepadatan 156 kata/halaman diturunkan dari `.docx` yang SUDAH memuat enam gambar, lalu 1,5 halaman untuk enam tangkapan layar ditambahkan lagi di atasnya. | Gambar yang sama terhitung dua kali dan draft tampak 30,3 halaman padahal 29,0. Diperiksa dengan membuka `word/media/` di dalam `.docx`: enam PNG tertanam. **Jumlah halaman final tetap wajib diperiksa dengan Word, bukan dengan perkiraan ini** |
-| B36 | **`data/processed/potret_demo.json` 7,8 MB WAJIB ikut di-commit.** Tanpa berkas itu, aplikasi yang di-deploy mati begitu Supabase tersendat. | Jalankan ulang `python -m scripts.18_seed_demo` sebelum demo — potret membawa tanggal kedaluwarsa dan ditolak API setelah lewat |
+| B36 | **`data/processed/potret_demo.json` WAJIB ikut di-commit.** Tanpa berkas itu, aplikasi yang di-deploy mati begitu Supabase tersendat. | Potret sekarang berlaku 26 September 00.00 WIB sampai 28 September 23.00 WIB, 7,7 MB. `/api/kesehatan` melaporkan `potret_berlaku_sampai_utc`, jadi basinya kini terlihat dari luar |
 | B37 | **Uji dari HP di jaringan seluler belum dilakukan.** | Kriteria terima M6 menuntutnya. Perlu perangkat fisik |
 | ~~B38~~ | **DIPUTUSKAN 29 Agustus:** Markdown jadi acuan, `.docx` dibangun ulang darinya di M8. Sebelumnya: **DUA SUMBER KEBENARAN untuk proposal.** `.docx` di akar (27 halaman, dirawat sejak sesi keempat) dan `docs/proposal_draft.md` (M7, 28,9 halaman perkiraan) kini memuat isi yang sama. | **Tetapkan satu sebagai acuan sebelum M8.** Saran: Markdown jadi acuan karena bisa di-diff di git, lalu `.docx` dibangun ulang darinya. Dibiarkan, keduanya akan menyimpang dalam satu sesi |
 | B39 | **Empat TODO(sumber) WAJIB diisi**: tautan riset WRI, konsumsi bahan bakar per km, faktor emisi, dan data leptospirosis. | Keempatnya angka yang sudah tercetak di proposal, dan dua di antaranya tampil di antarmuka. Rincian di `docs/proposal_draft.md` bagian Ringkasan TODO |
@@ -93,7 +96,7 @@ ini, baca bagian itu.
 | B22 | **MODEL GENANGAN SENTINEL-1 DITOLAK, DAN KLAIM PRODUK TURUN.** Model dilatih atas 725 citra dan 1,81 juta nilai backscatter, lalu ditolak sendiri karena label basahnya tidak berkorelasi dengan pasut (aturan "pasut saja" ROC-AUC 0,4935, dan pada tanggal kejadian rob tandanya terbalik). Sistem beralih ke indeks kerentanan sesuai PLAN.md 9.A. | **Ini perubahan terbesar sesi ini dan perlu keputusan tim.** Proposal sudah saya turunkan klaimnya dari "memprediksi genangan" menjadi "indeks kerentanan", dan Tabel 8 diisi angka model yang ditolak beserta alasannya. Rincian di `docs/validasi.md` bagian 6. Lihat C16 |
 | B23 | **Antarmuka kini punya DUA tingkat lencana**, bukan satu. `dummy` memunculkan DATA CONTOH, `kerentanan_v1` memunculkan INDEKS KERENTANAN. Hanya `model_v1` yang membuat peta tampil tanpa lencana. | Tanpa tingkat kedua, indeks kerentanan akan tampil polos dan terbaca seolah prediksi model — overclaim yang dilarang aturan repo nomor 1 |
 | B24 | **Tarikan mentah Sentinel-1 219 MB dan TIDAK di-commit.** Sudah masuk `.gitignore`. | Bisa dibangun ulang dengan `python -m scripts.08_ekstrak_s1`; daftar ruas dan benih acaknya terkunci di `data/processed/ruas_sampel_latih.json` sehingga hasilnya sama persis. Perlu kuota Earth Engine lagi, sekitar satu jam |
-| B25 | **Prakiraan hujan cepat basi.** Tabel `pemicu` kini memuat prakiraan Open-Meteo sampai 12 September 2026, bertanda `sumber_hujan = 'open-meteo-prakiraan'`. | Sebelum demo atau rekaman video, jalankan ulang `python -m scripts.06_isi_pemicu --prakiraan` lalu `python -m scripts.11_indeks_kerentanan` |
+| B25 | **Prakiraan hujan TIDAK dipakai di runtime.** Ditemukan 19 September: prediksi indeks kerentanan hanya dihitung dari pasut harmonik dan indeks per ruas yang tetap. Hujan hanya pernah menjadi fitur model Sentinel-1 yang ditolak. | Skrip 06 tetap diperlukan untuk memperpanjang baris jam di tabel `pemicu`, yang kini sampai 4 Oktober. Menyegarkan hujan sebelum final tidak mengubah satu angka pun. Juri yang bertanya "apakah hujan diperhitungkan" harus dijawab: tidak, dan kenapa |
 | B15 | **Autentikasi Earth Engine memberi empat cakupan sekaligus**: earthengine, cloud-platform, drive, dan devstorage.full_control. | Itu bawaan alat resmi, bukan pilihan kita, tetapi cakupan Drive dan Cloud Storage luas. Token tersimpan di laptop yang menjalankan perintah |
 
 ### C. HANYA BISA DIKERJAKAN MANUAL — di luar jangkauan Claude Code
@@ -119,7 +122,7 @@ berubah oleh tersedianya browser otomatis.
 | C14 | Konfirmasi pembagian peran di Lampiran C proposal. Saya isi mengikuti pembagian kerja PLAN.md, bukan berdasarkan kesepakatan tim | `docs/sisa_proposal.md` |
 | C13 | Buka satu per satu 19 entri `perlu_verifikasi` di `kejadian_rob_semarang.json` dan salin angkanya dari isi artikel | Angka belum terverifikasi tidak boleh masuk proposal |
 | C16 | **Setujui atau tolak penurunan klaim produk** dari "prediksi genangan" menjadi "indeks kerentanan". Saya sudah menurunkannya di proposal karena aturan repo nomor 1, tetapi ini keputusan strategis tim, bukan keputusan teknis. | B22, `docs/validasi.md` bagian 6 |
-| **C17** | **Pulihkan proyek Supabase tim** dari dasbor. Ref proyeknya ada di `DATABASE_URL` dalam `.env`, sengaja tidak ditulis di repo publik. Memerlukan login pemilik akun | A6 |
+| ~~C17~~ | **SELESAI 19 September**, dipulihkan tim. | A6 |
 | **C18** | **Pastikan konfirmasi kehadiran final diterima panitia, dan hadiri Technical Meeting 22 September.** Rulebook 10.1 dan 10.5e: tim yang terlambat mengonfirmasi digantikan atau gugur | `docs/persiapan_final.md` |
 | **C19** | Slide presentasi, latihan berwaktu, dan PDF slide untuk panitia | Catatan panitia: berkas yang dikumpulkan wajib PDF |
 | C15 | **Putuskan angka subsidensi mana yang dipakai tim.** Kalau 9–13 cm/tahun hendak dipertahankan, sediakan sumber yang bisa dibuka dan dibaca sampai ke tabelnya. Kalau tidak, PLAN.md bagian 6 perlu diturunkan menyusul proposal. | B18 |
@@ -1501,3 +1504,59 @@ Video keempat tim lain ditemukan: RobSense (Telkom University), OCEANAGARA
 (Binus Semarang), PRAKIRA (UGM), dan CIRQUO (ITS). RobSense menggarap rob
 Semarang, masalah yang sama dengan kita (B59). Deskripsi karya diambil dari
 deskripsi video, belum dari menonton videonya.
+
+---
+
+## Persiapan final lanjutan — 19 September 2026 malam: produksi hidup kembali
+
+Tim memulihkan proyek Supabase. Data di dalamnya utuh: 19.394 ruas, 102.552
+baris pemicu, dan 21.778 prediksi lama.
+
+### Pipeline
+
+- `06_isi_pemicu --prakiraan`: 552 jam, tabel `pemicu` kini sampai 4 Oktober.
+- `11_indeks_kerentanan --mulai 2026-09-19T14:00 --jam 275`: 67.442 baris,
+  sampai 1 Oktober 00.00 UTC. Indeks per ruas identik dengan versi 28
+  Agustus; yang berubah hanya jendela waktunya.
+- `18_seed_demo --mulai 2026-09-25T17:00 --jam 72`: potret 7,7 MB untuk 26
+  September 00.00 WIB sampai 28 September 23.00 WIB. Percobaan pertama gagal
+  karena sambungan SSL putus (B62); percobaan kedua berhasil.
+
+### Diuji sebelum push
+
+| Uji | Hasil |
+|---|---|
+| `pytest -q` | 43 lulus |
+| `pytest -q` di klon bersih tanpa `.env` | 43 lulus |
+| API lokal dengan basis data | 35 lulus, tetapi rute sampai 60 detik (B60) |
+| API lokal dengan basis data dimatikan | 35 lulus |
+| API lokal dengan `DATABASE_URL=` kosong, perintah persis di panduan | 35 lulus |
+
+### Diuji setelah push
+
+| Uji | Hasil |
+|---|---|
+| Vercel | menayangkan `9b1229a`, CSS memuat perbaikan 420 piksel |
+| Render | `/api/kesehatan` melaporkan commit `9b1229a` dan `database: true` |
+| `23_uji_menyeluruh` produksi | 35 lulus, 0 gagal |
+| Workflow `Uji` | lulus |
+| Workflow `Jaga hidup`, dipicu manual | lulus, tanpa peringatan |
+| Tampilan 390×844 di produksi | spanduk dan judul bertingkat, lebar dokumen 390 |
+
+### Yang ditambahkan ke kode
+
+- `.github/workflows/uji.yml` dan `.github/workflows/jaga_hidup.yml`,
+  keduanya disetujui tim.
+- `/api/kesehatan` kini memuat `commit` dan `potret_berlaku_sampai_utc`.
+  Tanpa `commit`, deploy Render tidak bisa dibuktikan dari luar. Tanpa
+  tanggal potret, potret yang basi baru ketahuan saat basis data mati.
+- Bug `lru_cache` pada `_potret()` diperbaiki (B61). Ditemukan karena ping
+  terjadwal membuat proses Render bisa hidup berhari-hari.
+
+### Yang dicoret
+
+PR nomor 5 di `docs/persiapan_final.md`, menyegarkan prakiraan hujan pada
+Kamis, ternyata tidak berguna. Saya menaruhnya tanpa memeriksa bahwa prediksi
+indeks kerentanan tidak memakai hujan sama sekali (B25). Proposal sendiri
+sudah menulis komponen waktunya dari pasut harmonik, jadi tidak ada klaim yang
+perlu dikoreksi.

@@ -11,7 +11,7 @@ bawah merujuk ke rulebook.
 | Sabtu 19 September | hari ini | tujuh hari sebelum final |
 | **Selasa 22 September** | **Technical Meeting, wajib** (10.3) | urutan presentasi diundi di sini (9.1.2); info lewat Instagram ANFORCOM |
 | **Rabu 23 September** | batas konfirmasi ketidakhadiran anggota (10.4) | paling lambat 3 hari sebelum final, lewat CP DSDC |
-| Kamis 24 September | segarkan data, uji jalur cadangan | lihat PR nomor 5 dan 6 |
+| Kamis 24 September | uji jalur cadangan laptop, ukur ulang waktu rute | PR nomor 6 |
 | Jumat 25 September | berangkat ke Semarang | jangan berangkat pada hari H |
 | **Sabtu 26 September** | **Final offline di Universitas Diponegoro** | pameran lalu presentasi |
 
@@ -54,76 +54,66 @@ orang lain. Jumlahnya 40 persen.
 - Technical Meeting berstatus wajib (10.3). Sanksinya tidak ditulis, jadi
   jangan diuji.
 
-## Status aplikasi, diperiksa 19 September
+## Status aplikasi
 
-**Belum siap. Fitur inti mati di produksi.**
+**Diperbarui 19 September malam: hidup kembali dan lulus seluruh uji.**
 
-Yang dilihat juri kalau membuka https://pasang-surut.vercel.app hari ini:
-peta kosong tanpa satu ruas pun, pesan "Server tidak merespons. Coba lagi
-sebentar lagi.", dan Pita Pasut yang hanya berbunyi "Muat ulang halaman untuk
-mengambil data pasut." Yang masih bisa diklik hanya tombol tujuan cepat dan
-halaman Validasi.
-
-| Uji terhadap API produksi | Hasil |
+| Pemeriksaan | Hasil |
 |---|---|
-| `/api/kesehatan` | menjawab, tetapi `database: false` |
-| `/api/jam`, sumbu waktu Pita Pasut | HTTP 503 |
-| `/api/genangan` | HTTP 503 |
-| `/api/rute`, perutean | HTTP 503 |
-| `/api/ruas` | 200, 19.394 ruas dari berkas |
-| `/api/tujuan-cepat`, `/api/validasi`, CORS | lulus |
-| `23_uji_menyeluruh` | 12 lulus, 2 gagal, bagian perutean tidak bisa dijalankan |
-| Bangun dari tidur | 26 detik (Render gratis tidur setelah 15 menit menganggur) |
+| `23_uji_menyeluruh` terhadap produksi | 35 lulus, 0 gagal |
+| `/api/kesehatan` | `database: true`, commit `9b1229a` sudah tayang |
+| Prediksi di basis data | 67.442 baris, sampai 1 Oktober 00.00 UTC |
+| Potret cadangan | 26 September 00.00 WIB sampai 28 September 23.00 WIB |
+| Uji dengan basis data dimatikan | 35 lulus, 0 gagal, perutean ikut hidup dari potret |
+| Tampilan 390 piksel | spanduk dan judul tidak lagi bertumpuk, tanpa gulir mendatar |
+| CI `Uji` di GitHub Actions | lulus |
+| Workflow `Jaga hidup` | lulus, tanpa peringatan |
+| Waktu satu rute di produksi | 3,0 sampai 3,9 detik |
 
-Rantai sebabnya:
+Waktu rute lebih lambat daripada catatan 29 Agustus, 1,3 detik. Kuerinya
+sendiri memakai indeks dan selesai dalam 0,4 milidetik di server, jadi yang
+lambat adalah bolak-balik jaringan ke Supabase di Sydney. Dari laptop, satu
+kueri sederhana hari ini makan 1,2 detik, sedangkan catatan Agustus 370
+milidetik. Ukur ulang pada Kamis; kalau masih begini, 3 sampai 4 detik tetap
+layak untuk demo, asal tidak kaget.
 
-1. **Proyek Supabase dijeda.** Galatnya `tenant/user
-   postgres.<ref-proyek> not found`, tanda proyek gratis yang dijeda
-   setelah seminggu tanpa aktivitas. Aplikasi terakhir dipakai sekitar akhir
-   Agustus.
-2. **Potret cadangan kedaluwarsa** sejak 31 Agustus 23.00 UTC. API sengaja
-   menolak potret basi, karena prediksi basi lebih berbahaya daripada layar
-   kosong. Akibatnya pengaman kedua juga tidak menolong.
-3. `/api/ruas` sebetulnya menjawab, tetapi frontend baru memintanya setelah
-   sumbu waktu tiba. Karena sumbu waktunya gagal, peta tetap kosong.
-
-Di luar itu, **5 commit lokal belum di-push** (remote masih `9dc8445`). Salah
-satunya perbaikan tampilan 390 piksel: tanpa itu, spanduk peringatan menutupi
-judul aplikasi di layar ponsel.
+Siang harinya produksi sempat mati total. Proyek Supabase dijeda karena
+seminggu tanpa aktivitas, dan potret cadangan sudah kedaluwarsa sejak 31
+Agustus. Juri yang membuka aplikasi akan melihat peta kosong, pesan "Server
+tidak merespons", dan Pita Pasut kosong. Tim memulihkan Supabase, lalu pipeline
+dijalankan ulang dan seluruh commit di-push.
 
 ## PR, diurutkan dari yang menghambat
 
 ### Aplikasi
 
-| # | Pekerjaan | Siapa | Kapan |
-|---|---|---|---|
-| 1 | **Pulihkan proyek Supabase** di dasbor, tombol *Restore project*. Ref proyeknya ada di `DATABASE_URL` dalam `.env`. Kalau tombolnya tidak ada, kabari dan pakai rencana cadangan di bawah | pemilik akun Supabase | Sabtu 19 atau Minggu 20 |
-| 2 | Periksa basis data, jalankan `06_isi_pemicu --prakiraan`, `11_indeks_kerentanan`, dan `18_seed_demo` dengan `--mulai` dan `--jam` diarahkan supaya seluruh hari final tercakup, lalu commit potretnya | Claude | begitu nomor 1 selesai |
-| 3 | Push seluruh commit lokal, lalu pastikan Vercel dan Render ikut deploy ulang | tim | setelah nomor 2 |
-| 4 | `23_uji_menyeluruh` terhadap produksi sampai nol gagal, dan aplikasi dibuka di lebar ponsel | Claude | setelah nomor 3 |
-| 5 | Segarkan prakiraan hujan sekali lagi supaya umurnya paling lama dua hari saat final, lalu push dan uji ulang | Claude, push oleh tim | Kamis 24 malam |
-| 6 | Jalur cadangan di laptop: backend dan frontend lokal memakai potret, diuji dengan wifi dimatikan | tim, dibantu Claude | Kamis 24 |
-| 7 | Uji dari HP sungguhan di jaringan seluler. Belum pernah dikerjakan (B37) | tim | setelah nomor 4 |
-
-Tambahan yang bisa saya kerjakan bila disetujui:
-
-| # | Pekerjaan | Gunanya |
+| # | Pekerjaan | Status |
 |---|---|---|
-| 8 | Ping terjadwal ke `/api/kesehatan` lewat GitHub Actions | Render tidak tidur saat juri membuka, dan Supabase tidak dijeda lagi |
-| 9 | Peta tetap menampilkan jaringan jalan ketika sumbu waktu gagal dimuat | Kegagalan berikutnya tidak lagi berupa layar kosong |
-| 10 | CI yang menjalankan `pytest` setiap push, plus test yang menjaga dua salinan `copy.id.json` tetap sama (B5) | Poin "praktik pengembangan yang baik" di Code Project |
+| ~~1~~ | Pulihkan proyek Supabase | **Selesai 19 September**, oleh tim |
+| ~~2~~ | Jalankan ulang pipeline dengan jendela yang menutupi hari final | **Selesai 19 September.** `06_isi_pemicu --prakiraan`, lalu `11_indeks_kerentanan --mulai 2026-09-19T14:00 --jam 275`, lalu `18_seed_demo --mulai 2026-09-25T17:00 --jam 72` |
+| ~~3~~ | Push seluruh commit, pastikan Vercel dan Render deploy ulang | **Selesai 19 September.** Keduanya menayangkan `9b1229a` |
+| ~~4~~ | Uji produksi sampai nol gagal, dan buka di lebar ponsel | **Selesai 19 September.** 35 lulus, 0 gagal |
+| ~~5~~ | ~~Segarkan prakiraan hujan pada Kamis~~ | **Dicoret, ternyata tidak berguna.** Prediksi dihitung dari pasut harmonik dan indeks per ruas yang tetap. Data hujan tidak dipakai di runtime, jadi menyegarkannya tidak mengubah satu angka pun di aplikasi |
+| 6 | Jalur cadangan di laptop, diuji dengan wifi dimatikan | **Terbuka**, tim. Perintahnya di bagian Demo, sudah diuji: 35 lulus |
+| 7 | Uji dari HP sungguhan di jaringan seluler (B37) | **Terbuka**, tim |
+| ~~8~~ | Ping terjadwal ke `/api/kesehatan` | **Selesai 19 September.** `.github/workflows/jaga_hidup.yml`, tiap 10 menit |
+| 9 | Peta tetap menampilkan jaringan jalan ketika sumbu waktu gagal dimuat | Belum disetujui |
+| ~~10~~ | CI yang menjalankan `pytest` setiap push | **Selesai 19 September.** `.github/workflows/uji.yml`. Test yang menjaga dua salinan `copy.id.json` tetap sama (B5) belum dikerjakan |
 
-**Rencana cadangan bila nomor 1 gagal.** Buat basis data baru, di proyek
-Supabase baru atau di Postgres lokal lewat Docker, lalu jalankan ulang pipeline
-dari skrip 02. Bahannya masih lengkap di laptop: DEMNAS 43 MB, graf jalan, dan
-data olahan. Render otomatis beralih ke potret ketika basis data tidak
-terjangkau, jadi potret yang dibangun dari basis data lokal pun cukup untuk
-menghidupkan produksi pada hari final. Docker Desktop sedang tidak berjalan,
-jadi isi kontainer lama belum diperiksa.
+**Kalau Supabase mati pada hari final**, tidak perlu berbuat apa-apa. Render
+beralih sendiri ke potret, dan jalur itu sudah diuji dengan basis data
+dimatikan: 35 lulus, termasuk perutean.
 
-**Supabase akan dijeda lagi** seminggu setelah aktivitas terakhir. Menjalankan
-pipeline pada 24 September kemungkinan besar sudah menjaganya sampai final,
-tetapi ping harian (PR nomor 8) membuatnya tidak bergantung pada tebakan.
+**Workflow `Jaga hidup` gagal hanya bila basis data tidak terjangkau.** Setiap
+kegagalan run terjadwal dikirim GitHub lewat surel ke akun yang terakhir
+mengubah jadwalnya, jadi surel dari GitHub Actions minggu ini wajib dibuka.
+Workflow itu juga memberi peringatan, tanpa gagal, bila prediksi tinggal
+kurang dari 72 jam atau potret sudah basi.
+
+**Batasnya.** Jadwal GitHub bisa terlambat beberapa menit, jadi buka aplikasi
+sendiri 30 menit sebelum pameran. Layanan yang terus bangun memakai 720 sampai
+744 dari 750 jam gratis Render per bulan. Setelah lomba, matikan dari tab
+Actions, pilih Jaga hidup, lalu Disable workflow.
 
 ### Presentasi, pameran, dan non-teknis
 
@@ -152,12 +142,45 @@ muncul. Langkah ini membangunkan Render dari tidurnya. Pastikan juga
 
 ### Demo
 
-`docs/demo_script.md` sudah memuat naskah demo. Perbarui jam yang dipakai ke jam
-pasang tertinggi pada hari final setelah data disegarkan.
+`docs/demo_script.md` sudah memuat naskah demo. Jam yang dipakai perlu
+disesuaikan dengan profil hari final di bawah.
 
 Alur inti, sekitar tiga menit: pilih asal dan tujuan dari tujuan cepat, hitung
 rute pada jam surut, geser Pita Pasut ke jam pasang, tunjukkan rute yang
 berubah beserta ongkos menghindarnya, lalu buka halaman Validasi.
+
+**Profil Sabtu 26 September**, dari potret. Kedalaman di sini estimasi turunan
+dari indeks kerentanan, bukan hasil pengukuran, dan harus disebut begitu saat
+demo.
+
+| Jam WIB | Pasut | Ruas tergenang | Kedalaman maksimum, estimasi |
+|---|---:|---:|---:|
+| 00.00 sampai 03.00 | −0,09 sampai −0,01 m | 0 | — |
+| 04.00 | +0,05 m | 173 | 31,8 cm |
+| 06.00 | +0,17 m | 739 | 37,6 cm |
+| **08.00, puncak** | **+0,23 m** | **1.043** | **40,8 cm** |
+| 10.00 | +0,19 m | 859 | 38,9 cm |
+| 12.00 | +0,07 m | 276 | 32,8 cm |
+| 13.00 sampai 23.00 | +0,00 sampai −0,16 m | 0 | — |
+
+Pita Pasut di produksi selalu dimulai dari jam berjalan. Kalau giliran
+presentasi jatuh setelah pukul 13.00, jam berjalan sudah kering, jadi geser ke
+pasang berikutnya: Minggu 27 September pukul 09.00, 805 ruas. Dari potret, Pita
+Pasut dimulai pukul 00.00 hari final, jadi puncak 08.00 selalu terjangkau.
+
+**Jalur cadangan laptop (PR nomor 6).** Wajib berjalan dari potret, bukan dari
+basis data. Dari laptop ke Sydney, satu rute terukur sampai 60 detik; dari
+potret, di bawah 0,1 detik. Dua terminal Git Bash dari akar repo:
+
+```bash
+cd backend && DATABASE_URL= ../.venv/Scripts/python -m uvicorn app.main:app --port 8000
+cd frontend && npm run dev
+```
+
+Lalu buka http://localhost:5173. `DATABASE_URL=` yang dikosongkan memaksa API
+memakai potret. Huruf dan peta tidak memanggil internet sama sekali, jadi uji
+akhirnya dengan wifi dimatikan. Perintah ini sudah diuji 19 September: 35
+lulus, 0 gagal.
 
 Siapkan cadangan berlapis: produksi, lalu laptop lokal, lalu berkas video asli
 di laptop, lalu tangkapan layar alur demo di dalam slide. Lapisan terakhir itu

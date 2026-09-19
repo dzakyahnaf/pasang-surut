@@ -1,5 +1,7 @@
 # PASANG SURUT
 
+[![Uji](https://github.com/dzakyahnaf/pasang-surut/actions/workflows/uji.yml/badge.svg)](https://github.com/dzakyahnaf/pasang-surut/actions/workflows/uji.yml)
+
 **Perutean sadar rob untuk Semarang.**
 
 Memprediksi **kapan** tiap ruas jalan berisiko tergenang rob untuk 72 jam ke
@@ -311,9 +313,13 @@ python -m scripts.16_muka_air_terukur   # label vs muka air terukur
 
 ```bash
 cd backend && uvicorn app.main:app --reload   # API di :8000
+cd backend && DATABASE_URL= uvicorn app.main:app   # tanpa database, dari potret
 cd frontend && npm install && npm run dev     # UI di :5173
 pytest -q                                     # 43 uji, dari akar repo
 ```
+
+Baris kedua menjalankan API sepenuhnya dari `data/processed/potret_demo.json`,
+tanpa database dan tanpa internet, selama potretnya masih berlaku.
 
 ### Deploy
 
@@ -326,6 +332,15 @@ Render membaca [`render.yaml`](render.yaml) sebagai blueprint. Vercel membaca
 [`frontend/vercel.json`](frontend/vercel.json). Dua variabel wajib diisi di
 dasbor masing-masing: `DATABASE_URL` dan `ASAL_DIIZINKAN` di sisi API,
 `VITE_API_URL` di sisi frontend.
+
+### Otomasi GitHub Actions
+
+- [`uji.yml`](.github/workflows/uji.yml) menjalankan `pytest -q` pada setiap
+  push dan pull request, di mesin bersih tanpa `.env` dan tanpa database.
+- [`jaga_hidup.yml`](.github/workflows/jaga_hidup.yml) mengetuk
+  `/api/kesehatan` tiap 10 menit supaya Render tidak tidur dan Supabase tidak
+  dijeda. Ia gagal bila basis data tidak terjangkau, dan memberi peringatan
+  bila prediksi tinggal kurang dari 72 jam atau potret cadangan sudah basi.
 
 ---
 
