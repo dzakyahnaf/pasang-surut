@@ -8,11 +8,13 @@ ini, baca bagian itu.
 
 ---
 
-## PAPAN BLOKADE — keadaan per 30 Agustus 2026, sore
+## PAPAN BLOKADE — keadaan per 19 September 2026
 
 > Bagian ini DIPERBARUI SETIAP SESI dan selalu menggambarkan keadaan
 > sekarang, bukan riwayat. Riwayat ada di entri per milestone di bawahnya.
-> Sisa waktu ke tenggat: **sekitar 36 jam** (31 Agustus 2026, 23.59 WIB).
+> **Tim lolos final.** Final offline di Universitas Diponegoro, **26 September
+> 2026**, tujuh hari lagi. Technical Meeting wajib **22 September**.
+> Rencana lengkap dan daftar PR ada di `docs/persiapan_final.md`.
 
 ### A. BLOKADE — menghentikan pekerjaan berikutnya
 
@@ -23,11 +25,16 @@ ini, baca bagian itu.
 | A3 | **SEBAGIAN SELESAI.** Proyek pertama `pasang-surut-anforcom` terverifikasi: terdaftar nonkomersial, Community tier, pemakaian 0,07 persen, uji 723 lolos, dan Python sudah tersambung. **Proyek Daffa dan Naufal masih belum ada** — kuota per proyek, jadi jatah tim baru sepertiga. | Kapasitas kuota untuk ekstraksi label M4 | Manual, dua orang |
 | ~~A4~~ | **SELESAI 28 Agustus.** `data/raw/DEMNAS_1409-22_v1.0.tif`, 43 MB, terverifikasi menutupi seluruh AOI, 100 persen piksel valid, median elevasi 2,60 m. | — | — |
 | ~~A5~~ | **SELESAI 29 Agustus.** github.com/dzakyahnaf/pasang-surut. Riwayat git diperiksa: `.env` tidak pernah masuk, dan tidak ada rahasia di seluruh riwayat. | — | — |
+| **A6** | **PRODUKSI MATI SEJAK SEKITAR AKHIR AGUSTUS.** Proyek Supabase dijeda karena seminggu tanpa aktivitas (`tenant/user postgres.<ref-proyek> not found`), dan potret cadangan kedaluwarsa 31 Agustus 23.00 UTC. `/api/jam`, `/api/genangan`, dan `/api/rute` menjawab 503. Juri yang membuka aplikasi hari ini melihat peta kosong, pesan "Server tidak merespons", dan Pita Pasut kosong. | Seluruh demo final; implementasi dan pameran berbobot 40 persen | Pemilik akun Supabase memulihkan proyek di dasbor, lalu Claude menjalankan ulang pipeline |
 
 ### B. PERLU PERHATIAN — tidak menghentikan, tetapi akan menggigit
 
 | # | Hal | Kenapa penting |
 |---|---|---|
+| **B56** | **Peta kosong total ketika sumbu waktu gagal dimuat.** `/api/ruas` tetap menjawab 19.394 ruas dari berkas, tetapi `App.jsx` baru memintanya setelah `/api/jam` mengisi `waktuAktif`. Begitu `/api/jam` gagal, jaringan jalan tidak pernah diminta. | Kegagalan basis data berubah menjadi layar kosong, bukan peta tanpa lapisan genangan. Perbaikannya kecil, tetapi menunggu persetujuan tim |
+| **B57** | **Lima commit lokal belum di-push** (remote `9dc8445`), termasuk perbaikan tampilan 390 piksel B53. Setelah commit sesi 19 September jumlahnya enam. | Juri yang membuka dari ponsel masih mendapat spanduk yang menutupi judul aplikasi, dan repo yang dinilai Code Project tertinggal |
+| **B58** | **Jam di luar jangkauan prediksi tampil sebagai kering.** `/api/jam` mengisi jam tanpa baris dengan nol, dan `prediksi_mencakup_jendela` bernilai benar asal ADA irisan dengan jendela. Frontend tidak membaca penanda itu sama sekali. | Kalau prediksi berakhir di tengah jendela 72 jam, sisa Pita Pasut terbaca kering padahal tidak ada prediksi di baliknya. Untuk final, cegah dengan `--mulai` dan `--jam` yang menutupi seluruh jendela hari H |
+| **B59** | **Benchmark finalis: RobSense (Telkom University) menggarap rob Semarang dan penurunan muka tanah**, masalah yang sama dengan kita. PRAKIRA (UGM) bersinggungan di leptospirosis dan memakai ensemble machine learning. | Juri hampir pasti membandingkan. Pembeda kita: keputusan per ruas per jam keberangkatan, dan model yang ditolak secara terbuka. Rincian dan tautan video di `docs/persiapan_final.md` |
 | ~~B1~~ | **SELESAI 29 Agustus.** Dipindah ke `docs/identitas_tim.yaml`, `jumlah_citra_s1` diperbaiki menjadi 725, dan komentar ambang keputusan lama dibuang karena sudah tidak berlaku. | — |
 | B2 | Tautan **riset WRI April 2026** di README masih `TODO(verifikasi tautan)`. | Tautan mati di gerbang juri lebih buruk daripada tidak ada tautan |
 | B3 | Commit membawa trailer `Co-Authored-By: Claude Opus 5`. | Kalau rulebook DSDC mempersoalkan, putuskan sekarang selagi baru empat commit |
@@ -112,6 +119,9 @@ berubah oleh tersedianya browser otomatis.
 | C14 | Konfirmasi pembagian peran di Lampiran C proposal. Saya isi mengikuti pembagian kerja PLAN.md, bukan berdasarkan kesepakatan tim | `docs/sisa_proposal.md` |
 | C13 | Buka satu per satu 19 entri `perlu_verifikasi` di `kejadian_rob_semarang.json` dan salin angkanya dari isi artikel | Angka belum terverifikasi tidak boleh masuk proposal |
 | C16 | **Setujui atau tolak penurunan klaim produk** dari "prediksi genangan" menjadi "indeks kerentanan". Saya sudah menurunkannya di proposal karena aturan repo nomor 1, tetapi ini keputusan strategis tim, bukan keputusan teknis. | B22, `docs/validasi.md` bagian 6 |
+| **C17** | **Pulihkan proyek Supabase tim** dari dasbor. Ref proyeknya ada di `DATABASE_URL` dalam `.env`, sengaja tidak ditulis di repo publik. Memerlukan login pemilik akun | A6 |
+| **C18** | **Pastikan konfirmasi kehadiran final diterima panitia, dan hadiri Technical Meeting 22 September.** Rulebook 10.1 dan 10.5e: tim yang terlambat mengonfirmasi digantikan atau gugur | `docs/persiapan_final.md` |
+| **C19** | Slide presentasi, latihan berwaktu, dan PDF slide untuk panitia | Catatan panitia: berkas yang dikumpulkan wajib PDF |
 | C15 | **Putuskan angka subsidensi mana yang dipakai tim.** Kalau 9–13 cm/tahun hendak dipertahankan, sediakan sumber yang bisa dibuka dan dibaca sampai ke tabelnya. Kalau tidak, PLAN.md bagian 6 perlu diturunkan menyusul proposal. | B18 |
 
 ### D. SUDAH TERPECAHKAN — jangan dikerjakan lagi
@@ -1448,3 +1458,46 @@ Tercatat sebagai B45.
 - `docs/validasi.md` 6.5 dikoreksi: uji topeng air permanen kini SELESAI,
   bukan "tidak selesai dalam waktu sesi ini". Hasilnya dicatat apa adanya
   beserta empat alasan mengapa ia tetap tidak mencabut penolakan model.
+
+---
+
+## Persiapan final — 19 September 2026: produksi ternyata mati
+
+Tim lolos lima besar. Sesi ini merangkum rulebook tahap final, memeriksa
+kesiapan aplikasi, dan mencari video keempat finalis lain sebagai pembanding.
+Hasil lengkapnya di `docs/persiapan_final.md`.
+
+### Temuan terpenting: aplikasi tidak bisa dipakai
+
+Kedua pengaman gagal bersamaan. Proyek Supabase dijeda karena tidak ada
+aktivitas sejak akhir Agustus, dan potret cadangan kedaluwarsa 31 Agustus
+23.00 UTC. API menolak potret basi dengan sengaja, jadi `/api/jam`,
+`/api/genangan`, dan `/api/rute` menjawab 503.
+
+`23_uji_menyeluruh` terhadap produksi: 12 lulus, 2 gagal, dan bagian perutean
+tidak bisa dijalankan. Aplikasi yang dibuka di peramban menampilkan peta
+kosong, pesan "Server tidak merespons", dan Pita Pasut kosong.
+
+Peta kosong itu sendiri temuan kedua (B56). `/api/ruas` masih menjawab dari
+berkas, tetapi frontend baru memintanya setelah sumbu waktu tiba. Temuan
+ketiga ditemukan saat menelusuri jendela prediksi (B58): jam yang tidak punya
+prediksi diisi nol dan tampil kering, dan frontend tidak membaca
+`prediksi_mencakup_jendela`.
+
+### Yang TIDAK dikerjakan, dan kenapa
+
+- Supabase tidak dipulihkan. Memulihkannya memerlukan login pemilik akun.
+- Pipeline tidak dijalankan ulang. Basis datanya belum hidup.
+- B56 dan B58 tidak diperbaiki. Keduanya mengubah perilaku aplikasi dan belum
+  diminta.
+- Proposal tidak disentuh. Tahap proposal sudah lewat dan berkas yang dinilai
+  sudah terkumpul.
+- Docker Desktop tidak berjalan, jadi isi kontainer Postgres lama belum
+  diperiksa untuk rencana cadangan.
+
+### Benchmark finalis
+
+Video keempat tim lain ditemukan: RobSense (Telkom University), OCEANAGARA
+(Binus Semarang), PRAKIRA (UGM), dan CIRQUO (ITS). RobSense menggarap rob
+Semarang, masalah yang sama dengan kita (B59). Deskripsi karya diambil dari
+deskripsi video, belum dari menonton videonya.
