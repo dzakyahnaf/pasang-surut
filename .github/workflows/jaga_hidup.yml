@@ -1,0 +1,75 @@
+# Ketuk API tiap 10 menit supaya aplikasi tidak tidur dan tidak dijeda.
+#
+# KENAPA PERLU.
+#
+# Render versi gratis menidurkan layanan setelah 15 menit tanpa permintaan,
+# dan bangunnya memakan sekitar 26 detik, tepat pada klik pertama pengguna.
+# Supabase versi gratis menjeda proyek setelah seminggu tanpa aktivitas. Yang
+# kedua itulah yang mematikan aplikasi antara akhir Agustus dan 19 September
+# 2026 tanpa ada yang tahu.
+#
+# /api/kesehatan menjalankan kueri ke basis data, jadi satu ketukan
+# membangunkan Render sekaligus menyentuh Supabase.
+#
+# KAPAN GAGAL, DAN KENAPA HANYA ITU.
+#
+# Workflow ini gagal hanya bila basis data tidak terjangkau. GitHub mengirim
+# surel kepada orang yang terakhir mengubah jadwal di berkas ini setiap kali
+# run terjadwal gagal, jadi kegagalan di sini adalah alarm, bukan kebisingan.
+# Prediksi yang hampir habis dan potret yang basi cukup diberi peringatan.
+#
+# BATASNYA.
+#
+# Jadwal GitHub Actions bisa terlambat beberapa menit saat runner sibuk, jadi
+# Render sesekali tetap tertidur. Buka aplikasi sendiri sebelum juri datang.
+# Layanan yang terus bangun memakai 720 sampai 744 dari 750 jam gratis Render
+# per bulan. Matikan workflow ini dari tab Actions setelah lomba selesai.
+
+name: Jaga hidup
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: jaga-hidup
+  cancel-in-progress: false
+
+jobs:
+  ketuk:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      ALAMAT: https://pasang-surut-api.onrender.com/api/kesehatan
+    steps:
+      - name: Ketuk /api/kesehatan
+        run: |
+          # Batas waktunya longgar karena bangun dari tidur bisa 30 detik.
+          curl --fail --silent --show-error --max-time 120 \
+               --retry 3 --retry-delay 15 --retry-all-errors \
+               "$ALAMAT" -o kesehatan.json
+          jq '{database, commit, jumlah_ruas, prediksi_selesai_utc,
+               potret_berlaku_sampai_utc}' kesehatan.json
+
+      - name: Periksa isinya
+        run: |
+          sekarang=$(date -u +%s)
+
+          if [ "$(jq -r .database kesehatan.json)" != "true" ]; then
+            echo "::error::Basis data tidak terjangkau. Periksa dasbor Supabase; proyeknya mungkin dijeda lagi."
+            exit 1
+          fi
+
+          selesai=$(jq -r '.prediksi_selesai_utc // empty' kesehatan.json)
+          if [ -z "$selesai" ] || [ "$(date -u -d "$selesai" +%s)" -lt $((sekarang + 72 * 3600)) ]; then
+            echo "::warning::Prediksi berakhir ${selesai:-entah kapan}, kurang dari 72 jam lagi. Jam sesudahnya akan tampil kering. Jalankan ulang 11_indeks_kerentanan."
+          fi
+
+          potret=$(jq -r '.potret_berlaku_sampai_utc // empty' kesehatan.json)
+          if [ -z "$potret" ] || [ "$(date -u -d "$potret" +%s)" -lt "$sekarang" ]; then
+            echo "::warning::Potret cadangan tidak ada atau sudah basi (${potret:-tidak ada}). Kalau basis data mati, aplikasi ikut mati. Jalankan ulang 18_seed_demo."
+          fi

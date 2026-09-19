@@ -121,6 +121,25 @@ async def tutup_koneksi() -> None:
 # SUMBER DATA
 # ══════════════════════════════════════════════════════════════════════════
 @lru_cache(maxsize=1)
+def _baca_potret() -> dict | None:
+    """Isi berkas potret, dibaca sekali lalu disimpan di memori.
+
+    Masa berlakunya SENGAJA tidak diperiksa di sini. Hasil fungsi ini
+    di-cache selama proses hidup, dan sejak layanan dijaga tetap bangun oleh
+    workflow `jaga_hidup`, proses bisa hidup berhari-hari. Versi sebelumnya
+    memeriksa tanggal di dalam fungsi yang di-cache, sehingga potret yang
+    masih berlaku saat pertama dibaca terus dipakai setelah basi.
+    """
+    if not BERKAS_POTRET.exists():
+        return None
+    try:
+        d = json.loads(BERKAS_POTRET.read_text(encoding="utf-8"))
+        datetime.fromisoformat(d["berlaku_sampai"])
+    except (json.JSONDecodeError, KeyError, ValueError):
+        return None
+    return d
+
+
 def _potret() -> dict | None:
     """Potret beku dari skrip 18, dipakai HANYA bila database tidak terjangkau.
 
@@ -135,30 +154,22 @@ def _potret() -> dict | None:
     menyarankan kapan orang boleh menembus air; menampilkan prediksi minggu
     lalu seolah-olah berlaku hari ini lebih berbahaya daripada layar kosong.
     Lewat `berlaku_sampai`, potret ditolak dan API mengembalikan galat yang
-    menjelaskan apa yang harus dijalankan.
+    menjelaskan apa yang harus dijalankan. Tanggalnya diperiksa pada SETIAP
+    panggilan, bukan sekali saat berkas dibaca.
     """
-    if not BERKAS_POTRET.exists():
+    d = _baca_potret()
+    if d is None:
         return None
-    try:
-        d = json.loads(BERKAS_POTRET.read_text(encoding="utf-8"))
-        sampai = datetime.fromisoformat(d["berlaku_sampai"])
-    except (json.JSONDecodeError, KeyError, ValueError):
-        return None
-    if datetime.now(timezone.utc) > sampai:
+    if datetime.now(timezone.utc) > datetime.fromisoformat(d["berlaku_sampai"]):
         return None
     return d
 
 
 def _potret_kedaluwarsa() -> bool:
     """True bila potret ada tetapi sudah lewat masa berlakunya."""
-    if not BERKAS_POTRET.exists():
-        return False
-    try:
-        d = json.loads(BERKAS_POTRET.read_text(encoding="utf-8"))
-        return datetime.now(timezone.utc) > datetime.fromisoformat(
-            d["berlaku_sampai"])
-    except (json.JSONDecodeError, KeyError, ValueError):
-        return False
+    d = _baca_potret()
+    return d is not None and datetime.now(timezone.utc) > datetime.fromisoformat(
+        d["berlaku_sampai"])
 
 
 @lru_cache(maxsize=1)
@@ -206,9 +217,13 @@ def kesehatan() -> dict:
     saklar manual yang bisa lupa dimatikan.
     """
     sekarang = datetime.now(timezone.utc)
+    potret = _baca_potret()
     jawaban = {
         "status": "hidup",
         "versi": app.version,
+        # Diisi Render pada tiap deploy, kosong di mesin lokal. Satu-satunya
+        # cara membuktikan dari luar bahwa commit terbaru sudah tayang.
+        "commit": os.getenv("RENDER_GIT_COMMIT"),
         "waktu_server_utc": sekarang.isoformat(),
         "zona_waktu_tampilan": str(config.ZONA_WAKTU_LOKAL),
         "aoi": {
@@ -223,6 +238,10 @@ def kesehatan() -> dict:
         "prediksi_mulai_utc": None,
         "prediksi_selesai_utc": None,
         "asal_jaringan": "potret" if _potret() is not None else "berkas",
+        # Dilaporkan walau database hidup. Saat database hidup potret tidak
+        # dipakai, dan justru karena itu basinya tidak akan ketahuan sampai
+        # database mati, yaitu saat potret paling dibutuhkan.
+        "potret_berlaku_sampai_utc": potret["berlaku_sampai"] if potret else None,
     }
 
     if db.database_tersedia():
