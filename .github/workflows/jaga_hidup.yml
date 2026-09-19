@@ -19,12 +19,23 @@
 # bukan kebisingan. Prediksi yang hampir habis dan potret yang basi cukup
 # diberi peringatan.
 #
-# BATASNYA.
+# BATASNYA, DAN INI PENTING.
 #
-# Jadwal GitHub Actions bisa terlambat beberapa menit saat runner sibuk, jadi
-# Render sesekali tetap tertidur. Buka aplikasi sendiri sebelum juri datang.
-# Layanan yang terus bangun memakai 720 sampai 744 dari 750 jam gratis Render
-# per bulan. Matikan workflow ini dari tab Actions setelah lomba selesai.
+# Jadwal GitHub Actions tidak dijamin. Dokumentasinya sendiri menyebut run
+# terjadwal bisa tertunda atau dibuang saat beban tinggi, dan staf GitHub
+# menyebut `*/10` sebagai "boleh jalan tiap 10 menit", bukan pengatur waktu.
+# Jarak antar-run bisa berjam-jam, jadi workflow ini TIDAK BISA diandalkan
+# untuk menjaga Render tetap bangun; untuk itu pakai pemantau luar.
+#
+# Lebih buruk lagi, sampai 20 September 2026 jadwal ini belum pernah berjalan
+# satu kali pun, padahal run manual lulus. Gejalanya sama dengan masalah yang
+# dilaporkan di github.com/orgs/community/discussions/205984 sejak 27 Agustus
+# dan belum selesai. Selama jadwalnya tidak berjalan, tidak ada surel
+# kegagalan: TIDAK ADA SUREL BUKAN BERARTI AMAN.
+#
+# Workflow ini tetap dipasang karena begitu jadwalnya berjalan, ia menjadi
+# alarm dan menyentuh Supabase. Ia juga bisa dipicu manual dari tab Actions
+# sebagai pemeriksaan kesehatan sekali klik. Matikan setelah lomba selesai.
 
 name: Jaga hidup
 

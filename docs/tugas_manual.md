@@ -28,8 +28,9 @@ bisa dikerjakan tim.
 | F4 | Uji jalur cadangan laptop dengan wifi dimatikan; perintahnya di `docs/persiapan_final.md` bagian Demo | Kamis 24 September |
 | F5 | Uji dari HP sungguhan di jaringan seluler (M6 di bawah, belum pernah dikerjakan) | Kamis 24 September |
 | F6 | Slide, latihan berwaktu, dan PDF slide untuk panitia | Kamis 24 September |
-| F7 | Buka setiap surel kegagalan GitHub Actions minggu ini. Kegagalan `Jaga hidup` berarti basis data tidak terjangkau; kegagalan `Uji` berarti ada test yang patah | sampai final |
-| F8 | Matikan workflow `Jaga hidup` setelah lomba: tab Actions, Jaga hidup, Disable workflow | setelah 26 September |
+| F7 | Buka setiap surel kegagalan GitHub Actions minggu ini. Tetapi jadwal `Jaga hidup` belum pernah berjalan (masalah di sisi GitHub), jadi **tidak ada surel bukan berarti aman** | sampai final |
+| F8 | Matikan workflow `Jaga hidup` dan pemantau luar setelah lomba | setelah 26 September |
+| F9 | Pilih penjaga agar Render tetap bangun: daftar pemantau luar (UptimeRobot atau cron-job.org, monitor tiap 5 menit), atau ping dari laptop pada hari H. Pilihan dan perintahnya di `docs/persiapan_final.md` | sebelum Kamis 24 September |
 
 ---
 

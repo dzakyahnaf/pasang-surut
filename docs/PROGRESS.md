@@ -38,6 +38,7 @@ ini, baca bagian itu.
 | **B60** | **Waktu rute di produksi 3,0 sampai 3,9 detik**, naik dari 1,3 detik pada 29 Agustus. Kueri genangan per jam memakai indeks dan selesai 0,4 ms di server; yang lambat bolak-balik jaringan ke Sydney. Dari laptop, `SELECT 1` 1,2 detik, dan satu rute lewat basis data sampai 60 detik. | Masih layak untuk demo. Ukur ulang Kamis. **Jalur cadangan laptop wajib mode potret** (`DATABASE_URL=` dikosongkan), yang menjawab rute di bawah 0,1 detik |
 | **B61** | **`_potret()` dulu memeriksa masa berlaku di dalam `lru_cache`.** Potret yang berlaku saat pertama dibaca akan terus dipakai setelah basi selama proses hidup. Tidak pernah terlihat karena Render gratis sering tidur dan memulai proses baru. | **Diperbaiki 19 September**, karena workflow `jaga_hidup` membuat proses bisa hidup berhari-hari. Pembacaan berkas tetap di-cache, pemeriksaan tanggal kini tiap panggilan |
 | **B62** | **Sambungan SSL ke Supabase putus sekali** saat `18_seed_demo` menarik GeoJSON 19.394 ruas, sesaat setelah proyek dipulihkan. Percobaan kedua berhasil. | Koneksi yang gagal dibuang dari kolam (`close=rusak`), jadi di API dampaknya paling banyak satu permintaan gagal. Belum terulang |
+| **B63** | **Jadwal workflow `Jaga hidup` belum pernah berjalan.** Dipasang 19 September 14.51 UTC; sampai 17.25 UTC nol run terjadwal, padahal run manual lulus, konfigurasi benar, dan status GitHub normal. Gejalanya sama dengan github.com/orgs/community/discussions/205984, terbuka sejak 27 Agustus tanpa solusi sementara. | **Klaim "menjaga Render tetap bangun" dicabut** dari README, workflow, dan `docs/persiapan_final.md`. Jadwal GitHub memang tidak dijamin, jaraknya bisa berjam-jam. Penjaga yang sungguhan perlu pemantau luar (butuh akun, tugas F9) atau ping dari laptop pada hari H. Tanpa run terjadwal juga tidak ada surel kegagalan, jadi diam bukan tanda sehat |
 | ~~B1~~ | **SELESAI 29 Agustus.** Dipindah ke `docs/identitas_tim.yaml`, `jumlah_citra_s1` diperbaiki menjadi 725, dan komentar ambang keputusan lama dibuang karena sudah tidak berlaku. | — |
 | B2 | Tautan **riset WRI April 2026** di README masih `TODO(verifikasi tautan)`. | Tautan mati di gerbang juri lebih buruk daripada tidak ada tautan |
 | B3 | Commit membawa trailer `Co-Authored-By: Claude Opus 5`. | Kalau rulebook DSDC mempersoalkan, putuskan sekarang selagi baru empat commit |
@@ -1560,3 +1561,23 @@ Kamis, ternyata tidak berguna. Saya menaruhnya tanpa memeriksa bahwa prediksi
 indeks kerentanan tidak memakai hujan sama sekali (B25). Proposal sendiri
 sudah menulis komponen waktunya dari pasut harmonik, jadi tidak ada klaim yang
 perlu dikoreksi.
+
+### Tambahan 20 September dini hari: jadwal ping tidak pernah berjalan
+
+Setelah 2,5 jam, workflow `Jaga hidup` belum punya satu pun run terjadwal.
+Diperiksa satu per satu: trigger `schedule` terbaca benar di `main`, Actions
+aktif untuk seluruh action, repo tidak diarsipkan, dan GitHub Status tidak
+mencatat insiden. Run manual tetap lulus, dan workflow `Uji` berjalan normal
+di setiap push.
+
+Gejalanya sama dengan laporan komunitas GitHub yang terbuka sejak 27 Agustus
+dan belum punya solusi sementara. Terpisah dari itu, staf GitHub di diskusi
+lain menegaskan jadwal `*/10` hanya "boleh jalan tiap 10 menit". Artinya
+workflow ini memang tidak pernah cocok menjadi penjaga agar Render tetap
+bangun, bahkan saat jadwalnya normal. Saya mengklaim sebaliknya di sesi
+sebelumnya tanpa memeriksa jaminan jadwal GitHub; klaim itu sudah dicabut
+(B63).
+
+Workflow tetap dipasang sebagai alarm dan pemeriksaan sekali klik. Penjaga
+Render diserahkan ke tim sebagai tugas F9. Perubahan dokumen ini di-commit
+tetapi BELUM di-push, karena belum ada persetujuan untuk push di sesi ini.

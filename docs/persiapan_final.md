@@ -67,7 +67,7 @@ orang lain. Jumlahnya 40 persen.
 | Uji dengan basis data dimatikan | 35 lulus, 0 gagal, perutean ikut hidup dari potret |
 | Tampilan 390 piksel | spanduk dan judul tidak lagi bertumpuk, tanpa gulir mendatar |
 | CI `Uji` di GitHub Actions | lulus |
-| Workflow `Jaga hidup` | lulus, tanpa peringatan |
+| Workflow `Jaga hidup` | run manual lulus; jadwalnya belum pernah berjalan, lihat di bawah |
 | Waktu satu rute di produksi | 3,0 sampai 3,9 detik |
 
 Waktu rute lebih lambat daripada catatan 29 Agustus, 1,3 detik. Kuerinya
@@ -96,7 +96,7 @@ dijalankan ulang dan seluruh commit di-push.
 | ~~5~~ | ~~Segarkan prakiraan hujan pada Kamis~~ | **Dicoret, ternyata tidak berguna.** Prediksi dihitung dari pasut harmonik dan indeks per ruas yang tetap. Data hujan tidak dipakai di runtime, jadi menyegarkannya tidak mengubah satu angka pun di aplikasi |
 | 6 | Jalur cadangan di laptop, diuji dengan wifi dimatikan | **Terbuka**, tim. Perintahnya di bagian Demo, sudah diuji: 35 lulus |
 | 7 | Uji dari HP sungguhan di jaringan seluler (B37) | **Terbuka**, tim |
-| ~~8~~ | Ping terjadwal ke `/api/kesehatan` | **Selesai 19 September.** `.github/workflows/jaga_hidup.yml`, tiap 10 menit |
+| 8 | Ping terjadwal ke `/api/kesehatan` | **Terpasang, tetapi belum bekerja.** `.github/workflows/jaga_hidup.yml` lulus saat dipicu manual, namun jadwalnya belum pernah berjalan. Penjaga Render perlu pemantau luar, lihat di bawah |
 | 9 | Peta tetap menampilkan jaringan jalan ketika sumbu waktu gagal dimuat | Belum disetujui |
 | ~~10~~ | CI yang menjalankan `pytest` setiap push | **Selesai 19 September.** `.github/workflows/uji.yml`. Test yang menjaga dua salinan `copy.id.json` tetap sama (B5) belum dikerjakan |
 
@@ -104,17 +104,39 @@ dijalankan ulang dan seluruh commit di-push.
 beralih sendiri ke potret, dan jalur itu sudah diuji dengan basis data
 dimatikan: 35 lulus, termasuk perutean.
 
-**Workflow `Jaga hidup` gagal bila API tidak menjawab atau basis data tidak
-terjangkau.** Setiap
-kegagalan run terjadwal dikirim GitHub lewat surel ke akun yang terakhir
-mengubah jadwalnya, jadi surel dari GitHub Actions minggu ini wajib dibuka.
-Workflow itu juga memberi peringatan, tanpa gagal, bila prediksi tinggal
-kurang dari 72 jam atau potret sudah basi.
+**Workflow `Jaga hidup` TIDAK menjaga Render tetap bangun.** Diperiksa 20
+September dini hari: run manualnya lulus, tetapi jadwalnya belum pernah
+berjalan satu kali pun dalam 2,5 jam. Konfigurasinya benar dan status GitHub
+normal. Gejala yang sama dilaporkan di
+github.com/orgs/community/discussions/205984 sejak 27 Agustus dan belum
+selesai. Kalaupun jadwalnya pulih, GitHub hanya menjanjikan "boleh jalan tiap
+10 menit"; saat beban tinggi jaraknya bisa berjam-jam, sedangkan Render tidur
+setelah 15 menit.
 
-**Batasnya.** Jadwal GitHub bisa terlambat beberapa menit, jadi buka aplikasi
-sendiri 30 menit sebelum pameran. Layanan yang terus bangun memakai 720 sampai
-744 dari 750 jam gratis Render per bulan. Setelah lomba, matikan dari tab
-Actions, pilih Jaga hidup, lalu Disable workflow.
+Akibatnya dua hal:
+
+- **Tidak ada surel kegagalan bukan berarti aman.** Surel hanya datang dari
+  run terjadwal yang benar-benar berjalan.
+- **Penjaga agar Render bangun harus datang dari luar GitHub.** Pilihannya di
+  bawah.
+
+| Pilihan | Caranya | Catatan |
+|---|---|---|
+| Pemantau luar | Daftar UptimeRobot atau cron-job.org, lalu buat monitor HTTP ke `https://pasang-surut-api.onrender.com/api/kesehatan` tiap 5 menit | Butuh akun, jadi tim yang mendaftar. Sekaligus menjadi alarm surel bila API mati |
+| Ping dari laptop pada hari H | Satu anggota menjalankan perulangan di Git Bash, lihat di bawah | Tanpa akun. Cukup untuk hari final |
+| Tanpa penjaga | Buka aplikasi sendiri 30 menit sebelum pameran | Bangun pertama 26 detik; setelah itu pemakaian juri membuatnya tetap bangun |
+
+```bash
+while true; do curl -s -o /dev/null -w "%{http_code} %{time_total}s\n" https://pasang-surut-api.onrender.com/api/kesehatan; sleep 300; done
+```
+
+Supabase lebih longgar: ia baru dijeda setelah seminggu tanpa aktivitas, dan
+setiap kali tim membuka aplikasi untuk latihan, basis data ikut tersentuh.
+Kalaupun ia dijeda tepat pada hari final, Render beralih sendiri ke potret.
+
+Layanan yang dijaga bangun terus memakai 720 sampai 744 dari 750 jam gratis
+Render per bulan. Setelah lomba, matikan pemantau luar dan workflow `Jaga
+hidup` (tab Actions, pilih Jaga hidup, lalu Disable workflow).
 
 ### Presentasi, pameran, dan non-teknis
 
