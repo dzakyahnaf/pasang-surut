@@ -68,14 +68,20 @@ orang lain. Jumlahnya 40 persen.
 | Tampilan 390 piksel | spanduk dan judul tidak lagi bertumpuk, tanpa gulir mendatar |
 | CI `Uji` di GitHub Actions | lulus |
 | Workflow `Jaga hidup` | run manual lulus; jadwalnya belum pernah berjalan, lihat di bawah |
-| Waktu satu rute di produksi | 3,0 sampai 3,9 detik |
+| Satu rute di produksi | 3 sampai 8 detik, berubah-ubah antar-pengukuran |
+| Satu kali geser Pita Pasut di produksi | sekitar 8 detik server, lalu unduh 6,6 MB |
 
-Waktu rute lebih lambat daripada catatan 29 Agustus, 1,3 detik. Kuerinya
-sendiri memakai indeks dan selesai dalam 0,4 milidetik di server, jadi yang
-lambat adalah bolak-balik jaringan ke Supabase di Sydney. Dari laptop, satu
-kueri sederhana hari ini makan 1,2 detik, sedangkan catatan Agustus 370
-milidetik. Ukur ulang pada Kamis; kalau masih begini, 3 sampai 4 detik tetap
-layak untuk demo, asal tidak kaget.
+**Kinerja adalah masalah terbesar yang tersisa, dan sebabnya sudah diukur.**
+Menghitung rute sendiri praktis nol detik. Yang mahal adalah data yang
+ditarik dari Supabase di Sydney pada SETIAP permintaan: rute memuat seluruh
+67.442 baris prediksi, dan setiap geser Pita Pasut memuat ulang GeoJSON 6,6 MB.
+Tabel prediksi kini tiga kali lebih besar daripada Agustus karena jendelanya
+diperpanjang sampai 1 Oktober. Angka 1,3 detik yang tercatat 29 Agustus diukur
+dari server lokal dengan tabel 21.778 baris, jadi tidak sebanding.
+
+Pilihan perbaikannya dibahas di laporan sesi 20 September dan menunggu
+keputusan tim: memindahkan Supabase ke Singapura, atau menyajikan data dari
+memori server seperti jalur potret.
 
 Siang harinya produksi sempat mati total. Proyek Supabase dijeda karena
 seminggu tanpa aktivitas, dan potret cadangan sudah kedaluwarsa sejak 31
@@ -122,9 +128,9 @@ Akibatnya dua hal:
 
 | Pilihan | Caranya | Catatan |
 |---|---|---|
-| Pemantau luar | Daftar UptimeRobot atau cron-job.org, lalu buat monitor HTTP ke `https://pasang-surut-api.onrender.com/api/kesehatan` tiap 5 menit | Butuh akun, jadi tim yang mendaftar. Sekaligus menjadi alarm surel bila API mati |
-| Ping dari laptop pada hari H | Satu anggota menjalankan perulangan di Git Bash, lihat di bawah | Tanpa akun. Cukup untuk hari final |
-| Tanpa penjaga | Buka aplikasi sendiri 30 menit sebelum pameran | Bangun pertama 26 detik; setelah itu pemakaian juri membuatnya tetap bangun |
+| Pemantau luar | Daftar UptimeRobot atau cron-job.org, lalu buat monitor HTTP ke `https://pasang-surut-api.onrender.com/api/kesehatan` tiap 5 menit | Tidak dipilih |
+| **Ping dari laptop pada hari H** | Satu anggota menjalankan perulangan di Git Bash, lihat di bawah | **DIPILIH TIM 20 September** |
+| **Buka aplikasi 30 menit sebelum pameran** | Membangunkan Render sebelum juri datang | **DIPILIH TIM 20 September**, dipakai bersama ping dari laptop |
 
 ```bash
 while true; do curl -s -o /dev/null -w "%{http_code} %{time_total}s\n" https://pasang-surut-api.onrender.com/api/kesehatan; sleep 300; done

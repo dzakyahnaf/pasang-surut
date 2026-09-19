@@ -30,7 +30,7 @@ bisa dikerjakan tim.
 | F6 | Slide, latihan berwaktu, dan PDF slide untuk panitia | Kamis 24 September |
 | F7 | Buka setiap surel kegagalan GitHub Actions minggu ini. Tetapi jadwal `Jaga hidup` belum pernah berjalan (masalah di sisi GitHub), jadi **tidak ada surel bukan berarti aman** | sampai final |
 | F8 | Matikan workflow `Jaga hidup` dan pemantau luar setelah lomba | setelah 26 September |
-| F9 | Pilih penjaga agar Render tetap bangun: daftar pemantau luar (UptimeRobot atau cron-job.org, monitor tiap 5 menit), atau ping dari laptop pada hari H. Pilihan dan perintahnya di `docs/persiapan_final.md` | sebelum Kamis 24 September |
+| F9 | **Diputuskan 20 September: ping dari laptop pada hari H, ditambah membuka aplikasi 30 menit sebelum pameran.** Tunjuk satu anggota yang laptopnya menjalankan perulangan ping sepanjang acara; perintahnya di `docs/persiapan_final.md` | hari H |
 
 ---
 

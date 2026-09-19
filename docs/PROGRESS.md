@@ -35,10 +35,11 @@ ini, baca bagian itu.
 | ~~B57~~ | **SELESAI 19 September.** Tujuh commit di-push, Vercel dan Render menayangkan `9b1229a`. Perbaikan 390 piksel diperiksa di produksi lewat iframe 390×844: spanduk dan judul tidak bertumpuk, tanpa gulir mendatar. | — |
 | **B58** | **Jam di luar jangkauan prediksi tampil sebagai kering.** `/api/jam` mengisi jam tanpa baris dengan nol, dan `prediksi_mencakup_jendela` bernilai benar asal ADA irisan dengan jendela. Frontend tidak membaca penanda itu. | **Diredam, belum diperbaiki.** Prediksi kini sampai 1 Oktober, jadi jendela 72 jam tertutup penuh sampai 27 September. Workflow `jaga_hidup` memberi peringatan begitu sisa prediksi kurang dari 72 jam |
 | **B59** | **Benchmark finalis: RobSense (Telkom University) menggarap rob Semarang dan penurunan muka tanah**, masalah yang sama dengan kita. PRAKIRA (UGM) bersinggungan di leptospirosis dan memakai ensemble machine learning. | Juri hampir pasti membandingkan. Pembeda kita: keputusan per ruas per jam keberangkatan, dan model yang ditolak secara terbuka. Rincian dan tautan video di `docs/persiapan_final.md` |
-| **B60** | **Waktu rute di produksi 3,0 sampai 3,9 detik**, naik dari 1,3 detik pada 29 Agustus. Kueri genangan per jam memakai indeks dan selesai 0,4 ms di server; yang lambat bolak-balik jaringan ke Sydney. Dari laptop, `SELECT 1` 1,2 detik, dan satu rute lewat basis data sampai 60 detik. | Masih layak untuk demo. Ukur ulang Kamis. **Jalur cadangan laptop wajib mode potret** (`DATABASE_URL=` dikosongkan), yang menjawab rute di bawah 0,1 detik |
+| **B60** | **Rute di produksi 3 sampai 8 detik, berubah-ubah antar-pengukuran.** Diprofilkan 20 September: menghitung rute praktis nol detik; yang mahal adalah `_peta_kedalaman_penuh()`, yang pada SETIAP permintaan rute menarik seluruh 67.442 baris prediksi dari Sydney (dari laptop 2,3 sampai 3,7 detik, walau CPU-nya hanya 0,09 detik). Catatan 1,3 detik pada 29 Agustus diukur dari server lokal dengan tabel 21.778 baris, jadi bukan pembanding yang sah. | Menunggu keputusan tim: Supabase ke Singapura, atau data disajikan dari memori server. **Jalur cadangan laptop tetap wajib mode potret** (`DATABASE_URL=` dikosongkan) |
 | **B61** | **`_potret()` dulu memeriksa masa berlaku di dalam `lru_cache`.** Potret yang berlaku saat pertama dibaca akan terus dipakai setelah basi selama proses hidup. Tidak pernah terlihat karena Render gratis sering tidur dan memulai proses baru. | **Diperbaiki 19 September**, karena workflow `jaga_hidup` membuat proses bisa hidup berhari-hari. Pembacaan berkas tetap di-cache, pemeriksaan tanggal kini tiap panggilan |
 | **B62** | **Sambungan SSL ke Supabase putus sekali** saat `18_seed_demo` menarik GeoJSON 19.394 ruas, sesaat setelah proyek dipulihkan. Percobaan kedua berhasil. | Koneksi yang gagal dibuang dari kolam (`close=rusak`), jadi di API dampaknya paling banyak satu permintaan gagal. Belum terulang |
 | **B63** | **Jadwal workflow `Jaga hidup` belum pernah berjalan.** Dipasang 19 September 14.51 UTC; sampai 17.25 UTC nol run terjadwal, padahal run manual lulus, konfigurasi benar, dan status GitHub normal. Gejalanya sama dengan github.com/orgs/community/discussions/205984, terbuka sejak 27 Agustus tanpa solusi sementara. | **Klaim "menjaga Render tetap bangun" dicabut** dari README, workflow, dan `docs/persiapan_final.md`. Jadwal GitHub memang tidak dijamin, jaraknya bisa berjam-jam. Penjaga yang sungguhan perlu pemantau luar (butuh akun, tugas F9) atau ping dari laptop pada hari H. Tanpa run terjadwal juga tidak ada surel kegagalan, jadi diam bukan tanda sehat |
+| **B64** | **Satu kali geser Pita Pasut makan sekitar 8 detik server, lalu unduh 6,6 MB.** `App.jsx` meminta ulang `/api/ruas?waktu=` utuh setiap jam berganti, tanpa cache di peramban, dan di mode basis data server membangun GeoJSON 19.394 ruas dari Sydney setiap kali. | Lebih mengganggu daripada waktu rute, karena menggeser Pita Pasut adalah hal pertama yang dicoba juri. Kelanjutan dari sisa B46 yang belum pernah dioptimalkan |
 | ~~B1~~ | **SELESAI 29 Agustus.** Dipindah ke `docs/identitas_tim.yaml`, `jumlah_citra_s1` diperbaiki menjadi 725, dan komentar ambang keputusan lama dibuang karena sudah tidak berlaku. | — |
 | B2 | Tautan **riset WRI April 2026** di README masih `TODO(verifikasi tautan)`. | Tautan mati di gerbang juri lebih buruk daripada tidak ada tautan |
 | B3 | Commit membawa trailer `Co-Authored-By: Claude Opus 5`. | Kalau rulebook DSDC mempersoalkan, putuskan sekarang selagi baru empat commit |
@@ -1581,3 +1582,14 @@ sebelumnya tanpa memeriksa jaminan jadwal GitHub; klaim itu sudah dicabut
 Workflow tetap dipasang sebagai alarm dan pemeriksaan sekali klik. Penjaga
 Render diserahkan ke tim sebagai tugas F9. Perubahan dokumen ini di-commit
 tetapi BELUM di-push, karena belum ada persetujuan untuk push di sesi ini.
+
+### Tambahan 20 September: keputusan tim, dan profil kinerja
+
+Tim memilih ping dari laptop pada hari H ditambah membuka aplikasi 30 menit
+sebelum pameran, tanpa pemantau luar.
+
+Profil kinerja dibuat karena tim menanyakan pemindahan Supabase ke Singapura.
+Hasilnya, waktu rute tidak berasal dari perhitungan rute (nol detik), tetapi
+dari data yang ditarik ulang dari Sydney di setiap permintaan (B60). Temuan
+yang lebih penting: setiap geser Pita Pasut makan sekitar 8 detik server dan
+6,6 MB unduhan (B64). Pilihannya dilaporkan ke tim dan belum dikerjakan.
