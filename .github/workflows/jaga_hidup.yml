@@ -13,10 +13,11 @@
 #
 # KAPAN GAGAL, DAN KENAPA HANYA ITU.
 #
-# Workflow ini gagal hanya bila basis data tidak terjangkau. GitHub mengirim
-# surel kepada orang yang terakhir mengubah jadwal di berkas ini setiap kali
-# run terjadwal gagal, jadi kegagalan di sini adalah alarm, bukan kebisingan.
-# Prediksi yang hampir habis dan potret yang basi cukup diberi peringatan.
+# Workflow ini gagal bila API tidak menjawab atau basis data tidak terjangkau.
+# GitHub mengirim surel kepada orang yang terakhir mengubah jadwal di berkas
+# ini setiap kali run terjadwal gagal, jadi kegagalan di sini adalah alarm,
+# bukan kebisingan. Prediksi yang hampir habis dan potret yang basi cukup
+# diberi peringatan.
 #
 # BATASNYA.
 #

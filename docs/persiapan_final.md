@@ -61,7 +61,7 @@ orang lain. Jumlahnya 40 persen.
 | Pemeriksaan | Hasil |
 |---|---|
 | `23_uji_menyeluruh` terhadap produksi | 35 lulus, 0 gagal |
-| `/api/kesehatan` | `database: true`, commit `9b1229a` sudah tayang |
+| `/api/kesehatan` | `database: true`, commit terbaru sudah tayang |
 | Prediksi di basis data | 67.442 baris, sampai 1 Oktober 00.00 UTC |
 | Potret cadangan | 26 September 00.00 WIB sampai 28 September 23.00 WIB |
 | Uji dengan basis data dimatikan | 35 lulus, 0 gagal, perutean ikut hidup dari potret |
@@ -104,7 +104,8 @@ dijalankan ulang dan seluruh commit di-push.
 beralih sendiri ke potret, dan jalur itu sudah diuji dengan basis data
 dimatikan: 35 lulus, termasuk perutean.
 
-**Workflow `Jaga hidup` gagal hanya bila basis data tidak terjangkau.** Setiap
+**Workflow `Jaga hidup` gagal bila API tidak menjawab atau basis data tidak
+terjangkau.** Setiap
 kegagalan run terjadwal dikirim GitHub lewat surel ke akun yang terakhir
 mengubah jadwalnya, jadi surel dari GitHub Actions minggu ini wajib dibuka.
 Workflow itu juga memberi peringatan, tanpa gagal, bila prediksi tinggal

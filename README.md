@@ -339,7 +339,8 @@ dasbor masing-masing: `DATABASE_URL` dan `ASAL_DIIZINKAN` di sisi API,
   push dan pull request, di mesin bersih tanpa `.env` dan tanpa database.
 - [`jaga_hidup.yml`](.github/workflows/jaga_hidup.yml) mengetuk
   `/api/kesehatan` tiap 10 menit supaya Render tidak tidur dan Supabase tidak
-  dijeda. Ia gagal bila basis data tidak terjangkau, dan memberi peringatan
+  dijeda. Ia gagal bila API tidak menjawab atau basis data tidak terjangkau,
+  dan memberi peringatan
   bila prediksi tinggal kurang dari 72 jam atau potret cadangan sudah basi.
 
 ---

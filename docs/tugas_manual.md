@@ -8,7 +8,28 @@ dan tidak menyetujui syarat layanan atau izin OAuth atas nama tim. Itu batas
 aturan, bukan batas alat, dan tidak berubah oleh tersedianya browser otomatis.
 Beberapa tugas lain butuh perangkat fisik atau orang.
 
-Diperbarui: 30 Agustus 2026. **Sisa waktu ke tenggat: sekitar 36 jam.**
+Diperbarui: 19 September 2026. **Final offline di Universitas Diponegoro, 26
+September 2026.** Bagian di bawah garis pertama berasal dari masa penyisihan
+dan disimpan sebagai riwayat.
+
+---
+
+## TAHAP FINAL — tugas manual per 19 September
+
+Rincian dan alasannya ada di `docs/persiapan_final.md`. Aplikasi di produksi
+sudah hidup kembali dan lulus 35 dari 35 uji; yang tersisa di bawah ini hanya
+bisa dikerjakan tim.
+
+| # | Tugas | Batas |
+|---|---|---|
+| F1 | Pastikan konfirmasi kehadiran final sudah diterima panitia (rulebook 10.1 dan 10.5e) | secepatnya |
+| F2 | Hadiri Technical Meeting dan catat urutan tampil | Selasa 22 September |
+| F3 | Kalau ada anggota yang tidak bisa hadir, konfirmasi lewat CP DSDC (10.4) | Rabu 23 September |
+| F4 | Uji jalur cadangan laptop dengan wifi dimatikan; perintahnya di `docs/persiapan_final.md` bagian Demo | Kamis 24 September |
+| F5 | Uji dari HP sungguhan di jaringan seluler (M6 di bawah, belum pernah dikerjakan) | Kamis 24 September |
+| F6 | Slide, latihan berwaktu, dan PDF slide untuk panitia | Kamis 24 September |
+| F7 | Buka setiap surel kegagalan GitHub Actions minggu ini. Kegagalan `Jaga hidup` berarti basis data tidak terjangkau; kegagalan `Uji` berarti ada test yang patah | sampai final |
+| F8 | Matikan workflow `Jaga hidup` setelah lomba: tab Actions, Jaga hidup, Disable workflow | setelah 26 September |
 
 ---
 
