@@ -20,14 +20,15 @@ function hasil(label = "baru") {
     geometry: { type: "LineString", coordinates: [] },
     properties: { jenis: "rute_sadar_rob", label, ditemukan: true, menit: 5,
       jarak_km: 1, ruas_tergenang: 0, nama_jalan: [] } }] },
+    versi_data: 'v1', versi_jaringan: 'g1',
     sumber_data: ["kerentanan_v1"], selisih: { tersedia: false } };
 }
 beforeEach(() => {
   vi.clearAllMocks();
   vi.stubGlobal("ResizeObserver", class { observe() {} disconnect() {} });
-  api.ambilJam.mockResolvedValue({ jam, asal_jaringan: "potret" });
+  api.ambilJam.mockResolvedValue({ jam, versi_data: 'v1', asal_jaringan: "potret" });
   api.ambilJaringan.mockResolvedValue({ type: "FeatureCollection", features: [], versi_jaringan: "g1" });
-  api.ambilKondisi.mockImplementation(async (w) => ({ waktu_utc: w, versi_jaringan: "g1", ruas: [] }));
+  api.ambilKondisi.mockImplementation(async (w) => ({ waktu_utc: w, versi_data: 'v1', versi_jaringan: "g1", ruas: [] }));
   api.ambilTujuanCepat.mockResolvedValue({ tujuan: [] });
   api.hitungRute.mockResolvedValue(hasil());
 });
@@ -93,7 +94,7 @@ test("respons jam lama tidak menimpa hasil jam baru walaupun abort diabaikan ser
 });
 
 test("jam tanpa cakupan dilewati dan tidak ditampilkan sebagai jam kering", async () => {
-  api.ambilJam.mockResolvedValue({ jam: jam.map((j,i) => i === 1 ? {
+  api.ambilJam.mockResolvedValue({ versi_data: 'v1', jam: jam.map((j,i) => i === 1 ? {
     ...j, tersedia: false, ruas_tergenang: null, tinggi_pasut_m: null } : j) });
   await mulai();
   await waitFor(() => expect(screen.getByTestId("rute").textContent).toBe("baru"));
@@ -112,7 +113,7 @@ test("galat pemuatan peta dapat dicoba ulang dan hilang setelah pulih", async ()
 });
 
 test("versi geometri berbeda tidak memicu loop unduhan dan bisa dipulihkan", async () => {
-  api.ambilKondisi.mockImplementation(async (w) => ({ waktu_utc: w, versi_jaringan: "g2", ruas: [] }));
+  api.ambilKondisi.mockImplementation(async (w) => ({ waktu_utc: w, versi_data: 'v1', versi_jaringan: "g2", ruas: [] }));
   render(<App />);
   await screen.findByRole("alert");
   expect(api.ambilJaringan).toHaveBeenCalledTimes(2);
@@ -122,4 +123,56 @@ test("versi geometri berbeda tidak memicu loop unduhan dan bisa dipulihkan", asy
   await waitFor(() => expect(screen.getByTestId("kondisi").textContent).toBe(jam[0].waktu_utc));
   expect(api.ambilJaringan).toHaveBeenCalledTimes(3);
   expect(screen.queryByRole("alert")).toBeNull();
+});
+
+test('versi rute berbeda dari kondisi disembunyikan dan bisa diselaraskan', async () => {
+  api.hitungRute.mockResolvedValueOnce({ ...hasil('kedaluwarsa'), versi_data: 'v0' });
+  await mulai();
+  await screen.findByText(/Versi data berubah/);
+  expect(screen.getByTestId('rute').textContent).toBe('kosong');
+  expect(screen.getByTestId('kondisi').textContent).toBe('kosong');
+  fireEvent.click(screen.getAllByRole('button', { name: 'Cari ulang' })[0]);
+  await waitFor(() => expect(screen.getByTestId('rute').textContent).toBe('baru'));
+  expect(screen.queryByRole('alert')).toBeNull();
+});
+
+test('hasil rute menunggu kondisi peta dan tidak menampilkan lapisan lama', async () => {
+  await mulai();
+  await waitFor(() => expect(screen.getByTestId('rute').textContent).toBe('baru'));
+  api.ambilKondisi.mockRejectedValueOnce(new Error('putus'));
+  fireEvent.keyDown(screen.getByRole('slider'), { key: 'End' });
+  await screen.findByRole('alert');
+  expect(screen.getByTestId('rute').textContent).toBe('kosong');
+  expect(screen.getByTestId('kondisi').textContent).toBe('kosong');
+});
+
+test('daftar tujuan yang gagal dapat dimuat ulang tanpa memuat ulang halaman', async () => {
+  api.ambilTujuanCepat.mockRejectedValueOnce(new Error('putus'));
+  render(<App />);
+  fireEvent.click(await screen.findByRole('button', { name: 'Muat ulang tujuan' }));
+  await waitFor(() => expect(api.ambilTujuanCepat).toHaveBeenCalledTimes(2));
+  await waitFor(() => expect(screen.queryByRole('alert')).toBeNull());
+});
+
+test('saran di luar pita tetap berupa informasi tanpa tombol yang tidak bekerja', async () => {
+  api.hitungRute.mockResolvedValue({ ...hasil(),
+    waktu_berangkat_utc: jam[0].waktu_utc,
+    paparan: { menembus: true, kedalaman_maks_cm: 22 },
+    jam_lebih_aman: { waktu_utc: '2026-09-27T00:00:00+00:00', kedalaman_maks_cm: 10 },
+  });
+  await mulai();
+  await screen.findByText(/di luar rentang Pita Pasut/);
+  expect(screen.queryByRole('button', { name: /genangan turun/ })).toBeNull();
+  expect(screen.getByText(/Estimasi kedalaman maksimum 22 cm/)).toBeTruthy();
+});
+
+test('rute terputus tidak menuduh semua jalur tergenang', async () => {
+  const h = hasil();
+  h.rute.features[0].properties = { jenis: 'rute_sadar_rob', ditemukan: false, alasan: 'tidak_terhubung' };
+  h.dampak = null;
+  api.hitungRute.mockResolvedValue(h);
+  await mulai();
+  await screen.findByText('Jaringan jalan tidak terhubung');
+  expect(screen.queryByText('Semua jalur tergenang')).toBeNull();
+  expect(screen.queryByText('Tidak ada selisih')).toBeNull();
 });

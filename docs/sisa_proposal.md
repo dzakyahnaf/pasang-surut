@@ -1,5 +1,14 @@
 # Sisa pekerjaan proposal
 
+**Pembaruan final 22 September 2026:** proposal yang telah disubmit tetap
+diarsipkan. Koreksi metode, status runtime, audit regresi, dan konfirmasi TM
+ditulis pada [addendum audit](final/Addendum_audit_22_september.docx).
+Dokumen addendum diperiksa dengan Microsoft Word: satu halaman. PPTX/PDF
+presentasi final dan video cadangan masih menjadi pekerjaan materi; jangan
+menyalin klaim radius 500 m atau CO₂e dari naskah lama tanpa koreksi.
+
+Bagian di bawah adalah riwayat penyusunan proposal babak penyisihan.
+
 Berkas ini memindahkan tujuh kotak `[ ISI MANUAL ]` yang semula tertanam di
 dalam `Anforcom2026_DSDC_TrioLaAlbiceleste_PasangSurut.docx`.
 

@@ -124,7 +124,7 @@ def main() -> int:
         config.CRS_SIMPAN, config.CRS_METRIK, always_xy=True)
     x_m, y_m = ke_metrik.transform(lon, lat)
 
-    print("menghitung elevasi relatif terhadap tetangga radius 500 m ...")
+    print("menghitung elevasi relatif pada jendela 3 x 3 sel, sisi sel 500 m ...")
     elev_rel = kerentanan.elevasi_relatif(elev, np.asarray(x_m), np.asarray(y_m))
     sah = np.isfinite(elev_rel)
     print(f"  terhitung {int(sah.sum()):,} ruas")
@@ -168,7 +168,8 @@ def main() -> int:
                      "backend/app/domain/kerentanan.py."),
         "dihitung": datetime.now(timezone.utc).isoformat(),
         "bobot": kerentanan.BOBOT,
-        "radius_elevasi_relatif_m": 500,
+        "sisi_sel_elevasi_relatif_m": 500,
+        "jendela_elevasi_relatif": "3 x 3 sel (bukan radius melingkar)",
         "ruas": int(ok.sum()),
         "sebaran": {f"p{p}": round(float(np.nanpercentile(skor, p)), 4)
                     for p in (1, 5, 25, 50, 75, 95, 99)},

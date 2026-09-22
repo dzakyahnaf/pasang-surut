@@ -29,13 +29,13 @@ npm run preview:osm
 ```
 
 Buka `http://127.0.0.1:5175`. API diproksi ke VPS yang sama dengan main.
-Bandingkan dengan `https://pasang-surut.vercel.app` pada lokasi/jam yang sama.
+Bandingkan dengan `https://pasang-surut.vercel.app/app` pada lokasi/jam yang sama.
 Basemap diambil langsung browser dari CARTO; tidak disimpan di API/VPS.
 Tidak ada unduhan massal atau prefetch wilayah. Bila pemuatan awal basemap
 gagal selama 10 detik, peta lokal aktif dengan status yang terlihat.
 
 Vercel pada branch ini membangun frontend asli dan hanya memproksi `/api`.
-Konfigurasi produksi main tetap memproksi seluruh frontend ke VPS.
+Produksi main menampilkan landing di `/` dan aplikasi dari VPS di `/app`.
 Preview Vercel dapat meminta login sesuai perlindungan proyek yang berlaku.
 
 ## Penyedia dan batas pratinjau
@@ -48,9 +48,8 @@ Atribusi OpenStreetMap dan CARTO ditampilkan sebagai tautan. Internet tetap
 dibutuhkan untuk basemap serta API produksi. Tidak ada langganan berbayar
 atau pendaftaran akun yang dibuat.
 
-Renderer pada main maupun branch ini masih MapLibre 5.24.0. Audit npm
-mencatat GHSA-jrc7-96c5-q579 pada HTML attribution. `AttributionControl`
-dimatikan; atribusi ditulis sebagai tautan React statis, bukan HTML dari
-style penyedia. Jangan mengaktifkan jalur HTML tersebut sebelum upgrade
-ke versi patched dan uji kompatibilitas. Ini pratinjau visual, bukan
-pernyataan bahwa seluruh audit dependensi telah bersih.
+Renderer pada main maupun branch ini sudah MapLibre 6.4.1, dengan worker
+modul dibundel oleh Vite. `npm audit` pada 22 September tidak menemukan
+advisory yang diketahui. Atribusi OpenStreetMap dan CARTO tetap berupa
+tautan React statis. Perbaikan regresi dari main disertakan pada branch
+ini; pilihan basemap tetap terpisah dan belum digabungkan ke main.

@@ -12,6 +12,23 @@ alamat `http://127.0.0.1:5175`. Vercel branch membangun frontend terpisah,
 hanya `/api` diproksi ke VPS. Tidak ada perubahan origin frontend main.
 Lihat [panduan perbandingan](final/pratinjau_peta_osm.md).
 
+## Audit regresi final dan status TM — 22 September 2026
+
+95 tes backend Windows/Linux dan 25 tes frontend lulus. Audit memperbaiki
+validasi data rusak, sinkronisasi versi, batas body/waktu request, cache
+graf, pesan konektivitas, saran waktu, retry tujuan, dukungan tanpa WebGL,
+serta protokol URL landing. MapLibre 6.4.1 menutup advisory yang sebelumnya
+terbuka; migrasi worker diuji lewat gambar peta pada build produksi.
+Lihat [laporan audit](final/audit_regresi_22_september.md).
+
+**Papan blokade materi:** TM selesai; tim tampil pertama, durasi tetap
+10 menit presentasi dan 15 menit tanya jawab. Deadline PDF belum diketahui.
+PPTX/PDF final, MP4 cadangan, bukti pengguna, dan latihan proyektor belum
+dikonfirmasi selesai. Outline delapan slide sudah diperbarui. Akurasi
+genangan per ruas dan dampak lapangan tetap belum tersedia.
+
+Catatan berikut adalah riwayat pengujian sebelumnya, bukan hitungan tes
+rilis audit terbaru.
 
 ## Uji beban dan perbandingan basemap — 22 September 2026
 

@@ -21,10 +21,8 @@ function angka(nilai, desimal = 0) {
   return nilai.toFixed(desimal).replace(".", ",");
 }
 
-export default function PeringatanPaparan({ paparan, jamAman, namaJalan, onPilihJam }) {
+export default function PeringatanPaparan({ paparan, jamAman, waktu, bisaPilihJam, onPilihJam }) {
   if (!paparan || !paparan.menembus) return null;
-
-  const jalan = namaJalan && namaJalan.length ? namaJalan[0] : null;
 
   return (
     <section className="peringatan" role="alert">
@@ -33,13 +31,10 @@ export default function PeringatanPaparan({ paparan, jamAman, namaJalan, onPilih
       </h2>
 
       <p className="peringatan__isi">
-        {jalan
-          ? t("peringatan.isiMenembus", {
-              kedalaman: angka(paparan.kedalaman_maks_cm),
-              namaJalan: jalan,
-              jam: "—",
-            })
-          : `${angka(paparan.kedalaman_maks_cm)} ${t("satuan.sentimeter")}`}
+        {t('peringatan.estimasiRute', {
+          kedalaman: angka(paparan.kedalaman_maks_cm),
+          jam: waktu ? labelHariJam(waktu) : '—',
+        })}
       </p>
 
       {/* Kalimat kesehatan diambil apa adanya dari copy.id.json. Angka kasus
@@ -47,7 +42,7 @@ export default function PeringatanPaparan({ paparan, jamAman, namaJalan, onPilih
           adalah tindakannya, bukan statistiknya. */}
       <p className="peringatan__kesehatan">{t("peringatan.risikoKesehatan")}</p>
 
-      {jamAman ? (
+      {jamAman && bisaPilihJam ? (
         <button
           type="button"
           className="peringatan__saran"
@@ -58,6 +53,11 @@ export default function PeringatanPaparan({ paparan, jamAman, namaJalan, onPilih
             kedalaman: angka(jamAman.kedalaman_maks_cm),
           })}
         </button>
+      ) : jamAman ? (
+        <p className="peringatan__tanpa-saran t-label">
+          {t('peringatan.saranJamLain', { jam: labelHariJam(jamAman.waktu_utc), kedalaman: angka(jamAman.kedalaman_maks_cm) })}
+          {' '}{t('peringatan.diLuarPita')}
+        </p>
       ) : (
         <p className="peringatan__tanpa-saran t-label">
           {t("peringatan.tidakAdaJamAman")}

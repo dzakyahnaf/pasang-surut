@@ -33,6 +33,8 @@
     "kembali": "Kembali"
   },
   "peta": {
+    "gagalGrafis": "Peta tidak dapat digambar di peramban ini. Aktifkan akselerasi grafis atau buka peramban lain. Tujuan cepat tetap dapat digunakan.",
+    "kondisiBelumTersedia": "Kondisi genangan belum tersedia. Garis jalan bukan penanda kondisi kering.",
     "judulLegenda": "KEDALAMAN GENANGAN",
     "tampilkanLegenda": "Tampilkan legenda",
     "sembunyikanLegenda": "Sembunyikan legenda",
@@ -122,7 +124,7 @@
     "emisi": "Emisi",
     "rentang": "{bawah}–{atas}",
     "tidakAdaSelisih": "Tidak ada selisih",
-    "catatanFaktor": "Bahan bakar dan emisi dihitung dari faktor rata-rata per moda, bukan dari kendaraan Anda.",
+    "catatanFaktor": "Estimasi BBM dan CO₂ memakai asumsi konsumsi per moda serta faktor pembakaran, belum dikalibrasi pada kendaraan Anda. Tidak mencakup emisi daur hidup atau gas lain.",
     "hemat": "Menghindari genangan menghemat {nilai} {satuan} dibanding menerjangnya"
   },
   "peringatan": {
@@ -130,13 +132,19 @@
     "isiMenembus": "Genangan setinggi {kedalaman} cm di {namaJalan} pada pukul {jam}.",
     "risikoKesehatan": "Air rob dapat membawa bakteri penyebab leptospirosis. Bila terpaksa lewat, hindari kontak kulit dengan air dan segera cuci dengan sabun setelahnya.",
     "saranJamLain": "Berangkat pukul {jam} — genangan turun ke {kedalaman} cm.",
-    "tidakAdaJamAman": "Tidak ada jam dengan genangan lebih rendah dalam 72 jam ke depan.",
+    "tidakAdaJamAman": "Belum ditemukan jam dengan estimasi genangan lebih rendah dalam cakupan yang diperiksa, maksimal 24 jam ke depan.",
+    "diLuarPita": "Waktu ini berada di luar rentang Pita Pasut yang sedang ditampilkan.",
+    "estimasiRute": "Estimasi kedalaman maksimum {kedalaman} cm pada rute ini, untuk keberangkatan {jam}.",
+    "judulTidakTerhubung": "Jaringan jalan tidak terhubung",
+    "isiTidakTerhubung": "Belum ditemukan sambungan jalan antara kedua titik, termasuk saat genangan diabaikan. Coba pilih titik lain di jaringan jalan.",
     "judulSemuaTertutup": "Semua jalur tergenang",
     "isiSemuaTertutup": "Tidak ada rute yang bisa dilewati {moda} menuju tujuan pada jam itu.",
     "saranGantiModa": "Mobil punya batas aman lebih tinggi. Coba ganti moda.",
     "lihatJamAman": "Lihat jam aman terdekat"
   },
   "tujuanCepat": {
+    "gagal": "Daftar tujuan gagal dimuat. Coba lagi atau pilih titik pada peta.",
+    "ulang": "Muat ulang tujuan",
     "judul": "TUJUAN CEPAT",
     "petunjuk": "Pilih tujuan yang sering dituju",
     "muat": "Memuat daftar tujuan",
@@ -232,7 +240,8 @@
     "halamanTidakAdaIsi": "Alamat yang Anda buka tidak ada. Kembali ke peta.",
     "kembaliKePeta": "Kembali ke peta",
     "dataTidakTersedia": "Data untuk waktu ini belum tersedia atau sudah kedaluwarsa. Pilih jam yang tersedia atau muat ulang data.",
-    "serverSibuk": "Server sedang sibuk. Coba lagi sebentar."
+    "serverSibuk": "Server sedang sibuk. Coba lagi sebentar.",
+    "dataBerubah": "Versi data berubah saat dimuat. Cari ulang untuk menyelaraskan peta, waktu, dan rute."
   },
   "memuat": {
     "peta": "Memuat peta",
@@ -251,7 +260,7 @@
     "meter": "m",
     "sentimeter": "cm",
     "liter": "L",
-    "kilogramCo2e": "kg CO₂e",
+    "kilogramCo2e": "kg CO₂",
     "persen": "%",
     "_catatan": "Satuan selalu ditulis lebih kecil dan lebih redup daripada angkanya, sesuai DESIGN.md Bagian 4."
   },
