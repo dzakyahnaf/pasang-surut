@@ -1,5 +1,9 @@
 # Migrasi VPS — 22 September 2026
 
+> Riwayat tahap privat. Setelah izin spesifik pembukaan origin diberikan,
+> pengalihan publik dan label peta selesai. Status terbaru ada pada
+> [hasil publikasi 22 September](publikasi_dan_label_22_september.md).
+
 **API, frontend produksi, dan database PostGIS PASANG SURUT sudah berjalan
 di VPS untuk pengujian privat.** Alamat masuk tetap
 `https://pasang-surut.vercel.app`, tetapi pengalihan layanan publik **belum

@@ -4,10 +4,10 @@
 
 **Perutean sadar rob untuk Semarang.**
 
-Pembaruan 22 September: retry, cakupan data, kinerja/memori, dan model routing
-sudah diperbaiki. API, frontend, serta database sudah diuji pada VPS privat;
-alamat publik masih memakai deployment sebelumnya. Baca
-[hasil migrasi, pengukuran, dan langkah publik yang tertahan](docs/final/migrasi_vps_22_september.md).
+Pembaruan 22 September: perbaikan retry, cakupan waktu, kinerja/memori, dan
+model routing sudah aktif. Frontend, API, dan database berjalan di VPS;
+alamat masuk tetap Vercel. Peta kini memuat nama jalan, kecamatan, dan tempat.
+Baca [hasil publikasi, label, pengukuran, dan batasnya](docs/final/publikasi_dan_label_22_september.md).
 
 Memprediksi **kapan** tiap ruas jalan berisiko tergenang rob untuk 72 jam ke
 depan, lalu merutekan warga dan logistik menghindarinya pada jam keberangkatan
@@ -51,7 +51,7 @@ berangkat.
 | | |
 |---|---|
 | Aplikasi live | https://pasang-surut.vercel.app |
-| API | https://pasang-surut-api.onrender.com |
+| API aktif | https://pasang-surut.vercel.app/api/kesehatan |
 | Video YouTube | https://youtu.be/CeXsEN_1Zvk |
 | Prototype Figma | https://www.figma.com/design/EtACxc7jD6wvMJjHh7bq3p/PasangSurut?node-id=1-907 |
 | Repositori | https://github.com/dzakyahnaf/pasang-surut |

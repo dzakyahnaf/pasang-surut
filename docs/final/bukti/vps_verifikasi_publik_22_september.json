@@ -1,0 +1,76 @@
+{
+  "utc": "2026-09-22T08:31:02.893073+00:00",
+  "maknaprice_container_identity_unchanged": true,
+  "maknaprice_caddy_configs_unchanged": true,
+  "pasang_containers": [
+    {
+      "service": "pasang-surut-api-1",
+      "status": "running",
+      "oom_killed": false,
+      "restart_count": 0,
+      "memory_limit_mib": 320,
+      "ports": {
+        "8000/tcp": null
+      }
+    },
+    {
+      "service": "pasang-surut-db-1",
+      "status": "running",
+      "oom_killed": false,
+      "restart_count": 0,
+      "memory_limit_mib": 192,
+      "ports": {
+        "5432/tcp": null
+      }
+    },
+    {
+      "service": "pasang-surut-web-1",
+      "status": "running",
+      "oom_killed": false,
+      "restart_count": 0,
+      "memory_limit_mib": 48,
+      "ports": {
+        "2019/tcp": null,
+        "443/tcp": null,
+        "443/udp": null,
+        "80/tcp": null,
+        "8080/tcp": [
+          {
+            "HostIp": "0.0.0.0",
+            "HostPort": "18080"
+          }
+        ]
+      }
+    }
+  ],
+  "health": {
+    "status": "hidup",
+    "versi": "0.4.0",
+    "commit": "21sep-d76a27388461",
+    "waktu_server_utc": "2026-09-22T08:31:03.738895+00:00",
+    "zona_waktu_tampilan": "Asia/Jakarta",
+    "database": true,
+    "data_tersedia": true,
+    "aoi": {
+      "bbox": [
+        110.385,
+        -6.995,
+        110.5,
+        -6.925
+      ]
+    },
+    "asal_jaringan": "database",
+    "jumlah_ruas": 19394,
+    "jumlah_prediksi": 87427,
+    "sumber_data": [
+      "kerentanan_v1"
+    ],
+    "versi_data": "715e64e7-109a-4ece-b7f8-6935d5f7148a",
+    "prediksi_mulai_utc": "2026-09-21T19:00:00+00:00",
+    "prediksi_selesai_utc": "2026-10-04T23:00:00+00:00",
+    "akhir_eksklusif_utc": "2026-10-05T00:00:00+00:00",
+    "potret_berlaku_sampai_utc": null
+  },
+  "backup_log": "/opt/pasang-surut/backups/pasang-surut-20260921T202001Z.dump 3735909 bytes",
+  "backup_cron_matches_repo": true
+}
