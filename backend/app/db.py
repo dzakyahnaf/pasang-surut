@@ -401,6 +401,17 @@ class RepositoriRuas:
                 })
         return {"type": "FeatureCollection", "features": fitur}
 
+    def versi_jaringan(self) -> str:
+        """Sidik isi dalam transaksi publikasi, bukan asumsi graf abadi.
+
+        Agregat hanya 32 karakter per ruas. Dibaca ketika versi prediksi
+        berubah agar penyegaran prediksi tidak menggandakan graf di RAM.
+        Ini identitas cache, bukan tanda tangan keamanan.
+        """
+        with self._kon.cursor() as kur:
+            kur.execute("SELECT md5(string_agg(md5(r::text), '' ORDER BY edge_id)) FROM ruas_jalan r")
+            return kur.fetchone()[0]
+
     def semua_untuk_routing(self) -> list[dict]:
         """Seluruh ruas dalam bentuk yang siap dijadikan graf routing.
 

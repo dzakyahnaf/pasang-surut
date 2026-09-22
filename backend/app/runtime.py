@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import math
 import threading
 import time
 from dataclasses import dataclass
@@ -86,6 +87,21 @@ class Cakupan:
 
 class Jaringan:
     def __init__(self, fitur):
+        if not fitur:
+            raise ValueError("Jaringan jalan kosong")
+        ids = set()
+        for f in fitur:
+            p, g = f['properties'], f['geometry']
+            edge_id = int(p['edge_id'])
+            if edge_id in ids or g['type'] != 'LineString' or len(g['coordinates']) < 2:
+                raise ValueError("Identitas atau geometri ruas tidak sah")
+            ids.add(edge_id)
+            for nilai in (p['panjang_m'], p.get('kecepatan_kmh') if p.get('kecepatan_kmh') is not None else 30):
+                if not math.isfinite(float(nilai)) or float(nilai) <= 0:
+                    raise ValueError("Panjang/kecepatan ruas tidak sah")
+            for lon, lat in g['coordinates']:
+                if not math.isfinite(lon) or not math.isfinite(lat) or not -180 <= lon <= 180 or not -90 <= lat <= 90:
+                    raise ValueError("Koordinat ruas tidak sah")
         self.fitur = fitur
         self.per_id = {int(f["properties"]["edge_id"]): f for f in fitur}
         self.graf = routing.GrafJalan({
@@ -115,6 +131,26 @@ class Dataset:
     ambang: dict
     asal: str
 
+    def __post_init__(self):
+        jam = set(self.cakupan.jam)
+        for w, nilai in self.prediksi.items():
+            if w not in jam:
+                raise ValueError("Prediksi di luar metadata")
+            for edge_id, (kedalaman, peluang) in nilai.items():
+                if (edge_id not in self.jaringan.per_id
+                        or not math.isfinite(kedalaman) or kedalaman < 0
+                        or not math.isfinite(peluang) or not 0 <= peluang <= 1):
+                    raise ValueError("Nilai prediksi tidak sah")
+        if not self.ambang:
+            raise ValueError("Ambang moda kosong")
+        for a in self.ambang.values():
+            nilai = [float(a[k]) for k in ('lambat_cm', 'berisiko_cm',
+                'tidak_bisa_lewat_cm', 'konsumsi_l_per_km', 'faktor_emisi_kg_per_l')]
+            if (not all(math.isfinite(v) for v in nilai)
+                    or not 0 <= nilai[0] <= nilai[1] < nilai[2]
+                    or nilai[3] <= 0 or nilai[4] <= 0):
+                raise ValueError("Ambang moda tidak sah")
+
     def periksa(self, waktu):
         self.cakupan.periksa(waktu)
 
@@ -130,6 +166,7 @@ class PenyimpanRuntime:
         self._dataset = None
         self._diperiksa = 0.0
         self._jaringan_db = None
+        self._versi_jaringan_db = None
         self._potret = None
         self._cap_berkas = None
 
@@ -145,7 +182,7 @@ class PenyimpanRuntime:
             if config.DATABASE_URL:
                 try:
                     data = self._dari_database()
-                except (psycopg2.Error, db.DatabaseBelumDikonfigurasi, ValueError):
+                except (psycopg2.Error, db.DatabaseBelumDikonfigurasi, ValueError, KeyError, TypeError, OverflowError):
                     # Kegagalan di tengah query juga beralih ke potret.
                     pass
             if data is None:
@@ -173,17 +210,21 @@ class PenyimpanRuntime:
             if (self._dataset and self._dataset.asal == "database"
                     and self._dataset.cakupan.versi == cakupan.versi):
                 return self._dataset
-            if self._jaringan_db is None:
+            versi_jaringan = db.RepositoriRuas(kon).versi_jaringan()
+            jaringan = self._jaringan_db
+            if jaringan is None or versi_jaringan != self._versi_jaringan_db:
                 baris = db.RepositoriRuas(kon).semua_untuk_routing()
                 fitur = [{"type": "Feature", "properties": {k: v for k, v in r.items()
                           if k != "koordinat"},
                           "geometry": {"type": "LineString", "coordinates": r["koordinat"]}}
                          for r in baris]
-                self._jaringan_db = Jaringan(fitur)
+                jaringan = Jaringan(fitur)
             prediksi = repo.peta_kedalaman(cakupan.mulai, cakupan.akhir,
                                           sumber=meta["sumber"])
             ambang = db.RepositoriRuas(kon).ambang_moda()
-            return Dataset(cakupan, self._jaringan_db, prediksi, ambang, "database")
+            data = Dataset(cakupan, jaringan, prediksi, ambang, "database")
+            self._jaringan_db, self._versi_jaringan_db = jaringan, versi_jaringan
+            return data
 
     def _dari_potret(self):
         try:
@@ -204,7 +245,7 @@ class PenyimpanRuntime:
             self._potret = Dataset(cakupan, jaringan, prediksi, d["ambang_moda"], "potret")
             self._cap_berkas = cap
             return self._potret
-        except (OSError, KeyError, TypeError, ValueError):
+        except (OSError, KeyError, TypeError, ValueError, IndexError, OverflowError):
             raise tidak_tersedia() from None
 
 

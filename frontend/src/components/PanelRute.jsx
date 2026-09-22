@@ -277,12 +277,12 @@ export default function PanelRute({
           ) : (
             <div className="peringatan" role="alert">
               <p className="t-bagian peringatan__judul">
-                {t("peringatan.judulSemuaTertutup")}
+                {t(sadar.alasan === 'tidak_terhubung' ? 'peringatan.judulTidakTerhubung' : "peringatan.judulSemuaTertutup")}
               </p>
               <p className="t-label peringatan__isi">
-                {t("peringatan.isiSemuaTertutup", { moda: t(`moda.${moda}`) })}
+                {sadar.alasan === 'tidak_terhubung' ? t('peringatan.isiTidakTerhubung') : t("peringatan.isiSemuaTertutup", { moda: t(`moda.${moda}`) })}
               </p>
-              {moda === "motor" ? (
+              {moda === "motor" && sadar.alasan !== 'tidak_terhubung' ? (
                 <p className="t-label peringatan__isi">
                   {t("peringatan.saranGantiModa")}
                 </p>

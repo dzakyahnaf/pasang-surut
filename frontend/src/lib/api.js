@@ -7,7 +7,7 @@
 
 const ALAMAT = import.meta.env.VITE_API_URL ?? "http://127.0.0.1:8000";
 
-async function ambil(jalur, opsi) {
+async function baca(jalur, opsi) {
   const jawaban = await fetch(`${ALAMAT}${jalur}`, opsi);
   if (!jawaban.ok) {
     let rincian = `HTTP ${jawaban.status}`;
@@ -30,6 +30,25 @@ async function ambil(jalur, opsi) {
   }
   const data = await jawaban.json();
   return data;
+}
+
+async function ambil(jalur, opsi = {}) {
+  const c = new AbortController();
+  const batalkan = () => c.abort(opsi.signal.reason);
+  if (opsi.signal?.aborted) batalkan();
+  else opsi.signal?.addEventListener('abort', batalkan, { once: true });
+  const timer = setTimeout(() => c.abort(Object.assign(new Error('Request timeout'), {
+    kode: 'batas_waktu',
+  })), 20000);
+  try {
+    return await baca(jalur, { ...opsi, signal: c.signal });
+  } catch (e) {
+    if (c.signal.aborted) throw c.signal.reason;
+    throw e;
+  } finally {
+    clearTimeout(timer);
+    opsi.signal?.removeEventListener('abort', batalkan);
+  }
 }
 
 /** Keadaan sistem: jumlah ruas, sumber data, rentang waktu prediksi. */

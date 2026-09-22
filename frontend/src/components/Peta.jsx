@@ -15,7 +15,7 @@
  */
 
 import { useEffect, useRef, useState } from "react";
-import maplibregl from "maplibre-gl";
+import * as maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 
 import { token, tokenPx } from "../lib/token.js";
@@ -111,6 +111,7 @@ export default function Peta({ geojson, kondisi, rute, asal, tujuan, onKlikPeta,
   // Tanpa ini, GeoJSON yang datang duluan akan hilang begitu saja dan peta
   // tetap kosong meski tidak ada satu pun galat di console.
   const [siap, setSiap] = useState(false);
+  const [galatGrafis, setGalatGrafis] = useState(false);
 
   // Handler klik disimpan di ref, bukan ditutup langsung di dalam efek
   // pembuatan peta. Kalau ditutup langsung, ia akan memegang nilai state
@@ -123,13 +124,15 @@ export default function Peta({ geojson, kondisi, rute, asal, tujuan, onKlikPeta,
     if (petaRef.current || !wadahRef.current) return;
     let dibatalkan = false;
 
-    const peta = new maplibregl.Map({
+    let peta;
+    try {
+      peta = new maplibregl.Map({
       container: wadahRef.current,
       // Gaya ditulis inline, bukan diambil dari URL. Sekali lagi: tidak ada
       // panggilan jaringan ke luar.
       style: {
         version: 8,
-        // Tanpa URL glyphs: MapLibre 5.24 menggambar teks melalui TinySDF
+        // Tanpa URL glyphs: MapLibre menggambar teks melalui TinySDF
         // memakai font lokal yang sudah dibundel, tanpa layanan glyph luar.
         sources: {},
         layers: [
@@ -150,7 +153,11 @@ export default function Peta({ geojson, kondisi, rute, asal, tujuan, onKlikPeta,
       pitchWithRotate: false,
       dragRotate: false,
       touchZoomRotate: true,
-    });
+      });
+    } catch {
+      setGalatGrafis(true);
+      return;
+    }
 
     peta.touchZoomRotate.disableRotation();
 
@@ -468,6 +475,8 @@ export default function Peta({ geojson, kondisi, rute, asal, tujuan, onKlikPeta,
       id="konten-utama"
       role="region"
       aria-label={t("aksesibilitas.petaLabel")}
-    />
+    >
+      {galatGrafis ? <div className="pesan pesan--galat" role="alert">{t('peta.gagalGrafis')}</div> : null}
+    </div>
   );
 }

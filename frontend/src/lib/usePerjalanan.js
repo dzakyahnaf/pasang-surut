@@ -118,14 +118,20 @@ export function usePerjalanan(asal, tujuan, moda) {
     return () => c.abort();
   }, [waktuAktif, waktuTersedia, asal, tujuan, moda, ulangRute, ulangData, kunciRute]);
 
-  const galatPeta = galatJam || galatJaringan || galatMuat;
+  const kondisiAktif = !menungguJam && !memuat && kondisi?.waktu_utc === waktuAktif
+    && kondisi?.versi_jaringan === geojson?.versi_jaringan;
+  const hasilAktif = !menungguJam && !sedangMencari && hasil?.kunci === kunciRute;
+  const bedaVersi = kondisiAktif && (kondisi.versi_data !== infoJam?.versi_data
+    || (hasilAktif && (hasil.data.versi_data !== kondisi.versi_data
+      || hasil.data.versi_jaringan !== geojson?.versi_jaringan)));
+  const galatPeta = galatJam || galatJaringan || galatMuat || (bedaVersi ? t('galat.dataBerubah') : null);
   return {
     jam, infoJam, indeksJam, setIndeksJam, waktuAktif, waktuTersedia,
-    geojson, kondisi: !menungguJam && !memuat && kondisi?.waktu_utc === waktuAktif && kondisi?.versi_jaringan === geojson?.versi_jaringan ? kondisi : null,
-    hasil: !menungguJam && !sedangMencari && hasil?.kunci === kunciRute ? hasil.data : null,
+    geojson, kondisi: kondisiAktif && !galatPeta ? kondisi : null,
+    hasil: hasilAktif && kondisiAktif && !galatPeta ? hasil.data : null,
     memuatJam, memuat: menungguJam || memuat || memuatJam || (!geojson && !galatPeta),
     sedangMencari: sedangMencari || menungguJam, galatMuat: galatPeta, galatRute,
-    cariUlang: () => setUlangRute((n) => n + 1),
+    cariUlang: () => galatPeta ? setUlangData((n) => n + 1) : setUlangRute((n) => n + 1),
     muatUlang: () => setUlangData((n) => n + 1),
   };
 }
