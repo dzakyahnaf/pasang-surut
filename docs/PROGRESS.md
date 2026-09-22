@@ -1,5 +1,18 @@
 # Progres
 
+## Branch pembanding peta dasar — 22 September 2026
+
+Atas permintaan Dzaky, `preview/peta-dasar-osm` memakai vector basemap
+CARTO Voyager berbasis OSM. Main tetap memakai tampilan lokal. Peta dasar
+memuat jalan, bangunan, perairan, kawasan dan tempat; empat tujuan penting
+tetap diberi label/akses lokal. Genangan dan rute memakai API VPS yang sama.
+
+Pratinjau laptop tersedia melalui `npm run preview:osm` di frontend,
+alamat `http://127.0.0.1:5175`. Vercel branch membangun frontend terpisah,
+hanya `/api` diproksi ke VPS. Tidak ada perubahan origin frontend main.
+Lihat [panduan perbandingan](final/pratinjau_peta_osm.md).
+
+
 ## Uji beban dan perbandingan basemap — 22 September 2026
 
 API produksi diperbaiki untuk NaN/Infinity, koordinat di luar rentang,

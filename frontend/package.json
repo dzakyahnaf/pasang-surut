@@ -4,6 +4,7 @@
   "version": "0.2.0",
   "type": "module",
   "scripts": {
+    "preview:osm": "node scripts/preview-osm.mjs",
     "dev": "vite",
     "build": "vite build",
     "build:vps": "node scripts/build-vps.mjs",

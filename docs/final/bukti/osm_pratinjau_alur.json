@@ -1,0 +1,13 @@
+{
+  "place_click": true,
+  "wet_hour": {
+    "waktu_utc": "2026-09-23T00:00:00+00:00",
+    "tersedia": true,
+    "ruas_tergenang": 1367,
+    "kedalaman_maks_cm": 44.1,
+    "tinggi_pasut_m": 0.2989
+  },
+  "routes_motor_car": true,
+  "fallback_with_provider_blocked": true,
+  "errors": []
+}

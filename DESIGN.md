@@ -8,6 +8,16 @@ atau radius yang boleh muncul di kode tanpa asalnya ada di sini.
 
 ## 1. Brief
 
+### Pengecualian branch pratinjau peta dasar
+
+Atas permintaan Dzaky 22 September, `preview/peta-dasar-osm` membandingkan
+basemap OSM siap pakai (CARTO Voyager) dengan tampilan lokal pada `main`.
+Palet basemap mengikuti gaya penyedia, termasuk daratan, bangunan, jalan,
+dan label tempat. Font tetap Barlow; panel, warna genangan, pola, serta rute
+memakai token aplikasi. Jalan kering dan label lokal disembunyikan agar
+tidak bertumpuk dengan basemap. Ini belum merupakan keputusan desain main.
+
+
 **Produk.** PASANG SURUT — alat pengambilan keputusan perjalanan di kota pesisir
 yang rutin tergenang rob.
 

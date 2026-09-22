@@ -73,6 +73,9 @@ python -m scripts.07_uji_silang_rob     # pasut vs tanggal kejadian rob
    Latih 2015–2023, uji 2024–2026.
 6. **Jalur demo offline.** Tidak ada panggilan API eksternal saat runtime.
    Graf OSM disimpan ke file, pasut dihitung sekali dan disimpan.
+   Pengecualian eksplisit Dzaky pada 22 September: branch
+   `preview/peta-dasar-osm` boleh memakai basemap siap pakai dari luar
+   untuk perbandingan visual. Main mempertahankan tampilan sekarang.
 7. **Tidak ada secret di repo.** Pakai `.env`, sertakan `.env.example`.
 8. **Jangan commit file raster mentah** (DEMNAS `.tif`, `.osm.pbf`).
 
