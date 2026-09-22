@@ -1,0 +1,76 @@
+Lewati ke konten utama
+CARI RUTE
+Berangkat dari
+Akses Stasiun Semarang Tawang
+-6.9637, 110.4274
+Menuju
+Akses Kawasan Industri Terboyo
+-6.9482, 110.4693
+MODA
+Motor
+Mobil
+
+Batas aman lebih rendah, lebih cepat terhenti genangan
+
+CARI ULANG
+RUTE
+
+Rute memakai kondisi jam keberangkatan. Perubahan selama perjalanan belum dimodelkan; periksa kondisi lapangan.
+
+7,0
+mnt
+Waktu tempuh
+6,3
+km
+Jarak
+
+Tiba sekitar pukul 13.06
+
+Melewati 61 ruas
+
+Tidak ada genangan di jalur ini pada jam tersebut
+
+Pada jam ini rute disarankan sama dengan rute biasa. Tidak perlu memutar.
+
+Sembunyikan rute biasa
+Validasi
+TUJUAN CEPAT
+
+Pilih tujuan yang sering dituju
+
+Pelabuhan Tanjung Emas
+Stasiun Semarang Tawang
+Kawasan Industri Terboyo
+RSI Sultan Agung Semarang
+BIAYA MENGHINDAR
+
+Tidak ada selisih
+
+Pasang Surut
+Semarang Utara dan Timur
+Skenario demo bertanggal - data potret
+Sab 26 · pukul 13.00 WIB
+INDEKS KERENTANAN — BUKAN PREDIKSI GENANGAN
+Peringatan: yang ditampilkan adalah indeks kerentanan, bukan prediksi genangan hasil model
+KEDALAMAN GENANGAN
+SEMBUNYIKAN LEGENDA
+Kering
+Tipis
+1–10 cm
+Sedang
+10–25 cm
+Dalam
+25–50 cm
+Sangat dalam
+di atas 50 cm
+
+Kedalaman adalah estimasi, bukan hasil pengukuran langsung
+
+Garis putus-putus tipis: batas kecamatan indikatif
+
+Ketuk peta untuk memilih titik berangkat
+© OpenStreetMap contributors
+PITA PASUT · 72 JAM
+Sab 26 · pukul 13.00 WIB
+Geser untuk melihat kondisi jalan pada jam lain
+Tinggi air +0.00 m
