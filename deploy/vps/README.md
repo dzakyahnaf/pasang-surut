@@ -194,3 +194,9 @@ python3 /opt/pasang-surut/pantau.py --menit 45 --out /opt/pasang-surut/monitor-b
 Simpan log mentah host secara privat. Repo hanya memuat ringkasan yang
 tidak mengekspos identitas container layanan lain. Pengujian yang sudah
 lulus tidak perlu diulang sebagai beban rutin pada layanan publik.
+# Hasil uji beban 22 September
+
+API tetap 320 MiB; batas web sekarang 64 MiB setelah uji ruas besar
+berulang mendekati batas lama 48 MiB. Lihat
+[laporan uji](../../docs/final/uji_beban_vps_22_september.md) sebelum mengubah
+kapasitas. Respons 503 `server_sibuk` adalah penolakan beban terkendali.

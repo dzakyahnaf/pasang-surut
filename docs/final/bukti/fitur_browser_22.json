@@ -1,0 +1,19 @@
+{
+  "url": "https://pasang-surut.vercel.app",
+  "checks": [
+    "pelabuhan_ke_terboyo_motor",
+    "ganti_mobil_menghitung_ulang",
+    "toggle_pembanding_tanpa_request_baru",
+    "validasi_dan_kembali_mempertahankan_hasil",
+    "hapus_dan_ganti_kedua_titik_semua_tujuan_cepat",
+    "batas_slider_home_end_pageup_pagedown",
+    "40_pergeseran_cepat_satu_request_rute",
+    "retry_data_setelah_503_simulasi",
+    "layar_360_dan_768_tanpa_overflow_atribusi_terlihat"
+  ],
+  "errors": [],
+  "simulated_failures": [
+    "satu respons kondisi 503"
+  ],
+  "route_requests": 12
+}

@@ -35,8 +35,9 @@ services:
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
       - ./frontend:/srv:ro
-    mem_limit: 48m
-    memswap_limit: 48m
+    # Uji legacy GeoJSON berulang mendekati 48 MiB (termasuk cache).
+    mem_limit: 64m
+    memswap_limit: 64m
     cpus: 0.15
     pids_limit: 48
     restart: unless-stopped
