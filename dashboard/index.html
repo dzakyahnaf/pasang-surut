@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="description" content="Pasang Surut — perutean sadar rob untuk Semarang pesisir. Tahu jalan mana yang terendam sebelum berangkat, prakiraan 72 jam per jam." />
+  <meta name="theme-color" content="#f4f4f5" />
+  <title>Pasang Surut — Tahu jalan tergenang sebelum berangkat</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <a class="lewati" href="#isi-utama">Lewati ke konten utama</a>
+
+  <header class="kepala">
+    <div class="kepala__dalam">
+      <nav class="navigasi navigasi--kiri" aria-label="Navigasi utama">
+        <button class="navigasi__tombol" type="button" aria-expanded="false" aria-controls="daftar-nav">Menu</button>
+        <ul class="navigasi__daftar" id="daftar-nav">
+          <li><a href="#fitur">Fitur</a></li>
+          <li><a href="#cara-kerja">Cara kerja</a></li>
+          <li><a href="#validasi">Validasi</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </nav>
+      <a class="merek" href="#atas" aria-label="Pasang Surut — kembali ke atas">
+        <svg class="merek__logo" width="26" height="26" viewBox="0 0 30 30" aria-hidden="true">
+          <rect x="1.5" y="1.5" width="27" height="27" rx="7" fill="#111111"/>
+          <path d="M6 12c2.6 0 2.6 2.2 5.2 2.2s2.6-2.2 5.2-2.2 2.6 2.2 5.2 2.2 2.4-2 2.4-2" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/>
+          <path d="M6 18.5c2.6 0 2.6 2.2 5.2 2.2s2.6-2.2 5.2-2.2 2.6 2.2 5.2 2.2 2.4-2 2.4-2" fill="none" stroke="#4ade80" stroke-width="2.2" stroke-linecap="round"/>
+        </svg>
+        <span class="merek__nama">Pasang Surut</span>
+      </a>
+      <a class="tombol tombol--pil js-dashboard" href="https://pasang-surut.vercel.app">Cek Dashboard</a>
+    </div>
+  </header>
+
+  <main id="isi-utama">
+    <!-- ── 1. Hero ──────────────────────────────────────────── -->
+    <section class="hero" id="atas" aria-labelledby="judul-hero">
+      <div class="hero__dalam">
+        <h1 class="hero__judul" id="judul-hero">Tahu jalan tergenang sebelum berangkat kerja.</h1>
+        <p class="hero__sub">Pasang Surut memprakirakan tiap ruas jalan 72 jam ke depan per jam, lalu merutekan perjalanan menghindarinya pada jam berangkat Anda.</p>
+
+        <figure class="banding" aria-labelledby="judul-banding">
+          <div class="banding__panggung" id="panggung-banding">
+            <svg class="banding__lapis banding__lapis--dasar" viewBox="0 0 400 250" aria-hidden="true">
+              <rect width="400" height="250" fill="#eef0f2"/>
+              <g stroke="#d7dbe0" stroke-width="2">
+                <line x1="0" y1="50" x2="400" y2="50"/><line x1="0" y1="110" x2="400" y2="110"/>
+                <line x1="0" y1="170" x2="400" y2="170"/><line x1="0" y1="220" x2="400" y2="220"/>
+                <line x1="70" y1="0" x2="70" y2="250"/><line x1="150" y1="0" x2="150" y2="250"/>
+                <line x1="240" y1="0" x2="240" y2="250"/><line x1="330" y1="0" x2="330" y2="250"/>
+              </g>
+              <rect x="150" y="90" width="120" height="100" fill="#dc2626" opacity="0.14"/>
+              <path d="M40 210 L360 210" stroke="#9aa1ab" stroke-width="6" stroke-dasharray="12 9" stroke-linecap="round"/>
+              <circle cx="40" cy="210" r="10" fill="#fff" stroke="#6b7280" stroke-width="3"/>
+              <circle cx="360" cy="210" r="10" fill="#6b7280"/>
+              <text x="200" y="60" text-anchor="middle" font-size="15" font-weight="700" fill="#991b1b" font-family="Outfit, sans-serif">RUTE BIASA</text>
+              <text x="200" y="80" text-anchor="middle" font-size="13" fill="#991b1b" font-family="Work Sans, sans-serif">lurus menembus genangan 18 cm</text>
+            </svg>
+            <div class="banding__lapis banding__lapis--atas" aria-hidden="true">
+              <svg viewBox="0 0 400 250">
+                <rect width="400" height="250" fill="#f4fbf6"/>
+                <g stroke="#cdead5" stroke-width="2">
+                  <line x1="0" y1="50" x2="400" y2="50"/><line x1="0" y1="110" x2="400" y2="110"/>
+                  <line x1="0" y1="170" x2="400" y2="170"/><line x1="0" y1="220" x2="400" y2="220"/>
+                  <line x1="70" y1="0" x2="70" y2="250"/><line x1="150" y1="0" x2="150" y2="250"/>
+                  <line x1="240" y1="0" x2="240" y2="250"/><line x1="330" y1="0" x2="330" y2="250"/>
+                </g>
+                <rect x="150" y="90" width="120" height="100" fill="#dc2626" opacity="0.14"/>
+                <rect x="150" y="90" width="120" height="100" fill="none" stroke="#dc2626" stroke-width="2" stroke-dasharray="6 4"/>
+                <path d="M40 210 C110 210 120 150 170 140 S250 130 290 90 S340 60 360 60" fill="none" stroke="#16a34a" stroke-width="7" stroke-linecap="round"/>
+                <circle cx="40" cy="210" r="10" fill="#fff" stroke="#16a34a" stroke-width="3"/>
+                <circle cx="360" cy="60" r="10" fill="#16a34a"/>
+                <text x="200" y="60" text-anchor="middle" font-size="15" font-weight="700" fill="#14532d" font-family="Outfit, sans-serif">RUTE DISARANKAN</text>
+                <text x="200" y="80" text-anchor="middle" font-size="13" fill="#14532d" font-family="Work Sans, sans-serif">memutar, +4 mnt · tiba kering</text>
+              </svg>
+            </div>
+            <div class="banding__gagang" aria-hidden="true"></div>
+          </div>
+          <figcaption class="banding__ket" id="judul-banding">
+            <span>Geser untuk membandingkan — jam berangkat yang sama</span>
+            <span class="banding__kontrol">
+              <button class="banding__panah" type="button" data-geser="-10" aria-label="Tampilkan lebih banyak rute biasa">‹</button>
+              <input class="banding__range" type="range" min="0" max="100" value="50" step="5"
+                     aria-label="Posisi pembanding rute biasa dan rute disarankan" />
+              <button class="banding__panah" type="button" data-geser="10" aria-label="Tampilkan lebih banyak rute disarankan">›</button>
+            </span>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ── 2. Kartu angka ───────────────────────────────────── -->
+    <section class="bagian" aria-labelledby="judul-angka">
+      <div class="bagian__dalam">
+        <h2 class="bagian__judul" id="judul-angka">Berguna untuk perjalanan.</h2>
+        <p class="bagian__sub">Prakiraan per ruas per jam untuk Semarang Utara dan Timur — beserta ongkos menghindarinya.</p>
+        <div class="grid grid--3">
+          <article class="kartu-stat">
+            <p class="kartu-stat__label">Korelasi pasut</p>
+            <p class="kartu-stat__angka">0,78–0,91</p>
+            <p class="kartu-stat__judul">terhadap muka air terukur.</p>
+            <p class="kartu-stat__desc">Stasiun BIG, galat RMSE 0,10–0,12 m.</p>
+          </article>
+          <article class="kartu-stat">
+            <p class="kartu-stat__label">Ruas dipetakan</p>
+            <p class="kartu-stat__angka">19.394</p>
+            <p class="kartu-stat__judul">ruas, 1.289 km jaringan.</p>
+            <p class="kartu-stat__desc">Tiap ruas dinilai risikonya per jam.</p>
+          </article>
+          <article class="kartu-stat">
+            <p class="kartu-stat__label">Prakiraan</p>
+            <p class="kartu-stat__angka">72 jam</p>
+            <p class="kartu-stat__judul">ke depan, resolusi per jam.</p>
+            <p class="kartu-stat__desc">Untuk 10% jalan yang berpotensi rob.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 3. Split fitur ───────────────────────────────────── -->
+    <section class="bagian" id="fitur" aria-labelledby="judul-fitur">
+      <div class="bagian__dalam split">
+        <div class="split__teks">
+          <h2 class="bagian__judul bagian__judul--kiri" id="judul-fitur">Cocok untuk perjalananmu.</h2>
+          <ul class="fitur-list">
+            <li>
+              <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><rect x="2" y="2" width="22" height="22" rx="5" fill="none" stroke="#111" stroke-width="2"/><path d="M5 15c2.5 0 2.5-5 5-5s2.5 5 5 5 2.5-5 4-5" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round"/></svg>
+              <div><p class="fitur-list__judul">Pita Pasut 72 jam.</p><p class="fitur-list__desc">Penggeser waktu berupa kurva pasang surut sungguhan. Jam berisiko diarsir merah, jam aman bertanda hijau.</p></div>
+            </li>
+            <li>
+              <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><rect x="2" y="2" width="22" height="22" rx="5" fill="none" stroke="#111" stroke-width="2"/><path d="M6 20C10 20 10 15 14 12s4-5 6-6" fill="none" stroke="#16a34a" stroke-width="2.4" stroke-linecap="round"/><path d="M6 20c5 0 6-3 10-4" fill="none" stroke="#9aa1ab" stroke-width="2" stroke-dasharray="4 3"/></svg>
+              <div><p class="fitur-list__judul">Dua rute sekaligus.</p><p class="fitur-list__desc">Rute sadar rob tampil bersama rute biasa. Dihitung pada waktu tiba di tiap ruas, bukan waktu berangkat.</p></div>
+            </li>
+            <li>
+              <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><rect x="2" y="2" width="22" height="22" rx="5" fill="none" stroke="#111" stroke-width="2"/><text x="13" y="17" text-anchor="middle" font-size="10" font-weight="800" fill="#111" font-family="Outfit, sans-serif">+4</text></svg>
+              <div><p class="fitur-list__judul">Biaya menghindar.</p><p class="fitur-list__desc">Selisih waktu, jarak, bahan bakar, dan emisi sebagai rentang. Memutar butuh bensin — biayanya ditampilkan, bukan disembunyikan.</p></div>
+            </li>
+            <li>
+              <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><rect x="2" y="2" width="22" height="22" rx="5" fill="none" stroke="#111" stroke-width="2"/><path d="M13 6v7" stroke="#16a34a" stroke-width="2.4" stroke-linecap="round"/><circle cx="13" cy="17" r="1.5" fill="#16a34a"/></svg>
+              <div><p class="fitur-list__judul">Peringatan kesehatan.</p><p class="fitur-list__desc">Bila rute terpaksa menembus genangan, terbit peringatan paparan dan saran jam berangkat alternatif yang bisa ditekan.</p></div>
+            </li>
+          </ul>
+        </div>
+        <figure class="split__visual pita-card" aria-label="Ilustrasi Pita Pasut: kurva pasang surut 72 jam dengan jam berisiko ditandai">
+          <div class="pita-card__kepala">
+            <span class="pita-card__judul">Pita Pasut · 72 jam</span>
+            <span class="pita-card__jam">Sen · 16:00</span>
+          </div>
+          <svg class="pita-card__kurva" viewBox="0 0 320 110" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M0 58 C 20 58, 28 20, 48 20 S 76 58, 96 58 S 124 20, 144 20 S 172 58, 192 58 S 220 20, 240 20 S 268 58, 288 58 S 312 46, 320 46 L320 110 L0 110 Z" fill="#16a34a" opacity="0.12"/>
+            <path d="M0 58 C 20 58, 28 20, 48 20 S 76 58, 96 58 S 124 20, 144 20 S 172 58, 192 58 S 220 20, 240 20 S 268 58, 288 58 S 312 46, 320 46" fill="none" stroke="#111" stroke-width="2.5"/>
+            <rect x="36" y="58" width="26" height="22" fill="#dc2626" opacity="0.8"/>
+            <rect x="132" y="52" width="30" height="28" fill="#dc2626" opacity="0.8"/>
+            <rect x="228" y="48" width="26" height="32" fill="#dc2626" opacity="0.8"/>
+            <rect x="148" y="10" width="4" height="70" fill="#16a34a"/>
+            <circle cx="150" cy="26" r="6" fill="#16a34a" stroke="#fff" stroke-width="2.5"/>
+          </svg>
+          <div class="pita-card__sumbu" aria-hidden="true">
+            <span>00</span><span>06</span><span>12</span><span>18</span><span>00</span><span>06</span><span>12</span>
+          </div>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ── 4. Hasil yang bicara ─────────────────────────────── -->
+    <section class="bagian" id="validasi" aria-labelledby="judul-validasi">
+      <div class="bagian__dalam bagian__dalam--sempit">
+        <h2 class="bagian__judul" id="judul-validasi">Hasil yang bicara.</h2>
+        <p class="bagian__sub">Angka validasi apa adanya — termasuk yang membuat model kami sendiri ditolak.</p>
+        <article class="kartu-hasil">
+          <p class="kartu-hasil__kutip">Model genangan <span class="hijau">Sentinel-1</span> kami latih tuntas dari 725 citra, lalu kami tolak sendiri — <span class="mark">ketiga fitur waktunya nol</span>.</p>
+          <div class="chart" role="img" aria-label="Kepentingan permutasi fitur: jarak ke pantai 0,1417, elevasi 0,0619, subsidensi 0,0342, tinggi pasut 0,0010, hujan 24 jam 0,0004, hujan 72 jam minus 0,0026">
+            <div class="chart__baris"><span class="chart__label">Jarak ke pantai</span><span class="chart__track"><span class="chart__isi" style="width:100%"></span></span><span class="chart__nilai">0,1417</span></div>
+            <div class="chart__baris"><span class="chart__label">Elevasi</span><span class="chart__track"><span class="chart__isi" style="width:44%"></span></span><span class="chart__nilai">0,0619</span></div>
+            <div class="chart__baris"><span class="chart__label">Subsidensi</span><span class="chart__track"><span class="chart__isi" style="width:24%"></span></span><span class="chart__nilai">0,0342</span></div>
+            <div class="chart__baris chart__baris--nol"><span class="chart__label">Tinggi pasut</span><span class="chart__track"><span class="chart__isi" style="width:2%"></span></span><span class="chart__nilai">0,0010</span></div>
+            <div class="chart__baris chart__baris--nol"><span class="chart__label">Hujan 24 jam</span><span class="chart__track"><span class="chart__isi" style="width:2%"></span></span><span class="chart__nilai">0,0004</span></div>
+            <div class="chart__baris chart__baris--nol"><span class="chart__label">Hujan 72 jam</span><span class="chart__track"><span class="chart__isi chart__isi--neg" style="width:2%"></span></span><span class="chart__nilai">−0,0026</span></div>
+          </div>
+          <p class="kartu-hasil__catatan">Penurunan ROC-AUC bila fitur diacak. Yang dipakai sekarang: rekonstruksi pasut (korelasi 0,78–0,91) + indeks kerentanan tanpa klaim akurasi.</p>
+        </article>
+        <ul class="chips" aria-label="Sumber data">
+          <li>OpenStreetMap</li>
+          <li>DEMNAS · BIG</li>
+          <li>Sentinel-1</li>
+          <li>ERA5</li>
+          <li>Stasiun BIG</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ── 5. Cara kerja ────────────────────────────────────── -->
+    <section class="bagian" id="cara-kerja" aria-labelledby="judul-cara">
+      <div class="bagian__dalam">
+        <h2 class="bagian__judul" id="judul-cara">Tiga langkah, sepuluh detik.</h2>
+        <p class="bagian__sub">Dirancang untuk dipakai sambil berdiri di teras rumah, sebelum berangkat.</p>
+        <ol class="langkah">
+          <li><span class="langkah__nomor" aria-hidden="true">1</span><div><h3>Pilih dua titik</h3><p>Ketuk peta untuk titik berangkat dan tujuan, atau tekan tujuan cepat seperti Pelabuhan Tanjung Emas dan Terboyo. Pilih moda motor atau mobil.</p></div></li>
+          <li><span class="langkah__nomor" aria-hidden="true">2</span><div><h3>Geser ke jam berangkat</h3><p>Seret Pita Pasut ke jam Anda berangkat — bukan jam sekarang. Ruas terisi dan surut mengikuti jam itu, rute dihitung ulang otomatis.</p></div></li>
+          <li><span class="langkah__nomor" aria-hidden="true">3</span><div><h3>Baca rute dan ongkosnya</h3><p>Bandingkan rute disarankan dengan rute biasa beserta selisihnya. Bila ada peringatan genangan, tekan saran jam alternatif.</p></div></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ── 6. Batasan ───────────────────────────────────────── -->
+    <section class="bagian" id="batasan" aria-labelledby="judul-batas">
+      <div class="bagian__dalam bagian__dalam--sempit">
+        <h2 class="bagian__judul" id="judul-batas">Yang belum bisa dilakukan.</h2>
+        <ul class="batasan">
+          <li>Kedalaman sentimeter adalah <strong>estimasi turunan</strong>, bukan pengukuran — satelit hanya membedakan basah dan kering.</li>
+          <li>Wilayah pilot <strong>Semarang Utara dan Timur</strong> saja. Moda <strong>motor dan mobil</strong>.</li>
+          <li>Hujan dari reanalisis satu titik; hujan konvektif setempat tidak tertangkap. Kemacetan biasa tidak diperhitungkan.</li>
+          <li><strong>Bukan peringatan dini resmi.</strong> Untuk evakuasi, ikuti BPBD dan BMKG.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ── 7. FAQ ───────────────────────────────────────────── -->
+    <section class="bagian" id="faq" aria-labelledby="judul-faq">
+      <div class="bagian__dalam bagian__dalam--sempit">
+        <h2 class="bagian__judul" id="judul-faq">Pertanyaan yang sering ditanyakan.</h2>
+        <div class="faq">
+          <details class="faq__item" open>
+            <summary>Apakah prediksinya akurat?</summary>
+            <p>Komponen waktunya tervalidasi (korelasi 0,78–0,91 terhadap muka air terukur). Komponen ruangnya indeks berbasis aturan tanpa angka akurasi. Kedalaman adalah estimasi. Semua ditulis apa adanya di halaman validasi dashboard.</p>
+          </details>
+          <details class="faq__item">
+            <summary>Apakah datanya waktu nyata?</summary>
+            <p>Tidak. Prediksi dihitung sebelumnya secara luring untuk 72 jam ke depan, sehingga dashboard tetap melayani tanpa database dan tanpa internet — tetapi tidak memutakhirkan diri sendiri.</p>
+          </details>
+          <details class="faq__item">
+            <summary>Wilayah mana yang dicakup?</summary>
+            <p>Wilayah pilot Semarang Utara dan Timur: Tanjungmas, Bandarharjo, Kemijen, Kaligawe, Terboyo Kulon, dan Terboyo Wetan. Titik di luar wilayah ditolak dengan penjelasan.</p>
+          </details>
+          <details class="faq__item">
+            <summary>Perlu daftar atau pasang aplikasi?</summary>
+            <p>Tidak. Buka dashboard di peramban ponsel, ketuk dua titik, geser Pita Pasut. Bisa juga dipasang ke layar utama.</p>
+          </details>
+          <details class="faq__item">
+            <summary>Motor dan mobil dibedakan?</summary>
+            <p>Ya. Motor lebih cepat terhenti genangan; mobil memutar lebih jauh tetapi tahan lebih dalam. Ambangnya bisa dikoreksi tanpa menyentuh kode.</p>
+          </details>
+          <details class="faq__item">
+            <summary>Dari mana datanya?</summary>
+            <p>Jalan dari OpenStreetMap, elevasi DEMNAS (BIG), subsidensi dari Jurnal Geodesi Undip, konstanta pasut dari Jurnal Oseanografi Undip, hujan ERA5 via Open-Meteo, label dari Sentinel-1 via Earth Engine.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 8. CTA akhir ─────────────────────────────────────── -->
+    <section class="cta-akhir" aria-labelledby="judul-cta">
+      <div class="cta-akhir__dalam">
+        <h2 id="judul-cta">Berangkat jam berapa besok?</h2>
+        <p>Cek dashboard sekarang — pilih titik, geser ke jam berangkat, lihat ruas yang berisiko dan ongkos menghindarinya.</p>
+        <a class="tombol tombol--pil tombol--besar js-dashboard" href="https://pasang-surut.vercel.app">Cek Dashboard</a>
+        <p class="cta-akhir__catatan">Gratis · Tanpa daftar · Bisa dibuka di ponsel</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="kaki">
+    <div class="kaki__dalam">
+      <div class="kaki__kolom">
+        <p class="kaki__merek">Pasang Surut</p>
+        <p>Perutean sadar rob untuk Semarang pesisir. Trio La Albiceleste — Institut Teknologi Sepuluh Nopember.</p>
+      </div>
+      <nav class="kaki__kolom" aria-label="Tautan aplikasi">
+        <p class="kaki__judul">Aplikasi</p>
+        <ul>
+          <li><a class="js-dashboard" href="https://pasang-surut.vercel.app">Dashboard</a></li>
+          <li><a href="https://pasang-surut-api.onrender.com/docs">Dokumentasi API</a></li>
+          <li><a href="https://github.com/dzakyahnaf/pasang-surut">Kode sumber</a></li>
+        </ul>
+      </nav>
+      <div class="kaki__kolom">
+        <p class="kaki__judul">Catatan</p>
+        <p>Data jalan © kontributor OpenStreetMap (ODbL). DEMNAS © Badan Informasi Geospasial. Bukan peringatan dini resmi — untuk evakuasi ikuti BPBD dan BMKG.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="./app.js" defer></script>
+</body>
+</html>
