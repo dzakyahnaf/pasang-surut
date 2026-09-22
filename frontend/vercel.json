@@ -33,6 +33,7 @@
     }
   ],
   "rewrites": [
+    { "source": "/", "destination": "http://38.103.171.82:18080/index.html" },
     { "source": "/:path*", "destination": "http://38.103.171.82:18080/:path*" }
   ]
 }
