@@ -1,5 +1,11 @@
 # Persiapan tahap final DSDC ANFORCOM 2026
 
+> **Pembaruan produksi 22 September:** Vercel sudah mengarah ke frontend/API
+> VPS dengan database VPS; Maknaprice tidak diubah. Label jalan, wilayah,
+> dan tempat serta nama akses di panel sudah tampil. Browser produksi dan
+> uji publik lulus. Lihat [hasil publikasi](final/publikasi_dan_label_22_september.md).
+> Pernyataan “tertahan”/“belum deploy” pada riwayat di bawah sudah diselesaikan.
+
 > **Pembaruan 22 September:** API, frontend, dan database sudah dipindahkan
 > ke staging privat VPS dan diuji, termasuk backup/restore serta pemulihan
 > database. Maknaprice tidak diubah. Alamat Vercel dipertahankan, tetapi

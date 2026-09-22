@@ -1,8 +1,10 @@
 # PASANG SURUT pada VPS bersama
 
-Status 22 September: API, frontend, dan PostGIS aktif untuk **staging
-privat**. Port host `127.0.0.1:18080`; belum ada pengalihan Vercel publik.
-Lihat [laporan hasil dan batas pengujian](../../docs/final/migrasi_vps_22_september.md).
+Status 22 September: API, frontend, dan PostGIS **aktif di produksi** melalui
+`https://pasang-surut.vercel.app`. Origin sementara `0.0.0.0:18080` dibuka
+dengan izin Dzaky; Vercel–origin memakai HTTP. Direktori runtime masih
+bernama `staging` untuk mempertahankan jalur dan volume yang sudah diuji.
+Lihat [hasil publikasi](../../docs/final/publikasi_dan_label_22_september.md).
 
 Proyek Docker Compose `pasang-surut` memakai direktori, jaringan, volume,
 akun database, dan port sendiri. Jangan menjalankan perintah Compose dari
@@ -37,7 +39,9 @@ read-only; pekerjaan migrasi menggunakan akun admin berbeda.
 
 File di staging yang **tidak ada di Git**:
 
-- `.env`: `PASANG_RELEASE` dan `PASANG_BIND=127.0.0.1`, bukan password.
+- `.env`: `PASANG_RELEASE` dan `PASANG_BIND=0.0.0.0`, bukan password.
+  Default template Compose tetap loopback supaya instalasi baru tidak
+  terbuka ke publik tanpa pengaturan eksplisit.
 - `db.env`: kredensial admin database PASANG SURUT.
 - `api.db.env` dan aktif `api.env`: DSN akun baca database internal.
 - `api.potret.env`: DSN kosong eksplisit untuk rollback potret.
@@ -92,9 +96,18 @@ Maknaprice. Setelah mengganti image hanya buat ulang API; mengganti aset
 frontend cukup pada mount frontend PASANG SURUT. Uji sebelum mengalihkan
 pengguna. Hindari penyalinan aset sebagian ketika sudah melayani publik.
 
-`frontend/scripts/build-proxy.mjs` adalah persiapan deployment Vercel sebagai
-proxy, **belum aktif**. Jangan mengubah `PASANG_BIND` menjadi publik atau
-memasang rewrite origin sampai izin paparan publik terselesaikan.
+`frontend/scripts/build-proxy.mjs` sudah aktif pada Vercel. Aturan `/`
+secara eksplisit menuju index VPS, diikuti wildcard aset/API. Cache API
+dinonaktifkan. Build Vercel tidak membangun frontend aplikasi; setiap
+perubahan UI harus melalui `npm run build:vps` dan deploy aset ke VPS.
+Push Git saja belum mengganti aset yang sedang disajikan Caddy VPS.
+
+Rilis aset label saat publikasi: `label-a29a25013940`. Upload aset dengan nama
+hash baru dahulu dan pertahankan aset lama, lalu ganti `index.html` secara
+atomik dalam direktori mount. Backup sebelum perubahan ada di
+`/opt/pasang-surut/backups/frontend-before-label-a29a25013940.tar.gz`.
+Service worker produksi v3 memakai network-first untuk HTML, tidak menyimpan
+API, dan menghapus cache cangkang versi sebelumnya.
 
 ## Migrasi dan publikasi data
 
@@ -161,8 +174,8 @@ docker compose --profile database stop api web db
 ```
 
 Jangan memakai `down -v`, global prune, atau menghentikan Docker daemon.
-Saat publik nanti dialihkan, rollback pengguna memakai deployment Vercel
-sebelumnya. Render dan Supabase sumber tetap dipertahankan sampai gladi
+Rollback pengguna memakai deployment Vercel sebelum pengalihan atau build
+frontend lama yang kompatibel. Render dan Supabase sumber dipertahankan sampai gladi
 selesai dan ada keputusan penghentian terpisah.
 
 ## Alat verifikasi

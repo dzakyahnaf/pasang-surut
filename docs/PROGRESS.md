@@ -1,5 +1,29 @@
 # Progres
 
+## Produksi VPS dan label peta aktif — 22 September 2026
+
+Seluruh runtime PASANG SURUT sekarang dilayani VPS melalui alamat masuk
+`pasang-surut.vercel.app`. Port HTTP 18080 dibuka dengan izin spesifik Dzaky;
+jalur Vercel–origin masih HTTP. Maknaprice tidak diubah. Perbaikan empat
+temuan sudah aktif di publik, dengan batas model routing tetap dinyatakan.
+
+Label jalan, tujuh kecamatan dalam AOI, pantai, dan empat tempat ditambahkan
+dari data OSM tersimpan. Panel menampilkan nama akses/dekat jalan tanpa
+mengarang nama ruas kosong. Font dan data label berasal dari aplikasi.
+12 tes frontend, CI, 35 pemeriksaan HTTP origin, serta browser produksi
+Vercel (retry, slider, geometri satu kali, layar 360px) lulus. Sampel laptop
+melalui Vercel: rute 266–857 ms, kondisi 209–292 ms; bukan benchmark p95.
+
+Preview Vercel dilindungi login. Sesudah uji origin lulus, produksi
+diperiksa langsung; 404 root ditemukan dan diperbaiki dengan rewrite
+eksplisit `/` ke `/index.html`. Uji produksi lengkap kemudian lulus.
+Workflow pemeriksaan kesehatan kini mengikuti URL Vercel/database VPS.
+
+Detail dan bukti: [publikasi dan label](final/publikasi_dan_label_22_september.md).
+Materi presentasi, gladi perangkat/venue, pembaruan data sebelum kedaluwarsa,
+dan keputusan origin HTTPS setelah final masih perlu ditindaklanjuti.
+Entri staging di bawah mempertahankan riwayat sebelum izin publik diberikan.
+
 ## Migrasi VPS privat dan uji Linux — 22 September 2026
 
 API, frontend produksi, dan database PostGIS sudah berjalan terisolasi di
