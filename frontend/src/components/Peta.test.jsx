@@ -3,7 +3,7 @@ import { afterEach, expect, test, vi } from 'vitest';
 import { cleanup, render, screen } from '@testing-library/react';
 import Peta from './Peta.jsx';
 
-vi.mock('maplibre-gl', () => ({ Map: class { constructor() { throw new Error('WebGL disabled'); } } }));
+vi.mock('maplibre-gl', () => ({ setWorkerUrl: vi.fn(), Map: class { constructor() { throw new Error('WebGL disabled'); } } }));
 afterEach(cleanup);
 
 test('WebGL tidak tersedia menampilkan galat tanpa menjatuhkan seluruh aplikasi', () => {

@@ -124,7 +124,7 @@
     "emisi": "Emisi",
     "rentang": "{bawah}–{atas}",
     "tidakAdaSelisih": "Tidak ada selisih",
-    "catatanFaktor": "Bahan bakar dan emisi dihitung dari faktor rata-rata per moda, bukan dari kendaraan Anda.",
+    "catatanFaktor": "Estimasi BBM dan CO₂ memakai asumsi konsumsi per moda serta faktor pembakaran, belum dikalibrasi pada kendaraan Anda. Tidak mencakup emisi daur hidup atau gas lain.",
     "hemat": "Menghindari genangan menghemat {nilai} {satuan} dibanding menerjangnya"
   },
   "peringatan": {
@@ -260,7 +260,7 @@
     "meter": "m",
     "sentimeter": "cm",
     "liter": "L",
-    "kilogramCo2e": "kg CO₂e",
+    "kilogramCo2e": "kg CO₂",
     "persen": "%",
     "_catatan": "Satuan selalu ditulis lebih kecil dan lebih redup daripada angkanya, sesuai DESIGN.md Bagian 4."
   },

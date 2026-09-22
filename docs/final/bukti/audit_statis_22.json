@@ -1,0 +1,442 @@
+{
+  "utc": "2026-09-22T16:36:46.711171+00:00",
+  "tracked_extensions": {
+    "": 12,
+    ".example": 2,
+    ".yml": 3,
+    ".docx": 2,
+    ".pdf": 1,
+    ".md": 32,
+    ".py": 68,
+    ".txt": 9,
+    ".json": 63,
+    ".js": 16,
+    ".html": 3,
+    ".css": 4,
+    ".geojson": 5,
+    ".joblib": 1,
+    ".sql": 2,
+    ".sh": 1,
+    ".cron": 1,
+    ".png": 28,
+    ".jsonl": 4,
+    ".yaml": 2,
+    ".svg": 2,
+    ".jpg": 5,
+    ".webmanifest": 1,
+    ".mjs": 2,
+    ".jsx": 13,
+    ".ini": 1
+  },
+  "parsed": {
+    "python": 68,
+    "json_geojson": 68
+  },
+  "parse_failures": [],
+  "secret_candidates": [],
+  "snapshot": {
+    "roads": 19394,
+    "hours": 72,
+    "wet_records": 14400,
+    "valid_until": "2026-09-28T17:00:00+00:00",
+    "all_values_validated": true
+  },
+  "source_manifest": [
+    {
+      "path": ".github/workflows/jaga_hidup.yml",
+      "sha256": "00738a33b120561370f82c662f3972594eea1533bf59b3d4e1209fc21448b991"
+    },
+    {
+      "path": ".github/workflows/uji.yml",
+      "sha256": "1a4bd393d4b96019f599bd43591bce73c884fae5517b59d7b1dfb1bcffc9a859"
+    },
+    {
+      "path": "backend/app/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "backend/app/api/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "backend/app/batas_beban.py",
+      "sha256": "dce426def4f38d1f5cdbd0a39d6c09c200375973968ec75bf888a295288ceee5"
+    },
+    {
+      "path": "backend/app/batas_isi.py",
+      "sha256": "b4440024380c3f6f03321beb9a5fc75105262eb7e16de791c20d17ba98e8f41e"
+    },
+    {
+      "path": "backend/app/config.py",
+      "sha256": "ba50b2a3d4f549cd6a22631526a7f14c340e50b54639b571f503e56da6e402d3"
+    },
+    {
+      "path": "backend/app/db.py",
+      "sha256": "82ee19b7ff2f75a2c491a06144a9b960e307578a96c351ae77a053a74354ae48"
+    },
+    {
+      "path": "backend/app/domain/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "backend/app/domain/dampak.py",
+      "sha256": "8aebe2fdbb0c18963d25a1c87a8bd522b3b7b7cda2e210b87b48d98aa09b7b10"
+    },
+    {
+      "path": "backend/app/domain/genangan.py",
+      "sha256": "aff96c72f0fc6888a530b3851bde5ae20d8438597f9c7fe56eabd16e74d12630"
+    },
+    {
+      "path": "backend/app/domain/kerentanan.py",
+      "sha256": "862e538f4c06bd1ed29b38e8008363ea839ffa2277c3d36e9af4b55cc28267ad"
+    },
+    {
+      "path": "backend/app/domain/pasut.py",
+      "sha256": "90e04e87f268fc79dc0f10d19489431233288d8fa06727ae41a6bbb553d73628"
+    },
+    {
+      "path": "backend/app/domain/routing.py",
+      "sha256": "9cb8201f912eb45539b2756ce1c81c9ece4de1547c57ca4736d88ab26b21cd69"
+    },
+    {
+      "path": "backend/app/main.py",
+      "sha256": "b63ea66cbff21e9d8f5e9fa846462728f280cbfb23c303fb5b0a6cc6f844889b"
+    },
+    {
+      "path": "backend/app/runtime.py",
+      "sha256": "a01eece39fd7c5fc2128f3081f315d8a38373119f4b05d1f320947da369cb8d7"
+    },
+    {
+      "path": "backend/app/schemas/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "backend/scripts/01_bangun_graf.py",
+      "sha256": "b0f173c74994dcbcb0b3cc5230f72fe2955f3bfb931dfcff2f016553f3ecd431"
+    },
+    {
+      "path": "backend/scripts/02_isi_ruas_jalan.py",
+      "sha256": "aa4afd182c98936c6bc77d5cf3bacd7d518d911f87da2b4f1e693b62e061eee4"
+    },
+    {
+      "path": "backend/scripts/03_isi_dummy.py",
+      "sha256": "0c5c8e0f9e04582cf8c234cf74a8b401e0403a749383ecf507f56ad86f63e381"
+    },
+    {
+      "path": "backend/scripts/04_kalibrasi_pasut.py",
+      "sha256": "1166ac45531e436c30bdb1d4c4bf39a5df0b5d18e338f8ccd32c5fae8ee21a16"
+    },
+    {
+      "path": "backend/scripts/05_isi_fitur_ruas.py",
+      "sha256": "d1279dd422852f2c01c68102283a81712984c3ddd1bf87660164283e72863c62"
+    },
+    {
+      "path": "backend/scripts/06_isi_pemicu.py",
+      "sha256": "9157c75b133092a313aee3fa715ee0c87d7002b6589619da5e99e45856863087"
+    },
+    {
+      "path": "backend/scripts/07_uji_silang_rob.py",
+      "sha256": "34299037230ad031bce3623ae7cbf442eaddaf04f33604c5f1044a96f36ec6be"
+    },
+    {
+      "path": "backend/scripts/08_ekstrak_s1.py",
+      "sha256": "281a8212ebe3286288b6f766c40557ebd23690fbd30be55f719566d2629d96b6"
+    },
+    {
+      "path": "backend/scripts/09_latih_model.py",
+      "sha256": "30531131e0600ed487ea32bdcf2e66c157daf11ece69512010d693753b42a08d"
+    },
+    {
+      "path": "backend/scripts/10_prediksi.py",
+      "sha256": "0811b8da9ae6455a0b682434e716312385025a3844058ffc5444a340402c3447"
+    },
+    {
+      "path": "backend/scripts/11_indeks_kerentanan.py",
+      "sha256": "df6a3d570fd2b1b4d2ad8690f06356d37d0a92ec57fa3e120a90665b6a540f5d"
+    },
+    {
+      "path": "backend/scripts/12_uji_isyarat_s1.py",
+      "sha256": "ea318394a7701cbddabe0e6e534dc79fc1876a2907402e7d0f3abb70a53616e9"
+    },
+    {
+      "path": "backend/scripts/13_periksa_database.py",
+      "sha256": "c366f86a33cbcaebff13c1825b188f8d35515914fcc43899e0a5d325f9cf50a9"
+    },
+    {
+      "path": "backend/scripts/14_uji_dua_arah.py",
+      "sha256": "ba75afb9291bf86f257e006a7fc7295b9aa4afebcc5467ae1898f16b06a5ca24"
+    },
+    {
+      "path": "backend/scripts/15_gambar_bukti.py",
+      "sha256": "b4e9673713dea8c186ddcfd70a0265daf1f776809ed34115e6d47df58c0d6a5b"
+    },
+    {
+      "path": "backend/scripts/16_muka_air_terukur.py",
+      "sha256": "700d8e0545154e6761125f56302a792f0bc8a21fac78c9af48d809e5dfb63c6c"
+    },
+    {
+      "path": "backend/scripts/17_tujuan_cepat.py",
+      "sha256": "10adf6f2c637d71f42fa8dc11f9c807f6768fd4516915e68b1fb2648b84a8d6d"
+    },
+    {
+      "path": "backend/scripts/18_seed_demo.py",
+      "sha256": "2d7f603fcec485f8957cce94e160c34662bbc82ed35f52f93324121ceb56e20f"
+    },
+    {
+      "path": "backend/scripts/19_rantai_dampak.py",
+      "sha256": "135f82644b04f67bfd58c17d7bc3976121338621f4c07de40e31cadf0f9ae783"
+    },
+    {
+      "path": "backend/scripts/20_label_luas_ke_ruas.py",
+      "sha256": "11b1006a48efb090197b16439681b879a4053108f2c55788a4f169b44d26fcda"
+    },
+    {
+      "path": "backend/scripts/21_uji_rancu_musiman.py",
+      "sha256": "ac853e43630cb322d0a32301db79803332761d917e7578b1e6e49ded87437cfc"
+    },
+    {
+      "path": "backend/scripts/22_bangun_docx.py",
+      "sha256": "40c0c3b10d6f676f16c552605a0e83a8ce96484fc188a7d0c2f122c9356c9697"
+    },
+    {
+      "path": "backend/scripts/23_uji_menyeluruh.py",
+      "sha256": "9f7c00a93ce0ee6000987d6ce4eecc2f1cb4003c513492fcadfabf14d2b7f9d7"
+    },
+    {
+      "path": "backend/scripts/24_gambar_arsitektur.py",
+      "sha256": "8a97b98397bd2c3ca23754b6626bbc6a131d93a42fae0af9683ed7494d4409d5"
+    },
+    {
+      "path": "backend/scripts/25_daftar_isi.py",
+      "sha256": "ae81209f363c33a80ddb3bb2be7aa0bc22583bc336eb8c76ac90cbbc91f9a25e"
+    },
+    {
+      "path": "backend/scripts/26_nomori_ulang.py",
+      "sha256": "da4a94c92b33230954a2713e213c5f30ec55d3e9f343de958012ac97beb7f5ee"
+    },
+    {
+      "path": "backend/scripts/27_potret_dari_indeks.py",
+      "sha256": "edfd5577683aee9d6551848220d8379ff44f9be65a38141f986326b663b8ae2b"
+    },
+    {
+      "path": "backend/scripts/28_uji_kinerja_lokal.py",
+      "sha256": "eaff4ec93eec52ccb1b5e35538b3bdc13b528517827ee1393ca1e10d59658e5c"
+    },
+    {
+      "path": "backend/scripts/29_uji_browser_lokal.py",
+      "sha256": "5fa499800a540888d8803f00ed1aff2f15c4fbc1aff505c14bad638e9467cb4e"
+    },
+    {
+      "path": "backend/scripts/30_konteks_peta.py",
+      "sha256": "35290e06d29f723d3632069e56f468b851ca890f8ab7718accdafa2bfa570ebd"
+    },
+    {
+      "path": "backend/scripts/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "dashboard/README.md",
+      "sha256": "7783dc3eba00aa884a6500c5a3d6be8e11bf8b7036b2b63b1018e0e4437413f3"
+    },
+    {
+      "path": "dashboard/app.js",
+      "sha256": "aded058651e0e5a7a8c6958b146fdcfa3b57909e2c1fffb77f450f11c346dff3"
+    },
+    {
+      "path": "dashboard/index.html",
+      "sha256": "b141d96e3a046fd6b3088b62d03a1a3108250f136423d5a7e600033f0f83afd8"
+    },
+    {
+      "path": "dashboard/styles.css",
+      "sha256": "bdebdac197a79ba5be409adfbc3e85ee285e6b57a8b6efba055bdee521405df6"
+    },
+    {
+      "path": "dashboard/vercel.json",
+      "sha256": "f07eff79fed1e3fed3be9017f356be54c8f0bbc61ae4af580fc3cc4ee2019822"
+    },
+    {
+      "path": "db/migrations/001_cakupan_prediksi.sql",
+      "sha256": "0b9f918ddaf4970760379f2785aa40633222ceac6c5d9cb3412db662c43cec95"
+    },
+    {
+      "path": "db/schema.sql",
+      "sha256": "ebbb99e54bee6e07c5053cfc58f8a1ac4aed76cb902fae2990a21c22eff76a8e"
+    },
+    {
+      "path": "deploy/vps/README.md",
+      "sha256": "966f3b15e8ab9b183232ddeadf0f1a04d649676405ac03565c72636e7b3f04d8"
+    },
+    {
+      "path": "deploy/vps/audit_statis.py",
+      "sha256": "018ef3a02b14e77370709c6f2da35139d4de02b4685e6c2378ab7882525006ca"
+    },
+    {
+      "path": "deploy/vps/buat_paket.py",
+      "sha256": "b03dd27ee55c2b65c8d993abd3224349fb83df27259e0dd4964ddb8c3322204d"
+    },
+    {
+      "path": "deploy/vps/compose.yml",
+      "sha256": "d04e5569549258bf8f09ae04db81e989e83a2f0a2bbeebf09fda8b8d6c1d8373"
+    },
+    {
+      "path": "deploy/vps/impor_dan_uji.py",
+      "sha256": "986f7917d2b7635fd3f65422956611badc9d20d3f37c5ccdfa78f99e8656a287"
+    },
+    {
+      "path": "deploy/vps/pantau.py",
+      "sha256": "47d0e31f1f60dd5e4ede67d3bf6706964df97268625b60e95ca6dd5c2b8ee77b"
+    },
+    {
+      "path": "deploy/vps/pantau_beban.py",
+      "sha256": "8d92300180418cf079dd2dd8ba03cd22946ecf7c2e75d8b12a11c37dca3dbbaa"
+    },
+    {
+      "path": "deploy/vps/publikasi_awal.py",
+      "sha256": "001bfd04a670a13ff5fecabe466f10bd7359065a32b8634e3c09c7641bd2ee23"
+    },
+    {
+      "path": "deploy/vps/uji_beban.py",
+      "sha256": "f4a81e0ad1b4cf0b18658b4551efd6b01a3c8fe2bca214f25953dd557f04e801"
+    },
+    {
+      "path": "deploy/vps/uji_browser.py",
+      "sha256": "f61777a9f64b75d669f1d75330b0861e0a353eedd3420f3d86e5b53b213095cf"
+    },
+    {
+      "path": "deploy/vps/uji_fitur_browser.py",
+      "sha256": "45a71849391a1d3a299d89b89231ffa956001cfa0afdaefc4e85b2091c67ad93"
+    },
+    {
+      "path": "deploy/vps/uji_regresi_browser.py",
+      "sha256": "777f7ebbc78703b3deb101ef90b5a6152123274c8b32709e5b5a078b7298429d"
+    },
+    {
+      "path": "deploy/vps/uji_regresi_vps.py",
+      "sha256": "a562c3baf90f0355c512e2afcb186c185bc960526e0b11aa0227a395d20ea92a"
+    },
+    {
+      "path": "deploy/vps/ukur_api.py",
+      "sha256": "06610bd20b8a226149d30b99037f92196d5e53e76443a8b01401530a87dd8a4f"
+    },
+    {
+      "path": "frontend/src/App.jsx",
+      "sha256": "8e50b49fc2bcfb3e5dd51015b503fe2ac781dd9e32816be13398e47c520e55a0"
+    },
+    {
+      "path": "frontend/src/App.test.jsx",
+      "sha256": "077003f0fe03c06730823399c964871517beb34a90c78cfdb4a000af4d67a178"
+    },
+    {
+      "path": "frontend/src/components/Legenda.jsx",
+      "sha256": "9828ad421c09031f17747846830e6187267a73a1a56f1eda5835d17c52cd1375"
+    },
+    {
+      "path": "frontend/src/components/LencanaContoh.jsx",
+      "sha256": "e1dd32b3a3e754b4a35afee6ece208aa2acd60034e6637d3396ae051650c54bc"
+    },
+    {
+      "path": "frontend/src/components/PanelDampak.jsx",
+      "sha256": "1bbb97e03e1bb1881393c6cc1396f5b9056c7a62d56c360babb3453d939e3195"
+    },
+    {
+      "path": "frontend/src/components/PanelRute.jsx",
+      "sha256": "e0f8a82dcaf41ca95fd53242912b16409265df1f299846b19c99e6c7525c2983"
+    },
+    {
+      "path": "frontend/src/components/PeringatanPaparan.jsx",
+      "sha256": "eebbf56a5a030c82ec22567adabbfbfed10c5d5d3f1aeb8e9462dc893ef2e15a"
+    },
+    {
+      "path": "frontend/src/components/Peta.jsx",
+      "sha256": "d5244801b02ded3f7f999289d1a83b7f4aa63cbba3d0b43bb91dfee5a2ff1078"
+    },
+    {
+      "path": "frontend/src/components/Peta.test.jsx",
+      "sha256": "43a8987bb59fe43c04ff033fdd3b3faca67c18094147b254f365db6493da05aa"
+    },
+    {
+      "path": "frontend/src/components/PitaPasut.jsx",
+      "sha256": "0709e6c38a0619f3add2db16477a6c7742c2c4dadb88da408199e22890b32915"
+    },
+    {
+      "path": "frontend/src/components/TujuanCepat.jsx",
+      "sha256": "e9f0bd39929a1d3dcf14ba4add7d85e90ec6b92775f1b67c2fc71aa6ad1963c0"
+    },
+    {
+      "path": "frontend/src/copy.id.json",
+      "sha256": "7679b5f3057dfd0447ae00dc427742e641d08b6c0ac332cfee9c89e3203010a8"
+    },
+    {
+      "path": "frontend/src/data/konteks-peta.json",
+      "sha256": "00adae8590cbcddabd48f52be22e37505e29ffcbfcae6655f42ba164d6041679"
+    },
+    {
+      "path": "frontend/src/landing.test.js",
+      "sha256": "66488c1885606f06f16a7186de076575e12ca838c617a82a91e7540774c34205"
+    },
+    {
+      "path": "frontend/src/lib/api.js",
+      "sha256": "8c70449e601487bce02a4719c4ffa7588cdf9b7ca5b353771f1663a0ae1bb438"
+    },
+    {
+      "path": "frontend/src/lib/api.test.js",
+      "sha256": "9742311142aec36d5a636bf890ea2e21d797f6178584527a7716c34addb6669a"
+    },
+    {
+      "path": "frontend/src/lib/jalanLabel.js",
+      "sha256": "7a2089abab0911d6b1e4b978754d1d4fd546b9cda51ab73620b8206e4f83ec88"
+    },
+    {
+      "path": "frontend/src/lib/jalanLabel.test.js",
+      "sha256": "0bf3e964fab69cbb3c7d139d963b7b6625f34e89088ccb7ff03952fbb0fb9032"
+    },
+    {
+      "path": "frontend/src/lib/labelPeta.js",
+      "sha256": "6eb99d1e11a4258d3e3cc9736113ede9cd69ef1bfcaa280721ebb21cf21fb33d"
+    },
+    {
+      "path": "frontend/src/lib/lokasi.js",
+      "sha256": "dbce7a50516b7b5c58890bb068518c67b2db53f1a22ed3dd6ae2c39ea404bd8d"
+    },
+    {
+      "path": "frontend/src/lib/lokasi.test.js",
+      "sha256": "b82d4643559203e04e13584acbc0ff48fbe28af88699067d3dca4eb23bb32af8"
+    },
+    {
+      "path": "frontend/src/lib/teks.js",
+      "sha256": "2037b7d1cf22d6668b722302123f0a33addc589b66b79189bdbb20a21af1b628"
+    },
+    {
+      "path": "frontend/src/lib/token.js",
+      "sha256": "b39e42caaf2af551add8e6633bf8a803764c8d86bd3a50076f6a6897576a332f"
+    },
+    {
+      "path": "frontend/src/lib/usePerjalanan.js",
+      "sha256": "eb4b6f902b7a544db73a9e40c2f1b65d4237af6ecbc02d3d430e26914b9eb699"
+    },
+    {
+      "path": "frontend/src/lib/waktu.js",
+      "sha256": "3eafc1934f460c7f190977973eafe39aeb73fc9348bbfca01dfb4506ffe07cee"
+    },
+    {
+      "path": "frontend/src/main.jsx",
+      "sha256": "ab54d2372586c97fc69e2942c9700b0f8c7c1cb4e3db8697606828bc0f0fb303"
+    },
+    {
+      "path": "frontend/src/pages/HalamanValidasi.jsx",
+      "sha256": "fd354588191c92acc5baec6fef46087daef4c1f13bd95893e35b8a16d583f23c"
+    },
+    {
+      "path": "frontend/src/styles/dasar.css",
+      "sha256": "77ad242d7ba4a9a57abab92059a764805df6eb87af081e8a472e68581a39d08e"
+    },
+    {
+      "path": "frontend/src/styles/tata-letak.css",
+      "sha256": "8d37550dd5b859b115e4db313c9c1aaccc386cc9f267565e85368486b9cba552"
+    },
+    {
+      "path": "frontend/src/styles/token.css",
+      "sha256": "5695ea1cb342f93376c6e1d8711adbbaa25f8e3b35851244bc948d14051078ad"
+    }
+  ]
+}

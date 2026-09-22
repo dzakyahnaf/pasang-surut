@@ -1,9 +1,16 @@
 # Outline slide final PASANG SURUT
 
-Versi 20 September 2026. Delapan slide utama, target sembilan menit termasuk
+Versi 22 September 2026 setelah TM. Delapan slide utama, target sembilan menit termasuk
 demo dan perpindahan pembicara; batas rulebook sepuluh menit. Naufal pemilik
 deck, Daffa pemilik visual/demo, Dzaky pemeriksa metode dan angka. Ini naskah
 dan storyboard siap dipindahkan ke aplikasi slide, belum PPTX/PDF final.
+
+**Konfirmasi TM:** durasi tetap 10 menit + 15 menit tanya jawab, urutan
+tampil pertama. Deadline PDF belum diinformasikan. Siapkan semua berkas
+dan aplikasi sebelum sesi dimulai; jangan mengandalkan waktu tim lain.
+Alamat demo langsung: https://pasang-surut.vercel.app/app. Landing tetap
+di https://pasang-surut.vercel.app/. Lencana sumber, tanggal, dan batas
+model harus terlihat di screenshot maupun demo.
 
 ## Alur dan waktu
 
@@ -112,9 +119,10 @@ disebut sebagai akurasi genangan per ruas.
 
 - Pasut: korelasi 0,78–0,91, RMSE sekitar 0,10–0,12 m pada evaluasi yang
   didokumentasikan. Jelaskan bila data yang sama ikut menentukan parameter.
-- Aplikasi: hasil uji versi final, jumlah kasus, tanggal, commit, dan
-  lingkungan. Angka 43/35 dari audit lama tidak membuktikan empat bug baru
-  sudah selesai; perbarui setelah regresi yang relevan tersedia.
+- Aplikasi: 95 tes backend Windows/Linux dan 25 tes frontend pada audit
+  22 September; 2.400 perbandingan routing termasuk dalam tes tersebut,
+  jangan menjumlahkannya sebagai 2.400 unit test terpisah. Cantumkan commit
+  rilis serta lingkungan. Detail uji publik dan batasnya ada di laporan audit.
 - Genangan per ruas: belum ada ground truth yang memadai; kedalaman bukan
   pengukuran lapangan. Eksperimen model Sentinel-1 yang ditolak masuk
   lampiran dan cukup dijelaskan dalam satu kalimat bila relevan.

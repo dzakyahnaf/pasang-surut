@@ -46,8 +46,12 @@ python -m http.server 8130
 | Konteks | Tujuan |
 |---|---|
 | Dibuka dari `localhost` | `http://127.0.0.1:5173` (Vite dev `frontend/`) |
-| Dibuka dari mana pun | `https://pasang-surut.vercel.app` |
-| Override | `?dashboard=https://alamat-lain` |
+| Produksi/pratinjau | `/app` pada origin yang sedang dibuka |
+| Override | `?dashboard=https://alamat-lain` atau `/app`; hanya HTTP/HTTPS |
+
+Parameter kosong memakai tujuan bawaan, bukan kembali ke landing.
+Skema `javascript:` dan `data:` ditolak. Kasus ini diuji di
+`frontend/src/landing.test.js`.
 
 ## Angka yang dipakai (semua dari proposal)
 

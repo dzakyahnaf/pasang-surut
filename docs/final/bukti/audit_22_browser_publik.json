@@ -1,0 +1,14 @@
+{
+  "url": "https://pasang-surut.vercel.app/app",
+  "checks": [
+    "canvas_peta_berisi_gambar",
+    "peta_label_dan_rute_satu_versi",
+    "navigasi_jam_dan_rute",
+    "ganti_moda_toggle_rute",
+    "validasi_kembali",
+    "responsif_360_768",
+    "webgl_gagal_tujuan_cepat_tetap_tersedia"
+  ],
+  "errors": [],
+  "console_errors": []
+}

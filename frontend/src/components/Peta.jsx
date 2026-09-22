@@ -16,7 +16,11 @@
 
 import { useEffect, useRef, useState } from "react";
 import * as maplibregl from "maplibre-gl";
+import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url';
 import "maplibre-gl/dist/maplibre-gl.css";
+
+// ESM v6 memerlukan worker terbundel; ?url saja kehilangan impor sibling.
+maplibregl.setWorkerUrl(workerUrl);
 
 import { token, tokenPx } from "../lib/token.js";
 import { t } from "../lib/teks.js";
@@ -154,17 +158,20 @@ export default function Peta({ geojson, kondisi, rute, asal, tujuan, onKlikPeta,
       dragRotate: false,
       touchZoomRotate: true,
       });
+      // MapLibre dapat mengembalikan objek parsial saat inisialisasi GPU
+      // gagal, tanpa melempar exception dari constructor.
+      if (!peta.touchZoomRotate) throw new Error('Map initialization failed');
+      peta.touchZoomRotate.disableRotation();
     } catch {
       setGalatGrafis(true);
       return;
     }
 
-    peta.touchZoomRotate.disableRotation();
-
     // Kontrol perbesar dan perkecil. Labelnya diambil dari copy.id.json
     // supaya tidak ada teks Inggris bawaan yang lolos ke layar.
     const kontrol = new maplibregl.NavigationControl({ showCompass: false });
     peta.addControl(kontrol, "bottom-right");
+    if (import.meta.env.DEV) window.__peta = peta;
 
     peta.on("error", (e) => console.error("[peta] galat MapLibre:", e && e.error));
     peta.on("load", async () => {

@@ -199,6 +199,8 @@ class PenyimpanRuntime:
             # termasuk ketika pipeline menerbitkan versi baru bersamaan.
             with kon.cursor() as kur:
                 kur.execute("SET TRANSACTION ISOLATION LEVEL REPEATABLE READ READ ONLY")
+                kur.execute("SET LOCAL statement_timeout = '10s'")
+                kur.execute("SET LOCAL lock_timeout = '3s'")
             repo = db.RepositoriGenangan(kon)
             meta = repo.cakupan()
             if meta is None:
