@@ -1,5 +1,31 @@
 # Progres
 
+## Paket presentasi final — 23 September 2026
+
+[PPTX dan dua PDF](final/presentasi/README.md) sudah dibuat: delapan slide
+utama dengan target sembilan menit, enam lampiran, catatan pembicara,
+screenshot potret 26 Sep 08.00/13.00, QR dan panduan demo lokal. PowerPoint
+membuka/mengekspor 14 slide; tidak ada overflow teks. Seluruh halaman ditinjau,
+QR pada render PDF didekode, dan tautan aplikasi diperiksa. Durasi sembilan
+menit masih target; latihan tim belum dilakukan oleh asisten.
+
+Pengambilan gambar menemukan peringatan lama di `PanelRute` yang masih
+melekatkan kedalaman maksimum pada jalan pertama. Sudah dikoreksi dengan
+tes regresi kedua panel. **26 tes frontend** dan build VPS lulus; pesan
+benar di publik, tanpa restart container dan tanpa perubahan Maknaprice.
+Lihat [koreksi lanjutan](final/koreksi_panel_23_september.md). Backend tidak
+berubah dari audit 95 tes. Branch OSM terpisah menerima koreksi/MapLibre 6.4.1;
+label eksternal, dua moda, pergantian jam, dan fallback penyedia diuji.
+
+**Papan blokade:** deadline PDF masih belum diumumkan. Tim tampil pertama;
+perlu konfirmasi deadline, keputusan pembagian pembicara, dua latihan
+9 menit, uji proyektor/HP dan laptop cadangan. MP4/poster serta bukti pengguna
+belum selesai/dikonfirmasi. Indeks genangan dan dampak lapangan tetap belum
+tervalidasi. Proposal submission tetap diarsipkan; pembaruan materi ada pada
+addendum 23 September dan paket presentasi, bukan mengganti proposal terkirim.
+
+Catatan 22 September berikut adalah status historis sebelum paket PPT dibuat.
+
 ## Audit regresi final dan status TM — 22 September 2026
 
 95 tes backend Windows/Linux dan 25 tes frontend lulus. Audit memperbaiki

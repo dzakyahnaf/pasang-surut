@@ -1,5 +1,13 @@
 # Naskah demo PASANG SURUT
 
+> **Arsip naskah penyisihan; tidak dipakai pada final.** Acuan final 23
+> September adalah [panduan demo 3 menit](final/presentasi/panduan_demo.md)
+> dan [catatan pembicara](final/presentasi/catatan_pembicara.md). Materi lama
+> di bawah belum mencerminkan routing kondisi jam keberangkatan, hosting
+> VPS, batas klaim genangan, dan skenario Tawang–Terboyo yang telah diuji.
+> Jangan menjalankan seed/pipeline atau mengulang klaim “pasti kering”,
+> “saat tiba di tiap ruas”, maupun offline otomatis dari naskah arsip ini.
+
 Untuk video 3–7 menit dan untuk babak final. Waktunya dihitung dari
 menjalankan skenarionya sungguhan, bukan diperkirakan.
 

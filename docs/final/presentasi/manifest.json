@@ -1,0 +1,17 @@
+{
+  "slides": 14,
+  "main_slides": 8,
+  "appendices": 6,
+  "target_seconds": 540,
+  "scenario_date": "2026-09-26",
+  "scenario_version": "919aa345-7492-4a53-9e7c-c34086775d18",
+  "application_url": "https://pasang-surut.vercel.app/app",
+  "fonts": [
+    "Arial",
+    "Arial Narrow"
+  ],
+  "source_code_base": "1651ad3",
+  "frontend_panel_fix_commit": "c554e27",
+  "frontend_tests_after_panel_fix": 26,
+  "backend_tests_audit_22": 95
+}

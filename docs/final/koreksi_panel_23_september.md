@@ -18,3 +18,13 @@ laporan 22 September tetap merupakan catatan historis audit saat itu.
 
 Batas cakupan: perubahan ini memperbaiki makna pesan yang telah ditemukan;
 tidak berarti audit membuktikan tidak ada bug lain.
+
+**Pemasangan dan pemeriksaan publik:** frontend `panel23-d5f8b721c34c`
+dipasang dengan pergantian index atomik dan aset lama dipertahankan untuk
+browser yang masih terbuka. Tidak ada restart container atau perubahan
+konfigurasi Maknaprice. Identitas/waktu mulai/restart enam container sebelum
+dan sesudah pemasangan sama. Browser baru pada `/app` menampilkan kedua
+peringatan dengan kalimat, kedalaman, dan WIB identik; canvas peta berisi
+gambar dan tidak ada galat JavaScript. Bukti:
+[deployment](bukti/panel_23_deployment.json) dan [browser](bukti/panel_23_publik.json).
+Branch OSM juga menerima koreksi yang sama, tanpa digabung ke main.

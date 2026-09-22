@@ -1,5 +1,13 @@
 # Sisa pekerjaan proposal
 
+**Pembaruan 23 September:** [paket PPTX/PDF final](final/presentasi/README.md)
+sudah selesai dan diverifikasi, dilengkapi catatan pembicara dan dua gambar
+demo. [Addendum materi](final/Addendum_presentasi_23_september.docx) mencatat
+skenario terverifikasi, 26 tes frontend, dan tugas manual tersisa. Proposal yang
+telah disubmit tidak ditimpa. MP4, latihan tim/proyektor, dan deadline PDF
+masih perlu ditangani tim.
+Addendum 23 September diperiksa dengan Microsoft Word: satu halaman.
+
 **Pembaruan final 22 September 2026:** proposal yang telah disubmit tetap
 diarsipkan. Koreksi metode, status runtime, audit regresi, dan konfirmasi TM
 ditulis pada [addendum audit](final/Addendum_audit_22_september.docx).
