@@ -13,7 +13,7 @@
 
 import { t } from "../lib/teks.js";
 
-export default function TujuanCepat({ daftar, memuat, terpilih, onPilih }) {
+export default function TujuanCepat({ daftar, memuat, terpilih, onPilih, galat, onUlang }) {
   if (memuat) {
     // Rangka STATIS, tidak berdenyut. DESIGN.md Bagian 9 revisi 30 Agustus:
     // nilai sebuah rangka pemuatan ada pada BENTUKNYA — ia menunjukkan apa
@@ -31,6 +31,11 @@ export default function TujuanCepat({ daftar, memuat, terpilih, onPilih }) {
       </section>
     );
   }
+
+  if (galat) return <section className="tujuan-cepat" role="alert">
+    <p className="tujuan-cepat__pesan t-label">{t('tujuanCepat.gagal')}</p>
+    <button type="button" className="tombol-utama" onClick={onUlang}>{t('tujuanCepat.ulang')}</button>
+  </section>;
 
   if (!daftar || daftar.length === 0) {
     return (

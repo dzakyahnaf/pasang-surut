@@ -1,0 +1,3309 @@
+{
+  "requests": 412,
+  "statuses": {
+    "200": 316,
+    "413": 58,
+    "422": 4,
+    "400": 2,
+    "503": 32
+  },
+  "unexpected": 0,
+  "rows": [
+    {
+      "stage": "metadata",
+      "path": "/api/jam",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 79.0,
+      "ok": true
+    },
+    {
+      "stage": "metadata",
+      "path": "/api/tujuan-cepat",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "metadata",
+      "path": "/api/validasi",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 234.0,
+      "ok": true
+    },
+    {
+      "stage": "semua_tujuan_dua_moda_dua_kondisi",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 47.0,
+      "ok": true
+    },
+    {
+      "stage": "semua_tujuan_dua_moda_dua_kondisi",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 125.0,
+      "ok": true
+    },
+    {
+      "stage": "semua_tujuan_dua_moda_dua_kondisi",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 78.0,
+      "ok": true
+    },
+    {
+      "stage": "semua_tujuan_dua_moda_dua_kondisi",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "semua_tujuan_dua_moda_dua_kondisi",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 125.0,
+      "ok": true
+    },
+    {
+      "stage": "semua_tujuan_dua_moda_dua_kondisi",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 79.0,
+      "ok": true
+    },
+    {
+      "stage": "semua_tujuan_dua_moda_dua_kondisi",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 156.0,
+      "ok": true
+    },
+    {
+      "stage": "semua_tujuan_dua_moda_dua_kondisi",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 109.0,
+      "ok": true
+    },
+    {
+      "stage": "semua_tujuan_dua_moda_dua_kondisi",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 47.0,
+      "ok": true
+    },
+    {
+      "stage": "semua_tujuan_dua_moda_dua_kondisi",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 78.0,
+      "ok": true
+    },
+    {
+      "stage": "semua_tujuan_dua_moda_dua_kondisi",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 78.0,
+      "ok": true
+    },
+    {
+      "stage": "semua_tujuan_dua_moda_dua_kondisi",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 32.0,
+      "ok": true
+    },
+    {
+      "stage": "semua_tujuan_dua_moda_dua_kondisi",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "semua_tujuan_dua_moda_dua_kondisi",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 109.0,
+      "ok": true
+    },
+    {
+      "stage": "semua_tujuan_dua_moda_dua_kondisi",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 78.0,
+      "ok": true
+    },
+    {
+      "stage": "semua_tujuan_dua_moda_dua_kondisi",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 47.0,
+      "ok": true
+    },
+    {
+      "stage": "semua_tujuan_dua_moda_dua_kondisi",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 125.0,
+      "ok": true
+    },
+    {
+      "stage": "semua_tujuan_dua_moda_dua_kondisi",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 63.0,
+      "ok": true
+    },
+    {
+      "stage": "semua_tujuan_dua_moda_dua_kondisi",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 125.0,
+      "ok": true
+    },
+    {
+      "stage": "semua_tujuan_dua_moda_dua_kondisi",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 125.0,
+      "ok": true
+    },
+    {
+      "stage": "semua_tujuan_dua_moda_dua_kondisi",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 93.0,
+      "ok": true
+    },
+    {
+      "stage": "semua_tujuan_dua_moda_dua_kondisi",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 94.0,
+      "ok": true
+    },
+    {
+      "stage": "semua_tujuan_dua_moda_dua_kondisi",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 78.0,
+      "ok": true
+    },
+    {
+      "stage": "semua_tujuan_dua_moda_dua_kondisi",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 32.0,
+      "ok": true
+    },
+    {
+      "stage": "semua_tujuan_dua_moda_dua_kondisi",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 93.0,
+      "ok": true
+    },
+    {
+      "stage": "semua_tujuan_dua_moda_dua_kondisi",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 688.0,
+      "ok": true
+    },
+    {
+      "stage": "semua_tujuan_dua_moda_dua_kondisi",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 515.0,
+      "ok": true
+    },
+    {
+      "stage": "semua_tujuan_dua_moda_dua_kondisi",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 329.0,
+      "ok": true
+    },
+    {
+      "stage": "semua_tujuan_dua_moda_dua_kondisi",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 828.0,
+      "ok": true
+    },
+    {
+      "stage": "semua_tujuan_dua_moda_dua_kondisi",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 531.0,
+      "ok": true
+    },
+    {
+      "stage": "semua_tujuan_dua_moda_dua_kondisi",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 62.0,
+      "ok": true
+    },
+    {
+      "stage": "semua_tujuan_dua_moda_dua_kondisi",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 63.0,
+      "ok": true
+    },
+    {
+      "stage": "semua_tujuan_dua_moda_dua_kondisi",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "semua_tujuan_dua_moda_dua_kondisi",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 828.0,
+      "ok": true
+    },
+    {
+      "stage": "semua_tujuan_dua_moda_dua_kondisi",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 485.0,
+      "ok": true
+    },
+    {
+      "stage": "semua_tujuan_dua_moda_dua_kondisi",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 125.0,
+      "ok": true
+    },
+    {
+      "stage": "semua_tujuan_dua_moda_dua_kondisi",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 47.0,
+      "ok": true
+    },
+    {
+      "stage": "semua_tujuan_dua_moda_dua_kondisi",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 343.0,
+      "ok": true
+    },
+    {
+      "stage": "semua_tujuan_dua_moda_dua_kondisi",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 532.0,
+      "ok": true
+    },
+    {
+      "stage": "semua_tujuan_dua_moda_dua_kondisi",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 109.0,
+      "ok": true
+    },
+    {
+      "stage": "semua_tujuan_dua_moda_dua_kondisi",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 453.0,
+      "ok": true
+    },
+    {
+      "stage": "semua_tujuan_dua_moda_dua_kondisi",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 344.0,
+      "ok": true
+    },
+    {
+      "stage": "semua_tujuan_dua_moda_dua_kondisi",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 422.0,
+      "ok": true
+    },
+    {
+      "stage": "semua_tujuan_dua_moda_dua_kondisi",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 328.0,
+      "ok": true
+    },
+    {
+      "stage": "semua_tujuan_dua_moda_dua_kondisi",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 47.0,
+      "ok": true
+    },
+    {
+      "stage": "semua_tujuan_dua_moda_dua_kondisi",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 437.0,
+      "ok": true
+    },
+    {
+      "stage": "semua_tujuan_dua_moda_dua_kondisi",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 203.0,
+      "ok": true
+    },
+    {
+      "stage": "semua_tujuan_dua_moda_dua_kondisi",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 235.0,
+      "ok": true
+    },
+    {
+      "stage": "pola_slider_legacy",
+      "path": "/api/ruas?waktu=2026-09-22T16:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 1312.0,
+      "ok": true
+    },
+    {
+      "stage": "pola_slider_legacy",
+      "path": "/api/ruas?waktu=2026-09-22T17:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 2593.0,
+      "ok": true
+    },
+    {
+      "stage": "pola_slider_legacy",
+      "path": "/api/ruas?waktu=2026-09-22T18:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 1312.0,
+      "ok": true
+    },
+    {
+      "stage": "pola_slider_legacy",
+      "path": "/api/ruas?waktu=2026-09-22T19:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 750.0,
+      "ok": true
+    },
+    {
+      "stage": "pola_slider_legacy",
+      "path": "/api/ruas?waktu=2026-09-22T20:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 828.0,
+      "ok": true
+    },
+    {
+      "stage": "pola_slider_legacy",
+      "path": "/api/ruas?waktu=2026-09-22T21:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 922.0,
+      "ok": true
+    },
+    {
+      "stage": "pola_slider_legacy",
+      "path": "/api/ruas?waktu=2026-09-22T22:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 813.0,
+      "ok": true
+    },
+    {
+      "stage": "pola_slider_legacy",
+      "path": "/api/ruas?waktu=2026-09-22T23:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 890.0,
+      "ok": true
+    },
+    {
+      "stage": "pola_slider_legacy",
+      "path": "/api/ruas?waktu=2026-09-23T00:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 1391.0,
+      "ok": true
+    },
+    {
+      "stage": "pola_slider_legacy",
+      "path": "/api/ruas?waktu=2026-09-23T01:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 2094.0,
+      "ok": true
+    },
+    {
+      "stage": "pola_slider_legacy",
+      "path": "/api/ruas?waktu=2026-09-23T02:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 891.0,
+      "ok": true
+    },
+    {
+      "stage": "pola_slider_legacy",
+      "path": "/api/ruas?waktu=2026-09-23T03:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 1031.0,
+      "ok": true
+    },
+    {
+      "stage": "body_besar",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 413,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "nan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 422,
+      "ms": 32.0,
+      "ok": true
+    },
+    {
+      "stage": "cakupan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 422,
+      "ms": 15.0,
+      "ok": true
+    },
+    {
+      "stage": "timezone",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 400,
+      "ms": 16.0,
+      "ok": true
+    },
+    {
+      "stage": "body_besar",
+      "path": "/api/rute",
+      "base": "https://pasang-surut.vercel.app",
+      "status": 413,
+      "ms": 578.0,
+      "ok": true
+    },
+    {
+      "stage": "nan",
+      "path": "/api/rute",
+      "base": "https://pasang-surut.vercel.app",
+      "status": 422,
+      "ms": 63.0,
+      "ok": true
+    },
+    {
+      "stage": "cakupan",
+      "path": "/api/rute",
+      "base": "https://pasang-surut.vercel.app",
+      "status": 422,
+      "ms": 62.0,
+      "ok": true
+    },
+    {
+      "stage": "timezone",
+      "path": "/api/rute",
+      "base": "https://pasang-surut.vercel.app",
+      "status": 400,
+      "ms": 63.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_rute_8",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_rute_8",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 503,
+      "ms": 46.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_rute_8",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 503,
+      "ms": 46.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_rute_8",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 503,
+      "ms": 46.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_rute_8",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 503,
+      "ms": 62.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_rute_8",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 503,
+      "ms": 62.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_rute_8",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 62.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_rute_8",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 62.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_body_8",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 413,
+      "ms": 47.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_body_8",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 413,
+      "ms": 63.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_body_8",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 413,
+      "ms": 63.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_body_8",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 413,
+      "ms": 63.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_body_8",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 413,
+      "ms": 63.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_body_8",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 413,
+      "ms": 78.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_body_8",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 413,
+      "ms": 78.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_body_8",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 413,
+      "ms": 78.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_rute_16",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 47.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_rute_16",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 503,
+      "ms": 47.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_rute_16",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 503,
+      "ms": 47.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_rute_16",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 47.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_rute_16",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 503,
+      "ms": 47.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_rute_16",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 63.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_rute_16",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 63.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_rute_16",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 503,
+      "ms": 63.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_rute_16",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 503,
+      "ms": 94.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_rute_16",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 503,
+      "ms": 94.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_rute_16",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 503,
+      "ms": 94.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_rute_16",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 503,
+      "ms": 94.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_rute_16",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 503,
+      "ms": 94.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_rute_16",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 503,
+      "ms": 94.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_rute_16",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 78.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_rute_16",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 110.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_body_16",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 413,
+      "ms": 46.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_body_16",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 413,
+      "ms": 46.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_body_16",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 413,
+      "ms": 62.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_body_16",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 413,
+      "ms": 93.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_body_16",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 413,
+      "ms": 93.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_body_16",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 413,
+      "ms": 109.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_body_16",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 413,
+      "ms": 109.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_body_16",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 413,
+      "ms": 109.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_body_16",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 413,
+      "ms": 109.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_body_16",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 413,
+      "ms": 109.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_body_16",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 413,
+      "ms": 156.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_body_16",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 413,
+      "ms": 156.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_body_16",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 413,
+      "ms": 156.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_body_16",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 413,
+      "ms": 156.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_body_16",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 413,
+      "ms": 171.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_body_16",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 413,
+      "ms": 187.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_rute_32",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 503,
+      "ms": 63.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_rute_32",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 63.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_rute_32",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 503,
+      "ms": 63.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_rute_32",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 503,
+      "ms": 78.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_rute_32",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 78.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_rute_32",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 503,
+      "ms": 78.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_rute_32",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 78.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_rute_32",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 503,
+      "ms": 78.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_rute_32",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 503,
+      "ms": 94.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_rute_32",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 78.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_rute_32",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 503,
+      "ms": 94.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_rute_32",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 109.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_rute_32",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 109.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_rute_32",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 109.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_rute_32",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 503,
+      "ms": 109.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_rute_32",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 503,
+      "ms": 109.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_rute_32",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 109.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_rute_32",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 503,
+      "ms": 125.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_rute_32",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 141.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_rute_32",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 503,
+      "ms": 125.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_rute_32",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 141.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_rute_32",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 503,
+      "ms": 141.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_rute_32",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 140.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_rute_32",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 503,
+      "ms": 140.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_rute_32",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 156.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_rute_32",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 503,
+      "ms": 156.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_rute_32",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 156.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_rute_32",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 503,
+      "ms": 172.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_rute_32",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 503,
+      "ms": 156.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_rute_32",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 503,
+      "ms": 172.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_rute_32",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 172.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_rute_32",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 172.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_body_32",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 413,
+      "ms": 62.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_body_32",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 413,
+      "ms": 62.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_body_32",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 413,
+      "ms": 78.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_body_32",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 413,
+      "ms": 78.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_body_32",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 413,
+      "ms": 78.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_body_32",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 413,
+      "ms": 78.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_body_32",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 413,
+      "ms": 93.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_body_32",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 413,
+      "ms": 78.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_body_32",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 413,
+      "ms": 93.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_body_32",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 413,
+      "ms": 93.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_body_32",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 413,
+      "ms": 94.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_body_32",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 413,
+      "ms": 94.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_body_32",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 413,
+      "ms": 94.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_body_32",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 413,
+      "ms": 110.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_body_32",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 413,
+      "ms": 110.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_body_32",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 413,
+      "ms": 125.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_body_32",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 413,
+      "ms": 125.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_body_32",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 413,
+      "ms": 140.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_body_32",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 413,
+      "ms": 141.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_body_32",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 413,
+      "ms": 156.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_body_32",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 413,
+      "ms": 141.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_body_32",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 413,
+      "ms": 141.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_body_32",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 413,
+      "ms": 171.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_body_32",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 413,
+      "ms": 171.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_body_32",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 413,
+      "ms": 156.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_body_32",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 413,
+      "ms": 171.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_body_32",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 413,
+      "ms": 156.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_body_32",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 413,
+      "ms": 156.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_body_32",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 413,
+      "ms": 218.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_body_32",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 413,
+      "ms": 203.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_body_32",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 413,
+      "ms": 203.0,
+      "ok": true
+    },
+    {
+      "stage": "burst_body_32",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 413,
+      "ms": 218.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-22T16:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 16.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-22T17:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 15.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 32.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-22T18:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-22T19:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 47.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-22T20:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 32.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-22T21:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 32.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-22T22:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-22T23:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 47.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-23T00:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 63.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 78.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-23T01:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 32.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-23T02:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 47.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-23T03:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 32.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-23T04:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 32.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-23T05:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 47.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 78.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-23T06:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 16.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-23T07:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 15.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 32.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-23T08:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 16.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-23T09:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 15.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 32.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-23T10:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-23T11:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 32.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-23T12:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-23T13:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 16.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-23T14:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 15.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 32.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-23T15:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-23T16:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 16.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-23T17:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 15.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-23T18:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 16.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-23T19:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-23T20:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 32.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-23T21:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-23T22:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-23T23:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 78.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-24T00:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-24T01:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-24T02:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 47.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 32.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-24T03:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-24T04:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 125.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-24T05:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 32.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-24T06:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 16.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-24T07:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 32.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-24T08:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-24T09:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 16.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-24T10:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 15.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 32.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-24T11:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-24T12:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-24T13:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 32.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-24T14:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-24T15:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 32.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-24T16:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-24T17:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 32.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-24T18:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 15.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 32.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-24T19:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 16.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-24T20:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 15.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 32.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-24T21:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-24T22:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 94.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-24T23:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 32.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-25T00:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 32.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-25T01:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 32.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-25T02:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-25T03:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-25T04:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 32.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-25T05:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 32.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-25T06:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 15.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 32.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-25T07:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 16.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-25T08:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-25T09:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 16.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-25T10:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-25T11:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 16.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-25T12:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-25T13:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 16.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-25T14:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-25T15:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 32.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-22T16:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-22T17:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 47.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 47.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-22T18:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 15.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 32.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-22T19:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 16.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-22T20:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-22T21:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 47.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 78.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-22T22:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 32.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 47.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-22T23:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 16.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-23T00:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 62.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-23T01:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 47.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 32.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-23T02:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 93.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 47.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-23T03:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 109.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 47.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-23T04:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 32.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-23T05:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-23T06:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 15.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 32.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-23T07:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-23T08:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 16.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-23T09:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 15.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-23T10:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 32.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 47.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-23T11:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 15.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-23T12:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 16.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-23T13:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-23T14:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 32.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-23T15:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 15.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-23T16:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 16.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-23T17:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 16.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-23T18:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 16.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-23T19:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-23T20:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 47.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-23T21:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-23T22:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 32.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-23T23:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 46.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 32.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-24T00:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 32.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 16.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-24T01:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 47.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 63.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-24T02:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-24T03:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-24T04:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 32.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-24T05:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 15.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 47.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-24T06:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 32.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-24T07:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-24T08:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 16.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/kondisi?waktu=2026-09-24T09:00:00%2B00:00",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "pemulihan",
+      "path": "/api/rute",
+      "base": "http://38.103.171.82:18080",
+      "status": 200,
+      "ms": 31.0,
+      "ok": true
+    },
+    {
+      "stage": "akhir",
+      "path": "/api/kesehatan",
+      "base": "https://pasang-surut.vercel.app",
+      "status": 200,
+      "ms": 157.0,
+      "ok": true
+    }
+  ]
+}

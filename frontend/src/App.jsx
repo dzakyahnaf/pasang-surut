@@ -39,6 +39,8 @@ export default function App() {
 
   const [tujuanCepat, setTujuanCepat] = useState([]);
   const [memuatTujuan, setMemuatTujuan] = useState(true);
+  const [galatTujuan, setGalatTujuan] = useState(false);
+  const [ulangTujuan, setUlangTujuan] = useState(0);
   const [tujuanTerpilih, setTujuanTerpilih] = useState(null);
   const namaAsal = useMemo(() => namaLokasi(asal, geojson, tujuanCepat), [asal, geojson, tujuanCepat]);
   const namaTujuan = useMemo(() => namaLokasi(tujuan, geojson, tujuanCepat), [tujuan, geojson, tujuanCepat]);
@@ -54,13 +56,15 @@ export default function App() {
 
   useEffect(() => {
     const c = new AbortController();
+    setMemuatTujuan(true);
+    setGalatTujuan(false);
     ambilTujuanCepat({ signal: c.signal }).then((data) => {
       if (!c.signal.aborted) setTujuanCepat(data.tujuan ?? []);
-    }).catch(() => {}).finally(() => {
+    }).catch(() => { if (!c.signal.aborted) setGalatTujuan(true); }).finally(() => {
       if (!c.signal.aborted) setMemuatTujuan(false);
     });
     return () => c.abort();
-  }, []);
+  }, [ulangTujuan]);
 
   const klikPeta = useCallback((koordinat) => {
     if (modePilih === "asal") {
@@ -99,7 +103,7 @@ export default function App() {
   }, [asal]);
 
   const pilihJamAman = useCallback((jamAman) => {
-    const i = jam.findIndex((j) => j.waktu_utc === jamAman.waktu_utc);
+    const i = jam.findIndex((j) => Date.parse(j.waktu_utc) === Date.parse(jamAman.waktu_utc));
     if (i >= 0 && jam[i].tersedia) setIndeksJam(i);
   }, [jam]);
 
@@ -157,10 +161,14 @@ export default function App() {
             memuat={memuatTujuan}
             terpilih={tujuanTerpilih}
             onPilih={pilihTujuanCepat}
+            galat={galatTujuan}
+            onUlang={() => setUlangTujuan((n) => n + 1)}
           />
           <PeringatanPaparan
             paparan={hasil?.paparan}
             jamAman={hasil?.jam_lebih_aman}
+            waktu={hasil?.waktu_berangkat_utc}
+            bisaPilihJam={jam.some((j) => j.tersedia && Date.parse(j.waktu_utc) === Date.parse(hasil?.jam_lebih_aman?.waktu_utc))}
             namaJalan={
               hasil?.rute?.features?.find(
                 (f) => f.properties.jenis === "rute_sadar_rob"
@@ -194,6 +202,7 @@ export default function App() {
 
           <div className="plat plat--kiri-bawah">
             <Legenda />
+            {!kondisi ? <p className="peta__keterangan-batas t-label">{t('peta.kondisiBelumTersedia')}</p> : null}
             <p className="peta__keterangan-batas t-label">{t("peta.batasWilayah")}</p>
           </div>
 

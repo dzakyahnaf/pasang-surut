@@ -44,15 +44,18 @@
   // Produksi menunjuk ke Vercel. Saat landing dibuka dari localhost
   // (pengembangan), CTA mengarah ke Vite dev server :5173.
   // Override manual: ?dashboard=https://alamat-lain
-  var PRODUKSI = "https://pasang-surut.vercel.app";
+  var PRODUKSI = new URL('/app', window.location.href).href;
   var url = PRODUKSI;
   try {
     var host = window.location.hostname;
     var param = new URLSearchParams(window.location.search).get("dashboard");
-    if (param) {
-      url = param;
-    } else if (host === "localhost" || host === "127.0.0.1") {
+    if (host === "localhost" || host === "127.0.0.1") {
       url = "http://127.0.0.1:5173";
+    }
+    if (param) {
+      var tujuan = new URL(param, window.location.href);
+      // Parameter publik tidak boleh menjadi javascript:/data: pada CTA.
+      if (tujuan.protocol === 'https:' || tujuan.protocol === 'http:') url = tujuan.href;
     }
   } catch (e) {
     url = PRODUKSI;

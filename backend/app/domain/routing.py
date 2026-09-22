@@ -369,7 +369,7 @@ def dua_rute(
     sadar = cari_rute(
         graf, simpul_asal, simpul_tujuan, waktu_berangkat,
         ambang, peta_kedalaman, sadar_rob=True,
-    )
+    ) if abai.ditemukan else HasilRute(ditemukan=False, alasan="tidak_terhubung")
 
     return {
         "simpul_asal": simpul_asal,

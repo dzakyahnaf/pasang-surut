@@ -98,7 +98,7 @@ export default function PanelDampak({ dampak, moda }) {
         />
         <Nilai
           label={t("dampak.emisi")}
-          rentang={dampak.kg_co2e}
+          rentang={dampak.kg_co2 ?? dampak.kg_co2e}
           satuan={t("satuan.kilogramCo2e")}
           desimal={3}
         />

@@ -22,8 +22,10 @@ from app import config, db
 from app.domain import dampak, pasut, routing
 from app.runtime import penyimpan, utc, jam_bulat
 from app.batas_beban import BatasBeban
+from app.batas_isi import BatasIsi
 
 app = FastAPI(title="PASANG SURUT", version="0.4.0")
+app.add_middleware(BatasIsi)
 app.add_middleware(BatasBeban, maksimum=2)
 app.add_middleware(CORSMiddleware,
     allow_origins=["http://localhost:5173", "http://127.0.0.1:5173",
@@ -176,7 +178,7 @@ def _jam_lebih_aman(data, permintaan, mulai, ambang):
     # Hanya ke depan, dalam horizon, dan rutenya dihitung ulang sesuai model.
     # Maksimal 24 kandidat; memakai snapshot/graf bersama tanpa query per jam.
     for langkah in range(1, 25):
-        w = mulai + timedelta(hours=langkah)
+        w = jam_bulat(mulai) + timedelta(hours=langkah)
         if jam_bulat(w) not in data.cakupan.jam:
             continue
         hasil = routing.dua_rute(data.jaringan.graf, tuple(permintaan.asal),
@@ -400,6 +402,7 @@ def rute(permintaan: PermintaanRute) -> dict:
             config.ZONA_WAKTU_LOKAL).isoformat(),
         "moda": permintaan.moda,
         "versi_data": data.cakupan.versi,
+        "versi_jaringan": data.jaringan.versi,
         "asal_jaringan": data.asal,
         "model_routing": "kondisi_jam_keberangkatan",
         "batas_model": "Kondisi jam keberangkatan dipakai sepanjang rute; perubahan selama perjalanan belum dimodelkan.",
@@ -443,7 +446,7 @@ def rute(permintaan: PermintaanRute) -> dict:
         "dampak": (
             dampak.hitung((sadar.detik - abai.detik) / 60,
                           (sadar.jarak_m - abai.jarak_m) / 1000, ambang)
-            if keduanya_ada else {"berarti": False}
+            if keduanya_ada else None
         ),
         "paparan": paparan,
         "jam_lebih_aman": jam_aman,

@@ -112,7 +112,10 @@ def hitung(selisih_menit: float, selisih_km: float, ambang_moda: dict) -> dict:
         "menit": round(selisih_menit, 1),
         "km": round(selisih_km, 2),
         "liter": liter.sebagai_dict(3),
+        "kg_co2": emisi.sebagai_dict(3),
+        # Alias kontrak lama; faktor pembakaran ini hanya mengestimasi CO2.
         "kg_co2e": emisi.sebagai_dict(3),
+        "satuan_emisi": "kg CO2 pembakaran; bukan CO2e atau emisi daur hidup",
         "faktor": {
             "konsumsi_l_per_km": konsumsi,
             "faktor_emisi_kg_per_l": faktor,

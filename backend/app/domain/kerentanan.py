@@ -102,14 +102,16 @@ def _skala_searah(nilai: np.ndarray) -> np.ndarray:
 
 def elevasi_relatif(elevasi: np.ndarray, x_m: np.ndarray, y_m: np.ndarray,
                     radius_m: float = 500.0) -> np.ndarray:
-    """Elevasi tiap ruas dikurangi nilai tengah tetangga dalam radius.
+    """Elevasi tiap ruas dikurangi median pada kumpulan sel 3 x 3.
 
     Koordinat WAJIB dalam meter, bukan derajat. Dihitung lewat petak dengan
     sisi sepanjang radius, bukan dengan membandingkan tiap ruas terhadap
     seluruh ruas lain, karena yang terakhir berarti 19.394 kuadrat perbandingan.
 
-    Satu ruas dibandingkan terhadap petaknya sendiri dan delapan petak
-    tetangganya, sehingga jendela efektifnya sekitar tiga kali radius.
+    Nama parameter radius_m dipertahankan untuk kompatibilitas: nilainya
+    adalah sisi sel, bukan radius pencarian melingkar. Satu ruas memakai
+    selnya sendiri dan delapan sel tetangga (jendela 1.500 x 1.500 m bila
+    sisi sel 500 m). Tidak ada penyaringan jarak Euclidean 500 m.
     """
     petak_x = np.floor(x_m / radius_m).astype(np.int64)
     petak_y = np.floor(y_m / radius_m).astype(np.int64)
