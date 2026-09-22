@@ -1,0 +1,7463 @@
+{
+  "origin": "http://38.103.171.82:18080",
+  "public": "https://pasang-surut.vercel.app",
+  "stopped": true,
+  "stages": [
+    {
+      "stage": "metadata",
+      "seconds": 0.17,
+      "requests": 4,
+      "statuses": {
+        "200": 4
+      },
+      "unexpected": 0,
+      "p95_success_ms": 62.0,
+      "max_success_ms": 62.0
+    },
+    {
+      "stage": "functional_edges",
+      "seconds": 13.17,
+      "requests": 77,
+      "statuses": {
+        "200": 55,
+        "422": 18,
+        "400": 4
+      },
+      "unexpected": 0,
+      "p95_success_ms": 782.0,
+      "max_success_ms": 891.0
+    },
+    {
+      "stage": "legacy_burst_2",
+      "seconds": 1.36,
+      "requests": 2,
+      "statuses": {
+        "200": 2
+      },
+      "unexpected": 0,
+      "p95_success_ms": 1360.0,
+      "max_success_ms": 1360.0
+    },
+    {
+      "stage": "route_burst_2",
+      "seconds": 0.94,
+      "requests": 2,
+      "statuses": {
+        "200": 2
+      },
+      "unexpected": 0,
+      "p95_success_ms": 937.0,
+      "max_success_ms": 937.0
+    },
+    {
+      "stage": "condition_burst_2",
+      "seconds": 0.03,
+      "requests": 2,
+      "statuses": {
+        "200": 2
+      },
+      "unexpected": 0,
+      "p95_success_ms": 31.0,
+      "max_success_ms": 31.0
+    },
+    {
+      "stage": "legacy_burst_4",
+      "seconds": 1.8,
+      "requests": 4,
+      "statuses": {
+        "503": 2,
+        "200": 2
+      },
+      "unexpected": 0,
+      "p95_success_ms": 1797.0,
+      "max_success_ms": 1797.0
+    },
+    {
+      "stage": "route_burst_4",
+      "seconds": 0.97,
+      "requests": 4,
+      "statuses": {
+        "503": 2,
+        "200": 2
+      },
+      "unexpected": 0,
+      "p95_success_ms": 968.0,
+      "max_success_ms": 968.0
+    },
+    {
+      "stage": "condition_burst_4",
+      "seconds": 0.03,
+      "requests": 4,
+      "statuses": {
+        "200": 4
+      },
+      "unexpected": 0,
+      "p95_success_ms": 31.0,
+      "max_success_ms": 31.0
+    },
+    {
+      "stage": "legacy_burst_8",
+      "seconds": 2.45,
+      "requests": 8,
+      "statuses": {
+        "503": 4,
+        "200": 4
+      },
+      "unexpected": 0,
+      "p95_success_ms": 2437.0,
+      "max_success_ms": 2437.0
+    },
+    {
+      "stage": "route_burst_8",
+      "seconds": 1.0,
+      "requests": 8,
+      "statuses": {
+        "503": 6,
+        "200": 2
+      },
+      "unexpected": 0,
+      "p95_success_ms": 1000.0,
+      "max_success_ms": 1000.0
+    },
+    {
+      "stage": "condition_burst_8",
+      "seconds": 0.06,
+      "requests": 8,
+      "statuses": {
+        "200": 8
+      },
+      "unexpected": 0,
+      "p95_success_ms": 62.0,
+      "max_success_ms": 62.0
+    },
+    {
+      "stage": "legacy_burst_16",
+      "seconds": 1.42,
+      "requests": 16,
+      "statuses": {
+        "503": 14,
+        "200": 2
+      },
+      "unexpected": 0,
+      "p95_success_ms": 1422.0,
+      "max_success_ms": 1422.0
+    },
+    {
+      "stage": "route_burst_16",
+      "seconds": 1.11,
+      "requests": 16,
+      "statuses": {
+        "503": 14,
+        "200": 2
+      },
+      "unexpected": 0,
+      "p95_success_ms": 1109.0,
+      "max_success_ms": 1109.0
+    },
+    {
+      "stage": "condition_burst_16",
+      "seconds": 0.25,
+      "requests": 16,
+      "statuses": {
+        "200": 16
+      },
+      "unexpected": 0,
+      "p95_success_ms": 234.0,
+      "max_success_ms": 234.0
+    },
+    {
+      "stage": "legacy_burst_32",
+      "seconds": 2.62,
+      "requests": 32,
+      "statuses": {
+        "503": 28,
+        "200": 4
+      },
+      "unexpected": 0,
+      "p95_success_ms": 2609.0,
+      "max_success_ms": 2609.0
+    },
+    {
+      "stage": "route_burst_32",
+      "seconds": 1.16,
+      "requests": 32,
+      "statuses": {
+        "503": 30,
+        "200": 2
+      },
+      "unexpected": 0,
+      "p95_success_ms": 1156.0,
+      "max_success_ms": 1156.0
+    },
+    {
+      "stage": "condition_burst_32",
+      "seconds": 0.22,
+      "requests": 32,
+      "statuses": {
+        "200": 32
+      },
+      "unexpected": 0,
+      "p95_success_ms": 203.0,
+      "max_success_ms": 203.0
+    },
+    {
+      "stage": "metadata_burst_32",
+      "seconds": 0.31,
+      "requests": 32,
+      "statuses": {
+        "200": 32
+      },
+      "unexpected": 0,
+      "p95_success_ms": 297.0,
+      "max_success_ms": 297.0
+    },
+    {
+      "stage": "vercel_mixed_burst_32",
+      "seconds": 1.3,
+      "requests": 32,
+      "statuses": {
+        "200": 19,
+        "503": 13
+      },
+      "unexpected": 0,
+      "p95_success_ms": 1266.0,
+      "max_success_ms": 1266.0
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "seconds": 36.98,
+      "requests": 70,
+      "statuses": {
+        "200": 68,
+        "503": 2
+      },
+      "unexpected": 0,
+      "p95_success_ms": 3391.0,
+      "max_success_ms": 4187.0
+    },
+    {
+      "stage": "modern_slider_route_soak_300s",
+      "seconds": 0.0,
+      "requests": 0,
+      "statuses": {},
+      "unexpected": 0,
+      "p95_success_ms": null,
+      "max_success_ms": null
+    }
+  ],
+  "requests": [
+    {
+      "stage": "metadata",
+      "utc": "2026-09-22T09:11:08.401930+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kesehatan",
+      "body": null,
+      "status": 200,
+      "ms": 62.0,
+      "bytes": 575,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "metadata",
+      "utc": "2026-09-22T09:11:08.439101+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/jam",
+      "body": null,
+      "status": 200,
+      "ms": 31.0,
+      "bytes": 9513,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "metadata",
+      "utc": "2026-09-22T09:11:08.463423+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/tujuan-cepat",
+      "body": null,
+      "status": 200,
+      "ms": 32.0,
+      "bytes": 515,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "metadata",
+      "utc": "2026-09-22T09:11:08.506044+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/validasi",
+      "body": null,
+      "status": 200,
+      "ms": 46.0,
+      "bytes": 3175,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:08.597583+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.41853,
+          -6.94959
+        ],
+        "tujuan": [
+          110.42744,
+          -6.96374
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 200,
+      "ms": 94.0,
+      "bytes": 12928,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:08.627076+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.41853,
+          -6.94959
+        ],
+        "tujuan": [
+          110.42744,
+          -6.96374
+        ],
+        "waktu": "2026-09-22T09:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 200,
+      "ms": 16.0,
+      "bytes": 8273,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:08.677353+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.41853,
+          -6.94959
+        ],
+        "tujuan": [
+          110.42744,
+          -6.96374
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 200,
+      "ms": 62.0,
+      "bytes": 8392,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:08.709064+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.41853,
+          -6.94959
+        ],
+        "tujuan": [
+          110.42744,
+          -6.96374
+        ],
+        "waktu": "2026-09-22T09:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 200,
+      "ms": 32.0,
+      "bytes": 8273,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:09.345823+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.41853,
+          -6.94959
+        ],
+        "tujuan": [
+          110.46934,
+          -6.94825
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 200,
+      "ms": 625.0,
+      "bytes": 22878,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:09.466129+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.41853,
+          -6.94959
+        ],
+        "tujuan": [
+          110.46934,
+          -6.94825
+        ],
+        "waktu": "2026-09-22T09:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 200,
+      "ms": 125.0,
+      "bytes": 12149,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:09.729781+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.41853,
+          -6.94959
+        ],
+        "tujuan": [
+          110.46934,
+          -6.94825
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 200,
+      "ms": 265.0,
+      "bytes": 11705,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:09.838262+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.41853,
+          -6.94959
+        ],
+        "tujuan": [
+          110.46934,
+          -6.94825
+        ],
+        "waktu": "2026-09-22T09:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 200,
+      "ms": 110.0,
+      "bytes": 12149,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:10.298285+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.41853,
+          -6.94959
+        ],
+        "tujuan": [
+          110.46051,
+          -6.95619
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 200,
+      "ms": 453.0,
+      "bytes": 19451,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:10.365219+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.41853,
+          -6.94959
+        ],
+        "tujuan": [
+          110.46051,
+          -6.95619
+        ],
+        "waktu": "2026-09-22T09:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 200,
+      "ms": 78.0,
+      "bytes": 8167,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:10.532817+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.41853,
+          -6.94959
+        ],
+        "tujuan": [
+          110.46051,
+          -6.95619
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 200,
+      "ms": 156.0,
+      "bytes": 8050,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:10.596877+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.41853,
+          -6.94959
+        ],
+        "tujuan": [
+          110.46051,
+          -6.95619
+        ],
+        "waktu": "2026-09-22T09:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 200,
+      "ms": 78.0,
+      "bytes": 8167,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:10.961970+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.42744,
+          -6.96374
+        ],
+        "tujuan": [
+          110.41853,
+          -6.94959
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 200,
+      "ms": 360.0,
+      "bytes": 8959,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:10.999801+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.42744,
+          -6.96374
+        ],
+        "tujuan": [
+          110.41853,
+          -6.94959
+        ],
+        "waktu": "2026-09-22T09:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 200,
+      "ms": 31.0,
+      "bytes": 7449,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:11.100933+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.42744,
+          -6.96374
+        ],
+        "tujuan": [
+          110.41853,
+          -6.94959
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 200,
+      "ms": 109.0,
+      "bytes": 8057,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:11.147411+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.42744,
+          -6.96374
+        ],
+        "tujuan": [
+          110.41853,
+          -6.94959
+        ],
+        "waktu": "2026-09-22T09:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 200,
+      "ms": 47.0,
+      "bytes": 7449,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:11.886005+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.42744,
+          -6.96374
+        ],
+        "tujuan": [
+          110.46934,
+          -6.94825
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 200,
+      "ms": 734.0,
+      "bytes": 18121,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:12.000107+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.42744,
+          -6.96374
+        ],
+        "tujuan": [
+          110.46934,
+          -6.94825
+        ],
+        "waktu": "2026-09-22T09:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 200,
+      "ms": 110.0,
+      "bytes": 14137,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:12.453629+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.42744,
+          -6.96374
+        ],
+        "tujuan": [
+          110.46934,
+          -6.94825
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 200,
+      "ms": 453.0,
+      "bytes": 14257,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:12.600708+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.42744,
+          -6.96374
+        ],
+        "tujuan": [
+          110.46934,
+          -6.94825
+        ],
+        "waktu": "2026-09-22T09:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 200,
+      "ms": 156.0,
+      "bytes": 14137,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:13.214597+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.42744,
+          -6.96374
+        ],
+        "tujuan": [
+          110.46051,
+          -6.95619
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 200,
+      "ms": 610.0,
+      "bytes": 15098,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:13.287749+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.42744,
+          -6.96374
+        ],
+        "tujuan": [
+          110.46051,
+          -6.95619
+        ],
+        "waktu": "2026-09-22T09:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 200,
+      "ms": 78.0,
+      "bytes": 10973,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:13.554821+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.42744,
+          -6.96374
+        ],
+        "tujuan": [
+          110.46051,
+          -6.95619
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 200,
+      "ms": 265.0,
+      "bytes": 11092,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:13.623547+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.42744,
+          -6.96374
+        ],
+        "tujuan": [
+          110.46051,
+          -6.95619
+        ],
+        "waktu": "2026-09-22T09:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 200,
+      "ms": 63.0,
+      "bytes": 10973,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:13.678651+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46934,
+          -6.94825
+        ],
+        "tujuan": [
+          110.41853,
+          -6.94959
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 200,
+      "ms": 62.0,
+      "bytes": 7354,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:13.807071+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46934,
+          -6.94825
+        ],
+        "tujuan": [
+          110.41853,
+          -6.94959
+        ],
+        "waktu": "2026-09-22T09:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 200,
+      "ms": 125.0,
+      "bytes": 13583,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:14.195721+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46934,
+          -6.94825
+        ],
+        "tujuan": [
+          110.41853,
+          -6.94959
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 200,
+      "ms": 391.0,
+      "bytes": 13579,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:14.315869+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46934,
+          -6.94825
+        ],
+        "tujuan": [
+          110.41853,
+          -6.94959
+        ],
+        "waktu": "2026-09-22T09:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 200,
+      "ms": 125.0,
+      "bytes": 13583,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:14.366052+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46934,
+          -6.94825
+        ],
+        "tujuan": [
+          110.42744,
+          -6.96374
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 200,
+      "ms": 47.0,
+      "bytes": 8972,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:14.511954+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46934,
+          -6.94825
+        ],
+        "tujuan": [
+          110.42744,
+          -6.96374
+        ],
+        "waktu": "2026-09-22T09:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 200,
+      "ms": 140.0,
+      "bytes": 16819,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:14.955504+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46934,
+          -6.94825
+        ],
+        "tujuan": [
+          110.42744,
+          -6.96374
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 200,
+      "ms": 454.0,
+      "bytes": 17151,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:15.072706+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46934,
+          -6.94825
+        ],
+        "tujuan": [
+          110.42744,
+          -6.96374
+        ],
+        "waktu": "2026-09-22T09:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 200,
+      "ms": 109.0,
+      "bytes": 16819,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:15.103900+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46934,
+          -6.94825
+        ],
+        "tujuan": [
+          110.46051,
+          -6.95619
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 200,
+      "ms": 31.0,
+      "bytes": 4379,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:15.175421+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46934,
+          -6.94825
+        ],
+        "tujuan": [
+          110.46051,
+          -6.95619
+        ],
+        "waktu": "2026-09-22T09:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 200,
+      "ms": 78.0,
+      "bytes": 7633,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:15.228417+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46934,
+          -6.94825
+        ],
+        "tujuan": [
+          110.46051,
+          -6.95619
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 200,
+      "ms": 47.0,
+      "bytes": 7752,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:15.257330+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46934,
+          -6.94825
+        ],
+        "tujuan": [
+          110.46051,
+          -6.95619
+        ],
+        "waktu": "2026-09-22T09:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 200,
+      "ms": 31.0,
+      "bytes": 7633,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:15.908407+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46051,
+          -6.95619
+        ],
+        "tujuan": [
+          110.41853,
+          -6.94959
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 200,
+      "ms": 641.0,
+      "bytes": 16127,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:15.999681+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46051,
+          -6.95619
+        ],
+        "tujuan": [
+          110.41853,
+          -6.94959
+        ],
+        "waktu": "2026-09-22T09:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 200,
+      "ms": 94.0,
+      "bytes": 8343,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:16.252289+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46051,
+          -6.95619
+        ],
+        "tujuan": [
+          110.41853,
+          -6.94959
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 200,
+      "ms": 250.0,
+      "bytes": 8100,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:16.338744+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46051,
+          -6.95619
+        ],
+        "tujuan": [
+          110.41853,
+          -6.94959
+        ],
+        "waktu": "2026-09-22T09:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 200,
+      "ms": 94.0,
+      "bytes": 8343,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:16.702554+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46051,
+          -6.95619
+        ],
+        "tujuan": [
+          110.42744,
+          -6.96374
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 200,
+      "ms": 359.0,
+      "bytes": 16201,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:16.766011+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46051,
+          -6.95619
+        ],
+        "tujuan": [
+          110.42744,
+          -6.96374
+        ],
+        "waktu": "2026-09-22T09:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 200,
+      "ms": 62.0,
+      "bytes": 11727,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:17.005451+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46051,
+          -6.95619
+        ],
+        "tujuan": [
+          110.42744,
+          -6.96374
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 200,
+      "ms": 250.0,
+      "bytes": 11844,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:17.075002+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46051,
+          -6.95619
+        ],
+        "tujuan": [
+          110.42744,
+          -6.96374
+        ],
+        "waktu": "2026-09-22T09:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 200,
+      "ms": 63.0,
+      "bytes": 11727,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:17.110557+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46051,
+          -6.95619
+        ],
+        "tujuan": [
+          110.46934,
+          -6.94825
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 200,
+      "ms": 31.0,
+      "bytes": 5774,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:17.135362+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46051,
+          -6.95619
+        ],
+        "tujuan": [
+          110.46934,
+          -6.94825
+        ],
+        "waktu": "2026-09-22T09:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 200,
+      "ms": 31.0,
+      "bytes": 5495,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:17.167606+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46051,
+          -6.95619
+        ],
+        "tujuan": [
+          110.46934,
+          -6.94825
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 200,
+      "ms": 32.0,
+      "bytes": 5499,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:17.194704+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46051,
+          -6.95619
+        ],
+        "tujuan": [
+          110.46934,
+          -6.94825
+        ],
+        "waktu": "2026-09-22T09:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 200,
+      "ms": 31.0,
+      "bytes": 5495,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:17.218639+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-21T11%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 422,
+      "ms": 16.0,
+      "bytes": 190,
+      "ok": true,
+      "detail": {
+        "kode": "waktu_di_luar_cakupan",
+        "pesan": "Waktu ini berada di luar cakupan data lengkap.",
+        "mulai_utc": "2026-09-21T19:00:00+00:00",
+        "akhir_eksklusif_utc": "2026-10-05T00:00:00+00:00"
+      },
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:17.239453+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-21T09%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 422,
+      "ms": 31.0,
+      "bytes": 190,
+      "ok": true,
+      "detail": {
+        "kode": "waktu_di_luar_cakupan",
+        "pesan": "Waktu ini berada di luar cakupan data lengkap.",
+        "mulai_utc": "2026-09-21T19:00:00+00:00",
+        "akhir_eksklusif_utc": "2026-10-05T00:00:00+00:00"
+      },
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:17.260082+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-21T13%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 422,
+      "ms": 15.0,
+      "bytes": 190,
+      "ok": true,
+      "detail": {
+        "kode": "waktu_di_luar_cakupan",
+        "pesan": "Waktu ini berada di luar cakupan data lengkap.",
+        "mulai_utc": "2026-09-21T19:00:00+00:00",
+        "akhir_eksklusif_utc": "2026-10-05T00:00:00+00:00"
+      },
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:18.045200+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-21T20%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 782.0,
+      "bytes": 7797493,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:18.064563+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-20T10%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 422,
+      "ms": 15.0,
+      "bytes": 190,
+      "ok": true,
+      "detail": {
+        "kode": "waktu_di_luar_cakupan",
+        "pesan": "Waktu ini berada di luar cakupan data lengkap.",
+        "mulai_utc": "2026-09-21T19:00:00+00:00",
+        "akhir_eksklusif_utc": "2026-10-05T00:00:00+00:00"
+      },
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:18.090648+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-20T11%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 422,
+      "ms": 32.0,
+      "bytes": 190,
+      "ok": true,
+      "detail": {
+        "kode": "waktu_di_luar_cakupan",
+        "pesan": "Waktu ini berada di luar cakupan data lengkap.",
+        "mulai_utc": "2026-09-21T19:00:00+00:00",
+        "akhir_eksklusif_utc": "2026-10-05T00:00:00+00:00"
+      },
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:18.136462+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2026-09-21T19%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 46.0,
+      "bytes": 292,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:18.188141+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2026-10-05T00%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 422,
+      "ms": 47.0,
+      "bytes": 190,
+      "ok": true,
+      "detail": {
+        "kode": "waktu_di_luar_cakupan",
+        "pesan": "Waktu ini berada di luar cakupan data lengkap.",
+        "mulai_utc": "2026-09-21T19:00:00+00:00",
+        "akhir_eksklusif_utc": "2026-10-05T00:00:00+00:00"
+      },
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:18.227615+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2099-01-01T00%3A00%3A00Z",
+      "body": null,
+      "status": 422,
+      "ms": 47.0,
+      "bytes": 190,
+      "ok": true,
+      "detail": {
+        "kode": "waktu_di_luar_cakupan",
+        "pesan": "Waktu ini berada di luar cakupan data lengkap.",
+        "mulai_utc": "2026-09-21T19:00:00+00:00",
+        "akhir_eksklusif_utc": "2026-10-05T00:00:00+00:00"
+      },
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:18.257069+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=bukan-tanggal",
+      "body": null,
+      "status": 400,
+      "ms": 31.0,
+      "bytes": 36,
+      "ok": true,
+      "detail": "Gunakan waktu ISO 8601.",
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:19.035947+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-21T19%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 782.0,
+      "bytes": 7795907,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:19.058318+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-10-05T00%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 422,
+      "ms": 15.0,
+      "bytes": 190,
+      "ok": true,
+      "detail": {
+        "kode": "waktu_di_luar_cakupan",
+        "pesan": "Waktu ini berada di luar cakupan data lengkap.",
+        "mulai_utc": "2026-09-21T19:00:00+00:00",
+        "akhir_eksklusif_utc": "2026-10-05T00:00:00+00:00"
+      },
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:19.080498+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2099-01-01T00%3A00%3A00Z",
+      "body": null,
+      "status": 422,
+      "ms": 32.0,
+      "bytes": 190,
+      "ok": true,
+      "detail": {
+        "kode": "waktu_di_luar_cakupan",
+        "pesan": "Waktu ini berada di luar cakupan data lengkap.",
+        "mulai_utc": "2026-09-21T19:00:00+00:00",
+        "akhir_eksklusif_utc": "2026-10-05T00:00:00+00:00"
+      },
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:19.102443+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=bukan-tanggal",
+      "body": null,
+      "status": 400,
+      "ms": 15.0,
+      "bytes": 36,
+      "ok": true,
+      "detail": "Gunakan waktu ISO 8601.",
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:19.128884+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/genangan?waktu=2026-09-21T19%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 31.0,
+      "bytes": 162,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:19.150315+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/genangan?waktu=2026-10-05T00%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 422,
+      "ms": 16.0,
+      "bytes": 190,
+      "ok": true,
+      "detail": {
+        "kode": "waktu_di_luar_cakupan",
+        "pesan": "Waktu ini berada di luar cakupan data lengkap.",
+        "mulai_utc": "2026-09-21T19:00:00+00:00",
+        "akhir_eksklusif_utc": "2026-10-05T00:00:00+00:00"
+      },
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:19.173464+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/genangan?waktu=2099-01-01T00%3A00%3A00Z",
+      "body": null,
+      "status": 422,
+      "ms": 16.0,
+      "bytes": 190,
+      "ok": true,
+      "detail": {
+        "kode": "waktu_di_luar_cakupan",
+        "pesan": "Waktu ini berada di luar cakupan data lengkap.",
+        "mulai_utc": "2026-09-21T19:00:00+00:00",
+        "akhir_eksklusif_utc": "2026-10-05T00:00:00+00:00"
+      },
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:19.197060+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/genangan?waktu=bukan-tanggal",
+      "body": null,
+      "status": 400,
+      "ms": 31.0,
+      "bytes": 36,
+      "ok": true,
+      "detail": "Gunakan waktu ISO 8601.",
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:19.220062+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          0,
+          0
+        ],
+        "tujuan": [
+          110.46934,
+          -6.94825
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 422,
+      "ms": 16.0,
+      "bytes": 79,
+      "ok": true,
+      "detail": {
+        "kode": "asal_jauh_dari_jalan",
+        "jarak_m": 12312002.6,
+        "batas_m": 500.0
+      },
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:19.240968+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.4
+        ],
+        "tujuan": [
+          110.46934,
+          -6.94825
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 422,
+      "ms": 31.0,
+      "bytes": 121,
+      "ok": true,
+      "detail": [
+        {
+          "type": "too_short",
+          "loc": [
+            "body",
+            "asal"
+          ],
+          "msg": "List should have at least 2 items after validation, not 1"
+        }
+      ],
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:19.262511+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.41853,
+          -6.94959
+        ],
+        "tujuan": [
+          110.46934,
+          -6.94825
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "pesawat"
+      },
+      "status": 400,
+      "ms": 15.0,
+      "bytes": 92,
+      "ok": true,
+      "detail": "Moda pesawat tidak ada di tabel ambang_moda. Yang tersedia: mobil, motor, truk.",
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:19.284704+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.41853,
+          -6.94959
+        ],
+        "tujuan": [
+          110.46934,
+          -6.94825
+        ],
+        "waktu": "2099-01-01T00:00:00Z",
+        "moda": "motor"
+      },
+      "status": 422,
+      "ms": 32.0,
+      "bytes": 190,
+      "ok": true,
+      "detail": {
+        "kode": "waktu_di_luar_cakupan",
+        "pesan": "Waktu ini berada di luar cakupan data lengkap.",
+        "mulai_utc": "2026-09-21T19:00:00+00:00",
+        "akhir_eksklusif_utc": "2026-10-05T00:00:00+00:00"
+      },
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:19.305470+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          "NaN",
+          -6.95
+        ],
+        "tujuan": [
+          110.46934,
+          -6.94825
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 422,
+      "ms": 15.0,
+      "bytes": 142,
+      "ok": true,
+      "detail": [
+        {
+          "type": "value_error",
+          "loc": [
+            "body",
+            "asal"
+          ],
+          "msg": "Value error, Koordinat harus berhingga; bujur -180..180 dan lintang -90..90."
+        }
+      ],
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:19.326922+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.4,
+          "Infinity"
+        ],
+        "tujuan": [
+          110.46934,
+          -6.94825
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 422,
+      "ms": 16.0,
+      "bytes": 142,
+      "ok": true,
+      "detail": [
+        {
+          "type": "value_error",
+          "loc": [
+            "body",
+            "asal"
+          ],
+          "msg": "Value error, Koordinat harus berhingga; bujur -180..180 dan lintang -90..90."
+        }
+      ],
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:19.349192+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          1e+200,
+          1e+200
+        ],
+        "tujuan": [
+          110.46934,
+          -6.94825
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 422,
+      "ms": 31.0,
+      "bytes": 142,
+      "ok": true,
+      "detail": [
+        {
+          "type": "value_error",
+          "loc": [
+            "body",
+            "asal"
+          ],
+          "msg": "Value error, Koordinat harus berhingga; bujur -180..180 dan lintang -90..90."
+        }
+      ],
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:19.398428+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.41853,
+          -6.94959
+        ],
+        "tujuan": [
+          110.46934,
+          -6.94825
+        ],
+        "waktu": "2026-10-04T23:59:59+00:00",
+        "moda": "motor"
+      },
+      "status": 422,
+      "ms": 47.0,
+      "bytes": 190,
+      "ok": true,
+      "detail": {
+        "kode": "waktu_di_luar_cakupan",
+        "pesan": "Waktu ini berada di luar cakupan data lengkap.",
+        "mulai_utc": "2026-09-21T19:00:00+00:00",
+        "akhir_eksklusif_utc": "2026-10-05T00:00:00+00:00"
+      },
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:20.285310+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.42744,
+          -6.96374
+        ],
+        "tujuan": [
+          110.46934,
+          -6.94825
+        ],
+        "waktu": "2026-09-22T23:59:59+00:00",
+        "moda": "motor"
+      },
+      "status": 200,
+      "ms": 891.0,
+      "bytes": 18121,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:21.000143+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.42744,
+          -6.96374
+        ],
+        "tujuan": [
+          110.46934,
+          -6.94825
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 200,
+      "ms": 703.0,
+      "bytes": 18121,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:11:21.675989+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.42744,
+          -6.96374
+        ],
+        "tujuan": [
+          110.46934,
+          -6.94825
+        ],
+        "waktu": "2026-09-23T00:00:01+00:00",
+        "moda": "motor"
+      },
+      "status": 200,
+      "ms": 687.0,
+      "bytes": 18121,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_burst_2",
+      "utc": "2026-09-22T09:11:22.796803+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T09%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 1110.0,
+      "bytes": 7795907,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_burst_2",
+      "utc": "2026-09-22T09:11:23.037287+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T10%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 1360.0,
+      "bytes": 7795907,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "route_burst_2",
+      "utc": "2026-09-22T09:11:25.606875+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.41853,
+          -6.94959
+        ],
+        "tujuan": [
+          110.46934,
+          -6.94825
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 200,
+      "ms": 562.0,
+      "bytes": 11705,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "route_burst_2",
+      "utc": "2026-09-22T09:11:25.977365+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.41853,
+          -6.94959
+        ],
+        "tujuan": [
+          110.46934,
+          -6.94825
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 200,
+      "ms": 937.0,
+      "bytes": 22878,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "condition_burst_2",
+      "utc": "2026-09-22T09:11:28.014171+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2026-09-22T09%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 31.0,
+      "bytes": 292,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "condition_burst_2",
+      "utc": "2026-09-22T09:11:28.014171+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2026-09-22T10%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 15.0,
+      "bytes": 292,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_burst_4",
+      "utc": "2026-09-22T09:11:30.106182+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T12%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 503,
+      "ms": 78.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "legacy_burst_4",
+      "utc": "2026-09-22T09:11:30.972931+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T11%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 503,
+      "ms": 953.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "legacy_burst_4",
+      "utc": "2026-09-22T09:11:31.801780+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T10%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 1781.0,
+      "bytes": 7795907,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_burst_4",
+      "utc": "2026-09-22T09:11:31.817271+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T09%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 1797.0,
+      "bytes": 7795907,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "route_burst_4",
+      "utc": "2026-09-22T09:11:33.886807+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.42744,
+          -6.96374
+        ],
+        "tujuan": [
+          110.46051,
+          -6.95619
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 503,
+      "ms": 46.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "route_burst_4",
+      "utc": "2026-09-22T09:11:33.894790+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.42744,
+          -6.96374
+        ],
+        "tujuan": [
+          110.46051,
+          -6.95619
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 503,
+      "ms": 62.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "route_burst_4",
+      "utc": "2026-09-22T09:11:34.518149+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.41853,
+          -6.94959
+        ],
+        "tujuan": [
+          110.46934,
+          -6.94825
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 200,
+      "ms": 687.0,
+      "bytes": 11705,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "route_burst_4",
+      "utc": "2026-09-22T09:11:34.810201+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.41853,
+          -6.94959
+        ],
+        "tujuan": [
+          110.46934,
+          -6.94825
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 200,
+      "ms": 968.0,
+      "bytes": 22878,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "condition_burst_4",
+      "utc": "2026-09-22T09:11:36.851525+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2026-09-22T09%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 31.0,
+      "bytes": 292,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "condition_burst_4",
+      "utc": "2026-09-22T09:11:36.854528+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2026-09-22T11%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 31.0,
+      "bytes": 292,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "condition_burst_4",
+      "utc": "2026-09-22T09:11:36.857536+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2026-09-22T12%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 31.0,
+      "bytes": 292,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "condition_burst_4",
+      "utc": "2026-09-22T09:11:36.858533+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2026-09-22T10%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 31.0,
+      "bytes": 292,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_burst_8",
+      "utc": "2026-09-22T09:11:38.905512+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T16%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 503,
+      "ms": 31.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "legacy_burst_8",
+      "utc": "2026-09-22T09:11:38.907510+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T13%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 503,
+      "ms": 31.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "legacy_burst_8",
+      "utc": "2026-09-22T09:11:39.544746+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T12%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 503,
+      "ms": 672.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "legacy_burst_8",
+      "utc": "2026-09-22T09:11:39.563438+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T14%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 503,
+      "ms": 703.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "legacy_burst_8",
+      "utc": "2026-09-22T09:11:40.321307+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T09%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 1469.0,
+      "bytes": 7795907,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_burst_8",
+      "utc": "2026-09-22T09:11:40.404411+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T10%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 1531.0,
+      "bytes": 7795907,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_burst_8",
+      "utc": "2026-09-22T09:11:41.207942+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T15%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 2344.0,
+      "bytes": 7795907,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_burst_8",
+      "utc": "2026-09-22T09:11:41.308592+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T11%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 2437.0,
+      "bytes": 7795907,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "route_burst_8",
+      "utc": "2026-09-22T09:11:43.363949+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46934,
+          -6.94825
+        ],
+        "tujuan": [
+          110.41853,
+          -6.94959
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 503,
+      "ms": 47.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "route_burst_8",
+      "utc": "2026-09-22T09:11:43.376752+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46051,
+          -6.95619
+        ],
+        "tujuan": [
+          110.42744,
+          -6.96374
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 503,
+      "ms": 47.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "route_burst_8",
+      "utc": "2026-09-22T09:11:43.395965+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.42744,
+          -6.96374
+        ],
+        "tujuan": [
+          110.46051,
+          -6.95619
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 503,
+      "ms": 94.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "route_burst_8",
+      "utc": "2026-09-22T09:11:43.396964+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.42744,
+          -6.96374
+        ],
+        "tujuan": [
+          110.46051,
+          -6.95619
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 503,
+      "ms": 78.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "route_burst_8",
+      "utc": "2026-09-22T09:11:43.399581+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46051,
+          -6.95619
+        ],
+        "tujuan": [
+          110.42744,
+          -6.96374
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 503,
+      "ms": 78.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "route_burst_8",
+      "utc": "2026-09-22T09:11:43.400595+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46934,
+          -6.94825
+        ],
+        "tujuan": [
+          110.41853,
+          -6.94959
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 503,
+      "ms": 78.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "route_burst_8",
+      "utc": "2026-09-22T09:11:43.955067+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.41853,
+          -6.94959
+        ],
+        "tujuan": [
+          110.46934,
+          -6.94825
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 200,
+      "ms": 641.0,
+      "bytes": 11705,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "route_burst_8",
+      "utc": "2026-09-22T09:11:44.308406+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.41853,
+          -6.94959
+        ],
+        "tujuan": [
+          110.46934,
+          -6.94825
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 200,
+      "ms": 1000.0,
+      "bytes": 22878,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "condition_burst_8",
+      "utc": "2026-09-22T09:11:46.358643+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2026-09-22T09%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 31.0,
+      "bytes": 292,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "condition_burst_8",
+      "utc": "2026-09-22T09:11:46.363174+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2026-09-22T10%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 47.0,
+      "bytes": 292,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "condition_burst_8",
+      "utc": "2026-09-22T09:11:46.368697+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2026-09-22T13%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 47.0,
+      "bytes": 292,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "condition_burst_8",
+      "utc": "2026-09-22T09:11:46.375910+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2026-09-22T16%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 47.0,
+      "bytes": 292,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "condition_burst_8",
+      "utc": "2026-09-22T09:11:46.376903+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2026-09-22T12%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 47.0,
+      "bytes": 292,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "condition_burst_8",
+      "utc": "2026-09-22T09:11:46.387654+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2026-09-22T14%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 62.0,
+      "bytes": 292,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "condition_burst_8",
+      "utc": "2026-09-22T09:11:46.387654+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2026-09-22T11%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 62.0,
+      "bytes": 292,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "condition_burst_8",
+      "utc": "2026-09-22T09:11:46.389651+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2026-09-22T15%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 62.0,
+      "bytes": 292,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_burst_16",
+      "utc": "2026-09-22T09:11:48.595739+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T11%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 503,
+      "ms": 188.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "legacy_burst_16",
+      "utc": "2026-09-22T09:11:48.596723+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T15%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 503,
+      "ms": 203.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "legacy_burst_16",
+      "utc": "2026-09-22T09:11:48.596723+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T23%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 503,
+      "ms": 187.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "legacy_burst_16",
+      "utc": "2026-09-22T09:11:48.596723+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T19%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 503,
+      "ms": 187.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "legacy_burst_16",
+      "utc": "2026-09-22T09:11:48.596723+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T18%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 503,
+      "ms": 203.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "legacy_burst_16",
+      "utc": "2026-09-22T09:11:48.599235+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-23T00%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 503,
+      "ms": 187.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "legacy_burst_16",
+      "utc": "2026-09-22T09:11:48.599235+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T17%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 503,
+      "ms": 203.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "legacy_burst_16",
+      "utc": "2026-09-22T09:11:48.600239+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T20%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 503,
+      "ms": 187.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "legacy_burst_16",
+      "utc": "2026-09-22T09:11:48.602239+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T16%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 503,
+      "ms": 203.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "legacy_burst_16",
+      "utc": "2026-09-22T09:11:48.603239+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T12%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 503,
+      "ms": 203.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "legacy_burst_16",
+      "utc": "2026-09-22T09:11:48.603239+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T21%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 503,
+      "ms": 187.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "legacy_burst_16",
+      "utc": "2026-09-22T09:11:48.603239+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T22%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 503,
+      "ms": 187.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "legacy_burst_16",
+      "utc": "2026-09-22T09:11:48.604239+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T10%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 503,
+      "ms": 203.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "legacy_burst_16",
+      "utc": "2026-09-22T09:11:48.604239+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T14%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 503,
+      "ms": 203.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "legacy_burst_16",
+      "utc": "2026-09-22T09:11:49.406418+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T13%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 1000.0,
+      "bytes": 7795907,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_burst_16",
+      "utc": "2026-09-22T09:11:49.826087+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T09%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 1422.0,
+      "bytes": 7795907,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "route_burst_16",
+      "utc": "2026-09-22T09:11:51.916725+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46934,
+          -6.94825
+        ],
+        "tujuan": [
+          110.41853,
+          -6.94959
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 503,
+      "ms": 63.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "route_burst_16",
+      "utc": "2026-09-22T09:11:51.936902+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46051,
+          -6.95619
+        ],
+        "tujuan": [
+          110.42744,
+          -6.96374
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 503,
+      "ms": 78.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "route_burst_16",
+      "utc": "2026-09-22T09:11:51.947950+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.42744,
+          -6.96374
+        ],
+        "tujuan": [
+          110.46051,
+          -6.95619
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 503,
+      "ms": 94.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "route_burst_16",
+      "utc": "2026-09-22T09:11:51.996462+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46934,
+          -6.94825
+        ],
+        "tujuan": [
+          110.41853,
+          -6.94959
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 503,
+      "ms": 141.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "route_burst_16",
+      "utc": "2026-09-22T09:11:52.004359+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46051,
+          -6.95619
+        ],
+        "tujuan": [
+          110.42744,
+          -6.96374
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 503,
+      "ms": 156.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "route_burst_16",
+      "utc": "2026-09-22T09:11:52.005359+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46934,
+          -6.94825
+        ],
+        "tujuan": [
+          110.41853,
+          -6.94959
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 503,
+      "ms": 156.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "route_burst_16",
+      "utc": "2026-09-22T09:11:52.010659+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.41853,
+          -6.94959
+        ],
+        "tujuan": [
+          110.46934,
+          -6.94825
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 503,
+      "ms": 156.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "route_burst_16",
+      "utc": "2026-09-22T09:11:52.011366+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.42744,
+          -6.96374
+        ],
+        "tujuan": [
+          110.46051,
+          -6.95619
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 503,
+      "ms": 156.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "route_burst_16",
+      "utc": "2026-09-22T09:11:52.011366+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46051,
+          -6.95619
+        ],
+        "tujuan": [
+          110.42744,
+          -6.96374
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 503,
+      "ms": 140.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "route_burst_16",
+      "utc": "2026-09-22T09:11:52.012362+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46934,
+          -6.94825
+        ],
+        "tujuan": [
+          110.41853,
+          -6.94959
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 503,
+      "ms": 156.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "route_burst_16",
+      "utc": "2026-09-22T09:11:52.012362+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46051,
+          -6.95619
+        ],
+        "tujuan": [
+          110.42744,
+          -6.96374
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 503,
+      "ms": 140.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "route_burst_16",
+      "utc": "2026-09-22T09:11:52.015076+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.42744,
+          -6.96374
+        ],
+        "tujuan": [
+          110.46051,
+          -6.95619
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 503,
+      "ms": 156.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "route_burst_16",
+      "utc": "2026-09-22T09:11:52.015076+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.41853,
+          -6.94959
+        ],
+        "tujuan": [
+          110.46934,
+          -6.94825
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 503,
+      "ms": 156.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "route_burst_16",
+      "utc": "2026-09-22T09:11:52.016081+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.42744,
+          -6.96374
+        ],
+        "tujuan": [
+          110.46051,
+          -6.95619
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 503,
+      "ms": 156.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "route_burst_16",
+      "utc": "2026-09-22T09:11:52.502339+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.41853,
+          -6.94959
+        ],
+        "tujuan": [
+          110.46934,
+          -6.94825
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 200,
+      "ms": 671.0,
+      "bytes": 11705,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "route_burst_16",
+      "utc": "2026-09-22T09:11:52.949633+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.41853,
+          -6.94959
+        ],
+        "tujuan": [
+          110.46934,
+          -6.94825
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 200,
+      "ms": 1109.0,
+      "bytes": 22878,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "condition_burst_16",
+      "utc": "2026-09-22T09:11:55.009869+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2026-09-22T11%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 46.0,
+      "bytes": 292,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "condition_burst_16",
+      "utc": "2026-09-22T09:11:55.010871+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2026-09-22T10%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 46.0,
+      "bytes": 292,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "condition_burst_16",
+      "utc": "2026-09-22T09:11:55.017842+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2026-09-22T14%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 46.0,
+      "bytes": 292,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "condition_burst_16",
+      "utc": "2026-09-22T09:11:55.026192+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2026-09-22T17%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 62.0,
+      "bytes": 292,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "condition_burst_16",
+      "utc": "2026-09-22T09:11:55.033608+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2026-09-22T13%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 78.0,
+      "bytes": 292,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "condition_burst_16",
+      "utc": "2026-09-22T09:11:55.053056+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2026-09-22T22%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 93.0,
+      "bytes": 21585,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "condition_burst_16",
+      "utc": "2026-09-22T09:11:55.054075+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2026-09-22T15%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 93.0,
+      "bytes": 292,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "condition_burst_16",
+      "utc": "2026-09-22T09:11:55.063068+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2026-09-23T00%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 78.0,
+      "bytes": 26693,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "condition_burst_16",
+      "utc": "2026-09-22T09:11:55.065610+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2026-09-22T20%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 109.0,
+      "bytes": 6635,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "condition_burst_16",
+      "utc": "2026-09-22T09:11:55.066630+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2026-09-22T19%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 109.0,
+      "bytes": 292,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "condition_burst_16",
+      "utc": "2026-09-22T09:11:55.066630+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2026-09-22T09%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 125.0,
+      "bytes": 292,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "condition_burst_16",
+      "utc": "2026-09-22T09:11:55.068629+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2026-09-22T12%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 109.0,
+      "bytes": 292,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "condition_burst_16",
+      "utc": "2026-09-22T09:11:55.075965+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2026-09-22T18%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 109.0,
+      "bytes": 292,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "condition_burst_16",
+      "utc": "2026-09-22T09:11:55.192136+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2026-09-22T23%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 219.0,
+      "bytes": 25903,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "condition_burst_16",
+      "utc": "2026-09-22T09:11:55.196120+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2026-09-22T16%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 234.0,
+      "bytes": 292,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "condition_burst_16",
+      "utc": "2026-09-22T09:11:55.197634+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2026-09-22T21%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 234.0,
+      "bytes": 14693,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_burst_32",
+      "utc": "2026-09-22T09:11:57.282247+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T14%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 503,
+      "ms": 62.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "legacy_burst_32",
+      "utc": "2026-09-22T09:11:57.605701+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T13%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 503,
+      "ms": 406.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "legacy_burst_32",
+      "utc": "2026-09-22T09:11:58.198917+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T11%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 503,
+      "ms": 969.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "legacy_burst_32",
+      "utc": "2026-09-22T09:11:58.200126+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T13%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 503,
+      "ms": 969.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "legacy_burst_32",
+      "utc": "2026-09-22T09:11:58.200126+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-23T07%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 503,
+      "ms": 969.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "legacy_burst_32",
+      "utc": "2026-09-22T09:11:58.201099+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T10%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 503,
+      "ms": 969.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "legacy_burst_32",
+      "utc": "2026-09-22T09:11:58.201099+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-23T05%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 503,
+      "ms": 969.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "legacy_burst_32",
+      "utc": "2026-09-22T09:11:58.202102+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-23T02%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 503,
+      "ms": 984.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "legacy_burst_32",
+      "utc": "2026-09-22T09:11:58.202102+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T12%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 503,
+      "ms": 969.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "legacy_burst_32",
+      "utc": "2026-09-22T09:11:58.202102+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T15%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 503,
+      "ms": 984.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "legacy_burst_32",
+      "utc": "2026-09-22T09:11:58.210110+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-23T06%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 503,
+      "ms": 985.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "legacy_burst_32",
+      "utc": "2026-09-22T09:11:58.211615+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T16%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 503,
+      "ms": 1000.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "legacy_burst_32",
+      "utc": "2026-09-22T09:11:58.211615+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T18%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 503,
+      "ms": 1000.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "legacy_burst_32",
+      "utc": "2026-09-22T09:11:58.212626+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T19%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 503,
+      "ms": 1000.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "legacy_burst_32",
+      "utc": "2026-09-22T09:11:58.212626+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T21%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 503,
+      "ms": 1000.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "legacy_burst_32",
+      "utc": "2026-09-22T09:11:58.212626+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T09%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 503,
+      "ms": 985.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "legacy_burst_32",
+      "utc": "2026-09-22T09:11:58.214074+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-23T00%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 503,
+      "ms": 1000.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "legacy_burst_32",
+      "utc": "2026-09-22T09:11:58.215484+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-23T04%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 503,
+      "ms": 1000.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "legacy_burst_32",
+      "utc": "2026-09-22T09:11:58.215484+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T23%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 503,
+      "ms": 1000.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "legacy_burst_32",
+      "utc": "2026-09-22T09:11:58.216988+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-23T03%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 503,
+      "ms": 1000.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "legacy_burst_32",
+      "utc": "2026-09-22T09:11:58.218741+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T12%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 503,
+      "ms": 1016.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "legacy_burst_32",
+      "utc": "2026-09-22T09:11:58.299300+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T16%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 503,
+      "ms": 1062.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "legacy_burst_32",
+      "utc": "2026-09-22T09:11:58.301269+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-23T08%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 503,
+      "ms": 1078.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "legacy_burst_32",
+      "utc": "2026-09-22T09:11:58.302280+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T15%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 503,
+      "ms": 1062.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "legacy_burst_32",
+      "utc": "2026-09-22T09:11:58.303809+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T09%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 503,
+      "ms": 1109.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "legacy_burst_32",
+      "utc": "2026-09-22T09:11:58.305855+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-23T01%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 503,
+      "ms": 1093.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "legacy_burst_32",
+      "utc": "2026-09-22T09:11:58.311836+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T20%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 503,
+      "ms": 1093.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "legacy_burst_32",
+      "utc": "2026-09-22T09:11:58.314177+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T14%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 503,
+      "ms": 1078.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "legacy_burst_32",
+      "utc": "2026-09-22T09:11:58.816089+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T10%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 1625.0,
+      "bytes": 7795907,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_burst_32",
+      "utc": "2026-09-22T09:11:59.005889+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T11%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 1812.0,
+      "bytes": 7795907,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_burst_32",
+      "utc": "2026-09-22T09:11:59.702688+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T17%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 2484.0,
+      "bytes": 7795907,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_burst_32",
+      "utc": "2026-09-22T09:11:59.815337+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T22%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 2609.0,
+      "bytes": 7800192,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "route_burst_32",
+      "utc": "2026-09-22T09:12:01.925901+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46051,
+          -6.95619
+        ],
+        "tujuan": [
+          110.42744,
+          -6.96374
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 503,
+      "ms": 93.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "route_burst_32",
+      "utc": "2026-09-22T09:12:01.926902+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46934,
+          -6.94825
+        ],
+        "tujuan": [
+          110.41853,
+          -6.94959
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 503,
+      "ms": 109.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "route_burst_32",
+      "utc": "2026-09-22T09:12:01.934038+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.42744,
+          -6.96374
+        ],
+        "tujuan": [
+          110.46051,
+          -6.95619
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 503,
+      "ms": 109.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "route_burst_32",
+      "utc": "2026-09-22T09:12:01.944037+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46934,
+          -6.94825
+        ],
+        "tujuan": [
+          110.41853,
+          -6.94959
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 503,
+      "ms": 109.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "route_burst_32",
+      "utc": "2026-09-22T09:12:01.949554+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46051,
+          -6.95619
+        ],
+        "tujuan": [
+          110.42744,
+          -6.96374
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 503,
+      "ms": 125.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "route_burst_32",
+      "utc": "2026-09-22T09:12:01.962555+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.41853,
+          -6.94959
+        ],
+        "tujuan": [
+          110.46934,
+          -6.94825
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 503,
+      "ms": 125.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "route_burst_32",
+      "utc": "2026-09-22T09:12:02.025447+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.42744,
+          -6.96374
+        ],
+        "tujuan": [
+          110.46051,
+          -6.95619
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 503,
+      "ms": 203.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "route_burst_32",
+      "utc": "2026-09-22T09:12:02.106034+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.42744,
+          -6.96374
+        ],
+        "tujuan": [
+          110.46051,
+          -6.95619
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 503,
+      "ms": 265.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "route_burst_32",
+      "utc": "2026-09-22T09:12:02.127173+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46051,
+          -6.95619
+        ],
+        "tujuan": [
+          110.42744,
+          -6.96374
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 503,
+      "ms": 266.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "route_burst_32",
+      "utc": "2026-09-22T09:12:02.127173+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.41853,
+          -6.94959
+        ],
+        "tujuan": [
+          110.46934,
+          -6.94825
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 503,
+      "ms": 281.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "route_burst_32",
+      "utc": "2026-09-22T09:12:02.127173+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46051,
+          -6.95619
+        ],
+        "tujuan": [
+          110.42744,
+          -6.96374
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 503,
+      "ms": 266.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "route_burst_32",
+      "utc": "2026-09-22T09:12:02.131196+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.41853,
+          -6.94959
+        ],
+        "tujuan": [
+          110.46934,
+          -6.94825
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 503,
+      "ms": 281.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "route_burst_32",
+      "utc": "2026-09-22T09:12:02.131196+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46051,
+          -6.95619
+        ],
+        "tujuan": [
+          110.42744,
+          -6.96374
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 503,
+      "ms": 296.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "route_burst_32",
+      "utc": "2026-09-22T09:12:02.132204+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46934,
+          -6.94825
+        ],
+        "tujuan": [
+          110.41853,
+          -6.94959
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 503,
+      "ms": 281.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "route_burst_32",
+      "utc": "2026-09-22T09:12:02.132204+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.42744,
+          -6.96374
+        ],
+        "tujuan": [
+          110.46051,
+          -6.95619
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 503,
+      "ms": 281.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "route_burst_32",
+      "utc": "2026-09-22T09:12:02.133211+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.41853,
+          -6.94959
+        ],
+        "tujuan": [
+          110.46934,
+          -6.94825
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 503,
+      "ms": 296.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "route_burst_32",
+      "utc": "2026-09-22T09:12:02.136265+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46934,
+          -6.94825
+        ],
+        "tujuan": [
+          110.41853,
+          -6.94959
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 503,
+      "ms": 296.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "route_burst_32",
+      "utc": "2026-09-22T09:12:02.136265+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.42744,
+          -6.96374
+        ],
+        "tujuan": [
+          110.46051,
+          -6.95619
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 503,
+      "ms": 296.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "route_burst_32",
+      "utc": "2026-09-22T09:12:02.137264+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46051,
+          -6.95619
+        ],
+        "tujuan": [
+          110.42744,
+          -6.96374
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 503,
+      "ms": 281.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "route_burst_32",
+      "utc": "2026-09-22T09:12:02.137264+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46051,
+          -6.95619
+        ],
+        "tujuan": [
+          110.42744,
+          -6.96374
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 503,
+      "ms": 281.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "route_burst_32",
+      "utc": "2026-09-22T09:12:02.138264+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46934,
+          -6.94825
+        ],
+        "tujuan": [
+          110.41853,
+          -6.94959
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 503,
+      "ms": 312.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "route_burst_32",
+      "utc": "2026-09-22T09:12:02.169694+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46051,
+          -6.95619
+        ],
+        "tujuan": [
+          110.42744,
+          -6.96374
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 503,
+      "ms": 328.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "route_burst_32",
+      "utc": "2026-09-22T09:12:02.200780+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.41853,
+          -6.94959
+        ],
+        "tujuan": [
+          110.46934,
+          -6.94825
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 503,
+      "ms": 359.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "route_burst_32",
+      "utc": "2026-09-22T09:12:02.202202+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46934,
+          -6.94825
+        ],
+        "tujuan": [
+          110.41853,
+          -6.94959
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 503,
+      "ms": 344.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "route_burst_32",
+      "utc": "2026-09-22T09:12:02.203211+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.42744,
+          -6.96374
+        ],
+        "tujuan": [
+          110.46051,
+          -6.95619
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 503,
+      "ms": 344.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "route_burst_32",
+      "utc": "2026-09-22T09:12:02.204210+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46934,
+          -6.94825
+        ],
+        "tujuan": [
+          110.41853,
+          -6.94959
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 503,
+      "ms": 344.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "route_burst_32",
+      "utc": "2026-09-22T09:12:02.209211+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.41853,
+          -6.94959
+        ],
+        "tujuan": [
+          110.46934,
+          -6.94825
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 503,
+      "ms": 360.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "route_burst_32",
+      "utc": "2026-09-22T09:12:02.216738+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.42744,
+          -6.96374
+        ],
+        "tujuan": [
+          110.46051,
+          -6.95619
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 503,
+      "ms": 360.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "route_burst_32",
+      "utc": "2026-09-22T09:12:02.218735+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46934,
+          -6.94825
+        ],
+        "tujuan": [
+          110.41853,
+          -6.94959
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 503,
+      "ms": 360.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "route_burst_32",
+      "utc": "2026-09-22T09:12:02.219735+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.42744,
+          -6.96374
+        ],
+        "tujuan": [
+          110.46051,
+          -6.95619
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 503,
+      "ms": 375.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "route_burst_32",
+      "utc": "2026-09-22T09:12:02.678319+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.41853,
+          -6.94959
+        ],
+        "tujuan": [
+          110.46934,
+          -6.94825
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 200,
+      "ms": 859.0,
+      "bytes": 11705,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "route_burst_32",
+      "utc": "2026-09-22T09:12:02.979157+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.41853,
+          -6.94959
+        ],
+        "tujuan": [
+          110.46934,
+          -6.94825
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 200,
+      "ms": 1156.0,
+      "bytes": 22878,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "condition_burst_32",
+      "utc": "2026-09-22T09:12:05.065081+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2026-09-22T11%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 78.0,
+      "bytes": 292,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "condition_burst_32",
+      "utc": "2026-09-22T09:12:05.065081+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2026-09-22T10%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 94.0,
+      "bytes": 292,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "condition_burst_32",
+      "utc": "2026-09-22T09:12:05.070098+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2026-09-22T14%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 78.0,
+      "bytes": 292,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "condition_burst_32",
+      "utc": "2026-09-22T09:12:05.076098+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2026-09-22T17%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 78.0,
+      "bytes": 292,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "condition_burst_32",
+      "utc": "2026-09-22T09:12:05.084643+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2026-09-22T13%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 94.0,
+      "bytes": 292,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "condition_burst_32",
+      "utc": "2026-09-22T09:12:05.105268+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2026-09-22T22%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 94.0,
+      "bytes": 21585,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "condition_burst_32",
+      "utc": "2026-09-22T09:12:05.115548+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2026-09-23T01%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 110.0,
+      "bytes": 23747,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "condition_burst_32",
+      "utc": "2026-09-22T09:12:05.116581+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2026-09-22T16%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 125.0,
+      "bytes": 292,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "condition_burst_32",
+      "utc": "2026-09-22T09:12:05.120553+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2026-09-22T20%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 125.0,
+      "bytes": 6635,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "condition_burst_32",
+      "utc": "2026-09-22T09:12:05.136099+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2026-09-23T04%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 125.0,
+      "bytes": 292,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "condition_burst_32",
+      "utc": "2026-09-22T09:12:05.136099+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2026-09-23T09%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 109.0,
+      "bytes": 292,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "condition_burst_32",
+      "utc": "2026-09-22T09:12:05.137096+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2026-09-23T10%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 109.0,
+      "bytes": 292,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "condition_burst_32",
+      "utc": "2026-09-22T09:12:05.137096+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2026-09-22T19%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 140.0,
+      "bytes": 292,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "condition_burst_32",
+      "utc": "2026-09-22T09:12:05.140096+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2026-09-22T23%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 125.0,
+      "bytes": 25903,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "condition_burst_32",
+      "utc": "2026-09-22T09:12:05.141094+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2026-09-23T05%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 125.0,
+      "bytes": 292,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "condition_burst_32",
+      "utc": "2026-09-22T09:12:05.141094+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2026-09-22T09%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 156.0,
+      "bytes": 292,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "condition_burst_32",
+      "utc": "2026-09-22T09:12:05.145629+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2026-09-23T13%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 125.0,
+      "bytes": 292,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "condition_burst_32",
+      "utc": "2026-09-22T09:12:05.149176+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2026-09-22T21%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 141.0,
+      "bytes": 14693,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "condition_burst_32",
+      "utc": "2026-09-22T09:12:05.150179+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2026-09-23T06%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 141.0,
+      "bytes": 292,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "condition_burst_32",
+      "utc": "2026-09-22T09:12:05.163915+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2026-09-23T15%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 141.0,
+      "bytes": 292,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "condition_burst_32",
+      "utc": "2026-09-22T09:12:05.163915+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2026-09-22T18%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 172.0,
+      "bytes": 292,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "condition_burst_32",
+      "utc": "2026-09-22T09:12:05.165934+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2026-09-23T00%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 157.0,
+      "bytes": 26693,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "condition_burst_32",
+      "utc": "2026-09-22T09:12:05.175451+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2026-09-23T07%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 156.0,
+      "bytes": 292,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "condition_burst_32",
+      "utc": "2026-09-22T09:12:05.178243+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2026-09-23T16%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 156.0,
+      "bytes": 292,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "condition_burst_32",
+      "utc": "2026-09-22T09:12:05.184903+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2026-09-23T02%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 172.0,
+      "bytes": 17524,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "condition_burst_32",
+      "utc": "2026-09-22T09:12:05.186899+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2026-09-23T14%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 156.0,
+      "bytes": 292,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "condition_burst_32",
+      "utc": "2026-09-22T09:12:05.188900+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2026-09-23T11%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 156.0,
+      "bytes": 292,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "condition_burst_32",
+      "utc": "2026-09-22T09:12:05.192185+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2026-09-23T12%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 172.0,
+      "bytes": 292,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "condition_burst_32",
+      "utc": "2026-09-22T09:12:05.193191+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2026-09-22T12%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 203.0,
+      "bytes": 292,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "condition_burst_32",
+      "utc": "2026-09-22T09:12:05.197909+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2026-09-23T08%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 172.0,
+      "bytes": 292,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "condition_burst_32",
+      "utc": "2026-09-22T09:12:05.198919+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2026-09-22T15%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 203.0,
+      "bytes": 292,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "condition_burst_32",
+      "utc": "2026-09-22T09:12:05.203949+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2026-09-23T03%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 188.0,
+      "bytes": 9202,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "metadata_burst_32",
+      "utc": "2026-09-22T09:12:07.303727+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/validasi",
+      "body": null,
+      "status": 200,
+      "ms": 93.0,
+      "bytes": 3175,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "metadata_burst_32",
+      "utc": "2026-09-22T09:12:07.308749+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kesehatan",
+      "body": null,
+      "status": 200,
+      "ms": 78.0,
+      "bytes": 575,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "metadata_burst_32",
+      "utc": "2026-09-22T09:12:07.316577+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/tujuan-cepat",
+      "body": null,
+      "status": 200,
+      "ms": 94.0,
+      "bytes": 515,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "metadata_burst_32",
+      "utc": "2026-09-22T09:12:07.316577+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/validasi",
+      "body": null,
+      "status": 200,
+      "ms": 94.0,
+      "bytes": 3175,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "metadata_burst_32",
+      "utc": "2026-09-22T09:12:07.317578+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kesehatan",
+      "body": null,
+      "status": 200,
+      "ms": 78.0,
+      "bytes": 575,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "metadata_burst_32",
+      "utc": "2026-09-22T09:12:07.343706+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/jam",
+      "body": null,
+      "status": 200,
+      "ms": 110.0,
+      "bytes": 9513,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "metadata_burst_32",
+      "utc": "2026-09-22T09:12:07.357765+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/tujuan-cepat",
+      "body": null,
+      "status": 200,
+      "ms": 109.0,
+      "bytes": 515,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "metadata_burst_32",
+      "utc": "2026-09-22T09:12:07.357765+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/jam",
+      "body": null,
+      "status": 200,
+      "ms": 125.0,
+      "bytes": 9513,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "metadata_burst_32",
+      "utc": "2026-09-22T09:12:07.358761+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kesehatan",
+      "body": null,
+      "status": 200,
+      "ms": 109.0,
+      "bytes": 575,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "metadata_burst_32",
+      "utc": "2026-09-22T09:12:07.358761+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/validasi",
+      "body": null,
+      "status": 200,
+      "ms": 125.0,
+      "bytes": 3175,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "metadata_burst_32",
+      "utc": "2026-09-22T09:12:07.405400+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kesehatan",
+      "body": null,
+      "status": 200,
+      "ms": 141.0,
+      "bytes": 575,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "metadata_burst_32",
+      "utc": "2026-09-22T09:12:07.405400+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/jam",
+      "body": null,
+      "status": 200,
+      "ms": 156.0,
+      "bytes": 9513,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "metadata_burst_32",
+      "utc": "2026-09-22T09:12:07.405400+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/validasi",
+      "body": null,
+      "status": 200,
+      "ms": 156.0,
+      "bytes": 3175,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "metadata_burst_32",
+      "utc": "2026-09-22T09:12:07.409401+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/jam",
+      "body": null,
+      "status": 200,
+      "ms": 188.0,
+      "bytes": 9513,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "metadata_burst_32",
+      "utc": "2026-09-22T09:12:07.410400+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/validasi",
+      "body": null,
+      "status": 200,
+      "ms": 172.0,
+      "bytes": 3175,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "metadata_burst_32",
+      "utc": "2026-09-22T09:12:07.412400+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kesehatan",
+      "body": null,
+      "status": 200,
+      "ms": 172.0,
+      "bytes": 575,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "metadata_burst_32",
+      "utc": "2026-09-22T09:12:07.418283+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kesehatan",
+      "body": null,
+      "status": 200,
+      "ms": 203.0,
+      "bytes": 575,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "metadata_burst_32",
+      "utc": "2026-09-22T09:12:07.425303+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/jam",
+      "body": null,
+      "status": 200,
+      "ms": 218.0,
+      "bytes": 9513,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "metadata_burst_32",
+      "utc": "2026-09-22T09:12:07.437881+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kesehatan",
+      "body": null,
+      "status": 200,
+      "ms": 203.0,
+      "bytes": 575,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "metadata_burst_32",
+      "utc": "2026-09-22T09:12:07.439885+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/tujuan-cepat",
+      "body": null,
+      "status": 200,
+      "ms": 188.0,
+      "bytes": 515,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "metadata_burst_32",
+      "utc": "2026-09-22T09:12:07.443884+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/tujuan-cepat",
+      "body": null,
+      "status": 200,
+      "ms": 203.0,
+      "bytes": 515,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "metadata_burst_32",
+      "utc": "2026-09-22T09:12:07.444884+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/tujuan-cepat",
+      "body": null,
+      "status": 200,
+      "ms": 203.0,
+      "bytes": 515,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "metadata_burst_32",
+      "utc": "2026-09-22T09:12:07.510301+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/jam",
+      "body": null,
+      "status": 200,
+      "ms": 265.0,
+      "bytes": 9513,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "metadata_burst_32",
+      "utc": "2026-09-22T09:12:07.516826+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/jam",
+      "body": null,
+      "status": 200,
+      "ms": 250.0,
+      "bytes": 9513,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "metadata_burst_32",
+      "utc": "2026-09-22T09:12:07.517839+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/validasi",
+      "body": null,
+      "status": 200,
+      "ms": 281.0,
+      "bytes": 3175,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "metadata_burst_32",
+      "utc": "2026-09-22T09:12:07.519843+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kesehatan",
+      "body": null,
+      "status": 200,
+      "ms": 281.0,
+      "bytes": 575,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "metadata_burst_32",
+      "utc": "2026-09-22T09:12:07.520836+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/jam",
+      "body": null,
+      "status": 200,
+      "ms": 281.0,
+      "bytes": 9513,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "metadata_burst_32",
+      "utc": "2026-09-22T09:12:07.522835+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/validasi",
+      "body": null,
+      "status": 200,
+      "ms": 281.0,
+      "bytes": 3175,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "metadata_burst_32",
+      "utc": "2026-09-22T09:12:07.522835+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/tujuan-cepat",
+      "body": null,
+      "status": 200,
+      "ms": 297.0,
+      "bytes": 515,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "metadata_burst_32",
+      "utc": "2026-09-22T09:12:07.523837+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/tujuan-cepat",
+      "body": null,
+      "status": 200,
+      "ms": 297.0,
+      "bytes": 515,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "metadata_burst_32",
+      "utc": "2026-09-22T09:12:07.526887+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/tujuan-cepat",
+      "body": null,
+      "status": 200,
+      "ms": 281.0,
+      "bytes": 515,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "metadata_burst_32",
+      "utc": "2026-09-22T09:12:07.527884+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/validasi",
+      "body": null,
+      "status": 200,
+      "ms": 266.0,
+      "bytes": 3175,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "vercel_mixed_burst_32",
+      "utc": "2026-09-22T09:12:09.911155+00:00",
+      "base": "https://pasang-surut.vercel.app",
+      "path": "/api/kondisi?waktu=2026-09-22T14%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 328.0,
+      "bytes": 292,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "vercel_mixed_burst_32",
+      "utc": "2026-09-22T09:12:09.922745+00:00",
+      "base": "https://pasang-surut.vercel.app",
+      "path": "/api/kondisi?waktu=2026-09-22T15%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 328.0,
+      "bytes": 292,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "vercel_mixed_burst_32",
+      "utc": "2026-09-22T09:12:09.930738+00:00",
+      "base": "https://pasang-surut.vercel.app",
+      "path": "/api/kondisi?waktu=2026-09-22T10%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 359.0,
+      "bytes": 292,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "vercel_mixed_burst_32",
+      "utc": "2026-09-22T09:12:10.050849+00:00",
+      "base": "https://pasang-surut.vercel.app",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46051,
+          -6.95619
+        ],
+        "tujuan": [
+          110.42744,
+          -6.96374
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 200,
+      "ms": 500.0,
+      "bytes": 11844,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "vercel_mixed_burst_32",
+      "utc": "2026-09-22T09:12:10.123731+00:00",
+      "base": "https://pasang-surut.vercel.app",
+      "path": "/api/kondisi?waktu=2026-09-22T09%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 563.0,
+      "bytes": 292,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "vercel_mixed_burst_32",
+      "utc": "2026-09-22T09:12:10.124731+00:00",
+      "base": "https://pasang-surut.vercel.app",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.42744,
+          -6.96374
+        ],
+        "tujuan": [
+          110.46051,
+          -6.95619
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 503,
+      "ms": 547.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "vercel_mixed_burst_32",
+      "utc": "2026-09-22T09:12:10.124731+00:00",
+      "base": "https://pasang-surut.vercel.app",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46934,
+          -6.94825
+        ],
+        "tujuan": [
+          110.41853,
+          -6.94959
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 503,
+      "ms": 563.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "vercel_mixed_burst_32",
+      "utc": "2026-09-22T09:12:10.125731+00:00",
+      "base": "https://pasang-surut.vercel.app",
+      "path": "/api/kondisi?waktu=2026-09-22T15%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 547.0,
+      "bytes": 292,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "vercel_mixed_burst_32",
+      "utc": "2026-09-22T09:12:10.190946+00:00",
+      "base": "https://pasang-surut.vercel.app",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46934,
+          -6.94825
+        ],
+        "tujuan": [
+          110.41853,
+          -6.94959
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 503,
+      "ms": 641.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "vercel_mixed_burst_32",
+      "utc": "2026-09-22T09:12:10.281787+00:00",
+      "base": "https://pasang-surut.vercel.app",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46051,
+          -6.95619
+        ],
+        "tujuan": [
+          110.42744,
+          -6.96374
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 503,
+      "ms": 687.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "vercel_mixed_burst_32",
+      "utc": "2026-09-22T09:12:10.432641+00:00",
+      "base": "https://pasang-surut.vercel.app",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.42744,
+          -6.96374
+        ],
+        "tujuan": [
+          110.46051,
+          -6.95619
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 503,
+      "ms": 875.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "vercel_mixed_burst_32",
+      "utc": "2026-09-22T09:12:10.434707+00:00",
+      "base": "https://pasang-surut.vercel.app",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46934,
+          -6.94825
+        ],
+        "tujuan": [
+          110.41853,
+          -6.94959
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 503,
+      "ms": 859.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "vercel_mixed_burst_32",
+      "utc": "2026-09-22T09:12:10.439804+00:00",
+      "base": "https://pasang-surut.vercel.app",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.41853,
+          -6.94959
+        ],
+        "tujuan": [
+          110.46934,
+          -6.94825
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 503,
+      "ms": 890.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "vercel_mixed_burst_32",
+      "utc": "2026-09-22T09:12:10.439804+00:00",
+      "base": "https://pasang-surut.vercel.app",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.41853,
+          -6.94959
+        ],
+        "tujuan": [
+          110.46934,
+          -6.94825
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 503,
+      "ms": 859.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "vercel_mixed_burst_32",
+      "utc": "2026-09-22T09:12:10.441564+00:00",
+      "base": "https://pasang-surut.vercel.app",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46051,
+          -6.95619
+        ],
+        "tujuan": [
+          110.42744,
+          -6.96374
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 503,
+      "ms": 859.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "vercel_mixed_burst_32",
+      "utc": "2026-09-22T09:12:10.444861+00:00",
+      "base": "https://pasang-surut.vercel.app",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.41853,
+          -6.94959
+        ],
+        "tujuan": [
+          110.46934,
+          -6.94825
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 503,
+      "ms": 875.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "vercel_mixed_burst_32",
+      "utc": "2026-09-22T09:12:10.445813+00:00",
+      "base": "https://pasang-surut.vercel.app",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.42744,
+          -6.96374
+        ],
+        "tujuan": [
+          110.46051,
+          -6.95619
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 503,
+      "ms": 906.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "vercel_mixed_burst_32",
+      "utc": "2026-09-22T09:12:10.447641+00:00",
+      "base": "https://pasang-surut.vercel.app",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46051,
+          -6.95619
+        ],
+        "tujuan": [
+          110.42744,
+          -6.96374
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 503,
+      "ms": 891.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "vercel_mixed_burst_32",
+      "utc": "2026-09-22T09:12:10.455076+00:00",
+      "base": "https://pasang-surut.vercel.app",
+      "path": "/api/kondisi?waktu=2026-09-22T12%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 875.0,
+      "bytes": 292,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "vercel_mixed_burst_32",
+      "utc": "2026-09-22T09:12:10.461890+00:00",
+      "base": "https://pasang-surut.vercel.app",
+      "path": "/api/kondisi?waktu=2026-09-22T16%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 875.0,
+      "bytes": 292,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "vercel_mixed_burst_32",
+      "utc": "2026-09-22T09:12:10.481134+00:00",
+      "base": "https://pasang-surut.vercel.app",
+      "path": "/api/kondisi?waktu=2026-09-22T12%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 890.0,
+      "bytes": 292,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "vercel_mixed_burst_32",
+      "utc": "2026-09-22T09:12:10.483151+00:00",
+      "base": "https://pasang-surut.vercel.app",
+      "path": "/api/kondisi?waktu=2026-09-22T11%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 906.0,
+      "bytes": 292,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "vercel_mixed_burst_32",
+      "utc": "2026-09-22T09:12:10.485150+00:00",
+      "base": "https://pasang-surut.vercel.app",
+      "path": "/api/kondisi?waktu=2026-09-22T14%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 906.0,
+      "bytes": 292,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "vercel_mixed_burst_32",
+      "utc": "2026-09-22T09:12:10.487151+00:00",
+      "base": "https://pasang-surut.vercel.app",
+      "path": "/api/kondisi?waktu=2026-09-22T16%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 922.0,
+      "bytes": 292,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "vercel_mixed_burst_32",
+      "utc": "2026-09-22T09:12:10.488150+00:00",
+      "base": "https://pasang-surut.vercel.app",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.41853,
+          -6.94959
+        ],
+        "tujuan": [
+          110.46934,
+          -6.94825
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 503,
+      "ms": 953.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "vercel_mixed_burst_32",
+      "utc": "2026-09-22T09:12:10.525268+00:00",
+      "base": "https://pasang-surut.vercel.app",
+      "path": "/api/kondisi?waktu=2026-09-22T13%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 937.0,
+      "bytes": 292,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "vercel_mixed_burst_32",
+      "utc": "2026-09-22T09:12:10.526268+00:00",
+      "base": "https://pasang-surut.vercel.app",
+      "path": "/api/kondisi?waktu=2026-09-22T13%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 953.0,
+      "bytes": 292,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "vercel_mixed_burst_32",
+      "utc": "2026-09-22T09:12:10.531790+00:00",
+      "base": "https://pasang-surut.vercel.app",
+      "path": "/api/kondisi?waktu=2026-09-22T10%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 937.0,
+      "bytes": 292,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "vercel_mixed_burst_32",
+      "utc": "2026-09-22T09:12:10.542788+00:00",
+      "base": "https://pasang-surut.vercel.app",
+      "path": "/api/kondisi?waktu=2026-09-22T11%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 953.0,
+      "bytes": 292,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "vercel_mixed_burst_32",
+      "utc": "2026-09-22T09:12:10.553125+00:00",
+      "base": "https://pasang-surut.vercel.app",
+      "path": "/api/kondisi?waktu=2026-09-22T09%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 968.0,
+      "bytes": 292,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "vercel_mixed_burst_32",
+      "utc": "2026-09-22T09:12:10.715971+00:00",
+      "base": "https://pasang-surut.vercel.app",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.42744,
+          -6.96374
+        ],
+        "tujuan": [
+          110.46051,
+          -6.95619
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 200,
+      "ms": 1141.0,
+      "bytes": 11092,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "vercel_mixed_burst_32",
+      "utc": "2026-09-22T09:12:10.836547+00:00",
+      "base": "https://pasang-surut.vercel.app",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46934,
+          -6.94825
+        ],
+        "tujuan": [
+          110.41853,
+          -6.94959
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 200,
+      "ms": 1266.0,
+      "bytes": 13579,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:13.620341+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T09%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 781.0,
+      "bytes": 7795907,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:14.208303+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T10%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 860.0,
+      "bytes": 7795907,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:14.699687+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T11%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 828.0,
+      "bytes": 7795907,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:15.107931+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T12%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 734.0,
+      "bytes": 7795907,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:15.709273+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T13%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 844.0,
+      "bytes": 7795907,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:17.021155+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T15%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 1156.0,
+      "bytes": 7795907,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:17.103093+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T14%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 1734.0,
+      "bytes": 7795907,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:17.468347+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T18%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 503,
+      "ms": 63.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:18.510549+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T17%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 1625.0,
+      "bytes": 7795907,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:18.702518+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T16%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 2328.0,
+      "bytes": 7795907,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:19.699456+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T19%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 1781.0,
+      "bytes": 7795907,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:19.808851+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T20%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 1375.0,
+      "bytes": 7797179,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:20.114567+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T21%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 1203.0,
+      "bytes": 7798808,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:20.705840+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T22%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 1282.0,
+      "bytes": 7800192,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:21.305574+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T23%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 1390.0,
+      "bytes": 7801065,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:21.716850+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-23T00%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 1297.0,
+      "bytes": 7801225,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:22.009156+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-23T01%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 1078.0,
+      "bytes": 7800631,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:22.504681+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-23T02%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 1078.0,
+      "bytes": 7799380,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:23.018062+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-23T03%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 1094.0,
+      "bytes": 7797700,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:23.329864+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-23T04%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 906.0,
+      "bytes": 7795907,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:23.815136+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-23T05%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 891.0,
+      "bytes": 7795907,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:24.314994+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-23T06%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 891.0,
+      "bytes": 7795907,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:24.735952+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-23T07%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 812.0,
+      "bytes": 7795907,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:25.215981+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-23T08%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 797.0,
+      "bytes": 7795907,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:26.028286+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T09%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 503,
+      "ms": 109.0,
+      "bytes": 85,
+      "ok": true,
+      "detail": {
+        "kode": "server_sibuk",
+        "pesan": "Server sedang sibuk. Coba lagi sebentar."
+      },
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:26.040830+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.41853,
+          -6.94959
+        ],
+        "tujuan": [
+          110.46934,
+          -6.94825
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 200,
+      "ms": 625.0,
+      "bytes": 11705,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:26.041828+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.41853,
+          -6.94959
+        ],
+        "tujuan": [
+          110.46934,
+          -6.94825
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 200,
+      "ms": 1125.0,
+      "bytes": 22878,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:27.116609+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T10%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 703.0,
+      "bytes": 7795907,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:27.717129+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T11%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 797.0,
+      "bytes": 7795907,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:28.331434+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T12%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 922.0,
+      "bytes": 7795907,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:28.815795+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T13%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 891.0,
+      "bytes": 7795907,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:29.302229+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T14%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 875.0,
+      "bytes": 7795907,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:29.813414+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T15%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 875.0,
+      "bytes": 7795907,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:30.301580+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T16%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 875.0,
+      "bytes": 7795907,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:30.730469+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T17%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 812.0,
+      "bytes": 7795907,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:31.280875+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T18%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 859.0,
+      "bytes": 7795907,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:31.758729+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T19%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 843.0,
+      "bytes": 7795907,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:32.316773+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T20%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 906.0,
+      "bytes": 7797179,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:32.730474+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T21%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 812.0,
+      "bytes": 7798808,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:33.225148+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T22%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 812.0,
+      "bytes": 7800192,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:33.817173+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T23%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 891.0,
+      "bytes": 7801065,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:34.300082+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-23T00%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 890.0,
+      "bytes": 7801225,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:34.734802+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-23T01%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 812.0,
+      "bytes": 7800631,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:35.219800+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-23T02%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 797.0,
+      "bytes": 7799380,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:35.813676+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-23T03%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 890.0,
+      "bytes": 7797700,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:36.300178+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-23T04%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 875.0,
+      "bytes": 7795907,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:37.112669+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-23T05%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 1203.0,
+      "bytes": 7795907,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:37.604358+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-23T06%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 1187.0,
+      "bytes": 7795907,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:38.703052+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-23T07%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 1781.0,
+      "bytes": 7795907,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:38.793570+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.41853,
+          -6.94959
+        ],
+        "tujuan": [
+          110.46934,
+          -6.94825
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 200,
+      "ms": 875.0,
+      "bytes": 22878,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:38.802237+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-23T08%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 1390.0,
+      "bytes": 7795907,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:39.494385+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.41853,
+          -6.94959
+        ],
+        "tujuan": [
+          110.46934,
+          -6.94825
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 200,
+      "ms": 1078.0,
+      "bytes": 11705,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:39.816922+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T09%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 906.0,
+      "bytes": 7795907,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:40.319101+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T10%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 891.0,
+      "bytes": 7795907,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:43.734112+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T11%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 3812.0,
+      "bytes": 7795907,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:44.568721+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T14%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 3141.0,
+      "bytes": 7795907,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:44.572721+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T12%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 4156.0,
+      "bytes": 7795907,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:44.632241+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T15%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 2687.0,
+      "bytes": 7795907,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:45.098696+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T13%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 4187.0,
+      "bytes": 7795907,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:45.276162+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T17%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 2312.0,
+      "bytes": 7795907,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:45.797664+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T16%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 3328.0,
+      "bytes": 7795907,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:46.755938+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T18%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 3281.0,
+      "bytes": 7795907,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:46.849481+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T19%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 2890.0,
+      "bytes": 7795907,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:47.065574+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T20%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 2594.0,
+      "bytes": 7797179,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:47.943079+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T22%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 2469.0,
+      "bytes": 7800192,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:48.364124+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T21%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 3391.0,
+      "bytes": 7798808,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:48.759486+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-22T23%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 2796.0,
+      "bytes": 7801065,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:49.358452+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-23T00%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 2890.0,
+      "bytes": 7801225,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:49.478983+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-23T01%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 2515.0,
+      "bytes": 7800631,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "legacy_render_pattern_45s",
+      "utc": "2026-09-22T09:12:49.829924+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-23T02%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 2344.0,
+      "bytes": 7799380,
+      "ok": true,
+      "detail": null,
+      "error": null
+    }
+  ]
+}

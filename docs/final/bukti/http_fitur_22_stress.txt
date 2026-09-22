@@ -1,0 +1,53 @@
+﻿UJI MENYELURUH — https://pasang-surut.vercel.app
+
+Kesehatan dan sumbu waktu
+  LULUS  kesehatan menjawab  — 0.2s
+  LULUS  sumber_data berupa list
+  LULUS  jumlah ruas wajar  — 19.394
+  LULUS  jam menjawab  — 72 jam, 0.2s
+  LULUS  bentuk baris jam
+  LULUS  ada jam tergenang di jendela  — maks 1367 ruas
+  LULUS  pasut bervariasi  — -0.18 .. +0.30 m
+
+Lapisan peta
+  LULUS  ruas menjawab  — 19394 fitur, 7.4 MB, 2.1s
+  LULUS  genangan menjawab  — 1367 tergenang, 0.4s
+  LULUS  jumlah genangan konsisten dengan fitur
+
+Tujuan cepat dan validasi
+  LULUS  tujuan cepat terisi  — 4 titik
+  LULUS  bentuk tujuan cepat
+  LULUS  validasi menjawab
+  LULUS  metrik model apa adanya  — ROC-AUC 0.6579
+
+Perutean
+  LULUS  rute motor  — 0.2s
+  LULUS  rute motor: sumber_data list
+  LULUS  rute motor menghasilkan geometri  — 2 jalur
+  LULUS  rute mobil  — 0.2s
+  LULUS  rute mobil: sumber_data list
+  LULUS  rute mobil menghasilkan geometri  — 2 jalur
+  LULUS  asal sama dengan tujuan ditangani  — HTTP 200
+  LULUS  titik di luar AOI ditolak rapi  — HTTP 422
+  LULUS  tolak moda tidak dikenal  — HTTP 400
+  LULUS  tolak koordinat kurang  — HTTP 422
+  LULUS  tolak koordinat bukan angka  — HTTP 422
+  LULUS  tolak bidang wajib hilang  — HTTP 422
+  LULUS  tolak waktu ngawur  — HTTP 400
+  LULUS  tolak lintang mustahil  — HTTP 422
+
+Parameter dan galat
+  LULUS  genangan waktu ngawur  — HTTP 400; diharapkan 400
+  LULUS  ruas waktu di luar jendela  — HTTP 422; diharapkan 422
+  LULUS  genangan di luar jendela  — HTTP 422; diharapkan 422
+  LULUS  jalur tak dikenal 404  — HTTP 404
+
+CORS
+  LULUS  CORS meloloskan asal resmi
+  LULUS  CORS menolak asal asing
+
+Beban
+  LULUS  enam permintaan serentak  — semua 200
+
+================================================================
+LULUS 35   GAGAL 0   CATAT 0

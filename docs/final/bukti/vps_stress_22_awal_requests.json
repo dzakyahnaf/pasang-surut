@@ -1,0 +1,1658 @@
+{
+  "origin": "http://38.103.171.82:18080",
+  "public": "https://pasang-surut.vercel.app",
+  "stopped": true,
+  "stages": [
+    {
+      "stage": "metadata",
+      "seconds": 0.16,
+      "requests": 4,
+      "statuses": {
+        "200": 4
+      },
+      "unexpected": 0,
+      "p95_success_ms": 63.0,
+      "max_success_ms": 63.0
+    }
+  ],
+  "requests": [
+    {
+      "stage": "metadata",
+      "utc": "2026-09-22T09:03:07.706311+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kesehatan",
+      "body": null,
+      "status": 200,
+      "ms": 63.0,
+      "bytes": 575,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "metadata",
+      "utc": "2026-09-22T09:03:07.736814+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/jam",
+      "body": null,
+      "status": 200,
+      "ms": 31.0,
+      "bytes": 9513,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "metadata",
+      "utc": "2026-09-22T09:03:07.759483+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/tujuan-cepat",
+      "body": null,
+      "status": 200,
+      "ms": 15.0,
+      "bytes": 515,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "metadata",
+      "utc": "2026-09-22T09:03:07.805920+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/validasi",
+      "body": null,
+      "status": 200,
+      "ms": 47.0,
+      "bytes": 3175,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:07.894437+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.41853,
+          -6.94959
+        ],
+        "tujuan": [
+          110.42744,
+          -6.96374
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 200,
+      "ms": 94.0,
+      "bytes": 12928,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:07.943972+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.41853,
+          -6.94959
+        ],
+        "tujuan": [
+          110.42744,
+          -6.96374
+        ],
+        "waktu": "2026-09-22T09:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 200,
+      "ms": 47.0,
+      "bytes": 8273,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:07.987202+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.41853,
+          -6.94959
+        ],
+        "tujuan": [
+          110.42744,
+          -6.96374
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 200,
+      "ms": 47.0,
+      "bytes": 8392,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:08.020287+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.41853,
+          -6.94959
+        ],
+        "tujuan": [
+          110.42744,
+          -6.96374
+        ],
+        "waktu": "2026-09-22T09:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 200,
+      "ms": 31.0,
+      "bytes": 8273,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:08.675969+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.41853,
+          -6.94959
+        ],
+        "tujuan": [
+          110.46934,
+          -6.94825
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 200,
+      "ms": 656.0,
+      "bytes": 22878,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:08.882827+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.41853,
+          -6.94959
+        ],
+        "tujuan": [
+          110.46934,
+          -6.94825
+        ],
+        "waktu": "2026-09-22T09:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 200,
+      "ms": 203.0,
+      "bytes": 12149,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:09.130319+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.41853,
+          -6.94959
+        ],
+        "tujuan": [
+          110.46934,
+          -6.94825
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 200,
+      "ms": 250.0,
+      "bytes": 11705,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:09.237176+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.41853,
+          -6.94959
+        ],
+        "tujuan": [
+          110.46934,
+          -6.94825
+        ],
+        "waktu": "2026-09-22T09:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 200,
+      "ms": 110.0,
+      "bytes": 12149,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:09.646335+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.41853,
+          -6.94959
+        ],
+        "tujuan": [
+          110.46051,
+          -6.95619
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 200,
+      "ms": 406.0,
+      "bytes": 19451,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:09.714263+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.41853,
+          -6.94959
+        ],
+        "tujuan": [
+          110.46051,
+          -6.95619
+        ],
+        "waktu": "2026-09-22T09:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 200,
+      "ms": 63.0,
+      "bytes": 8167,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:09.850617+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.41853,
+          -6.94959
+        ],
+        "tujuan": [
+          110.46051,
+          -6.95619
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 200,
+      "ms": 140.0,
+      "bytes": 8050,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:09.922429+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.41853,
+          -6.94959
+        ],
+        "tujuan": [
+          110.46051,
+          -6.95619
+        ],
+        "waktu": "2026-09-22T09:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 200,
+      "ms": 63.0,
+      "bytes": 8167,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:10.231913+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.42744,
+          -6.96374
+        ],
+        "tujuan": [
+          110.41853,
+          -6.94959
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 200,
+      "ms": 312.0,
+      "bytes": 8959,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:10.272044+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.42744,
+          -6.96374
+        ],
+        "tujuan": [
+          110.41853,
+          -6.94959
+        ],
+        "waktu": "2026-09-22T09:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 200,
+      "ms": 47.0,
+      "bytes": 7449,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:10.369757+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.42744,
+          -6.96374
+        ],
+        "tujuan": [
+          110.41853,
+          -6.94959
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 200,
+      "ms": 94.0,
+      "bytes": 8057,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:10.483830+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.42744,
+          -6.96374
+        ],
+        "tujuan": [
+          110.41853,
+          -6.94959
+        ],
+        "waktu": "2026-09-22T09:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 200,
+      "ms": 109.0,
+      "bytes": 7449,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:11.152054+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.42744,
+          -6.96374
+        ],
+        "tujuan": [
+          110.46934,
+          -6.94825
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 200,
+      "ms": 672.0,
+      "bytes": 18121,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:11.262881+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.42744,
+          -6.96374
+        ],
+        "tujuan": [
+          110.46934,
+          -6.94825
+        ],
+        "waktu": "2026-09-22T09:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 200,
+      "ms": 109.0,
+      "bytes": 14137,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:11.748128+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.42744,
+          -6.96374
+        ],
+        "tujuan": [
+          110.46934,
+          -6.94825
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 200,
+      "ms": 485.0,
+      "bytes": 14257,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:11.862245+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.42744,
+          -6.96374
+        ],
+        "tujuan": [
+          110.46934,
+          -6.94825
+        ],
+        "waktu": "2026-09-22T09:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 200,
+      "ms": 125.0,
+      "bytes": 14137,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:12.383762+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.42744,
+          -6.96374
+        ],
+        "tujuan": [
+          110.46051,
+          -6.95619
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 200,
+      "ms": 515.0,
+      "bytes": 15098,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:12.452556+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.42744,
+          -6.96374
+        ],
+        "tujuan": [
+          110.46051,
+          -6.95619
+        ],
+        "waktu": "2026-09-22T09:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 200,
+      "ms": 63.0,
+      "bytes": 10973,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:12.771308+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.42744,
+          -6.96374
+        ],
+        "tujuan": [
+          110.46051,
+          -6.95619
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 200,
+      "ms": 328.0,
+      "bytes": 11092,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:12.850918+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.42744,
+          -6.96374
+        ],
+        "tujuan": [
+          110.46051,
+          -6.95619
+        ],
+        "waktu": "2026-09-22T09:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 200,
+      "ms": 78.0,
+      "bytes": 10973,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:12.919578+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46934,
+          -6.94825
+        ],
+        "tujuan": [
+          110.41853,
+          -6.94959
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 200,
+      "ms": 63.0,
+      "bytes": 7354,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:13.053781+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46934,
+          -6.94825
+        ],
+        "tujuan": [
+          110.41853,
+          -6.94959
+        ],
+        "waktu": "2026-09-22T09:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 200,
+      "ms": 140.0,
+      "bytes": 13583,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:13.439108+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46934,
+          -6.94825
+        ],
+        "tujuan": [
+          110.41853,
+          -6.94959
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 200,
+      "ms": 375.0,
+      "bytes": 13579,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:13.570715+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46934,
+          -6.94825
+        ],
+        "tujuan": [
+          110.41853,
+          -6.94959
+        ],
+        "waktu": "2026-09-22T09:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 200,
+      "ms": 141.0,
+      "bytes": 13583,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:13.620276+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46934,
+          -6.94825
+        ],
+        "tujuan": [
+          110.42744,
+          -6.96374
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 200,
+      "ms": 47.0,
+      "bytes": 8972,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:13.744664+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46934,
+          -6.94825
+        ],
+        "tujuan": [
+          110.42744,
+          -6.96374
+        ],
+        "waktu": "2026-09-22T09:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 200,
+      "ms": 125.0,
+      "bytes": 16819,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:14.122976+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46934,
+          -6.94825
+        ],
+        "tujuan": [
+          110.42744,
+          -6.96374
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 200,
+      "ms": 375.0,
+      "bytes": 17151,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:14.254797+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46934,
+          -6.94825
+        ],
+        "tujuan": [
+          110.42744,
+          -6.96374
+        ],
+        "waktu": "2026-09-22T09:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 200,
+      "ms": 140.0,
+      "bytes": 16819,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:14.289756+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46934,
+          -6.94825
+        ],
+        "tujuan": [
+          110.46051,
+          -6.95619
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 200,
+      "ms": 32.0,
+      "bytes": 4379,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:14.319816+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46934,
+          -6.94825
+        ],
+        "tujuan": [
+          110.46051,
+          -6.95619
+        ],
+        "waktu": "2026-09-22T09:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 200,
+      "ms": 31.0,
+      "bytes": 7633,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:14.352683+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46934,
+          -6.94825
+        ],
+        "tujuan": [
+          110.46051,
+          -6.95619
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 200,
+      "ms": 31.0,
+      "bytes": 7752,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:14.379182+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46934,
+          -6.94825
+        ],
+        "tujuan": [
+          110.46051,
+          -6.95619
+        ],
+        "waktu": "2026-09-22T09:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 200,
+      "ms": 31.0,
+      "bytes": 7633,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:14.914250+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46051,
+          -6.95619
+        ],
+        "tujuan": [
+          110.41853,
+          -6.94959
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 200,
+      "ms": 532.0,
+      "bytes": 16127,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:14.995026+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46051,
+          -6.95619
+        ],
+        "tujuan": [
+          110.41853,
+          -6.94959
+        ],
+        "waktu": "2026-09-22T09:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 200,
+      "ms": 78.0,
+      "bytes": 8343,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:15.249837+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46051,
+          -6.95619
+        ],
+        "tujuan": [
+          110.41853,
+          -6.94959
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 200,
+      "ms": 250.0,
+      "bytes": 8100,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:15.335947+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46051,
+          -6.95619
+        ],
+        "tujuan": [
+          110.41853,
+          -6.94959
+        ],
+        "waktu": "2026-09-22T09:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 200,
+      "ms": 94.0,
+      "bytes": 8343,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:15.698881+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46051,
+          -6.95619
+        ],
+        "tujuan": [
+          110.42744,
+          -6.96374
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 200,
+      "ms": 359.0,
+      "bytes": 16201,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:15.786782+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46051,
+          -6.95619
+        ],
+        "tujuan": [
+          110.42744,
+          -6.96374
+        ],
+        "waktu": "2026-09-22T09:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 200,
+      "ms": 94.0,
+      "bytes": 11727,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:15.924476+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46051,
+          -6.95619
+        ],
+        "tujuan": [
+          110.42744,
+          -6.96374
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 200,
+      "ms": 140.0,
+      "bytes": 11844,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:15.995285+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46051,
+          -6.95619
+        ],
+        "tujuan": [
+          110.42744,
+          -6.96374
+        ],
+        "waktu": "2026-09-22T09:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 200,
+      "ms": 63.0,
+      "bytes": 11727,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:16.028440+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46051,
+          -6.95619
+        ],
+        "tujuan": [
+          110.46934,
+          -6.94825
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 200,
+      "ms": 31.0,
+      "bytes": 5774,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:16.057914+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46051,
+          -6.95619
+        ],
+        "tujuan": [
+          110.46934,
+          -6.94825
+        ],
+        "waktu": "2026-09-22T09:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 200,
+      "ms": 31.0,
+      "bytes": 5495,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:16.087445+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46051,
+          -6.95619
+        ],
+        "tujuan": [
+          110.46934,
+          -6.94825
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 200,
+      "ms": 32.0,
+      "bytes": 5499,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:16.121575+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.46051,
+          -6.95619
+        ],
+        "tujuan": [
+          110.46934,
+          -6.94825
+        ],
+        "waktu": "2026-09-22T09:00:00+00:00",
+        "moda": "mobil"
+      },
+      "status": 200,
+      "ms": 31.0,
+      "bytes": 5495,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:16.142258+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-21T11%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 422,
+      "ms": 15.0,
+      "bytes": 190,
+      "ok": true,
+      "detail": {
+        "kode": "waktu_di_luar_cakupan",
+        "pesan": "Waktu ini berada di luar cakupan data lengkap.",
+        "mulai_utc": "2026-09-21T19:00:00+00:00",
+        "akhir_eksklusif_utc": "2026-10-05T00:00:00+00:00"
+      },
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:16.176603+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-21T09%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 422,
+      "ms": 47.0,
+      "bytes": 190,
+      "ok": true,
+      "detail": {
+        "kode": "waktu_di_luar_cakupan",
+        "pesan": "Waktu ini berada di luar cakupan data lengkap.",
+        "mulai_utc": "2026-09-21T19:00:00+00:00",
+        "akhir_eksklusif_utc": "2026-10-05T00:00:00+00:00"
+      },
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:16.209116+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-21T13%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 422,
+      "ms": 32.0,
+      "bytes": 190,
+      "ok": true,
+      "detail": {
+        "kode": "waktu_di_luar_cakupan",
+        "pesan": "Waktu ini berada di luar cakupan data lengkap.",
+        "mulai_utc": "2026-09-21T19:00:00+00:00",
+        "akhir_eksklusif_utc": "2026-10-05T00:00:00+00:00"
+      },
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:18.613020+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-21T20%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 2406.0,
+      "bytes": 7797493,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:18.632452+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-20T10%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 422,
+      "ms": 15.0,
+      "bytes": 190,
+      "ok": true,
+      "detail": {
+        "kode": "waktu_di_luar_cakupan",
+        "pesan": "Waktu ini berada di luar cakupan data lengkap.",
+        "mulai_utc": "2026-09-21T19:00:00+00:00",
+        "akhir_eksklusif_utc": "2026-10-05T00:00:00+00:00"
+      },
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:18.654971+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-20T11%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 422,
+      "ms": 16.0,
+      "bytes": 190,
+      "ok": true,
+      "detail": {
+        "kode": "waktu_di_luar_cakupan",
+        "pesan": "Waktu ini berada di luar cakupan data lengkap.",
+        "mulai_utc": "2026-09-21T19:00:00+00:00",
+        "akhir_eksklusif_utc": "2026-10-05T00:00:00+00:00"
+      },
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:18.676431+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2026-09-21T19%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 31.0,
+      "bytes": 292,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:18.698319+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2026-10-05T00%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 422,
+      "ms": 16.0,
+      "bytes": 190,
+      "ok": true,
+      "detail": {
+        "kode": "waktu_di_luar_cakupan",
+        "pesan": "Waktu ini berada di luar cakupan data lengkap.",
+        "mulai_utc": "2026-09-21T19:00:00+00:00",
+        "akhir_eksklusif_utc": "2026-10-05T00:00:00+00:00"
+      },
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:18.720999+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=2099-01-01T00%3A00%3A00Z",
+      "body": null,
+      "status": 422,
+      "ms": 16.0,
+      "bytes": 190,
+      "ok": true,
+      "detail": {
+        "kode": "waktu_di_luar_cakupan",
+        "pesan": "Waktu ini berada di luar cakupan data lengkap.",
+        "mulai_utc": "2026-09-21T19:00:00+00:00",
+        "akhir_eksklusif_utc": "2026-10-05T00:00:00+00:00"
+      },
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:18.742686+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/kondisi?waktu=bukan-tanggal",
+      "body": null,
+      "status": 400,
+      "ms": 31.0,
+      "bytes": 36,
+      "ok": true,
+      "detail": "Gunakan waktu ISO 8601.",
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:19.509947+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-09-21T19%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 765.0,
+      "bytes": 7795907,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:19.598328+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2026-10-05T00%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 422,
+      "ms": 94.0,
+      "bytes": 190,
+      "ok": true,
+      "detail": {
+        "kode": "waktu_di_luar_cakupan",
+        "pesan": "Waktu ini berada di luar cakupan data lengkap.",
+        "mulai_utc": "2026-09-21T19:00:00+00:00",
+        "akhir_eksklusif_utc": "2026-10-05T00:00:00+00:00"
+      },
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:19.623933+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=2099-01-01T00%3A00%3A00Z",
+      "body": null,
+      "status": 422,
+      "ms": 16.0,
+      "bytes": 190,
+      "ok": true,
+      "detail": {
+        "kode": "waktu_di_luar_cakupan",
+        "pesan": "Waktu ini berada di luar cakupan data lengkap.",
+        "mulai_utc": "2026-09-21T19:00:00+00:00",
+        "akhir_eksklusif_utc": "2026-10-05T00:00:00+00:00"
+      },
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:19.657564+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/ruas?waktu=bukan-tanggal",
+      "body": null,
+      "status": 400,
+      "ms": 31.0,
+      "bytes": 36,
+      "ok": true,
+      "detail": "Gunakan waktu ISO 8601.",
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:19.685019+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/genangan?waktu=2026-09-21T19%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 200,
+      "ms": 31.0,
+      "bytes": 162,
+      "ok": true,
+      "detail": null,
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:19.716227+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/genangan?waktu=2026-10-05T00%3A00%3A00%2B00%3A00",
+      "body": null,
+      "status": 422,
+      "ms": 32.0,
+      "bytes": 190,
+      "ok": true,
+      "detail": {
+        "kode": "waktu_di_luar_cakupan",
+        "pesan": "Waktu ini berada di luar cakupan data lengkap.",
+        "mulai_utc": "2026-09-21T19:00:00+00:00",
+        "akhir_eksklusif_utc": "2026-10-05T00:00:00+00:00"
+      },
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:19.737502+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/genangan?waktu=2099-01-01T00%3A00%3A00Z",
+      "body": null,
+      "status": 422,
+      "ms": 31.0,
+      "bytes": 190,
+      "ok": true,
+      "detail": {
+        "kode": "waktu_di_luar_cakupan",
+        "pesan": "Waktu ini berada di luar cakupan data lengkap.",
+        "mulai_utc": "2026-09-21T19:00:00+00:00",
+        "akhir_eksklusif_utc": "2026-10-05T00:00:00+00:00"
+      },
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:19.758875+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/genangan?waktu=bukan-tanggal",
+      "body": null,
+      "status": 400,
+      "ms": 15.0,
+      "bytes": 36,
+      "ok": true,
+      "detail": "Gunakan waktu ISO 8601.",
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:19.780717+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          0,
+          0
+        ],
+        "tujuan": [
+          110.46934,
+          -6.94825
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 422,
+      "ms": 16.0,
+      "bytes": 79,
+      "ok": true,
+      "detail": {
+        "kode": "asal_jauh_dari_jalan",
+        "jarak_m": 12312002.6,
+        "batas_m": 500.0
+      },
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:19.803482+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.4
+        ],
+        "tujuan": [
+          110.46934,
+          -6.94825
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 422,
+      "ms": 31.0,
+      "bytes": 198,
+      "ok": true,
+      "detail": [
+        {
+          "type": "too_short",
+          "loc": [
+            "body",
+            "asal"
+          ],
+          "msg": "List should have at least 2 items after validation, not 1",
+          "input": [
+            110.4
+          ],
+          "ctx": {
+            "field_type": "List",
+            "min_length": 2,
+            "actual_length": 1
+          }
+        }
+      ],
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:19.832368+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.41853,
+          -6.94959
+        ],
+        "tujuan": [
+          110.46934,
+          -6.94825
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "pesawat"
+      },
+      "status": 400,
+      "ms": 32.0,
+      "bytes": 92,
+      "ok": true,
+      "detail": "Moda pesawat tidak ada di tabel ambang_moda. Yang tersedia: mobil, motor, truk.",
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:19.858320+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          110.41853,
+          -6.94959
+        ],
+        "tujuan": [
+          110.46934,
+          -6.94825
+        ],
+        "waktu": "2099-01-01T00:00:00Z",
+        "moda": "motor"
+      },
+      "status": 422,
+      "ms": 15.0,
+      "bytes": 190,
+      "ok": true,
+      "detail": {
+        "kode": "waktu_di_luar_cakupan",
+        "pesan": "Waktu ini berada di luar cakupan data lengkap.",
+        "mulai_utc": "2026-09-21T19:00:00+00:00",
+        "akhir_eksklusif_utc": "2026-10-05T00:00:00+00:00"
+      },
+      "error": null
+    },
+    {
+      "stage": "functional_edges",
+      "utc": "2026-09-22T09:03:20.599141+00:00",
+      "base": "http://38.103.171.82:18080",
+      "path": "/api/rute",
+      "body": {
+        "asal": [
+          "NaN",
+          -6.95
+        ],
+        "tujuan": [
+          110.46934,
+          -6.94825
+        ],
+        "waktu": "2026-09-23T00:00:00+00:00",
+        "moda": "motor"
+      },
+      "status": 200,
+      "ms": 750.0,
+      "bytes": 19926,
+      "ok": false,
+      "detail": null,
+      "error": null
+    }
+  ]
+}

@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import math
 import os
 from datetime import datetime, timedelta, timezone
 
@@ -13,8 +14,9 @@ for _variabel_thread in ("OPENBLAS_NUM_THREADS", "OMP_NUM_THREADS", "MKL_NUM_THR
 
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import Response
-from pydantic import BaseModel, Field
+from fastapi.exceptions import RequestValidationError
+from fastapi.responses import JSONResponse, Response
+from pydantic import BaseModel, Field, field_validator
 
 from app import config, db
 from app.domain import dampak, pasut, routing
@@ -35,6 +37,17 @@ BERKAS_TUJUAN = config.DIR_DATA_OLAHAN / "tujuan_cepat.geojson"
 BERKAS_METRIK = config.DIR_DATA_REFERENSI / "metrik_model.json"
 BERKAS_INDEKS = config.DIR_DATA_OLAHAN / "indeks_kerentanan.json"
 
+
+@app.exception_handler(RequestValidationError)
+async def masukan_tidak_sah(request, exc):
+    # Decoder JSON juga menerima konstanta NaN/Infinity nonstandar. Jangan
+    # pantulkan input tersebut ke JSON galat: serialisasinya bisa menjadi 500.
+    # Lokasi, jenis, dan pesan cukup untuk menjelaskan validasi kepada klien.
+    return JSONResponse(status_code=422, content={"detail": [
+        {k: e[k] for k in ("type", "loc", "msg") if k in e}
+        for e in exc.errors()
+    ]})
+
 @app.on_event("shutdown")
 async def tutup_koneksi():
     db.tutup_kolam()
@@ -45,7 +58,7 @@ def _urai_waktu(waktu):
         return datetime.now(timezone.utc)
     try:
         return utc(datetime.fromisoformat(waktu))
-    except ValueError:
+    except (ValueError, OverflowError):
         raise HTTPException(400, detail="Gunakan waktu ISO 8601.") from None
 
 
@@ -149,6 +162,14 @@ class PermintaanRute(BaseModel):
     tujuan: list[float] = Field(..., min_length=2, max_length=2)
     waktu: str | None = None
     moda: str = "motor"
+
+    @field_validator("asal", "tujuan")
+    @classmethod
+    def koordinat_sah(cls, nilai):
+        if (not all(math.isfinite(x) for x in nilai)
+                or not -180 <= nilai[0] <= 180 or not -90 <= nilai[1] <= 90):
+            raise ValueError("Koordinat harus berhingga; bujur -180..180 dan lintang -90..90.")
+        return nilai
 
 
 def _jam_lebih_aman(data, permintaan, mulai, ambang):

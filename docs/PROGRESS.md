@@ -1,5 +1,25 @@
 # Progres
 
+## Uji beban dan perbandingan basemap — 22 September 2026
+
+API produksi diperbaiki untuk NaN/Infinity, koordinat di luar rentang,
+dan overflow konversi zona waktu. 80 tes backend Windows/Linux serta
+12 tes frontend lulus. Web PASANG SURUT dinaikkan 48 menjadi 64 MiB setelah
+guard menghentikan uji mendekati batas; belum terjadi OOM.
+
+Uji akhir 1.596 request / 7 menit 41 detik: tidak ada galat tak terduga,
+OOM atau restart. 112 respons sibuk terkendali, 1.160/1.160 request pada
+soak lima menit berhasil. API peak 233,51/320 MiB; RAM tersedia minimum
+583,85 MiB. Maknaprice 46/46 HTTP 200, container/config tetap sama.
+35 pemeriksaan HTTP dan alur browser produksi lulus.
+
+Main tetap memakai peta lokal berlabel. Basemap siap pakai dikerjakan di
+branch `preview/peta-dasar-osm` untuk dibandingkan sendiri oleh Dzaky,
+tanpa digabung ke main. Audit npm mencatat advisory MapLibre; jalur HTML
+attribution yang terdampak tidak dipakai, upgrade mayor masih perlu uji.
+Detail, batas klaim, dan bukti: [uji beban](final/uji_beban_vps_22_september.md).
+
+
 ## Produksi VPS dan label peta aktif — 22 September 2026
 
 Seluruh runtime PASANG SURUT sekarang dilayani VPS melalui alamat masuk
