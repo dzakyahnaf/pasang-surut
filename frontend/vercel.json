@@ -33,7 +33,19 @@
     }
   ],
   "rewrites": [
-    { "source": "/", "destination": "http://38.103.171.82:18080/index.html" },
+    { "source": "/", "destination": "/lp/index.html" },
+    { "source": "/styles.css", "destination": "/lp/styles.css" },
+    { "source": "/app.js", "destination": "/lp/app.js" },
+    { "source": "/app", "destination": "http://38.103.171.82:18080/index.html" },
+    { "source": "/app/:path*", "destination": "http://38.103.171.82:18080/:path*" },
     { "source": "/:path*", "destination": "http://38.103.171.82:18080/:path*" }
+  ],
+  "redirects": [
+    {
+      "source": "/",
+      "missing": [{ "type": "query", "key": "dashboard" }],
+      "destination": "/?dashboard=/app",
+      "permanent": false
+    }
   ]
 }
