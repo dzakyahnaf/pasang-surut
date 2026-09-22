@@ -1,0 +1,18 @@
+{
+  "/api/kesehatan": {
+    "status": 200,
+    "ms": 58.6,
+    "bytes": 575,
+    "release": "21sep-d76a27388461"
+  },
+  "/api/jam": {
+    "status": 200,
+    "ms": 87.4,
+    "bytes": 9510
+  },
+  "/": {
+    "status": 200,
+    "ms": 58.3,
+    "bytes": 877
+  }
+}

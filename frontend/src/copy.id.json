@@ -42,8 +42,15 @@
     "perkecil": "Perkecil peta",
     "ketukUntukAsal": "Ketuk peta untuk memilih titik berangkat",
     "ketukUntukTujuan": "Ketuk peta untuk memilih tujuan",
-    "atribusi": "Data jalan dari OpenStreetMap",
-    "potretDemo": "Skenario demo bertanggal - data potret"
+    "atribusi": "© OpenStreetMap contributors",
+    "potretDemo": "Skenario demo bertanggal - data potret",
+    "aksesTempat": "Akses {nama}",
+    "dekatJalan": "Dekat {nama}",
+    "ruasTanpaNama": "Dekat ruas tanpa nama",
+    "titikPilihan": "Titik pilihan di peta",
+    "titikAsal": "Berangkat",
+    "titikTujuan": "Tujuan",
+    "batasWilayah": "Garis putus-putus tipis: batas kecamatan indikatif"
   },
   "pitaPasut": {
     "judul": "PITA PASUT · 72 JAM",

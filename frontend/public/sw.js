@@ -36,7 +36,7 @@
  * Setiap kali perilaku cache berubah, NAIKKAN NOMORNYA.
  */
 
-const VERSI = "pasang-surut-v2";
+const VERSI = "pasang-surut-v3";
 const CANGKANG = ["/", "/index.html", "/manifest.webmanifest"];
 
 self.addEventListener("install", (e) => {

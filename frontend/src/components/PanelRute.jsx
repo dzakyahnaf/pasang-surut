@@ -24,7 +24,7 @@ function Koordinat({ titik }) {
   );
 }
 
-function BarisTitik({ label, kosong, titik, aktif, onPilihMode, onHapus, labelHapus }) {
+function BarisTitik({ label, kosong, titik, nama, aktif, onPilihMode, onHapus, labelHapus }) {
   return (
     <div className={`titik ${aktif ? "titik--aktif" : ""}`}>
       <button
@@ -35,7 +35,10 @@ function BarisTitik({ label, kosong, titik, aktif, onPilihMode, onHapus, labelHa
       >
         <span className="titik__label t-label">{label}</span>
         {titik ? (
-          <Koordinat titik={titik} />
+          <>
+            {nama ? <span className="titik__nama">{nama}</span> : null}
+            <Koordinat titik={titik} />
+          </>
         ) : (
           <span className="titik__kosong t-label">{kosong}</span>
         )}
@@ -78,7 +81,7 @@ function AngkaDampak({ nilai, satuan, label, bertanda = false }) {
 }
 
 export default function PanelRute({
-  asal, tujuan, modePilih, moda, hasil, sedangMencari, galat,
+  asal, tujuan, namaAsal, namaTujuan, modePilih, moda, hasil, sedangMencari, galat,
   onPilihMode, onHapusTitik, onGantiModa, onCari, onTampilkanRuteBiasa,
   tampilkanRuteBiasa, children, waktuTersedia = true,
 }) {
@@ -103,6 +106,7 @@ export default function PanelRute({
           label={t("pencarianRute.asal")}
           kosong={t("pencarianRute.asalKosong")}
           titik={asal}
+          nama={namaAsal}
           aktif={modePilih === "asal"}
           onPilihMode={() => onPilihMode("asal")}
           onHapus={() => onHapusTitik("asal")}
@@ -112,6 +116,7 @@ export default function PanelRute({
           label={t("pencarianRute.tujuan")}
           kosong={t("pencarianRute.tujuanKosong")}
           titik={tujuan}
+          nama={namaTujuan}
           aktif={modePilih === "tujuan"}
           onPilihMode={() => onPilihMode("tujuan")}
           onHapus={() => onHapusTitik("tujuan")}

@@ -9,7 +9,7 @@
  * usePerjalanan agar interaksi peta dan panel memakai waktu yang sama.
  */
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 import Peta from "./components/Peta.jsx";
 import PitaPasut from "./components/PitaPasut.jsx";
@@ -24,6 +24,7 @@ import { ambilTujuanCepat } from "./lib/api.js";
 import { usePerjalanan } from "./lib/usePerjalanan.js";
 import { t } from "./lib/teks.js";
 import { labelHariJam } from "./lib/waktu.js";
+import { namaLokasi } from "./lib/lokasi.js";
 
 export default function App() {
   const [asal, setAsal] = useState(null);
@@ -39,6 +40,8 @@ export default function App() {
   const [tujuanCepat, setTujuanCepat] = useState([]);
   const [memuatTujuan, setMemuatTujuan] = useState(true);
   const [tujuanTerpilih, setTujuanTerpilih] = useState(null);
+  const namaAsal = useMemo(() => namaLokasi(asal, geojson, tujuanCepat), [asal, geojson, tujuanCepat]);
+  const namaTujuan = useMemo(() => namaLokasi(tujuan, geojson, tujuanCepat), [tujuan, geojson, tujuanCepat]);
 
   // Dua tampilan saja, jadi tidak perlu pustaka perutean. Menambah
   // react-router untuk satu halaman berarti membawa dependency,
@@ -127,6 +130,8 @@ export default function App() {
         <PanelRute
           asal={asal}
           tujuan={tujuan}
+          namaAsal={namaAsal}
+          namaTujuan={namaTujuan}
           modePilih={modePilih}
           moda={moda}
           hasil={hasil}
@@ -189,6 +194,7 @@ export default function App() {
 
           <div className="plat plat--kiri-bawah">
             <Legenda />
+            <p className="peta__keterangan-batas t-label">{t("peta.batasWilayah")}</p>
           </div>
 
           <div className="atribusi t-label">

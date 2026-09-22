@@ -331,6 +331,20 @@ alternatif terdekat yang lebih aman. Bukan sekadar tanda seru.
 
 ---
 
+### Konteks lokasi peta — 22 September 2026
+
+Nama jalan utama tampil mulai zoom 10,5 jika ruang mencukupi; jalan lokal mulai 14,5. Nama
+kecamatan membantu orientasi sampai zoom 15; tempat penting tetap ditandai.
+Label jalan memakai tangga Label 12px menuju Isi 15px ketika diperbesar;
+wilayah/tempat memakai Isi 15px. Warna teks `--tinta-1`/`--tinta-2`, halo
+`--dek-1` selebar 2px menjaga keterbacaan tanpa mengubah warna risiko.
+Renderer menghindari label bertumpuk. Batas kecamatan adalah garis tipis
+1px putus-putus, `--tinta-2` opasitas 0,35; garis pantai 2px `--air-3`.
+Titik tempat radius 4px berwarna `--lambung-1` dengan tepi 2px `--dek-1`.
+Label tempat mengikuti lokasi OSM asli; perjalanan memakai akses jalan
+yang diberi awalan “Akses” di panel. Ruas tanpa nama tidak diberi nama rekaan.
+Font Barlow yang dibundel harus dimuat sebelum renderer membuat glyph.
+
 ## 9. Gerak
 
 Satu momen terkoreografi, tidak lebih.

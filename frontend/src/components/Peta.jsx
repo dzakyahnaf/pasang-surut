@@ -20,6 +20,8 @@ import "maplibre-gl/dist/maplibre-gl.css";
 
 import { token, tokenPx } from "../lib/token.js";
 import { t } from "../lib/teks.js";
+import { pasangLabelPeta } from "../lib/labelPeta.js";
+import { buatLabelJalan } from "../lib/jalanLabel.js";
 
 /* Batas kelas tangga kedalaman, DESIGN.md Bagian 3.4.
    Nilainya sentimeter. */
@@ -119,6 +121,7 @@ export default function Peta({ geojson, kondisi, rute, asal, tujuan, onKlikPeta,
   // ── Pembuatan peta, sekali saja ────────────────────────────────────
   useEffect(() => {
     if (petaRef.current || !wadahRef.current) return;
+    let dibatalkan = false;
 
     const peta = new maplibregl.Map({
       container: wadahRef.current,
@@ -126,9 +129,8 @@ export default function Peta({ geojson, kondisi, rute, asal, tujuan, onKlikPeta,
       // panggilan jaringan ke luar.
       style: {
         version: 8,
-        // glyphs dan sprite sengaja dikosongkan. Keduanya hanya dibutuhkan
-        // kalau ada lapisan teks atau ikon bawaan, dan kita tidak memakai
-        // keduanya. Mengisinya berarti menambah permintaan ke server luar.
+        // Tanpa URL glyphs: MapLibre 5.24 menggambar teks melalui TinySDF
+        // memakai font lokal yang sudah dibundel, tanpa layanan glyph luar.
         sources: {},
         layers: [
           {
@@ -158,7 +160,11 @@ export default function Peta({ geojson, kondisi, rute, asal, tujuan, onKlikPeta,
     peta.addControl(kontrol, "bottom-right");
 
     peta.on("error", (e) => console.error("[peta] galat MapLibre:", e && e.error));
-    peta.on("load", () => {
+    peta.on("load", async () => {
+      // Tunggu font sebelum glyph pertama dirasterisasi; jika terlalu awal,
+      // font fallback akan tersimpan di cache glyph sepanjang umur peta.
+      await document.fonts.load('400 24px "Barlow Semi Condensed"').catch(() => {});
+      if (dibatalkan) return;
       // Pola halftone didaftarkan sebelum lapisan yang memakainya dibuat.
       const warnaTitik = token("--dek-1");
       const jarang = buatPolaTitik(10, 1.4, warnaTitik);
@@ -341,6 +347,7 @@ export default function Peta({ geojson, kondisi, rute, asal, tujuan, onKlikPeta,
         },
       });
 
+      pasangLabelPeta(peta);
       petaRef.current = peta;
       setSiap(true);
 
@@ -357,11 +364,19 @@ export default function Peta({ geojson, kondisi, rute, asal, tujuan, onKlikPeta,
     // pendengar tidak perlu dipasang ulang tiap kali fungsi berubah.
     peta.on("click", (e) => {
       const fn = klikRef.current;
-      if (fn) fn([e.lngLat.lng, e.lngLat.lat]);
+      if (!fn) return;
+      const tempat = peta.getLayer("nama-tempat")
+        ? peta.queryRenderedFeatures(e.point, { layers: ["nama-tempat", "tempat-titik"] })[0]
+        : null;
+      // Label berada di lokasi asli tempat; perjalanan menuju akses jalan
+      // yang sudah dipakai tombol tujuan cepat, bukan pusat bangunannya.
+      fn(tempat ? [tempat.properties.lon_rute, tempat.properties.lat_rute]
+        : [e.lngLat.lng, e.lngLat.lat]);
     });
     peta.getCanvas().style.cursor = "crosshair";
 
     return () => {
+      dibatalkan = true;
       peta.remove();
       petaRef.current = null;
       setSiap(false);
@@ -378,6 +393,7 @@ export default function Peta({ geojson, kondisi, rute, asal, tujuan, onKlikPeta,
     const sumber = peta.getSource("ruas");
     if (!sumber) return;
     sumber.setData(geojson);
+    peta.getSource("label-jalan").setData(buatLabelJalan(geojson));
 
     // Peta digeser ke kotak pembatas data, sekali saja saat data pertama
     // datang. Kalau diulang setiap pembaruan jam, tampilan akan melompat

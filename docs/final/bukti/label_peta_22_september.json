@@ -1,0 +1,83 @@
+{
+  "overview": {
+    "nama-wilayah": [
+      "Semarang Tengah",
+      "Semarang Barat",
+      "Pedurungan",
+      "Semarang Timur",
+      "Semarang Utara",
+      "Genuk"
+    ],
+    "nama-tempat": [
+      "RSI Sultan Agung Semarang",
+      "Kawasan Industri Terboyo",
+      "Stasiun Semarang Tawang",
+      "Pelabuhan Tanjung Emas"
+    ],
+    "nama-jalan-utama": [
+      "Jalan Muktiharjo Raya",
+      "Jalan Gajah Raya",
+      "Jalan Dokter Cipto",
+      "Jalan MT. Haryono",
+      "Jalan Ratan Cilik"
+    ],
+    "nama-jalan-lokal": []
+  },
+  "detail": {
+    "nama-wilayah": [],
+    "nama-tempat": [],
+    "nama-jalan-utama": [
+      "Jalan Arteri Utara",
+      "Jalan Bandarharjo Timur",
+      "Jalan Layur",
+      "Jalan Merak",
+      "Jalan Widoharjo",
+      "Jalan Imam Bonjol",
+      "Jalan Empu Tantular",
+      "Jalan Cendrawasih",
+      "Jalan Pattimura",
+      "Jalan Pengapon",
+      "Jalan Ronggowarsito",
+      "Jalan Raden Patah"
+    ],
+    "nama-jalan-lokal": [
+      "Jalan Kebon Harjo I",
+      "Jalan Ronggowarsito II",
+      "Jalan Sleko Kalibiru",
+      "Gang Jahe II",
+      "Jalan Kampung Jaksa",
+      "Gang Ikhlas",
+      "Gang Kunir II",
+      "Gang Jahe IV",
+      "Jalan Sendowo",
+      "Jalan Kedasih",
+      "Jalan Pedalangan",
+      "Jalan Branjangan",
+      "Jalan Progo II",
+      "Jalan Progo III",
+      "Jalan Progo IV",
+      "Jalan Mlaten Trenggulun",
+      "Jalan Mlatiharjo III",
+      "Jalan Mlatiharjo II",
+      "Jalan Mlatibaru",
+      "Jalan Mlatiharjo I",
+      "Jalan Mlatiharjo Raya"
+    ]
+  },
+  "mobile": {
+    "nama-wilayah": [
+      "Semarang Barat",
+      "Pedurungan",
+      "Genuk"
+    ],
+    "nama-tempat": [
+      "Kawasan Industri Terboyo",
+      "Pelabuhan Tanjung Emas"
+    ],
+    "nama-jalan-utama": [],
+    "nama-jalan-lokal": []
+  },
+  "errors": [],
+  "external_browser_requests": [],
+  "place_click_selects_road_access": true
+}

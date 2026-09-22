@@ -295,6 +295,12 @@
   }
 
   .atribusi {
+    background: var(--dek-1);
+    padding: var(--s-1);
+  }
+
+  .atribusi__petunjuk,
+  .plat__jam {
     display: none;
   }
 }
@@ -391,6 +397,19 @@
 
 .titik__koordinat {
   color: var(--rute);
+}
+
+.titik__nama {
+  color: var(--tinta-balik);
+  font-size: var(--t-isi-ukuran);
+  overflow-wrap: anywhere;
+}
+
+.peta__keterangan-batas {
+  color: var(--tinta-balik);
+  margin: 0;
+  padding: var(--s-2) var(--s-4);
+  max-width: 24ch;
 }
 
 .titik__hapus {
