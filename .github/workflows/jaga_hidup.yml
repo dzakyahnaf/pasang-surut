@@ -1,41 +1,6 @@
-# Ketuk API tiap 10 menit supaya aplikasi tidak tidur dan tidak dijeda.
-#
-# KENAPA PERLU.
-#
-# Render versi gratis menidurkan layanan setelah 15 menit tanpa permintaan,
-# dan bangunnya memakan sekitar 26 detik, tepat pada klik pertama pengguna.
-# Supabase versi gratis menjeda proyek setelah seminggu tanpa aktivitas. Yang
-# kedua itulah yang mematikan aplikasi antara akhir Agustus dan 19 September
-# 2026 tanpa ada yang tahu.
-#
-# /api/kesehatan menjalankan kueri ke basis data, jadi satu ketukan
-# membangunkan Render sekaligus menyentuh Supabase.
-#
-# KAPAN GAGAL, DAN KENAPA HANYA ITU.
-#
-# Workflow ini gagal bila API tidak menjawab atau basis data tidak terjangkau.
-# GitHub mengirim surel kepada orang yang terakhir mengubah jadwal di berkas
-# ini setiap kali run terjadwal gagal, jadi kegagalan di sini adalah alarm,
-# bukan kebisingan. Prediksi yang hampir habis dan potret yang basi cukup
-# diberi peringatan.
-#
-# BATASNYA, DAN INI PENTING.
-#
-# Jadwal GitHub Actions tidak dijamin. Dokumentasinya sendiri menyebut run
-# terjadwal bisa tertunda atau dibuang saat beban tinggi, dan staf GitHub
-# menyebut `*/10` sebagai "boleh jalan tiap 10 menit", bukan pengatur waktu.
-# Jarak antar-run bisa berjam-jam, jadi workflow ini TIDAK BISA diandalkan
-# untuk menjaga Render tetap bangun; untuk itu pakai pemantau luar.
-#
-# Lebih buruk lagi, sampai 20 September 2026 jadwal ini belum pernah berjalan
-# satu kali pun, padahal run manual lulus. Gejalanya sama dengan masalah yang
-# dilaporkan di github.com/orgs/community/discussions/205984 sejak 27 Agustus
-# dan belum selesai. Selama jadwalnya tidak berjalan, tidak ada surel
-# kegagalan: TIDAK ADA SUREL BUKAN BERARTI AMAN.
-#
-# Workflow ini tetap dipasang karena begitu jadwalnya berjalan, ia menjadi
-# alarm dan menyentuh Supabase. Ia juga bisa dipicu manual dari tab Actions
-# sebagai pemeriksaan kesehatan sekali klik. Matikan setelah lomba selesai.
+# Pemeriksaan kesehatan jalur publik Vercel -> VPS PASANG SURUT.
+# Jadwal GitHub dapat terlambat; bukan pemantauan uptime dengan SLA.
+# Nama workflow dipertahankan agar riwayat run tetap mudah ditemukan.
 
 name: Jaga hidup
 
@@ -56,12 +21,12 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     env:
-      ALAMAT: https://pasang-surut-api.onrender.com/api/kesehatan
+      ALAMAT: https://pasang-surut.vercel.app/api/kesehatan
     steps:
       - name: Ketuk /api/kesehatan
         run: |
-          # Batas waktunya longgar karena bangun dari tidur bisa 30 detik.
-          curl --fail --silent --show-error --max-time 120 \
+          # Batas retry terbatas; VPS tidak memakai mekanisme tidur Render.
+          curl --fail --silent --show-error --max-time 30 \
                --retry 3 --retry-delay 15 --retry-all-errors \
                "$ALAMAT" -o kesehatan.json
           jq '{database, commit, jumlah_ruas, prediksi_selesai_utc,
@@ -72,16 +37,16 @@ jobs:
           sekarang=$(date -u +%s)
 
           if [ "$(jq -r .database kesehatan.json)" != "true" ]; then
-            echo "::error::Basis data tidak terjangkau. Periksa dasbor Supabase; proyeknya mungkin dijeda lagi."
+            echo "::error::API tidak memakai database VPS. Periksa container database PASANG SURUT dan status fallback."
             exit 1
           fi
 
-          selesai=$(jq -r '.prediksi_selesai_utc // empty' kesehatan.json)
-          if [ -z "$selesai" ] || [ "$(date -u -d "$selesai" +%s)" -lt $((sekarang + 72 * 3600)) ]; then
-            echo "::warning::Prediksi berakhir ${selesai:-entah kapan}, kurang dari 72 jam lagi. Jam sesudahnya akan tampil kering. Jalankan ulang 11_indeks_kerentanan."
+          if [ "$(jq -r .data_tersedia kesehatan.json)" != "true" ]; then
+            echo "::error::Data perjalanan tidak tersedia. Periksa publikasi dan masa berlaku data."
+            exit 1
           fi
 
-          potret=$(jq -r '.potret_berlaku_sampai_utc // empty' kesehatan.json)
-          if [ -z "$potret" ] || [ "$(date -u -d "$potret" +%s)" -lt "$sekarang" ]; then
-            echo "::warning::Potret cadangan tidak ada atau sudah basi (${potret:-tidak ada}). Kalau basis data mati, aplikasi ikut mati. Jalankan ulang 18_seed_demo."
+          selesai=$(jq -r '.akhir_eksklusif_utc // empty' kesehatan.json)
+          if [ -z "$selesai" ] || [ "$(date -u -d "$selesai" +%s)" -lt $((sekarang + 72 * 3600)) ]; then
+            echo "::warning::Prediksi berakhir ${selesai:-entah kapan}, kurang dari 72 jam lagi. Jam sesudahnya akan ditolak karena data tidak tersedia. Jalankan ulang 11_indeks_kerentanan."
           fi
