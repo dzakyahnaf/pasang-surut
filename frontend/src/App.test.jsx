@@ -176,3 +176,18 @@ test('rute terputus tidak menuduh semua jalur tergenang', async () => {
   expect(screen.queryByText('Semua jalur tergenang')).toBeNull();
   expect(screen.queryByText('Tidak ada selisih')).toBeNull();
 });
+
+test('kedua panel paparan menyebut maksimum rute tanpa menebak jalan pertama', async () => {
+  const h = hasil();
+  h.waktu_berangkat_utc = jam[0].waktu_utc;
+  h.waktu_berangkat_wib = '2026-09-26T07:00:00+07:00';
+  h.paparan = { menembus: true, kedalaman_maks_cm: 24.8 };
+  Object.assign(h.rute.features[0].properties, {
+    ruas_tergenang: 2, kedalaman_maks_cm: 24.8, nama_jalan: ['Jalan Pertama'],
+  });
+  api.hitungRute.mockResolvedValue(h);
+  await mulai();
+  await waitFor(() => expect(screen.getAllByText(/Estimasi kedalaman maksimum 25 cm pada rute ini/)).toHaveLength(2));
+  expect(screen.queryByText(/di Jalan Pertama/)).toBeNull();
+  expect(screen.getAllByText(/Estimasi kedalaman maksimum/).every(el => el.textContent.includes('WIB'))).toBe(true);
+});

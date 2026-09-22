@@ -11,7 +11,7 @@
  */
 
 import { t } from "../lib/teks.js";
-import { labelJam } from "../lib/waktu.js";
+import { labelJam, labelHariJam } from "../lib/waktu.js";
 
 const MODA = ["motor", "mobil"];
 
@@ -222,10 +222,9 @@ export default function PanelRute({
                     {t("peringatan.judulMenembus")}
                   </p>
                   <p className="t-label peringatan__isi">
-                    {t("peringatan.isiMenembus", {
+                    {t("peringatan.estimasiRute", {
                       kedalaman: Math.round(sadar.kedalaman_maks_cm),
-                      namaJalan: sadar.nama_jalan?.[0] ?? t("hasilRute.ruteDisarankan"),
-                      jam: labelJam(hasil.waktu_berangkat_wib),
+                      jam: labelHariJam(hasil.waktu_berangkat_wib),
                     })}
                   </p>
                   <p className="t-label peringatan__isi">
