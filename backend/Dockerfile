@@ -7,14 +7,17 @@
 #
 # Berlaku untuk Render, Railway, maupun Fly.io. Ketiganya membaca Dockerfile.
 
-FROM python:3.11.8-slim
+FROM python:3.11-slim
 
 # psycopg2-binary sudah membawa pustaka kliennya sendiri, jadi tidak perlu
 # libpq-dev. numpy dan fastapi murni roda biner. Tidak ada paket sistem yang
 # perlu dipasang, dan itu memang tujuannya.
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
-    PIP_NO_CACHE_DIR=1
+    PIP_NO_CACHE_DIR=1 \
+    OPENBLAS_NUM_THREADS=1 \
+    OMP_NUM_THREADS=1 \
+    MKL_NUM_THREADS=1
 
 WORKDIR /app
 

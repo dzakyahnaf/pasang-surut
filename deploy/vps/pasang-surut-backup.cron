@@ -1,0 +1,2 @@
+# Waktu host: Asia/Jakarta. Hanya database container PASANG SURUT.
+20 3 * * * root /opt/pasang-surut/backup.sh >> /opt/pasang-surut/backup.log 2>&1

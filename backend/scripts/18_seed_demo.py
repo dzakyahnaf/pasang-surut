@@ -57,83 +57,36 @@ JAM = 72
 
 
 def bekukan(mulai: datetime, jam: int) -> dict:
-    selesai = mulai + timedelta(hours=jam - 1)
-
-    with db.koneksi() as kon:
-        repo_ruas = db.RepositoriRuas(kon)
-        ruas = repo_ruas.geojson()
-        ambang = repo_ruas.ambang_moda()
-
-        # SIMPUL UJUNG WAJIB IKUT. `geojson()` sengaja tidak memuat osm_u dan
-        # osm_v karena frontend tidak membutuhkannya. Tetapi mesin routing
-        # membangun grafnya dari pasangan simpul itu, dan tanpa keduanya
-        # seluruh ruas akan tersambung ke simpul yang sama — grafnya menjadi
-        # satu titik, dan perutean gagal dengan galat yang tidak menyebut
-        # sebabnya sama sekali.
-        with kon.cursor() as kur:
-            kur.execute("SELECT edge_id, osm_u, osm_v FROM ruas_jalan")
-            simpul = {int(a_): (int(b_), int(c_)) for a_, b_, c_ in kur.fetchall()}
-    for f in ruas["features"]:
-        u, v = simpul.get(int(f["properties"]["edge_id"]), (0, 0))
-        f["properties"]["osm_u"], f["properties"]["osm_v"] = u, v
-
+    from uuid import uuid4
+    if jam <= 0:
+        raise ValueError("Jumlah jam harus positif")
     with db.koneksi() as kon:
         with kon.cursor() as kur:
-            kur.execute(
-                """
-                SELECT waktu, tinggi_pasut_m FROM pemicu
-                WHERE waktu BETWEEN %s AND %s ORDER BY waktu
-                """,
-                (mulai, selesai),
-            )
-            pemicu = [(w, float(t)) for w, t in kur.fetchall()]
-
-            kur.execute(
-                """
-                SELECT waktu, edge_id, kedalaman_cm, probabilitas, sumber
-                FROM prediksi_genangan
-                WHERE waktu BETWEEN %s AND %s
-                ORDER BY waktu, edge_id
-                """,
-                (mulai, selesai),
-            )
-            baris = kur.fetchall()
-
-    # Genangan disusun per jam. Ruas kering TIDAK disimpan, sama seperti di
-    # database: ruas tanpa entri berarti kering. Menyimpan 19.394 nol untuk
-    # tiap jam akan melipatgandakan ukuran berkas tanpa menambah satu pun
-    # keterangan.
-    per_jam: dict[str, dict] = {}
-    sumber = set()
-    for waktu, edge_id, kedalaman, probabilitas, s in baris:
-        kunci = waktu.isoformat()
-        per_jam.setdefault(kunci, {})[str(int(edge_id))] = [
-            round(float(kedalaman), 1), round(float(probabilitas), 4)
-        ]
-        sumber.add(s)
-
+            kur.execute("SET TRANSACTION ISOLATION LEVEL REPEATABLE READ READ ONLY")
+        repo = db.RepositoriGenangan(kon)
+        meta = repo.cakupan()
+        pilihan = [mulai + timedelta(hours=i) for i in range(jam)]
+        if not meta or any(w not in meta["jam"] for w in pilihan):
+            raise ValueError("Jalankan pipeline prediksi dengan metadata cakupan lengkap dahulu")
+        baris = db.RepositoriRuas(kon).semua_untuk_routing()
+        ruas = {"type": "FeatureCollection", "features": [
+            {"type": "Feature", "properties": {k:v for k,v in r.items() if k != "koordinat"},
+             "geometry": {"type": "LineString", "coordinates": r["koordinat"]}} for r in baris]}
+        ambang = db.RepositoriRuas(kon).ambang_moda()
+        prediksi = repo.peta_kedalaman(pilihan[0], pilihan[-1], sumber=meta["sumber"])
+    from app.domain import pasut
     return {
-        "_catatan": (
-            "Potret beku untuk demo. Dipakai lapisan API hanya bila database "
-            "tidak bisa dihubungi. Dibuat oleh backend/scripts/18_seed_demo.py."
-        ),
+        "_catatan": "Potret beku dari publikasi data dengan cakupan eksplisit.",
         "dibuat": datetime.now(timezone.utc).isoformat(),
-        "mulai": mulai.isoformat(),
-        "selesai": selesai.isoformat(),
-        # Setelah jam ini potret dianggap basi dan TIDAK dipakai.
-        "berlaku_sampai": selesai.isoformat(),
-        "sumber_data": sorted(sumber),
-        "jam": [
-            {"waktu_utc": w.isoformat(), "tinggi_pasut_m": round(t, 4),
-             "ruas_tergenang": len(per_jam.get(w.isoformat(), {})),
-             "kedalaman_maks_cm": round(
-                 max((v[0] for v in per_jam.get(w.isoformat(), {}).values()),
-                     default=0.0), 1)}
-            for w, t in pemicu
-        ],
-        "ambang_moda": ambang,
-        "genangan": per_jam,
-        "ruas": ruas,
+        "mulai": pilihan[0].isoformat(), "selesai": pilihan[-1].isoformat(),
+        "berlaku_sampai": (pilihan[-1]+timedelta(hours=1)).isoformat(),
+        "cakupan": {"versi": str(uuid4()), "versi_asal": meta["versi"],
+                    "jam_lengkap": [w.isoformat() for w in pilihan]},
+        "sumber_data": [meta["sumber"]], "ruas": ruas, "ambang_moda": ambang,
+        "genangan": {w.isoformat(): {str(e): list(v) for e,v in prediksi.get(w,{}).items()} for w in pilihan},
+        "jam": [{"waktu_utc": w.isoformat(), "tinggi_pasut_m": round(float(pasut.tinggi_pasut_m(w)),4),
+                 "ruas_tergenang": sum(v[0]>0 for v in prediksi.get(w,{}).values()),
+                 "kedalaman_maks_cm": max((v[0] for v in prediksi.get(w,{}).values()),default=0.0)} for w in pilihan],
     }
 
 
@@ -169,9 +122,10 @@ def main() -> int:
     if a.periksa:
         return periksa()
 
-    mulai = (datetime.fromisoformat(a.mulai).replace(tzinfo=timezone.utc)
-             if a.mulai else
+    mulai = (datetime.fromisoformat(a.mulai) if a.mulai else
              datetime.now(timezone.utc).replace(minute=0, second=0, microsecond=0))
+    mulai = (mulai.replace(tzinfo=timezone.utc) if mulai.tzinfo is None
+             else mulai.astimezone(timezone.utc))
 
     print(f"membekukan {a.jam} jam sejak {mulai:%Y-%m-%d %H:%M} UTC ...")
     potret = bekukan(mulai, a.jam)

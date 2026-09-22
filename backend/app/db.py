@@ -17,6 +17,8 @@ from __future__ import annotations
 import atexit
 import threading
 import time
+from datetime import timedelta
+from uuid import uuid4
 from contextlib import contextmanager
 from typing import Iterable, Iterator, Sequence
 
@@ -217,6 +219,8 @@ class RepositoriRuas:
         """
         with self._kon.cursor() as kur:
             kur.execute("TRUNCATE ruas_jalan RESTART IDENTITY CASCADE")
+            # CASCADE menghapus prediksi, jadi bukti kelengkapannya ikut gugur.
+            kur.execute("DELETE FROM cakupan_prediksi")
 
     def sisipkan_banyak(self, baris: Iterable[Sequence]) -> int:
         """Sisipkan banyak ruas sekaligus.
@@ -488,7 +492,9 @@ class RepositoriGenangan:
         """
         with self._kon.cursor() as kur:
             kur.execute("DELETE FROM prediksi_genangan WHERE sumber = %s", (sumber,))
-            return kur.rowcount
+            jumlah = kur.rowcount
+            kur.execute("DELETE FROM cakupan_prediksi WHERE sumber = %s", (sumber,))
+            return jumlah
 
     def sisipkan_banyak(self, baris: Iterable[Sequence]) -> int:
         """Urutan kolom: (edge_id, waktu, kedalaman_cm, probabilitas, sumber).
@@ -537,27 +543,53 @@ class RepositoriGenangan:
             awal, akhir = kur.fetchone()
             return awal, akhir
 
-    def peta_kedalaman(self, mulai, selesai) -> dict:
+    def cakupan(self) -> dict | None:
+        with self._kon.cursor() as kur:
+            kur.execute("SELECT versi, sumber, jam_lengkap, akhir_eksklusif "
+                        "FROM cakupan_prediksi WHERE id = 1")
+            baris = kur.fetchone()
+        return dict(zip(("versi", "sumber", "jam", "akhir"), baris)) if baris else None
+
+    def publikasikan(self, baris, jam_lengkap, sumber):
+        """Baris dan bukti jam lengkap terbit atomik dalam transaksi pemanggil."""
+        jam = sorted(set(jam_lengkap))
+        if (not jam or any(j.minute or j.second or j.microsecond or j.tzinfo is None for j in jam)
+                or any(b - a != timedelta(hours=1) for a, b in zip(jam, jam[1:]))):
+            raise ValueError("Publikasi memerlukan jam lengkap berurutan dalam UTC")
+        baris = list(baris)
+        if any(b[1] not in jam or b[4] != sumber for b in baris):
+            raise ValueError("Baris prediksi tidak sesuai publikasi")
+        self.kosongkan_sumber(sumber)
+        jumlah = self.sisipkan_banyak(baris)
+        with self._kon.cursor() as kur:
+            kur.execute("""
+                INSERT INTO cakupan_prediksi (id, versi, sumber, jam_lengkap, akhir_eksklusif)
+                VALUES (1, %s, %s, %s, %s)
+                ON CONFLICT (id) DO UPDATE SET versi=EXCLUDED.versi,
+                    sumber=EXCLUDED.sumber, jam_lengkap=EXCLUDED.jam_lengkap,
+                    akhir_eksklusif=EXCLUDED.akhir_eksklusif, diterbitkan=NOW()
+            """, (str(uuid4()), sumber, jam, jam[-1] + timedelta(hours=1)))
+        return jumlah
+
+    def peta_kedalaman(self, mulai, selesai, sumber=None) -> dict:
         """Seluruh prediksi pada rentang waktu, disusun per jam.
 
         Bentuk hasilnya: { waktu: { edge_id: (kedalaman_cm, probabilitas) } }
 
-        Dimuat sekaligus, bukan satu kueri per jam, karena mesin routing
-        yang sadar waktu berpindah jam sepanjang penelusuran. Menanyakan
-        database di tengah Dijkstra akan membuat satu permintaan rute
-        memicu ribuan kueri.
+        Dimuat sekaligus ke snapshot runtime. Pergantian pilihan jam dan
+        pencarian saran jam memakai snapshot yang sama tanpa query baru.
 
-        Ingat: ruas kering TIDAK punya baris. Ruas yang tidak muncul di sini
-        berarti kering, bukan berarti datanya hilang.
+        Ruas tanpa baris hanya boleh dianggap kering setelah pemanggil
+        memeriksa metadata cakupan lengkap untuk jam dan sumber tersebut.
         """
         with self._kon.cursor() as kur:
             kur.execute(
                 """
                 SELECT waktu, edge_id, kedalaman_cm, probabilitas
                 FROM prediksi_genangan
-                WHERE waktu BETWEEN %s AND %s
+                WHERE waktu BETWEEN %s AND %s AND (%s IS NULL OR sumber = %s)
                 """,
-                (mulai, selesai),
+                (mulai, selesai, sumber, sumber),
             )
             hasil: dict = {}
             for waktu, edge_id, kedalaman, probabilitas in kur.fetchall():

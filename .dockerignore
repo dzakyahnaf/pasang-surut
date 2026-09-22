@@ -6,6 +6,17 @@
 # kecil sesudah.
 
 .git
+.env
+.env.*
+**/*.env
+.deploy-local
+deploy
+migration
+pipeline
+tests
+testscripts
+compose.yml
+Caddyfile
 .venv
 **/__pycache__
 **/*.pyc

@@ -1,0 +1,22 @@
+{
+  "browser": "Edge headless, localhost",
+  "errors": [],
+  "route_requests_including_failed_retry": 3,
+  "geometry_requests_bootstrap_including_dev_strictmode": 2,
+  "geometry_extra_requests_on_slider": 0,
+  "wet_feature_states": 1043,
+  "api_requests": [
+    "/api/jam",
+    "/api/jaringan",
+    "/api/tujuan-cepat",
+    "/api/jam",
+    "/api/jaringan",
+    "/api/tujuan-cepat",
+    "/api/kondisi?waktu=2026-09-25T17%3A00%3A00%2B00%3A00",
+    "/api/rute",
+    "/api/rute",
+    "/api/kondisi?waktu=2026-09-26T01%3A00%3A00%2B00%3A00",
+    "/api/rute"
+  ],
+  "final_slider": 8
+}

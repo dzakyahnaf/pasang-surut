@@ -107,11 +107,13 @@ export default function PitaPasut({ jam, indeks, onPilih, memuat = false }) {
   const mulaiGeser = (e) => {
     e.currentTarget.setPointerCapture?.(e.pointerId);
     setMenggeser(true);
-    onPilih(indeksDariX(e.clientX));
+    const calon = indeksDariX(e.clientX);
+    if (jam[calon]?.tersedia) onPilih(calon);
   };
   const saatGeser = (e) => {
     if (!menggeser) return;
-    onPilih(indeksDariX(e.clientX));
+    const calon = indeksDariX(e.clientX);
+    if (jam[calon]?.tersedia) onPilih(calon);
   };
   const selesaiGeser = (e) => {
     e.currentTarget.releasePointerCapture?.(e.pointerId);
@@ -141,7 +143,12 @@ export default function PitaPasut({ jam, indeks, onPilih, memuat = false }) {
 
     e.preventDefault();
     const batasi = (nilai) => Math.min(n - 1, Math.max(0, nilai));
-    onPilih(mutlak !== null ? mutlak : (sebelumnya) => batasi(sebelumnya + langkah));
+    onPilih((sebelumnya) => {
+      let calon = mutlak !== null ? mutlak : batasi(sebelumnya + langkah);
+      const arah = mutlak === 0 ? 1 : mutlak === n - 1 ? -1 : Math.sign(langkah);
+      while (calon >= 0 && calon < n && !jam[calon]?.tersedia) calon += arah;
+      return calon >= 0 && calon < n ? calon : sebelumnya;
+    });
   };
 
   if (!n) {
@@ -195,6 +202,11 @@ export default function PitaPasut({ jam, indeks, onPilih, memuat = false }) {
             </linearGradient>
           </defs>
 
+          {jam.map((j, i) => !j.tersedia ? (
+            <rect key={`kosong-${i}`} x={x(i) - lebarGambar / Math.max(n - 1, 1) / 2}
+              y={puncak} width={Math.max(lebarGambar / Math.max(n - 1, 1), 1.5)}
+              height={Math.max(dasar - puncak, 1)} fill="var(--tinta-3)" opacity="0.25" />
+          ) : null)}
           {/* Arsiran jam berisiko genangan. Digambar paling bawah supaya
               kurva dan guratan tetap terbaca di atasnya. */}
           {jam.map((j, i) =>
@@ -213,7 +225,7 @@ export default function PitaPasut({ jam, indeks, onPilih, memuat = false }) {
 
           {/* Penanda jam aman */}
           {jam.map((j, i) =>
-            j.ruas_tergenang === 0 ? (
+            j.tersedia && j.ruas_tergenang === 0 ? (
               <rect
                 key={`aman-${i}`}
                 x={x(i) - 0.75}

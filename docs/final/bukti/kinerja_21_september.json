@@ -1,0 +1,31 @@
+{
+  "tanggal_utc": "2026-09-21T13:58:26.798824+00:00",
+  "lingkungan": "Windows localhost, potret, satu worker; bukan container Linux/VPS",
+  "sampel_per_endpoint": 90,
+  "putaran": 3,
+  "rute_p95_ms": 317.2,
+  "kondisi_p95_ms": 6.19,
+  "geometri_sekali_bytes": 4464414,
+  "kondisi_min_maks_bytes": [
+    290,
+    20442
+  ],
+  "rss_awal_mib": 121.0,
+  "rss_per_putaran_mib": [
+    121.3,
+    120.1,
+    121.3
+  ],
+  "rss_puncak_sampel_mib": 126.2,
+  "enam_request_lokal_status": [
+    200,
+    200,
+    503,
+    503,
+    503,
+    503
+  ],
+  "windows_private_mib": 108.1,
+  "windows_peak_wset_mib": 130.8,
+  "windows_peak_pagefile_mib": 117.7
+}

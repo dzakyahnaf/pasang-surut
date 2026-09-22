@@ -1,0 +1,32 @@
+{
+  "tables": {
+    "ruas_jalan": {
+      "rows": 19394,
+      "sha256_csv": "f73174b48dcfbcb510e1cf0c6f55d6e156cecf7395fdf7204f47ff30eb199aa9"
+    },
+    "pemicu": {
+      "rows": 103080,
+      "sha256_csv": "e15718ff644dbfa7941c108b3027bebdaf376a58d05d38a3e73e93e76a86c1e4"
+    },
+    "prediksi_genangan": {
+      "rows": 67442,
+      "sha256_csv": "ce66ed3ef6706d626f7760c70a984f09a8f095fb9435bfb3aea53aacbd2f96fa"
+    },
+    "sampel_latih": {
+      "rows": 0,
+      "sha256_csv": "854fd37f5154b2f453bebf5760f1cf74ead20cee6be823c74a7b145c207ae530"
+    },
+    "ambang_moda": {
+      "rows": 3,
+      "sha256_csv": "8a205992c628fec20e4cd3696ccd03c1b92c54bbe4aef0fb22954db842658d25"
+    }
+  },
+  "tests": {
+    "copy_identik_semua_tabel": true,
+    "migrasi_idempoten": true,
+    "geometri_valid": true,
+    "jam_kering_dan_pembatalan_metadata": true,
+    "rollback_publikasi_gagal": true,
+    "akun_api_hanya_baca": true
+  }
+}

@@ -1,5 +1,13 @@
 # Batasan yang diketahui
 
+**Pembaruan runtime 21 September 2026:** perutean memakai kondisi jam
+keberangkatan tetap sepanjang satu pencarian. Optimalitas hanya untuk model
+biaya tetap tersebut; perubahan kondisi selama perjalanan belum dimodelkan.
+Data tanpa cakupan lengkap ditolak. Potret final bertanggal 26–28 September,
+bukan pembacaan genangan langsung. Elevasi relatif memakai median lingkungan
+3 × 3 sel grid bersisi 500 m; angka akurasi rekonstruksi pasut tidak berlaku
+sebagai akurasi genangan per ruas. Lihat [hasil implementasi](final/hasil_21_september.md).
+
 > Bahan bagian 5 proposal dan bagian 8 README. Diisi sepanjang pengerjaan,
 > bukan di akhir. Setiap batasan yang ditulis sendiri di sini adalah satu
 > pertanyaan juri yang sudah terjawab lebih dulu.

@@ -1,5 +1,32 @@
 # Persiapan tahap final DSDC ANFORCOM 2026
 
+> **Pembaruan 22 September:** API, frontend, dan database sudah dipindahkan
+> ke staging privat VPS dan diuji, termasuk backup/restore serta pemulihan
+> database. Maknaprice tidak diubah. Alamat Vercel dipertahankan, tetapi
+> pengalihan publik tertahan persetujuan spesifik pembukaan origin HTTP.
+> Baca [laporan migrasi terbaru](final/migrasi_vps_22_september.md).
+> Label nama jalan/wilayah/tempat tetap perlu diselesaikan sebelum rekaman
+> demo; jangan menyamakan validasi pasut dengan akurasi genangan per ruas.
+
+> **Pembaruan 21 September:** empat perbaikan sudah diterapkan dan diuji lokal.
+> Render berbayar ditolak; VPS Maknaprice sudah diperiksa sebagai kandidat API
+> dan frontend. Belum ada deploy/migrasi. Baca
+> [hasil implementasi dan pemeriksaan VPS](final/hasil_21_september.md).
+
+> **Pembaruan 20 September:** gunakan
+> [rencana berdasarkan audit terbaru](rencana_final_20_september.md) untuk
+> prioritas, jadwal, dan pembagian tugas hingga 24 September. Kehadiran ketiga
+> anggota sudah dikonfirmasi dan diterima panitia. Kewajiban PDF dikonfirmasi
+> Dzaky berasal dari jawaban langsung panitia. Setelah laporan OOM Render
+> pukul 17.09 WIB, kapasitas hosting sedang dievaluasi atas permintaan Dzaky;
+> belum ada migrasi/pembelian. Paket hari pertama tersedia dalam
+> [pembagian kerja dan inventaris](final/paket_20_september.md).
+> Run terjadwal Jaga hidup kini sudah berjalan, tetapi interval teramati masih
+> berjam-jam. Temuan baru mencakup retry UI, cakupan waktu data, kinerja, dan
+> kasus routing saat pergantian jam; 43 unit test serta 35 tes HTTP yang lama
+> belum mencakup seluruh temuan tersebut. Isi di bawah adalah catatan 19–20
+> September sebelum audit terbaru dan perlu dibaca dengan pembaruan ini.
+
 Disusun 19 September 2026 dari rulebook bagian 9 dan 10, catatan panitia, dan
 pemeriksaan langsung terhadap aplikasi yang sedang tayang. Nomor pasal di
 bawah merujuk ke rulebook.

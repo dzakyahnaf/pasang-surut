@@ -5,8 +5,8 @@
  * Rail kiri berbadan gelap berisi kontrol dan hasil, Pita Pasut melintang
  * penuh di bawah.
  *
- * Yang BELUM ada dan menyusul di milestone berikutnya: panel dampak dengan
- * empat angka, tombol tujuan cepat, dan halaman validasi.
+ * Pengambilan data, pembatalan request, dan percobaan ulang ada di
+ * usePerjalanan agar interaksi peta dan panel memakai waktu yang sama.
  */
 
 import { useCallback, useEffect, useState } from "react";
@@ -20,39 +20,20 @@ import PanelDampak from "./components/PanelDampak.jsx";
 import PeringatanPaparan from "./components/PeringatanPaparan.jsx";
 import TujuanCepat from "./components/TujuanCepat.jsx";
 import HalamanValidasi from "./pages/HalamanValidasi.jsx";
-import { ambilJam, ambilRuas, ambilTujuanCepat, hitungRute } from "./lib/api.js";
+import { ambilTujuanCepat } from "./lib/api.js";
+import { usePerjalanan } from "./lib/usePerjalanan.js";
 import { t } from "./lib/teks.js";
 import { labelHariJam } from "./lib/waktu.js";
 
-/** Ubah galat dari API menjadi kalimat yang ada di copy.id.json. */
-function pesanGalat(e) {
-  if (e?.kode === "asal_jauh_dari_jalan" || e?.kode === "tujuan_jauh_dari_jalan") {
-    return t("galat.titikTerlaluJauhDariJalan");
-  }
-  if (e?.status === 503) return t("galat.serverTidakMerespons");
-  if (e?.status === 422 || e?.status === 400) return t("galat.ruteGagal");
-  return t("galat.serverTidakMerespons");
-}
-
 export default function App() {
-  const [jam, setJam] = useState([]);
-  const [indeksJam, setIndeksJam] = useState(0);
-  const [geojson, setGeojson] = useState(null);
-  const [memuat, setMemuat] = useState(true);
-  // Sumbu waktu punya penanda muatnya SENDIRI. Tanpa ini Pita Pasut
-  // menampilkan keadaan kosong selama sedetik pertama, dan keadaan kosong
-  // itu menyuruh pengguna melakukan sesuatu yang tidak perlu.
-  const [memuatJam, setMemuatJam] = useState(true);
-  const [galatMuat, setGalatMuat] = useState(null);
-
   const [asal, setAsal] = useState(null);
   const [tujuan, setTujuan] = useState(null);
   const [modePilih, setModePilih] = useState("asal");
   const [moda, setModa] = useState("motor");
 
-  const [hasil, setHasil] = useState(null);
-  const [sedangMencari, setSedangMencari] = useState(false);
-  const [galatRute, setGalatRute] = useState(null);
+  const { jam, infoJam, indeksJam, setIndeksJam, waktuAktif, waktuTersedia,
+    geojson, kondisi, hasil, memuat, memuatJam, galatMuat, sedangMencari,
+    galatRute, cariUlang, muatUlang } = usePerjalanan(asal, tujuan, moda);
   const [tampilkanRuteBiasa, setTampilkanRuteBiasa] = useState(true);
 
   const [tujuanCepat, setTujuanCepat] = useState([]);
@@ -68,114 +49,16 @@ export default function App() {
     document.title = t("aplikasi.nama");
   }, []);
 
-  // ── Muat sumbu waktu SAJA ─────────────────────────────────────────
-  //
-  // KENAPA HANYA JAM, DAN KENAPA INI PERNAH SALAH.
-  //
-  // Versi sebelumnya menarik `/api/jam` dan `/api/ruas` bersama-sama dengan
-  // `Promise.all`. Keduanya lalu menunggu yang paling lambat, dan yang paling
-  // lambat jauh lebih besar: sumbu waktu 72 jam hanya beberapa kilobita,
-  // sedangkan jaringan jalan 19.394 ruas berukuran 6,6 MB.
-  //
-  // Akibatnya Pita Pasut — elemen tanda tangan antarmuka ini — menampilkan
-  // "belum dihitung" selama seluruh unduhan berlangsung, padahal datanya
-  // sudah tiba sejak detik pertama. Di ponsel kelas menengah pada jaringan
-  // seluler, yaitu pengguna yang disebut DESIGN.md bagian 1, layar pertama
-  // tampak rusak selama puluhan detik.
-  //
-  // Lebih buruk lagi, `ambilRuas()` tanpa argumen di sini SIA-SIA: begitu
-  // `jam` masuk, `waktuAktif` terisi dan efek di bawah segera menarik ulang
-  // jaringan yang sama untuk jam aktif. Muat pertama mengunduh 13,2 MB dan
-  // membuang separuhnya.
-  //
-  // Jadi di sini hanya sumbu waktu. Jaringan jalan dibiarkan diambil satu
-  // kali oleh efek `waktuAktif`, yang memang harus berjalan.
   useEffect(() => {
-    let dibatalkan = false;
-    (async () => {
-      setGalatMuat(null);
-      try {
-        const dataJam = await ambilJam();
-        if (!dibatalkan) setJam(dataJam.jam ?? []);
-      } catch (e) {
-        if (dibatalkan) return;
-        setGalatMuat(pesanGalat(e));
-        // Tanpa jam, `waktuAktif` tidak pernah ada dan efek di bawah tidak
-        // pernah berjalan. Penanda muat harus dilepas di sini, kalau tidak
-        // peta tertahan pada "memuat" selamanya tanpa galat apa pun.
-        setMemuat(false);
-      } finally {
-        if (!dibatalkan) setMemuatJam(false);
-      }
-    })();
-    return () => { dibatalkan = true; };
+    const c = new AbortController();
+    ambilTujuanCepat({ signal: c.signal }).then((data) => {
+      if (!c.signal.aborted) setTujuanCepat(data.tujuan ?? []);
+    }).catch(() => {}).finally(() => {
+      if (!c.signal.aborted) setMemuatTujuan(false);
+    });
+    return () => c.abort();
   }, []);
 
-  // ── Muat tujuan cepat, sekali ─────────────────────────────────────
-  // Kegagalannya sengaja tidak memunculkan galat di layar: tujuan cepat
-  // adalah jalan pintas, bukan syarat. Peta dan perutean tetap berguna
-  // tanpanya, dan galat yang tidak menghalangi apa pun hanya menambah
-  // kebisingan.
-  useEffect(() => {
-    let dibatalkan = false;
-    (async () => {
-      try {
-        const data = await ambilTujuanCepat();
-        if (!dibatalkan) setTujuanCepat(data.tujuan ?? []);
-      } catch {
-        if (!dibatalkan) setTujuanCepat([]);
-      } finally {
-        if (!dibatalkan) setMemuatTujuan(false);
-      }
-    })();
-    return () => { dibatalkan = true; };
-  }, []);
-
-  // ── Jam berganti: muat ulang lapisan genangan ─────────────────────
-  const waktuAktif = jam[indeksJam]?.waktu_utc ?? null;
-
-  useEffect(() => {
-    if (!waktuAktif) return;
-    let dibatalkan = false;
-    (async () => {
-      try {
-        const data = await ambilRuas(waktuAktif);
-        if (!dibatalkan) setGeojson(data);
-      } catch (e) {
-        if (!dibatalkan) setGalatMuat(pesanGalat(e));
-      } finally {
-        // Penanda muat peta ditutup DI SINI, bukan saat sumbu waktu tiba,
-        // karena yang digerbanginya memang jaringan jalan.
-        if (!dibatalkan) setMemuat(false);
-      }
-    })();
-    return () => { dibatalkan = true; };
-  }, [waktuAktif]);
-
-  // Rute ikut dihitung ulang saat jam berganti, selama kedua titik sudah
-  // dipilih. Inilah yang membuat menggeser Pita Pasut benar-benar mengubah
-  // rute di layar, bukan hanya mengubah warna genangan.
-  useEffect(() => {
-    if (!waktuAktif || !asal || !tujuan) return;
-    let dibatalkan = false;
-    (async () => {
-      setSedangMencari(true);
-      setGalatRute(null);
-      try {
-        const data = await hitungRute({
-          asal, tujuan, waktu: waktuAktif, moda,
-        });
-        if (!dibatalkan) setHasil(data);
-      } catch (e) {
-        if (!dibatalkan) { setHasil(null); setGalatRute(pesanGalat(e)); }
-      } finally {
-        if (!dibatalkan) setSedangMencari(false);
-      }
-    })();
-    return () => { dibatalkan = true; };
-  }, [waktuAktif, asal, tujuan, moda]);
-
-  // ── Ketuk peta memilih titik ──────────────────────────────────────
   const klikPeta = useCallback((koordinat) => {
     if (modePilih === "asal") {
       setAsal(koordinat);
@@ -189,8 +72,6 @@ export default function App() {
   const hapusTitik = useCallback((peran) => {
     if (peran === "asal") setAsal(null);
     else setTujuan(null);
-    setHasil(null);
-    setGalatRute(null);
     setModePilih(peran);
   }, []);
 
@@ -205,25 +86,21 @@ export default function App() {
   // sudah menghasilkan rute tanpa perlu dituntun sama sekali.
   const pilihTujuanCepat = useCallback((tj) => {
     setTujuanTerpilih(tj.kunci);
-    setAsal((asalSekarang) => {
-      if (!asalSekarang) {
-        setModePilih("tujuan");
-        return [tj.lon, tj.lat];
-      }
+    if (!asal) {
+      setAsal([tj.lon, tj.lat]);
+      setModePilih("tujuan");
+    } else {
       setTujuan([tj.lon, tj.lat]);
       setModePilih("asal");
-      return asalSekarang;
-    });
-  }, []);
+    }
+  }, [asal]);
 
-  // Saran "berangkat pukul sekian" hanya berguna kalau bisa ditekan dan
-  // langsung memindahkan Pita Pasut ke jam itu.
   const pilihJamAman = useCallback((jamAman) => {
     const i = jam.findIndex((j) => j.waktu_utc === jamAman.waktu_utc);
-    if (i >= 0) setIndeksJam(i);
+    if (i >= 0 && jam[i].tersedia) setIndeksJam(i);
   }, [jam]);
 
-  const sumberData = hasil?.sumber_data ?? geojson?.sumber_data ?? [];
+  const sumberData = hasil?.sumber_data ?? kondisi?.sumber_data ?? infoJam?.sumber_data ?? [];
 
   // Rute yang dikirim ke peta. Rute pembanding bisa disembunyikan pengguna,
   // tetapi rute sadar rob tidak pernah.
@@ -259,7 +136,8 @@ export default function App() {
           onPilihMode={setModePilih}
           onHapusTitik={hapusTitik}
           onGantiModa={setModa}
-          onCari={() => setIndeksJam((i) => i)}
+          onCari={cariUlang}
+          waktuTersedia={waktuTersedia}
           onTampilkanRuteBiasa={() => setTampilkanRuteBiasa((v) => !v)}
         >
           <button
@@ -291,6 +169,7 @@ export default function App() {
         <div className="jendela-peta">
           <Peta
             geojson={geojson}
+            kondisi={kondisi}
             rute={ruteTampil}
             asal={asal}
             tujuan={tujuan}
@@ -300,6 +179,7 @@ export default function App() {
           <div className="plat plat--kiri-atas">
             <div className="plat__judul t-judul">{t("aplikasi.nama")}</div>
             <div className="plat__anak t-label">{t("aplikasi.wilayah")}</div>
+            {infoJam?.asal_jaringan === "potret" ? <div className="t-label">{t("peta.potretDemo")}</div> : null}
             {waktuAktif ? (
               <div className="plat__jam t-data">{labelHariJam(waktuAktif)}</div>
             ) : null}
@@ -324,7 +204,7 @@ export default function App() {
 
           {memuat ? (
             <div className="pesan pesan--muat" role="status" aria-live="polite">
-              <span className="t-bagian">{t("memuat.jaringanJalan")}</span>
+              <span className="t-bagian">{t(geojson ? "memuat.memperbarui" : "memuat.jaringanJalan")}</span>
               <span className="t-label pesan__rincian">
                 {t("memuat.jaringanJalanRincian")}
               </span>
@@ -334,6 +214,7 @@ export default function App() {
           {galatMuat ? (
             <div className="pesan pesan--galat" role="alert">
               <span className="t-bagian">{galatMuat}</span>
+              <button type="button" className="tombol-utama" onClick={muatUlang}>{t("pencarianRute.cariUlang")}</button>
             </div>
           ) : null}
         </div>

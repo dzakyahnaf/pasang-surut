@@ -40,3 +40,5 @@ python-dotenv==1.2.3      # baca .env tanpa menaruh secret di kode
 
 # ── Uji ────────────────────────────────────────────────────────────────
 pytest==9.1.1             # test runner
+
+httpx==0.28.1             # TestClient untuk regresi kontrak API tanpa server produksi

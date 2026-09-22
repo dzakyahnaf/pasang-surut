@@ -1,5 +1,20 @@
 # Tugas manual — yang hanya bisa dikerjakan manusia
 
+> **Pembaruan 21 September:** perbaikan kode selesai diuji lokal; kandidat
+> hosting beralih ke VPS Maknaprice yang sudah diperiksa. Belum ada deploy.
+> Rincian pada [hasil 21 September](final/hasil_21_september.md). Materi,
+> konfirmasi tenggat PDF saat TM, dan gladi perangkat tetap perlu tim.
+
+> **Pembaruan 20 September:** F1 sudah selesai: Dzaky mengonfirmasi panitia
+> menerima kehadiran dan seluruh anggota hadir. PDF merupakan ketentuan dari
+> jawaban langsung panitia; tenggat belum diumumkan. Demo lokal serta
+> pemanasan/ping tetap disiapkan. Setelah notifikasi OOM pukul 17.09 WIB,
+> kapasitas Render dan opsi VPS sedang dievaluasi; belum ada pembelian.
+> Pembagian kerja/inventaris ada di [paket 20 September](final/paket_20_september.md);
+> checklist lengkap ada di [rencana final](rencana_final_20_september.md).
+> Catatan F7 di bawah sudah historis: jadwal Actions kini berjalan, tetapi
+> jedanya masih berjam-jam sehingga tidak menggantikan penjagaan hari H.
+
 Berkas ini adalah **satu tempat** untuk seluruh tugas yang tidak bisa
 dikerjakan Claude Code, dikumpulkan dari seluruh sesi. Diperbarui tiap sesi.
 

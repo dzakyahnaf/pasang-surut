@@ -1,0 +1,91 @@
+{
+  "utc": "2026-09-21T19:29:32.858940+00:00",
+  "lingkungan": "VPS Linux loopback, satu worker, CPU 0.8",
+  "mode": "database",
+  "samples": 30,
+  "health_ms": 19.17,
+  "route_p95_ms": 724.39,
+  "condition_p95_ms": 17.59,
+  "route_min_max_ms": [
+    87.43,
+    726.61
+  ],
+  "geometry_ms": 170.19,
+  "geometry_bytes": 4464454,
+  "condition_bytes_min_max": [
+    292,
+    20444
+  ],
+  "route_results": {
+    "2026-09-25T17:00:00+00:00": [
+      {
+        "jenis": "rute_abai_rob",
+        "menit": 7.0,
+        "jarak_km": 6.32,
+        "ruas_tergenang": 0
+      },
+      {
+        "jenis": "rute_sadar_rob",
+        "menit": 7.0,
+        "jarak_km": 6.32,
+        "ruas_tergenang": 0
+      }
+    ],
+    "2026-09-26T01:00:00+00:00": [
+      {
+        "jenis": "rute_abai_rob",
+        "menit": 7.0,
+        "jarak_km": 6.32,
+        "ruas_tergenang": 29
+      },
+      {
+        "jenis": "rute_sadar_rob",
+        "menit": 13.9,
+        "jarak_km": 10.58,
+        "ruas_tergenang": 14
+      }
+    ],
+    "2026-09-26T06:00:00+00:00": [
+      {
+        "jenis": "rute_abai_rob",
+        "menit": 7.0,
+        "jarak_km": 6.32,
+        "ruas_tergenang": 0
+      },
+      {
+        "jenis": "rute_sadar_rob",
+        "menit": 7.0,
+        "jarak_km": 6.32,
+        "ruas_tergenang": 0
+      }
+    ],
+    "2026-09-27T02:00:00+00:00": [
+      {
+        "jenis": "rute_abai_rob",
+        "menit": 7.0,
+        "jarak_km": 6.32,
+        "ruas_tergenang": 20
+      },
+      {
+        "jenis": "rute_sadar_rob",
+        "menit": 11.7,
+        "jarak_km": 10.58,
+        "ruas_tergenang": 9
+      }
+    ],
+    "2026-09-27T06:00:00+00:00": [
+      {
+        "jenis": "rute_abai_rob",
+        "menit": 7.0,
+        "jarak_km": 6.32,
+        "ruas_tergenang": 2
+      },
+      {
+        "jenis": "rute_sadar_rob",
+        "menit": 7.2,
+        "jarak_km": 6.32,
+        "ruas_tergenang": 2
+      }
+    ]
+  }
+}

@@ -80,7 +80,7 @@ function AngkaDampak({ nilai, satuan, label, bertanda = false }) {
 export default function PanelRute({
   asal, tujuan, modePilih, moda, hasil, sedangMencari, galat,
   onPilihMode, onHapusTitik, onGantiModa, onCari, onTampilkanRuteBiasa,
-  tampilkanRuteBiasa, children,
+  tampilkanRuteBiasa, children, waktuTersedia = true,
 }) {
   const siap = Boolean(asal && tujuan);
 
@@ -144,12 +144,12 @@ export default function PanelRute({
       <button
         type="button"
         className="tombol-utama t-bagian"
-        disabled={!siap || sedangMencari}
+        disabled={!siap || sedangMencari || !waktuTersedia}
         onClick={onCari}
       >
         {sedangMencari
           ? t("pencarianRute.sedangMencari")
-          : hasil
+          : hasil || galat
             ? t("pencarianRute.cariUlang")
             : t("pencarianRute.cariRute")}
       </button>
@@ -177,6 +177,7 @@ export default function PanelRute({
       {hasil && sadar ? (
         <section className="rail__blok hasil">
           <h2 className="t-bagian rail__judul">{t("hasilRute.judul")}</h2>
+          <p className="t-label">{t("hasilRute.batasModel")}</p>
 
           {sadar.ditemukan ? (
             <>

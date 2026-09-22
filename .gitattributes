@@ -1,0 +1,3 @@
+# Skrip yang dijalankan di Linux harus tetap LF saat checkout di Windows.
+deploy/vps/*.sh text eol=lf
+deploy/vps/*.cron text eol=lf

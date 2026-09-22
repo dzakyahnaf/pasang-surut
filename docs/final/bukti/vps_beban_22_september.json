@@ -1,0 +1,13 @@
+{
+  "requests": 6,
+  "status": [
+    200,
+    503,
+    200,
+    503,
+    503,
+    503
+  ],
+  "healthy_after": true,
+  "scope": "VPS staging via SSH tunnel"
+}

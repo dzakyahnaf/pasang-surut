@@ -159,49 +159,40 @@ def test_rute_berubah_saat_waktu_diubah(graf_uji):
     assert jam_kering.edge_ids != jam_rob.edge_ids
 
 
-def test_bobot_dihitung_pada_waktu_tiba_bukan_waktu_berangkat():
-    """Inti time-dependent: yang menentukan adalah jam TIBA di ruas.
-
-    Graf lurus A -> B -> C. Ruas pertama sengaja dibuat sangat lambat
-    sehingga menempuhnya memakan lebih dari satu jam. Ruas kedua kering pada
-    jam keberangkatan tetapi tergenang parah pada jam kedatangan.
-
-    Mesin yang menghitung bobot pada waktu berangkat akan melihat ruas kedua
-    kering dan melaporkan waktu tempuh singkat. Mesin yang benar melihatnya
-    tergenang dan waktunya membengkak.
-    """
-    A, B, C = 1, 2, 3
-    ruas = [
-        # 9.000 m pada 9 km/jam = tepat 1 jam
-        _ruas(301, A, B, 9000.0, [[110.40, -6.95], [110.41, -6.95]], kecepatan=9.0),
-        _ruas(302, B, C, 1000.0, [[110.41, -6.95], [110.42, -6.95]], kecepatan=36.0),
-    ]
-    graf = routing.GrafJalan(ruas)
-
-    # Jam 0 kering, jam 1 tergenang 25 cm. Untuk motor 25 cm berada di antara
-    # berisiko (20) dan tidak bisa lewat (30), jadi penaltinya besar tetapi
-    # ruas masih bisa dilewati.
-    peta = _kedalaman({0: {}, 1: {302: 25.0}})
-
-    hasil = routing.cari_rute(graf, A, C, WAKTU_AWAL, AMBANG_MOTOR, peta)
-
-    assert hasil.ditemukan
-    assert hasil.edge_ids == [301, 302]
-
-    detik_dasar_302 = 1000.0 / (36.0 / 3.6)   # 100 detik
-    detik_301 = 3600.0
-    # Kalau genangan dibaca pada jam berangkat, totalnya akan 3700 detik.
-    assert hasil.detik > detik_301 + detik_dasar_302 * 1.5, (
-        "genangan tampaknya dibaca pada waktu berangkat, bukan waktu tiba"
-    )
-    # Dan ruas tergenang di jalur itu harus terhitung.
-    assert hasil.ruas_tergenang == 1
-    assert hasil.kedalaman_maks_cm == pytest.approx(25.0)
+def test_kondisi_berangkat_tetap_meski_perjalanan_melewati_jam():
+    graf = routing.GrafJalan([
+        _ruas(301, 1, 2, 9000.0, [[110.40,-6.95],[110.41,-6.95]], kecepatan=9.0),
+        _ruas(302, 2, 3, 1000.0, [[110.41,-6.95],[110.42,-6.95]]),
+    ])
+    peta = _kedalaman({0: {}, 1: {302: 40.0}})
+    awal = routing.cari_rute(graf, 1, 3, WAKTU_AWAL, AMBANG_MOTOR, peta)
+    assert awal.detik == pytest.approx(3700)
+    assert awal.ruas_tergenang == 0
+    assert awal.kedalaman_per_ruas_cm == [0, 0]
+    sesudah = routing.cari_rute(graf, 1, 3, WAKTU_AWAL+timedelta(hours=1), AMBANG_MOTOR, peta)
+    assert not sesudah.ditemukan
 
 
-# ══════════════════════════════════════════════════════════════════════════
-# Penalti dan ambang
-# ══════════════════════════════════════════════════════════════════════════
+def test_kasus_non_fifo_dibandingkan_dengan_enumerasi_model_biaya_tetap():
+    # Kasus audit: solver dinamis lama melewatkan jalur 3661 detik.
+    # Model yang disetujui berubah: biaya tetap selama satu pencarian.
+    # Hitung semua jalur sederhana pada graf ini sebagai pembanding independen.
+    edges = [(1,0,1,3599),(2,0,2,1800),(3,2,1,1801),(4,1,3,60)]
+    graf = routing.GrafJalan([
+        _ruas(e,u,v,float(d),[[110.4+u*.001,-6.95],[110.4+v*.001,-6.95]],
+              satu_arah=True,kecepatan=3.6) for e,u,v,d in edges
+    ])
+    peta = _kedalaman({0:{4:29.0},1:{}})
+    for berangkat, biaya4 in [(WAKTU_AWAL,447),
+            (WAKTU_AWAL+timedelta(seconds=3599),447),
+            (WAKTU_AWAL+timedelta(hours=1),60)]:
+        semua_jalur = [3599+biaya4,1800+1801+biaya4]
+        hasil = routing.cari_rute(graf,0,3,berangkat,AMBANG_MOTOR,peta)
+        assert hasil.detik == pytest.approx(min(semua_jalur))
+        assert hasil.edge_ids == [1,4]
+        assert hasil.kedalaman_maks_cm == (29 if biaya4 == 447 else 0)
+
+
 def test_penalti_naik_monoton_lalu_tak_terhingga():
     a = AMBANG_MOTOR
     assert routing.penalti_genangan(0.0, a) == 1.0

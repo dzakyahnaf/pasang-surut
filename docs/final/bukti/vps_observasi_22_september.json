@@ -1,0 +1,13 @@
+{
+  "samples": 122,
+  "start_utc": "2026-09-21T19:00:57.341798+00:00",
+  "end_utc": "2026-09-21T19:45:55.540526+00:00",
+  "elapsed_minutes": 44.97,
+  "min_available_mib": 533.4,
+  "max_available_mib": 776.9,
+  "max_swap_used_mib": 215.8,
+  "maknaprice_all_http_200": true,
+  "stop_guard_triggered": false,
+  "maknaprice_identity_unchanged": true,
+  "scope": "Observasi mencakup uji pemulihan database PASANG SURUT dan perubahan batas API; bukan uji trafik publik."
+}

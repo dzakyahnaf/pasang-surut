@@ -1,27 +1,8 @@
-"""Perutean sadar genangan — Dijkstra yang sadar waktu.
+"""Dijkstra dengan kondisi jam keberangkatan tetap sepanjang satu pencarian.
 
-INTI YANG MEMBEDAKAN MODUL INI DARI ROUTING BIASA.
-
-Routing biasa menghitung bobot sekali di awal lalu mencari lintasan
-termurah. Itu salah untuk rob. Genangan berubah tiap jam, dan sebuah ruas
-yang kering saat pengguna berangkat bisa sudah terendam ketika ia benar-benar
-sampai di sana empat puluh menit kemudian.
-
-Karena itu bobot tiap ruas di sini dihitung pada **perkiraan waktu tiba di
-ruas itu**, bukan pada waktu berangkat. Dijkstra tetap sah dipakai selama
-fungsi waktu tempuhnya tidak pernah membuat orang tiba lebih awal dengan
-berangkat lebih lambat, dan pada rentang 72 jam dengan resolusi satu jam
-syarat itu terpenuhi.
-
-Dua rute dihitung untuk setiap permintaan:
-
-    rute_abai_rob   Mengabaikan genangan sepenuhnya. Ini rute yang akan
-                    diberikan aplikasi peta biasa. Fungsinya sebagai
-                    pembanding, bukan sebagai saran.
-    rute_sadar_rob  Menghindari genangan sesuai ambang moda.
-
-Selisih keduanya adalah satu-satunya pijakan yang sah untuk angka dampak di
-M5. Tanpa pembanding, klaim "menghemat sekian menit" tidak punya dasar.
+Pergantian pilihan jam menghasilkan graf biaya berbeda. Biaya nonnegatif
+mendukung pencarian optimal pada model ini; perubahan kondisi selama
+perjalanan belum dimodelkan. Estimasi bukan jaminan keselamatan di lapangan.
 """
 
 from __future__ import annotations
@@ -249,16 +230,10 @@ def cari_rute(
     peta_kedalaman: dict,
     sadar_rob: bool = True,
 ) -> HasilRute:
-    """Dijkstra sadar waktu dari simpul asal ke simpul tujuan.
+    """Cari biaya minimum pada kondisi jam berangkat yang sudah divalidasi.
 
-    Jarak yang dilonggarkan adalah WAKTU TEMPUH DALAM DETIK sejak berangkat,
-    bukan meter. Itu yang membuat waktu tiba di tiap simpul diketahui
-    sepanjang penelusuran, dan karena itu kedalaman genangan bisa dibaca
-    pada jam yang benar.
-
-    Bila sadar_rob bernilai False, genangan diabaikan sepenuhnya dan
-    hasilnya adalah rute terpendek biasa. Itulah pembanding yang dipakai
-    untuk menghitung dampak.
+    Lapisan API memeriksa cakupan dataset sebelum memanggil fungsi domain.
+    Peta sparse di sini hanya mewakili ruas basah pada jam yang diketahui.
     """
     if simpul_asal == simpul_tujuan:
         return HasilRute(
@@ -286,18 +261,13 @@ def cari_rute(
         if simpul == simpul_tujuan:
             break
 
-        # Inilah bagian yang membuatnya sadar waktu: jam yang dipakai untuk
-        # membaca genangan adalah jam saat pengguna diperkirakan TIBA di
-        # simpul ini, bukan jam ia berangkat dari rumah.
-        waktu_di_simpul = waktu_berangkat + timedelta(seconds=detik_kini)
-
         for sisi in graf.keluar.get(simpul, ()):
             if sisi.ke in selesai:
                 continue
 
             if sadar_rob:
                 kedalaman = _kedalaman_pada(
-                    peta_kedalaman, waktu_di_simpul, sisi.edge_id
+                    peta_kedalaman, waktu_berangkat, sisi.edge_id
                 )
                 pengali = penalti_genangan(kedalaman, ambang)
                 if not math.isfinite(pengali):
@@ -331,14 +301,12 @@ def cari_rute(
         simpul = sisi.dari
     jalur.reverse()
 
-    # Susun geometri, dan hitung ulang genangan di sepanjang jalur pada
-    # waktu tiba yang sebenarnya, untuk dilaporkan ke pengguna.
+    # Paparan memakai kondisi yang sama dengan biaya pencarian.
     koordinat: list = []
     nama_jalan: list[str] = []
     tergenang = 0
     kedalaman_maks = 0.0
     kedalaman_ruas: list[float] = []
-    berjalan = 0.0
 
     for sisi in jalur:
         titik = sisi.koordinat
@@ -347,19 +315,13 @@ def cari_rute(
         else:
             koordinat.extend(titik)
 
-        waktu_tiba_di_sisi = waktu_berangkat + timedelta(seconds=berjalan)
         kedalaman = _kedalaman_pada(
-            peta_kedalaman, waktu_tiba_di_sisi, sisi.edge_id
+            peta_kedalaman, waktu_berangkat, sisi.edge_id
         )
         if kedalaman > 0:
             tergenang += 1
             kedalaman_maks = max(kedalaman_maks, kedalaman)
         kedalaman_ruas.append(kedalaman)
-
-        pengali = penalti_genangan(kedalaman, ambang) if sadar_rob else 1.0
-        if not math.isfinite(pengali):
-            pengali = PENALTI_MENJELANG_TIDAK_BISA_LEWAT
-        berjalan += sisi.detik_dasar * pengali
 
         if sisi.nama and (not nama_jalan or nama_jalan[-1] != sisi.nama):
             nama_jalan.append(sisi.nama)

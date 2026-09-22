@@ -1,0 +1,10 @@
+{
+  "samples": 122,
+  "start_utc": "2026-09-21T14:33:57.882100+00:00",
+  "end_utc": "2026-09-21T15:18:50.723500+00:00",
+  "min_available_mib": 641.3,
+  "max_available_mib": 695.1,
+  "maknaprice_all_http_200": true,
+  "stop_guard_triggered": false,
+  "maknaprice_identity_unchanged": true
+}

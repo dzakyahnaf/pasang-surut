@@ -168,20 +168,10 @@ def main() -> int:
               f"dari {len(edge):,} "
               f"({100.0 * max(n for _, _, n, _ in ringkas) / len(edge):.1f} persen)")
 
-    if not hasil:
-        print()
-        print("TIDAK ADA RUAS YANG DIPREDIKSI TERGENANG pada jendela ini.")
-        print("Itu bukan galat. Akhir Agustus adalah musim kemarau dan pasut")
-        print("puncaknya sedang. Baris dummy TIDAK dihapus supaya antarmuka")
-        print("tetap punya sesuatu untuk ditampilkan; lencana DATA CONTOH juga")
-        print("tetap tampil, dan memang seharusnya begitu.")
-        return 0
-
     print("\nmenulis ke database ...")
     with db.koneksi() as kon:
         repo = db.RepositoriGenangan(kon)
-        repo.kosongkan_sumber(SUMBER)
-        repo.sisipkan_banyak(hasil)
+        repo.publikasikan(hasil, [w for w, *_ in ringkas], SUMBER)
         if not argumen.pertahankan_dummy:
             n_dummy = repo.kosongkan_sumber("dummy")
             print(f"  {n_dummy:,} baris dummy dihapus")

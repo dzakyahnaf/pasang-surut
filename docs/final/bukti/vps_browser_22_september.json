@@ -1,0 +1,12 @@
+{
+  "alamat": "http://127.0.0.1:18080",
+  "errors": [],
+  "mode": "database",
+  "geometry_requests": 1,
+  "extra_geometry_on_slider": 0,
+  "route_requests_including_retry": 3,
+  "selected_index": 29,
+  "selected_time": "2026-09-23T00:00:00+00:00",
+  "wet_roads": 1367,
+  "route_model": "kondisi_jam_keberangkatan"
+}

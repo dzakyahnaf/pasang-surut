@@ -5,7 +5,7 @@
  * antara pengembangan dan produksi tanpa mengubah kode.
  */
 
-const ALAMAT = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
+const ALAMAT = import.meta.env.VITE_API_URL ?? "http://127.0.0.1:8000";
 
 async function ambil(jalur, opsi) {
   const jawaban = await fetch(`${ALAMAT}${jalur}`, opsi);
@@ -28,7 +28,8 @@ async function ambil(jalur, opsi) {
     galat.kode = kode;
     throw galat;
   }
-  return jawaban.json();
+  const data = await jawaban.json();
+  return data;
 }
 
 /** Keadaan sistem: jumlah ruas, sumber data, rentang waktu prediksi. */
@@ -52,16 +53,17 @@ export function ambilGenangan(waktuIso = null) {
 }
 
 /** Sumbu waktu Pita Pasut: 72 jam ke depan beserta tinggi pasut per jam. */
-export function ambilJam() {
-  return ambil("/api/jam");
+export function ambilJam(opsi = {}) {
+  return ambil("/api/jam", opsi);
 }
 
 /**
  * Dua rute sekaligus: pembanding yang mengabaikan rob, dan yang sadar rob.
  * @param {{asal:number[], tujuan:number[], waktu:string, moda:string}} isi
  */
-export function hitungRute(isi) {
+export function hitungRute(isi, opsi = {}) {
   return ambil("/api/rute", {
+    ...opsi,
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(isi),
@@ -69,8 +71,8 @@ export function hitungRute(isi) {
 }
 
 /** Titik tujuan penting, disiapkan luring oleh skrip 17. */
-export function ambilTujuanCepat() {
-  return ambil("/api/tujuan-cepat");
+export function ambilTujuanCepat(opsi = {}) {
+  return ambil("/api/tujuan-cepat", opsi);
 }
 
 /**
@@ -83,4 +85,12 @@ export function ambilTujuanCepat() {
  */
 export function ambilValidasi() {
   return ambil("/api/validasi");
+}
+
+/** Geometri statis sekali per versi; kondisi per jam hanya ID dan nilai. */
+export function ambilJaringan(opsi = {}) {
+  return ambil("/api/jaringan", opsi);
+}
+export function ambilKondisi(waktu, opsi = {}) {
+  return ambil(`/api/kondisi?waktu=${encodeURIComponent(waktu)}`, opsi);
 }

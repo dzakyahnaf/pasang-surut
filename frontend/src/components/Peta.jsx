@@ -76,7 +76,7 @@ function buatPolaTitik(sisi, jariJari, warna) {
 function ekspresiWarnaKedalaman() {
   return [
     "step",
-    ["get", "kedalaman_cm"],
+    ["coalesce", ["feature-state", "kedalaman_cm"], 0],
     token("--air-1"),
     BATAS_SEDANG, token("--air-2"),
     BATAS_DALAM, token("--air-3"),
@@ -92,15 +92,16 @@ function ekspresiLebarKedalaman() {
   const kering = tokenPx("--ruas-lebar-kering");
   const dalam = tokenPx("--ruas-lebar-dalam");
   return [
-    "interpolate", ["linear"], ["get", "kedalaman_cm"],
+    "interpolate", ["linear"], ["coalesce", ["feature-state", "kedalaman_cm"], 0],
     0, kering,
     BATAS_SANGAT_DALAM, dalam,
   ];
 }
 
-export default function Peta({ geojson, rute, asal, tujuan, onKlikPeta, onSiap }) {
+export default function Peta({ geojson, kondisi, rute, asal, tujuan, onKlikPeta, onSiap }) {
   const wadahRef = useRef(null);
   const petaRef = useRef(null);
+  const basahRef = useRef([]);
 
   // Peta baru bisa menerima data setelah event load selesai. Data dari API
   // sering tiba lebih dulu, jadi kesiapan itu disimpan sebagai state supaya
@@ -214,9 +215,9 @@ export default function Peta({ geojson, rute, asal, tujuan, onKlikPeta, onSiap }
         id: "ruas-air",
         type: "line",
         source: "ruas",
-        filter: [">=", ["get", "kedalaman_cm"], BATAS_TIPIS],
         layout: { "line-cap": "round", "line-join": "round" },
         paint: {
+          "line-opacity": ["case", [">=", ["coalesce", ["feature-state", "kedalaman_cm"], 0], BATAS_TIPIS], 1, 0],
           "line-color": ekspresiWarnaKedalaman(),
           "line-width": ekspresiLebarKedalaman(),
           // Satu-satunya animasi di aplikasi ini: ruas terisi dan surut saat
@@ -236,13 +237,13 @@ export default function Peta({ geojson, rute, asal, tujuan, onKlikPeta, onSiap }
         id: "ruas-air-pola-dalam",
         type: "line",
         source: "ruas",
-        filter: [
-          "all",
-          [">=", ["get", "kedalaman_cm"], BATAS_DALAM],
-          ["<", ["get", "kedalaman_cm"], BATAS_SANGAT_DALAM],
-        ],
         layout: { "line-cap": "butt", "line-join": "round" },
         paint: {
+          "line-opacity": ["case", [
+          "all",
+          [">=", ["coalesce", ["feature-state", "kedalaman_cm"], 0], BATAS_DALAM],
+          ["<", ["coalesce", ["feature-state", "kedalaman_cm"], 0], BATAS_SANGAT_DALAM],
+        ], 1, 0],
           "line-pattern": "titik-jarang",
           "line-width": ekspresiLebarKedalaman(),
         },
@@ -252,9 +253,9 @@ export default function Peta({ geojson, rute, asal, tujuan, onKlikPeta, onSiap }
         id: "ruas-air-pola-sangat-dalam",
         type: "line",
         source: "ruas",
-        filter: [">=", ["get", "kedalaman_cm"], BATAS_SANGAT_DALAM],
         layout: { "line-cap": "butt", "line-join": "round" },
         paint: {
+          "line-opacity": ["case", [">=", ["coalesce", ["feature-state", "kedalaman_cm"], 0], BATAS_SANGAT_DALAM], 1, 0],
           "line-pattern": "titik-rapat",
           "line-width": ekspresiLebarKedalaman(),
         },
@@ -394,6 +395,19 @@ export default function Peta({ geojson, rute, asal, tujuan, onKlikPeta, onSiap }
   }, [geojson, siap]);
 
   // ── Pembaruan rute ─────────────────────────────────────────────────
+  // Nilai per jam berubah melalui feature state; geometri tidak disalin
+  // kembali ke worker MapLibre setiap slider digeser.
+  useEffect(() => {
+    const peta = petaRef.current;
+    if (!siap || !peta || !peta.getSource("ruas")) return;
+    for (const id of basahRef.current) peta.removeFeatureState({ source: "ruas", id });
+    basahRef.current = [];
+    for (const [id, kedalaman] of kondisi?.ruas ?? []) {
+      peta.setFeatureState({ source: "ruas", id }, { kedalaman_cm: kedalaman });
+      basahRef.current.push(id);
+    }
+  }, [kondisi, geojson, siap]);
+
   useEffect(() => {
     const peta = petaRef.current;
     if (!siap || !peta) return;

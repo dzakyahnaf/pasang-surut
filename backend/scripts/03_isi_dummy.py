@@ -210,8 +210,7 @@ def main() -> int:
     print(f"pengali dalam : {faktor:.2f} (dihitung)")
     print()
 
-    with db.koneksi() as kon:
-        db.RepositoriGenangan(kon).kosongkan_sumber(SUMBER)
+    hasil_publikasi = []
 
     total_baris = 0
     total_tergenang = 0
@@ -247,10 +246,14 @@ def main() -> int:
                     edge_id[basah], kedalaman[basah], probabilitas[basah]
                 )
             ]
-            with db.koneksi() as kon:
-                total_baris += db.RepositoriGenangan(kon).sisipkan_banyak(baris)
+            hasil_publikasi.extend(baris)
+            total_baris += len(baris)
 
         ringkasan_jam.append((waktu, pasut_m, jumlah_basah, float(kedalaman.max())))
+
+    with db.koneksi() as kon:
+        db.RepositoriGenangan(kon).publikasikan(
+            hasil_publikasi, [w for w, *_ in ringkasan_jam], SUMBER)
 
     print(f"baris tersimpan: {total_baris:,}")
     print(f"(tanpa penyaringan ruas kering akan menjadi {len(edge_id) * argumen.jam:,} baris)")

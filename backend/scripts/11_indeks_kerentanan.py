@@ -250,16 +250,10 @@ def main() -> int:
     print(f"puncak tergenang: {puncak_n:,} dari {len(edge):,} "
           f"({100.0 * puncak_n / len(edge):.1f} persen)")
 
-    if not hasil:
-        print("\nTidak ada ruas melewati ambang pada jendela ini. Baris dummy")
-        print("tidak dihapus supaya antarmuka tetap punya isi.")
-        return 0
-
     print("\nmenulis ke database ...")
     with db.koneksi() as kon:
         repo = db.RepositoriGenangan(kon)
-        repo.kosongkan_sumber(SUMBER)
-        repo.sisipkan_banyak(hasil)
+        repo.publikasikan(hasil, [w for w, *_ in ringkas], SUMBER)
         if not argumen.pertahankan_dummy:
             print(f"  {repo.kosongkan_sumber('dummy'):,} baris dummy dihapus")
     with db.koneksi() as kon:

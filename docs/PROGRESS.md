@@ -1,10 +1,97 @@
 # Progres
 
+## Migrasi VPS privat dan uji Linux — 22 September 2026
+
+API, frontend produksi, dan database PostGIS sudah berjalan terisolasi di
+VPS lama. Semua isi lima tabel sumber cocok setelah impor; publikasi baru
+menghasilkan 87.427 prediksi dan 317 jam lengkap sampai 5 Oktober 07.00 WIB
+(eksklusif). Backup/restore dan pemulihan database ke potret lalu kembali ke
+database berhasil. Backup harian khusus PASANG SURUT pukul 03.20 WIB aktif.
+
+57 tes backend Linux, 7 tes React, 35 pemeriksaan HTTP, dan browser produksi
+melalui SSH lulus. Rute VPS database p95 724 ms; kondisi peta p95 18 ms.
+Versi jaringan dipindahkan ke payload agar kompresi ETag Caddy tidak memicu
+unduhan geometri berulang. API dibatasi 320 MiB setelah uji fallback.
+Container dan konfigurasi Maknaprice tetap sama, tanpa restart/ubah layanan.
+
+Port web masih loopback 127.0.0.1:18080. Pengalihan Vercel **belum dilakukan**:
+peninjau otomatis menolak paparan origin HTTP publik tanpa persetujuan
+spesifik. Render/Supabase lama tetap tersedia. Detail hasil, batas kapasitas,
+masa berlaku data, langkah publik, dan pengingat label peta ada di
+[laporan migrasi 22 September](final/migrasi_vps_22_september.md).
+
+Entri di bawah adalah riwayat; penilaian awal bahwa database belum layak
+dicoba telah diperbarui berdasarkan uji Linux dan isolasi PostGIS tersebut.
+
+## Perbaikan lokal dan pemeriksaan VPS — 21 September 2026
+
+Empat perbaikan yang disetujui Dzaky sudah diterapkan di workspace: retry
+mengirim request baru; metadata membedakan jam lengkap/kering dari data
+hilang; geometri/prediksi/graf dipakai ulang dengan pembatasan request dan
+thread BLAS; routing memakai kondisi jam keberangkatan selama satu pencarian.
+Batas model tampil di UI. Potret demo dihitung ulang untuk 26–28 September.
+
+Validasi: 57 tes backend, 7 tes React, 35 pemeriksaan HTTP lokal, build, dan
+interaksi Edge lulus. Benchmark potret lokal p95 rute 317 ms, kondisi 6 ms;
+alokasi privat Windows 108 MiB setelah batas BLAS. Ini bukan hasil VPS.
+
+VPS Maknaprice berhasil diperiksa melalui SSH: 2 vCPU, RAM fisik 1,68 GiB,
+879 MiB tersedia pada sampel, disk tersisa 29 GiB. API dan frontend statis
+layak dicoba bertahap; database PostGIS baru belum disarankan. Dzaky menolak
+Render berbayar sehingga rekomendasi lama di bawah tidak lagi berlaku.
+Belum ada commit/push/deploy, perubahan VPS, atau migrasi database.
+
+Rincian perubahan, bukti, batas pengujian, dan rancangan penerapan ada di
+[hasil 21 September](final/hasil_21_september.md). Label jalan/wilayah,
+materi final, dan gladi perangkat masih merupakan pekerjaan terpisah.
+
+## Paket kerja dan insiden memori — 20 September 2026
+
+Dzaky melaporkan notifikasi OOM Render pukul 17.09 WIB. Enam request serentak
+pada audit mungkin ikut memicu puncak; kausalitas perlu log/metrik. Uji beban
+produksi dihentikan. Belum ada VPS siap pakai atau anggaran hosting tertentu.
+Evaluasi resmi membandingkan Render 2 GB, Biznet GIO NEO Lite, dan DigitalOcean;
+rekomendasi menjelang final adalah optimasi + Render 2 GB sementara bila
+anggaran memungkinkan + demo lokal. Belum ada pembelian/migrasi/deploy.
+
+Selesai pada tingkat artefak perencanaan:
+
+- [Pembagian kerja, inventaris dan prioritas](final/paket_20_september.md).
+- [Solusi T0/T1–T4, peta/metode, spesifikasi dan biaya hosting](final/solusi_teknis_dan_hosting.md).
+- [Outline delapan slide, sembilan menit, lengkap dengan narasi dan lampiran](final/outline_slide.md).
+
+Tugas anggota, pembuatan deck/PDF/MP4, dan implementasi belum dinyatakan
+selesai. Rekomendasi T4 membatasi model pada kondisi jam keberangkatan;
+ini perlu ditinjau sebelum implementasi dan mengubah batas klaim, bukan
+perbaikan solver dinamis yang setara. README diisi tautan video/Figma yang
+sudah tercantum dalam proposal. Perubahan sesi ini hanya dokumentasi.
+
+## Audit dan rencana final — 20 September 2026
+
+Rencana aktif: [rencana_final_20_september.md](rencana_final_20_september.md).
+Konfirmasi kehadiran diterima panitia dan ketiga anggota hadir; kewajiban PDF
+berasal dari jawaban langsung panitia. Hosting dipertahankan. Tugas belum
+dibagi; rencana mengusulkan pembagian Dzaky backend/data, Daffa UI/demo,
+Naufal materi/bukti/logistik dengan kapasitas ideal 6 jam efektif per hari.
+
+Verifikasi ulang: HEAD lokal/remote/Render 790a294; 43 unit test lulus; build
+frontend berhasil; 35 tes HTTP produksi dan 35 tes HTTP potret lokal lulus.
+Potret lokal dikonfirmasi memakai `database: false`. Pemeriksaan ini belum
+merupakan uji browser/HP fisik atau Wi-Fi mati. Run terjadwal Jaga hidup sudah
+berjalan, tetapi interval teramati 2–5 jam.
+
+Prioritas baru yang belum diperbaiki: tombol retry tidak memicu request,
+ketiadaan data waktu terbaca kering, latensi produksi, dan contoh kasus routing
+non-FIFO yang menghasilkan jalur suboptimal. Perbedaan radius elevasi dalam
+klaim dan implementasi serta batas interpretasi angka juga dicatat. Audit ini
+menghasilkan rencana; tidak mengubah aplikasi atau proposal submission.
+Papan historis di bawah dibaca bersama pembaruan ini.
+
 Satu entri per sesi kerja. Ditulis apa adanya, termasuk yang gagal.
 
-Bagian **Papan Blokade** di bawah ini adalah ringkasan keadaan sekarang dan
-diperbarui setiap sesi. Kalau hanya sempat membaca satu bagian dari berkas
-ini, baca bagian itu.
+Untuk keadaan sekarang, baca entri 22 September di atas dan rencana
+final yang ditautkannya. Papan Blokade di bawah mempertahankan riwayat sebelum
+audit tersebut; sejumlah statusnya telah diperbarui pada entri terbaru.
 
 ---
 

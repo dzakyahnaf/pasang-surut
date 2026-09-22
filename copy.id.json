@@ -42,7 +42,8 @@
     "perkecil": "Perkecil peta",
     "ketukUntukAsal": "Ketuk peta untuk memilih titik berangkat",
     "ketukUntukTujuan": "Ketuk peta untuk memilih tujuan",
-    "atribusi": "Data jalan dari OpenStreetMap"
+    "atribusi": "Data jalan dari OpenStreetMap",
+    "potretDemo": "Skenario demo bertanggal - data potret"
   },
   "pitaPasut": {
     "judul": "PITA PASUT · 72 JAM",
@@ -102,7 +103,8 @@
     "tidakAdaGenangan": "Tidak ada genangan di jalur ini pada jam tersebut",
     "samaDenganRuteBiasa": "Pada jam ini rute disarankan sama dengan rute biasa. Tidak perlu memutar.",
     "sembunyikanRuteBiasa": "Sembunyikan rute biasa",
-    "tampilkanRuteBiasa": "Tampilkan rute biasa"
+    "tampilkanRuteBiasa": "Tampilkan rute biasa",
+    "batasModel": "Rute memakai kondisi jam keberangkatan. Perubahan selama perjalanan belum dimodelkan; periksa kondisi lapangan."
   },
   "dampak": {
     "judul": "BIAYA MENGHINDAR",
@@ -221,7 +223,9 @@
     "muatUlang": "Muat ulang",
     "halamanTidakAda": "Halaman tidak ditemukan",
     "halamanTidakAdaIsi": "Alamat yang Anda buka tidak ada. Kembali ke peta.",
-    "kembaliKePeta": "Kembali ke peta"
+    "kembaliKePeta": "Kembali ke peta",
+    "dataTidakTersedia": "Data untuk waktu ini belum tersedia atau sudah kedaluwarsa. Pilih jam yang tersedia atau muat ulang data.",
+    "serverSibuk": "Server sedang sibuk. Coba lagi sebentar."
   },
   "memuat": {
     "peta": "Memuat peta",
@@ -230,7 +234,8 @@
     "genangan": "Memuat prediksi genangan",
     "rute": "Menghitung rute",
     "pasut": "Memuat data pasut",
-    "validasi": "Memuat hasil validasi"
+    "validasi": "Memuat hasil validasi",
+    "memperbarui": "Memperbarui kondisi dan rute..."
   },
   "satuan": {
     "menit": "mnt",

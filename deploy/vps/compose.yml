@@ -1,0 +1,73 @@
+name: pasang-surut
+
+services:
+  api:
+    image: pasang-surut-api:${PASANG_RELEASE:?set release}
+    env_file: ./api.env
+    environment:
+      PORT: '8000'
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+      MKL_NUM_THREADS: '1'
+      ASAL_DIIZINKAN: https://pasang-surut.vercel.app
+      APP_COMMIT: ${PASANG_RELEASE}
+    # Setelah pemulihan DB, graf DB dan potret sama-sama ada di cache.
+    # Terukur 221,5 MiB; sediakan ruang untuk serialisasi/request berikutnya.
+    mem_limit: 320m
+    memswap_limit: 320m
+    cpus: 0.8
+    pids_limit: 64
+    restart: unless-stopped
+    security_opt: [no-new-privileges:true]
+    healthcheck:
+      test: ['CMD', 'python', '-c', 'import json,urllib.request; d=json.load(urllib.request.urlopen("http://127.0.0.1:8000/api/kesehatan",timeout=10)); assert d["data_tersedia"]']
+      interval: 30s
+      timeout: 12s
+      retries: 3
+      start_period: 30s
+    logging: &logging
+      driver: json-file
+      options: {max-size: 5m, max-file: '2'}
+
+  web:
+    image: caddy:2-alpine
+    ports: ['${PASANG_BIND:-127.0.0.1}:18080:8080']
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./frontend:/srv:ro
+    mem_limit: 48m
+    memswap_limit: 48m
+    cpus: 0.15
+    pids_limit: 48
+    restart: unless-stopped
+    security_opt: [no-new-privileges:true]
+    depends_on:
+      api: {condition: service_healthy}
+    logging: *logging
+
+  db:
+    image: postgis/postgis:17-3.5-alpine
+    profiles: [database]
+    env_file: ./db.env
+    volumes:
+      - pasang_data:/var/lib/postgresql/data
+      - ./migration:/migration:ro
+    command: [postgres, -c, shared_buffers=32MB, -c, work_mem=2MB,
+      -c, maintenance_work_mem=32MB, -c, max_connections=16,
+      -c, autovacuum_max_workers=1, -c, max_wal_size=256MB,
+      -c, min_wal_size=80MB, -c, jit=off]
+    mem_limit: 192m
+    memswap_limit: 192m
+    cpus: 0.35
+    pids_limit: 48
+    restart: unless-stopped
+    security_opt: [no-new-privileges:true]
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U "$${POSTGRES_USER}" -d "$${POSTGRES_DB}"']
+      interval: 20s
+      timeout: 5s
+      retries: 3
+    logging: *logging
+
+volumes:
+  pasang_data:

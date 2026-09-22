@@ -255,18 +255,9 @@ def uji_parameter(a: str) -> None:
                         ("/api/ruas?waktu=2099-01-01T00:00:00Z", "ruas waktu di luar jendela"),
                         ("/api/genangan?waktu=2099-01-01T00:00:00Z", "genangan di luar jendela")):
         kode, badan, _ = panggil(a, jalur)
-        if kode == 500:
-            catat("GAGAL", nama, "HTTP 500 — galat tak tertangani")
-        elif kode in (200, 400, 404, 422):
-            n = ""
-            if kode == 200:
-                try:
-                    n = f"{len(json.loads(badan).get('features', []))} fitur"
-                except Exception:                     # noqa: BLE001
-                    pass
-            catat("LULUS", nama, f"HTTP {kode} {n}".strip())
-        else:
-            catat("CATAT", nama, f"HTTP {kode}")
+        diharapkan = 400 if "bukan-tanggal" in jalur else 422
+        catat("LULUS" if kode == diharapkan else "GAGAL", nama,
+              f"HTTP {kode}; diharapkan {diharapkan}")
 
     kode, _, _ = panggil(a, "/api/tidak-ada")
     catat("LULUS" if kode == 404 else "GAGAL", "jalur tak dikenal 404", f"HTTP {kode}")
@@ -311,7 +302,8 @@ def main() -> int:
     print("Kesehatan dan sumbu waktu")
     sehat = uji_kesehatan(a)
     jam = uji_jam(a)
-    waktu = max(jam, key=lambda x: x["ruas_tergenang"])["waktu_utc"] if jam else None
+    lengkap = [j for j in jam if j.get("tersedia") and j.get("ruas_tergenang") is not None]
+    waktu = max(lengkap, key=lambda x: x["ruas_tergenang"])["waktu_utc"] if lengkap else None
 
     if waktu:
         print("\nLapisan peta")

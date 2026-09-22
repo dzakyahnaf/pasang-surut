@@ -4,6 +4,11 @@
 
 **Perutean sadar rob untuk Semarang.**
 
+Pembaruan 22 September: retry, cakupan data, kinerja/memori, dan model routing
+sudah diperbaiki. API, frontend, serta database sudah diuji pada VPS privat;
+alamat publik masih memakai deployment sebelumnya. Baca
+[hasil migrasi, pengukuran, dan langkah publik yang tertahan](docs/final/migrasi_vps_22_september.md).
+
 Memprediksi **kapan** tiap ruas jalan berisiko tergenang rob untuk 72 jam ke
 depan, lalu merutekan warga dan logistik menghindarinya pada jam keberangkatan
 mereka — bukan pada kondisi saat ini.
@@ -47,8 +52,8 @@ berangkat.
 |---|---|
 | Aplikasi live | https://pasang-surut.vercel.app |
 | API | https://pasang-surut-api.onrender.com |
-| Video YouTube | `[ ISI ]` |
-| Prototype Figma | `[ ISI ]` |
+| Video YouTube | https://youtu.be/CeXsEN_1Zvk |
+| Prototype Figma | https://www.figma.com/design/EtACxc7jD6wvMJjHh7bq3p/PasangSurut?node-id=1-907 |
 | Repositori | https://github.com/dzakyahnaf/pasang-surut |
 
 ---
@@ -68,7 +73,8 @@ tidak berhubungan.
 
 **Komponen ruang — indeks berbasis aturan, TANPA angka akurasi.** Ruas mana
 yang lebih rentan ditentukan indeks dari tiga besaran fisik berbobot sama
-rata: elevasi relatif terhadap tetangga radius 500 m, jarak ke garis pantai,
+rata: elevasi relatif terhadap median lingkungan 3 × 3 sel grid (sisi sel
+500 m), jarak ke garis pantai,
 dan laju penurunan muka tanah. Indeks ini **tidak punya akurasi yang bisa
 dilaporkan**, dan tidak akan punya sampai ada pengamatan genangan per ruas.
 
@@ -135,13 +141,23 @@ Potret membawa `berlaku_sampai` dan **ditolak setelah kedaluwarsa**. Untuk
 sistem yang menyarankan kapan orang boleh menembus air, prediksi basi lebih
 berbahaya daripada layar kosong.
 
+Versi terbaru menyimpan metadata jam lengkap, termasuk jam kering. Waktu
+tanpa cakupan tidak menghasilkan rute. Frontend mengunduh geometri statis
+sekali lalu mengambil kondisi ringkas ketika pilihan jam berubah. Pengukuran
+lama di atas adalah riwayat; hasil lokal terbaru ada pada laporan 21 September.
+
+Routing memakai kondisi jam keberangkatan tetap sepanjang satu pencarian;
+perubahan kondisi di tengah perjalanan belum dimodelkan. Mengganti pilihan
+jam menghitung ulang rute. Evaluasi akurasi pasut bukan validasi genangan
+per ruas.
+
 ### Tech stack
 
 | Lapisan | Pilihan | Alasan singkat |
 |---|---|---|
 | API | FastAPI + Uvicorn | dokumentasi OpenAPI otomatis, tipe terperiksa |
 | Database | PostgreSQL + PostGIS (Supabase) | kueri spasial tanpa ORM |
-| Perutean | Dijkstra sadar waktu, tulis sendiri | biaya dihitung pada waktu TIBA, bukan berangkat |
+| Perutean | Dijkstra dengan kondisi jam keberangkatan | biaya tetap selama satu pencarian; dihitung ulang saat pilihan jam berubah |
 | Frontend | React + Vite + MapLibre GL JS | MapLibre bebas token, bisa gaya inline |
 | Gaya | CSS custom property | tiap warna dari `DESIGN.md`, nol heks di komponen |
 | Model | HistGradientBoostingClassifier | dilatih lalu ditolak, lihat bagian 6 |
@@ -356,7 +372,7 @@ Ringkasan. Daftar penuh di [`docs/batasan.md`](docs/batasan.md).
 2. **Indeks kerentanan tanpa akurasi.** Bobot sepertiga tiap komponen adalah
    keputusan sadar, bukan hasil penyetelan terhadap data.
 3. **DEMNAS RMSE 2,79 m** jauh lebih besar daripada rob 10–50 cm. Karena itu
-   dipakai elevasi **relatif** terhadap tetangga radius 500 m, yang
+   dipakai elevasi **relatif** terhadap median 3 × 3 sel grid bersisi 500 m, yang
    meniadakan galat berkorelasi spasial: simpangan baku turun 5,86 → 2,99 m.
 4. **Hujan dari reanalisis satu titik** untuk seluruh AOI 13×8 km. Hujan
    konvektif setempat tidak tertangkap.
