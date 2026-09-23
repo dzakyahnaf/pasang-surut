@@ -1,5 +1,24 @@
 # Progres
 
+## Review branch, basemap, dan PPT — 23 September 2026
+
+Delapan branch remote diperiksa. Enam branch lama dihapus setelah seluruh
+commit-nya terbukti ada di main; tidak ada perubahan unik yang dibuang.
+PR #1,2,4,5,6 sudah merged. Main dan draft PR #3/branch OSM dipertahankan.
+Log ENOENT pada 8d74b2f terkonfirmasi akibat folder dashboard yang belum
+ter-commit; 97d8408 memperbaikinya. Build landing main dan produksi berhasil.
+
+[Laporan untuk tim](final/review_branch_peta_presentasi_23_september.md)
+memuat tautan kedua peta, tabel perbedaan, screenshot pada jam/data/rute
+yang identik, serta evaluasi PPT terhadap bobot rulebook. Preview Vercel
+masih meminta login; gambar pembanding dapat dibaca publik dari repo.
+
+**Papan blokade:** delapan slide utama cukup, tetapi persona/skema 08.00→13.00,
+bukti fungsi yang bisa dicoba juri, dan hubungan biaya adaptasi dengan
+subtema perlu diperjelas. Rekomendasi belum mengubah PPTX/PDF. Pilihan peta
+belum diputuskan tim. Deadline PDF, latihan nyata, perangkat acara, pameran,
+MP4/poster, serta bukti pengguna tetap pekerjaan tim.
+
 ## Paket presentasi final — 23 September 2026
 
 [PPTX dan dua PDF](final/presentasi/README.md) sudah dibuat: delapan slide
