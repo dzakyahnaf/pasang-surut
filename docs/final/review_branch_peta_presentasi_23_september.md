@@ -46,6 +46,22 @@ review peta tim. Laporan ini diterbitkan melalui PR dokumentasi tersendiri;
 branch laporan dihapus setelah merge sehingga dua branch di atas tetap
 menjadi keadaan akhir.
 
+### Temuan CI selama review
+
+Pada commit dokumentasi `8f45e57`, workflow push berhasil, tetapi workflow
+PR gagal pada dua tes frontend. Tes pertama kehabisan waktu saat menunggu
+kondisi awal; tes berikutnya lalu menerima mock galat yang belum terpakai.
+Reproduksi kecil menunjukkan `mockClear()` mempertahankan antrean respons
+`mockRejectedValueOnce`, sedangkan `mockReset()` membuangnya. Penyebab persis
+lambatnya pemuatan pada runner pertama tidak dapat disimpulkan dari log.
+
+Fixture sekarang memakai `resetAllMocks()` sebelum mengatur seluruh
+respons, dan helper awal menunggu efek Promise melalui `act()` asinkron.
+Assertion retry, pembatalan, pergantian jam dan versi tetap dipertahankan;
+timeout tidak dinaikkan. Seluruh 26 tes frontend lulus lokal. Perubahan ini
+hanya menyentuh tes; runtime/API dan layanan VPS tidak berubah. Bukti CI
+akhir dapat dilihat pada checks PR laporan.
+
 ## Tautan untuk review tim
 
 - [Peta main/produksi](https://pasang-surut.vercel.app/app).

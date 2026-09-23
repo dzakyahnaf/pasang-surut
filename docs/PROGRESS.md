@@ -13,6 +13,11 @@ memuat tautan kedua peta, tabel perbedaan, screenshot pada jam/data/rute
 yang identik, serta evaluasi PPT terhadap bobot rulebook. Preview Vercel
 masih meminta login; gambar pembanding dapat dibaca publik dari repo.
 
+CI PR sempat gagal saat menunggu pemuatan awal, lalu mock galat yang belum
+terpakai mencemari tes berikutnya. Fixture kini mereset seluruh mock dan
+menunggu efek awal secara asinkron; 26 tes frontend lulus lokal, tanpa
+mengubah assertion, timeout, atau runtime. Pemeriksaan CI akhir ada di PR #7.
+
 **Papan blokade:** delapan slide utama cukup, tetapi persona/skema 08.00→13.00,
 bukti fungsi yang bisa dicoba juri, dan hubungan biaya adaptasi dengan
 subtema perlu diperjelas. Rekomendasi belum mengubah PPTX/PDF. Pilihan peta
