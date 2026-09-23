@@ -24,7 +24,8 @@ function hasil(label = "baru") {
     sumber_data: ["kerentanan_v1"], selisih: { tersedia: false } };
 }
 beforeEach(() => {
-  vi.clearAllMocks();
+  // Buang juga antrean mock *Once bila tes sebelumnya gagal sebelum request.
+  vi.resetAllMocks();
   vi.stubGlobal("ResizeObserver", class { observe() {} disconnect() {} });
   api.ambilJam.mockResolvedValue({ jam, versi_data: 'v1', asal_jaringan: "potret" });
   api.ambilJaringan.mockResolvedValue({ type: "FeatureCollection", features: [], versi_jaringan: "g1" });
@@ -35,7 +36,8 @@ beforeEach(() => {
 afterEach(() => { cleanup(); vi.unstubAllGlobals(); });
 
 async function mulai() {
-  render(<App />);
+  // Selesaikan efek awal berbasis Promise sebelum mulai menunggu kondisi.
+  await act(async () => { render(<App />); });
   await waitFor(() => expect(screen.getByTestId("kondisi").textContent).toBe(jam[0].waktu_utc));
   fireEvent.click(screen.getByRole("button", { name: "titik A" }));
   fireEvent.click(screen.getByRole("button", { name: "titik B" }));
