@@ -1,0 +1,70 @@
+{
+  "cache_key": "f682e18ab22b9b3cb7edf27ad2d6c80d87ff44bbbe02e627ea2c996811a87632",
+  "boundaries": [
+    {
+      "offset": 1000000,
+      "duration": 4125000,
+      "text": "Pasang"
+    },
+    {
+      "offset": 5125000,
+      "duration": 5375000,
+      "text": "Surut"
+    },
+    {
+      "offset": 18875000,
+      "duration": 4625000,
+      "text": "Baca"
+    },
+    {
+      "offset": 23500000,
+      "duration": 3625000,
+      "text": "risiko"
+    },
+    {
+      "offset": 27125000,
+      "duration": 3625000,
+      "text": "rob"
+    },
+    {
+      "offset": 39125000,
+      "duration": 5375000,
+      "text": "Bandingkan"
+    },
+    {
+      "offset": 44500000,
+      "duration": 3375000,
+      "text": "waktu"
+    },
+    {
+      "offset": 47875000,
+      "duration": 1875000,
+      "text": "dan"
+    },
+    {
+      "offset": 49750000,
+      "duration": 1875000,
+      "text": "rute"
+    },
+    {
+      "offset": 51625000,
+      "duration": 6375000,
+      "text": "perjalanan"
+    },
+    {
+      "offset": 58000000,
+      "duration": 750000,
+      "text": "di"
+    },
+    {
+      "offset": 58750000,
+      "duration": 3125000,
+      "text": "Semarang"
+    },
+    {
+      "offset": 61875000,
+      "duration": 6125000,
+      "text": "pesisir"
+    }
+  ]
+}

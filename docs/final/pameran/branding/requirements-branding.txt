@@ -1,0 +1,4 @@
+# Alat pembuatan video, bukan dependency aplikasi/API.
+# Font, Pillow, numpy, fontTools menggunakan lingkungan materi yang sudah ada.
+imageio-ffmpeg==0.6.0
+edge-tts==7.2.8

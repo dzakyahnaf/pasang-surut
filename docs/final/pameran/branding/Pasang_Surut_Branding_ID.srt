@@ -1,0 +1,115 @@
+1
+00:00:00,643 --> 00:00:03,848
+Di pesisir Semarang, rob bisa mengubah kondisi jalan.
+
+2
+00:00:04,381 --> 00:00:06,757
+Perjalanan pun perlu direncanakan kembali.
+
+3
+00:00:08,650 --> 00:00:13,013
+Bagi warga dan pelaku usaha, berangkat kapan, lewat mana, dan
+
+4
+00:00:13,013 --> 00:00:14,350
+berapa biaya memutar?
+
+5
+00:00:16,638 --> 00:00:17,726
+Pasang Surut.
+
+6
+00:00:18,214 --> 00:00:19,511
+Baca risiko rob.
+
+7
+00:00:20,000 --> 00:00:22,795
+Bandingkan waktu dan rute perjalanan di Semarang pesisir.
+
+8
+00:00:24,650 --> 00:00:26,675
+Pilih titik berangkat dan tujuan.
+
+9
+00:00:27,275 --> 00:00:30,412
+Tentukan motor atau mobil, lalu geser Pita Pasut.
+
+10
+00:00:31,013 --> 00:00:34,612
+Lihat bagaimana estimasi kondisi jalan berubah pada jam yang berbeda,
+
+11
+00:00:34,625 --> 00:00:35,812
+langsung di peta.
+
+12
+00:00:38,662 --> 00:00:42,161
+Dalam contoh Tawang ke Terboyo, rute sadar rob dan rute pembanding
+
+13
+00:00:42,161 --> 00:00:43,503
+ditampilkan bersama.
+
+14
+00:00:44,084 --> 00:00:46,903
+Ubah jam keberangkatan untuk melihat perbedaannya.
+
+15
+00:00:47,484 --> 00:00:51,097
+Jika jadwalmu fleksibel, bandingkan juga pilihan waktu.
+
+16
+00:00:51,678 --> 00:00:53,914
+Hasil ini adalah estimasi model.
+
+17
+00:00:54,495 --> 00:00:56,706
+Kondisi jalan tetap perlu diperiksa.
+
+18
+00:00:58,657 --> 00:01:03,239
+Memutar dapat menambah waktu, jarak, bahan bakar, dan emisi.
+
+19
+00:01:03,782 --> 00:01:06,222
+Pahami konsekuensinya sebelum memilih rute.
+
+20
+00:01:06,765 --> 00:01:08,743
+Penghematan tidak selalu terjadi.
+
+21
+00:01:10,646 --> 00:01:14,073
+Di balik layar, perhitungan pasang surut, indeks kerentanan ruas,
+
+22
+00:01:14,073 --> 00:01:16,772
+dan jaringan jalan OpenStreetMap mendukung perbandingan rute.
+
+23
+00:01:17,245 --> 00:01:20,827
+Kedalaman yang tampil merupakan estimasi, bukan hasil sensor langsung.
+
+24
+00:01:22,652 --> 00:01:26,576
+Berikutnya, uji bersama pengguna, validasi genangan di lapangan,
+
+25
+00:01:26,576 --> 00:01:27,934
+dan pembaruan data.
+
+26
+00:01:28,442 --> 00:01:30,784
+Untuk perjalanan pesisir yang lebih terencana.
+
+27
+00:01:32,650 --> 00:01:36,762
+Coba Pasang Surut di meja kami, atau pindai kode ini lewat ponselmu.
+
+28
+00:01:37,350 --> 00:01:39,312
+Kenali pilihan sebelum berangkat.
+
+29
+00:01:39,900 --> 00:01:43,350
+Pasang Surut, perutean sadar rob untuk Semarang pesisir.

@@ -1,0 +1,70 @@
+{
+  "cache_key": "d6ca13c020c27032c93c05ee2e4d583c7266e7f2c9f1aedac76e189c911d6d1a",
+  "boundaries": [
+    {
+      "offset": 1000000,
+      "duration": 2875000,
+      "text": "Bagi"
+    },
+    {
+      "offset": 3875000,
+      "duration": 3375000,
+      "text": "warga"
+    },
+    {
+      "offset": 7250000,
+      "duration": 1500000,
+      "text": "dan"
+    },
+    {
+      "offset": 8750000,
+      "duration": 2375000,
+      "text": "pelaku"
+    },
+    {
+      "offset": 11125000,
+      "duration": 6250000,
+      "text": "usaha"
+    },
+    {
+      "offset": 20000000,
+      "duration": 3750000,
+      "text": "berangkat"
+    },
+    {
+      "offset": 23750000,
+      "duration": 5375000,
+      "text": "kapan"
+    },
+    {
+      "offset": 31750000,
+      "duration": 3125000,
+      "text": "lewat"
+    },
+    {
+      "offset": 34875000,
+      "duration": 5000000,
+      "text": "mana"
+    },
+    {
+      "offset": 42375000,
+      "duration": 2250000,
+      "text": "dan"
+    },
+    {
+      "offset": 44625000,
+      "duration": 2500000,
+      "text": "berapa"
+    },
+    {
+      "offset": 47125000,
+      "duration": 2625000,
+      "text": "biaya"
+    },
+    {
+      "offset": 49750000,
+      "duration": 5750000,
+      "text": "memutar"
+    }
+  ]
+}

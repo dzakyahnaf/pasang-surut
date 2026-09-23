@@ -1,5 +1,10 @@
 # Video pameran PASANG SURUT
 
+**Versi branding terbaru, 24 September:** [105 detik, musik dan narasi
+Bahasa Indonesia](branding/README.md), dilengkapi subtitle dan tampilan
+aplikasi asli. Gunakan versi tersebut untuk permintaan video di atas 1:30.
+Versi 60 detik berikut tetap tersedia sebagai alternatif singkat tanpa suara.
+
 Motion design **60 detik** untuk diputar berulang di meja pameran final,
 23 September 2026. Tanpa suara, karena ruang pameran bising dan video harus
 tetap bercerita tanpa penjaga.

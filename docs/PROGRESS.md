@@ -1,5 +1,26 @@
 # Progres
 
+## Video branding dengan narasi — 24 September 2026
+
+[Video pameran 105 detik](final/pameran/branding/README.md) dibuat sesuai
+permintaan durasi di atas 1:30: 1080p/30 fps, narasi sintetis Indonesia,
+musik instrumental prosedural, subtitle menyatu, animasi rute dari potret,
+tampilan aplikasi asli, metode, rencana pengembangan, dan QR ke `/app`.
+Versi 60 detik tetap disimpan. Naskah/angka mengikuti sumber presentasi;
+tidak mengklaim genangan terukur, jalan pasti aman, atau penghematan kota.
+
+Pemeriksaan produksi mencakup seluruh 3.150 bingkai, decode audio/video,
+29 subtitle sesuai naskah dan tidak tumpang tindih, volume audio, QR pada
+1080p/720p, serta kesamaan ujung loop. Hasil MP4 akhir dan hash berada pada
+`final/pameran/branding/verifikasi.json`. Addendum pameran 24 September
+diperiksa di Microsoft Word: satu halaman. Runtime aplikasi tidak berubah.
+
+**Papan blokade:** video branding tersedia; uji speaker, jarak pandang,
+dan mode ulang pada TV/proyektor acara tetap perlu dilakukan tim. Poster
+pameran, latihan presentasi, bukti pengguna, pilihan basemap final, dan
+konfirmasi deadline PDF mengikuti daftar kesiapan sebelumnya. Gambar poster
+dalam paket video hanya sampul pemutar, bukan poster lomba yang sudah final.
+
 ## Video pameran — 23 September 2026
 
 [Motion design 60 detik](final/pameran/README.md) untuk diputar berulang di

@@ -1,5 +1,12 @@
 # Sisa pekerjaan proposal
 
+**Pembaruan 24 September:** [video branding pameran 105 detik](final/pameran/branding/README.md)
+dengan musik, narasi Indonesia dan subtitle tersedia. Materi ini dilengkapi
+[addendum pameran](final/Addendum_pameran_24_september.docx), diperiksa dengan
+Microsoft Word: satu halaman. Proposal yang sudah disubmit tetap diarsipkan.
+Uji volume/loop di perangkat acara, poster lomba, latihan tim, dan deadline
+PDF tetap perlu ditangani. Catatan MP4 belum selesai di bawah adalah historis.
+
 **Pembaruan 23 September:** [paket PPTX/PDF final](final/presentasi/README.md)
 sudah selesai dan diverifikasi, dilengkapi catatan pembicara dan dua gambar
 demo. [Addendum materi](final/Addendum_presentasi_23_september.docx) mencatat
