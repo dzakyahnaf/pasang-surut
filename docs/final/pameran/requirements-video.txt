@@ -1,0 +1,4 @@
+# Khusus pembuatan video pameran; tidak masuk image API/frontend.
+# Alasan: laptop tim tidak punya ffmpeg, dan paket ini membawa ffmpeg
+# lengkap dengan encoder H.264 sehingga MP4 bisa diputar di TV mana pun.
+imageio-ffmpeg==0.6.0

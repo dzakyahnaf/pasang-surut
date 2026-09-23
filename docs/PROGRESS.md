@@ -1,5 +1,28 @@
 # Progres
 
+## Video pameran — 23 September 2026
+
+[Motion design 60 detik](final/pameran/README.md) untuk diputar berulang di
+meja pameran: 1920 × 1080, 30 fps, tanpa suara, ujung awal dan akhir sama
+gelap sehingga pengulangan tidak patah. Isinya pertanyaan pembuka, Pita
+Pasut 72 jam, peta 19.394 ruas yang terisi air dari 00.00 ke 08.00, rute
+Tawang–Terboyo pada 08.00 lawan 13.00, cara kerja, dan QR ke `/app`.
+
+Semua visual digambar dari data yang dipakai aplikasi dan PPT: potret
+26 September, `skenario.json`, konteks peta, fungsi pasut backend, dan
+`token.css`. Angka dibaca saat dibuat, tidak diketik. Lencana indeks
+kerentanan, keterangan estimasi, tanggal skenario, dan rute disarankan yang
+masih menembus 24,8 cm ikut tampil. Encoder dipasang di
+`.deploy-local/video-tools`, tidak masuk runtime.
+
+Dua penyesuaian terhadap gaya aplikasi untuk jarak pandang pameran: rute
+ditebalkan 1,5 kali, dan rute biasa diberi garis luar gelap karena abu-abu
+terangnya hilang di atas jalan `--tinta-2`.
+
+**Papan blokade:** MP4 pameran selesai; poster belum. Video perlu diputar
+sekali di TV atau laptop pameran untuk memastikan pemutar mendukung
+pengulangan. Seluruh catatan papan blokade di bawah tetap berlaku.
+
 ## Review branch, basemap, dan PPT — 23 September 2026
 
 Delapan branch remote diperiksa. Enam branch lama dihapus setelah seluruh
