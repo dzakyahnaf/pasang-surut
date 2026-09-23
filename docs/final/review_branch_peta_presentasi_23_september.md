@@ -136,7 +136,7 @@ tanya jawab maksimal 15 menit. Pameran kunjungan juri maksimal 5 menit per tim.
 |---|---:|---|---|
 | Presentasi | 30% | Alur 8 slide koheren, target 9 menit, tiga pembicara | Latihan nyata; satu persoalan pengguna dan satu kesimpulan keputusan yang mudah diingat |
 | Keberhasilan implementasi | 25% | Demo, screenshot cadangan, bukti tes | Tonjolkan fungsi yang dapat dicoba juri dan perilaku ketika data/jaringan bermasalah; jumlah unit test bukan ukuran keberhasilan penggunaan |
-| Tanya jawab | 20% | Enam lampiran dan catatan batas model | Latih jawaban singkat20–30detik, lalu tunjukkan bukti bila diminta; jangan membacakan semua lampiran saat 10 menit utama |
+| Tanya jawab | 20% | Enam lampiran dan catatan batas model | Latih jawaban singkat 20–30 detik, lalu tunjukkan bukti bila diminta; jangan membacakan semua lampiran saat 10 menit utama |
 | Pameran | 15% | QR dan aplikasi tersedia | Siapkan pitch 60 detik + hands-on juri; deck 9 menit bukan pengganti alur pameran 5 menit |
 | Code project | 10% | Link repo, metode, tes/regresi terdokumentasi | Satu lampiran tambahan tentang pemisahan API/domain/data, validasi, CI, dan cara reproduksi; tidak perlu membuka seluruh source saat presentasi utama |
 
