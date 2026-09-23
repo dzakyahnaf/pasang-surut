@@ -1,0 +1,135 @@
+{
+  "cache_key": "deb9dc3e7eb9df3149c5bc0bebaa14b56fa80fc786198a0557ad5831f8dcd85e",
+  "boundaries": [
+    {
+      "offset": 1000000,
+      "duration": 2750000,
+      "text": "Pilih"
+    },
+    {
+      "offset": 3750000,
+      "duration": 2625000,
+      "text": "titik"
+    },
+    {
+      "offset": 6375000,
+      "duration": 4125000,
+      "text": "berangkat"
+    },
+    {
+      "offset": 10500000,
+      "duration": 1875000,
+      "text": "dan"
+    },
+    {
+      "offset": 12375000,
+      "duration": 6375000,
+      "text": "tujuan"
+    },
+    {
+      "offset": 27250000,
+      "duration": 3250000,
+      "text": "Tentukan"
+    },
+    {
+      "offset": 30500000,
+      "duration": 2750000,
+      "text": "motor"
+    },
+    {
+      "offset": 33250000,
+      "duration": 1875000,
+      "text": "atau"
+    },
+    {
+      "offset": 35125000,
+      "duration": 5500000,
+      "text": "mobil"
+    },
+    {
+      "offset": 43500000,
+      "duration": 2500000,
+      "text": "lalu"
+    },
+    {
+      "offset": 46000000,
+      "duration": 3250000,
+      "text": "geser"
+    },
+    {
+      "offset": 49250000,
+      "duration": 2125000,
+      "text": "Pita"
+    },
+    {
+      "offset": 51375000,
+      "duration": 4750000,
+      "text": "Pasut"
+    },
+    {
+      "offset": 64625000,
+      "duration": 2875000,
+      "text": "Lihat"
+    },
+    {
+      "offset": 67500000,
+      "duration": 4250000,
+      "text": "bagaimana"
+    },
+    {
+      "offset": 71750000,
+      "duration": 4625000,
+      "text": "estimasi"
+    },
+    {
+      "offset": 76375000,
+      "duration": 3750000,
+      "text": "kondisi"
+    },
+    {
+      "offset": 80125000,
+      "duration": 2500000,
+      "text": "jalan"
+    },
+    {
+      "offset": 82625000,
+      "duration": 3875000,
+      "text": "berubah"
+    },
+    {
+      "offset": 86500000,
+      "duration": 2125000,
+      "text": "pada"
+    },
+    {
+      "offset": 88625000,
+      "duration": 2250000,
+      "text": "jam"
+    },
+    {
+      "offset": 90875000,
+      "duration": 1250000,
+      "text": "yang"
+    },
+    {
+      "offset": 92125000,
+      "duration": 6000000,
+      "text": "berbeda"
+    },
+    {
+      "offset": 100750000,
+      "duration": 3875000,
+      "text": "langsung"
+    },
+    {
+      "offset": 104625000,
+      "duration": 750000,
+      "text": "di"
+    },
+    {
+      "offset": 105375000,
+      "duration": 4750000,
+      "text": "peta"
+    }
+  ]
+}

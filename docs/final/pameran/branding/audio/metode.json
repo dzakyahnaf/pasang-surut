@@ -1,0 +1,130 @@
+{
+  "cache_key": "57af61f3b65aa2de12d64a04d5c329edd7ae729060fbcacef38e6200bca10c1f",
+  "boundaries": [
+    {
+      "offset": 1125000,
+      "duration": 1375000,
+      "text": "Di"
+    },
+    {
+      "offset": 2500000,
+      "duration": 2375000,
+      "text": "balik"
+    },
+    {
+      "offset": 4875000,
+      "duration": 5125000,
+      "text": "layar"
+    },
+    {
+      "offset": 12875000,
+      "duration": 4875000,
+      "text": "perhitungan"
+    },
+    {
+      "offset": 17750000,
+      "duration": 2500000,
+      "text": "pasang"
+    },
+    {
+      "offset": 20250000,
+      "duration": 4375000,
+      "text": "surut"
+    },
+    {
+      "offset": 27250000,
+      "duration": 3125000,
+      "text": "indeks"
+    },
+    {
+      "offset": 30375000,
+      "duration": 3875000,
+      "text": "kerentanan"
+    },
+    {
+      "offset": 34250000,
+      "duration": 4500000,
+      "text": "ruas"
+    },
+    {
+      "offset": 41375000,
+      "duration": 2250000,
+      "text": "dan"
+    },
+    {
+      "offset": 43625000,
+      "duration": 3500000,
+      "text": "jaringan"
+    },
+    {
+      "offset": 47125000,
+      "duration": 2625000,
+      "text": "jalan"
+    },
+    {
+      "offset": 49750000,
+      "duration": 6625000,
+      "text": "OpenStreetMap"
+    },
+    {
+      "offset": 56375000,
+      "duration": 3875000,
+      "text": "mendukung"
+    },
+    {
+      "offset": 60250000,
+      "duration": 5000000,
+      "text": "perbandingan"
+    },
+    {
+      "offset": 65250000,
+      "duration": 4875000,
+      "text": "rute"
+    },
+    {
+      "offset": 78625000,
+      "duration": 4250000,
+      "text": "Kedalaman"
+    },
+    {
+      "offset": 82875000,
+      "duration": 1375000,
+      "text": "yang"
+    },
+    {
+      "offset": 84250000,
+      "duration": 3125000,
+      "text": "tampil"
+    },
+    {
+      "offset": 87375000,
+      "duration": 3750000,
+      "text": "merupakan"
+    },
+    {
+      "offset": 91125000,
+      "duration": 7750000,
+      "text": "estimasi"
+    },
+    {
+      "offset": 101750000,
+      "duration": 3000000,
+      "text": "bukan"
+    },
+    {
+      "offset": 104750000,
+      "duration": 3375000,
+      "text": "hasil"
+    },
+    {
+      "offset": 108125000,
+      "duration": 3625000,
+      "text": "sensor"
+    },
+    {
+      "offset": 111750000,
+      "duration": 6000000,
+      "text": "langsung"
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "voice": "id-ID-ArdiNeural",
+  "source": "Microsoft Edge TTS via edge-tts 7.2.8",
+  "music": "Sintesis orisinal prosedural 96 BPM, tanpa sampel eksternal",
+  "durasi": 105,
+  "sample_rate": 48000,
+  "peak_dbfs": -3.9790195108628907,
+  "segments": [
+    {
+      "id": "pembuka",
+      "mulai": 0.55,
+      "akhir": 7.2807916666666666,
+      "tempo": 1.0702222222222222,
+      "words": 13
+    },
+    {
+      "id": "masalah",
+      "mulai": 8.55,
+      "akhir": 14.958000000000002,
+      "tempo": 1.0,
+      "words": 13
+    },
+    {
+      "id": "brand",
+      "mulai": 16.55,
+      "akhir": 23.2826875,
+      "tempo": 1.1342222222222222,
+      "words": 13
+    },
+    {
+      "id": "aplikasi",
+      "mulai": 24.55,
+      "akhir": 36.406,
+      "tempo": 1.0,
+      "words": 26
+    },
+    {
+      "id": "rute",
+      "mulai": 38.55,
+      "akhir": 57.278958333333335,
+      "tempo": 1.00736,
+      "words": 36
+    },
+    {
+      "id": "dampak",
+      "mulai": 58.55,
+      "akhir": 69.27974999999999,
+      "tempo": 1.056,
+      "words": 18
+    },
+    {
+      "id": "metode",
+      "mulai": 70.55,
+      "akhir": 81.28204166666666,
+      "tempo": 1.1743255813953488,
+      "words": 25
+    },
+    {
+      "id": "lanjut",
+      "mulai": 82.55,
+      "akhir": 91.28127083333334,
+      "tempo": 1.1053714285714287,
+      "words": 17
+    },
+    {
+      "id": "penutup",
+      "mulai": 92.55,
+      "akhir": 103.95,
+      "tempo": 1.0,
+      "words": 24
+    }
+  ],
+  "subtitles": 29
+}

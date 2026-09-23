@@ -1,0 +1,90 @@
+{
+  "cache_key": "d36ceffb4aef4478fe8d1920d981753a3f75ee1a8c458a859ee131628f7236bb",
+  "boundaries": [
+    {
+      "offset": 1125000,
+      "duration": 7500000,
+      "text": "Berikutnya"
+    },
+    {
+      "offset": 11375000,
+      "duration": 2875000,
+      "text": "uji"
+    },
+    {
+      "offset": 14250000,
+      "duration": 3625000,
+      "text": "bersama"
+    },
+    {
+      "offset": 17875000,
+      "duration": 6250000,
+      "text": "pengguna"
+    },
+    {
+      "offset": 26750000,
+      "duration": 4875000,
+      "text": "validasi"
+    },
+    {
+      "offset": 31625000,
+      "duration": 3625000,
+      "text": "genangan"
+    },
+    {
+      "offset": 35250000,
+      "duration": 750000,
+      "text": "di"
+    },
+    {
+      "offset": 36000000,
+      "duration": 5750000,
+      "text": "lapangan"
+    },
+    {
+      "offset": 44500000,
+      "duration": 2750000,
+      "text": "dan"
+    },
+    {
+      "offset": 47250000,
+      "duration": 4500000,
+      "text": "pembaruan"
+    },
+    {
+      "offset": 51750000,
+      "duration": 5000000,
+      "text": "data"
+    },
+    {
+      "offset": 65125000,
+      "duration": 2875000,
+      "text": "Untuk"
+    },
+    {
+      "offset": 68000000,
+      "duration": 4750000,
+      "text": "perjalanan"
+    },
+    {
+      "offset": 72750000,
+      "duration": 4625000,
+      "text": "pesisir"
+    },
+    {
+      "offset": 77375000,
+      "duration": 1750000,
+      "text": "yang"
+    },
+    {
+      "offset": 79125000,
+      "duration": 2250000,
+      "text": "lebih"
+    },
+    {
+      "offset": 81375000,
+      "duration": 6875000,
+      "text": "terencana"
+    }
+  ]
+}
