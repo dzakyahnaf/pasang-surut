@@ -1,5 +1,16 @@
 # Sisa pekerjaan proposal
 
+**Pembaruan materi 25 September:** [PPTX dan dua PDF revisi final](final/presentasi_25_september/README.md)
+mengikuti rulebook/TM dan evaluasi pasut terbaru. Sembilan slide utama
+ditargetkan sembilan menit, dengan sembilan lampiran untuk bukti dan cadangan
+demo. [Addendum materi](final/Addendum_presentasi_25_september.docx) melengkapi
+proposal terkirim yang tetap diarsipkan; diperiksa di Word, satu halaman.
+Uji pengguna belum dilakukan;
+target peserta ditulis sebagai rencana. Pemeriksaan PowerPoint, QR,
+navigasi dan kesamaan demo lokal lulus. Tim masih perlu latihan nyata,
+uji perangkat acara, salinan cadangan, serta informasi pengumpulan PDF.
+Video pameran 24 September tidak direvisi dalam pekerjaan PPT ini.
+
 **Pembaruan 25 September:** [audit sumber dan masa berlaku data](final/audit_asal_data_25_september.md)
 dan [addendum validasi data](final/Addendum_validasi_data_25_september.docx)
 melengkapi arsip proposal terkirim. Uji pasut baru memakai 10.020 rekaman IOC

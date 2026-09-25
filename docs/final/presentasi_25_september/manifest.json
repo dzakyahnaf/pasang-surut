@@ -1,0 +1,157 @@
+{
+  "slides": 18,
+  "main_slides": 9,
+  "appendices": 9,
+  "target_seconds": 540,
+  "buffer_seconds": 60,
+  "fonts": [
+    "Arial",
+    "Arial Narrow"
+  ],
+  "application_url": "https://pasang-surut.vercel.app/app",
+  "scenario_date": "2026-09-26",
+  "scenario_version": "919aa345-7492-4a53-9e7c-c34086775d18",
+  "source_code_base": "69eae60",
+  "user_testing": "Belum dilakukan; dikonfirmasi user 25 September 2026",
+  "references": [
+    "Rulebook-dsdc-final.pdf halaman 2,3,9,10",
+    "TM Final DSDC Anforcom 2026.pdf halaman 5,6,7,9",
+    "ITC2026_1_SOFTDEV_PPT_Fable5Enjoyer_DekapAutis_Revisi_v3.pptx dan PDF",
+    "anti-slop-writing/indonesian/SKILL.md"
+  ],
+  "slides_summary": [
+    {
+      "slide": 1,
+      "title": "Pembuka",
+      "seconds": 30,
+      "time": "00:00 sampai 00:30",
+      "speaker": "Dzaky"
+    },
+    {
+      "slide": 2,
+      "title": "Kebutuhan perjalanan",
+      "seconds": 50,
+      "time": "00:30 sampai 01:20",
+      "speaker": "Dzaky"
+    },
+    {
+      "slide": 3,
+      "title": "Alur pemakaian",
+      "seconds": 45,
+      "time": "01:20 sampai 02:05",
+      "speaker": "Daffa"
+    },
+    {
+      "slide": 4,
+      "title": "Demo dua jam",
+      "seconds": 145,
+      "time": "02:05 sampai 04:30",
+      "speaker": "Daffa"
+    },
+    {
+      "slide": 5,
+      "title": "Metode aktif",
+      "seconds": 60,
+      "time": "04:30 sampai 05:30",
+      "speaker": "Dzaky"
+    },
+    {
+      "slide": 6,
+      "title": "Apa yang sudah dibuktikan",
+      "seconds": 70,
+      "time": "05:30 sampai 06:40",
+      "speaker": "Dzaky"
+    },
+    {
+      "slide": 7,
+      "title": "Manfaat dan biaya adaptasi",
+      "seconds": 60,
+      "time": "06:40 sampai 07:40",
+      "speaker": "Naufal"
+    },
+    {
+      "slide": 8,
+      "title": "Rencana validasi berikut",
+      "seconds": 55,
+      "time": "07:40 sampai 08:35",
+      "speaker": "Naufal"
+    },
+    {
+      "slide": 9,
+      "title": "Penutup",
+      "seconds": 25,
+      "time": "08:35 sampai 09:00",
+      "speaker": "Naufal"
+    },
+    {
+      "slide": 10,
+      "title": "Navigasi lampiran",
+      "seconds": 0,
+      "time": "Lampiran untuk tanya jawab",
+      "speaker": "Sesuai topik"
+    },
+    {
+      "slide": 11,
+      "title": "Cadangan demo 8.00",
+      "seconds": 0,
+      "time": "Lampiran untuk tanya jawab",
+      "speaker": "Daffa"
+    },
+    {
+      "slide": 12,
+      "title": "Cadangan demo 13.00",
+      "seconds": 0,
+      "time": "Lampiran untuk tanya jawab",
+      "speaker": "Daffa"
+    },
+    {
+      "slide": 13,
+      "title": "Sumber dan keberlanjutan",
+      "seconds": 0,
+      "time": "Lampiran untuk tanya jawab",
+      "speaker": "Dzaky"
+    },
+    {
+      "slide": 14,
+      "title": "Uji pasut independen",
+      "seconds": 0,
+      "time": "Lampiran untuk tanya jawab",
+      "speaker": "Dzaky"
+    },
+    {
+      "slide": 15,
+      "title": "Model dan routing",
+      "seconds": 0,
+      "time": "Lampiran untuk tanya jawab",
+      "speaker": "Dzaky"
+    },
+    {
+      "slide": 16,
+      "title": "Hosting dan uji beban",
+      "seconds": 0,
+      "time": "Lampiran untuk tanya jawab",
+      "speaker": "Dzaky / Daffa"
+    },
+    {
+      "slide": 17,
+      "title": "Struktur kode dan reproduksi",
+      "seconds": 0,
+      "time": "Lampiran untuk tanya jawab",
+      "speaker": "Dzaky / Daffa"
+    },
+    {
+      "slide": 18,
+      "title": "Asumsi BBM dan emisi",
+      "seconds": 0,
+      "time": "Lampiran untuk tanya jawab",
+      "speaker": "Naufal / Dzaky"
+    }
+  ],
+  "main_narration_words": 742,
+  "assets_sha256": {
+    "docs\\final\\presentasi\\aset\\demo_08.png": "de513ffdbe26cd37d1b8c92c8c58eeccfc3263b696e4c3eb580d94ede3311c40",
+    "docs\\final\\presentasi\\aset\\demo_13.png": "d97d3a061f295760b74a2e005930b92519bb214ebaec1c290cb160b6c2714021",
+    "docs\\final\\presentasi\\aset\\skenario.json": "1853cf86d4bb186f03d085fcdfb92d71f7258428d151b8f86d728f3aeeb83bfa",
+    "docs\\final\\data\\perbandingan_pasut_september.png": "1261adfdf166781c8e697a966aa8885e298edb0422179b71e4fd50f38da1f48f"
+  }
+}
