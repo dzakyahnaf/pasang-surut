@@ -1,5 +1,39 @@
 # Progres
 
+## Presentasi final mengikuti rulebook dan TM, 25 September 2026
+
+[Paket PPTX/PDF terbaru](final/presentasi_25_september/README.md) berisi
+9 slide utama, target 9 menit termasuk demo 2 menit 25 detik, dan 9 lampiran
+tersembunyi. Alurnya kebutuhan perjalanan, penggunaan aplikasi, demo,
+metode, pengujian dan batas, biaya adaptasi, lalu rencana validasi. Umur
+masukan dan evaluasi pasut September sudah masuk. Pengguna mengonfirmasi
+belum ada uji pengguna; target 5-8 peserta tetap rencana.
+
+Rulebook, TM, dan PPTX/PDF referensi DekapAutis dibaca. Bobot final dan
+sumber tiap slide dipetakan. TM menempatkan tim 1 pada 09.20-09.30, Q&A
+09.30-09.45 setelah showcase 08.50-09.20 WIB. Panduan memuat usulan pembagian,
+skenario cadangan, latihan waktu, alur showcase, dan 13 bekal jawaban juri.
+Deadline PDF masih belum diinformasikan; tidak dibuat tenggat baru.
+
+PowerPoint membuka/mengekspor 18 slide tanpa overflow teks/objek keluar.
+Render diperiksa visual; catatan, navigasi dan QR diverifikasi. Browser lokal
+dengan request HTTP eksternal diblokir menghasilkan angka, geometri dan
+versi potret yang identik pada 08.00/13.00; Cari ulang berhasil, tanpa galat
+JavaScript. Uji beban/95 tes backend/26 frontend tetap merujuk audit terdahulu.
+[Addendum materi](final/Addendum_presentasi_25_september.docx) melengkapi
+proposal submission yang tetap diarsipkan; diperiksa di Microsoft Word,
+satu halaman. Runtime dan database tidak diubah.
+
+**Papan blokade:** berkas presentasi selesai; target 9 menit belum diukur
+dalam latihan tim. Tim perlu menetapkan pembicara, dua latihan stopwatch,
+menguji proyektor/QR serta demo tanpa jaringan nyata, menyalin ke perangkat
+cadangan, dan mengonfirmasi jalur/deadline PDF. Video pameran 24 September
+belum memuat evaluasi pasut baru; poster dan pilihan basemap final mengikuti
+daftar tim. Genangan per ruas, manfaat lapangan, umur masukan dan pipeline
+data permanen tetap belum tuntas. Produksi berakhir eksklusif 5 Oktober
+07.00 WIB; potret lokal 29 September 00.00 WIB. Catatan PPT lama di bawah
+bersifat historis; gunakan paket 25 September untuk presentasi.
+
 ## Audit asal dan kemutakhiran data — 25 September 2026
 
 [Laporan audit](final/audit_asal_data_25_september.md) memetakan data aktif,

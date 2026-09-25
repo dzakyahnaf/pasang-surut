@@ -1,5 +1,9 @@
 # Presentasi final PASANG SURUT
 
+**Arsip 23 September. Untuk final gunakan [paket revisi 25 September](../presentasi_25_september/README.md)**
+yang mengikuti PDF TM, evaluasi pasut September, dan konfirmasi belum ada
+uji pengguna. Nomor slide, waktu demo, dan panduan di bawah adalah versi lama.
+
 Paket 23 September 2026: **8 slide utama, target 9 menit termasuk demo
 3 menit**, dan 6 lampiran untuk tanya jawab. Rasio 16:9. Pembagian pembicara
 merupakan usulan, belum keputusan pembagian tugas tim.
