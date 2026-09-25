@@ -1,0 +1,5 @@
+{
+  "/etc/cron.d/pasang-surut-backup": "# Waktu host: Asia/Jakarta. Hanya database container PASANG SURUT.\n20 3 * * * root /opt/pasang-surut/backup.sh >> /opt/pasang-surut/backup.log 2>&1\n",
+  "crontab_root": [],
+  "timers": []
+}

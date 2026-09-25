@@ -1,5 +1,33 @@
 # Progres
 
+## Audit asal dan kemutakhiran data — 25 September 2026
+
+[Laporan audit](final/audit_asal_data_25_september.md) memetakan data aktif,
+umur pengukuran, berkas, lokasi dan sumber primer. API/database produksi
+memakai `kerentanan_v1`: ruas OSM, elevasi DEMNAS, laju subsidensi 2015–2018,
+dan pasut harmonik dari pengamatan 2014. Tanggal publikasi 2026 bukan umur
+pengukuran. Genangan 10–50 cm dan proporsi puncak 10% belum terkalibrasi
+terhadap pengamatan ruas; hujan dan model Sentinel-1 tidak aktif.
+
+Uji baru tanpa penyetelan ulang: 10.020 rekaman tekanan IOC sema pada
+18–25 September, korelasi 0,8340; RMSE simpangan 12,44 cm; MAE 10,32 cm.
+CSV, grafik dan metadata ada di [paket data](final/data/README.md). Perbedaan
+datum ditangani dengan mengurangi rata-rata; sumber belum melalui quality
+control. Hasil tidak menyatakan persentase akurasi atau akurasi genangan.
+Pembacaan produksi/jadwal hanya baca, tidak mengubah aplikasi atau layanan.
+[Addendum validasi](final/Addendum_validasi_data_25_september.docx) diperiksa
+di Microsoft Word: satu halaman. Grafik diperiksa visual; CSV/JSON, tautan
+berkas laporan dan hitung ulang metrik konsisten.
+
+**Papan blokade:** klaim pemakaian operasional tiga tahun belum terbukti.
+Data produksi berakhir eksklusif **5 Oktober 2026 07.00 WIB**; potret lokal
+**29 September 00.00 WIB**. Jadwal khusus VPS yang ditemukan hanya backup;
+belum ada penerbit data permanen. Butuh validasi genangan lapangan, masukan
+spasial mutakhir, sumber pasut bermutu/izin penggunaan, dan pipeline bergulir.
+PPT/video lama belum memasukkan bukti audit baru. Catatan ERA5 tidak dikunci
+di kueri, hujan null menjadi nol, radius/grid, dan jarak stasiun yang keliru
+dicatat sebagai pekerjaan data berikut, bukan diam-diam mengubah model final.
+
 ## Video branding dengan narasi — 24 September 2026
 
 [Video pameran 105 detik](final/pameran/branding/README.md) dibuat sesuai
