@@ -3,6 +3,8 @@ import { afterEach, expect, test, vi } from 'vitest';
 import { cleanup, render, screen } from '@testing-library/react';
 import Peta from './Peta.jsx';
 
+vi.mock('../lib/token.js', () => ({ token: () => 'transparent', tokenPx: () => 1 }));
+
 vi.mock('maplibre-gl', () => ({ setWorkerUrl: vi.fn(), Map: class { constructor() { throw new Error('WebGL disabled'); } } }));
 afterEach(cleanup);
 

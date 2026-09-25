@@ -304,5 +304,11 @@
     "sembunyikanDetail": "Sembunyikan detail",
     "pasangAplikasi": "Pasang aplikasi",
     "pasangAplikasiKeterangan": "Tambahkan ke layar utama agar bisa dibuka tanpa peramban"
+  },
+  "petaDasar": {
+    "memuat": "Memuat peta dasar OSM...",
+    "osm": "Peta dasar OSM / CARTO",
+    "lokal": "Peta dasar belum tersedia; tampilan lokal aktif",
+    "carto": "CARTO"
   }
 }

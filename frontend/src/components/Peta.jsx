@@ -4,14 +4,8 @@
  * Peta adalah KONTEN, bukan latar. Tidak ada lapisan kartu yang menutupinya;
  * yang menumpang di atasnya hanya pelat instrumen kecil di sudut.
  *
- * TIDAK ADA PETA DASAR DARI LUAR. Tidak ada Mapbox, tidak ada penyedia ubin
- * mana pun. Latarnya satu warna dek, dan seluruh yang tergambar di atasnya
- * adalah data kita sendiri. Dua alasannya:
- *   1. Aturan repo — tidak ada panggilan layanan luar saat runtime. Demo di
- *      babak final tidak boleh bergantung pada sambungan ruangan lomba.
- *   2. DESIGN.md Bagian 2 — jendela peta terang dengan garis jalan sebagai
- *      linework, persis seperti peta laut. Ubin foto satelit justru melawan
- *      arah itu.
+ * Peta dasar OSM siap pakai dari CARTO dipilih tim untuk rilis final.
+ * Data genangan dan perutean tetap berasal dari API PASANG SURUT.
  */
 
 import { useEffect, useRef, useState } from "react";
@@ -26,6 +20,7 @@ import { token, tokenPx } from "../lib/token.js";
 import { t } from "../lib/teks.js";
 import { pasangLabelPeta } from "../lib/labelPeta.js";
 import { buatLabelJalan } from "../lib/jalanLabel.js";
+import { GAYA_OSM, tataPetaDasar } from "../lib/petaDasar.js";
 
 /* Batas kelas tangga kedalaman, DESIGN.md Bagian 3.4.
    Nilainya sentimeter. */
@@ -104,7 +99,7 @@ function ekspresiLebarKedalaman() {
   ];
 }
 
-export default function Peta({ geojson, kondisi, rute, asal, tujuan, onKlikPeta, onSiap }) {
+export default function Peta({ geojson, kondisi, rute, asal, tujuan, onKlikPeta, onSiap, onStatusPetaDasar }) {
   const wadahRef = useRef(null);
   const petaRef = useRef(null);
   const basahRef = useRef([]);
@@ -128,13 +123,8 @@ export default function Peta({ geojson, kondisi, rute, asal, tujuan, onKlikPeta,
     if (petaRef.current || !wadahRef.current) return;
     let dibatalkan = false;
 
-    let peta;
-    try {
-      peta = new maplibregl.Map({
-      container: wadahRef.current,
-      // Gaya ditulis inline, bukan diambil dari URL. Sekali lagi: tidak ada
-      // panggilan jaringan ke luar.
-      style: {
+    let lokal = false;
+    const gayaLokal = {
         version: 8,
         // Tanpa URL glyphs: MapLibre menggambar teks melalui TinySDF
         // memakai font lokal yang sudah dibundel, tanpa layanan glyph luar.
@@ -147,7 +137,13 @@ export default function Peta({ geojson, kondisi, rute, asal, tujuan, onKlikPeta,
             paint: { "background-color": token("--dek-1") },
           },
         ],
-      },
+      };
+    onStatusPetaDasar?.("memuat");
+    let peta;
+    try {
+      peta = new maplibregl.Map({
+      container: wadahRef.current,
+      style: GAYA_OSM,
       // Pusat dan zoom awal diisi ulang oleh fitBounds begitu data datang.
       center: [110.4425, -6.96],
       zoom: 12,
@@ -166,6 +162,12 @@ export default function Peta({ geojson, kondisi, rute, asal, tujuan, onKlikPeta,
       setGalatGrafis(true);
       return;
     }
+    const batasMuat = setTimeout(() => {
+      if (dibatalkan || peta.loaded()) return;
+      lokal = true;
+      onStatusPetaDasar?.("lokal");
+      peta.setStyle(gayaLokal);
+    }, 10000);
 
     // Kontrol perbesar dan perkecil. Labelnya diambil dari copy.id.json
     // supaya tidak ada teks Inggris bawaan yang lolos ke layar.
@@ -173,12 +175,23 @@ export default function Peta({ geojson, kondisi, rute, asal, tujuan, onKlikPeta,
     peta.addControl(kontrol, "bottom-right");
     if (import.meta.env.DEV) window.__peta = peta;
 
-    peta.on("error", (e) => console.error("[peta] galat MapLibre:", e && e.error));
+    peta.on("error", (e) => console.warn("[peta]", e && e.error));
     peta.on("load", async () => {
+      clearTimeout(batasMuat);
       // Tunggu font sebelum glyph pertama dirasterisasi; jika terlalu awal,
       // font fallback akan tersimpan di cache glyph sepanjang umur peta.
       await document.fonts.load('400 24px "Barlow Semi Condensed"').catch(() => {});
       if (dibatalkan) return;
+      if (!lokal) {
+        // Font label aplikasi tidak ada di server glyph CARTO. Pakai font
+        // bundel untuk semua teks, sambil mempertahankan layer/gaya basemap.
+        peta.setGlyphs(null);
+        for (const layer of peta.getStyle().layers) {
+          if (layer.type === "symbol" && layer.layout?.["text-field"]) {
+            peta.setLayoutProperty(layer.id, "text-font", ["Barlow Semi Condensed"]);
+          }
+        }
+      }
       // Pola halftone didaftarkan sebelum lapisan yang memakainya dibuat.
       const warnaTitik = token("--dek-1");
       const jarang = buatPolaTitik(10, 1.4, warnaTitik);
@@ -362,6 +375,8 @@ export default function Peta({ geojson, kondisi, rute, asal, tujuan, onKlikPeta,
       });
 
       pasangLabelPeta(peta);
+      if (!lokal) tataPetaDasar(peta);
+      onStatusPetaDasar?.(lokal ? "lokal" : "osm");
       petaRef.current = peta;
       setSiap(true);
 
@@ -391,6 +406,7 @@ export default function Peta({ geojson, kondisi, rute, asal, tujuan, onKlikPeta,
 
     return () => {
       dibatalkan = true;
+      clearTimeout(batasMuat);
       peta.remove();
       petaRef.current = null;
       setSiap(false);

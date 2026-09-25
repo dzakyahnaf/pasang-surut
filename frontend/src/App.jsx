@@ -27,6 +27,7 @@ import { labelHariJam } from "./lib/waktu.js";
 import { namaLokasi } from "./lib/lokasi.js";
 
 export default function App() {
+  const [petaDasar, setPetaDasar] = useState("memuat");
   const [asal, setAsal] = useState(null);
   const [tujuan, setTujuan] = useState(null);
   const [modePilih, setModePilih] = useState("asal");
@@ -187,11 +188,13 @@ export default function App() {
             asal={asal}
             tujuan={tujuan}
             onKlikPeta={klikPeta}
+            onStatusPetaDasar={setPetaDasar}
           />
 
           <div className="plat plat--kiri-atas">
             <div className="plat__judul t-judul">{t("aplikasi.nama")}</div>
             <div className="plat__anak t-label">{t("aplikasi.wilayah")}</div>
+            <div className="plat__anak t-label" role="status">{t(`petaDasar.${petaDasar}`)}</div>
             {infoJam?.asal_jaringan === "potret" ? <div className="t-label">{t("peta.potretDemo")}</div> : null}
             {waktuAktif ? (
               <div className="plat__jam t-data">{labelHariJam(waktuAktif)}</div>
@@ -214,7 +217,7 @@ export default function App() {
             </span>
             {/* Atribusi OpenStreetMap wajib tampil. Lisensi ODbL menuntutnya,
                 dan ia tidak boleh digeser oleh petunjuk sesaat. */}
-            <span>{t("peta.atribusi")}</span>
+            <span><a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">{t("peta.atribusi")}</a>{" | "}<a href="https://carto.com/attributions" target="_blank" rel="noreferrer">{t("petaDasar.carto")}</a></span>
           </div>
 
           {memuat ? (

@@ -1,0 +1,31 @@
+{
+  "url": "https://pasang-surut.vercel.app/app",
+  "diperiksa_utc": "2026-09-25T23:52:12.706243+00:00",
+  "page_errors": [],
+  "external_hosts": [
+    "basemaps.cartocdn.com",
+    "tiles-a.basemaps.cartocdn.com",
+    "tiles-b.basemaps.cartocdn.com",
+    "tiles-c.basemaps.cartocdn.com",
+    "tiles-d.basemaps.cartocdn.com",
+    "tiles.basemaps.cartocdn.com"
+  ],
+  "jam": {
+    "8": {
+      "versi_data": "715e64e7-109a-4ece-b7f8-6935d5f7148a",
+      "rute_ditemukan": true,
+      "identik_dengan_potret_deck": null,
+      "waktu": "2026-09-26T01:00:00+00:00"
+    },
+    "13": {
+      "versi_data": "715e64e7-109a-4ece-b7f8-6935d5f7148a",
+      "rute_ditemukan": true,
+      "identik_dengan_potret_deck": null,
+      "waktu": "2026-09-26T06:00:00+00:00"
+    }
+  },
+  "tiles_berhasil": 3,
+  "mobil_dan_cari_ulang": true,
+  "canvas_berisi_gambar": true,
+  "ponsel_tanpa_overflow": true
+}
