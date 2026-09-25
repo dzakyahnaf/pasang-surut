@@ -79,9 +79,10 @@ tersebut adalah akses hasil pelekatan ke graf, bukan pintu masuk tersurvei.
 
 Pita dimulai dari 00.00 WIB. Fokus penggeser, tekan `Home`, lalu panah kanan
 delapan kali untuk 08.00; tambah lima kali untuk 13.00. Pastikan angka pada
-hasil sudah berubah sebelum menjelaskan. Gambar deck memakai peta main
-berlabel lokal; branch basemap OSM alternatif tidak menjadi tampilan final
-dalam paket ini.
+hasil sudah berubah sebelum menjelaskan. Pada 26 September tim memilih
+peta OSM/CARTO untuk aplikasi. Gambar deck tetap peta lokal sebelumnya;
+angka/geometri potret diuji ulang dan tetap sama. Saat CARTO tidak tersedia,
+peta lokal cadangan digunakan. Lihat [catatan rilis](../peta_osm_final_26_september.md).
 
 **Jika satu permintaan tertahan sepuluh detik**, langsung kembali ke PPT,
 ketik `11` + Enter, lanjut `12` + Enter, kemudian `5` + Enter. Kedua gambar

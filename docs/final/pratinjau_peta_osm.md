@@ -1,7 +1,9 @@
-# Pratinjau peta dasar OSM
+# Peta dasar OSM pilihan final
 
-Branch `preview/peta-dasar-osm` khusus perbandingan visual, **jangan merge
-ke main tanpa keputusan Dzaky**. Main mempertahankan peta lokal berlabel.
+Pada **26 September 2026**, Dzaky menyampaikan persetujuan tim untuk memakai
+tampilan OSM/CARTO dan meminta branch digabung ke main lalu dihapus.
+Peta ini menjadi tampilan aplikasi di `/app`; landing tetap di `/`.
+Riwayat perbandingan dan screenshot 22-23 September dipertahankan di bawah.
 
 Basemap siap pakai: [CARTO Voyager](https://basemaps.cartocdn.com/gl/voyager-gl-style/style.json),
 berbasis OpenStreetMap. Gambar jalan, perairan, bangunan, nama kawasan dan
@@ -21,7 +23,7 @@ Basemap tidak menambah cakupan prediksi atau validasi model genangan.
 
 ## Melihat dari laptop
 
-Di direktori `frontend` pada branch ini:
+Di direktori `frontend` pada main:
 
 ```powershell
 npm ci
@@ -34,9 +36,10 @@ Basemap diambil langsung browser dari CARTO; tidak disimpan di API/VPS.
 Tidak ada unduhan massal atau prefetch wilayah. Bila pemuatan awal basemap
 gagal selama 10 detik, peta lokal aktif dengan status yang terlihat.
 
-Vercel pada branch ini membangun frontend asli dan hanya memproksi `/api`.
-Produksi main menampilkan landing di `/` dan aplikasi dari VPS di `/app`.
-Preview Vercel dapat meminta login sesuai perlindungan proyek yang berlaku.
+Konfigurasi Vercel khusus pratinjau telah dikembalikan ke konfigurasi main:
+landing di `/`, aplikasi dan API dari VPS di `/app` serta `/api`.
+Perubahan UI dibangun dengan `npm run build:vps` dan aset dipasang ke VPS;
+push Git saja tidak mengganti frontend yang disajikan VPS.
 
 ## Penyedia dan batas pratinjau
 
@@ -52,4 +55,5 @@ Renderer pada main maupun branch ini sudah MapLibre 6.4.1, dengan worker
 modul dibundel oleh Vite. `npm audit` pada 22 September tidak menemukan
 advisory yang diketahui. Atribusi OpenStreetMap dan CARTO tetap berupa
 tautan React statis. Perbaikan regresi dari main disertakan pada branch
-ini; pilihan basemap tetap terpisah dan belum digabungkan ke main.
+ini; pilihan basemap sudah disetujui untuk main. Jika internet ke penyedia
+terputus sebelum peta selesai dimuat, tampilan lokal cadangan tetap tersedia.

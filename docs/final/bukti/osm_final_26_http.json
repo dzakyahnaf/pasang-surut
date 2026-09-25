@@ -1,0 +1,8 @@
+{
+  "app_sha256": "5f46ace4929e03dcdc88e34cb56863425d621280b0cf72cebbdde555e220b778",
+  "bundle_sha256": "7d0ef4a78ea42debe5816d2be8e09b1f6ad1af15fbf681e5da59bbb758647d1b",
+  "landing_identik": true,
+  "service_worker": "pasang-surut-v4-osm",
+  "app_http": 200,
+  "landing_http": 200
+}

@@ -1,5 +1,13 @@
 # Sisa pekerjaan proposal
 
+**Pembaruan 26 September:** tim memilih peta OSM/CARTO untuk main.
+[Laporan rilis dan pengujian](final/peta_osm_final_26_september.md) serta
+[addendum peta](final/Addendum_peta_OSM_26_september.docx) melengkapi proposal
+terkirim; addendum diperiksa di Word, satu halaman. Pilihan basemap sudah
+selesai. Screenshot PPT/video masih versi
+peta lokal; angka skenario tetap cocok dengan hasil potret yang diuji ulang.
+Kebutuhan validasi data dan pengguna tidak berubah karena penambahan basemap.
+
 **Pembaruan materi 25 September:** [PPTX dan dua PDF revisi final](final/presentasi_25_september/README.md)
 mengikuti rulebook/TM dan evaluasi pasut terbaru. Sembilan slide utama
 ditargetkan sembilan menit, dengan sembilan lampiran untuk bukti dan cadangan

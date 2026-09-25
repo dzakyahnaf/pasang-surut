@@ -1,0 +1,67 @@
+{
+  "frontend": "osm26-5f46ace4929e",
+  "sha256_index": "5f46ace4929e03dcdc88e34cb56863425d621280b0cf72cebbdde555e220b778",
+  "container_tidak_berubah": true,
+  "maknaprice_http_sebelum": 200,
+  "maknaprice_http_sesudah": 200,
+  "mem_available_sebelum_kib": 730568,
+  "health_sebelum": {
+    "status": "hidup",
+    "versi": "0.4.0",
+    "commit": "audit22-11c58776b1ca",
+    "waktu_server_utc": "2026-09-25T23:51:41.782780+00:00",
+    "zona_waktu_tampilan": "Asia/Jakarta",
+    "database": true,
+    "data_tersedia": true,
+    "aoi": {
+      "bbox": [
+        110.385,
+        -6.995,
+        110.5,
+        -6.925
+      ]
+    },
+    "asal_jaringan": "database",
+    "jumlah_ruas": 19394,
+    "jumlah_prediksi": 87427,
+    "sumber_data": [
+      "kerentanan_v1"
+    ],
+    "versi_data": "715e64e7-109a-4ece-b7f8-6935d5f7148a",
+    "prediksi_mulai_utc": "2026-09-21T19:00:00+00:00",
+    "prediksi_selesai_utc": "2026-10-04T23:00:00+00:00",
+    "akhir_eksklusif_utc": "2026-10-05T00:00:00+00:00",
+    "potret_berlaku_sampai_utc": null
+  },
+  "health_sesudah": {
+    "status": "hidup",
+    "versi": "0.4.0",
+    "commit": "audit22-11c58776b1ca",
+    "waktu_server_utc": "2026-09-25T23:51:43.987115+00:00",
+    "zona_waktu_tampilan": "Asia/Jakarta",
+    "database": true,
+    "data_tersedia": true,
+    "aoi": {
+      "bbox": [
+        110.385,
+        -6.995,
+        110.5,
+        -6.925
+      ]
+    },
+    "asal_jaringan": "database",
+    "jumlah_ruas": 19394,
+    "jumlah_prediksi": 87427,
+    "sumber_data": [
+      "kerentanan_v1"
+    ],
+    "versi_data": "715e64e7-109a-4ece-b7f8-6935d5f7148a",
+    "prediksi_mulai_utc": "2026-09-21T19:00:00+00:00",
+    "prediksi_selesai_utc": "2026-10-04T23:00:00+00:00",
+    "akhir_eksklusif_utc": "2026-10-05T00:00:00+00:00",
+    "potret_berlaku_sampai_utc": null
+  },
+  "backup": "/opt/pasang-surut/backups/frontend-before-osm26-5f46ace4929e.tar.gz",
+  "aset_lama_dipertahankan": true,
+  "pergantian_index_atomik": true
+}

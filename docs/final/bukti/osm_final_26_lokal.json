@@ -1,0 +1,32 @@
+{
+  "url": "http://127.0.0.1:5186",
+  "diperiksa_utc": "2026-09-25T23:50:11.694694+00:00",
+  "page_errors": [],
+  "external_hosts": [
+    "basemaps.cartocdn.com",
+    "tiles-a.basemaps.cartocdn.com",
+    "tiles-b.basemaps.cartocdn.com",
+    "tiles-c.basemaps.cartocdn.com",
+    "tiles-d.basemaps.cartocdn.com",
+    "tiles.basemaps.cartocdn.com"
+  ],
+  "jam": {
+    "8": {
+      "versi_data": "919aa345-7492-4a53-9e7c-c34086775d18",
+      "rute_ditemukan": true,
+      "identik_dengan_potret_deck": true,
+      "waktu": "2026-09-26T01:00:00+00:00"
+    },
+    "13": {
+      "versi_data": "919aa345-7492-4a53-9e7c-c34086775d18",
+      "rute_ditemukan": true,
+      "identik_dengan_potret_deck": true,
+      "waktu": "2026-09-26T06:00:00+00:00"
+    }
+  },
+  "tiles_berhasil": 3,
+  "mobil_dan_cari_ulang": true,
+  "canvas_berisi_gambar": true,
+  "ponsel_tanpa_overflow": true,
+  "fallback_penyedia_diblokir_rute_berhasil": true
+}

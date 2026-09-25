@@ -1,5 +1,26 @@
 # Progres
 
+## Peta OSM pilihan final, 26 September 2026
+
+Tim menyetujui OSM/CARTO dan meminta merge serta penghapusan branch preview.
+[Laporan rilis](final/peta_osm_final_26_september.md) mencatat sinkronisasi
+main, penyelesaian konflik dokumentasi, dan dipertahankannya landing `/`
+serta aplikasi `/app`. Status pratinjau dihapus; service worker v4-osm.
+
+26 tes frontend dan kedua build lulus. Browser build produksi serta URL
+publik menguji motor/mobil, jam 08.00/13.00, Cari ulang, atribusi, dan ponsel.
+Hasil lokal identik dengan potret deck; peta lokal cadangan juga berhasil
+ketika CARTO diblokir. Tidak ada galat JavaScript. Aset dipasang atomik pada
+VPS dengan backup, tanpa restart container atau perubahan Maknaprice.
+
+**Papan blokade:** pilihan basemap sudah selesai. Internet diperlukan untuk
+CARTO; peta lokal menjadi cadangan. Screenshot PPT/video masih menunjukkan
+peta sebelumnya, tetapi angka potret tetap sama. Validasi genangan ruas,
+uji pengguna, dan pipeline data permanen tetap pekerjaan berikutnya.
+[Addendum peta](final/Addendum_peta_OSM_26_september.docx) melengkapi arsip
+proposal terkirim; Microsoft Word memverifikasi satu halaman. Batas data
+produksi/potret tidak diperpanjang oleh merge.
+
 ## Presentasi final mengikuti rulebook dan TM, 25 September 2026
 
 [Paket PPTX/PDF terbaru](final/presentasi_25_september/README.md) berisi

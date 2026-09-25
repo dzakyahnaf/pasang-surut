@@ -8,14 +8,16 @@ atau radius yang boleh muncul di kode tanpa asalnya ada di sini.
 
 ## 1. Brief
 
-### Pengecualian branch pratinjau peta dasar
+### Peta dasar pilihan final, 26 September 2026
 
-Atas permintaan Dzaky 22 September, `preview/peta-dasar-osm` membandingkan
-basemap OSM siap pakai (CARTO Voyager) dengan tampilan lokal pada `main`.
+Setelah perbandingan pada branch `preview/peta-dasar-osm`, Dzaky dan tim
+memilih basemap OSM siap pakai (CARTO Voyager) untuk `main` pada 26 September.
 Palet basemap mengikuti gaya penyedia, termasuk daratan, bangunan, jalan,
 dan label tempat. Font tetap Barlow; panel, warna genangan, pola, serta rute
 memakai token aplikasi. Jalan kering dan label lokal disembunyikan agar
-tidak bertumpuk dengan basemap. Ini belum merupakan keputusan desain main.
+tidak bertumpuk dengan basemap. Peta lokal menjadi cadangan ketika pemuatan
+awal penyedia gagal. Basemap hanya menambah konteks visual; analisis ruas
+dan perhitungan rute tetap memakai data PASANG SURUT.
 
 
 **Produk.** PASANG SURUT — alat pengambilan keputusan perjalanan di kota pesisir

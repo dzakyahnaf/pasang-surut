@@ -1,4 +1,4 @@
-/** Pratinjau terpisah: basemap OSM siap pakai, dilayani CARTO. */
+/** Peta dasar OSM pilihan tim, dilayani CARTO; overlay berasal dari API. */
 export const GAYA_OSM = "https://basemaps.cartocdn.com/gl/voyager-gl-style/style.json";
 
 export function tataPetaDasar(peta) {

@@ -4,7 +4,7 @@
  * Peta adalah KONTEN, bukan latar. Tidak ada lapisan kartu yang menutupinya;
  * yang menumpang di atasnya hanya pelat instrumen kecil di sudut.
  *
- * Branch pratinjau memakai basemap OSM siap pakai dari CARTO.
+ * Peta dasar OSM siap pakai dari CARTO dipilih tim untuk rilis final.
  * Data genangan dan perutean tetap berasal dari API PASANG SURUT.
  */
 

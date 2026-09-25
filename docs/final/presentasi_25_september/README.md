@@ -1,5 +1,9 @@
 # Presentasi final PASANG SURUT, 25 September 2026
 
+**Catatan 26 September:** tim memilih [peta OSM/CARTO untuk aplikasi](../peta_osm_final_26_september.md).
+Screenshot deck tetap peta lokal sebelumnya; angka demo potret telah diuji
+ulang dan tetap sama. Screenshot masih dapat digunakan untuk cadangan demo.
+
 Gunakan paket ini untuk final 26 September. **9 slide utama, target 9 menit
 termasuk demo 2 menit 25 detik**, ditambah 9 lampiran untuk tanya jawab dan
 cadangan demo. Satu menit tersisa untuk transisi atau gangguan. Durasi ini

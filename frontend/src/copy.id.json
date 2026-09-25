@@ -305,9 +305,9 @@
     "pasangAplikasi": "Pasang aplikasi",
     "pasangAplikasiKeterangan": "Tambahkan ke layar utama agar bisa dibuka tanpa peramban"
   },
-  "pratinjauPeta": {
+  "petaDasar": {
     "memuat": "Memuat peta dasar OSM...",
-    "osm": "Pratinjau peta dasar OSM / CARTO",
+    "osm": "Peta dasar OSM / CARTO",
     "lokal": "Peta dasar belum tersedia; tampilan lokal aktif",
     "carto": "CARTO"
   }
