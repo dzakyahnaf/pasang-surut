@@ -1,0 +1,550 @@
+{
+  "diperiksa_utc": "2026-09-25T06:54:49.954115+00:00",
+  "health": {
+    "status": "hidup",
+    "versi": "0.4.0",
+    "commit": "audit22-11c58776b1ca",
+    "waktu_server_utc": "2026-09-25T06:54:52.291627+00:00",
+    "zona_waktu_tampilan": "Asia/Jakarta",
+    "database": true,
+    "data_tersedia": true,
+    "aoi": {
+      "bbox": [
+        110.385,
+        -6.995,
+        110.5,
+        -6.925
+      ]
+    },
+    "asal_jaringan": "database",
+    "jumlah_ruas": 19394,
+    "jumlah_prediksi": 87427,
+    "sumber_data": [
+      "kerentanan_v1"
+    ],
+    "versi_data": "715e64e7-109a-4ece-b7f8-6935d5f7148a",
+    "prediksi_mulai_utc": "2026-09-21T19:00:00+00:00",
+    "prediksi_selesai_utc": "2026-10-04T23:00:00+00:00",
+    "akhir_eksklusif_utc": "2026-10-05T00:00:00+00:00",
+    "potret_berlaku_sampai_utc": null
+  },
+  "jam": {
+    "jam": [
+      {
+        "waktu_utc": "2026-09-25T06:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 0,
+        "kedalaman_maks_cm": 0.0,
+        "tinggi_pasut_m": -0.0523
+      },
+      {
+        "waktu_utc": "2026-09-25T07:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 0,
+        "kedalaman_maks_cm": 0.0,
+        "tinggi_pasut_m": -0.1102
+      },
+      {
+        "waktu_utc": "2026-09-25T08:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 0,
+        "kedalaman_maks_cm": 0.0,
+        "tinggi_pasut_m": -0.1458
+      },
+      {
+        "waktu_utc": "2026-09-25T09:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 0,
+        "kedalaman_maks_cm": 0.0,
+        "tinggi_pasut_m": -0.1587
+      },
+      {
+        "waktu_utc": "2026-09-25T10:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 0,
+        "kedalaman_maks_cm": 0.0,
+        "tinggi_pasut_m": -0.1534
+      },
+      {
+        "waktu_utc": "2026-09-25T11:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 0,
+        "kedalaman_maks_cm": 0.0,
+        "tinggi_pasut_m": -0.1372
+      },
+      {
+        "waktu_utc": "2026-09-25T12:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 0,
+        "kedalaman_maks_cm": 0.0,
+        "tinggi_pasut_m": -0.1183
+      },
+      {
+        "waktu_utc": "2026-09-25T13:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 0,
+        "kedalaman_maks_cm": 0.0,
+        "tinggi_pasut_m": -0.1032
+      },
+      {
+        "waktu_utc": "2026-09-25T14:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 0,
+        "kedalaman_maks_cm": 0.0,
+        "tinggi_pasut_m": -0.0952
+      },
+      {
+        "waktu_utc": "2026-09-25T15:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 0,
+        "kedalaman_maks_cm": 0.0,
+        "tinggi_pasut_m": -0.0938
+      },
+      {
+        "waktu_utc": "2026-09-25T16:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 0,
+        "kedalaman_maks_cm": 0.0,
+        "tinggi_pasut_m": -0.0947
+      },
+      {
+        "waktu_utc": "2026-09-25T17:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 0,
+        "kedalaman_maks_cm": 0.0,
+        "tinggi_pasut_m": -0.0916
+      },
+      {
+        "waktu_utc": "2026-09-25T18:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 0,
+        "kedalaman_maks_cm": 0.0,
+        "tinggi_pasut_m": -0.0781
+      },
+      {
+        "waktu_utc": "2026-09-25T19:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 0,
+        "kedalaman_maks_cm": 0.0,
+        "tinggi_pasut_m": -0.05
+      },
+      {
+        "waktu_utc": "2026-09-25T20:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 0,
+        "kedalaman_maks_cm": 0.0,
+        "tinggi_pasut_m": -0.0062
+      },
+      {
+        "waktu_utc": "2026-09-25T21:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 173,
+        "kedalaman_maks_cm": 31.8,
+        "tinggi_pasut_m": 0.0498
+      },
+      {
+        "waktu_utc": "2026-09-25T22:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 466,
+        "kedalaman_maks_cm": 34.8,
+        "tinggi_pasut_m": 0.111
+      },
+      {
+        "waktu_utc": "2026-09-25T23:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 739,
+        "kedalaman_maks_cm": 37.6,
+        "tinggi_pasut_m": 0.168
+      },
+      {
+        "waktu_utc": "2026-09-26T00:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 945,
+        "kedalaman_maks_cm": 39.7,
+        "tinggi_pasut_m": 0.2108
+      },
+      {
+        "waktu_utc": "2026-09-26T01:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 1043,
+        "kedalaman_maks_cm": 40.8,
+        "tinggi_pasut_m": 0.2314
+      },
+      {
+        "waktu_utc": "2026-09-26T02:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 1015,
+        "kedalaman_maks_cm": 40.5,
+        "tinggi_pasut_m": 0.2254
+      },
+      {
+        "waktu_utc": "2026-09-26T03:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 859,
+        "kedalaman_maks_cm": 38.9,
+        "tinggi_pasut_m": 0.193
+      },
+      {
+        "waktu_utc": "2026-09-26T04:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 600,
+        "kedalaman_maks_cm": 36.2,
+        "tinggi_pasut_m": 0.1389
+      },
+      {
+        "waktu_utc": "2026-09-26T05:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 276,
+        "kedalaman_maks_cm": 32.8,
+        "tinggi_pasut_m": 0.0714
+      },
+      {
+        "waktu_utc": "2026-09-26T06:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 0,
+        "kedalaman_maks_cm": 0.0,
+        "tinggi_pasut_m": 0.0007
+      },
+      {
+        "waktu_utc": "2026-09-26T07:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 0,
+        "kedalaman_maks_cm": 0.0,
+        "tinggi_pasut_m": -0.0634
+      },
+      {
+        "waktu_utc": "2026-09-26T08:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 0,
+        "kedalaman_maks_cm": 0.0,
+        "tinggi_pasut_m": -0.1129
+      },
+      {
+        "waktu_utc": "2026-09-26T09:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 0,
+        "kedalaman_maks_cm": 0.0,
+        "tinggi_pasut_m": -0.1435
+      },
+      {
+        "waktu_utc": "2026-09-26T10:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 0,
+        "kedalaman_maks_cm": 0.0,
+        "tinggi_pasut_m": -0.1547
+      },
+      {
+        "waktu_utc": "2026-09-26T11:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 0,
+        "kedalaman_maks_cm": 0.0,
+        "tinggi_pasut_m": -0.1497
+      },
+      {
+        "waktu_utc": "2026-09-26T12:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 0,
+        "kedalaman_maks_cm": 0.0,
+        "tinggi_pasut_m": -0.1337
+      },
+      {
+        "waktu_utc": "2026-09-26T13:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 0,
+        "kedalaman_maks_cm": 0.0,
+        "tinggi_pasut_m": -0.113
+      },
+      {
+        "waktu_utc": "2026-09-26T14:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 0,
+        "kedalaman_maks_cm": 0.0,
+        "tinggi_pasut_m": -0.0929
+      },
+      {
+        "waktu_utc": "2026-09-26T15:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 0,
+        "kedalaman_maks_cm": 0.0,
+        "tinggi_pasut_m": -0.0767
+      },
+      {
+        "waktu_utc": "2026-09-26T16:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 0,
+        "kedalaman_maks_cm": 0.0,
+        "tinggi_pasut_m": -0.0651
+      },
+      {
+        "waktu_utc": "2026-09-26T17:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 0,
+        "kedalaman_maks_cm": 0.0,
+        "tinggi_pasut_m": -0.0563
+      },
+      {
+        "waktu_utc": "2026-09-26T18:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 0,
+        "kedalaman_maks_cm": 0.0,
+        "tinggi_pasut_m": -0.0469
+      },
+      {
+        "waktu_utc": "2026-09-26T19:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 0,
+        "kedalaman_maks_cm": 0.0,
+        "tinggi_pasut_m": -0.0327
+      },
+      {
+        "waktu_utc": "2026-09-26T20:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 0,
+        "kedalaman_maks_cm": 0.0,
+        "tinggi_pasut_m": -0.0108
+      },
+      {
+        "waktu_utc": "2026-09-26T21:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 30,
+        "kedalaman_maks_cm": 30.3,
+        "tinggi_pasut_m": 0.0199
+      },
+      {
+        "waktu_utc": "2026-09-26T22:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 212,
+        "kedalaman_maks_cm": 32.2,
+        "tinggi_pasut_m": 0.058
+      },
+      {
+        "waktu_utc": "2026-09-26T23:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 410,
+        "kedalaman_maks_cm": 34.2,
+        "tinggi_pasut_m": 0.0993
+      },
+      {
+        "waktu_utc": "2026-09-27T00:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 596,
+        "kedalaman_maks_cm": 36.1,
+        "tinggi_pasut_m": 0.138
+      },
+      {
+        "waktu_utc": "2026-09-27T01:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 737,
+        "kedalaman_maks_cm": 37.6,
+        "tinggi_pasut_m": 0.1674
+      },
+      {
+        "waktu_utc": "2026-09-27T02:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 805,
+        "kedalaman_maks_cm": 38.3,
+        "tinggi_pasut_m": 0.1816
+      },
+      {
+        "waktu_utc": "2026-09-27T03:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 781,
+        "kedalaman_maks_cm": 38.0,
+        "tinggi_pasut_m": 0.1766
+      },
+      {
+        "waktu_utc": "2026-09-27T04:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 661,
+        "kedalaman_maks_cm": 36.8,
+        "tinggi_pasut_m": 0.1516
+      },
+      {
+        "waktu_utc": "2026-09-27T05:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 455,
+        "kedalaman_maks_cm": 34.7,
+        "tinggi_pasut_m": 0.1086
+      },
+      {
+        "waktu_utc": "2026-09-27T06:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 188,
+        "kedalaman_maks_cm": 31.9,
+        "tinggi_pasut_m": 0.053
+      },
+      {
+        "waktu_utc": "2026-09-27T07:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 0,
+        "kedalaman_maks_cm": 0.0,
+        "tinggi_pasut_m": -0.0078
+      },
+      {
+        "waktu_utc": "2026-09-27T08:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 0,
+        "kedalaman_maks_cm": 0.0,
+        "tinggi_pasut_m": -0.0656
+      },
+      {
+        "waktu_utc": "2026-09-27T09:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 0,
+        "kedalaman_maks_cm": 0.0,
+        "tinggi_pasut_m": -0.1131
+      },
+      {
+        "waktu_utc": "2026-09-27T10:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 0,
+        "kedalaman_maks_cm": 0.0,
+        "tinggi_pasut_m": -0.1446
+      },
+      {
+        "waktu_utc": "2026-09-27T11:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 0,
+        "kedalaman_maks_cm": 0.0,
+        "tinggi_pasut_m": -0.1574
+      },
+      {
+        "waktu_utc": "2026-09-27T12:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 0,
+        "kedalaman_maks_cm": 0.0,
+        "tinggi_pasut_m": -0.1519
+      },
+      {
+        "waktu_utc": "2026-09-27T13:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 0,
+        "kedalaman_maks_cm": 0.0,
+        "tinggi_pasut_m": -0.1316
+      },
+      {
+        "waktu_utc": "2026-09-27T14:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 0,
+        "kedalaman_maks_cm": 0.0,
+        "tinggi_pasut_m": -0.1018
+      },
+      {
+        "waktu_utc": "2026-09-27T15:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 0,
+        "kedalaman_maks_cm": 0.0,
+        "tinggi_pasut_m": -0.0686
+      },
+      {
+        "waktu_utc": "2026-09-27T16:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 0,
+        "kedalaman_maks_cm": 0.0,
+        "tinggi_pasut_m": -0.0379
+      },
+      {
+        "waktu_utc": "2026-09-27T17:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 0,
+        "kedalaman_maks_cm": 0.0,
+        "tinggi_pasut_m": -0.0136
+      },
+      {
+        "waktu_utc": "2026-09-27T18:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 0,
+        "kedalaman_maks_cm": 0.0,
+        "tinggi_pasut_m": 0.0025
+      },
+      {
+        "waktu_utc": "2026-09-27T19:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 0,
+        "kedalaman_maks_cm": 0.0,
+        "tinggi_pasut_m": 0.0112
+      },
+      {
+        "waktu_utc": "2026-09-27T20:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 15,
+        "kedalaman_maks_cm": 30.1,
+        "tinggi_pasut_m": 0.0154
+      },
+      {
+        "waktu_utc": "2026-09-27T21:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 26,
+        "kedalaman_maks_cm": 30.3,
+        "tinggi_pasut_m": 0.0191
+      },
+      {
+        "waktu_utc": "2026-09-27T22:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 60,
+        "kedalaman_maks_cm": 30.6,
+        "tinggi_pasut_m": 0.0263
+      },
+      {
+        "waktu_utc": "2026-09-27T23:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 124,
+        "kedalaman_maks_cm": 31.3,
+        "tinggi_pasut_m": 0.0395
+      },
+      {
+        "waktu_utc": "2026-09-28T00:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 218,
+        "kedalaman_maks_cm": 32.2,
+        "tinggi_pasut_m": 0.0593
+      },
+      {
+        "waktu_utc": "2026-09-28T01:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 334,
+        "kedalaman_maks_cm": 33.4,
+        "tinggi_pasut_m": 0.0834
+      },
+      {
+        "waktu_utc": "2026-09-28T02:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 449,
+        "kedalaman_maks_cm": 34.6,
+        "tinggi_pasut_m": 0.1074
+      },
+      {
+        "waktu_utc": "2026-09-28T03:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 535,
+        "kedalaman_maks_cm": 35.5,
+        "tinggi_pasut_m": 0.1254
+      },
+      {
+        "waktu_utc": "2026-09-28T04:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 564,
+        "kedalaman_maks_cm": 35.8,
+        "tinggi_pasut_m": 0.1314
+      },
+      {
+        "waktu_utc": "2026-09-28T05:00:00+00:00",
+        "tersedia": true,
+        "ruas_tergenang": 514,
+        "kedalaman_maks_cm": 35.3,
+        "tinggi_pasut_m": 0.121
+      }
+    ],
+    "versi_data": "715e64e7-109a-4ece-b7f8-6935d5f7148a",
+    "sumber_data": [
+      "kerentanan_v1"
+    ],
+    "mulai_utc": "2026-09-25T06:00:00+00:00",
+    "akhir_eksklusif_utc": "2026-10-05T00:00:00+00:00",
+    "asal_jaringan": "database",
+    "prediksi_mencakup_jendela": true,
+    "selesai_utc": "2026-09-28T05:00:00+00:00",
+    "prediksi_mulai_utc": "2026-09-21T19:00:00+00:00",
+    "prediksi_selesai_utc": "2026-10-04T23:00:00+00:00"
+  }
+}

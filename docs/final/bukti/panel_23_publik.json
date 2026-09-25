@@ -1,0 +1,11 @@
+{
+  "url": "https://pasang-surut.vercel.app/app",
+  "frontend_sha256": "d5f8b721c34cbb33cb6bab20c4f3181a0b66045171fe21536fcc5c05ca92971a",
+  "wet_hour": "2026-09-23T00:00:00+00:00",
+  "both_panels_identical": [
+    "Estimasi kedalaman maksimum 29 cm pada rute ini, untuk keberangkatan Rab 23 · pukul 07.00 WIB.",
+    "Estimasi kedalaman maksimum 29 cm pada rute ini, untuk keberangkatan Rab 23 · pukul 07.00 WIB."
+  ],
+  "canvas_nonblank": true,
+  "errors": []
+}

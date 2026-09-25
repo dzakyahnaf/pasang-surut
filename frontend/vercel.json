@@ -1,25 +1,16 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "npm run build:vps",
-  "installCommand": "npm ci",
-  "outputDirectory": "dist",
-  "framework": "vite",
+  "buildCommand": "node scripts/build-proxy.mjs",
+  "installCommand": "node -e \"process.exit(0)\"",
+  "outputDirectory": "dist-proxy",
+  "framework": null,
   "headers": [
     {
       "source": "/api/:path*",
       "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "no-store"
-        },
-        {
-          "key": "CDN-Cache-Control",
-          "value": "no-store"
-        },
-        {
-          "key": "x-vercel-enable-rewrite-caching",
-          "value": "0"
-        }
+        { "key": "Cache-Control", "value": "no-store" },
+        { "key": "CDN-Cache-Control", "value": "no-store" },
+        { "key": "x-vercel-enable-rewrite-caching", "value": "0" }
       ]
     },
     {
@@ -42,13 +33,19 @@
     }
   ],
   "rewrites": [
+    { "source": "/", "destination": "/lp/index.html" },
+    { "source": "/styles.css", "destination": "/lp/styles.css" },
+    { "source": "/app.js", "destination": "/lp/app.js" },
+    { "source": "/app", "destination": "http://38.103.171.82:18080/index.html" },
+    { "source": "/app/:path*", "destination": "http://38.103.171.82:18080/:path*" },
+    { "source": "/:path*", "destination": "http://38.103.171.82:18080/:path*" }
+  ],
+  "redirects": [
     {
-      "source": "/api/:path*",
-      "destination": "http://38.103.171.82:18080/api/:path*"
-    },
-    {
-      "source": "/:path*",
-      "destination": "/index.html"
+      "source": "/",
+      "missing": [{ "type": "query", "key": "dashboard" }],
+      "destination": "/?dashboard=/app",
+      "permanent": false
     }
   ]
 }

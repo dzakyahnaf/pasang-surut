@@ -1,5 +1,42 @@
 # Sisa pekerjaan proposal
 
+**Pembaruan materi 25 September:** [PPTX dan dua PDF revisi final](final/presentasi_25_september/README.md)
+mengikuti rulebook/TM dan evaluasi pasut terbaru. Sembilan slide utama
+ditargetkan sembilan menit, dengan sembilan lampiran untuk bukti dan cadangan
+demo. [Addendum materi](final/Addendum_presentasi_25_september.docx) melengkapi
+proposal terkirim yang tetap diarsipkan; diperiksa di Word, satu halaman.
+Uji pengguna belum dilakukan;
+target peserta ditulis sebagai rencana. Pemeriksaan PowerPoint, QR,
+navigasi dan kesamaan demo lokal lulus. Tim masih perlu latihan nyata,
+uji perangkat acara, salinan cadangan, serta informasi pengumpulan PDF.
+Video pameran 24 September tidak direvisi dalam pekerjaan PPT ini.
+
+**Pembaruan 25 September:** [audit sumber dan masa berlaku data](final/audit_asal_data_25_september.md)
+dan [addendum validasi data](final/Addendum_validasi_data_25_september.docx)
+melengkapi arsip proposal terkirim. Uji pasut baru memakai 10.020 rekaman IOC
+18–25 September: korelasi 0,8340; RMSE simpangan 12,44 cm. Angka ini bukan
+akurasi genangan ruas. Data produksi berakhir 5 Oktober 2026 07.00 WIB;
+pipeline pembaruan permanen dan validasi lapangan belum tersedia. Materi
+final perlu menyebut prototipe berbasis indeks, umur masukan 2014/2015–2018,
+asumsi kedalaman, dan hasil uji baru beserta batasannya. PPT/video lama belum
+diubah pada sesi audit ini.
+Addendum 25 September diperiksa di Microsoft Word: satu halaman.
+
+**Pembaruan 24 September:** [video branding pameran 105 detik](final/pameran/branding/README.md)
+dengan musik, narasi Indonesia dan subtitle tersedia. Materi ini dilengkapi
+[addendum pameran](final/Addendum_pameran_24_september.docx), diperiksa dengan
+Microsoft Word: satu halaman. Proposal yang sudah disubmit tetap diarsipkan.
+Uji volume/loop di perangkat acara, poster lomba, latihan tim, dan deadline
+PDF tetap perlu ditangani. Catatan MP4 belum selesai di bawah adalah historis.
+
+**Pembaruan 23 September:** [paket PPTX/PDF final](final/presentasi/README.md)
+sudah selesai dan diverifikasi, dilengkapi catatan pembicara dan dua gambar
+demo. [Addendum materi](final/Addendum_presentasi_23_september.docx) mencatat
+skenario terverifikasi, 26 tes frontend, dan tugas manual tersisa. Proposal yang
+telah disubmit tidak ditimpa. MP4, latihan tim/proyektor, dan deadline PDF
+masih perlu ditangani tim.
+Addendum 23 September diperiksa dengan Microsoft Word: satu halaman.
+
 **Pembaruan final 22 September 2026:** proposal yang telah disubmit tetap
 diarsipkan. Koreksi metode, status runtime, audit regresi, dan konfirmasi TM
 ditulis pada [addendum audit](final/Addendum_audit_22_september.docx).

@@ -1,0 +1,137 @@
+{
+  "same_data_and_routes": true,
+  "screenshots": [
+    {
+      "variant": "main",
+      "url_tested": "https://pasang-surut.vercel.app/app",
+      "hour": "2026-09-24T00:00:00+00:00",
+      "data_version": "715e64e7-109a-4ece-b7f8-6935d5f7148a",
+      "network_version": "5ffae21c70bc77fbd4ab",
+      "routes": [
+        {
+          "jenis": "rute_abai_rob",
+          "ditemukan": true,
+          "alasan": null,
+          "detik": 419.4,
+          "menit": 7.0,
+          "jarak_m": 6317.4,
+          "jarak_km": 6.32,
+          "jumlah_ruas": 61,
+          "ruas_tergenang": 33,
+          "kedalaman_maks_cm": 32.1,
+          "waktu_tiba_utc": "2026-09-24T00:06:59.442218+00:00",
+          "waktu_tiba_wib": "2026-09-24T07:06:59.442218+07:00",
+          "nama_jalan": [
+            "Gang Tanjung Asri",
+            "Jalan Kebon Harjo I",
+            "Gang Banteng",
+            "Jalan Kebon Harjo I",
+            "Jalan Empu Tantular",
+            "Jalan Taman Tawang",
+            "Jalan Merak",
+            "Jalan Taman Tawang",
+            "Jalan Pengapon",
+            "Jalan Kaligawe Raya",
+            "Jalan Raden Patah",
+            "Jalan Raya Kaligawe"
+          ]
+        },
+        {
+          "jenis": "rute_sadar_rob",
+          "ditemukan": true,
+          "alasan": null,
+          "detik": 1061.1,
+          "menit": 17.7,
+          "jarak_m": 10582.7,
+          "jarak_km": 10.58,
+          "jumlah_ruas": 119,
+          "ruas_tergenang": 18,
+          "kedalaman_maks_cm": 28.3,
+          "waktu_tiba_utc": "2026-09-24T00:17:41.077407+00:00",
+          "waktu_tiba_wib": "2026-09-24T07:17:41.077407+07:00",
+          "nama_jalan": [
+            "Gang Tanjung Asri",
+            "Jalan Kebon Harjo I",
+            "Gang Banteng",
+            "Jalan Kebon Harjo I",
+            "Jalan Empu Tantular",
+            "Jalan Taman Tawang",
+            "Jalan Merak",
+            "Jalan Cendrawasih",
+            "Jalan Pattimura",
+            "Jalan Citarum Raya",
+            "Jalan Arteri Soekarno Hatta",
+            "Jalan Tambak Dalam Raya"
+          ]
+        }
+      ],
+      "errors": []
+    },
+    {
+      "variant": "osm",
+      "url_tested": "http://127.0.0.1:5175",
+      "hour": "2026-09-24T00:00:00+00:00",
+      "data_version": "715e64e7-109a-4ece-b7f8-6935d5f7148a",
+      "network_version": "5ffae21c70bc77fbd4ab",
+      "routes": [
+        {
+          "jenis": "rute_abai_rob",
+          "ditemukan": true,
+          "alasan": null,
+          "detik": 419.4,
+          "menit": 7.0,
+          "jarak_m": 6317.4,
+          "jarak_km": 6.32,
+          "jumlah_ruas": 61,
+          "ruas_tergenang": 33,
+          "kedalaman_maks_cm": 32.1,
+          "waktu_tiba_utc": "2026-09-24T00:06:59.442218+00:00",
+          "waktu_tiba_wib": "2026-09-24T07:06:59.442218+07:00",
+          "nama_jalan": [
+            "Gang Tanjung Asri",
+            "Jalan Kebon Harjo I",
+            "Gang Banteng",
+            "Jalan Kebon Harjo I",
+            "Jalan Empu Tantular",
+            "Jalan Taman Tawang",
+            "Jalan Merak",
+            "Jalan Taman Tawang",
+            "Jalan Pengapon",
+            "Jalan Kaligawe Raya",
+            "Jalan Raden Patah",
+            "Jalan Raya Kaligawe"
+          ]
+        },
+        {
+          "jenis": "rute_sadar_rob",
+          "ditemukan": true,
+          "alasan": null,
+          "detik": 1061.1,
+          "menit": 17.7,
+          "jarak_m": 10582.7,
+          "jarak_km": 10.58,
+          "jumlah_ruas": 119,
+          "ruas_tergenang": 18,
+          "kedalaman_maks_cm": 28.3,
+          "waktu_tiba_utc": "2026-09-24T00:17:41.077407+00:00",
+          "waktu_tiba_wib": "2026-09-24T07:17:41.077407+07:00",
+          "nama_jalan": [
+            "Gang Tanjung Asri",
+            "Jalan Kebon Harjo I",
+            "Gang Banteng",
+            "Jalan Kebon Harjo I",
+            "Jalan Empu Tantular",
+            "Jalan Taman Tawang",
+            "Jalan Merak",
+            "Jalan Cendrawasih",
+            "Jalan Pattimura",
+            "Jalan Citarum Raya",
+            "Jalan Arteri Soekarno Hatta",
+            "Jalan Tambak Dalam Raya"
+          ]
+        }
+      ],
+      "errors": []
+    }
+  ]
+}

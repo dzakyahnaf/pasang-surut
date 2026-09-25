@@ -1,0 +1,62 @@
+[
+  {
+    "branch": "deploy/vps-uji-20260922",
+    "sha": "c6b7192cabe69ccc3e435613250ddf31c174b0e0",
+    "fully_in_main": true,
+    "ahead_behind": "16\t0",
+    "unique_commits": []
+  },
+  {
+    "branch": "development-tahap-final",
+    "sha": "9dc844529bbd60451496cc8a6a2121ec18d8bd6b",
+    "fully_in_main": true,
+    "ahead_behind": "30\t0",
+    "unique_commits": []
+  },
+  {
+    "branch": "docs/presentasi-final-20260923",
+    "sha": "7c08ae97e1644a1a912ae9e1eadf8aa21a8e1609",
+    "fully_in_main": true,
+    "ahead_behind": "1\t0",
+    "unique_commits": []
+  },
+  {
+    "branch": "fix/regresi-final-20260922",
+    "sha": "851a10fbe7bf8ae2c1116a36dbc10b47cb1afe1b",
+    "fully_in_main": true,
+    "ahead_behind": "4\t0",
+    "unique_commits": []
+  },
+  {
+    "branch": "main",
+    "sha": "3988c5673e5b3f1a33f6c242a7c8fe333a7242c9",
+    "fully_in_main": true,
+    "ahead_behind": "0\t0",
+    "unique_commits": []
+  },
+  {
+    "branch": "preview/peta-dasar-osm",
+    "sha": "b1072e3b8a2d82f83d7043e03a46a885f7bad88d",
+    "fully_in_main": false,
+    "ahead_behind": "3\t3",
+    "unique_commits": [
+      "b1072e3 Selaraskan peringatan maksimum kedalaman pada kedua panel",
+      "1f7d5b9 Sinkronkan pratinjau OSM dengan audit regresi final",
+      "a48158e Siapkan pratinjau basemap OSM terpisah dari main"
+    ]
+  },
+  {
+    "branch": "test/stress-vps-20260922",
+    "sha": "10a8f5550a62dca6d2ddfb5be8179e2909dd595b",
+    "fully_in_main": true,
+    "ahead_behind": "12\t0",
+    "unique_commits": []
+  },
+  {
+    "branch": "vercel-landing-first",
+    "sha": "a0e9b7e812bc6ac949649809e46962c49f972a43",
+    "fully_in_main": true,
+    "ahead_behind": "8\t0",
+    "unique_commits": []
+  }
+]

@@ -1,16 +1,160 @@
 # Progres
 
-## Branch pembanding peta dasar — 22 September 2026
+## Presentasi final mengikuti rulebook dan TM, 25 September 2026
 
-Atas permintaan Dzaky, `preview/peta-dasar-osm` memakai vector basemap
-CARTO Voyager berbasis OSM. Main tetap memakai tampilan lokal. Peta dasar
-memuat jalan, bangunan, perairan, kawasan dan tempat; empat tujuan penting
-tetap diberi label/akses lokal. Genangan dan rute memakai API VPS yang sama.
+[Paket PPTX/PDF terbaru](final/presentasi_25_september/README.md) berisi
+9 slide utama, target 9 menit termasuk demo 2 menit 25 detik, dan 9 lampiran
+tersembunyi. Alurnya kebutuhan perjalanan, penggunaan aplikasi, demo,
+metode, pengujian dan batas, biaya adaptasi, lalu rencana validasi. Umur
+masukan dan evaluasi pasut September sudah masuk. Pengguna mengonfirmasi
+belum ada uji pengguna; target 5-8 peserta tetap rencana.
 
-Pratinjau laptop tersedia melalui `npm run preview:osm` di frontend,
-alamat `http://127.0.0.1:5175`. Vercel branch membangun frontend terpisah,
-hanya `/api` diproksi ke VPS. Tidak ada perubahan origin frontend main.
-Lihat [panduan perbandingan](final/pratinjau_peta_osm.md).
+Rulebook, TM, dan PPTX/PDF referensi DekapAutis dibaca. Bobot final dan
+sumber tiap slide dipetakan. TM menempatkan tim 1 pada 09.20-09.30, Q&A
+09.30-09.45 setelah showcase 08.50-09.20 WIB. Panduan memuat usulan pembagian,
+skenario cadangan, latihan waktu, alur showcase, dan 13 bekal jawaban juri.
+Deadline PDF masih belum diinformasikan; tidak dibuat tenggat baru.
+
+PowerPoint membuka/mengekspor 18 slide tanpa overflow teks/objek keluar.
+Render diperiksa visual; catatan, navigasi dan QR diverifikasi. Browser lokal
+dengan request HTTP eksternal diblokir menghasilkan angka, geometri dan
+versi potret yang identik pada 08.00/13.00; Cari ulang berhasil, tanpa galat
+JavaScript. Uji beban/95 tes backend/26 frontend tetap merujuk audit terdahulu.
+[Addendum materi](final/Addendum_presentasi_25_september.docx) melengkapi
+proposal submission yang tetap diarsipkan; diperiksa di Microsoft Word,
+satu halaman. Runtime dan database tidak diubah.
+
+**Papan blokade:** berkas presentasi selesai; target 9 menit belum diukur
+dalam latihan tim. Tim perlu menetapkan pembicara, dua latihan stopwatch,
+menguji proyektor/QR serta demo tanpa jaringan nyata, menyalin ke perangkat
+cadangan, dan mengonfirmasi jalur/deadline PDF. Video pameran 24 September
+belum memuat evaluasi pasut baru; poster dan pilihan basemap final mengikuti
+daftar tim. Genangan per ruas, manfaat lapangan, umur masukan dan pipeline
+data permanen tetap belum tuntas. Produksi berakhir eksklusif 5 Oktober
+07.00 WIB; potret lokal 29 September 00.00 WIB. Catatan PPT lama di bawah
+bersifat historis; gunakan paket 25 September untuk presentasi.
+
+## Audit asal dan kemutakhiran data — 25 September 2026
+
+[Laporan audit](final/audit_asal_data_25_september.md) memetakan data aktif,
+umur pengukuran, berkas, lokasi dan sumber primer. API/database produksi
+memakai `kerentanan_v1`: ruas OSM, elevasi DEMNAS, laju subsidensi 2015–2018,
+dan pasut harmonik dari pengamatan 2014. Tanggal publikasi 2026 bukan umur
+pengukuran. Genangan 10–50 cm dan proporsi puncak 10% belum terkalibrasi
+terhadap pengamatan ruas; hujan dan model Sentinel-1 tidak aktif.
+
+Uji baru tanpa penyetelan ulang: 10.020 rekaman tekanan IOC sema pada
+18–25 September, korelasi 0,8340; RMSE simpangan 12,44 cm; MAE 10,32 cm.
+CSV, grafik dan metadata ada di [paket data](final/data/README.md). Perbedaan
+datum ditangani dengan mengurangi rata-rata; sumber belum melalui quality
+control. Hasil tidak menyatakan persentase akurasi atau akurasi genangan.
+Pembacaan produksi/jadwal hanya baca, tidak mengubah aplikasi atau layanan.
+[Addendum validasi](final/Addendum_validasi_data_25_september.docx) diperiksa
+di Microsoft Word: satu halaman. Grafik diperiksa visual; CSV/JSON, tautan
+berkas laporan dan hitung ulang metrik konsisten.
+
+**Papan blokade:** klaim pemakaian operasional tiga tahun belum terbukti.
+Data produksi berakhir eksklusif **5 Oktober 2026 07.00 WIB**; potret lokal
+**29 September 00.00 WIB**. Jadwal khusus VPS yang ditemukan hanya backup;
+belum ada penerbit data permanen. Butuh validasi genangan lapangan, masukan
+spasial mutakhir, sumber pasut bermutu/izin penggunaan, dan pipeline bergulir.
+PPT/video lama belum memasukkan bukti audit baru. Catatan ERA5 tidak dikunci
+di kueri, hujan null menjadi nol, radius/grid, dan jarak stasiun yang keliru
+dicatat sebagai pekerjaan data berikut, bukan diam-diam mengubah model final.
+
+## Video branding dengan narasi — 24 September 2026
+
+[Video pameran 105 detik](final/pameran/branding/README.md) dibuat sesuai
+permintaan durasi di atas 1:30: 1080p/30 fps, narasi sintetis Indonesia,
+musik instrumental prosedural, subtitle menyatu, animasi rute dari potret,
+tampilan aplikasi asli, metode, rencana pengembangan, dan QR ke `/app`.
+Versi 60 detik tetap disimpan. Naskah/angka mengikuti sumber presentasi;
+tidak mengklaim genangan terukur, jalan pasti aman, atau penghematan kota.
+
+Pemeriksaan produksi mencakup seluruh 3.150 bingkai, decode audio/video,
+29 subtitle sesuai naskah dan tidak tumpang tindih, volume audio, QR pada
+1080p/720p, serta kesamaan ujung loop. Hasil MP4 akhir dan hash berada pada
+`final/pameran/branding/verifikasi.json`. Addendum pameran 24 September
+diperiksa di Microsoft Word: satu halaman. Runtime aplikasi tidak berubah.
+
+**Papan blokade:** video branding tersedia; uji speaker, jarak pandang,
+dan mode ulang pada TV/proyektor acara tetap perlu dilakukan tim. Poster
+pameran, latihan presentasi, bukti pengguna, pilihan basemap final, dan
+konfirmasi deadline PDF mengikuti daftar kesiapan sebelumnya. Gambar poster
+dalam paket video hanya sampul pemutar, bukan poster lomba yang sudah final.
+
+## Video pameran — 23 September 2026
+
+[Motion design 60 detik](final/pameran/README.md) untuk diputar berulang di
+meja pameran: 1920 × 1080, 30 fps, tanpa suara, ujung awal dan akhir sama
+gelap sehingga pengulangan tidak patah. Isinya pertanyaan pembuka, Pita
+Pasut 72 jam, peta 19.394 ruas yang terisi air dari 00.00 ke 08.00, rute
+Tawang–Terboyo pada 08.00 lawan 13.00, cara kerja, dan QR ke `/app`.
+
+Semua visual digambar dari data yang dipakai aplikasi dan PPT: potret
+26 September, `skenario.json`, konteks peta, fungsi pasut backend, dan
+`token.css`. Angka dibaca saat dibuat, tidak diketik. Lencana indeks
+kerentanan, keterangan estimasi, tanggal skenario, dan rute disarankan yang
+masih menembus 24,8 cm ikut tampil. Encoder dipasang di
+`.deploy-local/video-tools`, tidak masuk runtime.
+
+Dua penyesuaian terhadap gaya aplikasi untuk jarak pandang pameran: rute
+ditebalkan 1,5 kali, dan rute biasa diberi garis luar gelap karena abu-abu
+terangnya hilang di atas jalan `--tinta-2`.
+
+**Papan blokade:** MP4 pameran selesai; poster belum. Video perlu diputar
+sekali di TV atau laptop pameran untuk memastikan pemutar mendukung
+pengulangan. Seluruh catatan papan blokade di bawah tetap berlaku.
+
+## Review branch, basemap, dan PPT — 23 September 2026
+
+Delapan branch remote diperiksa. Enam branch lama dihapus setelah seluruh
+commit-nya terbukti ada di main; tidak ada perubahan unik yang dibuang.
+PR #1,2,4,5,6 sudah merged. Main dan draft PR #3/branch OSM dipertahankan.
+Log ENOENT pada 8d74b2f terkonfirmasi akibat folder dashboard yang belum
+ter-commit; 97d8408 memperbaikinya. Build landing main dan produksi berhasil.
+
+[Laporan untuk tim](final/review_branch_peta_presentasi_23_september.md)
+memuat tautan kedua peta, tabel perbedaan, screenshot pada jam/data/rute
+yang identik, serta evaluasi PPT terhadap bobot rulebook. Preview Vercel
+masih meminta login; gambar pembanding dapat dibaca publik dari repo.
+
+CI PR sempat gagal saat menunggu pemuatan awal, lalu mock galat yang belum
+terpakai mencemari tes berikutnya. Fixture kini mereset seluruh mock dan
+menunggu efek awal secara asinkron; 26 tes frontend lulus lokal, tanpa
+mengubah assertion, timeout, atau runtime. Pemeriksaan CI akhir ada di PR #7.
+
+**Papan blokade:** delapan slide utama cukup, tetapi persona/skema 08.00→13.00,
+bukti fungsi yang bisa dicoba juri, dan hubungan biaya adaptasi dengan
+subtema perlu diperjelas. Rekomendasi belum mengubah PPTX/PDF. Pilihan peta
+belum diputuskan tim. Deadline PDF, latihan nyata, perangkat acara, pameran,
+MP4/poster, serta bukti pengguna tetap pekerjaan tim.
+
+## Paket presentasi final — 23 September 2026
+
+[PPTX dan dua PDF](final/presentasi/README.md) sudah dibuat: delapan slide
+utama dengan target sembilan menit, enam lampiran, catatan pembicara,
+screenshot potret 26 Sep 08.00/13.00, QR dan panduan demo lokal. PowerPoint
+membuka/mengekspor 14 slide; tidak ada overflow teks. Seluruh halaman ditinjau,
+QR pada render PDF didekode, dan tautan aplikasi diperiksa. Durasi sembilan
+menit masih target; latihan tim belum dilakukan oleh asisten.
+
+Pengambilan gambar menemukan peringatan lama di `PanelRute` yang masih
+melekatkan kedalaman maksimum pada jalan pertama. Sudah dikoreksi dengan
+tes regresi kedua panel. **26 tes frontend** dan build VPS lulus; pesan
+benar di publik, tanpa restart container dan tanpa perubahan Maknaprice.
+Lihat [koreksi lanjutan](final/koreksi_panel_23_september.md). Backend tidak
+berubah dari audit 95 tes. Branch OSM terpisah menerima koreksi/MapLibre 6.4.1;
+label eksternal, dua moda, pergantian jam, dan fallback penyedia diuji.
+
+**Papan blokade:** deadline PDF masih belum diumumkan. Tim tampil pertama;
+perlu konfirmasi deadline, keputusan pembagian pembicara, dua latihan
+9 menit, uji proyektor/HP dan laptop cadangan. MP4/poster serta bukti pengguna
+belum selesai/dikonfirmasi. Indeks genangan dan dampak lapangan tetap belum
+tervalidasi. Proposal submission tetap diarsipkan; pembaruan materi ada pada
+addendum 23 September dan paket presentasi, bukan mengganti proposal terkirim.
+
+Catatan 22 September berikut adalah status historis sebelum paket PPT dibuat.
 
 ## Audit regresi final dan status TM — 22 September 2026
 

@@ -1,9 +1,11 @@
 # Outline slide final PASANG SURUT
 
-Versi 22 September 2026 setelah TM. Delapan slide utama, target sembilan menit termasuk
-demo dan perpindahan pembicara; batas rulebook sepuluh menit. Naufal pemilik
-deck, Daffa pemilik visual/demo, Dzaky pemeriksa metode dan angka. Ini naskah
-dan storyboard siap dipindahkan ke aplikasi slide, belum PPTX/PDF final.
+Versi 23 September 2026 setelah TM. Delapan slide utama, target sembilan menit termasuk
+demo dan perpindahan pembicara; batas rulebook sepuluh menit. Usulan pembagian:
+Naufal pemilik deck, Daffa visual/demo, Dzaky pemeriksa metode dan angka.
+[PPTX, PDF utama/lengkap, catatan pembicara, dan panduan demo](presentasi/README.md)
+sudah dibuat dan diverifikasi. Materi pada paket itu menjadi acuan final;
+bagian di bawah menyimpan storyboard dan penjelasan penyusunannya.
 
 **Konfirmasi TM:** durasi tetap 10 menit + 15 menit tanya jawab, urutan
 tampil pertama. Deadline PDF belum diinformasikan. Siapkan semua berkas
@@ -81,10 +83,11 @@ perbandingan pada jam lain. Jangan menampilkan data lama seolah live.
    sepuluh detik, pindah ke lokal atau MP4 tanpa mengulang tunggu berkali-kali.
 
 **Data skenario:** potret lokal bertanggal 26 September, bandingkan 08.00
-dan 13.00 WIB; sebut terang-terangan sebagai skenario potret. Untuk produksi
-dengan jendela bergerak, gunakan waktu yang masih tercakup, misalnya
-27 September 09.00, setelah diverifikasi pada versi final. Angka audit lama
-bukan angka final; ambil ulang setelah T2/T4 dan optimasi selesai.
+dan 13.00 WIB; sebut terang-terangan sebagai skenario potret. Sudah diambil ulang
+23 September: rute sadar rob 08.00 menghasilkan 13,9 menit/10,58 km dan
+13.00 menghasilkan 7,0 menit/6,32 km. Angka lengkap ada pada
+`presentasi/aset/skenario.json`. Produksi memakai dataset berbeda; periksa
+jam yang tersedia dan hasilnya sebelum tampil, jangan menjanjikan angka sama.
 
 **Bahan/PIC:** Daffa; backend lokal sudah menyala sebelum presentasi. Siapkan
 produksi → lokal → MP4 lokal → screenshot, semuanya memakai cerita sama.
@@ -119,8 +122,9 @@ disebut sebagai akurasi genangan per ruas.
 
 - Pasut: korelasi 0,78–0,91, RMSE sekitar 0,10–0,12 m pada evaluasi yang
   didokumentasikan. Jelaskan bila data yang sama ikut menentukan parameter.
-- Aplikasi: 95 tes backend Windows/Linux dan 25 tes frontend pada audit
-  22 September; 2.400 perbandingan routing termasuk dalam tes tersebut,
+- Aplikasi: 95 tes backend Windows/Linux; 25 tes frontend pada audit
+  22 September, menjadi 26 setelah koreksi panel 23 September.
+  2.400 perbandingan routing termasuk dalam tes tersebut,
   jangan menjumlahkannya sebagai 2.400 unit test terpisah. Cantumkan commit
   rilis serta lingkungan. Detail uji publik dan batasnya ada di laporan audit.
 - Genangan per ruas: belum ada ground truth yang memadai; kedalaman bukan

@@ -1,0 +1,55 @@
+{
+  "file": "Pasang_Surut_Branding_105s.mp4",
+  "bytes": 17933190,
+  "sha256": "0ff4bbfdf7aeaa8d9b561ff1116c23823b9e19129d1be0c57a9f409679349d11",
+  "duration_seconds": 105.0,
+  "frames": 3150,
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "codec": "H.264 / yuv420p",
+  "audio": "AAC stereo 48000 Hz",
+  "decode_errors": 0,
+  "subtitles": 29,
+  "subtitle_text_matches_script": true,
+  "integrated_lufs": -16.09,
+  "true_peak_dbtp": -3.88,
+  "qr": [
+    {
+      "second": 98,
+      "width": 1920,
+      "url": "https://pasang-surut.vercel.app/app"
+    },
+    {
+      "second": 98,
+      "width": 1280,
+      "url": "https://pasang-surut.vercel.app/app"
+    },
+    {
+      "second": 101,
+      "width": 1920,
+      "url": "https://pasang-surut.vercel.app/app"
+    },
+    {
+      "second": 101,
+      "width": 1280,
+      "url": "https://pasang-surut.vercel.app/app"
+    }
+  ],
+  "loop_mean_pixel_delta": 0.00966820987654321,
+  "visual_review_seconds": [
+    4,
+    12,
+    20,
+    28,
+    35,
+    44,
+    54,
+    64,
+    77,
+    87,
+    98,
+    101
+  ],
+  "remaining_manual": "Volume, keterbacaan dan loop pada TV/proyektor pameran perlu dicoba tim."
+}

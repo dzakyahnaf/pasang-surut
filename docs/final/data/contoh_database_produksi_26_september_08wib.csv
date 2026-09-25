@@ -1,0 +1,3 @@
+edge_id,nama,elevasi_m,jarak_pantai_m,laju_subsidensi_cm_thn,panjang_m,kecepatan_kmh,waktu,kedalaman_cm,indeks_kerentanan,sumber
+1,Jalan Gajah Mada,4.99334716796875,3655.08885039659,2.3,115.446371211979,59.8333333333333,,,,
+8584,Jalan Tanggungrejo Raya,0.792231917381287,259.674725579911,5.8,1438.98050312475,19.5,2026-09-26 01:00:00+00,39,0.9802,kerentanan_v1

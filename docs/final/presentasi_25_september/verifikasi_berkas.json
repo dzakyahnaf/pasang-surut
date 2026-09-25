@@ -1,0 +1,36 @@
+{
+  "pdf_main_pages": 9,
+  "pdf_full_pages": 18,
+  "notes": 18,
+  "hidden_appendices": 9,
+  "overflow": 0,
+  "objects_off_slide": 0,
+  "internal_slide_relationships": 22,
+  "qr_from_pdf": "https://pasang-surut.vercel.app/app",
+  "pdf_backup_link": true,
+  "target_seconds": 540,
+  "external_links": [
+    "http://127.0.0.1:5182",
+    "https://github.com/dzakyahnaf/pasang-surut",
+    "https://github.com/dzakyahnaf/pasang-surut/blob/main/docs/final/audit_asal_data_25_september.md",
+    "https://github.com/dzakyahnaf/pasang-surut/blob/main/docs/final/audit_regresi_22_september.md",
+    "https://github.com/dzakyahnaf/pasang-surut/blob/main/docs/sumber_angka.md",
+    "https://github.com/dzakyahnaf/pasang-surut/tree/main/backend/app",
+    "https://github.com/dzakyahnaf/pasang-surut/tree/main/backend/app/domain",
+    "https://github.com/dzakyahnaf/pasang-surut/tree/main/backend/tests",
+    "https://github.com/dzakyahnaf/pasang-surut/tree/main/frontend/src",
+    "https://pasang-surut.vercel.app/app",
+    "https://sda.pu.go.id/balai/bbwspemalijuana/pages/posts/perkuat-pengendalian-rob-pantura-wapres-tinjau-pembangunan-tol-semrang-demak-seksi-1",
+    "https://www.openstreetmap.org/copyright"
+  ],
+  "native_text_characters": 9349,
+  "style_check": {
+    "em_en_dash_in_native_text": 0,
+    "banned_boilerplate": 0
+  },
+  "sha256": {
+    "Pasang_Surut_Final_2026_25Sep.pptx": "f73234562c93b1ccba4dc0af467990e2663098507906b885271dd75fbfbe0100",
+    "Pasang_Surut_Final_2026_25Sep_utama.pdf": "d91142fd7195f555495a37cf667f8621450fd2bdd4d047321b26f154dc3a7815",
+    "Pasang_Surut_Final_2026_25Sep_lengkap.pdf": "da76cca68fd8f69597dc2b0643555b41cdd93d6dbc0738acebacabd5f50e0d9c"
+  }
+}

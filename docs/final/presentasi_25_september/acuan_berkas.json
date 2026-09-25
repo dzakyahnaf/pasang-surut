@@ -1,0 +1,25 @@
+{
+  "tanggal_pemeriksaan": "2026-09-25",
+  "berkas": [
+    {
+      "nama": "Rulebook-dsdc-final.pdf",
+      "sha256": "de50d148b0841184aea9adaca40f26d6d5a2b2f7e4153adb6d3b70fb8180f0f9",
+      "halaman": 11
+    },
+    {
+      "nama": "TM Final DSDC Anforcom 2026.pdf",
+      "sha256": "a9deedae9308ef5e6df70b6b1044a2d9a50b782f7f6c97699e093461cdb51965",
+      "halaman": 11
+    },
+    {
+      "nama": "ITC2026_1_SOFTDEV_PPT_Fable5Enjoyer_DekapAutis_Revisi_v3.pptx",
+      "sha256": "c193d6054f0ca09df51b404fafef0e5c194a1e15e5ff90b5a339b3913062ff99",
+      "slide": 11
+    },
+    {
+      "nama": "ITC2026_1_SOFTDEV_PPT_Fable5Enjoyer_DekapAutis_Revisi_v3.pdf",
+      "sha256": "aedd8db8be9910d0f64d48d263bc8478bf842bb06cab75f82a43cadaa37766ce",
+      "halaman": 11
+    }
+  ]
+}

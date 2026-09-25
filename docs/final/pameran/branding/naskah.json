@@ -1,0 +1,99 @@
+{
+  "durasi": 105,
+  "voice": "id-ID-ArdiNeural",
+  "rate": "+0%",
+  "tagline": "Baca risiko rob. Rencanakan perjalanan.",
+  "tautan": "https://pasang-surut.vercel.app/app",
+  "adegan": [
+    {
+      "id": "pembuka", "mulai": 0, "akhir": 8,
+      "label": "SEMARANG PESISIR",
+      "judul": ["Jalan yang sama.", "Kondisi berbeda."],
+      "ringkas": "Rob mengubah pilihan perjalanan.",
+      "narasi": "Di pesisir Semarang, rob bisa mengubah kondisi jalan. Perjalanan pun perlu direncanakan kembali."
+    },
+    {
+      "id": "masalah", "mulai": 8, "akhir": 16,
+      "label": "UNTUK PERJALANAN DAN PENGIRIMAN",
+      "judul": ["Berangkat kapan?", "Lewat mana?"],
+      "ringkas": "Pilihan jam. Pilihan rute. Biaya memutar.",
+      "narasi": "Bagi warga dan pelaku usaha, berangkat kapan, lewat mana, dan berapa biaya memutar?"
+    },
+    {
+      "id": "brand", "mulai": 16, "akhir": 24,
+      "label": "PERUTEAN SADAR ROB",
+      "judul": ["PASANG", "SURUT"],
+      "ringkas": "Baca risiko rob. Rencanakan perjalanan.",
+      "narasi": "Pasang Surut. Baca risiko rob. Bandingkan waktu dan rute perjalanan di Semarang pesisir."
+    },
+    {
+      "id": "aplikasi", "mulai": 24, "akhir": 38,
+      "label": "TAMPILAN APLIKASI",
+      "judul": ["Pilih tujuan.", "Tentukan moda.", "Geser waktu."],
+      "ringkas": "01  Asal dan tujuan\n02  Motor atau mobil\n03  Pita Pasut",
+      "narasi": "Pilih titik berangkat dan tujuan. Tentukan motor atau mobil, lalu geser Pita Pasut. Lihat bagaimana estimasi kondisi jalan berubah pada jam yang berbeda, langsung di peta."
+    },
+    {
+      "id": "rute", "mulai": 38, "akhir": 58,
+      "label": "SKENARIO POTRET · 26 SEPTEMBER 2026",
+      "judul": ["Bandingkan", "pilihanmu."],
+      "ringkas": "Tawang–Terboyo · Motor",
+      "narasi": "Dalam contoh Tawang ke Terboyo, rute sadar rob dan rute pembanding ditampilkan bersama. Ubah jam keberangkatan untuk melihat perbedaannya. Jika jadwalmu fleksibel, bandingkan juga pilihan waktu. Hasil ini adalah estimasi model. Kondisi jalan tetap perlu diperiksa."
+    },
+    {
+      "id": "dampak", "mulai": 58, "akhir": 70,
+      "label": "PAHAMI KONSEKUENSI PILIHAN",
+      "judul": ["Memutar ada", "biayanya."],
+      "ringkas": "Waktu · Jarak · Estimasi BBM · Estimasi CO2",
+      "narasi": "Memutar dapat menambah waktu, jarak, bahan bakar, dan emisi. Pahami konsekuensinya sebelum memilih rute. Penghematan tidak selalu terjadi."
+    },
+    {
+      "id": "metode", "mulai": 70, "akhir": 82,
+      "label": "DI BALIK LAYAR",
+      "judul": ["Data menjadi", "pertimbangan."],
+      "ringkas": "Pasut harmonik · Indeks kerentanan · Jaringan jalan · Pilihan rute",
+      "narasi": "Di balik layar, perhitungan pasang surut, indeks kerentanan ruas, dan jaringan jalan OpenStreetMap mendukung perbandingan rute. Kedalaman yang tampil merupakan estimasi, bukan hasil sensor langsung."
+    },
+    {
+      "id": "lanjut", "mulai": 82, "akhir": 92,
+      "label": "LANGKAH BERIKUTNYA",
+      "judul": ["Dikembangkan", "bersama pengguna."],
+      "ringkas": "Uji penggunaan · Validasi lapangan · Pembaruan data",
+      "narasi": "Berikutnya, uji bersama pengguna, validasi genangan di lapangan, dan pembaruan data. Untuk perjalanan pesisir yang lebih terencana."
+    },
+    {
+      "id": "penutup", "mulai": 92, "akhir": 105,
+      "label": "COBA LANGSUNG DI MEJA KAMI",
+      "judul": ["PASANG SURUT"],
+      "ringkas": "Pindai. Jelajahi. Bandingkan.",
+      "narasi": "Coba Pasang Surut di meja kami, atau pindai kode ini lewat ponselmu. Kenali pilihan sebelum berangkat. Pasang Surut, perutean sadar rob untuk Semarang pesisir."
+    }
+  ],
+  "copy": {
+    "brand_kecil": "PASANG SURUT",
+    "acara": "ANFORCOM 2026 · SHOWCASE",
+    "potret": "Tampilan aplikasi · potret 26 Sep 2026",
+    "model": "Estimasi model; periksa kondisi lapangan.",
+    "bukan_sensor": "Estimasi kedalaman, bukan sensor langsung.",
+    "rute_biasa": "Rute pembanding",
+    "rute_sadar": "Rute sadar rob",
+    "kering_model": "0 ruas tergenang dalam model",
+    "jadwal": "Pilihan waktu untuk jadwal fleksibel; biaya menunggu belum dihitung.",
+    "menit": "menit model",
+    "km": "kilometer",
+    "genangan": "ruas tergenang dalam model",
+    "dampak_konteks": "Skenario 08.00 WIB · sadar rob dibanding pembanding",
+    "batas_waktu": "Waktu model, bukan ETA lalu lintas langsung.",
+    "batas_bbm": "BBM dan CO2 berbasis asumsi; bukan penghematan terukur.",
+    "metode": ["Pasut harmonik", "Kerentanan ruas", "Jaringan OSM", "Pilihan rute"],
+    "metode_keterangan": ["Pola waktu", "Konteks lokasi", "Koneksi jalan", "Perbandingan"],
+    "lanjut": ["Uji bersama pengguna", "Validasi genangan lapangan", "Pembaruan data berkala"],
+    "batas": "Alat bantu perencanaan, bukan peringatan dini resmi.",
+    "tim": "trio la albiceleste · Institut Teknologi Sepuluh Nopember",
+    "cta": "Pindai untuk mencoba",
+    "url": "pasang-surut.vercel.app/app",
+    "roadmap": "Rencana pengembangan · belum merupakan hasil validasi",
+    "sumber": "Sumber peta: © OpenStreetMap contributors",
+    "skenario": "Potret 26 Sep 2026 · Motor · Tawang–Terboyo"
+  }
+}
