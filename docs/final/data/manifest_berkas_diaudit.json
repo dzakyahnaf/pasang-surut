@@ -1,0 +1,70 @@
+{
+  "data/referensi/konstanta_pasut_semarang.json": {
+    "bytes": 8218,
+    "sha256": "1e27c68f9407bdf0c55fc61db58e421629a2e15e0d6f59e0c972154c8165923a"
+  },
+  "data/referensi/kalibrasi_pasut.json": {
+    "bytes": 1246,
+    "sha256": "52328941732c271c1ba4270362d89616d01726a3cbd56a882b72ca166437ac8b"
+  },
+  "data/referensi/laju_subsidensi.json": {
+    "bytes": 4821,
+    "sha256": "3567a7ff0d88d457b91028f2c401b2450ee93bb0d58de325136219892d26ef69"
+  },
+  "data/referensi/hujan_open_meteo.json": {
+    "bytes": 409217,
+    "sha256": "ee5b88a210018901a894f9f0b1f8bb07839bf4575b4b82ef0a31956bc50f1c90"
+  },
+  "data/referensi/metrik_model.json": {
+    "bytes": 3441,
+    "sha256": "7ab388b827ed88b73e1adfc7f5849ae59c1ef894d6b825ff2b2843612c477d22"
+  },
+  "data/processed/graph.graphml": {
+    "bytes": 18071688,
+    "sha256": "c89e87fc6efb350e0220918512401af1008c494cb0064cdee390f6572a0b0d60"
+  },
+  "data/processed/ruas_jalan.geojson": {
+    "bytes": 5786206,
+    "sha256": "febdd8dd8a0dba1b89cb6475b9bbecb5b6cc09c2a5fae9206d0e8d8542ed9f29"
+  },
+  "data/processed/garis_pantai.geojson": {
+    "bytes": 106788,
+    "sha256": "254600d1df00428a150b7d8e7e83cde7628fe33deaf7348cd257db594dfc8e9b"
+  },
+  "data/processed/kecamatan.geojson": {
+    "bytes": 57273,
+    "sha256": "eb919df9af2092960832b3673d1842e929ae131ab94194bb548631d29df68179"
+  },
+  "data/processed/tujuan_cepat.geojson": {
+    "bytes": 1898,
+    "sha256": "eba8769c62a093a198fd60b829b8cfa6e313d3d959e5ccb61fe11eec3bfe66e8"
+  },
+  "data/processed/indeks_kerentanan.json": {
+    "bytes": 278538,
+    "sha256": "6b837455355cc4ee2f2d5f8976653a528555c61ed3f03ff786a2535207d1fa73"
+  },
+  "data/processed/potret_demo.json": {
+    "bytes": 7674819,
+    "sha256": "2444847e9da754003a9d89a2fb3c4d9e6dcfd38532e12e5c49495383ec228754"
+  },
+  "data/raw/DEMNAS_1409-22_v1.0.tif": {
+    "bytes": 44463542,
+    "sha256": "637169e892dbe2e1e3c11d6a67ee6048c7fe3cc48ee4136dda2b428c7e231bbf"
+  },
+  "backend/app/domain/pasut.py": {
+    "bytes": 7706,
+    "sha256": "90e04e87f268fc79dc0f10d19489431233288d8fa06727ae41a6bbb553d73628"
+  },
+  "backend/app/domain/genangan.py": {
+    "bytes": 3958,
+    "sha256": "aff96c72f0fc6888a530b3851bde5ae20d8438597f9c7fe56eabd16e74d12630"
+  },
+  "backend/app/domain/kerentanan.py": {
+    "bytes": 6979,
+    "sha256": "29983f5532206c9aa28efd148b0405bfb7ff7f54c76f2079dfa442862abe1da6"
+  },
+  "backend/scripts/11_indeks_kerentanan.py": {
+    "bytes": 12212,
+    "sha256": "4aeebec4b56e94b531fd3f4abcfb0f5294106b169fc9d3b17a4002f2479c76b6"
+  }
+}

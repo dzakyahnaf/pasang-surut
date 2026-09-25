@@ -1,5 +1,16 @@
 # Sisa pekerjaan proposal
 
+**Pembaruan 25 September:** [audit sumber dan masa berlaku data](final/audit_asal_data_25_september.md)
+dan [addendum validasi data](final/Addendum_validasi_data_25_september.docx)
+melengkapi arsip proposal terkirim. Uji pasut baru memakai 10.020 rekaman IOC
+18–25 September: korelasi 0,8340; RMSE simpangan 12,44 cm. Angka ini bukan
+akurasi genangan ruas. Data produksi berakhir 5 Oktober 2026 07.00 WIB;
+pipeline pembaruan permanen dan validasi lapangan belum tersedia. Materi
+final perlu menyebut prototipe berbasis indeks, umur masukan 2014/2015–2018,
+asumsi kedalaman, dan hasil uji baru beserta batasannya. PPT/video lama belum
+diubah pada sesi audit ini.
+Addendum 25 September diperiksa di Microsoft Word: satu halaman.
+
 **Pembaruan 24 September:** [video branding pameran 105 detik](final/pameran/branding/README.md)
 dengan musik, narasi Indonesia dan subtitle tersedia. Materi ini dilengkapi
 [addendum pameran](final/Addendum_pameran_24_september.docx), diperiksa dengan

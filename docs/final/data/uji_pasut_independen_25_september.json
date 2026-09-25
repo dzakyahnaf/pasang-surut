@@ -1,0 +1,83 @@
+{
+  "dijalankan_utc": "2026-09-25T07:01:59.044985+00:00",
+  "sumber": "https://www.ioc-sealevelmonitoring.org/service.php?query=data&code=sema&timestart=2026-09-18T06:00:00&timestop=2026-09-25T06:00:00&format=json",
+  "station": "sema",
+  "sensor": "prs",
+  "raw_sha256": "4f31f4493408c5389cce8d4139225b2dea3b280251aca9329d4273ca0bb79226",
+  "raw_records_semua_sensor": 23682,
+  "rekaman_ditolak": 0,
+  "rentang_utc": [
+    "2026-09-18T06:00:00+00:00",
+    "2026-09-25T06:00:00+00:00"
+  ],
+  "nilai_sensor_min_m": 0.95,
+  "nilai_sensor_max_m": 1.933,
+  "interval_median_detik": 60.0,
+  "jeda_maksimum_menit": 16.0,
+  "model": "harmonik_v1",
+  "offset_jam": 7.0,
+  "epoch_utc": "2026-01-01T00:00:00+00:00",
+  "evaluasi": {
+    "n": 10020,
+    "korelasi": 0.8340142724817039,
+    "rmse_simpangan_m": 0.12441527836734871,
+    "mae_simpangan_m": 0.10318259280974743
+  },
+  "per_hari_utc_demean_per_hari": {
+    "2026-09-18": {
+      "n": 1063,
+      "korelasi": 0.7590093703544887,
+      "rmse_simpangan_m": 0.12015812792500367,
+      "mae_simpangan_m": 0.10326743192767593
+    },
+    "2026-09-19": {
+      "n": 1430,
+      "korelasi": 0.7736132225913562,
+      "rmse_simpangan_m": 0.13137117561446568,
+      "mae_simpangan_m": 0.10862159749838605
+    },
+    "2026-09-20": {
+      "n": 1430,
+      "korelasi": 0.8772076746762807,
+      "rmse_simpangan_m": 0.1188978009796345,
+      "mae_simpangan_m": 0.09713257192518726
+    },
+    "2026-09-21": {
+      "n": 1434,
+      "korelasi": 0.8264431223046571,
+      "rmse_simpangan_m": 0.12832088877239023,
+      "mae_simpangan_m": 0.10406702267233484
+    },
+    "2026-09-22": {
+      "n": 1434,
+      "korelasi": 0.8688830361976108,
+      "rmse_simpangan_m": 0.12579657963191146,
+      "mae_simpangan_m": 0.10420926064164616
+    },
+    "2026-09-23": {
+      "n": 1440,
+      "korelasi": 0.9343142986432325,
+      "rmse_simpangan_m": 0.10294876656179683,
+      "mae_simpangan_m": 0.08684652112475294
+    },
+    "2026-09-24": {
+      "n": 1428,
+      "korelasi": 0.7838825383837096,
+      "rmse_simpangan_m": 0.12477076101856233,
+      "mae_simpangan_m": 0.10519607315913926
+    },
+    "2026-09-25": {
+      "n": 361,
+      "korelasi": 0.93804849826598,
+      "rmse_simpangan_m": 0.09871561892179198,
+      "mae_simpangan_m": 0.08344852903909082
+    }
+  },
+  "batasan": [
+    "Model dan offset +7 dibekukan; tidak ada pelatihan atau pemilihan offset baru.",
+    "Data sensor publik belum diaudit mutu oleh tim; hanya filter tidak hingga/duplikat/rentang waktu.",
+    "Datum berbeda: statistik hanya terhadap simpangan, bukan tinggi absolut.",
+    "Jendela baru tujuh hari; tidak membuktikan akurasi sepanjang musim atau genangan per ruas.",
+    "Sampel rapat berkorelasi; jumlah baris bukan jumlah observasi independen."
+  ]
+}
